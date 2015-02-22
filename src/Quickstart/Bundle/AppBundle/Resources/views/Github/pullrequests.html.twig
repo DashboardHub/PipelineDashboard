@@ -1,0 +1,31 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Pull Requests <span class="badge">{{ pullrequests|length }}</span>
+            <span class="glyphicon glyphicon-ok pull-right"></span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Branch</th>
+                <th>When</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for pullrequest in pullrequests %}
+                <tr>
+                    <td>{{ pullrequest.head.ref }}</td>
+                    <td>{{ pullrequest.created_at|ago }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <p><strong>Last PR {{ pullrequests.0.created_at|ago }}</strong></p>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

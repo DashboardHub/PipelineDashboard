@@ -24,34 +24,31 @@
     </div>
 
     <div class="row">
-
-        <div class="col-md-12">
-
-            </div>
-
-            <div class="col-md-3">
-                {{ render(controller(
-                    'quickstart_app_github_controller:indexAction', { 'reponame': reponame, 'owner': owner, 'name': name }
-                )) }}
-            </div>
-
-            <div class="col-md-3">
-                {{ render(controller(
-                    'quickstart_app_travis_controller:indexAction', { 'reponame': reponame, 'owner': owner, 'name': name }
-                )) }}
-            </div>
-
-            <div class="col-md-3">
-                {% include 'QuickstartAppBundle:Dashboard:scrutinizer.html.twig' %}
-            </div>
-
-            <div class="col-md-3">
-                {% include 'QuickstartAppBundle:Dashboard:deployment.html.twig' %}
-            </div>
-
-
+        <div class="col-md-6">
+            {{ render(controller(
+            'quickstart_app_github_controller:eventsAction', { 'reponame': reponame }
+            )) }}
         </div>
 
+        <div class="col-md-3">
+            {{ render(controller(
+            'quickstart_app_github_controller:pullrequestsAction', { 'reponame': reponame }
+            )) }}
+        </div>
+
+        <div class="col-md-3">
+            {{ render(controller(
+            'quickstart_app_travis_controller:indexAction', { 'reponame': reponame }
+            )) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ render(controller(
+            'quickstart_app_github_controller:issuesAction', { 'reponame': reponame }
+            )) }}
+        </div>
     </div>
 
 

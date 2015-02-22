@@ -1,0 +1,29 @@
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Issues <span class="badge">{{ issues|length }}</span>
+            <span class="glyphicon glyphicon-ok pull-right"></span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for issue in issues %}
+                <tr>
+                    <td>{{ issue.title }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <p><strong>Last Issue {{ issues.0.created_at|ago }}</strong></p>
+
+        <div class="clearfix"></div>
+    </div>
+</div>

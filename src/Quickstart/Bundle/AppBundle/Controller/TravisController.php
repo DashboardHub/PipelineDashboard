@@ -25,7 +25,7 @@ class TravisController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($reponame, $owner, $name)
+    public function indexAction($reponame)
     {
         $travis = new \GuzzleHttp\Client();
         $builds = $travis->get('https://api.travis-ci.org/repos/' . $reponame . '/builds');
@@ -33,7 +33,7 @@ class TravisController
         return $this->templating->renderResponse(
             'QuickstartAppBundle:Travis:index.html.twig',
             array(
-                'builds' => array_slice(json_decode($builds->getBody()->getContents(), true), 0, 15)
+                'builds' => array_slice(json_decode($builds->getBody()->getContents(), true), 0, 5)
             )
         );
     }

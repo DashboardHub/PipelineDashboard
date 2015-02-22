@@ -1,12 +1,11 @@
 <div class="panel panel-{% if builds.0.result == 0 %}success{% else %}danger{% endif %}">
     <div class="panel-heading">
         <h3 class="panel-title">
-            2. Travis CI
+            Latest Builds <span class="badge">{{ builds|length }}</span>
             <span class="glyphicon glyphicon-{% if builds.0.result == 0 %}ok{% else %}remove{% endif %} pull-right"></span>
         </h3>
     </div>
     <div class="panel-body">
-        <h4>Latest Builds <span class="badge">{{ builds|length }}</span></h4>
         <table class="table table-condensed">
             <thead>
             <tr>
