@@ -1,0 +1,55 @@
+services:
+#    quickstart_app.example:
+#        class: Quickstart\Bundle\AppBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+  quickstart_app_default_controller:
+      class:     Quickstart\Bundle\AppBundle\Controller\DefaultController
+      arguments: ["@templating"]
+
+  quickstart_app_account_controller:
+      class:     Quickstart\Bundle\AppBundle\Controller\AccountController
+      arguments: ["@templating"]
+
+  quickstart_app_dashboard_controller:
+      class:     Quickstart\Bundle\AppBundle\Controller\DashboardController
+      arguments: ["@templating"]
+
+  quickstart_app_github_controller:
+      class:     Quickstart\Bundle\AppBundle\Controller\GithubController
+      arguments: ["@templating"]
+
+  quickstart_app_travis_controller:
+      class:     Quickstart\Bundle\AppBundle\Controller\TravisController
+      arguments: ["@templating"]
+
+  quickstart_app_main.menu_builder:
+    class: Quickstart\Bundle\AppBundle\Menu\MenuBuilder
+    arguments: ["@knp_menu.factory","@security.context"]
+
+  quickstart_app_main.menu.main:
+    class: Knp\Menu\MenuItem # the service definition requires setting the class
+    factory_service: quickstart_app_main.menu_builder
+    factory_method: createMainMenu
+    arguments: ["@request"]
+    scope: request # needed as we have the request as a dependency here
+    tags:
+        - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+  quickstart_app_main.service.version:
+    class: Quickstart\Bundle\AppBundle\Service\Version
+    arguments: ["%kernel.root_dir%/../version"]
+
+  quickstart_app_main.service.random_username_generator:
+    class: Quickstart\Bundle\AppBundle\Service\RandomUsernameGenerator
+
+  quickstart_app_user_registration_listener:
+    class: Quickstart\Bundle\AppBundle\EventListener\RegistrationListener
+    arguments: [@router, @quickstart_app_main.service.random_username_generator]
+    tags:
+        - { name: kernel.event_subscriber }
+
+  quickstart_user.registration.form.type:
+    class: Quickstart\Bundle\AppBundle\Form\RegistrationFormType
+    tags:
+        - { name: form.type, alias: quickstart_user_registration }

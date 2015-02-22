@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="row ">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('quickstart_app_homepage') }}">{% trans %}nav.home{% endtrans %}</a></li>
+            <li class="active">Overview</li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block title %}
+    {% trans %}home.title{% endtrans %}
+{% endblock %}
+
+{% block body %}
+    <div class="homepage">
+
+        <form class="form-inline" action="{{ path('quickstart_app_dashboard') }}" method="get">
+            <div class="form-group">
+                <label class="sr-only" for="reponame">Repo Name</label>
+                <div class="input-group">
+                    <div class="input-group-addon">Github</div>
+                    <input type="text" class="form-control" id="reponame" name="reponame" placeholder="owner/repo">
+                    <div class="input-group-addon">.git</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Go to Dashboard</button>
+        </form>
+
+    </div>
+{% endblock %}

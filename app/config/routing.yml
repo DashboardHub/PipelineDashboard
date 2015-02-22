@@ -1,0 +1,6 @@
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+quickstart_app:
+    resource: "@QuickstartAppBundle/Resources/config/routing.yml"
+    prefix:   /

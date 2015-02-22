@@ -1,0 +1,48 @@
+Quickstart\Bundle\AppBundle\Entity\User:
+    constraints:
+      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+          fields: email
+          groups: [QuickstartRegistration]
+      - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+          fields: username
+          groups: [QuickstartRegistration]
+    properties:
+      firstname:
+        - NotBlank: { groups: [QuickstartRegistration] }
+        - Length:
+            min: 2
+            max: 128
+            groups: [QuickstartRegistration]
+        - Type:
+            type: alpha
+            groups: [QuickstartRegistration]
+      lastname:
+        - NotBlank: { groups: [QuickstartRegistration] }
+        - Length:
+            min: 2
+            max: 128
+            groups: [QuickstartRegistration]
+        - Type:
+            type: alpha
+            groups: [QuickstartRegistration]
+      email:
+        - NotBlank: { groups: [QuickstartRegistration] }
+        - Email: { groups: [QuickstartRegistration] }
+      plainPassword:
+        - NotBlank: { groups: [QuickstartRegistration] }
+        - Length:
+            min: 8
+            max: 32
+            groups: [QuickstartRegistration]
+        - Regex:
+            pattern: '/\d/'
+            message: Must contain at least 1 number
+            groups: [QuickstartRegistration]
+        - Regex:
+            pattern: '/[a-zA-Z]+/'
+            message: Must contain at least 1 letter
+            groups: [QuickstartRegistration]
+        - Regex:
+            pattern: '/[!@#$%^*_-]+/'
+            message: Must contain at least 1 symbol (eg. !@#$%^*_-)
+            groups: [QuickstartRegistration]

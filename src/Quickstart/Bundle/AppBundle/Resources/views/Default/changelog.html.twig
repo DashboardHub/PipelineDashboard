@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="row ">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('quickstart_app_changelog') }}">Changelog</a></li>
+            <li class="active">Overview</li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block title %}Changelog{% endblock %}
+
+{% block body %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>Changelog</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commit in changelog %}
+            <tr>
+                <td>{{ commit }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

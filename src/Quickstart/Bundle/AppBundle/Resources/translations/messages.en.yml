@@ -1,0 +1,48 @@
+project:
+  name: Pipeline Dashboard
+
+nav:
+  home: Home
+  register: Register
+  login: Login
+  logout: Logout
+
+breadcrumb:
+  overview: Overview
+
+home:
+  title: Pipeline Dashboard
+
+form:
+  select: Please Select
+
+login:
+  title: Login
+  subtitle: Register Your Details
+  form:
+    username:
+      label: Email address
+    password:
+      label: Password
+    login:
+      label: Login
+
+register:
+  title: Register
+  subtitle: Register Your Details
+  form:
+    firstname:
+      label: First Name
+    lastname:
+      label: Last Name
+    email:
+      label: Email
+    password:
+      label: Password
+    password-confirm:
+      label: Confirm Password
+    register-button:
+      label: Register
+
+account:
+  title: My Account

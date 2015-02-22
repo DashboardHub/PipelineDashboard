@@ -3,12 +3,13 @@
 namespace Quickstart\Bundle\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class AccountController
+ * Class DashboardController
  * @package Quickstart\Bundle\AppBundle\Controller
  */
-class AccountController
+class DashboardController
 {
 
     /**
@@ -24,11 +25,16 @@ class AccountController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        return $this->templating->renderResponse('QuickstartAppBundle:Account:index.html.twig',
-            array(
+        $reponame = $request->get('reponame', '');
 
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Dashboard:index.html.twig',
+            array(
+                'reponame' => $reponame,
+                'owner'    => explode('/', $reponame)[0],
+                'name'     => explode('/', $reponame)[1]
             )
         );
     }

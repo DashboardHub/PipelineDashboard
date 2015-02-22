@@ -1,0 +1,41 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                check_path: fos_user_security_check
+                default_target_path: quickstart_app_account
+                login_path: fos_user_security_login
+                failure_path: fos_user_security_login
+            logout:
+              path: fos_user_security_logout
+            anonymous:    true
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+    access_control:
+        - { path: ^/en/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/en/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/en/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/en/admin/, role: ROLE_ADMIN }
+        - { path: ^/en/account, role: ROLE_USER }
+        - { path: ^/fr/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fr/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fr/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/fr/admin/, role: ROLE_ADMIN }
+        - { path: ^/fr/account, role: ROLE_USER }

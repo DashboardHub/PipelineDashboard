@@ -1,0 +1,23 @@
+suites:
+    default:
+        namespace: Quickstart\Bundle\AppBundle
+        spec_prefix: Spec
+        spec_path: src/Quickstart/Bundle/AppBundle/Tests
+
+extensions:
+  - PhpSpec\Extension\CodeCoverageExtension
+
+code_coverage:
+  whitelist:
+    - src/Quickstart/Bundle/AppBundle/DependencyInjection
+    - src/Quickstart/Bundle/AppBundle/EventListener
+    - src/Quickstart/Bundle/AppBundle/Menu
+    - src/Quickstart/Bundle/AppBundle/Service
+  whitelist_files:
+    - src/Quickstart/Bundle/AppBundle/QuickstartAppBundle.php
+  format:
+    - html
+    - clover
+  output:
+    html: test/build/coverage
+    clover: test/build/coverage.xml

@@ -6,10 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class DashboardController
+ * Class GithubController
  * @package Quickstart\Bundle\AppBundle\Controller
  */
-class DashboardController
+class GithubController
 {
 
     /**
@@ -25,13 +25,19 @@ class DashboardController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction($reponame, $owner, $name)
     {
-        $reponame = $request->get('reponame', '');
+        $github       = new \GuzzleHttp\Client();
+        $events = $github->get('https://api.github.com/repos/' . $reponame . '/events?per_page=5');
+        $pullrequests = $github->get('https://api.github.com/repos/' . $reponame . '/pulls?per_page=5');
+        $issues       = $github->get('https://api.github.com/repos/' . $reponame . '/issues?per_page=5');
 
-        return $this->templating->renderResponse('QuickstartAppBundle:Dashboard:index.html.twig',
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Github:index.html.twig',
             array(
-                'reponame' => $reponame
+                'events'       => json_decode($events->getBody()->getContents(), true),
+                'pullrequests' => json_decode($pullrequests->getBody()->getContents(), true),
+                'issues'       => json_decode($issues->getBody()->getContents(), true)
             )
         );
     }

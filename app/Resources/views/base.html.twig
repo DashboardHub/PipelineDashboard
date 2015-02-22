@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock title %}</title>
+        {% block stylesheets %}{% endblock stylesheets %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+
+        <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
+        {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
+    </head>
+    <body>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('quickstart_app_homepage') }}">{% trans %}project.name{% endtrans %}</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {{ knp_menu_render('main', {'template': 'QuickstartAppBundle:Default:knp_menu.html.twig'}) }}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}">en</a></li>
+                    {#<li><a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}">fr</a></li>#}
+                    <li><a href="{{ path('quickstart_app_changelog') }}">{{ version.current }} / {{ app.environment }}</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+        {% block breadcrumb %}{% endblock breadcrumb %}
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        {% block body %}{% endblock body %}
+        {% block javascripts %}{% endblock javascripts %}
+    </div>
+    </body>
+</html>

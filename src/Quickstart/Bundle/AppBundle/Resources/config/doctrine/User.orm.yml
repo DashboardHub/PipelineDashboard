@@ -1,0 +1,15 @@
+Quickstart\Bundle\AppBundle\Entity\User:
+    type:  entity
+    table: users
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        firstname:
+            type: string
+            length: 128
+        lastname:
+            type: string
+            length: 128

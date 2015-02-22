@@ -1,0 +1,52 @@
+default:
+    suites:
+      default:
+        contexts:
+          - FeatureContext:
+            session:   '@session'
+      quickstart_app:
+        type: symfony_bundle
+        bundle: QuickstartAppBundle
+        filters:
+          tags: ~@omit
+    extensions:
+      Behat\Symfony2Extension: ~
+      Behat\MinkExtension:
+        sessions:
+          my_session:
+            symfony2: ~
+          selenium_session:
+            selenium2: ~
+          goutte_session:
+            goutte: ~
+      chartinger\Behat\TwigReportExtension\Extension:
+         output:
+          file: test/build/report.html
+         templates:
+          file: default.twig
+phantomjs:
+    suites:
+      default:
+        contexts:
+          - FeatureContext:
+            session:   '@session'
+      quickstart_app:
+        type: symfony_bundle
+        bundle: QuickstartAppBundle
+    extensions:
+      Behat\Symfony2Extension: ~
+      Behat\MinkExtension:
+        base_url: 'http://localhost:8000'
+        sessions:
+          my_session:
+            symfony2: ~
+          phantomjs_session:
+            selenium2:
+              browser: phantomjs
+          goutte_session:
+            goutte: ~
+      chartinger\Behat\TwigReportExtension\Extension:
+         output:
+          file: test/build/report.html
+         templates:
+          file: default.twig

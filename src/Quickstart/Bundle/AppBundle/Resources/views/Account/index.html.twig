@@ -1,0 +1,176 @@
+{% extends "::base.html.twig" %}
+
+{% block breadcrumb %}
+    <div class="row ">
+        <ol class="breadcrumb">
+            <li><a href="{{ path('quickstart_app_account') }}">Account</a></li>
+            <li class="active">Overview</li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block title %}
+    {% trans %}account.title{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <h2>{% trans %}account.title{% endtrans %}</h2>
+        </div>
+
+        <div class="col-md-4"></div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-8">
+
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                Error: This is an error message
+
+            </div>
+
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                Info: Information to the user
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="alert alert-danger">
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true" tabindex="0" data-placement="top"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Unread messages"
+                      data-animation="true"></span>
+                Your messages
+                <span class="badge">2</span>
+            </div>
+
+            <ul class="list-unstyled">
+                <li><a href="#">Information link 1</a></li>
+                <li><a href="#">Information link 2</a></li>
+                <li><a href="#">Information link 3</a></li>
+                <li><a href="#">Information link 4</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <h3>Your progress</h3>
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 45%;">
+                    45%
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>1. Step 1</strong>
+                <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Completed"
+                      data-animation="true"></span>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>2. Step 2</strong>
+                <span class="glyphicon glyphicon-ok pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Completed"
+                      data-animation="true"></span>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-body">3. Step 3
+                    <span class="glyphicon glyphicon-info-sign pull-right" aria-hidden="true" tabindex="0"
+                          class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                          data-content="Pending"
+                          data-animation="true"></span>
+                </div>
+                <div class="panel-footer">
+                    <p><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit</strong></p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fermentum lorem vitae urna pretium
+                        cursus. Sed interdum neque nec ullamcorper faucibus. Curabitur at metus eu velit convallis
+                        porttitor eu ut enim. Vivamus quis nibh iaculis elit auctor convallis ut convallis nisi. Nunc
+                        mattis accumsan dui eu porttitor. Sed et magna at urna faucibus egestas ac vitae felis. Duis
+                        neque felis, mollis et facilisis ut, laoreet condimentum lectus. Cras porta, leo sit amet
+                        pharetra ultricies, mi ex tristique ligula, in rhoncus tortor libero nec metus. Integer
+                        tincidunt velit quis pulvinar scelerisque. Sed nec mauris quis quam viverra vestibulum. Sed ante
+                        elit, tincidunt vitae semper vitae, bibendum quis ipsum. Fusce iaculis tincidunt arcu, at
+                        aliquet arcu tristique eu.</p>
+                    <a href="#" class="btn btn-success pull-right">Start</a>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>4. Step 4</strong>
+                <span class="glyphicon glyphicon-minus-sign pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Unavailable"
+                      data-animation="true"></span>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>5. Step 5</strong>
+                <span class="glyphicon glyphicon-minus-sign pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Unavailable"
+                      data-animation="true"></span>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>6. Step 6</strong>
+                <span class="glyphicon glyphicon-minus-sign pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Unavailable"
+                      data-animation="true"></span>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>7. Step 7</strong>
+                <span class="glyphicon glyphicon-minus-sign pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Unavailable"
+                      data-animation="true"></span>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>8. Step 8</strong>
+                <span class="glyphicon glyphicon-minus-sign pull-right" aria-hidden="true" tabindex="0"
+                      class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="hover"
+                      data-content="Unavailable"
+                      data-animation="true"></span>
+            </div>
+
+        </div>
+
+        <div class="col-md-4"></div>
+
+    </div>
+
+
+{% endblock %}

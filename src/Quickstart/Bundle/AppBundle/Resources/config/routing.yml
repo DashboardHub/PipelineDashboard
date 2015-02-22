@@ -1,0 +1,24 @@
+quickstart_app_changelog:
+    path:     /changelog
+    defaults: { _controller: quickstart_app_default_controller:changelogAction }
+
+quickstart_app_homepage:
+    path:     /
+    defaults: { _controller: quickstart_app_default_controller:indexAction }
+#
+#quickstart_app_account:
+#    path:     /account
+#    defaults: { _controller: quickstart_app_account_controller:indexAction }
+
+quickstart_app_dashboard:
+    path:     /dashboard
+    defaults: { _controller: quickstart_app_dashboard_controller:indexAction }
+
+quickstart_app_github:
+    path:     /widget/github
+    defaults: { _controller: quickstart_app_github_controller:indexAction }
+
+quickstart_app_travis:
+    path:     /widget/travis
+    defaults: { _controller: quickstart_app_travis_controller:indexAction }
+

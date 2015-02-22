@@ -1,0 +1,42 @@
+nav:
+  home: Accueil
+  register: Se enregistrer
+  login: S'identifier
+  logout: Déconnexion
+
+breadcrumb:
+  overview: Vue d'ensemble
+
+form:
+  select: Se il vous plaît Sélectionnez
+
+login:
+  title: S'identifier
+  subtitle: Enregistrez vos coordonnées
+  form:
+    username:
+      label: Adresse e-mail
+    password:
+      label: Mot de passe
+    login:
+      label: S'identifier
+
+register:
+  title: Se enregistrer
+  subtitle: Enregistrez vos coordonnées
+  form:
+    firstname:
+      label: Prénom
+    lastname:
+      label: Nom De Famille
+    email:
+      label: Email
+    password:
+      label: Mot de passe
+    password-confirm:
+      label: Confirmez Le Mot De Passe
+    register-button:
+      label: Enregistrer
+
+account:
+  title: Mon Compte

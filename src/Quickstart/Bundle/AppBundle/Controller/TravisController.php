@@ -2,15 +2,14 @@
 
 namespace Quickstart\Bundle\AppBundle\Controller;
 
-use Github\Client;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class GithubController
+ * Class TravisController
  * @package Quickstart\Bundle\AppBundle\Controller
  */
-class GithubController
+class TravisController
 {
 
     /**
@@ -26,21 +25,16 @@ class GithubController
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction($reponame, $owner, $name)
     {
-        $github       = new \GuzzleHttp\Client();
-        $events       = $github->get('https://api.github.com/repos/eddiejaoude/SymfonyQuickStart/events?per_page=5');
-        $pullrequests = $github->get('https://api.github.com/repos/eddiejaoude/SymfonyQuickStart/pulls?per_page=5');
-        $issues       = $github->get('https://api.github.com/repos/eddiejaoude/SymfonyQuickStart/issues?per_page=5');
+        $travis = new \GuzzleHttp\Client();
+        $builds = $travis->get('https://api.travis-ci.org/repos/' . $reponame . '/builds');
 
         return $this->templating->renderResponse(
-            'QuickstartAppBundle:Github:index.html.twig',
+            'QuickstartAppBundle:Travis:index.html.twig',
             array(
-                'events'       => json_decode($events->getBody()->getContents(), true),
-                'pullrequests' => json_decode($pullrequests->getBody()->getContents(), true),
-                'issues'       => json_decode($issues->getBody()->getContents(), true)
+                'builds' => array_slice(json_decode($builds->getBody()->getContents(), true), 0, 15)
             )
         );
     }
-
 }
