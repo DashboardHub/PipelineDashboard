@@ -102,3 +102,7 @@ fos_user:
         form:
             type: quickstart_user_registration
             validation_groups: [QuickstartRegistration]
+
+stash:
+    drivers: [ FileSystem ]
+    FileSystem: ~

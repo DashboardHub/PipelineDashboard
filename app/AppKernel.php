@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new EddieJaoude\Bundle\SymfonyTranslationTwigCollectionBundle\EddieJaoudeSymfonyTranslationTwigCollectionBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
+            new Tedivm\StashBundle\TedivmStashBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

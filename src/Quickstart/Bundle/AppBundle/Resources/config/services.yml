@@ -17,11 +17,11 @@ services:
 
   quickstart_app_github_controller:
       class:     Quickstart\Bundle\AppBundle\Controller\GithubController
-      arguments: ["@templating"]
+      arguments: ["@templating", "@stash"]
 
   quickstart_app_travis_controller:
       class:     Quickstart\Bundle\AppBundle\Controller\TravisController
-      arguments: ["@templating"]
+      arguments: ["@templating", "@stash"]
 
   quickstart_app_main.menu_builder:
     class: Quickstart\Bundle\AppBundle\Menu\MenuBuilder

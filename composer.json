@@ -29,7 +29,8 @@
         "eddiejaoude/eddie-jaoude-symfony-translation-twig-collection-bundle": "0.1.*",
         "eddiejaoude/dev-helper-cmds": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "knplabs/knp-time-bundle": "~1.3"
+        "knplabs/knp-time-bundle": "~1.3",
+        "tedivm/stash-bundle": "0.4.*"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*",
