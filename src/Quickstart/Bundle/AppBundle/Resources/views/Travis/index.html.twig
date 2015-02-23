@@ -11,6 +11,7 @@
             <tr>
                 <th>Branch</th>
                 <th>When</th>
+                <th>Duration (s)</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
                 {% endif %}
                     <td>{{ build.branch }}</td>
                     <td>{{ build.finished_at|ago }}</td>
+                    <td>{{ build.duration }}</td>
                     <td>
                         {% if build.result == 0 %}
                             <span class="glyphicon glyphicon-ok pull-right"></span>

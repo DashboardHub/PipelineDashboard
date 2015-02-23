@@ -24,7 +24,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             {{ render(controller(
             'quickstart_app_github_controller:eventsAction', { 'reponame': reponame }
             )) }}
@@ -36,17 +36,23 @@
             )) }}
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-5">
             {{ render(controller(
-            'quickstart_app_travis_controller:indexAction', { 'reponame': reponame }
+            'quickstart_app_github_controller:issuesAction', { 'reponame': reponame }
             )) }}
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             {{ render(controller(
-            'quickstart_app_github_controller:issuesAction', { 'reponame': reponame }
+            'quickstart_app_travis_controller:indexAction', { 'reponame': reponame }
+            )) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller(
+            'quickstart_app_travis_controller:durationGraphAction', { 'reponame': reponame }
             )) }}
         </div>
     </div>

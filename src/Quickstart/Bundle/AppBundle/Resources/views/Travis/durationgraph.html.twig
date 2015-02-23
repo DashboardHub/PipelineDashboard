@@ -1,0 +1,36 @@
+<div class="panel panel-{% if builds.0.result == 0 %}success{% else %}danger{% endif %}">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Latest Builds <span class="badge">{{ builds|length }}</span>
+            <span class="glyphicon glyphicon-{% if builds.0.result == 0 %}ok{% else %}remove{% endif %} pull-right"></span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <canvas id="travisChart" width="450" height="200"></canvas>
+    </div>
+    <div class="panel-footer">
+        <p><strong>Build duration</strong></p>
+
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<script>
+    var data = {
+        labels: {{ graph.x }},
+        datasets: [
+            {
+                label: "My First dataset",
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: {{ graph.y }}
+            }
+        ]
+    };
+    var ctx = document.getElementById("travisChart").getContext("2d");
+    var myLineChart = new Chart(ctx).Line(data);
+</script>
