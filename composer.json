@@ -30,7 +30,8 @@
         "eddiejaoude/dev-helper-cmds": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "knplabs/knp-time-bundle": "~1.3",
-        "tedivm/stash-bundle": "0.4.*"
+        "tedivm/stash-bundle": "0.4.*",
+        "guzzlehttp/guzzle": "5.*"
     },
     "require-dev": {
         "heroku/heroku-buildpack-php": "*",
@@ -41,7 +42,6 @@
         "behat/mink-browserkit-driver": "~1.1@dev",
         "behat/mink-goutte-driver": "*@dev",
         "behat/mink-selenium2-driver": "1.*",
-        "guzzlehttp/guzzle": "5.*",
         "chartinger/behat-twig-report-extension": "*@dev",
         "phpunit/phpunit": "4.*@stable",
         "phpspec/phpspec": "~2.0",
