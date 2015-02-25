@@ -12,6 +12,8 @@
 
 **Note: There are no boundary checks, try to break App & it will break **
 
+![Dashboard Screenshot](/web/img/screenshot.png "Dashboard Screenshot")
+
 ## Setup
 
 1. Install dependencies
