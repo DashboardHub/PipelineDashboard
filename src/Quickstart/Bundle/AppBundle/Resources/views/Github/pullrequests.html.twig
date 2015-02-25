@@ -1,4 +1,4 @@
-<div class="panel panel-success">
+<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
             Pull Requests <span class="badge">{{ pullrequests|length }}</span>
@@ -10,6 +10,8 @@
             <thead>
             <tr>
                 <th>Branch</th>
+                <th>Who</th>
+                <th>Assignee</th>
                 <th>When</th>
             </tr>
             </thead>
@@ -17,6 +19,8 @@
             {% for pullrequest in pullrequests %}
                 <tr>
                     <td>{{ pullrequest.head.ref }}</td>
+                    <td>{{ pullrequest.user.login }}</td>
+                    <td>{{ pullrequest.assignee|default('---') }}</td>
                     <td>{{ pullrequest.created_at|ago }}</td>
                 </tr>
             {% endfor %}

@@ -1,4 +1,4 @@
-<div class="panel panel-success">
+<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
             Issues <span class="badge">{{ issues|length }}</span>
@@ -10,12 +10,18 @@
             <thead>
             <tr>
                 <th>Title</th>
+                <th>Who</th>
+                <th>Assignee</th>
+                <th>When</th>
             </tr>
             </thead>
             <tbody>
             {% for issue in issues %}
                 <tr>
                     <td>{{ issue.title }}</td>
+                    <td>{{ issue.user.login }}</td>
+                    <td>{{ issue.assignee|default('---') }}</td>
+                    <td>{{ issue.created_at|ago }}</td>
                 </tr>
             {% endfor %}
             </tbody>

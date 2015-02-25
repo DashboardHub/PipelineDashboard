@@ -1,0 +1,11 @@
+<div class="box1">
+    <span class="mega-octicon octicon-clock"></span>
+    <h3>
+        {% if build.duration > 0 %}
+            {{ build.duration }}
+        {% else %}
+            building
+        {% endif %}
+    </h3>
+</div>
+<p>Latest Build Time on CI</p>

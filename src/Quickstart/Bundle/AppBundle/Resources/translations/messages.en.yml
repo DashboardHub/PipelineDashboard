@@ -1,5 +1,6 @@
 project:
   name: Pipeline Dashboard
+  title: Your world in one place!
 
 nav:
   home: Home

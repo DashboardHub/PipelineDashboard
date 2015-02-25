@@ -1,49 +1,52 @@
 {% extends "::base.html.twig" %}
 
-{% block breadcrumb %}
-    <div class="row ">
-        <ol class="breadcrumb">
-            <li>Dashboard</li>
-            <li class="active">{{ reponame }}</li>
-        </ol>
-    </div>
-{% endblock %}
+{#{% block breadcrumb %}#}
+    {#<div class="row ">#}
+        {#<ol class="breadcrumb">#}
+            {#<li><a href="/">Dashboard</a></li>#}
+            {#<li class="active">{{ reponame }}</li>#}
+        {#</ol>#}
+    {#</div>#}
+{#{% endblock %}#}
 
 {% block title %}{{ reponame }}{% endblock %}
 
 {% block body %}
 
-    <div class="row">
-
-        <div class="col-md-8">
-            <h2>{{ reponame }}</h2>
+    <div class="row mtbox">
+        <div class="col-md-2 col-sm-2 col-md-offset-1 box0">
+            {{ render(controller(
+            'quickstart_app_github_controller:prBoxAction', { 'reponame': reponame }
+            )) }}
         </div>
 
-        <div class="col-md-4"></div>
+        <div class="col-md-2 col-sm-2 box0">
+            {{ render(controller(
+            'quickstart_app_github_controller:issueBoxAction', { 'reponame': reponame }
+            )) }}
+        </div>
+
+        <div class="col-md-2 col-sm-2 box0">
+            {{ render(controller(
+            'quickstart_app_github_controller:branchBoxAction', { 'reponame': reponame }
+            )) }}
+        </div>
+
+        <div class="col-md-2 col-sm-2 box0">
+            {{ render(controller(
+            'quickstart_app_travis_controller:latestBuildDurationBoxAction', { 'reponame': reponame }
+            )) }}
+        </div>
+
+        <div class="col-md-2 col-sm-2 box0">
+            {{ render(controller(
+            'quickstart_app_travis_controller:latestBuildStatusBoxAction', { 'reponame': reponame }
+            )) }}
+        </div>
 
     </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            {{ render(controller(
-            'quickstart_app_github_controller:eventsAction', { 'reponame': reponame }
-            )) }}
-        </div>
-
-        <div class="col-md-3">
-            {{ render(controller(
-            'quickstart_app_github_controller:pullrequestsAction', { 'reponame': reponame }
-            )) }}
-        </div>
-
-        <div class="col-md-5">
-            {{ render(controller(
-            'quickstart_app_github_controller:issuesAction', { 'reponame': reponame }
-            )) }}
-        </div>
-    </div>
-
-    <div class="row">
+    <div class="row mtbox">
         <div class="col-md-6">
             {{ render(controller(
             'quickstart_app_travis_controller:indexAction', { 'reponame': reponame }
@@ -53,6 +56,28 @@
         <div class="col-md-6">
             {{ render(controller(
             'quickstart_app_travis_controller:durationGraphAction', { 'reponame': reponame }
+            )) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ render(controller(
+            'quickstart_app_github_controller:eventsAction', { 'reponame': reponame }
+            )) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller(
+            'quickstart_app_github_controller:pullrequestsAction', { 'reponame': reponame }
+            )) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            {{ render(controller(
+            'quickstart_app_github_controller:issuesAction', { 'reponame': reponame }
             )) }}
         </div>
     </div>

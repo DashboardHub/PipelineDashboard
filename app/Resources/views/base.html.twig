@@ -11,7 +11,16 @@
         <!-- HTML5 Shim and Respond.js add IE8 support of HTML5 elements and media queries -->
         {% include 'BraincraftedBootstrapBundle::ie8-support.html.twig' %}
 
-        <script src="/js/Chart.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/css/zabuto_calendar.css">
+        <link rel="stylesheet" type="text/css" href="/js/gritter/css/jquery.gritter.css" />
+        <link rel="stylesheet" type="text/css" href="/lineicons/style.css">
+        <link rel="stylesheet" href="/octicons/octicons.css">
+
+        <!-- Custom styles for this template -->
+        <link href="/css/style.css" rel="stylesheet">
+        <link href="/css/style-responsive.css" rel="stylesheet">
+
+        <script src="/js/chart-master/Chart.js"></script>
     </head>
     <body>
     <nav class="navbar navbar-default" role="navigation">
@@ -24,7 +33,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ path('quickstart_app_homepage') }}">{% trans %}project.name{% endtrans %}</a>
+                <a class="navbar-brand" href="{{ path('quickstart_app_homepage') }}">
+                    {% trans %}project.name{% endtrans %}
+                    <span class="small">{% trans %}project.title{% endtrans %}</span>
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,13 +55,33 @@
 
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}
-                <div class="flash-{{ type }}">
+                <div class="alert alert-{{ type }}">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endfor %}
 
         {% block body %}{% endblock body %}
+        
+        <script src="/js/jquery.js"></script>
+        <script src="/js/jquery-1.8.3.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script class="include" type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
+        <script src="/js/jquery.scrollTo.min.js"></script>
+        <script src="/js/jquery.nicescroll.js" type="text/javascript"></script>
+        <script src="/js/jquery.sparkline.js"></script>
+
+
+        <!--common script for all pages-->
+        <script src="/js/common-scripts.js"></script>
+
+        <script type="text/javascript" src="/js/gritter/js/jquery.gritter.js"></script>
+        <script type="text/javascript" src="/js/gritter-conf.js"></script>
+
+        <!--script for this page-->
+        <script src="/js/sparkline-chart.js"></script>
+        <script src="/js/zabuto_calendar.js"></script>
+
         {% block javascripts %}{% endblock javascripts %}
     </div>
     </body>

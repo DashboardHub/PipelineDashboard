@@ -2,8 +2,8 @@
 
 namespace Quickstart\Bundle\AppBundle\Controller;
 
+use Quickstart\Bundle\AppBundle\Service\Github;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Tedivm\StashBundle\Service\CacheService as Cache;
 
 /**
  * Class GithubController
@@ -18,14 +18,14 @@ class GithubController
     private $templating;
 
     /**
-     * @var Cache
+     * @var Github
      */
-    private $cache;
+    private $github;
 
-    public function __construct(EngineInterface $templating, Cache $cache)
+    public function __construct(EngineInterface $templating, Github $github)
     {
         $this->templating = $templating;
-        $this->cache      = $cache;
+        $this->github     = $github;
     }
 
     /**
@@ -33,24 +33,10 @@ class GithubController
      */
     public function eventsAction($reponame)
     {
-        $github = new \GuzzleHttp\Client();
-
-        $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame);
-        $events = $cache->get();
-
-        if ($cache->isMiss()) {
-            $events = json_decode(
-                $github->get('https://api.github.com/repos/' . $reponame . '/events?per_page=5')
-                       ->getBody()->getContents(),
-                true
-            );
-            $cache->set($events, 600);
-        }
-
         return $this->templating->renderResponse(
             'QuickstartAppBundle:Github:events.html.twig',
             array(
-                'events' => $events
+                'events' => $this->github->getEvents($reponame)
             )
         );
     }
@@ -60,25 +46,10 @@ class GithubController
      */
     public function pullrequestsAction($reponame)
     {
-        $github = new \GuzzleHttp\Client();
-
-        $cache        = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame);
-        $pullrequests = $cache->get();
-
-        if ($cache->isMiss()) {
-            $pullrequests = json_decode(
-                $github->get('https://api.github.com/repos/' . $reponame . '/pulls?per_page=5')
-                       ->getBody()->getContents()
-                ,
-                true
-            );
-            $cache->set($pullrequests, 600);
-        }
-
         return $this->templating->renderResponse(
             'QuickstartAppBundle:Github:pullrequests.html.twig',
             array(
-                'pullrequests' => $pullrequests
+                'pullrequests' => $this->github->getPullRequests($reponame)
             )
         );
     }
@@ -88,25 +59,49 @@ class GithubController
      */
     public function issuesAction($reponame)
     {
-        $github = new \GuzzleHttp\Client();
-
-        $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame);
-        $issues = $cache->get();
-
-        if ($cache->isMiss()) {
-            $issues = json_decode(
-                $github->get('https://api.github.com/repos/' . $reponame . '/issues?per_page=5')
-                       ->getBody()->getContents()
-                ,
-                true
-            );
-            $cache->set($issues, 600);
-        }
-
         return $this->templating->renderResponse(
             'QuickstartAppBundle:Github:issues.html.twig',
             array(
-                'issues' => $issues
+                'issues' => $this->github->getIssues($reponame)
+            )
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function prBoxAction($reponame)
+    {
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Github:prbox.html.twig',
+            array(
+                'pullrequests' => $this->github->getPullRequests($reponame, 100)
+            )
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function issueBoxAction($reponame)
+    {
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Github:issuebox.html.twig',
+            array(
+                'issues' => $this->github->getIssues($reponame, 100)
+            )
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function branchBoxAction($reponame)
+    {
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Github:branchbox.html.twig',
+            array(
+                'branches' => $this->github->getBranches($reponame, 30)
             )
         );
     }

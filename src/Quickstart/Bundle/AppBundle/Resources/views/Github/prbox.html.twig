@@ -1,0 +1,11 @@
+<div class="box1">
+    <span class="mega-octicon octicon-git-pull-request"></span>
+    <h3>
+        {% if pullrequests|length > 99 %}
+            100+ !!!
+        {% else %}
+            {{ pullrequests|length }}
+        {% endif %}
+    </h3>
+</div>
+<p>Pull Requests</p>

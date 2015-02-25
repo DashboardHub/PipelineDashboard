@@ -1,0 +1,13 @@
+<div class="box1">
+    <span class="mega-octicon octicon-code"></span>
+    <h3>
+        {% if build.result == 0 %}
+            OK!
+        {% elseif build.result > 0 %}
+            FAILED!!!
+        {% else %}
+            building
+        {% endif %}
+    </h3>
+</div>
+<p>Latest Build Status on CI</p>

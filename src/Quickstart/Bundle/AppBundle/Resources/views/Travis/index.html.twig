@@ -1,46 +1,38 @@
-<div class="panel panel-{% if builds.0.result == 0 %}success{% else %}danger{% endif %}">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            Latest Builds <span class="badge">{{ builds|length }}</span>
-            <span class="glyphicon glyphicon-{% if builds.0.result == 0 %}ok{% else %}remove{% endif %} pull-right"></span>
-        </h3>
+<div class="darkblue-panel pn">
+    <div class="darkblue-header">
+        <h5>TRAVIS CI <span class="badge">{{ builds|length }}</span></h5>
     </div>
-    <div class="panel-body">
-        <table class="table table-condensed">
-            <thead>
-            <tr>
-                <th>Branch</th>
-                <th>When</th>
-                <th>Duration (s)</th>
-                <th>Status</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for build in builds %}
+
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th>Branch</th>
+            <th>When</th>
+            <th>Duration (s)</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for build in builds %}
+            {% if build.result == 0 %}
+                <tr class="success">
+            {% else %}
+                <tr class="danger">
+            {% endif %}
+            <td>{{ build.branch }}</td>
+            <td>{{ build.finished_at|ago }}</td>
+            <td>{{ build.duration|default('building') }}</td>
+            <td>
                 {% if build.result == 0 %}
-                    <tr class="success">
+                    <span class="glyphicon glyphicon-ok"></span>
                 {% else %}
-                    <tr class="danger">
+                    <span class="glyphicon glyphicon-remove"></span>
                 {% endif %}
-                    <td>{{ build.branch }}</td>
-                    <td>{{ build.finished_at|ago }}</td>
-                    <td>{{ build.duration }}</td>
-                    <td>
-                        {% if build.result == 0 %}
-                            <span class="glyphicon glyphicon-ok pull-right"></span>
-                        {% else %}
-                            <span class="glyphicon glyphicon-remove pull-right"></span>
-                        {% endif %}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+            </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    </div>
-    <div class="panel-footer">
-        <p><strong>Last build duration {{ builds.0.duration }}s</strong></p>
-
-        <div class="clearfix"></div>
-    </div>
+    <div class="clearfix"></div>
 </div>

@@ -2,8 +2,8 @@
 
 namespace Quickstart\Bundle\AppBundle\Controller;
 
+use Quickstart\Bundle\AppBundle\Service\Travis;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Tedivm\StashBundle\Service\CacheService as Cache;
 
 /**
  * Class TravisController
@@ -20,12 +20,12 @@ class TravisController
     /**
      * @var Cache
      */
-    private $cache;
+    private $travis;
 
-    public function __construct(EngineInterface $templating, Cache $cache)
+    public function __construct(EngineInterface $templating, Travis $travis)
     {
         $this->templating = $templating;
-        $this->cache      = $cache;
+        $this->travis      = $travis;
     }
 
     /**
@@ -33,25 +33,10 @@ class TravisController
      */
     public function indexAction($reponame)
     {
-        $travis = new \GuzzleHttp\Client();
-
-        $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame);
-        $builds = $cache->get();
-
-        if ($cache->isMiss()) {
-            $builds = json_decode(
-                $travis->get('https://api.travis-ci.org/repos/' . $reponame . '/builds')
-                       ->getBody()->getContents()
-                ,
-                true
-            );
-            $cache->set($builds, 600);
-        }
-
         return $this->templating->renderResponse(
             'QuickstartAppBundle:Travis:index.html.twig',
             array(
-                'builds' => array_slice($builds, 0, 5)
+                'builds' => array_slice($this->travis->getBuilds($reponame), 0, 5)
             )
         );
     }
@@ -61,20 +46,7 @@ class TravisController
      */
     public function durationGraphAction($reponame)
     {
-        $travis = new \GuzzleHttp\Client();
-
-        $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame);
-        $builds = $cache->get();
-
-        if ($cache->isMiss()) {
-            $builds = json_decode(
-                $travis->get('https://api.travis-ci.org/repos/' . $reponame . '/builds')
-                       ->getBody()->getContents()
-                ,
-                true
-            );
-            $cache->set($builds, 600);
-        }
+        $builds = $this->travis->getBuilds($reponame);
 
         $graph = array();
         foreach ($builds as $build) {
@@ -90,6 +62,32 @@ class TravisController
                     'x' => json_encode($graph['x']),
                     'y' => json_encode($graph['y'])
                 )
+            )
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function latestBuildDurationBoxAction($reponame)
+    {
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Travis:latestbuilddurationbox.html.twig',
+            array(
+                'build' => $this->travis->getBuilds($reponame)[0]
+            )
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function latestBuildStatusBoxAction($reponame)
+    {
+        return $this->templating->renderResponse(
+            'QuickstartAppBundle:Travis:latestbuildstatusbox.html.twig',
+            array(
+                'build' => $this->travis->getBuilds($reponame)[0]
             )
         );
     }

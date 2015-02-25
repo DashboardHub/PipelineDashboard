@@ -1,36 +1,18 @@
-<div class="panel panel-{% if builds.0.result == 0 %}success{% else %}danger{% endif %}">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            Latest Builds <span class="badge">{{ builds|length }}</span>
-            <span class="glyphicon glyphicon-{% if builds.0.result == 0 %}ok{% else %}remove{% endif %} pull-right"></span>
-        </h3>
+<div class="darkblue-panel pn">
+    <div class="darkblue-header">
+        <h5>TRAVIS CI <span class="badge">{{ builds|length }}</span></h5>
     </div>
-    <div class="panel-body">
-        <canvas id="travisChart" width="450" height="200"></canvas>
-    </div>
-    <div class="panel-footer">
-        <p><strong>Build duration</strong></p>
 
-        <div class="clearfix"></div>
+    <div class="chart mt">
+        <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1"
+             data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff"
+             data-spot-radius="4" data-data="{{ graph.y }}">
+            <canvas width="304" height="75"
+                    style="display: inline-block; width: 304px; height: 75px; vertical-align: top;"></canvas>
+        </div>
     </div>
+
+    <p class="mt"><b>{{ builds.0.duration }} seconds</b><br>Latest Build Duration</p>
+
+    <div class="clearfix"></div>
 </div>
-
-<script>
-    var data = {
-        labels: {{ graph.x }},
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: {{ graph.y }}
-            }
-        ]
-    };
-    var ctx = document.getElementById("travisChart").getContext("2d");
-    var myLineChart = new Chart(ctx).Line(data);
-</script>

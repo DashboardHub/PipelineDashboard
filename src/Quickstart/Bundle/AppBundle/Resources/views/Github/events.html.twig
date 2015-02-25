@@ -1,4 +1,4 @@
-<div class="panel panel-success">
+<div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">
             Latest Events <span class="badge">{{ events|length }}</span>
@@ -10,6 +10,7 @@
             <thead>
             <tr>
                 <th>Type</th>
+                <th>Who</th>
                 <th>When</th>
             </tr>
             </thead>
@@ -17,6 +18,7 @@
             {% for event in events %}
                 <tr>
                     <td>{{ event.type }}</td>
+                    <td>{{ event.actor.login }}</td>
                     <td>{{ event.created_at|ago }}</td>
                 </tr>
             {% endfor %}

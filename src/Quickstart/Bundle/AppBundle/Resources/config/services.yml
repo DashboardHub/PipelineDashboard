@@ -13,15 +13,15 @@ services:
 
   quickstart_app_dashboard_controller:
       class:     Quickstart\Bundle\AppBundle\Controller\DashboardController
-      arguments: ["@templating"]
+      arguments: ["@templating", "@quickstart_app_main.service.github", "@session"]
 
   quickstart_app_github_controller:
       class:     Quickstart\Bundle\AppBundle\Controller\GithubController
-      arguments: ["@templating", "@stash"]
+      arguments: ["@templating", "@quickstart_app_main.service.github"]
 
   quickstart_app_travis_controller:
       class:     Quickstart\Bundle\AppBundle\Controller\TravisController
-      arguments: ["@templating", "@stash"]
+      arguments: ["@templating", "@quickstart_app_main.service.travis"]
 
   quickstart_app_main.menu_builder:
     class: Quickstart\Bundle\AppBundle\Menu\MenuBuilder
@@ -53,3 +53,19 @@ services:
     class: Quickstart\Bundle\AppBundle\Form\RegistrationFormType
     tags:
         - { name: form.type, alias: quickstart_user_registration }
+
+  quickstart_app.github.api:
+    class: GuzzleHttp\Client
+    arguments: ["%github_api%"]
+
+  quickstart_app.travis.api:
+    class: GuzzleHttp\Client
+    arguments: ["%travis_api%"]
+
+  quickstart_app_main.service.github:
+    class: Quickstart\Bundle\AppBundle\Service\Github
+    arguments: ["@quickstart_app.github.api", "@stash"]
+
+  quickstart_app_main.service.travis:
+    class: Quickstart\Bundle\AppBundle\Service\Travis
+    arguments: ["@quickstart_app.travis.api", "@stash"]

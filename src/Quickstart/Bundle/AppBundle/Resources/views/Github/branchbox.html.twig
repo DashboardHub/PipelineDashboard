@@ -1,0 +1,11 @@
+<div class="box1">
+    <span class="mega-octicon octicon-git-branch"></span>
+    <h3>
+        {% if branches|length > 29 %}
+            100+ !!!
+        {% else %}
+            {{ branches|length }}
+        {% endif %}
+    </h3>
+</div>
+<p>Branches</p>
