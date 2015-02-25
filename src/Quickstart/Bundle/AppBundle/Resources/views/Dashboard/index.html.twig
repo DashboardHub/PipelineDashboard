@@ -1,13 +1,13 @@
 {% extends "::base.html.twig" %}
 
-{#{% block breadcrumb %}#}
-    {#<div class="row ">#}
-        {#<ol class="breadcrumb">#}
-            {#<li><a href="/">Dashboard</a></li>#}
-            {#<li class="active">{{ reponame }}</li>#}
-        {#</ol>#}
-    {#</div>#}
-{#{% endblock %}#}
+{% block breadcrumb %}
+    <div class="row ">
+        <ol class="breadcrumb">
+            <li><a href="/">Dashboard</a></li>
+            <li class="active">{{ reponame }}</li>
+        </ol>
+    </div>
+{% endblock %}
 
 {% block title %}{{ reponame }}{% endblock %}
 
