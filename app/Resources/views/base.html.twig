@@ -57,6 +57,10 @@
 <div class="container">
     {% block breadcrumb %}{% endblock breadcrumb %}
 
+    <div class="alert alert-info">
+        Prototype Application, play gently. Feedback welcome <a href="https://github.com/DashboardHub/PipelineDashboard">Github</a>
+    </div>
+
     {% for type, messages in app.session.flashbag.all() %}
         {% for message in messages %}
             <div class="alert alert-{{ type }}">
