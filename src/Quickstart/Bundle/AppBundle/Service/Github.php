@@ -41,8 +41,6 @@ class Github
         $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame, $limit);
         $events = $cache->get();
 
-        error_log($this->client->getDefaultOption()['headers']['Authorization']);
-
         if ($cache->isMiss()) {
             $events = json_decode(
                 $this->client->get('/repos/' . $reponame . '/events?per_page=' . $limit)
