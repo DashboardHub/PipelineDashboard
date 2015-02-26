@@ -6,6 +6,8 @@ use Quickstart\Bundle\AppBundle\Service\Github;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class DashboardController
@@ -24,14 +26,16 @@ class DashboardController
      */
     private $github;
 
-
+    /**
+     * @var Session
+     */
     private $session;
 
-    public function __construct(EngineInterface $templating, Github $github, $session)
+    public function __construct(EngineInterface $templating, Github $github, Session $session)
     {
         $this->templating = $templating;
         $this->github     = $github;
-        $this->session     = $session;
+        $this->session    = $session;
     }
 
     /**
@@ -43,14 +47,17 @@ class DashboardController
 
         try {
             $this->github->getEvents($reponame);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // redirect to form page with flash message
             $this->session
                 ->getFlashBag()
                 ->add(
-                'danger',
-                'Project not found. Please try again.'
-            );
+                    'danger',
+                    'Project not found or API Rate limit hit. Please try again.'
+                );
+
+            error_log($e->getCode() . ': ' . $e->getMessage());
+
             return new RedirectResponse('/');
         }
 
@@ -64,4 +71,13 @@ class DashboardController
         );
     }
 
+    /**
+     * @param string $url
+     *
+     * @return Response
+     */
+    public function widgetAction($url)
+    {
+        return new Response(file_get_contents($url));
+    }
 }

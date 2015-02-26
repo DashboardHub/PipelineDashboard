@@ -28,7 +28,7 @@ class Github
     public function __construct(Client $client, Cache $cache)
     {
         $this->client = $client;
-        $this->cache      = $cache;
+        $this->cache  = $cache;
     }
 
     /**
@@ -41,10 +41,12 @@ class Github
         $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame, $limit);
         $events = $cache->get();
 
+        error_log($this->client->getDefaultOption()['headers']['Authorization']);
+
         if ($cache->isMiss()) {
             $events = json_decode(
                 $this->client->get('/repos/' . $reponame . '/events?per_page=' . $limit)
-                       ->getBody()->getContents(),
+                             ->getBody()->getContents(),
                 true
             );
             $cache->set($events, 600);
@@ -66,7 +68,7 @@ class Github
         if ($cache->isMiss()) {
             $pullrequests = json_decode(
                 $this->client->get('/repos/' . $reponame . '/pulls?state=open&per_page=' . $limit)
-                       ->getBody()->getContents()
+                             ->getBody()->getContents()
                 ,
                 true
             );
@@ -89,7 +91,7 @@ class Github
         if ($cache->isMiss()) {
             $issues = json_decode(
                 $this->client->get('/repos/' . $reponame . '/issues?state=open&per_page=' . $limit)
-                       ->getBody()->getContents()
+                             ->getBody()->getContents()
                 ,
                 true
             );
@@ -106,13 +108,13 @@ class Github
      */
     public function getBranches($reponame, $limit = 5)
     {
-        $cache  = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame, $limit);
+        $cache    = $this->cache->getItem(__CLASS__ . __METHOD__, $reponame, $limit);
         $branches = $cache->get();
 
         if ($cache->isMiss()) {
             $branches = json_decode(
                 $this->client->get('/repos/' . $reponame . '/branches?per_page=' . $limit)
-                       ->getBody()->getContents()
+                             ->getBody()->getContents()
                 ,
                 true
             );
