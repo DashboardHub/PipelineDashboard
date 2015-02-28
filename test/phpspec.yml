@@ -1,0 +1,5 @@
+suites:
+  default:
+    namespace: DashboardHub\Bundle\AppBundle
+    spec_prefix: Spec
+    spec_path: src/DashboardHub/Bundle/AppBundle/Tests
