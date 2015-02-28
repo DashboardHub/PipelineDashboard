@@ -6,6 +6,7 @@
 .project
 
 composer.phar
+symfony.phar
 
 /web/bundles/
 /app/bootstrap.php.cache
