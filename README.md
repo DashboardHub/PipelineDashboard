@@ -1,4 +1,5 @@
-myproject
-=========
+| --- | master | develop |
+| --- | ------ | ------- |
+| Build | [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=master)](https://travis-ci.org/DashboardHub/PipelineDashboard) | [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=develop)](https://travis-ci.org/DashboardHub/PipelineDashboard) |
 
-A Symfony project created on February 27, 2015, 8:54 pm.
+# Dashboard Hub :: Pipeline Dashboard
