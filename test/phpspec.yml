@@ -3,3 +3,18 @@ suites:
     namespace: DashboardHub\Bundle\AppBundle
     spec_prefix: Spec
     spec_path: src/DashboardHub/Bundle/AppBundle/Tests
+
+extensions:
+    - PhpSpec\Extension\CodeCoverageExtension
+
+code_coverage:
+  whitelist:
+    - src/DashboardHub/Bundle/AppBundle/Menu
+  whitelist_files:
+    - src/Quickstart/Bundle/AppBundle/QuickstartAppBundle.php
+  format:
+    - html
+    - clover
+  output:
+    html: test/build/coverage
+    clover: test/build/coverage.xml

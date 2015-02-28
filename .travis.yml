@@ -10,3 +10,5 @@ before_script:
 script:
   - ./bin/phpspec run --config=test/phpspec.yml
   - ./bin/behat --config=test/behat.yml
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover test/build/coverage.xml
