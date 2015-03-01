@@ -1,0 +1,17 @@
+services:
+#    dashboard_hub_app.example:
+#        class: DashboardHub\Bundle\AppBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+  dashboardhub_app_main.menu.main:
+    class: Knp\Menu\MenuItem # the service definition requires setting the class
+    factory_service: dashboardhub_app_main.menu_builder
+    factory_method: createMainMenu
+    arguments: ["@request"]
+    scope: request # needed as we have the request as a dependency here
+    tags:
+        - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+  dashboardhub_app_main.menu_builder:
+    class: DashboardHub\Bundle\AppBundle\Menu\MenuBuilder
+    arguments: ["@knp_menu.factory","@security.context"]

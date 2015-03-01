@@ -1,0 +1,20 @@
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext:
+            session: '@session'
+    dashboardhub_app:
+      type: symfony_bundle
+      bundle: DashboardHubAppBundle
+      filters:
+        tags: ~@omit
+      contexts:
+        - FeatureContext: ~
+        - Behat\MinkExtension\Context\MinkContext: ~
+  extensions:
+    Behat\Symfony2Extension: ~
+    Behat\MinkExtension:
+      sessions:
+        default:
+          symfony2: ~
