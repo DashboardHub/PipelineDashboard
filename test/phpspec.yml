@@ -10,8 +10,9 @@ extensions:
 code_coverage:
   whitelist:
     - src/DashboardHub/Bundle/AppBundle/Menu
+    - src/DashboardHub/Bundle/AppBundle/Service
   whitelist_files:
-    - src/Quickstart/Bundle/AppBundle/QuickstartAppBundle.php
+    - src/DashboardHub/Bundle/AppBundle/DashboardHubAppBundle.php
   format:
     - html
     - clover

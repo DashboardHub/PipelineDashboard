@@ -29,6 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+      version: "@dashboardhub_app_main.service.version"
 
 # Assetic Configuration
 assetic:
