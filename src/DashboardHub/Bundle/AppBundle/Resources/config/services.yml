@@ -15,3 +15,7 @@ services:
   dashboardhub_app_main.menu_builder:
     class: DashboardHub\Bundle\AppBundle\Menu\MenuBuilder
     arguments: ["@knp_menu.factory","@security.context"]
+
+  dashboardhub_app_main.service.version:
+    class: DashboardHub\Bundle\AppBundle\Service\VersionService
+    arguments: ["%kernel.root_dir%/../VERSION"]

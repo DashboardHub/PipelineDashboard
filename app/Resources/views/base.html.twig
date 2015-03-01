@@ -7,6 +7,8 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <p id="version">{{ version.current }}</p>
+
         {{ knp_menu_render('main') }}
 
         {% block body %}{% endblock %}
