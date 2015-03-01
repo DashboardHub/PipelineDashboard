@@ -18,7 +18,7 @@ after_success:
   - git config --global user.name "Travis CI"
   - GIT_TAG=build-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
   - echo $GIT_TAG > VERSION
-  - git commit -m "Set build VERSION number $GIT_TAG" VESRION
+  - git commit -m "Set build VERSION number $GIT_TAG" VERSION
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
   - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
 
