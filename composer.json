@@ -1,6 +1,6 @@
 {
-    "name": "eaj/myproject",
-    "license": "proprietary",
+    "name": "DashboardHub/PipelineDashboard",
+    "license": "MIT",
     "type": "project",
     "autoload": {
         "psr-0": {
