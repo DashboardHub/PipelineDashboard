@@ -8,8 +8,8 @@ before_script:
   - php composer.phar install --dev --no-interaction
 
 script:
-  - ./bin/phpspec run --config=test/phpspec.yml
-  - ./bin/behat --config=test/behat.yml
+  - ./bin/phpspec run --config=test/phpspec.yml -vvv
+  - ./bin/behat --config=test/behat.yml -vvv
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover test/build/coverage.xml
 
