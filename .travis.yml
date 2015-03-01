@@ -25,10 +25,10 @@ after_success:
 deploy:
   provider: heroku
   api_key:
-    feature/27-pipeline-setup:
+    develop:
       secure: "NGh/IdxnP/syydjDRDDj7reLmkgEjpzKx5OCH1x0HWSQaMboObqK15gfWMRg50EMDrtCzMQG7L8pCB4L1wIKODQ2xZIHKQJJXSL15xUFhiYK8nVFM28O4jWktI94eEKzdI2nm3tavUydabsTHLssnwiXSn0gOZ9DKUMI5dHP2Us="
   app:
-    feature/27-pipeline-setup: dashboardhub-ci
+    develop: dashboardhub-ci
 
 env:
   global:
