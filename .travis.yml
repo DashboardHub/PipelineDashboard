@@ -1,0 +1,43 @@
+language: php
+
+php:
+  - 5.5
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install --dev --no-interaction
+
+script:
+  - ./bin/phpspec run --config=test/phpspec.yml
+  - ./bin/behat --config=test/behat.yml
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover test/build/coverage.xml
+
+after_success:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - GIT_TAG=build-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
+  - echo $GIT_TAG > VERSION
+  - git commit -m "Set build VERSION number $GIT_TAG" VERSION
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+  - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
+
+deploy:
+  provider: heroku
+  api_key:
+    develop:
+      secure: "NGh/IdxnP/syydjDRDDj7reLmkgEjpzKx5OCH1x0HWSQaMboObqK15gfWMRg50EMDrtCzMQG7L8pCB4L1wIKODQ2xZIHKQJJXSL15xUFhiYK8nVFM28O4jWktI94eEKzdI2nm3tavUydabsTHLssnwiXSn0gOZ9DKUMI5dHP2Us="
+  app:
+    develop: dashboardhub-ci
+
+env:
+  global:
+    - secure: "GmEtyPOua9A1W7Wv+Dz1NA/Skh5yiB3VaHk2yaptet5xbAOTo66D4yhlsJFfOI8ZlSUvpEXLzh4B3zKgMzVXUv4lcSnZFP6MLJ6l4pBkivBTWfYRiwMCEZYgS7eAw1WIetFx6fuO//9m0qe33eSyRx0bZQ3b1URqSgf/2xUtX28="
+
+notifications:
+  slack:
+    secure: Ycj4WidlUAwf+8IDyUS6lpr1IZEMRSckegumdFLNhSwuajpfxWQg7RBvIbq0tf4JgfHgsOv0vzJkY9cfRJybNsqskUnuG4GJdQ0jV9T2AuLtGgJaaoB+MYnNoIf31RJS5Isnf4ikoCjY1wpUlHQ6HjfpEJMNdV4+FXk9xa9V4X4=
+
+branches:
+  except:
+    - /^build-[0-9a-z\-\/]*/
