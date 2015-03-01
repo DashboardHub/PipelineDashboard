@@ -31,5 +31,5 @@ deploy:
     feature/27-pipeline-setup: dashboardhub-ci
 
 env:
-  globa:
+  global:
     - secure: "GmEtyPOua9A1W7Wv+Dz1NA/Skh5yiB3VaHk2yaptet5xbAOTo66D4yhlsJFfOI8ZlSUvpEXLzh4B3zKgMzVXUv4lcSnZFP6MLJ6l4pBkivBTWfYRiwMCEZYgS7eAw1WIetFx6fuO//9m0qe33eSyRx0bZQ3b1URqSgf/2xUtX28="
