@@ -14,33 +14,13 @@ security:
     providers:
         hwi:
             id: hwi_oauth.user.provider
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        app_root:
-            pattern : ^/$
+        secured_area:
             anonymous: ~
 
-        app_root_login:
-            pattern: ^(/login$|^login/check-github)
-            security: false
-
-        app_root_connect:
-            pattern: ^/connect/*
-            security: false
-
-        secured_area:
             logout:
                 path:   /logout
                 target: /
@@ -60,7 +40,7 @@ security:
     # http://symfony.com/doc/current/cookbook/security/access_control.html
     access_control:
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-         - { path: ^/logout, roles: ROLE_USER }
-         - { path: ^/dashboard, roles: ROLE_USER }
+         - { path: ^/logout, roles: ROLE_OAUTH_USER }
+         - { path: ^/dashboard, roles: ROLE_OAUTH_USER }
