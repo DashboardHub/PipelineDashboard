@@ -5,13 +5,62 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     </head>
     <body>
-        <p id="version">{{ version.current }}</p>
 
-        {{ knp_menu_render('main') }}
+        <div class="container-fluid">
+            <!-- Static navbar -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">DashboardHub</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        {{ knp_menu_render('main') }}
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-expanded="false">
+                                    Community <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="https://gitter.im/DashboardHub/PipelineDashboard">
+                                            <img src="https://badges.gitter.im/Join%20Chat.svg"/></a>
+                                    </li>
+                                    <li><a href="https://github.com/DashboardHub/PipelineDashboard">Github</a></li>
+                                    <li><a href="https://twitter.com/dashboardhub">Twitter</a></li>
+                                    <li><a href="https://dashboardhub-ci.herokuapp.com">Demo</a></li>
+                                </ul>
+                            </li>
+                            <li class="disabled"><a href="#" id="version">{{ version.current }}</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+                <!--/.container-fluid -->
+            </nav>
 
-        {% block body %}{% endblock %}
+            {% block body %}{% endblock %}
+        </div>
+        <!-- /container -->
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
