@@ -33,7 +33,7 @@ security:
             anonymous: ~
 
         secured_area:
-            pattern: ^/dashboard|^/login_check|^/login/check-github|^/connect/github|^/logout
+            pattern: ^/dashboard|^/login_check|^/login/check-github|^/logout
 
             logout:
                 path:   /logout
