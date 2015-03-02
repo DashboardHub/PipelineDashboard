@@ -1,0 +1,13 @@
+div.jumbotron h1 {
+    font-size: xx-large;
+}
+
+div#homepage div.dashboardhub-image {
+    background-image: url("/bundles/dashboardhubapp/images/screenshot.png");
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+div#homepage div.dashboardhub-image div.jumbotron {
+    max-width: 600px;
+}
