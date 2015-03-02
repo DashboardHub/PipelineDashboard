@@ -28,8 +28,12 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        secured_area:
+        app_root:
+            pattern : ^/$
             anonymous: ~
+            
+        secured_area:
+            pattern: ^/dashboard|^/login_check
             logout:
                 path:   /logout
                 target: /
@@ -42,6 +46,9 @@ security:
 
                 oauth_user_provider:
                     service: hwi_oauth.user.provider
+
+
+
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
