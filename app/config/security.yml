@@ -18,6 +18,11 @@ security:
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
     firewalls:
+
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
         secured_area:
             anonymous: ~
 
