@@ -32,9 +32,15 @@ security:
             pattern : ^/$
             anonymous: ~
 
-        secured_area:
-            pattern: ^/dashboard|^/login_check|^/login/check-github|^/logout
+        app_root_login:
+            pattern: ^(/login$|^login/check-github)
+            security: false
 
+        app_root_connect:
+            pattern: ^/connect/*
+            security: false
+
+        secured_area:
             logout:
                 path:   /logout
                 target: /
@@ -48,9 +54,6 @@ security:
 
                 oauth_user_provider:
                     service: hwi_oauth.user.provider
-
-
-
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
