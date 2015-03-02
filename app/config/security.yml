@@ -31,12 +31,14 @@ security:
         app_root:
             pattern : ^/$
             anonymous: ~
-            
+
         secured_area:
-            pattern: ^/dashboard|^/login_check
+            pattern: ^/dashboard|^/login_check|^/login/check-github|^/connect/github|^/logout
+
             logout:
                 path:   /logout
                 target: /
+
             oauth:
                 resource_owners:
                     github:     "/login/check-github"
