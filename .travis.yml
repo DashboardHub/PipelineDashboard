@@ -9,6 +9,7 @@ before_install:
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
+  - php app/console doctrine:schema:update --force
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
@@ -32,6 +33,8 @@ deploy:
       secure: "NGh/IdxnP/syydjDRDDj7reLmkgEjpzKx5OCH1x0HWSQaMboObqK15gfWMRg50EMDrtCzMQG7L8pCB4L1wIKODQ2xZIHKQJJXSL15xUFhiYK8nVFM28O4jWktI94eEKzdI2nm3tavUydabsTHLssnwiXSn0gOZ9DKUMI5dHP2Us="
   app:
     develop: dashboardhub-ci
+  run:
+    - php app/console doctrine:schema:update --force
 
 env:
   global:
