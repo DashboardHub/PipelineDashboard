@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
         <!-- Optional theme -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+        <!-- Additional Icon set -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- Our custom stylesheet -->
         <link rel="stylesheet" href="/bundles/dashboardhubapp/css/styles.css">
     </head>
     <body>
@@ -34,6 +37,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">
+                                    <i class="fa fa-heartbeat"></i>
                                     Community <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -41,12 +45,27 @@
                                         <a href="https://gitter.im/DashboardHub/PipelineDashboard">
                                             <img src="https://badges.gitter.im/Join%20Chat.svg"/></a>
                                     </li>
-                                    <li><a href="https://github.com/DashboardHub/PipelineDashboard">Github</a></li>
-                                    <li><a href="https://twitter.com/dashboardhub">Twitter</a></li>
-                                    <li><a href="https://dashboardhub-ci.herokuapp.com">Demo</a></li>
+                                    <li>
+                                        <a href="https://github.com/DashboardHub/PipelineDashboard">
+                                            <i class="fa fa-github"></i>
+                                            Github
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://twitter.com/dashboardhub">
+                                            <i class="fa fa-twitter"></i>
+                                            Twitter
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://dashboardhub-ci.herokuapp.com">
+                                            <i class="fa fa-play-circle-o"></i>
+                                            Demo
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li class="disabled"><a href="#" id="version">{{ version.current }}</a></li>
+                            <li class="disabled" title="version"><a href="#" id="version"><i class="fa fa-line-chart"></i> {{ version.current }}</a></li>
                         </ul>
                     </div>
                     <!--/.nav-collapse -->
