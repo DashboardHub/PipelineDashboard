@@ -20,5 +20,5 @@ parameters:
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     # oauth
-    client.id:         "%client.id%"
-    client.secret:     "%client.secret%"
+    client_id:         "%client.id%"
+    client_secret:     "%client.secret%"
