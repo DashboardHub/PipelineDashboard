@@ -23,6 +23,7 @@ after_failure:
 branches:
   except:
     - /^build-[0-9a-z\-\/]*/
+    - /^spike[0-9a-z\-\/]*/
 
 env:
   global:
