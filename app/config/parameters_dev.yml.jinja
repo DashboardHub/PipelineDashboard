@@ -1,0 +1,20 @@
+parameters:
+    database_driver: '{{pillar['PipelineDashboard']['db']['driver']}}'
+    database_host: '{{pillar['PipelineDashboard']['db']['host']}}'
+    database_port: '{{pillar['PipelineDashboard']['db']['port']}}'
+    database_name: '{{pillar['PipelineDashboard']['db']['database']}}'
+    database_user: '{{pillar['PipelineDashboard']['db']['username']}}'
+    database_password: '{{pillar['PipelineDashboard']['db']['password']}}'
+    mailer_transport: '{{pillar['PipelineDashboard']['mailer']['transport']}}'
+    mailer_host: '{{pillar['PipelineDashboard']['mailer']['host']}}'
+    mailer_user: '{{pillar['PipelineDashboard']['mailer']['username']}}'
+    mailer_password: '{{pillar['PipelineDashboard']['mailer']['password']}}'
+    locale: '{{pillar['PipelineDashboard']['locale']}}'
+    secret: '{{pillar['PipelineDashboard']['secret']}}'
+    debug_toolbar: '{{pillar['PipelineDashboard']['debug']['toolbar']}}'
+    debug_redirects: '{{pillar['PipelineDashboard']['debug']['redirects']}}'
+    use_assetic_controller: '{{pillar['PipelineDashboard']['debug']['use_assetic_controller']}}'
+    github_api:
+        base_url: https://api.github.com
+    travis_api:
+        base_url: https://api.travis-ci.org

@@ -1,0 +1,27 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "netsensia/ubuntu-trusty64-salt"
+
+    config.vm.network "private_network", ip: "192.168.40.63"
+
+    # Sets this cloned repo as /var/www/PipelineDashboard
+    config.vm.synced_folder "../../", "/var/www/"
+    
+    config.vm.synced_folder "salt/roots/", "/srv/salt/"
+    
+    # Create your pillar data at the same directory level as this repo
+    config.vm.synced_folder "../../pillar/", "/srv/pillar/"
+
+    config.vm.provision :salt do |salt|
+      salt.minion_config = "salt/minion"
+      salt.run_highstate = true
+    end
+
+    config.vm.network :forwarded_port, guest: 8000, host: 8000
+
+end
