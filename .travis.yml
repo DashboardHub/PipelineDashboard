@@ -25,16 +25,3 @@ branches:
     - /^build-[0-9a-z\-\/]*/
     - /^spike[0-9a-z\-\/]*/
 
-env:
-  global:
-    - secure: XWoz6d9RvX6C3UGNNhPlMfdsg8p4J+5c6ZO6TB0sGIK8zVRSYwm3fTDLb+xIZKiBmp0eqgVmkiO9gPdkMtorfTUbEPYz2C2kXmR9gwtySQHqAcCPlNhDY1dloV9/3C3SKa58fvNRTkSRXR0bT/obVo0IUFLRyLnX4uLt2zhRHk4=
-
-deploy:
-  provider: heroku
-  api_key:
-    secure: Z3ayUw0ugCox7Dyvw5o1L3xCySlf8R5Pi124xffqvw5A/jnvi6yyZ/bUvwonNWTYhsR2WydAjgz9KFSjhgUEUNQpHa+rpSMpiZCCkmblAhdakHHVo9AR3X165sM/VGLFVnC69XkfvS/F8l6iAqoyWQAdjaR6GLtnY/dxgMmavko=
-  app: symfony-quickstart
-  on:
-    all_branches: true
-  run:
-      - "make symfony.dev.rebuild"
