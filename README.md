@@ -41,4 +41,4 @@ Database parameters are important: host, username, password etc...
 
 ## Contributions
 
-Please read on [Contribution Guildlines](/CONTRIBUTING.md)
+Please read on [Contribution Guidelines](/CONTRIBUTING.md)
