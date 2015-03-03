@@ -11,9 +11,9 @@ parameters:
     mailer_password: '{{pillar['PipelineDashboard']['mailer']['password']}}'
     locale: '{{pillar['PipelineDashboard']['locale']}}'
     secret: '{{pillar['PipelineDashboard']['secret']}}'
-    debug_toolbar: '{{pillar['PipelineDashboard']['debug']['toolbar']}}'
-    debug_redirects: '{{pillar['PipelineDashboard']['debug']['redirects']}}'
-    use_assetic_controller: '{{pillar['PipelineDashboard']['debug']['use_assetic_controller']}}'
+    debug_toolbar: {{pillar['PipelineDashboard']['debug']['toolbar']}}
+    debug_redirects: {{pillar['PipelineDashboard']['debug']['redirects']}}
+    use_assetic_controller: {{pillar['PipelineDashboard']['debug']['use_assetic_controller']}}
     github_api:
         base_url: https://api.github.com
     travis_api:

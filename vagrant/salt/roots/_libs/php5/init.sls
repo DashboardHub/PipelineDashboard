@@ -78,7 +78,7 @@ enable_php_pgsql:
 /etc/php5/apache2/php.ini:
   file:
     - managed
-    - source: salt://_files/php.ini.apache2
+    - source: salt://php5/files/php.ini.apache2
     - template: jinja
     - require:
       - pkg: php5
@@ -87,7 +87,7 @@ enable_php_pgsql:
 /etc/php5/cli/php.ini:
   file:
     - managed
-    - source: salt://_files/php.ini.cli
+    - source: salt://php5/files/php.ini.cli
     - template: jinja
     - require:
       - pkg: php5

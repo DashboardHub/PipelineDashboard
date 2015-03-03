@@ -9,7 +9,7 @@ PipelineDashboard:
   mailer:
     transport: smtp
     host: 127.0.0.1
-    user: null
+    username: null
     password: 
   locale: en
   secret: ThisTokenIsNotSoSecretChangeIt

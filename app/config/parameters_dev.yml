@@ -1,19 +1,19 @@
 parameters:
-    database_driver: pdo_mysql
-    database_host: 192.168.59.103
-    database_port: null
-    database_name: dashboard
-    database_user: root
-    database_password: null
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
-    locale: en
-    secret: ThisTokenIsNotSoSecretChangeIt
-    debug_toolbar: true
-    debug_redirects: false
-    use_assetic_controller: true
+    database_driver: 'pdo_mysql'
+    database_host: '192.168.40.63'
+    database_port: '3306'
+    database_name: 'dashboard'
+    database_user: 'root'
+    database_password: 'jkladsljkasdu909'
+    mailer_transport: 'smtp'
+    mailer_host: '127.0.0.1'
+    mailer_user: 'None'
+    mailer_password: 'None'
+    locale: 'en'
+    secret: 'ThisTokenIsNotSoSecretChangeIt'
+    debug_toolbar: True
+    debug_redirects: False
+    use_assetic_controller: True
     github_api:
         base_url: https://api.github.com
     travis_api:

@@ -14,9 +14,5 @@ sshpass:
 
 /etc/ssh/sshd_config:
   file.managed:
-{% if 'elucidata' in grains['id'] %}
-    - source: salt://_files/sshd_config_elucidata.jinja
-{% else %}
-    - source: salt://_files/sshd_config.jinja
-{% endif %}
+    - source: salt://ssh/files/sshd_config.jinja
     - template: jinja

@@ -1,0 +1,17 @@
+{% set project = "PipelineDashboard" %}
+
+<VirtualHost *:80>
+    ServerName {{ project }}.local
+    ServerAlias www.{{ project }}.local
+
+    DocumentRoot /var/www/{{ project }}/web
+    <Directory /var/www/{{ project }}/web>
+        # enable the .htaccess rewrites
+        AllowOverride All
+        Order allow,deny
+        Allow from All
+    </Directory>
+
+    ErrorLog /var/log/apache2/{{ project }}_error.log
+    CustomLog /var/log/apache2/{{ project }}_access.log combined
+</VirtualHost>

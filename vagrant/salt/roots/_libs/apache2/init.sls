@@ -49,7 +49,7 @@ a2enmod ssl:
 
 /etc/apache2/conf-available/nogit.conf:
   file.managed:
-    - source: salt://_files/apache2/nogit.conf
+    - source: salt://apache2/files/nogit.conf
     - require:
       - pkg: apache2
 
