@@ -3,6 +3,9 @@ language: php
 php:
   - 5.5
 
+before_install:
+  - mysql -e "create database IF NOT EXISTS dashboardhub;" -uroot
+
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
@@ -33,6 +36,10 @@ deploy:
 env:
   global:
     - secure: "GmEtyPOua9A1W7Wv+Dz1NA/Skh5yiB3VaHk2yaptet5xbAOTo66D4yhlsJFfOI8ZlSUvpEXLzh4B3zKgMzVXUv4lcSnZFP6MLJ6l4pBkivBTWfYRiwMCEZYgS7eAw1WIetFx6fuO//9m0qe33eSyRx0bZQ3b1URqSgf/2xUtX28="
+    - SYMFONY__DATABASE__HOST="127.0.0.1"
+    - SYMFONY__DATABASE__NAME="dashboardhub"
+    - SYMFONY__DATABASE__USER="root"
+    - SYMFONY__DATABASE__PASSWORD=""
 
 notifications:
   webhooks:
