@@ -1,11 +1,11 @@
 # This file is a "template" of what your parameters.yml file should look like
 parameters:
     database_driver:   pdo_mysql
-    database_host:     127.0.0.1
+    database_host:     "%database.host%"
     database_port:     ~
-    database_name:     symfony
-    database_user:     root
-    database_password: ~
+    database_name:     "%database.name%"
+    database_user:     "%database.user%"
+    database_password: "%database.password%"
     # You should uncomment this if you want use pdo_sqlite
     # database_path: "%kernel.root_dir%/data.db3"
 
@@ -18,5 +18,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    client.id:         71473a4676970c0dfa36
-    client.secret:     4fa4ce713c55ee8fa7f1ff833327ef3d7f528de8
+
+    # oauth
+    client.id:         "%client.id%"
+    client.secret:     "%client.secret%"
