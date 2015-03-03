@@ -18,5 +18,5 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
-    client_id:         71473a4676970c0dfa36
-    client_secret:     4fa4ce713c55ee8fa7f1ff833327ef3d7f528de8
+    client.id:         71473a4676970c0dfa36
+    client.secret:     4fa4ce713c55ee8fa7f1ff833327ef3d7f528de8
