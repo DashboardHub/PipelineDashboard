@@ -6,7 +6,7 @@ include:
 
 create_{{ project }}_database:
   cmd.run:
-    - name: mysql -uroot -e "create database if not exists {{ pillar[project]['db']['database'] }}"
+    - name: mysql -uroot -p{{ pillar[project]['db']['root_password'] }} -e  "create database if not exists {{ pillar[project]['db']['database'] }}"
     - watch_in:
       - module: mysql-restart
     - require:
@@ -14,7 +14,7 @@ create_{{ project }}_database:
     
 set_{{ project }}_database_privs:
   cmd.run:
-    - name: mysql -uroot -e "grant all on *.* to {{ pillar[project]['db']['username'] }}@localhost identified by '{{ pillar[project]['db']['password'] }}'"
+    - name: mysql -uroot -p{{ pillar[project]['db']['root_password'] }} -e "grant all on *.* to {{ pillar[project]['db']['username'] }}@localhost identified by '{{ pillar[project]['db']['password'] }}'"
     - watch_in:
       - module: mysql-restart
     - require:

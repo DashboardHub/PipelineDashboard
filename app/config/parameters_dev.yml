@@ -1,6 +1,6 @@
 parameters:
     database_driver: 'pdo_mysql'
-    database_host: '192.168.40.63'
+    database_host: 'localhost'
     database_port: '3306'
     database_name: 'dashboard'
     database_user: 'root'

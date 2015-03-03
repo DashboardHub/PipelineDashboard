@@ -5,7 +5,8 @@ PipelineDashboard:
     port: null
     database: dashboard
     username: root
-    password: 
+    password:
+    root_password: 
   mailer:
     transport: smtp
     host: 127.0.0.1
