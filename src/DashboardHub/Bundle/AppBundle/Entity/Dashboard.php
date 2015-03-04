@@ -27,7 +27,7 @@ class Dashboard
     /**
      * @var string
      */
-    protected $repo;
+    protected $repository;
 
     /**
      * @var string
@@ -102,19 +102,19 @@ class Dashboard
     /**
      * @return string
      */
-    public function getRepo()
+    public function getRepository()
     {
-        return $this->repo;
+        return $this->repository;
     }
 
     /**
-     * @param string $repo
+     * @param string $repository
      *
      * @return Dashboard
      */
-    public function setRepo($repo)
+    public function setRepository($repository)
     {
-        $this->repo = $repo;
+        $this->repository = $repository;
 
         return $this;
     }

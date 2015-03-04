@@ -39,9 +39,9 @@ class DashboardSpec extends ObjectBehavior
     function it_should_set_then_get_repo()
     {
         $data = 'testname';
-        $this->setRepo($data)
+        $this->setRepository($data)
              ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Dashboard');
-        $this->getRepo()->shouldReturn($data);
+        $this->getRepository()->shouldReturn($data);
     }
 
     function it_should_set_then_get_theme()
