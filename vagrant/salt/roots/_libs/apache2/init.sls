@@ -3,7 +3,6 @@ apache2:
     - installed
     - refresh: True
     - skip_verify: True
-    - hold: True
   service:
     - running
     - require:

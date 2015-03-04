@@ -1,7 +1,7 @@
 parameters:
     database_driver: '{{pillar['PipelineDashboard']['db']['driver']}}'
     database_host: '{{pillar['PipelineDashboard']['db']['host']}}'
-    database_port: '{{pillar['PipelineDashboard']['db']['port']}}'
+    database_port: {{pillar['PipelineDashboard']['db']['port']}}
     database_name: '{{pillar['PipelineDashboard']['db']['database']}}'
     database_user: '{{pillar['PipelineDashboard']['db']['username']}}'
     database_password: '{{pillar['PipelineDashboard']['db']['password']}}'

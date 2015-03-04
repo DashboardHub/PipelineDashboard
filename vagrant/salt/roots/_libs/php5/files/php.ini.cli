@@ -1,7 +1,5 @@
 [PHP]
 
-newrelic.license="{{ pillar['netsensia']['newRelicKey'] }}"
-
 ;;;;;;;;;;;;;;;;;;;
 ; About php.ini   ;
 ;;;;;;;;;;;;;;;;;;;
