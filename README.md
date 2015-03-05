@@ -2,6 +2,9 @@
 
 [![Join the chat at https://gitter.im/DashboardHub/PipelineDashboard](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/DashboardHub/PipelineDashboard?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+#### Have you ever started a project and been asked "See that big monitor? put a dashboard on it" ...
+Want to spend more time on your work and not on configuring widgets and APIs? Use Pipeline Dashboard.
+
 ## Table of Contents
 
 * [Contribution guidelines](/CONTRIBUTING.md)
