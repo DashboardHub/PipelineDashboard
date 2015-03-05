@@ -1,12 +1,11 @@
 PipelineDashboard:
   db:
     driver: pdo_mysql
-    host: 192.168.59.103
-    port: null
+    host: localhost
+    port: 3306
     database: dashboard
-    username: root
+    username: dashie
     password:
-    root_password: 
   mailer:
     transport: smtp
     host: 127.0.0.1
