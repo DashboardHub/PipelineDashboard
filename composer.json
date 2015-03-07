@@ -22,7 +22,8 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "hwi/oauth-bundle": "0.4.*@dev",
-        "knplabs/knp-menu-bundle": "~2.0"
+        "knplabs/knp-menu-bundle": "~2.0",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
