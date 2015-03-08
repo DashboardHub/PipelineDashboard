@@ -19,3 +19,7 @@ services:
   dashboardhub_app_main.service.version:
     class: DashboardHub\Bundle\AppBundle\Service\VersionService
     arguments: ["%kernel.root_dir%/../VERSION"]
+
+  dashboardhub_app_main.service.dashboard:
+    class: DashboardHub\Bundle\AppBundle\Service\DashboardService
+    arguments: ["@doctrine.orm.entity_manager", "@security.context"]

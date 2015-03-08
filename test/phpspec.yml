@@ -11,6 +11,9 @@ code_coverage:
   whitelist:
     - src/DashboardHub/Bundle/AppBundle/Menu
     - src/DashboardHub/Bundle/AppBundle/Service
+    - src/DashboardHub/Bundle/AppBundle/Entity
+    - src/DashboardHub/Bundle/AppBundle/Repository
+    - src/DashboardHub/Bundle/AppBundle/Form
   whitelist_files:
     - src/DashboardHub/Bundle/AppBundle/DashboardHubAppBundle.php
   format:
