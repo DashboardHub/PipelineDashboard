@@ -21,12 +21,12 @@ class DashboardController extends Controller
     public function indexAction()
     {
         return $this->render(
-                'DashboardHubAppBundle:Dashboard:index.html.twig',
-                array(
-                    'dashboards' => $this->get('dashboardhub_app_main.service.dashboard')
-                        ->findAllByAuthenticatedUserAndDefaults()
-                )
-            );
+            'DashboardHubAppBundle:Dashboard:index.html.twig',
+            array(
+                'dashboards' => $this->get('dashboardhub_app_main.service.dashboard')
+                                     ->findAllByAuthenticatedUserAndDefaults()
+            )
+        );
     }
 
     /**
@@ -37,7 +37,7 @@ class DashboardController extends Controller
     public function addAction(Request $request)
     {
         $dashboard = new Dashboard();
-        $form = $this->createForm('dashboard', $dashboard);
+        $form      = $this->createForm('dashboard', $dashboard);
 
         $form->handleRequest($request);
 
@@ -45,19 +45,23 @@ class DashboardController extends Controller
             $dashboard = $form->getData();
 
             $this->get('dashboardhub_app_main.service.dashboard')
-                ->save($dashboard);
+                 ->save($dashboard);
 
-            $request->getSession()->getFlashBag()->add(
-                'success',
-                'Dashboard created'
-            );
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'success',
+                        'Dashboard created'
+                    );
+
             return $this->redirect($this->generateUrl('dashboardhub_app_dashboard.list'));
         }
 
-        return $this->render('DashboardHubAppBundle:Dashboard:add.html.twig',
-                array(
-                    'form' => $form->createView()
-                )
+        return $this->render(
+            'DashboardHubAppBundle:Dashboard:add.html.twig',
+            array(
+                'form' => $form->createView()
+            )
         );
     }
 
@@ -72,11 +76,14 @@ class DashboardController extends Controller
         try {
             $dashboard = $this->get('dashboardhub_app_main.service.dashboard')
                               ->findOneById($id);
-        } catch(\InvalidArgumentException $e) {
-            $request->getSession()->getFlashBag()->add(
-                'danger',
-                'Invalid Dashboard'
-            );
+        } catch (\InvalidArgumentException $e) {
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'danger',
+                        'Invalid Dashboard'
+                    );
+
             return $this->redirect($this->generateUrl('dashboardhub_app_dashboard.list'));
         }
 
@@ -90,17 +97,21 @@ class DashboardController extends Controller
             $this->get('dashboardhub_app_main.service.dashboard')
                  ->save($dashboard);
 
-            $request->getSession()->getFlashBag()->add(
-                'success',
-                'Dashboard updated'
-            );
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'success',
+                        'Dashboard updated'
+                    );
+
             return $this->redirect($this->generateUrl('dashboardhub_app_dashboard.list'));
         }
 
-        return $this->render('DashboardHubAppBundle:Dashboard:add.html.twig',
-                array(
-                    'form' => $form->createView()
-                )
+        return $this->render(
+            'DashboardHubAppBundle:Dashboard:add.html.twig',
+            array(
+                'form' => $form->createView()
+            )
         );
     }
 }
