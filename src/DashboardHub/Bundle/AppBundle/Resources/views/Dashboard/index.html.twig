@@ -1,5 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    Dashboard.
+    <h2>Your Dashboards</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <p class="pull-right">
+                <a href="{{ path('dashboardhub_app_dashboard.add') }}" class="btn btn-default"><i
+                            class="fa fa-plus-circle"></i> Add</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Owner</th>
+                <th>Name</th>
+                <th>Repo</th>
+                <th>Theme</th>
+                <th>Visibility</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                {% for dashboard in dashboards %}
+                    <tr>
+                        <td>{{ dashboard.user.username }}</td>
+                        <td>{{ dashboard.name }}</td>
+                        <td>{{ dashboard.repository }}</td>
+                        <td>{{ dashboard.theme }}</td>
+                        <td>
+                            {% if dashboard.public == 1 %}
+                                <i class="fa fa-unlock"></i> Public
+                            {% else %}
+                                <i class="fa fa-lock"></i> Private
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-xs disabled" href="#" role="button">
+                                <i class="fa fa-eye"></i>
+                                View
+                            </a>
+                            <a class="btn btn-default btn-xs {% if dashboard.user.username == 'DashboardHub' %}disabled{% endif %}"
+                               href="{{ path('dashboardhub_app_dashboard.edit', { 'id': dashboard.id }) }}"
+                               role="button">
+                                <i class="fa fa-pencil"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

@@ -41,14 +41,18 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttributes(array('class' => 'navbar-nav nav'));
         $menu->addChild('Home', array('route' => 'dashboardhub_app_homepage'));
+
         if ($this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             $menu->addChild(
-                $this->securityContext->getToken()->getUser()->getUsername(),
-                array('route' => 'dashboardhub_app_homepage')
+                'Dashboard',
+                array('route' => 'dashboardhub_app_dashboard.list')
             );
-            $menu->addChild('Dashboard', array('route' => 'dashboardhub_app_dashboard.list'));
-            $menu->addChild('Create', array('route' => 'dashboardhub_app_dashboard.create'));
-            $menu->addChild('Logout', array('route' => 'logout'));
+            $menu->addChild(
+                'Logout ' . $this->securityContext->getToken()
+                                                  ->getUser()
+                                                  ->getUsername(),
+                array('route' => 'logout')
+            );
         } else {
             $menu->addChild('Login', array('route' => 'login'));
         }

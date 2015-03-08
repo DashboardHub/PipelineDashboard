@@ -1,0 +1,35 @@
+DashboardHub\Bundle\AppBundle\Entity\Dashboard:
+    type:  entity
+    table: dashboards
+    repositoryClass: DashboardHub\Bundle\AppBundle\Repository\DashboardRepository
+    manyToOne:
+        user:
+            targetEntity: DashboardHub\Bundle\AppBundle\Entity\User
+            cascade: ["persist"]
+            fetch: EAGER
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        repository:
+            type: string
+            length: 255
+        theme:
+            type: string
+            length: 255
+        public:
+            type: boolean
+            options:
+                default: true
+        createdOn:
+            type: datetime
+        updatedOn:
+            type: datetime

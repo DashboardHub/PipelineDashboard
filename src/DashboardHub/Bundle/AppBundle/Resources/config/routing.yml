@@ -6,6 +6,12 @@ dashboardhub_app_dashboard.list:
     path:     /dashboard
     defaults: { _controller: DashboardHubAppBundle:Dashboard:index }
 
-dashboardhub_app_dashboard.create:
-    path:     /dashboard/create
-    defaults: { _controller: DashboardHubAppBundle:Dashboard:create }
+dashboardhub_app_dashboard.add:
+    path:     /dashboard/add
+    defaults: { _controller: DashboardHubAppBundle:Dashboard:add }
+
+dashboardhub_app_dashboard.edit:
+    path:     /dashboard/edit/{id}
+    defaults: { _controller: DashboardHubAppBundle:Dashboard:edit }
+    requirements:
+        page:  \d+
