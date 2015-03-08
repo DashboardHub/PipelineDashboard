@@ -70,9 +70,13 @@ class DashboardService
      */
     public function save(Dashboard $dashboard)
     {
-        $dashboard->setUser(
-            new User($this->securityContext->getToken()->getUser()->getUsername())
-        );
+        $user = $this->em
+            ->getRepository('DashboardHubAppBundle:User')
+            ->findOneByUsername(
+                $this->securityContext->getToken()->getUser()->getUsername()
+            );
+
+        $dashboard->setUser($user);
 
         $this->em->persist($dashboard);
         $this->em->flush();
