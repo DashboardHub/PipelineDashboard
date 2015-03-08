@@ -1,0 +1,19 @@
+DashboardHub\Bundle\AppBundle\Entity\AuthenticationAudit:
+    type:  entity
+    table: authentication_audit
+    manyToOne:
+        user:
+            targetEntity: DashboardHub\Bundle\AppBundle\Entity\User
+            cascade: ["persist"]
+            fetch: EAGER
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        createdOn:
+            type: datetime
