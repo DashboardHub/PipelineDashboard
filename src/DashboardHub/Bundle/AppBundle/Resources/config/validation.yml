@@ -1,0 +1,22 @@
+DashboardHub\Bundle\AppBundle\Entity\Dashboard:
+    properties:
+        user:
+            - NotBlank: ~
+            - Type: DashboardHub\Bundle\AppBundle\Entity\User
+        name:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                max: 64
+        repository:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                max: 128
+        theme:
+            - NotBlank: ~
+            - Choice:
+                  choices:  [default]
+        public:
+            - NotBlank: ~
+            - Type: bool

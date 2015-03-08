@@ -1,5 +1,6 @@
 <?php
 namespace DashboardHub\Bundle\AppBundle\Service;
+
 /**
  * Class Version
  * @package DashboardHub\Bundle\AppBundle\Service
@@ -10,6 +11,7 @@ class VersionService
      * @var string
      */
     private $version;
+
     /**
      * @param string $version
      */
@@ -17,6 +19,7 @@ class VersionService
     {
         $this->version = $version;
     }
+
     /**
      * @return string
      */
