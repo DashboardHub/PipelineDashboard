@@ -12,7 +12,7 @@ class DashboardRepository extends EntityRepository
 {
 
     /**
-     * @param $username
+     * @param string $username
      *
      * @return array
      */
@@ -33,7 +33,8 @@ class DashboardRepository extends EntityRepository
     }
 
     /**
-     * @param $id
+     * @param string $username
+     * @param int    $id
      *
      * @return array
      */
