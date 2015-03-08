@@ -14,12 +14,12 @@ class DashboardService
     /**
      * @var EntityManager
      */
-    private $em;
+    protected $em;
 
     /**
      * @var SecurityContext
      */
-    private $securityContext;
+    protected $securityContext;
 
     /**
      * @param EntityManager   $em
