@@ -32,7 +32,7 @@ class DashboardController extends Controller
     public function addAction(Request $request)
     {
         $dashboard = new Dashboard();
-        $form = $this->createForm(new DashboardType(), $dashboard);
+        $form = $this->createForm('dashboard', $dashboard);
 
         $form->handleRequest($request);
 
@@ -69,7 +69,7 @@ class DashboardController extends Controller
             return $this->redirect($this->generateUrl('dashboardhub_app_dashboard.list'));
         }
 
-        $form = $this->createForm(new DashboardType(), $dashboard);
+        $form = $this->createForm('dashboard', $dashboard);
 
         $form->handleRequest($request);
 
