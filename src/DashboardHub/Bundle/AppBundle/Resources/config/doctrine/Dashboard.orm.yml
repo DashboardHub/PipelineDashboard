@@ -29,3 +29,7 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
             type: boolean
             options:
                 default: true
+        createdOn:
+            type: datetime
+        updatedOn:
+            type: datetime
