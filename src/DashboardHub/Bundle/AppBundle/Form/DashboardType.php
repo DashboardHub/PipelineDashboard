@@ -2,9 +2,13 @@
 
 namespace DashboardHub\Bundle\AppBundle\Form;
 
+use DashboardHub\Bundle\AppBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Class DashboardType
@@ -12,6 +16,28 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class DashboardType extends AbstractType
 {
+
+    /**
+     * @var SecurityContextInterface
+     */
+    private $securityContext;
+
+    public function __construct(SecurityContextInterface $securityContext)
+    {
+        $this->securityContext = $securityContext;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'dashboard';
+    }
+
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
@@ -21,6 +47,10 @@ class DashboardType extends AbstractType
         );
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array                $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -46,11 +76,25 @@ class DashboardType extends AbstractType
                 'save',
                 'submit',
                 array('label' => 'Save')
+            )
+            ->addEventListener(
+                FormEvents::POST_SET_DATA,
+                array($this, 'onPostSetData')
             );
     }
 
-    public function getName()
+    /**
+     * @param FormEvent $event
+     */
+    public function onPostSetData(FormEvent $event)
     {
-        return 'dashboard';
+        $event->getData()
+              ->setUser(
+                  new User($this->securityContext->getToken()->getUser()->getUsername())
+              );
+        $event->getData()
+              ->setUpdatedOn(
+                  new \Datetime()
+              );
     }
 }
