@@ -29,6 +29,11 @@ class DashboardController extends Controller
             );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addAction(Request $request)
     {
         $dashboard = new Dashboard();
@@ -56,6 +61,12 @@ class DashboardController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @param         $id
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function editAction(Request $request, $id)
     {
         try {

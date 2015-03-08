@@ -1,7 +1,6 @@
 <?php
 namespace DashboardHub\Bundle\AppBundle\Repository;
 
-use DashboardHub\Bundle\AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**

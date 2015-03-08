@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
+/**
+ * Class AuthenticationListener
+ * @package DashboardHub\Bundle\AppBundle\Listener
+ */
 class AuthenticationListener
 {
 
@@ -22,6 +26,10 @@ class AuthenticationListener
      */
     private $em;
 
+    /**
+     * @param EntityManager   $em
+     * @param SecurityContext $securityContext
+     */
     public function __construct(EntityManager $em, SecurityContext $securityContext)
     {
         $this->securityContext = $securityContext;

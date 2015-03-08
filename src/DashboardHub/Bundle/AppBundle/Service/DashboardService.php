@@ -2,8 +2,6 @@
 namespace DashboardHub\Bundle\AppBundle\Service;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
-use DashboardHub\Bundle\AppBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -24,7 +22,8 @@ class DashboardService
     private $securityContext;
 
     /**
-     * @param EntityManager $em
+     * @param EntityManager   $em
+     * @param SecurityContext $securityContext
      */
     public function __construct(EntityManager $em, SecurityContext $securityContext)
     {
