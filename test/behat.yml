@@ -10,7 +10,7 @@ default:
       filters:
         tags: ~@omit
       contexts:
-        - FeatureContext: ~
+        - DashboardHub\Bundle\AppBundle\Features\Context\FeatureContext: ~
         - Behat\MinkExtension\Context\MinkContext: ~
   extensions:
     Behat\Symfony2Extension: ~

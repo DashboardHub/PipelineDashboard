@@ -19,3 +19,19 @@ services:
   dashboardhub_app_main.service.version:
     class: DashboardHub\Bundle\AppBundle\Service\VersionService
     arguments: ["%kernel.root_dir%/../VERSION"]
+
+  account.security_listener:
+    class: DashboardHub\Bundle\AppBundle\Listener\AuthenticationListener
+    arguments: ["@doctrine.orm.entity_manager", "@security.context"]
+    tags:
+        - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+  dashboardhub_app_main.service.dashboard:
+    class: DashboardHub\Bundle\AppBundle\Service\DashboardService
+    arguments: ["@doctrine.orm.entity_manager", "@security.context"]
+
+  dashboardhub_app_main.form.type.dashboard:
+    class: DashboardHub\Bundle\AppBundle\Form\DashboardType
+    arguments: ["@security.context"]
+    tags:
+        - { name: form.type, alias: dashboard }
