@@ -20,7 +20,7 @@ class DashboardType extends AbstractType
     /**
      * @var SecurityContextInterface
      */
-    private $securityContext;
+    protected $securityContext;
 
     public function __construct(SecurityContextInterface $securityContext)
     {

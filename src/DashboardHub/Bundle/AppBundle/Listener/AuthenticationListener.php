@@ -19,12 +19,12 @@ class AuthenticationListener
     /**
      * @var SecurityContext
      */
-    private $securityContext;
+    protected $securityContext;
 
     /**
      * @var EntityManager
      */
-    private $em;
+    protected $em;
 
     /**
      * @param EntityManager   $em
