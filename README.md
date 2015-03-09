@@ -14,27 +14,27 @@ Focus on what matters to you!
 
 1. Clone project
 
-```
-git clone https://github.com/DashboardHub/PipelineDashboard.git
-```
+   ```
+   git clone https://github.com/DashboardHub/PipelineDashboard.git
+   ```
 
 2. Download Composer & Run Install
 
-```
-curl -sS https://getcomposer.org/installer | php
-```
-or
-```
-php -r "readfile('https://getcomposer.org/installer');" | php
-```
+   ```
+   curl -sS https://getcomposer.org/installer | php
+   ```
+   or
+   ```
+   php -r "readfile('https://getcomposer.org/installer');" | php
+   ```
 
-More information on composer here https://getcomposer.org/download/
+   More information on composer here https://getcomposer.org/download/
 
 3. Run builtin Webserver for Development
 
-```
-php app/console server:run -vvv --env=dev
-```
+   ```
+   php app/console server:run -vvv --env=dev
+   ```
 
 ---
 
