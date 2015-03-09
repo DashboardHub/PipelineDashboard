@@ -10,7 +10,7 @@ class VersionService
     /**
      * @var string
      */
-    private $version;
+    protected $version;
 
     /**
      * @param string $version
