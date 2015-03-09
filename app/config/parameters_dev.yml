@@ -1,16 +1,25 @@
-# This file is auto-generated during the composer install
+# This file is a "template" of what your parameters.yml file should look like
 parameters:
-    database_driver: pdo_mysql
-    database_host: 127.0.0.1
-    database_port: null
-    database_name: dashboardhub
-    database_user: root
-    database_password: null
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
-    locale: en
-    secret: 8039273f2d3c02497789932f8f6baf4ea2a70b95
-    client.id: b8552335dab47905366f
-    client.secret: 03602bf8c10921c94e27bdcf92f50da901b0fc2c
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     3306 
+    database_name:     dashboardhub
+    database_user:     root
+    database_password: 
+
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    locale:            en
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            8039273f2d3c02497789932f8f6baf4ea2a70b95
+
+    # oauth
+    client_id:         b8552335dab47905366f
+    client_secret:     03602bf8c10921c94e27bdcf92f50da901b0fc2c
