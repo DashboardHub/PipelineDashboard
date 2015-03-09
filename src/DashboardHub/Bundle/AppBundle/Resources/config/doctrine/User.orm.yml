@@ -1,0 +1,18 @@
+DashboardHub\Bundle\AppBundle\Entity\User:
+    type:  entity
+    table: users
+    oneToMany:
+        dashboards:
+            targetEntity: DashboardHub\Bundle\AppBundle\Entity\Dashboard
+            cascade: ["persist"]
+            fetch: EAGER
+            mappedBy: user
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        username:
+            type: string
+            length: 255
