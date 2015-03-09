@@ -18,6 +18,9 @@ class User extends OAuthUser
      */
     protected $dashboards;
 
+    /**
+     * @param string $username
+     */
     public function __construct($username)
     {
         parent::__construct($username);
