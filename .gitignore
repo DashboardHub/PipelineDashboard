@@ -5,6 +5,7 @@
 .idea
 .project
 *.patch
+.settings/
 
 composer.phar
 symfony.phar
