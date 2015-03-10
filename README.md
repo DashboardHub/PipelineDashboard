@@ -6,7 +6,7 @@
 | Deps json | --- | [![Dependency Status](https://www.versioneye.com/user/projects/54f2fad64f3108d1fa0008b1/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54f2fad64f3108d1fa0008b1) |
 | Deps lock | --- | [![Dependency Status](https://www.versioneye.com/user/projects/54f2fadb4f31083e1b00072d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54f2fadb4f31083e1b00072d) |
 
-# Dashboard Hub :: Pipeline Dashboard
+# Dashboard Hub :: Pipeline Dashboard :: Focus
 
 Focus on what matters to you!
 
