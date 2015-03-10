@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: 127.0.0.1
+    database_host: 192.168.59.103
     database_port: null
     database_name: dashboardhub
     database_user: root
@@ -14,3 +14,7 @@ parameters:
     secret: 8039273f2d3c02497789932f8f6baf4ea2a70b95
     client.id: b8552335dab47905366f
     client.secret: 03602bf8c10921c94e27bdcf92f50da901b0fc2c
+    github_api:
+        base_url: https://api.github.com
+    travis_api:
+        base_url: https://api.travis-ci.org
