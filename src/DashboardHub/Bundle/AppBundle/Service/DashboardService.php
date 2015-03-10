@@ -2,8 +2,6 @@
 namespace DashboardHub\Bundle\AppBundle\Service;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
-use DashboardHub\Bundle\AppBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -16,15 +14,16 @@ class DashboardService
     /**
      * @var EntityManager
      */
-    private $em;
+    protected $em;
 
     /**
      * @var SecurityContext
      */
-    private $securityContext;
+    protected $securityContext;
 
     /**
-     * @param EntityManager $em
+     * @param EntityManager   $em
+     * @param SecurityContext $securityContext
      */
     public function __construct(EntityManager $em, SecurityContext $securityContext)
     {
@@ -70,9 +69,13 @@ class DashboardService
      */
     public function save(Dashboard $dashboard)
     {
-        $dashboard->setUser(
-            new User($this->securityContext->getToken()->getUser()->getUsername())
-        );
+        $user = $this->em
+            ->getRepository('DashboardHubAppBundle:User')
+            ->findOneByUsername(
+                $this->securityContext->getToken()->getUser()->getUsername()
+            );
+
+        $dashboard->setUser($user);
 
         $this->em->persist($dashboard);
         $this->em->flush();
