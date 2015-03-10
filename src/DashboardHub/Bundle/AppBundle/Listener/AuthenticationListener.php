@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
+ * Save User to system after login
+ * Audit that the User has log in
+ *
  * Class AuthenticationListener
  * @package DashboardHub\Bundle\AppBundle\Listener
  */
@@ -33,9 +36,12 @@ class AuthenticationListener
     public function __construct(EntityManager $em, SecurityContext $securityContext)
     {
         $this->securityContext = $securityContext;
-        $this->em = $em;
+        $this->em              = $em;
     }
 
+    /**
+     * @param InteractiveLoginEvent $event
+     */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $user = $this->em
