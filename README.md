@@ -8,4 +8,33 @@
 
 # Dashboard Hub :: Pipeline Dashboard :: Focus
 
-Dashboard Hub is the main App that consumes Widgets which are Micro Services & can be written in any language.
+Focus on what matters to you!
+
+## Setup
+
+1. Clone project
+
+   ```
+   git clone https://github.com/DashboardHub/PipelineDashboard.git
+   ```
+
+2. Download Composer & Run Install
+
+   ```
+   curl -sS https://getcomposer.org/installer | php
+   ```
+   or
+   ```
+   php -r "readfile('https://getcomposer.org/installer');" | php
+   ```
+
+   More information on composer here https://getcomposer.org/download/
+
+3. Run builtin Webserver for Development
+
+   ```
+   php app/console server:run -vvv --env=dev
+   ```
+
+---
+
