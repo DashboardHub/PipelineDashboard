@@ -55,7 +55,7 @@ class MenuBuilder
             );
         } else {
             $menu->addChild('Login', array('route' => 'login'));
-            $menu->addChild('Mock Login', array('route' => 'dashboardhub_app_mock_login'));
+            $menu->addChild('Mock Login', array('route' => 'dashboardhub_app_mock.login'));
         }
 
         return $menu;
