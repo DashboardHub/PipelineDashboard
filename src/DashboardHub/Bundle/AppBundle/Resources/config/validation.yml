@@ -20,3 +20,9 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
         public:
             - NotBlank: ~
             - Type: bool
+        createdOn:
+            - NotBlank: ~
+            - DateTime: ~
+        updatedOn:
+            - NotBlank: ~
+            - DateTime: ~

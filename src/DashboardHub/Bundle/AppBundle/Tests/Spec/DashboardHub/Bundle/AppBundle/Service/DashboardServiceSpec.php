@@ -4,6 +4,7 @@ namespace Spec\DashboardHub\Bundle\AppBundle\Service;
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
 use DashboardHub\Bundle\AppBundle\Entity\User;
 use DashboardHub\Bundle\AppBundle\Repository\DashboardRepository;
+use DashboardHub\Bundle\AppBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -131,10 +132,10 @@ class DashboardServiceSpec extends ObjectBehavior
         SecurityContext $securityContext,
         TokenInterface $token,
         User $user,
-        Dashboard $dashboard
+        Dashboard $dashboard,
+        UserRepository $userRepository
     )
     {
-        $id       = 1;
         $username = 'testuser';
 
         $user->getUsername()
@@ -148,6 +149,24 @@ class DashboardServiceSpec extends ObjectBehavior
         $securityContext->getToken()
                         ->shouldBeCalled()
                         ->willReturn($token);
+
+        $userRepository->findOneByUsername($username)
+                            ->shouldBeCalled()
+                            ->willReturn($user);
+
+        $em->getRepository('DashboardHubAppBundle:User')
+           ->shouldBeCalled()
+           ->willReturn($userRepository);
+
+        $dashboard->setUser($user)
+            ->shouldBeCalled()
+            ->willReturn($dashboard);
+
+        $em->persist($dashboard)
+            ->shouldBeCalled();
+
+        $em->flush()
+            ->shouldBeCalled();
 
         $this->beConstructedWith($em, $securityContext);
 

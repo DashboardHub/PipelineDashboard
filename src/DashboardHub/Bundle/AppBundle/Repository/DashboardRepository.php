@@ -1,7 +1,6 @@
 <?php
 namespace DashboardHub\Bundle\AppBundle\Repository;
 
-use DashboardHub\Bundle\AppBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,7 +11,7 @@ class DashboardRepository extends EntityRepository
 {
 
     /**
-     * @param $username
+     * @param string $username
      *
      * @return array
      */
@@ -33,7 +32,8 @@ class DashboardRepository extends EntityRepository
     }
 
     /**
-     * @param $id
+     * @param string $username
+     * @param int    $id
      *
      * @return array
      */

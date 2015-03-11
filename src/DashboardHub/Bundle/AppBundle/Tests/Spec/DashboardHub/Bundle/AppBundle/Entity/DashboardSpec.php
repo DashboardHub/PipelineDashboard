@@ -59,4 +59,20 @@ class DashboardSpec extends ObjectBehavior
              ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Dashboard');
         $this->isPublic()->shouldReturn($data);
     }
+
+    function it_should_set_then_get_created_on()
+    {
+        $data = new \Datetime;
+        $this->setCreatedOn($data)
+             ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Dashboard');
+        $this->getCreatedOn()->shouldReturn($data);
+    }
+
+    function it_should_set_then_get_updated_on()
+    {
+        $data = new \Datetime;
+        $this->setUpdatedOn($data)
+             ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Dashboard');
+        $this->getUpdatedOn()->shouldReturn($data);
+    }
 }

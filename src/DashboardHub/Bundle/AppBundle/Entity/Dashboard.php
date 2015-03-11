@@ -40,6 +40,22 @@ class Dashboard
     protected $public;
 
     /**
+     * @var \Datetime
+     */
+    protected $createdOn;
+
+    /**
+     * @var \Datetime
+     */
+    protected $updatedOn;
+
+    public function __construct()
+    {
+        $this->createdOn = new \DateTime();
+        $this->updatedOn = new \DateTime();
+    }
+
+    /**
      * @return int
      */
     public function getId()
@@ -155,6 +171,46 @@ class Dashboard
     public function setPublic($public)
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getCreatedOn()
+    {
+        return $this->createdOn;
+    }
+
+    /**
+     * @param \Datetime $createdOn
+     *
+     * @return Dashboard
+     */
+    public function setCreatedOn(\Datetime $createdOn)
+    {
+        $this->createdOn = $createdOn;
+
+        return $this;
+    }
+
+    /**
+     * @return \Datetime
+     */
+    public function getUpdatedOn()
+    {
+        return $this->updatedOn;
+    }
+
+    /**
+     * @param \Datetime $updatedOn
+     *
+     * @return Dashboard
+     */
+    public function setUpdatedOn(\Datetime $updatedOn)
+    {
+        $this->updatedOn = $updatedOn;
 
         return $this;
     }

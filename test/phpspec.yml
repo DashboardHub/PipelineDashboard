@@ -14,6 +14,7 @@ code_coverage:
     - src/DashboardHub/Bundle/AppBundle/Entity
     - src/DashboardHub/Bundle/AppBundle/Repository
     - src/DashboardHub/Bundle/AppBundle/Form
+    - src/DashboardHub/Bundle/AppBundle/Listener
   whitelist_files:
     - src/DashboardHub/Bundle/AppBundle/DashboardHubAppBundle.php
   format:
