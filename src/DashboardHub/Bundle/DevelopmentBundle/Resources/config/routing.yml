@@ -5,3 +5,7 @@ dashboard_hub_development_homepage:
 dashboard_hub_development_login:
     path:     /mock/login
     defaults: { _controller: DashboardHubDevelopmentBundle:Auth:login }
+    
+dashboard_hub_development_login_check:
+    path:     /mock_login_check
+    defaults: { _controller: DashboardHubDevelopmentBundle:Auth:loginCheck }

@@ -2,6 +2,13 @@ imports:
     - { resource: config.yml }
     - { resource: parameters_dev.yml }
 
+security:
+    firewalls:
+        secured_area:
+            provider: mock
+            form_login:              
+                check_path: /development/mock_login_check
+                
 framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"

@@ -13,11 +13,15 @@ class AuthController extends Controller
 {
     public function loginAction(Request $request)
     {
-        $request->getSession()->getFlashBag()->add(
-            'notice',
-            'You have been given a fake identity.'
+        return $this->render('DashboardHubDevelopmentBundle:Auth:login.html.twig', [
+                'last_username' => 'Mockerton'
+            ]
         );
-        
-        return $this->redirect('/');
+    }
+    
+    public function loginCheckAction(Request $request)
+    {
+        // The destination of the login form action
+        // It is special and never gets called - Symfony intercepts calls to this action
     }
 }
