@@ -154,15 +154,7 @@ class DashboardController extends Controller
         return $this->render(
             'DashboardHubAppBundle:Dashboard:view.html.twig',
             array(
-                'dashboard'    => $dashboard,
-                'repository'   => $dashboard->getRepository(),
-                'events'       => $events,
-                'issues'       => $this->get('dashboardhub_app_main.service.github')
-                                       ->getIssues($dashboard->getRepository(), 5),
-                'pullrequests' => $this->get('dashboardhub_app_main.service.github')
-                                       ->getPullRequests($dashboard->getRepository(), 5),
-                'builds'       => $this->get('dashboardhub_app_main.service.travis')
-                                       ->getBuilds($dashboard->getRepository(), 5)
+                'dashboard'    => $dashboard
             )
         );
     }

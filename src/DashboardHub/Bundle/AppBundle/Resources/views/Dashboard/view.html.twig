@@ -1,117 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>{{ repository }}</h2>
+    <h2>{{ dashboard.repository }}</h2>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Github Events</div>
-
-                <table class="table hideOverflow">
-                    <thead>
-                        <tr>
-                            <th>Type</th>
-                            <th>Who</th>
-                            <th>When</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for event in events %}
-                        <tr>
-                            <td>{{ event.type }}</td>
-                            <td>{{ event.actor.login }}</td>
-                            <td>{{ event.created_at|ago }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            {{ render(controller('DashboardHubAppBundle:Github:events', { 'repository': dashboard.repository } )) }}
         </div>
 
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Github Pull Requests</div>
-
-                <table class="table hideOverflow">
-                    <thead>
-                    <tr>
-                        <th>Branch</th>
-                        <th>Who</th>
-                        <th>When</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for pullrequest in pullrequests %}
-                            <tr>
-                                <td>{{ pullrequest.title }}</td>
-                                <td>{{ pullrequest.user.login }}</td>
-                                <td>{{ pullrequest.created_at|ago }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            {{ render(controller('DashboardHubAppBundle:Github:pullrequests', { 'repository': dashboard.repository } )) }}
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Github Issues</div>
-
-                <table class="table hideOverflow">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Who</th>
-                        <th>When</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for issue in issues %}
-                        <tr>
-                            <td>{{ issue.title }}</td>
-                            <td>{{ issue.user.login }}</td>
-                            <td>{{ issue.created_at|ago }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            {{ render(controller('DashboardHubAppBundle:Github:issues', { 'repository': dashboard.repository } )) }}
         </div>
 
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">Travis Builds</div>
-
-                <table class="table hideOverflow">
-                    <thead>
-                    <tr>
-                        <th>Branch</th>
-                        <th>When</th>
-                        <th>Duration (s)</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for build in builds %}
-                            <tr>
-                                <td>{{ build.branch }}</td>
-                                <td>{{ build.finished_at|ago }}</td>
-                                <td>{{ build.duration|default('building') }}</td>
-                                <td>
-                                    {% if build.result == 0 %}
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    {% else %}
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            {{ render(controller('DashboardHubAppBundle:Travis:builds', { 'repository': dashboard.repository } )) }}
         </div>
     </div>
 {% endblock %}
