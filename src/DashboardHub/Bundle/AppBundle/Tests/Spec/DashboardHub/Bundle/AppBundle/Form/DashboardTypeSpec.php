@@ -15,11 +15,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 class DashboardTypeSpec extends ObjectBehavior
 {
 
-    function let(SecurityContext $securityContext)
-    {
-        $this->beConstructedWith($securityContext);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('DashboardHub\Bundle\AppBundle\Form\DashboardType');
@@ -95,32 +90,10 @@ class DashboardTypeSpec extends ObjectBehavior
 
     function it_should_on_post_set_data(
         FormEvent $event,
-        SecurityContext $securityContext,
         TokenInterface $token,
-        User $user,
         Dashboard $dashboard
     )
     {
-        $username = 'testuser';
-
-        $user->getUsername()
-             ->shouldBeCalled()
-             ->willReturn($username);
-
-        $token->getUser()
-              ->shouldBeCalled()
-              ->willReturn($user);
-
-        $securityContext->getToken()
-                        ->shouldBeCalled()
-                        ->willReturn($token);
-
-        $this->beConstructedWith($securityContext);
-
-        $dashboard->setUser(Argument::type('DashboardHub\Bundle\AppBundle\Entity\User'))
-                  ->shouldBeCalled()
-                  ->willReturn($dashboard);
-
         $dashboard->setUpdatedOn(Argument::type('Datetime'))
                   ->shouldBeCalled()
                   ->willReturn($dashboard);

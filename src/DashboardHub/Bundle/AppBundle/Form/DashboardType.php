@@ -18,16 +18,6 @@ class DashboardType extends AbstractType
 {
 
     /**
-     * @var SecurityContextInterface
-     */
-    protected $securityContext;
-
-    public function __construct(SecurityContextInterface $securityContext)
-    {
-        $this->securityContext = $securityContext;
-    }
-
-    /**
      * @return string
      */
     public function getName()
@@ -88,10 +78,6 @@ class DashboardType extends AbstractType
      */
     public function onPostSetData(FormEvent $event)
     {
-        $event->getData()
-              ->setUser(
-                  new User($this->securityContext->getToken()->getUser()->getUsername())
-              );
         $event->getData()
               ->setUpdatedOn(
                   new \Datetime()

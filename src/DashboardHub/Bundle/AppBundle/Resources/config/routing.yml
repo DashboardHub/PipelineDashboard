@@ -11,7 +11,9 @@ dashboardhub_app_dashboard.add:
     defaults: { _controller: DashboardHubAppBundle:Dashboard:add }
 
 dashboardhub_app_dashboard.edit:
-    path:     /dashboard/edit/{id}
+    path:     /dashboard/edit/{uid}
     defaults: { _controller: DashboardHubAppBundle:Dashboard:edit }
-    requirements:
-        page:  \d+
+
+dashboardhub_app_dashboard.view:
+    path:     /dashboard/view/{uid}
+    defaults: { _controller: DashboardHubAppBundle:Dashboard:view }
