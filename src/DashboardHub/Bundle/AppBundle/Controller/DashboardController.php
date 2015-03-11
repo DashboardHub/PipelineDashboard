@@ -92,9 +92,4 @@ class DashboardController extends Controller
                 )
         );
     }
-    
-    public function mockinAction(Request $request)
-    {
-        echo "Why on Earth doesn't this work?";
-    }
 }

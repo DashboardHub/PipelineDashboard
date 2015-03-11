@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new DashboardHub\Bundle\AppBundle\DashboardHubAppBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new DashboardHub\Bundle\DevelopmentBundle\DashboardHubDevelopmentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -46,7 +46,6 @@ class MenuBuilder
             $menu->addChild('Logout ' . $this->securityContext->getToken()->getUser()->getUsername(), array('route' => 'logout'));
         } else {
             $menu->addChild('Login', array('route' => 'login'));
-            $menu->addChild('Mock Login', array('route' => 'dashboardhub_app_mock_login'));
         }
 
         return $menu;
