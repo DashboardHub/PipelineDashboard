@@ -1,6 +1,7 @@
 DashboardHub\Bundle\AppBundle\Entity\User:
     type:  entity
     table: users
+    repositoryClass: DashboardHub\Bundle\AppBundle\Repository\UserRepository
     oneToMany:
         dashboards:
             targetEntity: DashboardHub\Bundle\AppBundle\Entity\Dashboard
