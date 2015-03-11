@@ -16,6 +16,6 @@ dashboardhub_app_dashboard.edit:
     requirements:
         page:  \d+
 
-dashboardhub_app_mock_login:
-    path:     /mockin
-    defaults: { _controller: DashboardHubAppBundle:Dashboard:mockin }
+dashboardhub_app_mock.login:
+    path:     /mock/login
+    defaults: { _controller: DashboardHubAppBundle:Mock:login }
