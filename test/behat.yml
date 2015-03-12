@@ -11,7 +11,6 @@ default:
         tags: ~@omit
       contexts:
         - DashboardHub\Bundle\AppBundle\Features\Context\FeatureContext: ~
-        - Behat\MinkExtension\Context\MinkContext: ~
   extensions:
     Behat\Symfony2Extension: ~
     Behat\MinkExtension:
