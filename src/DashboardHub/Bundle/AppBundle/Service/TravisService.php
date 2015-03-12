@@ -13,11 +13,11 @@ class TravisService
     /**
      * @var Client
      */
-    private $client;
+    protected $client;
     /**
      * @var Cache
      */
-    private $cache;
+    protected $cache;
 
     /**
      * @param Client $client
