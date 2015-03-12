@@ -15,6 +15,11 @@ class Dashboard
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $uid;
+
+    /**
      * @var User
      */
     protected $user;
@@ -71,6 +76,26 @@ class Dashboard
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return Dashboard
+     */
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
 
         return $this;
     }

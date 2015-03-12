@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -101,3 +101,7 @@ hwi_oauth:
             type:                github
             client_id:           "%client_id%"
             client_secret:       "%client_secret%"
+
+stash:
+    drivers: [ FileSystem ]
+    FileSystem: ~

@@ -33,11 +33,11 @@ class DashboardRepository extends EntityRepository
 
     /**
      * @param string $username
-     * @param int    $id
+     * @param string $uid
      *
      * @return array
      */
-    public function findOneByUsernameAndId($username, $id)
+    public function findOneByUsernameAndUid($username, $uid)
     {
         return $this->getEntityManager()
                     ->createQuery(
@@ -46,10 +46,35 @@ class DashboardRepository extends EntityRepository
                           WHERE
                             u.username = :username
                             AND
-                            d.id = :id'
+                            d.uid = :uid'
                     )
                     ->setParameter('username', $username)
-                    ->setParameter('id', $id)
+                    ->setParameter('uid', $uid)
+                    ->getOneOrNullResult();
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return array
+     */
+    public function findOneByUidAndOwnedByUsernameOrIsPublic($uid, $username = null)
+    {
+        return $this->getEntityManager()
+                    ->createQuery(
+                        'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          JOIN d.user u
+                          WHERE
+                            d.uid = :uid
+                            AND
+                            (
+                              d.public = 1
+                              OR
+                              u.username = :username
+                            )'
+                    )
+                    ->setParameter('uid', $uid)
+                    ->setParameter('username', $username)
                     ->getOneOrNullResult();
     }
 }
