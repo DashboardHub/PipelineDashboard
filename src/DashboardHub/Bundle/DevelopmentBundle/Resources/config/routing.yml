@@ -1,7 +1,3 @@
-dashboard_hub_development_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: DashboardHubDevelopmentBundle:Default:index }
-
 dashboard_hub_development_login:
     path:     /mock/login
     defaults: { _controller: DashboardHubDevelopmentBundle:Auth:login }
