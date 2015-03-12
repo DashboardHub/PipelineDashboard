@@ -35,17 +35,6 @@ class User extends OAuthUser
     {
         return $this->id;
     }
-    
-    /**
-     * Return a password to be used by the development bundle
-     * as opposed to the null returned by the parent class
-     * 
-     * @return string
-     */
-    public function getPassword()
-    {
-        return 'IAmNotASecret';
-    }
 
     /**
      * @param int $id
