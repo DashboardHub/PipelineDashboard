@@ -12,7 +12,7 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
                 max: 255
         theme:
             - NotBlank: ~
-            # @TODO: Theme validation
+            # @TODO: Theme validation https://github.com/DashboardHub/PipelineDashboard/issues/78
         public:
             - NotBlank: ~
             - Type: bool
