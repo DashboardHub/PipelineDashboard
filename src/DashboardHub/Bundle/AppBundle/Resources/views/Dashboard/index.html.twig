@@ -36,12 +36,14 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a class="btn btn-default btn-xs disabled" href="#" role="button">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('dashboardhub_app_dashboard.view', { 'uid': dashboard.uid }) }}"
+                               role="button">
                                 <i class="fa fa-eye"></i>
                                 View
                             </a>
                             <a class="btn btn-default btn-xs {% if dashboard.user.username == 'DashboardHub' %}disabled{% endif %}"
-                               href="{{ path('dashboardhub_app_dashboard.edit', { 'id': dashboard.id }) }}"
+                               href="{{ path('dashboardhub_app_dashboard.edit', { 'uid': dashboard.uid }) }}"
                                role="button">
                                 <i class="fa fa-pencil"></i> Edit
                             </a>

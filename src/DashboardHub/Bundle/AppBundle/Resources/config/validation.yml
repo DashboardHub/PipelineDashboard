@@ -1,8 +1,5 @@
 DashboardHub\Bundle\AppBundle\Entity\Dashboard:
     properties:
-        user:
-            - NotBlank: ~
-            - Type: DashboardHub\Bundle\AppBundle\Entity\User
         name:
             - NotBlank: ~
             - Length:
@@ -12,11 +9,10 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
             - NotBlank: ~
             - Length:
                 min: 3
-                max: 128
+                max: 255
         theme:
             - NotBlank: ~
-            - Choice:
-                  choices:  [default]
+            # @TODO: Theme validation https://github.com/DashboardHub/PipelineDashboard/issues/78
         public:
             - NotBlank: ~
             - Type: bool

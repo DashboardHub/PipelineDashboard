@@ -16,15 +16,17 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class DashboardType extends AbstractType
 {
+    /**
+     * @var array
+     */
+    protected $config = array();
 
     /**
-     * @var SecurityContextInterface
+     * @param array $config
      */
-    protected $securityContext;
-
-    public function __construct(SecurityContextInterface $securityContext)
+    public function __construct(array $config)
     {
-        $this->securityContext = $securityContext;
+        $this->config = $config;
     }
 
     /**
@@ -60,7 +62,7 @@ class DashboardType extends AbstractType
                 'theme',
                 'choice',
                 array(
-                    'choices'  => array('default' => 'Default'),
+                    'choices'  => array_flip($this->config['themes']),
                     'required' => true,
                 )
             )
@@ -88,10 +90,6 @@ class DashboardType extends AbstractType
      */
     public function onPostSetData(FormEvent $event)
     {
-        $event->getData()
-              ->setUser(
-                  new User($this->securityContext->getToken()->getUser()->getUsername())
-              );
         $event->getData()
               ->setUpdatedOn(
                   new \Datetime()

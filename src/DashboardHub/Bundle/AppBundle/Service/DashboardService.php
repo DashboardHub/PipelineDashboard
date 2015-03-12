@@ -38,22 +38,72 @@ class DashboardService
     {
         return $this->em
             ->getRepository('DashboardHubAppBundle:Dashboard')
-            ->findAllByUserAndDefaults($this->securityContext->getToken()->getUser()->getUsername());
+            ->findAllByUserAndDefaults(
+                $this->securityContext
+                    ->getToken()
+                    ->getUser()
+                    ->getUsername()
+            );
     }
 
     /**
-     * @param int $id
+     * @param string $uid
      *
      * @return array
      */
-    public function findOneById($id)
+    public function findOneByAuthenticatedUserAndUid($uid)
     {
         $dashboard = $this->em
             ->getRepository('DashboardHubAppBundle:Dashboard')
-            ->findOneByUsernameAndId(
-                $this->securityContext->getToken()->getUser()->getUsername(),
-                $id
+            ->findOneByUsernameAndUid(
+                $this->securityContext
+                    ->getToken()
+                    ->getUser()
+                    ->getUsername(),
+                $uid
             );
+
+        if (is_null($dashboard)) {
+            throw new \InvalidArgumentException('Invalid Dashboard ID');
+        }
+
+        return $dashboard;
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return array
+     */
+    public function findOneByUidAndOwnedByUsernameOrIsPublic($uid)
+    {
+        $dashboard = $this->em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->findOneByUidAndOwnedByUsernameOrIsPublic(
+                $uid,
+                $this->securityContext
+                    ->getToken()
+                    ->getUser()
+                    ->getUsername()
+            );
+
+        if (is_null($dashboard)) {
+            throw new \InvalidArgumentException('Invalid Dashboard ID');
+        }
+
+        return $dashboard;
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return array
+     */
+    public function findOneByUidAndIsPublic($uid)
+    {
+        $dashboard = $this->em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->findOneByUidAndOwnedByUsernameOrIsPublic($uid);
 
         if (is_null($dashboard)) {
             throw new \InvalidArgumentException('Invalid Dashboard ID');
@@ -69,13 +119,20 @@ class DashboardService
      */
     public function save(Dashboard $dashboard)
     {
-        $user = $this->em
-            ->getRepository('DashboardHubAppBundle:User')
-            ->findOneByUsername(
-                $this->securityContext->getToken()->getUser()->getUsername()
-            );
+        $dashboard->setUser(
+            $this->em
+                ->getRepository('DashboardHubAppBundle:User')
+                ->findOneByUsername(
+                    $this->securityContext
+                        ->getToken()
+                        ->getUser()
+                        ->getUsername()
+                )
+        );
 
-        $dashboard->setUser($user);
+        if (empty($dashboard->getUid())) {
+            $dashboard->setUid(uniqid('', true));
+        }
 
         $this->em->persist($dashboard);
         $this->em->flush();
