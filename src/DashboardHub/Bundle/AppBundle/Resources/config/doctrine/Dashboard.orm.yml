@@ -16,15 +16,19 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
             generator:
                 strategy: AUTO
     fields:
+        uid:
+            type: string
+            length: 24
+            unique: true
         name:
             type: string
-            length: 255
+            length: 128
         repository:
             type: string
             length: 255
         theme:
             type: string
-            length: 255
+            length: 64
         public:
             type: boolean
             options:

@@ -18,8 +18,10 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new DashboardHub\Bundle\AppBundle\DashboardHubAppBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Tedivm\StashBundle\TedivmStashBundle(),
+            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
+            new DashboardHub\Bundle\AppBundle\DashboardHubAppBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
