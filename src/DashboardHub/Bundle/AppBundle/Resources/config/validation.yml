@@ -12,8 +12,7 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
                 max: 255
         theme:
             - NotBlank: ~
-            - Choice:
-                  choices:  [default]
+            # @TODO: Theme validation
         public:
             - NotBlank: ~
             - Type: bool
