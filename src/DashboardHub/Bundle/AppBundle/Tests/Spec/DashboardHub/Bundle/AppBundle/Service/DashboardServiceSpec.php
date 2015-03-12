@@ -31,8 +31,8 @@ class DashboardServiceSpec extends ObjectBehavior
         $username = 'testuser';
 
         $user->getUsername()
-            ->shouldBeCalled()
-            ->willReturn($username);
+             ->shouldBeCalled()
+             ->willReturn($username);
 
         $token->getUser()
               ->shouldBeCalled()
@@ -43,18 +43,18 @@ class DashboardServiceSpec extends ObjectBehavior
                         ->willReturn($token);
 
         $dashboardRepository->findAllByUserAndDefaults($username)
-            ->shouldBeCalled();
+                            ->shouldBeCalled();
 
         $em->getRepository('DashboardHubAppBundle:Dashboard')
            ->shouldBeCalled()
-            ->willReturn($dashboardRepository);
+           ->willReturn($dashboardRepository);
 
         $this->beConstructedWith($em, $securityContext);
 
         $this->findAllByAuthenticatedUserAndDefaults();
     }
 
-    function it_should_find_one_by_id(
+    function it_should_find_one_by_authenticated_user_and_uid(
         EntityManager $em,
         SecurityContext $securityContext,
         TokenInterface $token,
@@ -63,12 +63,12 @@ class DashboardServiceSpec extends ObjectBehavior
         Dashboard $dashboard
     )
     {
-        $id = 1;
+        $uid      = 1;
         $username = 'testuser';
 
         $user->getUsername()
-            ->shouldBeCalled()
-            ->willReturn($username);
+             ->shouldBeCalled()
+             ->willReturn($username);
 
         $token->getUser()
               ->shouldBeCalled()
@@ -78,20 +78,20 @@ class DashboardServiceSpec extends ObjectBehavior
                         ->shouldBeCalled()
                         ->willReturn($token);
 
-        $dashboardRepository->findOneByUsernameAndId($username, $id)
-            ->shouldBeCalled()
-            ->willReturn($dashboard);
+        $dashboardRepository->findOneByUsernameAndUid($username, $uid)
+                            ->shouldBeCalled()
+                            ->willReturn($dashboard);
 
         $em->getRepository('DashboardHubAppBundle:Dashboard')
            ->shouldBeCalled()
-            ->willReturn($dashboardRepository);
+           ->willReturn($dashboardRepository);
 
         $this->beConstructedWith($em, $securityContext);
 
-        $this->findOneById($id);
+        $this->findOneByAuthenticatedUserAndUid($uid);
     }
 
-    function it_should_find_one_by_id_throws_exception(
+    function it_should_find_one_by_authenticated_user_and_uid_throws_exception(
         EntityManager $em,
         SecurityContext $securityContext,
         TokenInterface $token,
@@ -99,12 +99,12 @@ class DashboardServiceSpec extends ObjectBehavior
         DashboardRepository $dashboardRepository
     )
     {
-        $id = 1;
+        $uid      = 1;
         $username = 'testuser';
 
         $user->getUsername()
-            ->shouldBeCalled()
-            ->willReturn($username);
+             ->shouldBeCalled()
+             ->willReturn($username);
 
         $token->getUser()
               ->shouldBeCalled()
@@ -114,20 +114,145 @@ class DashboardServiceSpec extends ObjectBehavior
                         ->shouldBeCalled()
                         ->willReturn($token);
 
-        $dashboardRepository->findOneByUsernameAndId($username, $id)
-            ->shouldBeCalled()
-            ->willReturn(null);
+        $dashboardRepository->findOneByUsernameAndUid($username, $uid)
+                            ->shouldBeCalled()
+                            ->willReturn(null);
 
         $em->getRepository('DashboardHubAppBundle:Dashboard')
            ->shouldBeCalled()
-            ->willReturn($dashboardRepository);
+           ->willReturn($dashboardRepository);
 
         $this->beConstructedWith($em, $securityContext);
 
-        $this->shouldThrow('\InvalidArgumentException')->duringFindOneById($id);
+        $this->shouldThrow('\InvalidArgumentException')
+             ->duringFindOneByAuthenticatedUserAndUid($uid);
     }
 
-    function it_should_save(
+    function it_should_find_one_by_uid_and_owned_by_username_or_is_public(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        DashboardRepository $dashboardRepository,
+        Dashboard $dashboard
+    )
+    {
+        $uid      = 1;
+        $username = 'testuser';
+
+        $user->getUsername()
+             ->shouldBeCalled()
+             ->willReturn($username);
+
+        $token->getUser()
+              ->shouldBeCalled()
+              ->willReturn($user);
+
+        $securityContext->getToken()
+                        ->shouldBeCalled()
+                        ->willReturn($token);
+
+        $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid, $username)
+                            ->shouldBeCalled()
+                            ->willReturn($dashboard);
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->findOneByUidAndOwnedByUsernameOrIsPublic($uid);
+    }
+
+    function it_should_find_one_by_uid_and_owned_by_username_or_is_public_throws_exception(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        DashboardRepository $dashboardRepository,
+        Dashboard $dashboard
+    )
+    {
+        $uid      = 1;
+        $username = 'testuser';
+
+        $user->getUsername()
+             ->shouldBeCalled()
+             ->willReturn($username);
+
+        $token->getUser()
+              ->shouldBeCalled()
+              ->willReturn($user);
+
+        $securityContext->getToken()
+                        ->shouldBeCalled()
+                        ->willReturn($token);
+
+        $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid, $username)
+                            ->shouldBeCalled()
+                            ->willReturn(null);
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->shouldThrow('\InvalidArgumentException')
+             ->duringFindOneByUidAndOwnedByUsernameOrIsPublic($uid);
+    }
+
+    function it_should_find_one_by_uid_and_is_public(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        DashboardRepository $dashboardRepository,
+        Dashboard $dashboard
+    )
+    {
+        $uid      = 1;
+
+        $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid)
+                            ->shouldBeCalled()
+                            ->willReturn($dashboard);
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->findOneByUidAndIsPublic($uid);
+    }
+
+    function it_should_find_one_by_uid_and_is_public_throws_exception(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        DashboardRepository $dashboardRepository,
+        Dashboard $dashboard
+    )
+    {
+        $uid      = 1;
+
+        $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid)
+                            ->shouldBeCalled()
+                            ->willReturn(null);
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->shouldThrow('\InvalidArgumentException')
+             ->duringFindOneByUidAndIsPublic($uid);
+    }
+
+    function it_should_save_create(
         EntityManager $em,
         SecurityContext $securityContext,
         TokenInterface $token,
@@ -151,22 +276,81 @@ class DashboardServiceSpec extends ObjectBehavior
                         ->willReturn($token);
 
         $userRepository->findOneByUsername($username)
-                            ->shouldBeCalled()
-                            ->willReturn($user);
+                       ->shouldBeCalled()
+                       ->willReturn($user);
 
         $em->getRepository('DashboardHubAppBundle:User')
            ->shouldBeCalled()
            ->willReturn($userRepository);
 
         $dashboard->setUser($user)
-            ->shouldBeCalled()
-            ->willReturn($dashboard);
+                  ->shouldBeCalled()
+                  ->willReturn($dashboard);
+
+        $dashboard->getUid()
+                  ->shouldBeCalled()
+                  ->willReturn(null);
+
+        $dashboard->setUid(Argument::type('string'))
+                  ->shouldBeCalled()
+                  ->willReturn($dashboard);
 
         $em->persist($dashboard)
-            ->shouldBeCalled();
+           ->shouldBeCalled();
 
         $em->flush()
-            ->shouldBeCalled();
+           ->shouldBeCalled();
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->save($dashboard);
+    }
+
+    function it_should_save_edit(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        Dashboard $dashboard,
+        UserRepository $userRepository
+    )
+    {
+        $uid = 'abc';
+        $username = 'testuser';
+
+        $user->getUsername()
+             ->shouldBeCalled()
+             ->willReturn($username);
+
+        $token->getUser()
+              ->shouldBeCalled()
+              ->willReturn($user);
+
+        $securityContext->getToken()
+                        ->shouldBeCalled()
+                        ->willReturn($token);
+
+        $userRepository->findOneByUsername($username)
+                       ->shouldBeCalled()
+                       ->willReturn($user);
+
+        $em->getRepository('DashboardHubAppBundle:User')
+           ->shouldBeCalled()
+           ->willReturn($userRepository);
+
+        $dashboard->setUser($user)
+                  ->shouldBeCalled()
+                  ->willReturn($dashboard);
+
+        $dashboard->getUid()
+                  ->shouldBeCalled()
+                  ->willReturn($uid);
+
+        $em->persist($dashboard)
+           ->shouldBeCalled();
+
+        $em->flush()
+           ->shouldBeCalled();
 
         $this->beConstructedWith($em, $securityContext);
 
