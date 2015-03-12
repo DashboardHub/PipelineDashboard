@@ -22,4 +22,3 @@ logout:
 dashboard_hub_app:
     resource: "@DashboardHubAppBundle/Resources/config/routing.yml"
     prefix:   /
-
