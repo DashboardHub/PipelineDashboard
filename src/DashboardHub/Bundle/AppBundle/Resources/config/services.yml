@@ -32,6 +32,7 @@ services:
 
   dashboardhub_app_main.form.type.dashboard:
     class: DashboardHub\Bundle\AppBundle\Form\DashboardType
+    arguments: ["%dashboard_hub_app%"]
     tags:
         - { name: form.type, alias: dashboard }
 

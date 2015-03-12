@@ -16,6 +16,18 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  */
 class DashboardType extends AbstractType
 {
+    /**
+     * @var array
+     */
+    protected $config = array();
+
+    /**
+     * @param array $config
+     */
+    public function __construct(array $config)
+    {
+        $this->config = $config;
+    }
 
     /**
      * @return string
@@ -50,7 +62,7 @@ class DashboardType extends AbstractType
                 'theme',
                 'choice',
                 array(
-                    'choices'  => array('default' => 'Default'),
+                    'choices'  => array_flip($this->config['themes']),
                     'required' => true,
                 )
             )

@@ -17,16 +17,19 @@ class DashboardTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
+        $this->beConstructedWith(array());
         $this->shouldHaveType('DashboardHub\Bundle\AppBundle\Form\DashboardType');
     }
 
     function it_should_get_name()
     {
+        $this->beConstructedWith(array());
         $this->getName()->shouldReturn('dashboard');
     }
 
     function it_should_set_default_options(OptionsResolverInterface $resolver)
     {
+        $this->beConstructedWith(array());
         $resolver
             ->setDefaults(
                 array(
@@ -39,6 +42,15 @@ class DashboardTypeSpec extends ObjectBehavior
 
     function it_should_build_form(FormBuilderInterface $builder)
     {
+        $config = array(
+            'themes' =>
+                array(
+                    'Github'       => 'DashboardHubAppBundle:Template:Github.html.twig',
+                    'GithubTravis' => 'DashboardHubAppBundle:Template:GithubTravis.html.twig'
+                )
+        );
+
+        $this->beConstructedWith($config);
         $builder
             ->add('name')
             ->shouldBeCalled()
@@ -52,7 +64,7 @@ class DashboardTypeSpec extends ObjectBehavior
                 'theme',
                 'choice',
                 array(
-                    'choices'  => array('default' => 'Default'),
+                    'choices'  => array_flip($config['themes']),
                     'required' => true,
                 )
             )
@@ -94,13 +106,14 @@ class DashboardTypeSpec extends ObjectBehavior
         Dashboard $dashboard
     )
     {
+        $this->beConstructedWith(array());
         $dashboard->setUpdatedOn(Argument::type('Datetime'))
                   ->shouldBeCalled()
                   ->willReturn($dashboard);
 
         $event->getData()
-            ->shouldBeCalled()
-            ->willReturn($dashboard);
+              ->shouldBeCalled()
+              ->willReturn($dashboard);
 
         $this->onPostSetData($event);
     }
