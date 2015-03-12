@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Github Pull Requests</div>
+
+    <table class="table hideOverflow">
+        <thead>
+        <tr>
+            <th>Branch</th>
+            <th>Who</th>
+            <th>When</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pullrequest in pullrequests %}
+            <tr>
+                <td>{{ pullrequest.title }}</td>
+                <td>{{ pullrequest.user.login }}</td>
+                <td>{{ pullrequest.created_at|ago }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

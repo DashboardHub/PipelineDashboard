@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Github Events</div>
+
+    <table class="table hideOverflow">
+        <thead>
+        <tr>
+            <th>Type</th>
+            <th>Who</th>
+            <th>When</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.type }}</td>
+                <td>{{ event.actor.login }}</td>
+                <td>{{ event.created_at|ago }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

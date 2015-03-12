@@ -37,8 +37,8 @@ class DashboardController extends Controller
     public function addAction(Request $request)
     {
         $dashboard = new Dashboard();
-        $form      = $this->createForm('dashboard', $dashboard);
 
+        $form = $this->createForm('dashboard', $dashboard);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -67,15 +67,15 @@ class DashboardController extends Controller
 
     /**
      * @param Request $request
-     * @param         $id
+     * @param string  $uid
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $uid)
     {
         try {
             $dashboard = $this->get('dashboardhub_app_main.service.dashboard')
-                              ->findOneById($id);
+                              ->findOneByAuthenticatedUserAndUid($uid);
         } catch (\InvalidArgumentException $e) {
             $request->getSession()
                     ->getFlashBag()
@@ -111,6 +111,50 @@ class DashboardController extends Controller
             'DashboardHubAppBundle:Dashboard:add.html.twig',
             array(
                 'form' => $form->createView()
+            )
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param string  $uid
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAction(Request $request, $uid)
+    {
+        try {
+            $dashboard = $this->get('dashboardhub_app_main.service.dashboard')
+                              ->findOneByUidAndOwnedByUsernameOrIsPublic($uid);
+        } catch (\InvalidArgumentException $e) {
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'danger',
+                        'Invalid Dashboard'
+                    );
+
+            return $this->redirect($this->generateUrl('dashboardhub_app_dashboard.list'));
+        }
+
+        try {
+            $events = $this->get('dashboardhub_app_main.service.github')
+                           ->getEvents($dashboard->getRepository(), 5);
+        } catch (\Exception $e) {
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'danger',
+                        'Invalid Github Project'
+                    );
+
+            return $this->redirect($this->generateUrl('dashboardhub_app_dashboard.list'));
+        }
+
+        return $this->render(
+            $dashboard->getTheme(),
+            array(
+                'dashboard'    => $dashboard
             )
         );
     }

@@ -21,6 +21,14 @@ class DashboardSpec extends ObjectBehavior
         $this->getId()->shouldReturn($data);
     }
 
+    function it_should_set_then_get_uid()
+    {
+        $data = 'testuid';
+        $this->setUid($data)
+             ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Dashboard');
+        $this->getUid()->shouldReturn($data);
+    }
+
     function it_should_set_then_get_user(User $user)
     {
         $this->setUser($user)
