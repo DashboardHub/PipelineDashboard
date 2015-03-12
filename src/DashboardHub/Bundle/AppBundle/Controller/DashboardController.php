@@ -152,7 +152,7 @@ class DashboardController extends Controller
         }
 
         return $this->render(
-            'DashboardHubAppBundle:Dashboard:view.html.twig',
+            $dashboard->getTheme(),
             array(
                 'dashboard'    => $dashboard
             )
