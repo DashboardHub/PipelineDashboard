@@ -64,7 +64,7 @@ class DashboardService
             );
 
         if (is_null($dashboard)) {
-            throw new \InvalidArgumentException('Invalid Dashboard Token');
+            throw new \InvalidArgumentException('Invalid Dashboard ID');
         }
 
         return $dashboard;
@@ -88,7 +88,25 @@ class DashboardService
             );
 
         if (is_null($dashboard)) {
-            throw new \InvalidArgumentException('Invalid Dashboard Token');
+            throw new \InvalidArgumentException('Invalid Dashboard ID');
+        }
+
+        return $dashboard;
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return array
+     */
+    public function findOneByUidAndIsPublic($uid)
+    {
+        $dashboard = $this->em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->findOneByUidAndOwnedByUsernameOrIsPublic($uid);
+
+        if (is_null($dashboard)) {
+            throw new \InvalidArgumentException('Invalid Dashboard ID');
         }
 
         return $dashboard;

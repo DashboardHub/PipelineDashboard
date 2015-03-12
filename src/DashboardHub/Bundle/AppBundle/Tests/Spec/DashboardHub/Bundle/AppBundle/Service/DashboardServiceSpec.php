@@ -203,6 +203,55 @@ class DashboardServiceSpec extends ObjectBehavior
              ->duringFindOneByUidAndOwnedByUsernameOrIsPublic($uid);
     }
 
+    function it_should_find_one_by_uid_and_is_public(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        DashboardRepository $dashboardRepository,
+        Dashboard $dashboard
+    )
+    {
+        $uid      = 1;
+
+        $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid)
+                            ->shouldBeCalled()
+                            ->willReturn($dashboard);
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->findOneByUidAndIsPublic($uid);
+    }
+
+    function it_should_find_one_by_uid_and_is_public_throws_exception(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        TokenInterface $token,
+        User $user,
+        DashboardRepository $dashboardRepository,
+        Dashboard $dashboard
+    )
+    {
+        $uid      = 1;
+
+        $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid)
+                            ->shouldBeCalled()
+                            ->willReturn(null);
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->shouldThrow('\InvalidArgumentException')
+             ->duringFindOneByUidAndIsPublic($uid);
+    }
+
     function it_should_save_create(
         EntityManager $em,
         SecurityContext $securityContext,
