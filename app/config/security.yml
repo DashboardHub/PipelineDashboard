@@ -4,6 +4,7 @@ security:
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        DashboardHub\Bundle\AppBundle\Entity\User: plaintext
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
@@ -14,16 +15,18 @@ security:
     providers:
         hwi:
             id: hwi_oauth.user.provider
-
+        mock:
+            id: mockdashboardhub_user_provider
+                
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
     firewalls:
-
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
+                
         secured_area:
+                
             anonymous: ~
 
             logout:

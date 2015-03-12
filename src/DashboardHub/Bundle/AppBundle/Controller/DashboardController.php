@@ -108,7 +108,7 @@ class DashboardController extends Controller
         }
 
         return $this->render(
-            'DashboardHubAppBundle:Dashboard:add.html.twig',
+            'DashboardHubAppBundle:Dashboard:edit.html.twig',
             array(
                 'form' => $form->createView()
             )

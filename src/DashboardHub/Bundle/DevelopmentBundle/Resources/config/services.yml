@@ -1,0 +1,3 @@
+services:
+    mockdashboardhub_user_provider:
+        class: DashboardHub\Bundle\DevelopmentBundle\Security\User\DashboardHubUserProvider
