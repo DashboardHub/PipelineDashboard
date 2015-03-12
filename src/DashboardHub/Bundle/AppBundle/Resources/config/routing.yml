@@ -2,6 +2,10 @@ dashboardhub_app_homepage:
     path:     /
     defaults: { _controller: DashboardHubAppBundle:Default:index }
 
+dashboardhub_app_dashboard:
+    path:     /d/{uid}
+    defaults: { _controller: DashboardHubAppBundle:Default:dashboard }
+
 dashboardhub_app_dashboard.list:
     path:     /dashboard
     defaults: { _controller: DashboardHubAppBundle:Dashboard:index }
