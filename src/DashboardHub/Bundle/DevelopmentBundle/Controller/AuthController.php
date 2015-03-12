@@ -11,14 +11,19 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class AuthController extends Controller
 {
+    /**
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function loginAction(Request $request)
     {
-        return $this->render('DashboardHubDevelopmentBundle:Auth:login.html.twig', [
-                'last_username' => 'Mockerton'
-            ]
-        );
+        return $this->render('DashboardHubDevelopmentBundle:Auth:login.html.twig');
     }
-    
+
+    /**
+     * @param Request $request
+     */
     public function loginCheckAction(Request $request)
     {
         // The destination of the login form action
