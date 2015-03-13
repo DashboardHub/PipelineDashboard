@@ -2,6 +2,8 @@
 
 namespace DashboardHub\Bundle\DevelopmentBundle\Security\User;
 
+use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -11,7 +13,7 @@ use DashboardHub\Bundle\DevelopmentBundle\Entity\MockUser;
  * Class DashboardHubUserProvider
  * @package DashboardHub\Bundle\DevelopmentBundle\Security\User
  */
-class DashboardHubUserProvider implements UserProviderInterface
+class DashboardHubUserProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
 
     /**
@@ -48,5 +50,15 @@ class DashboardHubUserProvider implements UserProviderInterface
     public function supportsClass($class)
     {
         return $class === 'DashboardHub\Bundle\DevelopmentBundle\Entity\MockUser';
+    }
+
+    /**
+     * @param UserResponseInterface $response
+     *
+     * @return MockUser
+     */
+    public function loadUserByOAuthUserResponse(UserResponseInterface $response)
+    {
+        return new MockUser('Mockerman');
     }
 }

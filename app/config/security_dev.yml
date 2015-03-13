@@ -1,0 +1,10 @@
+security:
+    providers:
+        hwi:
+            id: mockdashboardhub_user_provider
+
+    firewalls:
+        secured_area:
+            oauth:
+                oauth_user_provider:
+                    service: mockdashboardhub_user_provider
