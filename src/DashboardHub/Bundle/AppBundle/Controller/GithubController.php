@@ -57,7 +57,24 @@ class GithubController extends Controller
             'DashboardHubAppBundle:Github:pullrequests.html.twig',
             array(
                 'pullrequests' => $this->get('dashboardhub_app_main.service.github')
-                                 ->getPullRequests($repository, $limit),
+                                       ->getPullRequests($repository, $limit),
+            )
+        );
+    }
+
+    /**
+     * @param string $repository
+     * @param int    $limit
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function milestonesAction($repository, $limit = 5)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Github:milestones.html.twig',
+            array(
+                'milestones' => $this->get('dashboardhub_app_main.service.github')
+                                     ->getMilestones($repository, $limit),
             )
         );
     }
