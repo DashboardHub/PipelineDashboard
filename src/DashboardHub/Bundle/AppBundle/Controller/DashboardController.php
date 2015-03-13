@@ -111,7 +111,9 @@ class DashboardController extends Controller
         return $this->render(
             'DashboardHubAppBundle:Dashboard:edit.html.twig',
             array(
-                'form' => $form->createView()
+                'form'      => $form->createView(),
+                'dashboard' => $dashboard,
+                'themes'    => array_flip($this->container->getParameter('dashboard_hub_app.themes'))
             )
         );
     }

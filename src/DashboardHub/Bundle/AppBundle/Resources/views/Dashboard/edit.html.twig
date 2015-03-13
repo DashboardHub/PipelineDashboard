@@ -2,6 +2,10 @@
 
 {% block body %}
     <h2>Edit Dashboard</h2>
+    <h3>
+        {{ dashboard.name }}
+        <span class="label label-default theme-badge">{{ attribute(themes, dashboard.theme) }}</span>
+    </h3>
 
     <div class="row">
         <div class="col-md-4">
