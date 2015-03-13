@@ -122,4 +122,39 @@ class GithubService
 
         return $branches;
     }
+
+    /**
+     * @param string $reponame
+     *
+     * @return array $branches
+     */
+    public function getMilestones($reponame, $limit = 5)
+    {
+        $cache    = $this->cache->getItem(__METHOD__, $reponame, $limit);
+        $milestones = $cache->get();
+        if ($cache->isMiss()) {
+            $milestones = json_decode(
+                $this->client
+                    ->get('/repos/' . $reponame . '/milestones?per_page=' . $limit)
+                    ->getBody()
+                    ->getContents()
+                ,
+                true
+            );
+
+            // calculate Completeness percentage
+            foreach($milestones as $key => $milestone) {
+                if ($milestone['closed_issues'] + $milestone['open_issues'] != 0) {
+                    $milestones[ $key ]['completeness'] =
+                        round(($milestone['closed_issues'] / ($milestone['closed_issues'] + $milestone['open_issues'])) * 100);
+                } else {
+                    $milestones[ $key ]['completeness'] = 0;
+                }
+            }
+
+            $cache->set($milestones, 600);
+        }
+
+        return $milestones;
+    }
 }

@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Github Milestones</div>
+
+    <table class="table hideOverflow">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Due</th>
+            <th>Open Issues</th>
+            <th>Closed Issues</th>
+            <th>Completeness</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for milestone in milestones %}
+            <tr>
+                <td>{{ milestone.title }}</td>
+                <td>{{ milestone.due_on|date("d/m/Y") }}</td>
+                <td>{{ milestone.open_issues }}</td>
+                <td>{{ milestone.closed_issues }}</td>
+                <td>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                             aria-valuenow="{{ milestone.completeness }}" aria-valuemin="0" aria-valuemax="100"
+                             style="width: {{ milestone.completeness }}%;">
+                            {{ milestone.completeness }}%
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
