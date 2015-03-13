@@ -42,13 +42,11 @@ class DashboardTypeSpec extends ObjectBehavior
 
     function it_should_build_form(FormBuilderInterface $builder)
     {
-        $config = array(
-            'themes' =>
-                array(
-                    'Github'       => 'DashboardHubAppBundle:Template:Github.html.twig',
-                    'GithubTravis' => 'DashboardHubAppBundle:Template:GithubTravis.html.twig'
-                )
-        );
+        $config =
+            array(
+                'Github'       => 'DashboardHubAppBundle:Template:Github.html.twig',
+                'GithubTravis' => 'DashboardHubAppBundle:Template:GithubTravis.html.twig'
+            );
 
         $this->beConstructedWith($config);
         $builder
@@ -64,7 +62,7 @@ class DashboardTypeSpec extends ObjectBehavior
                 'theme',
                 'choice',
                 array(
-                    'choices'  => array_flip($config['themes']),
+                    'choices'  => array_flip($config),
                     'required' => true,
                 )
             )

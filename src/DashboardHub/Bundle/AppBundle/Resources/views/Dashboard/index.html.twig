@@ -27,7 +27,7 @@
                         <td>{{ dashboard.user.username }}</td>
                         <td>{{ dashboard.name }}</td>
                         <td>{{ dashboard.repository }}</td>
-                        <td>{{ dashboard.theme }}</td>
+                        <td>{{ attribute(themes, dashboard.theme) }}</td>
                         <td>
                             {% if dashboard.public == 1 %}
                                 <i class="fa fa-unlock"></i> Public

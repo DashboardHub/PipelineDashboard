@@ -62,7 +62,7 @@ class DashboardType extends AbstractType
                 'theme',
                 'choice',
                 array(
-                    'choices'  => array_flip($this->config['themes']),
+                    'choices'  => array_flip($this->config),
                     'required' => true,
                 )
             )

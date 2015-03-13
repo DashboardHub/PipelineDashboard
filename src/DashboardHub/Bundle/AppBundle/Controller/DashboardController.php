@@ -24,7 +24,8 @@ class DashboardController extends Controller
             'DashboardHubAppBundle:Dashboard:index.html.twig',
             array(
                 'dashboards' => $this->get('dashboardhub_app_main.service.dashboard')
-                                     ->findAllByAuthenticatedUserAndDefaults()
+                                     ->findAllByAuthenticatedUserAndDefaults(),
+                'themes'     => array_flip($this->container->getParameter('dashboard_hub_app.themes'))
             )
         );
     }
@@ -154,7 +155,7 @@ class DashboardController extends Controller
         return $this->render(
             $dashboard->getTheme(),
             array(
-                'dashboard'    => $dashboard
+                'dashboard' => $dashboard
             )
         );
     }
