@@ -32,6 +32,22 @@ services:
 
   dashboardhub_app_main.form.type.dashboard:
     class: DashboardHub\Bundle\AppBundle\Form\DashboardType
-    arguments: ["@security.context"]
+    arguments: ["%dashboard_hub_app.themes%"]
     tags:
         - { name: form.type, alias: dashboard }
+
+  dashboardhub_app_main.github.api:
+    class: GuzzleHttp\Client
+    arguments: ["%github_api%"]
+
+  dashboardhub_app_main.travis.api:
+    class: GuzzleHttp\Client
+    arguments: ["%travis_api%"]
+
+  dashboardhub_app_main.service.github:
+    class: DashboardHub\Bundle\AppBundle\Service\GithubService
+    arguments: ["@dashboardhub_app_main.github.api", "@stash"]
+
+  dashboardhub_app_main.service.travis:
+    class: DashboardHub\Bundle\AppBundle\Service\TravisService
+    arguments: ["@dashboardhub_app_main.travis.api", "@stash"]

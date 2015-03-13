@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Travis Builds</div>
+
+    <table class="table hideOverflow">
+        <thead>
+        <tr>
+            <th>Branch</th>
+            <th>When</th>
+            <th>Duration (s)</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for build in builds %}
+            <tr>
+                <td>{{ build.branch }}</td>
+                <td>{{ build.finished_at|ago }}</td>
+                <td>{{ build.duration|default('building') }}</td>
+                <td>
+                    {% if build.result == 0 %}
+                        <span class="glyphicon glyphicon-ok"></span>
+                    {% else %}
+                        <span class="glyphicon glyphicon-remove"></span>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
