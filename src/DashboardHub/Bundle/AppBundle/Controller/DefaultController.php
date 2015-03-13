@@ -3,6 +3,7 @@
 namespace DashboardHub\Bundle\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class DefaultController
@@ -16,5 +17,37 @@ class DefaultController extends Controller
     public function indexAction()
     {
         return $this->render('DashboardHubAppBundle:Default:index.html.twig');
+    }
+
+    /**
+     * Public to view public dashboards
+     *
+     * @param Request $request
+     * @param string $uid
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function dashboardAction(Request $request, $uid)
+    {
+        try {
+            $dashboard = $this->get('dashboardhub_app_main.service.dashboard')
+                              ->findOneByUidAndIsPublic($uid);
+        } catch (\InvalidArgumentException $e) {
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'danger',
+                        'PRivate or Invalid Dashboard'
+                    );
+
+            return $this->redirect($this->generateUrl('dashboardhub_app_homepage'));
+        }
+
+        return $this->render(
+            $dashboard->getTheme(),
+            array(
+                'dashboard'    => $dashboard
+            )
+        );
     }
 }

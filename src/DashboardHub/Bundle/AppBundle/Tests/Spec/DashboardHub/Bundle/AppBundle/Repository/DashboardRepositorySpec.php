@@ -54,19 +54,19 @@ class DashboardRepositorySpec extends ObjectBehavior
         $this->findAllByUserAndDefaults($username);
     }
 
-    function it_should_find_one_by_username_and_id(
+    function it_should_find_one_by_username_and_uid(
         EntityManager $em,
         ClassMetadata $classMetadata,
         AbstractQuery $abstractQuery
     )
     {
-        $id = 1;
+        $uid      = 1;
         $username = 'testuser';
 
         $abstractQuery->setParameter('username', $username)
                       ->shouldBeCalled()
                       ->willReturn($abstractQuery);
-        $abstractQuery->setParameter('id', $id)
+        $abstractQuery->setParameter('uid', $uid)
                       ->shouldBeCalled()
                       ->willReturn($abstractQuery);
 
@@ -76,7 +76,7 @@ class DashboardRepositorySpec extends ObjectBehavior
                           WHERE
                             u.username = :username
                             AND
-                            d.id = :id'
+                            d.uid = :uid'
         )
            ->shouldBeCalled()
            ->willReturn($abstractQuery);
@@ -87,6 +87,46 @@ class DashboardRepositorySpec extends ObjectBehavior
 
         $this->beConstructedWith($em, $classMetadata);
 
-        $this->findOneByUsernameAndId($username, $id);
+        $this->findOneByUsernameAndUid($username, $uid);
+    }
+
+    function it_should_find_one_by_uid_and_owned_by_username_or_is_public(
+        EntityManager $em,
+        ClassMetadata $classMetadata,
+        AbstractQuery $abstractQuery
+    )
+    {
+        $uid      = 1;
+        $username = 'testuser';
+
+        $abstractQuery->setParameter('username', $username)
+                      ->shouldBeCalled()
+                      ->willReturn($abstractQuery);
+        $abstractQuery->setParameter('uid', $uid)
+                      ->shouldBeCalled()
+                      ->willReturn($abstractQuery);
+
+        $em->createQuery(
+            'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          JOIN d.user u
+                          WHERE
+                            d.uid = :uid
+                            AND
+                            (
+                              d.public = 1
+                              OR
+                              u.username = :username
+                            )'
+        )
+           ->shouldBeCalled()
+           ->willReturn($abstractQuery);
+
+        $abstractQuery->getOneOrNullResult()
+                      ->shouldBeCalled()
+                      ->willReturn(array());
+
+        $this->beConstructedWith($em, $classMetadata);
+
+        $this->findOneByUidAndOwnedByUsernameOrIsPublic($uid, $username);
     }
 }

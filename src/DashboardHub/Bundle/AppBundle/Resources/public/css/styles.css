@@ -1,3 +1,8 @@
+a.navbar-brand span.version {
+    font-size: 50%;
+    font-style: italic;
+}
+
 div.jumbotron h1 {
     font-size: xx-large;
 }
@@ -10,4 +15,20 @@ div#homepage div.dashboardhub-image {
 
 div#homepage div.dashboardhub-image div.jumbotron {
     max-width: 600px;
+}
+
+table.hideOverflow {
+    table-layout:fixed;
+}
+
+table.hideOverflow td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+span.theme-badge {
+    font-size: 40%;
+    font-style: italic;
 }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% include 'DashboardHubAppBundle:Template:header.html.twig' %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Github:events', { 'repository': dashboard.repository } )) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Github:pullrequests', { 'repository': dashboard.repository } )) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Github:issues', { 'repository': dashboard.repository } )) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Travis:builds', { 'repository': dashboard.repository } )) }}
+        </div>
+    </div>
+{% endblock %}
