@@ -32,11 +32,14 @@ class LoadDashboardData implements FixtureInterface
 
 
         $dashboard = new Dashboard();
+        $dashboard->setUid(uniqid('', true));
         $dashboard->setUser($user);
         $dashboard->setName('Example Dashboard');
-        $dashboard->setRepo('DashboardHub/PipelineDashboard');
-        $dashboard->setTheme('default');
+        $dashboard->setRepository('DashboardHub/PipelineDashboard');
+        $dashboard->setTheme('DashboardHubAppBundle:Template:GithubTravis.html.twig');
         $dashboard->setPublic(true);
+        $dashboard->setCreatedOn(new \DateTime());
+        $dashboard->setUpdatedOn(new \DateTime());
         $manager->persist($dashboard);
 
         return $this;

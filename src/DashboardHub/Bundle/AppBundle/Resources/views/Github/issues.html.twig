@@ -1,0 +1,22 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Github Issues</div>
+
+    <table class="table hideOverflow">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Who</th>
+            <th>When</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for issue in issues %}
+            <tr>
+                <td>{{ issue.title }}</td>
+                <td>{{ issue.user.login }}</td>
+                <td>{{ issue.created_at|ago }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
