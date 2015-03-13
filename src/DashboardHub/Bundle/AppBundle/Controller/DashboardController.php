@@ -155,7 +155,8 @@ class DashboardController extends Controller
         return $this->render(
             $dashboard->getTheme(),
             array(
-                'dashboard' => $dashboard
+                'dashboard' => $dashboard,
+                'themes'    => array_flip($this->container->getParameter('dashboard_hub_app.themes'))
             )
         );
     }
