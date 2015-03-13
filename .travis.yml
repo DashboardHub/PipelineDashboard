@@ -10,7 +10,7 @@ before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
   - php app/console doctrine:schema:update --force
-  - php app/console doctrine:fixtures:load
+  - php app/console doctrine:fixtures:load --no-interaction
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
