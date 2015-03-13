@@ -23,3 +23,12 @@ parameters:
     # oauth
     client_id:         "%client.id%"
     client_secret:     "%client.secret%"
+
+    # github
+    github_api:
+        base_url: https://api.github.com
+        defaults:
+            headers:
+                Authorization: "token %github.api.token%"
+    travis_api:
+        base_url: https://api.travis-ci.org
