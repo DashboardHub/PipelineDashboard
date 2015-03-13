@@ -27,3 +27,8 @@ table.hideOverflow td {
     text-overflow: ellipsis;
 
 }
+
+span.theme-badge {
+    font-size: 40%;
+    font-style: italic;
+}
