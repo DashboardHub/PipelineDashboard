@@ -21,5 +21,5 @@ Feature: Dashboard Add
     And I fill in "dashboard_repository" with "DashboardHub/PipelineDashboard"
     And I press "Save"
     Then I should see "Your Dashboards"
-    And I should see "Mockerman"
+    And I should see "MockUser"
     And I should see "behat-test"
