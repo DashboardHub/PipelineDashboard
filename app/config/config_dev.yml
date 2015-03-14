@@ -48,10 +48,3 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
-
-security:
-    firewalls:
-        secured_area:
-            provider: mock
-            form_login:
-                check_path: /development/mock_login_check

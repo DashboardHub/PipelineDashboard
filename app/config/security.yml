@@ -4,7 +4,6 @@ security:
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        DashboardHub\Bundle\AppBundle\Entity\User: plaintext
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
