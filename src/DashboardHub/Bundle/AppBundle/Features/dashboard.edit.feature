@@ -10,5 +10,5 @@ Feature: Dashboard Edit
     And I press "Save"
     And I should see "Your Dashboards"
     And I should see "Dashboard updated"
-    And I should see "Mockerman"
+    And I should see "MockUser"
     And I should see "behat-test2"

@@ -1,3 +1,6 @@
 services:
-    mockdashboardhub_user_provider:
-        class: DashboardHub\Bundle\DevelopmentBundle\Security\User\DashboardHubUserProvider
+    dashboardhub.development.mock_user_provider:
+        class: DashboardHub\Bundle\DevelopmentBundle\Security\User\MockUserProvider
+
+    security.user.provider.concrete.mock:
+        class: DashboardHub\Bundle\DevelopmentBundle\Security\User\MockUserProvider

@@ -19,6 +19,6 @@ class FeatureContext extends MinkContext
     public function iAmLoggedIn()
     {
         $this->getSession()->visit('/development/mock/login');
-        $this->getSession()->getPage()->pressButton('login');
+        $this->getSession()->getPage()->pressButton('Login');
     }
 }
