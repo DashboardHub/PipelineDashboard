@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace DashboardHub\Bundle\DevelopmentBundle\Security\User;
 
@@ -10,10 +10,10 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use DashboardHub\Bundle\DevelopmentBundle\Entity\MockUser;
 
 /**
- * Class DashboardHubUserProvider
+ * Class MockUserProvider
  * @package DashboardHub\Bundle\DevelopmentBundle\Security\User
  */
-class DashboardHubUserProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
+class MockUserProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
 
     /**
@@ -23,7 +23,7 @@ class DashboardHubUserProvider implements UserProviderInterface, OAuthAwareUserP
      */
     public function loadUserByUsername($username)
     {
-        return new MockUser('Mockerman');
+        return new MockUser('MockUser');
     }
 
     /**
@@ -59,6 +59,6 @@ class DashboardHubUserProvider implements UserProviderInterface, OAuthAwareUserP
      */
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        return new MockUser('Mockerman');
+        return new MockUser('MockUser');
     }
 }

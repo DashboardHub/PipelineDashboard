@@ -1,19 +1,17 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-<section class="login">
-    <article>
-
-        <form action="{{ path('dashboard_hub_development_login_check') }}" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="_username" value="Mockerton" />
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="_password" value="IAmNotASecret" />
-
-            <button type="submit">login</button>
-        </form>
-
-    </article>
-</section>
+    <form action="{{ path('dashboard_hub_development_login_check') }}" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" value="MockUser"
+                   id="username" name="_username" placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" value="IAmNotASecret"
+                   id="password" name="_password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-default">Login</button>
+    </form>
 {% endblock %}

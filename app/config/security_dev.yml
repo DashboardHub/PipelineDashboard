@@ -4,7 +4,7 @@ security:
 
     providers:
         hwi:
-            id: mockdashboardhub_user_provider
+            id: dashboardhub.development.mock_user_provider
 
     firewalls:
         secured_area:
@@ -13,4 +13,4 @@ security:
                 check_path: /development/mock_login_check
             oauth:
                 oauth_user_provider:
-                    service: mockdashboardhub_user_provider
+                    service: dashboardhub.development.mock_user_provider

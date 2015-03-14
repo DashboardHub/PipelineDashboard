@@ -26,7 +26,7 @@ Feature: Dashboard view
     And I press "Save"
     And I should see "Your Dashboards"
     And I should see "Dashboard updated"
-    And I should see "Mockerman"
+    And I should see "MockUser"
     And I should see "behat-test"
     Then I follow "View"
     And I should see "DashboardHub/PipelineDashboard"
