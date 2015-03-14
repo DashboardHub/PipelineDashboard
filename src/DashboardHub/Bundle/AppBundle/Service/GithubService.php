@@ -125,12 +125,13 @@ class GithubService
 
     /**
      * @param string $reponame
+     * @param int    $limit
      *
      * @return array $branches
      */
     public function getMilestones($reponame, $limit = 5)
     {
-        $cache    = $this->cache->getItem(__METHOD__, $reponame, $limit);
+        $cache      = $this->cache->getItem(__METHOD__, $reponame, $limit);
         $milestones = $cache->get();
         if ($cache->isMiss()) {
             $milestones = json_decode(
@@ -143,10 +144,15 @@ class GithubService
             );
 
             // calculate Completeness percentage
-            foreach($milestones as $key => $milestone) {
+            foreach ($milestones as $key => $milestone) {
                 if ($milestone['closed_issues'] + $milestone['open_issues'] != 0) {
                     $milestones[ $key ]['completeness'] =
-                        round(($milestone['closed_issues'] / ($milestone['closed_issues'] + $milestone['open_issues'])) * 100);
+                        round(
+                            (
+                                $milestone['closed_issues'] /
+                                ($milestone['closed_issues'] + $milestone['open_issues'])
+                            ) * 100
+                        );
                 } else {
                     $milestones[ $key ]['completeness'] = 0;
                 }
