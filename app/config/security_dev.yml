@@ -1,0 +1,16 @@
+security:
+    encoders:
+        DashboardHub\Bundle\AppBundle\Entity\User: plaintext
+
+    providers:
+        hwi:
+            id: mockdashboardhub_user_provider
+
+    firewalls:
+        secured_area:
+            provider: mock
+            form_login:
+                check_path: /development/mock_login_check
+            oauth:
+                oauth_user_provider:
+                    service: mockdashboardhub_user_provider
