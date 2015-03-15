@@ -19,6 +19,7 @@
                 <th>Repo</th>
                 <th>Theme</th>
                 <th>Visibility</th>
+                <th>Public Views</th>
                 <th>Actions</th>
                 </thead>
                 <tbody>
@@ -35,6 +36,7 @@
                                 <i class="fa fa-lock"></i> Private
                             {% endif %}
                         </td>
+                        <td>{{ dashboard.publicViews }}</td>
                         <td>
                             <a class="btn btn-default btn-xs"
                                href="{{ path('dashboardhub_app_dashboard.view', { 'uid': dashboard.uid }) }}"

@@ -45,6 +45,11 @@ class Dashboard
     protected $public;
 
     /**
+     * @var int
+     */
+    protected $publicViews = 0;
+
+    /**
      * @var \Datetime
      */
     protected $createdOn;
@@ -196,6 +201,26 @@ class Dashboard
     public function setPublic($public)
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPublicViews()
+    {
+        return $this->publicViews;
+    }
+
+    /**
+     * @param int $publicViews
+     *
+     * @return Dashboard
+     */
+    public function setPublicViews($publicViews)
+    {
+        $this->publicViews = $publicViews;
 
         return $this;
     }
