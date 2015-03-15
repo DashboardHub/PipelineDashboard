@@ -33,6 +33,12 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
             type: boolean
             options:
                 default: true
+        publicViews:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+                default: 0
         createdOn:
             type: datetime
         updatedOn:
