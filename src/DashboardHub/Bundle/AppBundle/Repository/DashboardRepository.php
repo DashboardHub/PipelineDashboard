@@ -1,6 +1,7 @@
 <?php
 namespace DashboardHub\Bundle\AppBundle\Repository;
 
+use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -60,7 +61,8 @@ class DashboardRepository extends EntityRepository
      */
     public function findOneByUidAndOwnedByUsernameOrIsPublic($uid, $username = null)
     {
-        return $this->getEntityManager()
+        /** @var Dashboard $dashboard */
+        $dashboard = $this->getEntityManager()
                     ->createQuery(
                         'SELECT d FROM DashboardHubAppBundle:Dashboard d
                           JOIN d.user u
@@ -76,5 +78,19 @@ class DashboardRepository extends EntityRepository
                     ->setParameter('uid', $uid)
                     ->setParameter('username', $username)
                     ->getOneOrNullResult();
+
+        // log dashboard view if not the owner
+        if ($dashboard->getUser()->getUsername() != $username) {
+            $dashboard->setPublicViews(
+                $dashboard->getPublicViews() + 1
+            );
+
+            $this->getEntityManager()
+                ->persist($dashboard);
+            $this->getEntityManager()
+                ->flush();
+        }
+
+        return $dashboard;
     }
 }
