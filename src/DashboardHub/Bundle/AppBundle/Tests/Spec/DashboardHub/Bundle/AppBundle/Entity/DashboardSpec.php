@@ -68,6 +68,14 @@ class DashboardSpec extends ObjectBehavior
         $this->isPublic()->shouldReturn($data);
     }
 
+    function it_should_set_then_get_public_views()
+    {
+        $data = 100;
+        $this->setPublicViews($data)
+             ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Dashboard');
+        $this->getPublicViews()->shouldReturn($data);
+    }
+
     function it_should_set_then_get_created_on()
     {
         $data = new \Datetime;
