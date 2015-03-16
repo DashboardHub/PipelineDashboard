@@ -50,11 +50,23 @@ class DashboardTypeSpec extends ObjectBehavior
 
         $this->beConstructedWith($config);
         $builder
-            ->add('name')
+            ->add('name', null,
+                  array(
+                      'attr' => array(
+                          'placeholder' => 'The name for your Dashboard',
+                      ),
+                  )
+            )
             ->shouldBeCalled()
             ->willReturn($builder);
         $builder
-            ->add('repository')
+            ->add('repository', null,
+                  array(
+                      'attr' => array(
+                          'placeholder' => 'Dashboardhub/PipelineDashboard (owner/repo)',
+                      ),
+                  )
+            )
             ->shouldBeCalled()
             ->willReturn($builder);
         $builder
