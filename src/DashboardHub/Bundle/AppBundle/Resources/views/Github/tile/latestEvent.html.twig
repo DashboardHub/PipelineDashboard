@@ -1,0 +1,8 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>{{ event.type }}</p>
+    </div>
+    <div class="panel-footer">
+        Latest Event {{ event.created_at|ago }} by {{ event.actor.login }}
+    </div>
+</div>

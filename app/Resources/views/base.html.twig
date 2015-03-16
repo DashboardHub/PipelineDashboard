@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        {% block meta %}{% endblock %}
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
