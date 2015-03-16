@@ -139,4 +139,24 @@ class DashboardService
 
         return $dashboard;
     }
+
+    /**
+     * @return array
+     */
+    public function findAllByIsPublicAndLatest()
+    {
+        return $this->em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->findAllByIsPublicAndLatest();
+    }
+
+    /**
+     * @return array
+     */
+    public function findAllByIsPublicAndPopular()
+    {
+        return $this->em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->findAllByIsPublicAndPopular();
+    }
 }

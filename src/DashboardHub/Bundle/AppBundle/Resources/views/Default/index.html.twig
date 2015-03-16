@@ -2,19 +2,107 @@
 
 {% block body %}
     <div id="homepage">
-        <div class="jumbotron dashboardhub-image">
-            <div class="jumbotron">
-                <h1>Your World in One Place</h1>
+        <div class="row">
+            <div class="col-md-12">
 
-                <p class="lead">
-                    Your Pipeline in One Place. Github, TravisCI etc reporting back to your Dashboard Hub.
-                </p>
+                <div class="jumbotron dashboardhub-image">
+                    <div class="jumbotron">
+                        <h1>FOCUS!</h1>
+                        <h2>Your World in One Place</h2>
 
-                <p><a class="btn btn-lg btn-success" href="/connect/github" role="button">
-                        <i class="fa fa-github"></i>
-                        Free Sign in with Github
-                    </a>
-                </p>
+                        <p class="lead">
+                            Your Pipeline in One Place. Github, TravisCI etc reporting back to your Dashboard Hub.
+                        </p>
+
+                        <p><a class="btn btn-lg btn-success" href="/connect/github" role="button">
+                                <i class="fa fa-github"></i>
+                                Free Sign in with Github
+                            </a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-arrow-down"></i>
+                        Latest Open Source Dashboards
+                    </div>
+
+                    <table class="table hideOverflow">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Repository</th>
+                            <th>Theme</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for dashboard in latestDashboards %}
+                            <tr>
+                                <td>{{ dashboard.name }}</td>
+                                <td>{{ dashboard.repository }}</td>
+                                <td>{{ attribute(themes, dashboard.theme) }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-xs"
+                                       href="{{ path('dashboardhub_app_dashboard', { 'uid': dashboard.uid }) }}"
+                                       role="button">
+                                        <i class="fa fa-eye"></i>
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-line-chart"></i>
+                        Most Popular Open Source Dashboards
+                    </div>
+
+                    <table class="table hideOverflow">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Repository</th>
+                            <th>Theme</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for dashboard in popularDashboards %}
+                            <tr>
+                                <td>{{ dashboard.name }}</td>
+                                <td>{{ dashboard.repository }}</td>
+                                <td>{{ attribute(themes, dashboard.theme) }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-xs"
+                                       href="{{ path('dashboardhub_app_dashboard', { 'uid': dashboard.uid }) }}"
+                                       role="button">
+                                        <i class="fa fa-eye"></i>
+                                        View
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
         </div>
     </div>
