@@ -4,6 +4,7 @@ namespace Spec\DashboardHub\Bundle\AppBundle\Repository;
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
 use DashboardHub\Bundle\AppBundle\Entity\User;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query;
@@ -126,12 +127,12 @@ class DashboardRepositorySpec extends ObjectBehavior
            ->willReturn($abstractQuery);
 
         $user->getUsername()
-            ->shouldBeCalled()
-            ->willReturn($username);
+             ->shouldBeCalled()
+             ->willReturn($username);
 
         $dashboard->getUser()
-            ->shouldBeCalled()
-            ->willReturn($user);
+                  ->shouldBeCalled()
+                  ->willReturn($user);
 
         $abstractQuery->getOneOrNullResult()
                       ->shouldBeCalled()
@@ -176,26 +177,26 @@ class DashboardRepositorySpec extends ObjectBehavior
            ->willReturn($abstractQuery);
 
         $user->getUsername()
-            ->shouldBeCalled()
-            ->willReturn($username . '_different');
+             ->shouldBeCalled()
+             ->willReturn($username . '_different');
 
         $dashboard->getUser()
-            ->shouldBeCalled()
-            ->willReturn($user);
+                  ->shouldBeCalled()
+                  ->willReturn($user);
 
         $dashboard->getPublicViews()
-            ->shouldBeCalled()
-            ->willReturn(100);
+                  ->shouldBeCalled()
+                  ->willReturn(100);
 
         $dashboard->setPublicViews(101)
-            ->shouldBeCalled();
+                  ->shouldBeCalled();
 
         $em->persist($dashboard)
-            ->shouldBeCalled()
-            ->willReturn($dashboard);
+           ->shouldBeCalled()
+           ->willReturn($dashboard);
 
         $em->flush()
-            ->shouldBeCalled();
+           ->shouldBeCalled();
 
         $abstractQuery->getOneOrNullResult()
                       ->shouldBeCalled()
