@@ -32,3 +32,12 @@ span.theme-badge {
     font-size: 40%;
     font-style: italic;
 }
+
+div.tiles div.panel {
+    text-align: center;
+}
+
+div.tiles div.panel div.panel-body {
+    font-size: xx-large;
+    height:80px;
+}
