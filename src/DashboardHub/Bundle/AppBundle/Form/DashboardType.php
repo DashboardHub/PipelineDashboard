@@ -56,8 +56,20 @@ class DashboardType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('repository')
+            ->add('name', null,
+                  array(
+                    'attr' => array(
+                        'placeholder' => 'The name for your Dashboard',
+                    ),
+                  )
+            )
+            ->add('repository', null,
+                  array(
+                      'attr' => array(
+                          'placeholder' => 'Dashboardhub/PipelineDashboard (owner/repo)',
+                      ),
+                  )
+            )
             ->add(
                 'theme',
                 'choice',
