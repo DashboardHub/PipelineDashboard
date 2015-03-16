@@ -93,4 +93,38 @@ class DashboardRepository extends EntityRepository
 
         return $dashboard;
     }
+
+    /**
+     * @return array
+     */
+    public function findAllByIsPublicAndLatest()
+    {
+        return $this->getEntityManager()
+                    ->createQuery(
+                        'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          WHERE
+                            d.public = 1
+                          ORDER BY
+                            d.createdOn DESC'
+                    )
+                    ->setMaxResults(10)
+                    ->getResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function findAllByIsPublicAndPopular()
+    {
+        return $this->getEntityManager()
+                    ->createQuery(
+                        'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          WHERE
+                            d.public = 1
+                          ORDER BY
+                            d.publicViews DESC'
+                    )
+                    ->setMaxResults(10)
+                    ->getResult();
+    }
 }
