@@ -16,14 +16,23 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('DashboardHubAppBundle:Default:index.html.twig');
+        return $this->render(
+            'DashboardHubAppBundle:Default:index.html.twig',
+            array(
+                'themes'            => array_flip($this->container->getParameter('dashboard_hub_app.themes')),
+                'latestDashboards'  => $this->get('dashboardhub_app_main.service.dashboard')
+                                            ->findAllByIsPublicAndLatest(),
+                'popularDashboards' => $this->get('dashboardhub_app_main.service.dashboard')
+                                            ->findAllByIsPublicAndPopular()
+            )
+        );
     }
 
     /**
      * Public to view public dashboards
      *
      * @param Request $request
-     * @param string $uid
+     * @param string  $uid
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -46,7 +55,8 @@ class DefaultController extends Controller
         return $this->render(
             $dashboard->getTheme(),
             array(
-                'dashboard'    => $dashboard
+                'themes'    => array_flip($this->container->getParameter('dashboard_hub_app.themes')),
+                'dashboard' => $dashboard
             )
         );
     }
