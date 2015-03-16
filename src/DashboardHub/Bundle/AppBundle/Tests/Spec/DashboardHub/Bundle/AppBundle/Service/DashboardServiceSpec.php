@@ -356,4 +356,40 @@ class DashboardServiceSpec extends ObjectBehavior
 
         $this->save($dashboard);
     }
+
+    function it_should_find_all_by_is_public_and_latest(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        DashboardRepository $dashboardRepository
+    )
+    {
+        $dashboardRepository->findAllByIsPublicAndLatest()
+                            ->shouldBeCalled();
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->findAllByIsPublicAndLatest();
+    }
+
+    function it_should_find_all_by_is_public_and_popular(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        DashboardRepository $dashboardRepository
+    )
+    {
+        $dashboardRepository->findAllByIsPublicAndPopular()
+                            ->shouldBeCalled();
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->findAllByIsPublicAndPopular();
+    }
 }
