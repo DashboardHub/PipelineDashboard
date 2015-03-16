@@ -7,3 +7,4 @@ Feature: As an user, I want to be able to login
     And I press "Login"
     Then I should see "Logout"
     And I should see "Dashboard"
+    And I should see "Your Dashboards"

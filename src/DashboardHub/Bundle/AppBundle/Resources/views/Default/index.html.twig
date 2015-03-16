@@ -14,10 +14,19 @@
                             Your Pipeline in One Place. Github, TravisCI etc reporting back to your Dashboard Hub.
                         </p>
 
-                        <p><a class="btn btn-lg btn-success" href="/connect/github" role="button">
+                        <p>
+                            {% if app.user %}
+                            <a class="btn btn-lg btn-success"
+                               href="{{ path('dashboardhub_app_dashboard.list') }}" role="button">
+                                <i class="fa fa-tachometer"></i>
+                                Your Dashboards
+                            </a>
+                            {% else %}
+                            <a class="btn btn-lg btn-success" href="/connect/github" role="button">
                                 <i class="fa fa-github"></i>
                                 Free Sign in with Github
                             </a>
+                            {% endif %}
                         </p>
                     </div>
                 </div>
