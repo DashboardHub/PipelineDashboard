@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <span class="inlinesparkline" values="{{ builds.series.y }}"></span>
+    </div>
+    <div class="panel-footer">
+        Min build {{ builds.min|number_format }}s time, Max build {{ builds.max|number_format }}s time
+        ( Diff: {{ builds.diff }}s )
+    </div>
+</div>

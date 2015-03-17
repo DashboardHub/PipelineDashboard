@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <p>
+            {% if build.result == 0 %}
+                <span class="glyphicon glyphicon-ok"></span>
+            {% else %}
+                <span class="glyphicon glyphicon-remove"></span>
+            {% endif %}
+            <span>{{ build.duration|default('?') }}s</span>
+        </p>
+    </div>
+    <div class="panel-footer">
+        Latest Build {{ build.finished_at|ago }}
+    </div>
+</div>
