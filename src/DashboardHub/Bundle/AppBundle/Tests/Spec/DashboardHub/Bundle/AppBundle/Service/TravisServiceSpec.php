@@ -26,8 +26,8 @@ class TravisServiceSpec extends ObjectBehavior
     )
     {
         $reponame = 'test/repo';
-        $limit = 5;
-        $data = array('data' => 'testdata');
+        $limit    = 5;
+        $data     = array('data' => 'testdata');
 
         $item->get()
              ->shouldBeCalled()
@@ -56,8 +56,8 @@ class TravisServiceSpec extends ObjectBehavior
     )
     {
         $reponame = 'test/repo';
-        $limit = 5;
-        $data = array('data' => 'testdata');
+        $limit    = 5;
+        $data     = array('data' => 'testdata');
 
         $item->get()
              ->shouldBeCalled()
@@ -83,12 +83,53 @@ class TravisServiceSpec extends ObjectBehavior
                ->shouldBeCalled()
                ->willReturn($response);
 
-        $item->set($data, 600)
+        $item->set($data, 60)
              ->shouldBeCalled()
              ->willReturn(true);
 
         $this->beConstructedWith($client, $cache);
 
         $this->getBuilds($reponame, $limit);
+    }
+
+    function it_should_get_builds_duration_for_graph(
+        Client $client,
+        Cache $cache,
+        ItemInterface $item
+    )
+    {
+        $reponame = 'test/repo';
+        $limit    = 5;
+        $data     = array(
+            array(
+                'number'   => 1,
+                'duration' => 100
+            )
+        );
+        $expected = array(
+            'x'      => array(1),
+            'y'      => array(100),
+            'series' => array('x' => "1", 'y' => "100"),
+            'min'    => 100,
+            'max'    => 100,
+            'diff'   => 0,
+        );
+
+        $item->get()
+             ->shouldBeCalled()
+             ->willReturn($data);
+
+        $item->isMiss()
+             ->shouldBeCalled()
+             ->willReturn(false);
+
+        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\TravisService::getBuilds', $reponame, $limit)
+              ->shouldBeCalled()
+              ->willReturn($item);
+
+        $this->beConstructedWith($client, $cache);
+
+        $this->getBuildsDurationForGraph($reponame, $limit)
+             ->shouldBeLike($expected);
     }
 }
