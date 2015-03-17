@@ -78,4 +78,36 @@ class GithubController extends Controller
             )
         );
     }
+
+    /**
+     * @param string $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function latestEventAction($repository)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Github:tile/latestEvent.html.twig',
+            array(
+                'event' => $this->get('dashboardhub_app_main.service.github')
+                                ->getEvents($repository, 1)[0]
+            )
+        );
+    }
+
+    /**
+     * @param string $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function currentMilestoneAction($repository)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Github:tile/currentMilestone.html.twig',
+            array(
+                'milestone' => $this->get('dashboardhub_app_main.service.github')
+                                    ->getMilestones($repository, 1)[0]
+            )
+        );
+    }
 }
