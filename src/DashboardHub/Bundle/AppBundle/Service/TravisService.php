@@ -10,6 +10,7 @@ use Tedivm\StashBundle\Service\CacheService as Cache;
  */
 class TravisService
 {
+
     /**
      * @var Client
      */
@@ -47,9 +48,34 @@ class TravisService
                 ,
                 true
             );
-            $cache->set($builds, 600);
+            $cache->set($builds, 60);
         }
 
         return array_slice($builds, 0, $max);
+    }
+
+    /**
+     * @param string $reponame
+     * @param int    $max
+     *
+     * @return array
+     */
+    public function getBuildsDurationForGraph($reponame, $max = 20)
+    {
+        $builds = $this->getBuilds($reponame, $max);
+
+        $graph = array();
+        foreach ($builds as $build) {
+            $graph['x'][] = (int)$build['number'];
+            $graph['y'][] = $build['duration'];
+        }
+
+        $graph['series']['x'] = implode(',', $graph['x']);
+        $graph['series']['y'] = implode(',', $graph['y']);
+        $graph['min'] = min($graph['y']);
+        $graph['max'] = max($graph['y']);
+        $graph['diff'] = $graph['max'] - $graph['min'];
+
+        return $graph;
     }
 }

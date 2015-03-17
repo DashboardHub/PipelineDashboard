@@ -27,4 +27,36 @@ class TravisController extends Controller
             )
         );
     }
+
+    /**
+     * @param string $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function latestBuildAction($repository)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Travis:tile/latestBuild.html.twig',
+            array(
+                'build' => $this->get('dashboardhub_app_main.service.travis')
+                                 ->getBuilds($repository, 1)[0]
+            )
+        );
+    }
+
+    /**
+     * @param string $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function buildDurationAction($repository)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Travis:tile/buildDuration.html.twig',
+            array(
+                'builds' => $this->get('dashboardhub_app_main.service.travis')
+                                 ->getBuildsDurationForGraph($repository, 20)
+            )
+        );
+    }
 }
