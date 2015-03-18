@@ -30,13 +30,15 @@ Focus on what matters to you!
 
    More information on composer here https://getcomposer.org/download/
 
-3. Run Database Migrations with Doctrine
+3. Update config parameters, edit `app/config/parameters_dev.yml` (if in `dev` mode)
+
+4. Run Database Migrations with Doctrine
 
    ```
    php app/console doctrine:schema:update —force
    ```
 
-4. Run builtin Webserver for Development
+5. Run builtin Webserver for Development
 
    ```
    php app/console server:run -vvv --env=dev
