@@ -14,6 +14,7 @@ class GithubService
      * @var Client
      */
     protected $client;
+
     /**
      * @var Cache
      */
