@@ -9,6 +9,10 @@
 # Dashboard Hub :: Pipeline Dashboard
 ## Focus on what matters to you!
 
+## Example Screenshot (GithubTravisCI Theme)
+
+![DashboardHub Screenshot](/doc/screenshot/GithubTravisCI.png "DashboardHub Screenshot")
+
 ## Setup
 
 1. Clone project
