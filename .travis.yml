@@ -30,7 +30,7 @@ deploy:
   provider: heroku
   api_key:
     develop:
-      secure: "NGh/IdxnP/syydjDRDDj7reLmkgEjpzKx5OCH1x0HWSQaMboObqK15gfWMRg50EMDrtCzMQG7L8pCB4L1wIKODQ2xZIHKQJJXSL15xUFhiYK8nVFM28O4jWktI94eEKzdI2nm3tavUydabsTHLssnwiXSn0gOZ9DKUMI5dHP2Us="
+      secure: "APuMjriw3g77wca7s6jSL3glCR1dup/ldvxUXyCbVlmbq2P/tRAStrfXYBQvm4GLpEGF8SgeaCUC1WBTo7gUSUWj0fwbkudj/rBxW54wBkNMW86n9tbt07abcxHptUh/IHs3JDHKW23FeXHzNUdFFRogJEHchN6D/DBmWftmpXo="
   app:
     develop: dashboardhub-ci
   run:
