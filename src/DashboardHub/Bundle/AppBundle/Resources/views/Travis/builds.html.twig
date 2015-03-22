@@ -12,7 +12,7 @@
         </thead>
         <tbody>
         {% for build in builds %}
-            <tr>
+            <tr {% if build.result != 0 %}class="bg-danger text-danger"{% endif %}>
                 <td>{{ build.branch }}</td>
                 <td>{{ build.finished_at|ago }}</td>
                 <td>{{ build.duration|default('building') }}</td>
