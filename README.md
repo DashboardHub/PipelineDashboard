@@ -48,3 +48,5 @@
 # Ideas
 
 All feedback / ideas are welcome! Please log under issues on Github.
+
+---
