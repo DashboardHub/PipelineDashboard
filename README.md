@@ -7,7 +7,12 @@
 | Deps lock | --- | [![Dependency Status](https://www.versioneye.com/user/projects/54f2fadb4f31083e1b00072d/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54f2fadb4f31083e1b00072d) |
 
 # Dashboard Hub :: Pipeline Dashboard
+
+Project Dashboard for All...especially Developers. 
+
 ## Focus on what matters to you!
+
+No need to log in here & there, all your metrics in one place!
 
 ## Example Screenshot (GithubTravisCI Theme)
 
