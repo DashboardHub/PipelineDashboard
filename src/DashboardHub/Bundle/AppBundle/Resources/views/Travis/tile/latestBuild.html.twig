@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-body {% if build.result != 0 %}bg-danger text-danger{% endif %}">
         <p>
             {% if build.result == 0 %}
                 <span class="glyphicon glyphicon-ok"></span>
