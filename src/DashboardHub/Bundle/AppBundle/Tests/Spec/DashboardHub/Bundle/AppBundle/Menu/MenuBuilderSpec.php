@@ -27,6 +27,9 @@ class MenuBuilderSpec extends ObjectBehavior
         $menu->addChild('Home', array('route' => 'dashboardhub_app_homepage'))
              ->shouldBeCalled()
              ->willReturn($menu);
+        $menu->addChild('Search', array('route' => 'dashboardhub_app_dashboard.search'))
+             ->shouldBeCalled()
+             ->willReturn($menu);
         $securityContext
             ->isGranted('IS_AUTHENTICATED_FULLY')
             ->shouldBeCalled()
@@ -54,6 +57,9 @@ class MenuBuilderSpec extends ObjectBehavior
              ->shouldBeCalled()
              ->willReturn($menu);
         $menu->addChild('Home', array('route' => 'dashboardhub_app_homepage'))
+             ->shouldBeCalled()
+             ->willReturn($menu);
+        $menu->addChild('Search', array('route' => 'dashboardhub_app_dashboard.search'))
              ->shouldBeCalled()
              ->willReturn($menu);
         $securityContext
