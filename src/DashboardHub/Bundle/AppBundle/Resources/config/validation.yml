@@ -22,3 +22,11 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
         updatedOn:
             - NotBlank: ~
             - DateTime: ~
+
+DashboardHub\Bundle\AppBundle\Entity\Search:
+    properties:
+        query:
+            - NotBlank: ~
+            - Length:
+                min: 3
+                max: 64

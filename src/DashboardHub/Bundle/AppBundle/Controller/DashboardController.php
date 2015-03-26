@@ -3,8 +3,10 @@
 namespace DashboardHub\Bundle\AppBundle\Controller;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
+use DashboardHub\Bundle\AppBundle\Entity\Search;
 use DashboardHub\Bundle\AppBundle\Entity\User;
 use DashboardHub\Bundle\AppBundle\Form\DashboardType;
+use DashboardHub\Bundle\AppBundle\Form\SearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
@@ -159,6 +161,34 @@ class DashboardController extends Controller
             array(
                 'dashboard' => $dashboard,
                 'themes'    => array_flip($this->container->getParameter('dashboard_hub_app.themes'))
+            )
+        );
+    }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchAction(Request $request)
+    {
+        $dashboards = array();
+        $search     = new Search();
+
+        $form = $this->createForm(new SearchType(), $search);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $search = $form->getData();
+
+            $dashboards = $this->get('dashboardhub_app_main.service.dashboard')
+                               ->search($search);
+        }
+
+        return $this->render(
+            'DashboardHubAppBundle:Dashboard:search.html.twig',
+            array(
+                'form'       => $form->createView(),
+                'dashboards' => $dashboards,
+                'themes'     => array_flip($this->container->getParameter('dashboard_hub_app.themes'))
             )
         );
     }
