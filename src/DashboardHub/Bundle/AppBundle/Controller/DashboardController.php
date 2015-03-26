@@ -170,12 +170,12 @@ class DashboardController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $search = new Search();
+        $dashboards = array();
+        $search     = new Search();
 
         $form = $this->createForm(new SearchType(), $search);
         $form->handleRequest($request);
 
-        $dashboards = array();
         if ($form->isValid()) {
             $search = $form->getData();
 

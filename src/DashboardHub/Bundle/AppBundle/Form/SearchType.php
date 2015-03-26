@@ -44,7 +44,8 @@ class SearchType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('query', null,
+            ->add('query',
+                  null,
                   array(
                     'attr' => array(
                         'placeholder' => 'Search Dashboards',
@@ -55,7 +56,9 @@ class SearchType extends AbstractType
             ->add(
                 'search',
                 'submit',
-                array('label' => 'Go')
+                array(
+                    'label' => 'Go'
+                )
             );
     }
 }
