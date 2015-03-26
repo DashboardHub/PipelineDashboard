@@ -213,7 +213,7 @@ class DashboardServiceSpec extends ObjectBehavior
         Dashboard $dashboard
     )
     {
-        $uid      = 1;
+        $uid = 1;
 
         $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid)
                             ->shouldBeCalled()
@@ -237,7 +237,7 @@ class DashboardServiceSpec extends ObjectBehavior
         Dashboard $dashboard
     )
     {
-        $uid      = 1;
+        $uid = 1;
 
         $dashboardRepository->findOneByUidAndOwnedByUsernameOrIsPublic($uid)
                             ->shouldBeCalled()
@@ -316,7 +316,7 @@ class DashboardServiceSpec extends ObjectBehavior
         UserRepository $userRepository
     )
     {
-        $uid = 'abc';
+        $uid      = 'abc';
         $username = 'testuser';
 
         $user->getUsername()
@@ -401,12 +401,14 @@ class DashboardServiceSpec extends ObjectBehavior
         Search $search
     )
     {
-        $dashboardRepository->search($search)
-                            ->shouldBeCalled();
+        $dashboardRepository
+            ->search($search)
+            ->shouldBeCalled();
 
-        $em->getRepository('DashboardHubAppBundle:Dashboard')
-           ->shouldBeCalled()
-           ->willReturn($dashboardRepository);
+        $em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->shouldBeCalled()
+            ->willReturn($dashboardRepository);
 
         $this->beConstructedWith($em, $securityContext);
 
