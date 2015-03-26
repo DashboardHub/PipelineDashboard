@@ -2,6 +2,7 @@
 namespace Spec\DashboardHub\Bundle\AppBundle\Service;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
+use DashboardHub\Bundle\AppBundle\Entity\Search;
 use DashboardHub\Bundle\AppBundle\Entity\User;
 use DashboardHub\Bundle\AppBundle\Repository\DashboardRepository;
 use DashboardHub\Bundle\AppBundle\Repository\UserRepository;
@@ -391,5 +392,24 @@ class DashboardServiceSpec extends ObjectBehavior
         $this->beConstructedWith($em, $securityContext);
 
         $this->findAllByIsPublicAndPopular();
+    }
+
+    function it_should_search(
+        EntityManager $em,
+        SecurityContext $securityContext,
+        DashboardRepository $dashboardRepository,
+        Search $search
+    )
+    {
+        $dashboardRepository->search($search)
+                            ->shouldBeCalled();
+
+        $em->getRepository('DashboardHubAppBundle:Dashboard')
+           ->shouldBeCalled()
+           ->willReturn($dashboardRepository);
+
+        $this->beConstructedWith($em, $securityContext);
+
+        $this->search($search);
     }
 }

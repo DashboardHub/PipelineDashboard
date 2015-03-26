@@ -2,6 +2,7 @@
 namespace Spec\DashboardHub\Bundle\AppBundle\Repository;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
+use DashboardHub\Bundle\AppBundle\Entity\Search;
 use DashboardHub\Bundle\AppBundle\Entity\User;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\Configuration;
@@ -205,5 +206,46 @@ class DashboardRepositorySpec extends ObjectBehavior
         $this->beConstructedWith($em, $classMetadata);
 
         $this->findOneByUidAndOwnedByUsernameOrIsPublic($uid, $username);
+    }
+
+    function it_should_search(
+        EntityManager $em,
+        ClassMetadata $classMetadata,
+        AbstractQuery $abstractQuery,
+        Search $search
+    )
+    {
+        $query = 'testquery';
+        $search->getQuery()
+               ->shouldBeCalled()
+               ->willReturn($query);
+
+        $abstractQuery->setParameter('query', '%' . $query . '%')
+                      ->shouldBeCalled()
+                      ->willReturn($abstractQuery);
+
+        $em->createQuery(
+            'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          WHERE
+                            d.public = 1
+                            AND
+                            (
+                              d.repository LIKE :query
+                              OR
+                              d.name LIKE :query
+                            )
+                          ORDER BY
+                            d.publicViews DESC'
+        )
+           ->shouldBeCalled()
+           ->willReturn($abstractQuery);
+
+        $abstractQuery->getResult()
+                      ->shouldBeCalled()
+                      ->willReturn(array());
+
+        $this->beConstructedWith($em, $classMetadata);
+
+        $this->search($search);
     }
 }

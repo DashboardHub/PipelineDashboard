@@ -36,6 +36,11 @@ services:
     tags:
         - { name: form.type, alias: dashboard }
 
+  dashboardhub_app_main.form.type.search:
+    class: DashboardHub\Bundle\AppBundle\Form\SearchType
+    tags:
+        - { name: form.type, alias: search }
+
   dashboardhub_app_main.github.api:
     class: GuzzleHttp\Client
     arguments: ["%github_api%"]
