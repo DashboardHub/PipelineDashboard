@@ -13,11 +13,11 @@ class SearchSpec extends ObjectBehavior
         $this->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Search');
     }
 
-    function it_should_set_then_get_keyword()
+    function it_should_set_then_get_query()
     {
         $data = 'searchme';
-        $this->setKeyword($data)
+        $this->setQuery($data)
              ->shouldHaveType('DashboardHub\Bundle\AppBundle\Entity\Search');
-        $this->getKeyword()->shouldReturn($data);
+        $this->getQuery()->shouldReturn($data);
     }
 }

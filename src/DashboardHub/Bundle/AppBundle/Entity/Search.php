@@ -12,24 +12,24 @@ class Search
     /**
      * @var string
      */
-    protected $keyword;
+    protected $query;
 
     /**
      * @return string
      */
-    public function getKeyword()
+    public function getQuery()
     {
-        return $this->keyword;
+        return $this->query;
     }
 
     /**
-     * @param string $keyword
+     * @param string $query
      *
      * @return Search
      */
-    public function setKeyword($keyword)
+    public function setQuery($query)
     {
-        $this->keyword = $keyword;
+        $this->query = $query;
 
         return $this;
     }
