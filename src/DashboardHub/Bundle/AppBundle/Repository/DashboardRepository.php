@@ -2,6 +2,7 @@
 namespace DashboardHub\Bundle\AppBundle\Repository;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
+use DashboardHub\Bundle\AppBundle\Entity\Search;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -125,6 +126,29 @@ class DashboardRepository extends EntityRepository
                             d.publicViews DESC'
                     )
                     ->setMaxResults(10)
+                    ->getResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function search(Search $search)
+    {
+        return $this->getEntityManager()
+                    ->createQuery(
+                        'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          WHERE
+                            d.public = 1
+                            AND
+                            (
+                              d.repository LIKE :query
+                              OR
+                              d.name LIKE :query
+                            )
+                          ORDER BY
+                            d.publicViews DESC'
+                    )
+                    ->setParameter('query', '%' . $search->getQuery() . '%')
                     ->getResult();
     }
 }
