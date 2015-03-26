@@ -21,3 +21,7 @@ dashboardhub_app_dashboard.edit:
 dashboardhub_app_dashboard.view:
     path:     /dashboard/view/{uid}
     defaults: { _controller: DashboardHubAppBundle:Dashboard:view }
+
+dashboardhub_app_dashboard.search:
+    path:     /search
+    defaults: { _controller: DashboardHubAppBundle:Dashboard:search }

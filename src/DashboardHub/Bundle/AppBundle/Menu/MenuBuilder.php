@@ -41,6 +41,7 @@ class MenuBuilder
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttributes(array('class' => 'navbar-nav nav'));
         $menu->addChild('Home', array('route' => 'dashboardhub_app_homepage'));
+        $menu->addChild('Search', array('route' => 'dashboardhub_app_dashboard.search'));
 
         if ($this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
             $menu->addChild(
