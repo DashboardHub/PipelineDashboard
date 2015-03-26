@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Search Dashboards</h2>
+    <div class="row">
+        <div class="col-md-12">
+            {{ form_start(form, {'attr': {'novalidate': 'novalidate', 'class': 'form-inline'}}) }}
+            {{ form_errors(form) }}
+
+            <div>
+                {{ form_row(form.query) }}
+                {{ form_row(form.search) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Owner</th>
+                <th>Name</th>
+                <th>Repo</th>
+                <th>Theme</th>
+                <th>Public Views</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                {% for dashboard in dashboards %}
+                    <tr>
+                        <td>{{ dashboard.user.username }}</td>
+                        <td>{{ dashboard.name }}</td>
+                        <td>{{ dashboard.repository }}</td>
+                        <td>{{ attribute(themes, dashboard.theme) }}</td>
+                        <td>{{ dashboard.publicViews|number_format }}</td>
+                        <td>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('dashboardhub_app_dashboard', { 'uid': dashboard.uid }) }}"
+                               role="button">
+                                <i class="fa fa-eye"></i>
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
