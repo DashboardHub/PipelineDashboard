@@ -2,6 +2,7 @@
 namespace DashboardHub\Bundle\AppBundle\Service;
 
 use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
+use DashboardHub\Bundle\AppBundle\Entity\Search;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -158,5 +159,17 @@ class DashboardService
         return $this->em
             ->getRepository('DashboardHubAppBundle:Dashboard')
             ->findAllByIsPublicAndPopular();
+    }
+
+    /**
+     * @param Search $search
+     *
+     * @return array
+     */
+    public function search(Search $search)
+    {
+        return $this->em
+            ->getRepository('DashboardHubAppBundle:Dashboard')
+            ->search($search);
     }
 }
