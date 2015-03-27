@@ -165,7 +165,7 @@ class GithubServiceSpec extends ObjectBehavior
         $this->getPullRequests($reponame, $limit);
     }
 
-    function it_should_get_get_issues_cache_hit(
+    function it_should_get_issues_cache_hit(
         Client $client,
         Cache $cache,
         ItemInterface $item
@@ -193,7 +193,7 @@ class GithubServiceSpec extends ObjectBehavior
     }
 
 
-    function it_should_get_get_issues_cache_miss(
+    function it_should_get_issues_cache_miss(
         Client $client,
         Cache $cache,
         ItemInterface $item,
@@ -238,7 +238,7 @@ class GithubServiceSpec extends ObjectBehavior
         $this->getIssues($reponame, $limit);
     }
 
-    function it_should_get_get_branches_cache_hit(
+    function it_should_get_branches_cache_hit(
         Client $client,
         Cache $cache,
         ItemInterface $item
@@ -266,7 +266,7 @@ class GithubServiceSpec extends ObjectBehavior
     }
 
 
-    function it_should_get_get_branches_cache_miss(
+    function it_should_get_branches_cache_miss(
         Client $client,
         Cache $cache,
         ItemInterface $item,
@@ -311,7 +311,7 @@ class GithubServiceSpec extends ObjectBehavior
         $this->getBranches($reponame, $limit);
     }
 
-    function it_should_get_get_milestones_cache_hit(
+    function it_should_get_milestones_cache_hit(
         Client $client,
         Cache $cache,
         ItemInterface $item
@@ -339,7 +339,7 @@ class GithubServiceSpec extends ObjectBehavior
     }
 
 
-    function it_should_get_get_milestones_cache_miss(
+    function it_should_get_milestones_cache_miss(
         Client $client,
         Cache $cache,
         ItemInterface $item,
@@ -391,7 +391,7 @@ class GithubServiceSpec extends ObjectBehavior
              ->shouldBeLike(array($expected));
     }
 
-    function it_should_get_get_milestones_cache_miss_no_issues(
+    function it_should_get_milestones_cache_miss_no_issues(
         Client $client,
         Cache $cache,
         ItemInterface $item,
@@ -441,5 +441,199 @@ class GithubServiceSpec extends ObjectBehavior
 
         $this->getMilestones($reponame, $limit)
              ->shouldBe(array($expected));
+    }
+
+    function it_should_get_contributors_cache_hit(
+        Client $client,
+        Cache $cache,
+        ItemInterface $item
+    )
+    {
+        $reponame = 'test/repo';
+        $data     = array(
+            array(
+                'total' => 100
+            )
+        );
+
+        $item->get()
+             ->shouldBeCalled()
+             ->willReturn($data);
+
+        $item->isMiss()
+             ->shouldBeCalled()
+             ->willReturn(false);
+
+        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getContributors', $reponame)
+              ->shouldBeCalled()
+              ->willReturn($item);
+
+        $this->beConstructedWith($client, $cache);
+
+        $this->getContributors($reponame)
+             ->shouldBeLike($data);
+    }
+
+    function it_should_get_contributors_cache_mis(
+        Client $client,
+        Cache $cache,
+        ItemInterface $item,
+        ResponseInterface $response,
+        StreamInterface $stream
+    )
+    {
+        $reponame = 'test/repo';
+        $data     = array(
+            array(
+                'total' => 100
+            )
+        );
+
+        $item->get()
+             ->shouldBeCalled()
+             ->willReturn($data);
+
+        $item->isMiss()
+             ->shouldBeCalled()
+             ->willReturn(true);
+
+        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getContributors', $reponame)
+              ->shouldBeCalled()
+              ->willReturn($item);
+
+        $stream->getContents()
+               ->shouldBeCalled()
+               ->willReturn(json_encode($data));
+
+        $response->getBody()
+                 ->shouldBeCalled()
+                 ->willReturn($stream);
+
+        $client->get('/repos/' . $reponame . '/stats/contributors')
+               ->shouldBeCalled()
+               ->willReturn($response);
+
+        $item->set($data, 60 * 60 * 24)
+             ->shouldBeCalled()
+             ->willReturn(true);
+
+        $this->beConstructedWith($client, $cache);
+
+        $this->getContributors($reponame)
+             ->shouldBeLike($data);
+    }
+
+    function it_should_get_commit_total_cache_hit(
+        Client $client,
+        Cache $cache,
+        ItemInterface $item
+    )
+    {
+        $reponame = 'test/repo';
+        $data     = 300;
+        $expected = 300;
+
+        $item->get()
+             ->shouldBeCalled()
+             ->willReturn($data);
+
+        $item->isMiss()
+             ->shouldBeCalled()
+             ->willReturn(false);
+
+        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getCommitTotal', $reponame)
+              ->shouldBeCalled()
+              ->willReturn($item);
+
+        $this->beConstructedWith($client, $cache);
+
+        $this->getCommitTotal($reponame)
+             ->shouldBeLike($expected);
+    }
+
+    function it_should_get_commit_total_cache_miss(
+        Client $client,
+        Cache $cache,
+        ItemInterface $item,
+        ResponseInterface $response,
+        StreamInterface $stream
+    )
+    {
+        $reponame = 'test/repo';
+        $data     = array(
+            'all' => array(100, 200)
+        );
+        $expected = 300;
+
+        $item->get()
+             ->shouldBeCalled()
+             ->willReturn($data);
+
+        $item->isMiss()
+             ->shouldBeCalled()
+             ->willReturn(true);
+
+        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getCommitTotal', $reponame)
+              ->shouldBeCalled()
+              ->willReturn($item);
+
+        $stream->getContents()
+               ->shouldBeCalled()
+               ->willReturn(json_encode($data));
+
+        $response->getBody()
+                 ->shouldBeCalled()
+                 ->willReturn($stream);
+
+        $client->get('/repos/' . $reponame . '/stats/participation')
+               ->shouldBeCalled()
+               ->willReturn($response);
+
+        $item->set($expected, 60 * 60 * 24)
+             ->shouldBeCalled()
+             ->willReturn(true);
+
+        $this->beConstructedWith($client, $cache);
+
+        $this->getCommitTotal($reponame)
+             ->shouldBeLike($expected);
+    }
+
+    function it_should_get_top_contributors_cache_hit(
+        Client $client,
+        Cache $cache,
+        ItemInterface $item
+    )
+    {
+        $reponame = 'test/repo';
+        $limit    = 4;
+        $data     = array(
+            0 => array(
+                'weeks' => array(
+                    array(
+                        'w' => time(),
+                        'c' => 100
+                    )
+                )
+            )
+        );
+        $expected = array_merge($data[0], array('percentage' => 50));
+
+        $item->get()
+             ->shouldBeCalled()
+             ->willReturn($expected);
+
+        $item->isMiss()
+             ->shouldBeCalled()
+             ->willReturn(false);
+
+        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getTopContributors', $reponame, $limit)
+              ->shouldBeCalled()
+              ->willReturn($item);
+
+        $this->beConstructedWith($client, $cache);
+
+        $this->getTopContributors($reponame)
+             ->shouldBeLike($expected);
     }
 }

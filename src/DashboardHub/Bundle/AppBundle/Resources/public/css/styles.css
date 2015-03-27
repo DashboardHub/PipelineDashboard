@@ -41,3 +41,10 @@ div.tiles div.panel div.panel-body {
     font-size: xx-large;
     height:80px;
 }
+
+div.profile div.well p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0px;
+}

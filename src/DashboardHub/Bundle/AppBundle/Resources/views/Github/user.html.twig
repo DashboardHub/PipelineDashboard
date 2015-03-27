@@ -1,0 +1,15 @@
+<p class="text-center">Top Contributors</p>
+{% for contributor in contributors %}
+    <div class="well well-sm">
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" role="progressbar"
+                 aria-valuenow="{{ contributor.percentage }}" aria-valuemin="0" aria-valuemax="100"
+                 style="width: {{ contributor.percentage }}%;">
+                {{ contributor.percentage }}%
+            </div>
+        </div>
+        <p><img width="100%" src="{{ contributor.author.avatar_url }}" /></p>
+        <p class="text-center">{{ contributor.author.login }}</p>
+        <p class="text-center">({{ contributor.total }})</p>
+    </div>
+{%  endfor %}
