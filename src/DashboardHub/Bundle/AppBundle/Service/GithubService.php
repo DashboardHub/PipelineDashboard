@@ -164,4 +164,92 @@ class GithubService
 
         return $milestones;
     }
+
+    /**
+     * @param string $reponame
+     *
+     * @return array $contributors
+     */
+    public function getContributors($reponame)
+    {
+        $cache        = $this->cache->getItem(__METHOD__, $reponame);
+        $contributors = $cache->get();
+        if ($cache->isMiss() ) {
+            $contributors = json_decode(
+                $this->client
+                    ->get('/repos/' . $reponame . '/stats/contributors')
+                    ->getBody()
+                    ->getContents()
+                ,
+                true
+            );
+
+            $cache->set($contributors, 60 * 60 * 24);
+        }
+
+        return $contributors;
+    }
+
+    /**
+     * Get Top Contributors with Percentage for the last year
+     *
+     * @param string $reponame
+     *
+     * @return array $contributors
+     */
+    public function getTopContributors($reponame, $limit = 4)
+    {
+        $cache        = $this->cache->getItem(__METHOD__, $reponame, $limit);
+        $contributors = $cache->get();
+        if ($cache->isMiss()) {
+            $contributors = array_slice(array_reverse($this->getContributors($reponame)), 0, $limit);
+
+            $totalCommits = $this->getCommitTotal($reponame);
+            foreach ($contributors as $key => $contributor) {
+                $total = 0;
+                $weeks = 0;
+                foreach ($contributor['weeks'] as $week) {
+                    if ($week['w'] > (new \Datetime())->sub(new \DateInterval('P1Y'))->getTimestamp()) {
+                        $total += $week['c'];
+                        $weeks++;
+                    }
+                }
+                $contributors[ $key ]['weeks']      = $weeks;
+                $contributors[ $key ]['percentage'] = round($total / $totalCommits * 100);
+            }
+
+            $cache->set($contributors, 60 * 60 * 24);
+        }
+
+        return $contributors;
+    }
+
+    /**
+     * Commit activity over the last year
+     *
+     * @param string $reponame
+     *
+     * @return int $commits
+     */
+    public function getCommitTotal($reponame)
+    {
+        $cache   = $this->cache->getItem(__METHOD__, $reponame);
+        $commits = $cache->get();
+        if ($cache->isMiss()) {
+            $commits = json_decode(
+                $this->client
+                    ->get('/repos/' . $reponame . '/stats/participation')
+                    ->getBody()
+                    ->getContents()
+                ,
+                true
+            );
+
+            $commits = array_sum($commits['all']);
+
+            $cache->set($commits, 60 * 60 * 24);
+        }
+
+        return $commits;
+    }
 }
