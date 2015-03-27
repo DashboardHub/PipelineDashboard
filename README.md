@@ -18,7 +18,8 @@ No need to log in here & there, all your metrics in one place!
 
 ## Example Screenshot (GithubTravisCI Theme)
 
-![DashboardHub Screenshot](/doc/screenshot/GithubTravisCI.png "DashboardHub Screenshot")
+![DashboardHub Screenshot of Github Theme](/doc/screenshot/Github.png "DashboardHub Screenshot of Github Theme")
+![DashboardHub Screenshot of GithubTravis Theme](/doc/screenshot/GithubTravisCI.png "DashboardHub Screenshot of GithubTravis Theme")
 
 ---
 
