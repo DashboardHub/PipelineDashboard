@@ -3,39 +3,51 @@
 {% block body %}
     {% include 'DashboardHubAppBundle:Template:header.html.twig' %}
 
-    <div class="row tiles">
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <p>{{ 'now'|date('g:ia') }}</p>
+
+    <div class="row profile">
+
+        <div class="col-md-1">
+            {{ render(controller('DashboardHubAppBundle:Github:contributors', { 'repository': dashboard.repository } )) }}
+        </div>
+
+        <div class="col-md-11">
+
+            <div class="row tiles">
+                <div class="col-md-2">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>{{ 'now'|date('g:ia') }}</p>
+                        </div>
+                        <div class="panel-footer">Dashboard Updated</div>
+                    </div>
                 </div>
-                <div class="panel-footer">Dashboard Updated</div>
+                <div class="col-md-4">
+                    {{ render(controller('DashboardHubAppBundle:Github:currentMilestone', { 'repository': dashboard.repository } )) }}
+                </div>
+                <div class="col-md-6">
+                    {{ render(controller('DashboardHubAppBundle:Github:latestEvent', { 'repository': dashboard.repository } )) }}
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            {{ render(controller('DashboardHubAppBundle:Github:currentMilestone', { 'repository': dashboard.repository } )) }}
-        </div>
-        <div class="col-md-6">
-            {{ render(controller('DashboardHubAppBundle:Github:latestEvent', { 'repository': dashboard.repository } )) }}
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            {{ render(controller('DashboardHubAppBundle:Github:events', { 'repository': dashboard.repository } )) }}
-        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ render(controller('DashboardHubAppBundle:Github:events', { 'repository': dashboard.repository } )) }}
+                </div>
 
-        <div class="col-md-6">
-            {{ render(controller('DashboardHubAppBundle:Github:pullrequests', { 'repository': dashboard.repository } )) }}
-        </div>
-    </div>
+                <div class="col-md-6">
+                    {{ render(controller('DashboardHubAppBundle:Github:pullrequests', { 'repository': dashboard.repository } )) }}
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            {{ render(controller('DashboardHubAppBundle:Github:issues', { 'repository': dashboard.repository } )) }}
-        </div>
-        <div class="col-md-6">
-            {{ render(controller('DashboardHubAppBundle:Github:milestones', { 'repository': dashboard.repository } )) }}
+            <div class="row">
+                <div class="col-md-6">
+                    {{ render(controller('DashboardHubAppBundle:Github:issues', { 'repository': dashboard.repository } )) }}
+                </div>
+                <div class="col-md-6">
+                    {{ render(controller('DashboardHubAppBundle:Github:milestones', { 'repository': dashboard.repository } )) }}
+                </div>
+            </div>
+
         </div>
     </div>
 {% endblock %}

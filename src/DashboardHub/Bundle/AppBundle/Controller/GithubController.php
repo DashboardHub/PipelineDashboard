@@ -110,4 +110,20 @@ class GithubController extends Controller
             )
         );
     }
+
+    /**
+     * @param string $repository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function contributorsAction($repository)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Github:user.html.twig',
+            array(
+                'contributors' => $this->get('dashboardhub_app_main.service.github')
+                                       ->getTopContributors($repository, 4)
+            )
+        );
+    }
 }
