@@ -4,9 +4,9 @@
     {% include 'DashboardHubAppBundle:Template:header.html.twig' %}
 
 
-    <div class="row profile">
+    <div class="row">
 
-        <div class="col-md-1">
+        <div class="col-md-1 profile">
             {{ render(controller('DashboardHubAppBundle:Github:contributors', { 'repository': dashboard.repository } )) }}
         </div>
 
