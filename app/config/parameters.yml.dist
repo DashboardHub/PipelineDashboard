@@ -26,9 +26,11 @@ parameters:
 
     # github
     github_api:
-        base_url: https://api.github.com
+        base_url: "https://api.github.com"
         defaults:
             headers:
                 Authorization: "token %github.api.token%"
     travis_api:
-        base_url: https://api.travis-ci.org
+        base_url: "https://api.travis-ci.org"
+    scrutinizer_api:
+        base_url: "https://scrutinizer-ci.com"
