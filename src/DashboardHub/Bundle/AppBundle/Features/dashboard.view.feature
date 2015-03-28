@@ -10,7 +10,7 @@ Feature: Dashboard view
     And I should see "DashboardHub/PipelineDashboard"
     And I should see "Github"
     And I should see "Github Events"
-    And I should see "Top Contributors"
+    And I should see "eddiejaoude"
 
   Scenario: View dashboard in different Theme
     Given I am logged in
