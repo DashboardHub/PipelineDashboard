@@ -18,3 +18,5 @@ parameters:
         base_url: https://api.github.com
     travis_api:
         base_url: https://api.travis-ci.org
+    scrutinizer_api:
+        base_url: "https://scrutinizer-ci.com"
