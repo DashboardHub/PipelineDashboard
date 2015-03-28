@@ -39,14 +39,35 @@ class ScrutinizerService
         $cache  = $this->cache->getItem(__METHOD__, $reponame);
         $builds = $cache->get();
         if ($cache->isMiss()) {
-            $builds = json_decode(
-                $this->client
-                    ->get('/api/repositories/g/' . $reponame)
-                    ->getBody()
-                    ->getContents()
-                ,
-                true
-            );
+            try {
+                $builds = json_decode(
+                    $this->client
+                        ->get('/api/repositories/g/' . $reponame)
+                        ->getBody()
+                        ->getContents()
+                    ,
+                    true
+                );
+            } catch (\Exception $e) {
+                $builds = array(
+                    'applications' => array(
+
+                        'develop' => array(
+                            'index' => array(
+                                '_embedded' => array(
+                                    'project' => array(
+                                        'metric_values' => array(
+                                            'scrutinizer.quality'       => 0,
+                                            'scrutinizer.test_coverage' => 0
+                                        )
+                                    )
+                                )
+                            )
+
+                        )
+                    )
+                );
+            }
             $cache->set($builds, 600);
         }
 
@@ -60,7 +81,7 @@ class ScrutinizerService
      */
     public function getLatestBuild($reponame)
     {
-        $cache  = $this->cache->getItem(__METHOD__, $reponame);
+        $cache = $this->cache->getItem(__METHOD__, $reponame);
         $build = $cache->get();
         if ($cache->isMiss()) {
             $build = array_slice($this->getBuilds($reponame)['applications'], 0, 1);
