@@ -28,7 +28,7 @@ services:
 
   dashboardhub_app_main.service.dashboard:
     class: DashboardHub\Bundle\AppBundle\Service\DashboardService
-    arguments: ["@doctrine.orm.entity_manager", "@security.context"]
+    arguments: ["@doctrine.orm.entity_manager", "@security.context", "@stash", "%dashboard_hub_app.themes%"]
 
   dashboardhub_app_main.form.type.dashboard:
     class: DashboardHub\Bundle\AppBundle\Form\DashboardType

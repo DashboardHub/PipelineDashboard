@@ -9,15 +9,17 @@ use DashboardHub\Bundle\AppBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Stash\Interfaces\ItemInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\SecurityContext;
+use Tedivm\StashBundle\Service\CacheService as Cache;
 
 class DashboardServiceSpec extends ObjectBehavior
 {
 
-    function it_is_initializable(EntityManager $em, SecurityContext $securityContext)
+    function it_is_initializable(EntityManager $em, SecurityContext $securityContext, Cache $cache)
     {
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
         $this->shouldHaveType('DashboardHub\Bundle\AppBundle\Service\DashboardService');
     }
 
@@ -26,7 +28,8 @@ class DashboardServiceSpec extends ObjectBehavior
         SecurityContext $securityContext,
         TokenInterface $token,
         User $user,
-        DashboardRepository $dashboardRepository
+        DashboardRepository $dashboardRepository,
+        Cache $cache
     )
     {
         $username = 'testuser';
@@ -50,7 +53,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->findAllByAuthenticatedUserAndDefaults();
     }
@@ -61,7 +64,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         DashboardRepository $dashboardRepository,
-        Dashboard $dashboard
+        Dashboard $dashboard,
+        Cache $cache
     )
     {
         $uid      = 1;
@@ -87,7 +91,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->findOneByAuthenticatedUserAndUid($uid);
     }
@@ -97,7 +101,8 @@ class DashboardServiceSpec extends ObjectBehavior
         SecurityContext $securityContext,
         TokenInterface $token,
         User $user,
-        DashboardRepository $dashboardRepository
+        DashboardRepository $dashboardRepository,
+        Cache $cache
     )
     {
         $uid      = 1;
@@ -123,7 +128,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->shouldThrow('\InvalidArgumentException')
              ->duringFindOneByAuthenticatedUserAndUid($uid);
@@ -135,7 +140,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         DashboardRepository $dashboardRepository,
-        Dashboard $dashboard
+        Dashboard $dashboard,
+        Cache $cache
     )
     {
         $uid      = 1;
@@ -161,7 +167,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->findOneByUidAndOwnedByUsernameOrIsPublic($uid);
     }
@@ -172,7 +178,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         DashboardRepository $dashboardRepository,
-        Dashboard $dashboard
+        Dashboard $dashboard,
+        Cache $cache
     )
     {
         $uid      = 1;
@@ -198,7 +205,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->shouldThrow('\InvalidArgumentException')
              ->duringFindOneByUidAndOwnedByUsernameOrIsPublic($uid);
@@ -210,7 +217,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         DashboardRepository $dashboardRepository,
-        Dashboard $dashboard
+        Dashboard $dashboard,
+        Cache $cache
     )
     {
         $uid = 1;
@@ -223,7 +231,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->findOneByUidAndIsPublic($uid);
     }
@@ -234,7 +242,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         DashboardRepository $dashboardRepository,
-        Dashboard $dashboard
+        Dashboard $dashboard,
+        Cache $cache
     )
     {
         $uid = 1;
@@ -247,7 +256,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->shouldThrow('\InvalidArgumentException')
              ->duringFindOneByUidAndIsPublic($uid);
@@ -259,7 +268,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         Dashboard $dashboard,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        Cache $cache
     )
     {
         $username = 'testuser';
@@ -302,7 +312,7 @@ class DashboardServiceSpec extends ObjectBehavior
         $em->flush()
            ->shouldBeCalled();
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->save($dashboard);
     }
@@ -313,7 +323,8 @@ class DashboardServiceSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         Dashboard $dashboard,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        Cache $cache
     )
     {
         $uid      = 'abc';
@@ -353,7 +364,7 @@ class DashboardServiceSpec extends ObjectBehavior
         $em->flush()
            ->shouldBeCalled();
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->save($dashboard);
     }
@@ -361,7 +372,8 @@ class DashboardServiceSpec extends ObjectBehavior
     function it_should_find_all_by_is_public_and_latest(
         EntityManager $em,
         SecurityContext $securityContext,
-        DashboardRepository $dashboardRepository
+        DashboardRepository $dashboardRepository,
+        Cache $cache
     )
     {
         $dashboardRepository->findAllByIsPublicAndLatest()
@@ -371,7 +383,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->findAllByIsPublicAndLatest();
     }
@@ -379,7 +391,8 @@ class DashboardServiceSpec extends ObjectBehavior
     function it_should_find_all_by_is_public_and_popular(
         EntityManager $em,
         SecurityContext $securityContext,
-        DashboardRepository $dashboardRepository
+        DashboardRepository $dashboardRepository,
+        Cache $cache
     )
     {
         $dashboardRepository->findAllByIsPublicAndPopular()
@@ -389,7 +402,7 @@ class DashboardServiceSpec extends ObjectBehavior
            ->shouldBeCalled()
            ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->findAllByIsPublicAndPopular();
     }
@@ -398,7 +411,8 @@ class DashboardServiceSpec extends ObjectBehavior
         EntityManager $em,
         SecurityContext $securityContext,
         DashboardRepository $dashboardRepository,
-        Search $search
+        Search $search,
+        Cache $cache
     )
     {
         $dashboardRepository
@@ -410,8 +424,47 @@ class DashboardServiceSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($dashboardRepository);
 
-        $this->beConstructedWith($em, $securityContext);
+        $this->beConstructedWith($em, $securityContext, $cache, array());
 
         $this->search($search);
     }
+
+//    function it_should_get_badge(
+//        EntityManager $em,
+//        SecurityContext $securityContext,
+//        ItemInterface $item,
+//        Search $search,
+//        Cache $cache,
+//        Dashboard $dashboard
+//    )
+//    {
+//        $uid    = '123.abc';
+//        $config = array(
+//            'theme1' => 'theme1.html.twig',
+//            'theme2' => 'theme2.html.twig',
+//        );
+//
+//        $dashboard->getTheme()
+//                  ->shouldBeCalled()
+//                  ->willReturn('theme1.html.twig');
+//
+//        $this->findOneByUidAndIsPublic($uid)
+//             ->shouldBeCalled()
+//             ->willReturn($dashboard);
+//
+//        $item->get()
+//             ->shouldBeCalled()
+//             ->willReturn($dashboard);
+//
+//        $item->isMiss()
+//             ->shouldBeCalled()
+//             ->willReturn(false);
+//
+//        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getBadge', 'theme1')
+//              ->willReturn();
+//
+//        $this->beConstructedWith($em, $securityContext, $cache, $config);
+//
+//        $this->search($search);
+//    }
 }
