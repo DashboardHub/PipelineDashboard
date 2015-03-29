@@ -46,7 +46,7 @@ class DefaultController extends Controller
                     ->getFlashBag()
                     ->add(
                         'danger',
-                        'PRivate or Invalid Dashboard'
+                        'Private or Invalid Dashboard'
                     );
 
             return $this->redirect($this->generateUrl('dashboardhub_app_homepage'));
