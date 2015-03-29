@@ -5,6 +5,7 @@ use DashboardHub\Bundle\AppBundle\Entity\Dashboard;
 use DashboardHub\Bundle\AppBundle\Entity\Search;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\SecurityContext;
+use Tedivm\StashBundle\Service\CacheService as Cache;
 
 /**
  * Class Dashboard
@@ -23,13 +24,25 @@ class DashboardService
     protected $securityContext;
 
     /**
+     * @var Cache
+     */
+    protected $cache;
+
+    /**
+     * @var Cache
+     */
+    protected $config;
+
+    /**
      * @param EntityManager   $em
      * @param SecurityContext $securityContext
      */
-    public function __construct(EntityManager $em, SecurityContext $securityContext)
+    public function __construct(EntityManager $em, SecurityContext $securityContext, Cache $cache, array $config)
     {
         $this->em              = $em;
         $this->securityContext = $securityContext;
+        $this->cache           = $cache;
+        $this->config          = $config;
     }
 
     /**
@@ -171,5 +184,29 @@ class DashboardService
         return $this->em
             ->getRepository('DashboardHubAppBundle:Dashboard')
             ->search($search);
+    }
+
+    /**
+     * @param string $uid
+     *
+     * @return string
+     */
+    public function getBadge($uid)
+    {
+        $config = array_flip($this->config);
+        /** @var Dashboard $badge */
+        $dashboard = $this->findOneByUidAndIsPublic($uid);
+
+        $cache = $this->cache->getItem(__METHOD__, $config[$dashboard->getTheme()]);
+        $badge = $cache->get();
+        if ($cache->isMiss()) {
+            $badge = file_get_contents('https://img.shields.io/badge/DashboardHub-' .
+                $config[$dashboard->getTheme()] .
+                '-green.svg');
+
+            $cache->set($badge, 60 * 60 * 24);
+        }
+
+        return $badge;
     }
 }

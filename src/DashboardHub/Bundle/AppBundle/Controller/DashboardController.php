@@ -192,4 +192,18 @@ class DashboardController extends Controller
             )
         );
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function badgeAction($uid)
+    {
+        return $this->render(
+            'DashboardHubAppBundle:Dashboard:badge.html.twig',
+            array(
+                'badge' => $this->get('dashboardhub_app_main.service.dashboard')
+                                ->getBadge($uid)
+            )
+        );
+    }
 }
