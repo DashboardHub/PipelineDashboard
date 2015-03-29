@@ -636,4 +636,58 @@ class GithubServiceSpec extends ObjectBehavior
         $this->getTopContributors($reponame)
              ->shouldBeLike($expected);
     }
+
+//    function it_should_get_top_contributors_cache_miss(
+//        Client $client,
+//        Cache $cache,
+//        ItemInterface $item
+//    )
+//    {
+//        $reponame = 'test/repo';
+//        $limit    = 4;
+//        $data     = array(
+//            0 => array(
+//                'weeks' => array(
+//                    array(
+//                        'w' => time(),
+//                        'c' => 100
+//                    )
+//                )
+//            ),
+//            1 => array(
+//                'weeks' => array(
+//                    array(
+//                        'w' => time(),
+//                        'c' => 900
+//                    )
+//                )
+//            )
+//        );
+//        $expected = $data;
+//        $expected[0]['percentage'] = 10;
+//        $expected[1]['percentage'] = 90;
+//
+//        $cache->getItem('DashboardHub\Bundle\AppBundle\Service\GithubService::getTopContributors', $reponame, $limit)
+//              ->shouldBeCalled()
+//              ->willReturn($item);
+//
+//        $item->get()
+//             ->shouldBeCalled()
+//             ->willReturn($data);
+//
+//        $item->isMiss()
+//             ->shouldBeCalled()
+//             ->willReturn(true);
+//
+//        $this->beConstructedWith($client, $cache);
+//
+//        $this->getContributors($reponame)
+//             ->willReturn($data);
+//
+//        $this->getCommitTotal($reponame)
+//             ->willReturn(1000);
+//
+//        $this->getTopContributors($reponame)
+//             ->shouldBeLike($expected);
+//    }
 }
