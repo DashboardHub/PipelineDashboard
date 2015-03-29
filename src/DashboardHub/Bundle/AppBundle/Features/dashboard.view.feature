@@ -10,7 +10,8 @@ Feature: Dashboard view
     And I should see "DashboardHub/PipelineDashboard"
     And I should see "Github"
     And I should see "Github Events"
-    And I should see "Top Contributors"
+    And I should see "eddiejaoude"
+    And I should see "DashboardHub Github"
 
   Scenario: View dashboard in different Theme
     Given I am logged in
@@ -33,4 +34,3 @@ Feature: Dashboard view
     And I should see "DashboardHub/PipelineDashboard"
     And I should see "GithubTravis"
     And I should see "Github Events"
-    And I should not see "Top Contributors"
