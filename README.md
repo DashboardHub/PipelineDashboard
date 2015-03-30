@@ -43,7 +43,10 @@ No need to log in here & there, all your metrics in one place!
 
    More information on composer here https://getcomposer.org/download/
 
-3. Update config parameters, edit `app/config/parameters_dev.yml` (if in `dev` mode)
+3. Update config parameters 
+   * **DEV** `app/config/parameters_dev.yml`
+   * **PROD** `app/config/parameters.yml` 
+        or use **ENV** variables
 
 4. Run Database Migrations with Doctrine
 
