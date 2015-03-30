@@ -48,7 +48,10 @@ Add a badge to you README for easy & quick access [![DashboardHub Badge](http://
 
    More information on composer here https://getcomposer.org/download/
 
-3. Update config parameters, edit `app/config/parameters_dev.yml` (if in `dev` mode)
+3. Update config parameters 
+   * **DEV** `app/config/parameters_dev.yml`
+   * **PROD** `app/config/parameters.yml` 
+        or use **ENV** variables
 
 4. Run Database Migrations with Doctrine
 
@@ -61,6 +64,8 @@ Add a badge to you README for easy & quick access [![DashboardHub Badge](http://
    ```
    php app/console server:run -vvv --env=dev
    ```
+
+   For **prod** see Symfony Documentation http://symfony.com/doc/current/cookbook/deployment/tools.html
 
 ---
 
