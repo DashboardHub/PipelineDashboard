@@ -9,6 +9,7 @@ use DashboardHub\Bundle\AppBundle\Form\DashboardType;
 use DashboardHub\Bundle\AppBundle\Form\SearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class DashboardController
@@ -198,11 +199,21 @@ class DashboardController extends Controller
      */
     public function badgeAction($uid)
     {
+        $badge = $this->get('dashboardhub_app_main.service.dashboard')
+                      ->getBadge($uid);
+
         return $this->render(
             'DashboardHubAppBundle:Dashboard:badge.html.twig',
             array(
-                'badge' => $this->get('dashboardhub_app_main.service.dashboard')
-                                ->getBadge($uid)
+                'badge' => $badge,
+            ),
+            new Response(
+                '',
+                200,
+                array(
+                    'Etag'          => hash('md5', $badge),
+                    'Cache-Control' => 'no-cache'
+                )
             )
         );
     }
