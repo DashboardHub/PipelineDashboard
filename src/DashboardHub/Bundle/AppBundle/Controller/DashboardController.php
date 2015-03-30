@@ -211,8 +211,7 @@ class DashboardController extends Controller
                 '',
                 200,
                 array(
-                    'Etag'          => hash('md5', $badge),
-                    'Cache-Control' => 'no-cache'
+                    'ETag' => hash('md5', $badge)
                 )
             )
         );
