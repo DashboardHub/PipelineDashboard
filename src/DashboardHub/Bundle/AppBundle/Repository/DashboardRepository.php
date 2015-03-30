@@ -81,15 +81,17 @@ class DashboardRepository extends EntityRepository
                     ->getOneOrNullResult();
 
         // log dashboard view if not the owner
-        if ($dashboard->getUser()->getUsername() != $username) {
-            $dashboard->setPublicViews(
-                $dashboard->getPublicViews() + 1
-            );
+        if ($dashboard) {
+            if ($dashboard->getUser()->getUsername() != $username) {
+                $dashboard->setPublicViews(
+                    $dashboard->getPublicViews() + 1
+                );
 
-            $this->getEntityManager()
-                ->persist($dashboard);
-            $this->getEntityManager()
-                ->flush();
+                $this->getEntityManager()
+                     ->persist($dashboard);
+                $this->getEntityManager()
+                     ->flush();
+            }
         }
 
         return $dashboard;
