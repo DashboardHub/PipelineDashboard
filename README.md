@@ -60,6 +60,8 @@ No need to log in here & there, all your metrics in one place!
    php app/console server:run -vvv --env=dev
    ```
 
+   For **prod** see Symfony Documentation http://symfony.com/doc/current/cookbook/deployment/tools.html
+
 ---
 
 # Ideas
