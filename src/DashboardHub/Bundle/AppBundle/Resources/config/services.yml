@@ -49,6 +49,10 @@ services:
     class: GuzzleHttp\Client
     arguments: ["%travis_api%"]
 
+  dashboardhub_app_main.scrutinizer.api:
+    class: GuzzleHttp\Client
+    arguments: ["%scrutinizer_api%"]
+
   dashboardhub_app_main.service.github:
     class: DashboardHub\Bundle\AppBundle\Service\GithubService
     arguments: ["@dashboardhub_app_main.github.api", "@stash"]
@@ -56,3 +60,7 @@ services:
   dashboardhub_app_main.service.travis:
     class: DashboardHub\Bundle\AppBundle\Service\TravisService
     arguments: ["@dashboardhub_app_main.travis.api", "@stash"]
+
+  dashboardhub_app_main.service.scrutinizer:
+    class: DashboardHub\Bundle\AppBundle\Service\ScrutinizerService
+    arguments: ["@dashboardhub_app_main.scrutinizer.api", "@stash"]
