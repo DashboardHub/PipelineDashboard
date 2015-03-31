@@ -211,8 +211,8 @@ class DashboardController extends Controller
                 '',
                 200,
                 array(
-                    'ETag'          => hash('md5', $badge),
-                    'Cache-Control' => 'public, max-age=600'
+                    'ETag'          => uniqid('', true),
+                    'Cache-Control' => 'no-cache'
                 )
             )
         );
