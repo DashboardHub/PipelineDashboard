@@ -27,5 +27,9 @@ dashboardhub_app_dashboard.search:
     defaults: { _controller: DashboardHubAppBundle:Dashboard:search }
 
 dashboardhub_app_dashboard.badge:
+    path:     /dashboard/badge/{uid}
+    defaults: { _controller: DashboardHubAppBundle:Dashboard:badge }
+
+dashboardhub_app.badge:
     path:     /badge/{uid}
     defaults: { _controller: DashboardHubAppBundle:Dashboard:badge }
