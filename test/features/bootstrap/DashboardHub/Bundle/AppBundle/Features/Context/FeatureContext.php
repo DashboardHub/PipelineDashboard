@@ -21,4 +21,12 @@ class FeatureContext extends MinkContext
         $this->getSession()->visit('/development/mock/login');
         $this->getSession()->getPage()->pressButton('Login');
     }
+
+    /**
+     * @Then /^I should wait "(?P<text>(?:[^"]|\\")*)" secs$/
+     */
+    public function iShouldWait($wait)
+    {
+        sleep($wait);
+    }
 }
