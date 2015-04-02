@@ -44,7 +44,9 @@ class DashboardRepositorySpec extends ObjectBehavior
                           WHERE
                             u.username = :username
                             OR
-                            u.username = :defaultUsername'
+                            u.username = :defaultUsername
+                          ORDER BY
+                            d.createdOn DESC'
         )
            ->shouldBeCalled()
            ->willReturn($abstractQuery);

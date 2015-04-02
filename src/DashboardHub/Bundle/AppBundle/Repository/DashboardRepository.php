@@ -26,7 +26,9 @@ class DashboardRepository extends EntityRepository
                           WHERE
                             u.username = :username
                             OR
-                            u.username = :defaultUsername'
+                            u.username = :defaultUsername
+                          ORDER BY
+                            d.createdOn DESC'
                     )
                     ->setParameter('username', $username)
                     ->setParameter('defaultUsername', 'DashboardHub')
@@ -64,8 +66,8 @@ class DashboardRepository extends EntityRepository
     {
         /** @var Dashboard $dashboard */
         $dashboard = $this->getEntityManager()
-                    ->createQuery(
-                        'SELECT d FROM DashboardHubAppBundle:Dashboard d
+                          ->createQuery(
+                              'SELECT d FROM DashboardHubAppBundle:Dashboard d
                           JOIN d.user u
                           WHERE
                             d.uid = :uid
@@ -75,10 +77,10 @@ class DashboardRepository extends EntityRepository
                               OR
                               u.username = :username
                             )'
-                    )
-                    ->setParameter('uid', $uid)
-                    ->setParameter('username', $username)
-                    ->getOneOrNullResult();
+                          )
+                          ->setParameter('uid', $uid)
+                          ->setParameter('username', $username)
+                          ->getOneOrNullResult();
 
         // log dashboard view if not the owner
         if ($dashboard) {
