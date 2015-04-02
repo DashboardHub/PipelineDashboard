@@ -223,7 +223,8 @@ class DashboardController extends Controller
                 200,
                 array(
                     'ETag'          => hash('md5', $badge),
-                    'Cache-Control' => 'no-cache'
+                    'Cache-Control' => 'no-cache',
+                    'Content-Type'  => 'image/svg+xml; charset=UTF-8'
                 )
             )
         );
