@@ -197,10 +197,21 @@ class DashboardController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function badgeAction($uid)
+    public function badgeAction(Request $request, $uid)
     {
-        $badge = $this->get('dashboardhub_app_main.service.dashboard')
-                      ->getBadge($uid);
+        try {
+            $badge = $this->get('dashboardhub_app_main.service.dashboard')
+                          ->getBadge($uid);
+        } catch (\Exception $e) {
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'danger',
+                        'Invalid Dashboard'
+                    );
+
+            return $this->redirect($this->generateUrl('dashboardhub_app_homepage'));
+        }
 
         return $this->render(
             'DashboardHubAppBundle:Dashboard:badge.html.twig',
@@ -211,7 +222,7 @@ class DashboardController extends Controller
                 '',
                 200,
                 array(
-                    'ETag'          => uniqid('', true),
+                    'ETag'          => hash('md5', $badge),
                     'Cache-Control' => 'no-cache'
                 )
             )
