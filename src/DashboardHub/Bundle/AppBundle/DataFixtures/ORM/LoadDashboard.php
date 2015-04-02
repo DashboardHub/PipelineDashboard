@@ -35,7 +35,7 @@ class LoadDashboardData implements FixtureInterface
     public function addDefaultDashboard(ObjectManager $manager, User $user)
     {
         $dashboard = new Dashboard();
-        $dashboard->setUid(uniqid('', true));
+        $dashboard->setUid(123);
         $dashboard->setUser($user);
         $dashboard->setName('Example Dashboard');
         $dashboard->setRepository('DashboardHub/PipelineDashboard');
