@@ -16,14 +16,15 @@ Feature: Badge
 
   Scenario: Display Badge
     Given I am on "/badge/123"
-    Then I should not see "Invalid Dashboard"
-    And I should not see "Free Sign in with Github"
-    And I should see "DashboardHub"
-    And I should see "GithubTravis"
+    Then the response should not contain "Invalid Dashboard"
+    And the response should not contain "Free Sign in with Github"
+    And the response should contain "DashboardHub"
+    And the response should contain "GithubTravis"
+
 
   Scenario: Display Badge
     Given I am on "/b/123"
-    Then I should not see "Invalid Dashboard"
-    And I should not see "Free Sign in with Github"
-    And I should see "DashboardHub"
-    And I should see "GithubTravis"
+    Then the response should not contain "Invalid Dashboard"
+    And the response should not contain "Free Sign in with Github"
+    And the response should contain "DashboardHub"
+    And the response should contain "GithubTravis"
