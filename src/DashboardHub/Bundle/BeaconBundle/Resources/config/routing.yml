@@ -1,3 +1,4 @@
 dashboard_hub_beacon.yslow:
     path:     /yslow/{uid}/{build}
     defaults: { _controller: DashboardHubBeaconBundle:Default:yslow }
+    methods:  [POST]
