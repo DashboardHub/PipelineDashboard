@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new Tedivm\StashBundle\TedivmStashBundle(),
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new DashboardHub\Bundle\AppBundle\DashboardHubAppBundle(),
+            new DashboardHub\Bundle\BeaconBundle\DashboardHubBeaconBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
