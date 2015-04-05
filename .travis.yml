@@ -14,12 +14,12 @@ before_install:
   - wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar
 
 before_script:
+  - java -jar selenium-server-standalone-2.45.0.jar > /dev/null 2>&1 &
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
   - php app/console doctrine:schema:update --force
   - php app/console doctrine:fixtures:load --no-interaction
   - php app/console server:start -vvv --env=dev
-  - java -jar selenium-server-standalone-2.45.0.jar > /dev/null 2>&1 &
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
