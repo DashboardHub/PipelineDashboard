@@ -36,7 +36,8 @@
         "behat/mink": "~1.6",
         "behat/mink-extension": "~2.0",
         "behat/mink-browserkit-driver": "~1.2",
-        "henrikbjorn/phpspec-code-coverage": "~1.0"
+        "henrikbjorn/phpspec-code-coverage": "~1.0",
+        "behat/mink-selenium2-driver": "*"
     },
     "scripts": {
         "post-root-package-install": [
