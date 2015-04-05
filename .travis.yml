@@ -11,6 +11,7 @@ before_install:
   - sudo chmod +x /usr/local/sbin/install-mozilla-addon
   - sudo install-mozilla-addon https://addons.mozilla.org/firefox/downloads/latest/5369/addon-5369-latest.xpi
   - sudo install-mozilla-addon https://addons.mozilla.org/firefox/downloads/latest/1843/addon-1843-latest.xpi
+  - wget http://selenium-release.storage.googleapis.com/2.45/selenium-server-standalone-2.45.0.jar
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
@@ -18,6 +19,7 @@ before_script:
   - php app/console doctrine:schema:update --force
   - php app/console doctrine:fixtures:load --no-interaction
   - php app/console server:start -vvv --env=dev
+  - java -jar selenium-server-standalone-2.45.0.jar &
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
