@@ -5,12 +5,19 @@ php:
 
 before_install:
   - mysql -e "create database IF NOT EXISTS dashboardhub;" -uroot
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sudo wget -O /usr/local/sbin/install-mozilla-addon http://bernaerts.dyndns.org/download/ubuntu/install-mozilla-addon
+  - sudo chmod +x /usr/local/sbin/install-mozilla-addon
+  - sudo install-mozilla-addon https://addons.mozilla.org/firefox/downloads/latest/5369/addon-5369-latest.xpi
+  - sudo install-mozilla-addon https://addons.mozilla.org/firefox/downloads/latest/1843/addon-1843-latest.xpi
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
   - php app/console doctrine:schema:update --force
-  - php app/console doctrine:fixtures:load --no-interaction 
+  - php app/console doctrine:fixtures:load --no-interaction
+  - php app/console server:run -vvv --env=dev
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
