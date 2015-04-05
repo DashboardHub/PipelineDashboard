@@ -17,7 +17,7 @@ before_script:
   - php composer.phar install --dev --no-interaction
   - php app/console doctrine:schema:update --force
   - php app/console doctrine:fixtures:load --no-interaction
-  - php app/console server:run -vvv --env=dev
+  - php app/console server:start -vvv --env=dev
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
