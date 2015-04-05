@@ -35,6 +35,7 @@ after_success:
   - git commit -m "Set build VERSION number $GIT_TAG" VERSION
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
   - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
+  - mysql -e "select * from dashboardhub.pages;" -uroot
 
 deploy:
   provider: heroku
