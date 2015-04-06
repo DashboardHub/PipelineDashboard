@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Your Pages</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead>
+                <th>Score</th>
+                <th>Dashboard</th>
+                <th>Url</th>
+                <th>Ruleset</th>
+                <th>Page size (kb)</th>
+                <th>Requests</th>
+                <th>Tag</th>
+                </thead>
+                <tbody>
+                {% for page in pages %}
+                    <tr>
+                        <td>{{ page.score }}</td>
+                        <td>{{ page.dashboard.name }}</td>
+                        <td>{{ page.url }}</td>
+                        <td>{{ page.ruleset }}</td>
+                        <td>{{ page.pageSize|number_format }}</td>
+                        <td>{{ page.requests }}</td>
+                        <td>{{ page.build }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

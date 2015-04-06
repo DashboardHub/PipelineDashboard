@@ -49,6 +49,10 @@ class MenuBuilder
                 array('route' => 'dashboardhub_app_dashboard.list')
             );
             $menu->addChild(
+                'Performance',
+                array('route' => 'dashboard_hub_performance.list')
+            );
+            $menu->addChild(
                 'Logout ' . $this->securityContext->getToken()
                                                   ->getUser()
                                                   ->getUsername(),

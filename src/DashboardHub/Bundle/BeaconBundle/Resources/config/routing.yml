@@ -2,3 +2,7 @@ dashboard_hub_beacon.yslow:
     path:     /yslow/{uid}/{build}
     defaults: { _controller: DashboardHubBeaconBundle:Default:yslow }
     methods:  [POST]
+
+dashboard_hub_performance.list:
+    path:     /performance
+    defaults: { _controller: DashboardHubBeaconBundle:Performance:index }

@@ -1,6 +1,7 @@
 DashboardHub\Bundle\BeaconBundle\Entity\Page:
     type: entity
     table: pages
+    repositoryClass: DashboardHub\Bundle\BeaconBundle\Repository\PageRepository
     manyToOne:
         dashboard:
             targetEntity: DashboardHub\Bundle\AppBundle\Entity\Dashboard

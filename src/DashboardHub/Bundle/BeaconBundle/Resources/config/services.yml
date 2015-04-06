@@ -2,3 +2,7 @@ services:
 #    dashboard_hub_beacon.example:
 #        class: DashboardHub\Bundle\BeaconBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+  dashboard_hub_performance.service.page:
+    class: DashboardHub\Bundle\BeaconBundle\Service\PageService
+    arguments: ["@doctrine.orm.entity_manager", "@security.context"]
