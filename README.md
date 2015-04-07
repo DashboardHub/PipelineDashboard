@@ -20,7 +20,7 @@ No need to log in here & there, all your metrics in one place!
 
 Use your Github Account to login & setup your dashboard in 30s with the Repository name.
 
-Add a badge to you README for easy & quick access [![DashboardHub Badge](http://dashboardhub.io/badge/5515130a761e94.06603079 "DashboardHub Badge")](http://dashboardhub.io/d/5515130a761e94.06603079)
+Add a badge to you README for easy & quick access [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216)
 
 ## Example Screenshot (GithubTravisCI Theme)
 
