@@ -1,6 +1,7 @@
-| --- | master | develop | v0.2 |
+| --- | master | develop | v0.2.1 |
 | --- | ------ | ------- | ---- |
 | Dashboard | [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | --- |
+| Current Issues | --- | --- | [v0.2.1](https://github.com/DashboardHub/PipelineDashboard/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22v0.2.1%3A+ySlow+Beacon+Prototype%22) |
 | Deployment | --- | --- | --- |
 | Build | [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=master)](https://travis-ci.org/DashboardHub/PipelineDashboard) | [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=develop)](https://travis-ci.org/DashboardHub/PipelineDashboard) | --- |
 | Quality | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DashboardHub/PipelineDashboard/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DashboardHub/PipelineDashboard/?branch=master) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DashboardHub/PipelineDashboard/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/DashboardHub/PipelineDashboard/?branch=develop) | --- |
@@ -20,7 +21,7 @@ No need to log in here & there, all your metrics in one place!
 
 Use your Github Account to login & setup your dashboard in 30s with the Repository name.
 
-Add a badge to you README for easy & quick access [![DashboardHub Badge](http://dashboardhub.io/badge/5515130a761e94.06603079 "DashboardHub Badge")](http://dashboardhub.io/d/5515130a761e94.06603079)
+Add a badge to you README for easy & quick access [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216)
 
 ## Example Screenshot (GithubTravisCI Theme)
 
