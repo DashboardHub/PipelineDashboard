@@ -23,3 +23,4 @@ symfony.phar
 !test/build/.gitkeep
 test/build/
 web/fonts/
+.travis/*.pem
