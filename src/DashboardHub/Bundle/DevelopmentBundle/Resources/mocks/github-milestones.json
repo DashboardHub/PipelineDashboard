@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https:\/\/api.github.com\/repos\/DashboardHub\/PipelineDashboard\/milestones\/6",
+    "html_url": "https:\/\/github.com\/DashboardHub\/PipelineDashboard\/milestones\/v0.4:%20Private%20API%20sources%20with%20Tokens",
+    "labels_url": "https:\/\/api.github.com\/repos\/DashboardHub\/PipelineDashboard\/milestones\/6\/labels",
+    "id": 1043479,
+    "number": 6,
+    "title": "v0.4: Private API sources with Tokens",
+    "description": "",
+    "creator": {
+      "login": "eddiejaoude",
+      "id": 624760,
+      "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/624760?v=3",
+      "gravatar_id": "",
+      "url": "https:\/\/api.github.com\/users\/eddiejaoude",
+      "html_url": "https:\/\/github.com\/eddiejaoude",
+      "followers_url": "https:\/\/api.github.com\/users\/eddiejaoude\/followers",
+      "following_url": "https:\/\/api.github.com\/users\/eddiejaoude\/following{\/other_user}",
+      "gists_url": "https:\/\/api.github.com\/users\/eddiejaoude\/gists{\/gist_id}",
+      "starred_url": "https:\/\/api.github.com\/users\/eddiejaoude\/starred{\/owner}{\/repo}",
+      "subscriptions_url": "https:\/\/api.github.com\/users\/eddiejaoude\/subscriptions",
+      "organizations_url": "https:\/\/api.github.com\/users\/eddiejaoude\/orgs",
+      "repos_url": "https:\/\/api.github.com\/users\/eddiejaoude\/repos",
+      "events_url": "https:\/\/api.github.com\/users\/eddiejaoude\/events{\/privacy}",
+      "received_events_url": "https:\/\/api.github.com\/users\/eddiejaoude\/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "open_issues": 0,
+    "closed_issues": 0,
+    "state": "open",
+    "created_at": "2015-03-29T10:30:57Z",
+    "updated_at": "2015-03-29T10:30:57Z",
+    "due_on": null,
+    "closed_at": null,
+    "completeness": 0
+  }
+]

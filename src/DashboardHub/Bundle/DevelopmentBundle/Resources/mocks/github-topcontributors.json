@@ -1,0 +1,98 @@
+[
+  {
+    "total": 256,
+    "weeks": 8,
+    "author": {
+      "login": "eddiejaoude",
+      "id": 624760,
+      "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/624760?v=3",
+      "gravatar_id": "",
+      "url": "https:\/\/api.github.com\/users\/eddiejaoude",
+      "html_url": "https:\/\/github.com\/eddiejaoude",
+      "followers_url": "https:\/\/api.github.com\/users\/eddiejaoude\/followers",
+      "following_url": "https:\/\/api.github.com\/users\/eddiejaoude\/following{\/other_user}",
+      "gists_url": "https:\/\/api.github.com\/users\/eddiejaoude\/gists{\/gist_id}",
+      "starred_url": "https:\/\/api.github.com\/users\/eddiejaoude\/starred{\/owner}{\/repo}",
+      "subscriptions_url": "https:\/\/api.github.com\/users\/eddiejaoude\/subscriptions",
+      "organizations_url": "https:\/\/api.github.com\/users\/eddiejaoude\/orgs",
+      "repos_url": "https:\/\/api.github.com\/users\/eddiejaoude\/repos",
+      "events_url": "https:\/\/api.github.com\/users\/eddiejaoude\/events{\/privacy}",
+      "received_events_url": "https:\/\/api.github.com\/users\/eddiejaoude\/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "percentage": 80
+  },
+  {
+    "total": 11,
+    "weeks": 8,
+    "author": {
+      "login": "Netsensia",
+      "id": 1436601,
+      "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/1436601?v=3",
+      "gravatar_id": "",
+      "url": "https:\/\/api.github.com\/users\/Netsensia",
+      "html_url": "https:\/\/github.com\/Netsensia",
+      "followers_url": "https:\/\/api.github.com\/users\/Netsensia\/followers",
+      "following_url": "https:\/\/api.github.com\/users\/Netsensia\/following{\/other_user}",
+      "gists_url": "https:\/\/api.github.com\/users\/Netsensia\/gists{\/gist_id}",
+      "starred_url": "https:\/\/api.github.com\/users\/Netsensia\/starred{\/owner}{\/repo}",
+      "subscriptions_url": "https:\/\/api.github.com\/users\/Netsensia\/subscriptions",
+      "organizations_url": "https:\/\/api.github.com\/users\/Netsensia\/orgs",
+      "repos_url": "https:\/\/api.github.com\/users\/Netsensia\/repos",
+      "events_url": "https:\/\/api.github.com\/users\/Netsensia\/events{\/privacy}",
+      "received_events_url": "https:\/\/api.github.com\/users\/Netsensia\/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "percentage": 3
+  },
+  {
+    "total": 9,
+    "weeks": 8,
+    "author": {
+      "login": "brettminnie",
+      "id": 6124248,
+      "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/6124248?v=3",
+      "gravatar_id": "",
+      "url": "https:\/\/api.github.com\/users\/brettminnie",
+      "html_url": "https:\/\/github.com\/brettminnie",
+      "followers_url": "https:\/\/api.github.com\/users\/brettminnie\/followers",
+      "following_url": "https:\/\/api.github.com\/users\/brettminnie\/following{\/other_user}",
+      "gists_url": "https:\/\/api.github.com\/users\/brettminnie\/gists{\/gist_id}",
+      "starred_url": "https:\/\/api.github.com\/users\/brettminnie\/starred{\/owner}{\/repo}",
+      "subscriptions_url": "https:\/\/api.github.com\/users\/brettminnie\/subscriptions",
+      "organizations_url": "https:\/\/api.github.com\/users\/brettminnie\/orgs",
+      "repos_url": "https:\/\/api.github.com\/users\/brettminnie\/repos",
+      "events_url": "https:\/\/api.github.com\/users\/brettminnie\/events{\/privacy}",
+      "received_events_url": "https:\/\/api.github.com\/users\/brettminnie\/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "percentage": 3
+  },
+  {
+    "total": 1,
+    "weeks": 8,
+    "author": {
+      "login": "nicely-toasted",
+      "id": 720743,
+      "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/720743?v=3",
+      "gravatar_id": "",
+      "url": "https:\/\/api.github.com\/users\/nicely-toasted",
+      "html_url": "https:\/\/github.com\/nicely-toasted",
+      "followers_url": "https:\/\/api.github.com\/users\/nicely-toasted\/followers",
+      "following_url": "https:\/\/api.github.com\/users\/nicely-toasted\/following{\/other_user}",
+      "gists_url": "https:\/\/api.github.com\/users\/nicely-toasted\/gists{\/gist_id}",
+      "starred_url": "https:\/\/api.github.com\/users\/nicely-toasted\/starred{\/owner}{\/repo}",
+      "subscriptions_url": "https:\/\/api.github.com\/users\/nicely-toasted\/subscriptions",
+      "organizations_url": "https:\/\/api.github.com\/users\/nicely-toasted\/orgs",
+      "repos_url": "https:\/\/api.github.com\/users\/nicely-toasted\/repos",
+      "events_url": "https:\/\/api.github.com\/users\/nicely-toasted\/events{\/privacy}",
+      "received_events_url": "https:\/\/api.github.com\/users\/nicely-toasted\/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "percentage": 0
+  }
+]
