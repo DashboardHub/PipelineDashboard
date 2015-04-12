@@ -82,9 +82,6 @@ class MenuBuilderSpec extends ObjectBehavior
         $menu->addChild('Dashboard', array('route' => 'dashboardhub_app_dashboard.list'))
              ->shouldBeCalled()
              ->willReturn($menu);
-        $menu->addChild('Performance',array('route' => 'dashboard_hub_performance.list'))
-             ->shouldBeCalled()
-             ->willReturn($menu);
         $menu->addChild('Logout ' . $email, array('route' => 'logout'))
              ->shouldBeCalled()
              ->willReturn($menu);
