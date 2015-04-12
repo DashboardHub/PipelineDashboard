@@ -57,6 +57,11 @@ class Page
     protected $build = '';
 
     /**
+     * @var array
+     */
+    protected $raw = array();
+
+    /**
      * @var \Datetime
      */
     protected $createdOn;
@@ -261,4 +266,23 @@ class Page
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getRaw()
+    {
+        return $this->raw;
+    }
+
+    /**
+     * @param array $raw
+     *
+     * @return Page
+     */
+    public function setRaw($raw)
+    {
+        $this->raw = $raw;
+
+        return $this;
+    }
 }

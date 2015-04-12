@@ -41,3 +41,5 @@ DashboardHub\Bundle\BeaconBundle\Entity\Page:
             length: 255
         createdOn:
             type: datetime
+        raw:
+            type: json_array
