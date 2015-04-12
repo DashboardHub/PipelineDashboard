@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * Class DefaultController
+ * @package DashboardHub\Bundle\BeaconBundle\Controller
+ */
 class DefaultController extends Controller
 {
     public function yslowAction(Request $request, $uid, $build)
@@ -27,12 +31,13 @@ class DefaultController extends Controller
         $page->setDashboard($dashboard);
         $page->setCreatedOn(new \Datetime());
         $page->setBuild($build);
-//        $page->setPageLoadTime($data['lt']);
+        $page->setPageLoadTime($data['lt']);
         $page->setPageSize($data['w']);
         $page->setScore($data['o']);
         $page->setUrl(urldecode($data['u']));
         $page->setRequests($data['r']);
         $page->setRuleset($data['i']);
+        $page->setRaw($data);
         $this->getDoctrine()
              ->getManager()
              ->persist($page);
