@@ -43,16 +43,6 @@ after_success:
   - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
   - mysql -e 'SELECT TABLE_NAME AS "Table Name",  table_rows AS "Quant of Rows", ROUND( ( data_length + index_length ) /1024, 2 ) AS "Total Size Kb" FROM information_schema.TABLES WHERE information_schema.TABLES.table_schema = "dashboardhub" LIMIT 0 , 30;' -uroot
 
-deploy:
-  provider: heroku
-  api_key:
-    develop:
-      secure: "APuMjriw3g77wca7s6jSL3glCR1dup/ldvxUXyCbVlmbq2P/tRAStrfXYBQvm4GLpEGF8SgeaCUC1WBTo7gUSUWj0fwbkudj/rBxW54wBkNMW86n9tbt07abcxHptUh/IHs3JDHKW23FeXHzNUdFFRogJEHchN6D/DBmWftmpXo="
-  app:
-    develop: dashboardhub-ci
-  run:
-    - php app/console doctrine:schema:update --force
-
 env:
   global:
     - secure: "GmEtyPOua9A1W7Wv+Dz1NA/Skh5yiB3VaHk2yaptet5xbAOTo66D4yhlsJFfOI8ZlSUvpEXLzh4B3zKgMzVXUv4lcSnZFP6MLJ6l4pBkivBTWfYRiwMCEZYgS7eAw1WIetFx6fuO//9m0qe33eSyRx0bZQ3b1URqSgf/2xUtX28="
