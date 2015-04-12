@@ -4,5 +4,9 @@ dashboard_hub_beacon.yslow:
     methods:  [POST]
 
 dashboard_hub_performance.list:
-    path:     /performance
+    path:     /performance/{uid}
     defaults: { _controller: DashboardHubBeaconBundle:Performance:index }
+
+dashboard_hub_performance.builds:
+    path:     /performance/builds/{uid}/{build}
+    defaults: { _controller: DashboardHubBeaconBundle:Performance:build }

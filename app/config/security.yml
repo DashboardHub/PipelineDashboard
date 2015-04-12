@@ -50,3 +50,4 @@ security:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/logout, roles: ROLE_USER }
          - { path: ^/dashboard, roles: ROLE_USER }
+         - { path: ^/performance, roles: ROLE_USER }

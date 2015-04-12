@@ -26,14 +26,14 @@
             return chart;
         });
 
-        var data = {{ builds.aggregations.builds.buckets|json_encode|raw }};
+        var data = {{ pages.hits.hits|json_encode|raw }};
         function getData() {
             var graph = [];
             $.each(data, function(key, value)
             {
                 graph.push({
-                    key: value.key,
-                    values: [{"label": value.key, "value": value.score.min}]
+                    key: value._source.url,
+                    values: [{"label": value._source.url, "value": value._source.score}]
                 });
             });
 
@@ -43,7 +43,7 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Your Builds</h2>
+    <h2>Your Pages for build "<b>{{ build }}</b>"</h2>
 
     <div class="row">
 
@@ -54,30 +54,20 @@
 
             <table class="table table-striped">
                 <thead>
-                <th>Build</th>
                 <th>Pages</th>
-                <th>Min / Max Requests</th>
-                <th>Min / Max Score (%)</th>
-                <th>Min / Max Page Load (ms)</th>
-                <th>Min / Max Page Size (kb)</th>
-                <th>Actions</th>
+                <th>Requests</th>
+                <th>Score (%)</th>
+                <th>Page Load (ms)</th>
+                <th>Page Size (kb)</th>
                 </thead>
                 <tbody>
-                {% for build in builds.aggregations.builds.buckets %}
+                {% for page in pages.hits.hits %}
                     <tr>
-                        <td>{{ build.key }}</td>
-                        <td>{{ build.doc_count }}</td>
-                        <td>{{ build.requests.min }} / {{ build.requests.max }}</td>
-                        <td>{{ build.score.min }} / {{ build.score.max }}</td>
-                        <td>{{ build.pageload.min|number_format }} / {{ build.pageload.max|number_format }}</td>
-                        <td>{{ build.pagesize.min|number_format }} / {{ build.pagesize.max|number_format }}</td>
-                        <td>
-                            <a class="btn btn-default btn-xs"
-                               href="{{ path('dashboard_hub_performance.builds', { 'uid': uid, 'build': build.key }) }}"
-                               role="button">
-                                <i class="fa fa-bar-chart"></i> Pages
-                            </a>
-                        </td>
+                        <td>{{ page._source.url }}</td>
+                        <td>{{ page._source.requests }}</td>
+                        <td>{{ page._source.score }}</td>
+                        <td>{{ page._source.page_load_time|number_format }}</td>
+                        <td>{{ page._source.page_size|number_format }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
