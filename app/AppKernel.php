@@ -23,6 +23,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\TimeBundle\KnpTimeBundle(),
             new DashboardHub\Bundle\AppBundle\DashboardHubAppBundle(),
             new DashboardHub\Bundle\BeaconBundle\DashboardHubBeaconBundle(),
+            new FOS\ElasticaBundle\FOSElasticaBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
