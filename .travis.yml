@@ -35,6 +35,7 @@ after_success:
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
   - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
   # deploy
+  - eval "$(ssh-agent -s")
   - chmod 600 .travis/deploy.pem
   - ssh-add .travis/deploy.pem
   - sh .travis/deploy.sh $TRAVIS_BRANCH
