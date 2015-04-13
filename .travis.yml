@@ -22,7 +22,7 @@ before_script:
 
 script:
   - ./bin/phpspec run --config=test/phpspec.yml -vvv
-  - ./bin/behat --config=test/behat.yml -vvv --suite=dashboardhub_app
+  #- ./bin/behat --config=test/behat.yml -vvv --suite=dashboardhub_app
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover test/build/coverage.xml
 
@@ -40,9 +40,8 @@ after_success:
   - eval "$(ssh-agent -s)"
   - chmod 600 .travis/deploy.pem
   - ssh-add .travis/deploy.pem
-  - git remote add ci dokku@alpha.dashboardhub.io:alpha
-  - git push alpha $GIT_TAG:master -f
-  - ssh dokku@alpha.dashboardhub.io run alpha php app/console doctrine:schema:update --force
+  - git remote add ci dokku@prototype.dashboardhub.io:prototype
+  - git push prototype $GIT_TAG:master -f
 
 env:
   global:
