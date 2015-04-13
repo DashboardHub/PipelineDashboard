@@ -11,8 +11,8 @@ parameters:
     mailer_password: null
     locale: en
     secret: 8039273f2d3c02497789932f8f6baf4ea2a70b95
-    client.id: "%client.id%"
-    client.secret: "%client.secret%"
+    client_id: "%client.id%"
+    client_secret: "%client.secret%"
     github_api:
         base_url: https://api.github.com
         defaults:

@@ -1,6 +1,6 @@
 parameters:
     database_driver: pdo_mysql
-    database_host: 127.0.0.1 # 192.168.59.103
+    database_host: 192.168.59.103 # 192.168.59.103
     database_port: null
     database_name: dashboardhub
     database_user: root
@@ -11,8 +11,8 @@ parameters:
     mailer_password: null
     locale: en
     secret: 8039273f2d3c02497789932f8f6baf4ea2a70b95
-    client.id: "%client.id%"
-    client.secret: "%client.secret%"
+    client_id: b8552335dab47905366f
+    client_secret: fd319682ebbf3a2ce76350d146891e665c90c365
     github_api:
         base_url: https://api.github.com
     travis_api:
