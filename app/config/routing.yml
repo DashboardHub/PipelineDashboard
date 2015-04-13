@@ -1,3 +1,7 @@
+dashboard_hub_beacon:
+    resource: "@DashboardHubBeaconBundle/Resources/config/routing.yml"
+    prefix:   /
+
 hwi_oauth_login:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix:   /login

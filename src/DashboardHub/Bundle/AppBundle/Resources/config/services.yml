@@ -64,3 +64,7 @@ services:
   dashboardhub_app_main.service.scrutinizer:
     class: DashboardHub\Bundle\AppBundle\Service\ScrutinizerService
     arguments: ["@dashboardhub_app_main.scrutinizer.api", "@stash"]
+
+  dashboardhub_app_main.elasticsearch.client:
+    class: Elasticsearch\Client
+    arguments: [{"hosts" : ["%elasticsearch_host%"]}]

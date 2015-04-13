@@ -1,0 +1,45 @@
+DashboardHub\Bundle\BeaconBundle\Entity\Page:
+    type: entity
+    table: pages
+    repositoryClass: DashboardHub\Bundle\BeaconBundle\Repository\PageRepository
+    manyToOne:
+        dashboard:
+            targetEntity: DashboardHub\Bundle\AppBundle\Entity\Dashboard
+            cascade: ["persist"]
+            fetch: EAGER
+            joinColumn:
+                name: dashboard_id
+                referencedColumnName: id
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        url:
+            type: text
+        ruleset:
+            type: string
+            length: 32
+        pageSize:
+            type: integer
+            options:
+                unsigned: true
+        score:
+            type: integer
+            options:
+                unsigned: true
+        requests:
+            type: integer
+            options:
+                unsigned: true
+        pageLoadTime:
+            type: integer
+            options:
+                unsigned: true
+        build:
+            type: string
+            length: 255
+        createdOn:
+            type: datetime
+        raw:
+            type: json_array

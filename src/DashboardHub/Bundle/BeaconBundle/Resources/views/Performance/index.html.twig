@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.7.1/build/nv.d3.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.7.1/build/nv.d3.min.js"></script>
+    <script>
+        nv.addGraph(function() {
+            var chart = nv.models.discreteBarChart()
+                            .x(function(d) { return d.label })    //Specify the data accessors.
+                            .y(function(d) { return d.value })
+                            .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+                            .tooltips(true)        //Don't show tooltips
+                            .showValues(true)       //...instead, show the bar value right on top of each bar.
+                    ;
+
+            d3.select('#chart svg')
+                    .datum(getData())
+                    .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+
+        var data = {{ builds.aggregations.builds.buckets|json_encode|raw }};
+        function getData() {
+            var graph = [];
+            $.each(data, function(key, value)
+            {
+                graph.push({
+                    key: value.key,
+                    values: [{"label": value.key, "value": value.score.min}]
+                });
+            });
+
+            return graph;
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h2>Your Builds</h2>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p class="pull-right btn btn-default" data-toggle="modal" data-target="#badge-markdown">
+                    <i class="fa fa-signal"></i> Beacon
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div id="chart"><svg></svg></div>
+
+            <div class="clearfix"></div>
+
+            <table class="table table-striped">
+                <thead>
+                <th>Build</th>
+                <th>Pages</th>
+                <th>Min / Max Requests</th>
+                <th>Min / Max Score (%)</th>
+                <th>Min / Max Page Load (ms)</th>
+                <th>Min / Max Page Size (kb)</th>
+                <th>Actions</th>
+                </thead>
+                <tbody>
+                {% for build in builds.aggregations.builds.buckets %}
+                    <tr>
+                        <td>{{ build.key }}</td>
+                        <td>{{ build.doc_count }}</td>
+                        <td>{{ build.requests.min }} / {{ build.requests.max }}</td>
+                        <td>{{ build.score.min }} / {{ build.score.max }}</td>
+                        <td>{{ build.pageload.min|number_format }} / {{ build.pageload.max|number_format }}</td>
+                        <td>{{ build.pagesize.min|number_format }} / {{ build.pagesize.max|number_format }}</td>
+                        <td>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('dashboard_hub_performance.builds', { 'uid': uid, 'build': build.key }) }}"
+                               role="button">
+                                <i class="fa fa-bar-chart"></i> Pages
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="badge-markdown">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Beacons</h4>
+                </div>
+                <div class="modal-body">
+                    The last parameter (build-no-example-123) on the url can be anything you like,
+                    but DashboardHub advise for it to be unique per run/build.
+                    <div class="input-group">
+                        <div class="input-group-addon">Beacon</div>
+                        <input type="text" class="form-control"
+                               value='http://beacon.dashboardhub.io/yslow/{{ uid }}/build-no-example-123'>
+                        <div class="input-group-addon">url</div>
+                    </div>
+                    Documentation of how to use this beacon url:
+                    <a href="http://yslow.org/user-guide/">ySlow official documentation</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}
