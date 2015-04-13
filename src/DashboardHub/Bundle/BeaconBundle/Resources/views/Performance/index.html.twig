@@ -46,6 +46,14 @@
     <h2>Your Builds</h2>
 
     <div class="row">
+        <div class="col-md-12">
+            <p class="pull-right btn btn-default" data-toggle="modal" data-target="#badge-markdown">
+                    <i class="fa fa-signal"></i> Beacon
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
 
         <div class="col-md-12">
             <div id="chart"><svg></svg></div>
@@ -84,4 +92,32 @@
             </table>
         </div>
     </div>
+
+    <div class="modal fade" id="badge-markdown">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Beacons</h4>
+                </div>
+                <div class="modal-body">
+                    The last parameter (build-no-example-123) on the url can be anything you like,
+                    but DashboardHub advise for it to be unique per run/build.
+                    <div class="input-group">
+                        <div class="input-group-addon">Beacon</div>
+                        <input type="text" class="form-control"
+                               value='http://beacon.dashboardhub.io/yslow/{{ uid }}/build-no-example-123'>
+                        <div class="input-group-addon">url</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 {% endblock %}
