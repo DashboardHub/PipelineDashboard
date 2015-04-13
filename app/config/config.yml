@@ -125,3 +125,4 @@ fos_elastica:
                     mappings:
                         url: { type: string, index: not_analyzed }
                         created_on: { type: date, format: date_time_no_millis }
+                        build: { type: string, index: not_analyzed }
