@@ -15,7 +15,7 @@ before_install:
 
 before_script:
   - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev --no-interaction
+  - php composer.phar install --dev --no-interaction --prefer-source
   - php app/console doctrine:schema:update --force
   - php app/console doctrine:fixtures:load --no-interaction
   - php app/console cache:prime
@@ -42,6 +42,9 @@ env:
   global:
     - secure: "GmEtyPOua9A1W7Wv+Dz1NA/Skh5yiB3VaHk2yaptet5xbAOTo66D4yhlsJFfOI8ZlSUvpEXLzh4B3zKgMzVXUv4lcSnZFP6MLJ6l4pBkivBTWfYRiwMCEZYgS7eAw1WIetFx6fuO//9m0qe33eSyRx0bZQ3b1URqSgf/2xUtX28="
     - secure: "ZIajiUHwiooq5xP9QlPG/GgTrfNbLe9QTMLQd1fc0GMSJRVJhBOT2YqaWRYLPP3jOuCtjOwzFlgER3exaxXU1FBJHXHteCfKuYlidF0JOa4ASadpPkFXdOBZsyFLhoErMxa7TsCGgQmHEpnDqe36448RaWn8ad6HeNvrjTHArDc="
+    - secure: "Krew3lipt13cgfQVZ9kI2ZH08QR1KrPHS6XYglmNp90YlrX04cUQ0QBofu4PBpC5X/peKBX1YiGRY9nIfBJgEvLNwzFLEX/qNe2OOarELM/cvzg0/TSS9nl2X7/tBKg7h56Ilmp5jRwlCs+6yAN55AEo41UoPezpNr7GHhqdFOI="
+    - secure: "egCIJUSoUQPml4fZDblp0GkIZAtL41nNZhAtUeQ/6DlwvVEEj2zhmNTODpl2fFJtglWjNjFDiClHRTDyvXgguXvYQjZvHJABcnwSmT6JPTR0O5ZTSsBRMXVP3XU25r/zB2MRHcJ57hQqamFhaX+NpIEfJS3l1HXI8Q5w+PCyHQ0="
+    - secure: "f1i9VTFeQhMX15v8wf7apjJikn4pfgB4gCnND1Hwcb+QTwXfmxYY7w792e96KQhQHUIo8FxyrX8yEtmsmB8d/RlGEHkXINDXCy2xLwzK2lsLx0/3Bwy68Pf7l1AAWTJ9G0eG5ZbpMfz0LRVGsYKCNvH05OivMLLHZj1HW+7Psk8="
     - SYMFONY__DATABASE__HOST="127.0.0.1"
     - SYMFONY__DATABASE__NAME="dashboardhub"
     - SYMFONY__DATABASE__USER="root"
@@ -53,7 +56,7 @@ notifications:
         - https://webhooks.gitter.im/e/48b2cf97b6c09c6988ae
       on_success: always  # options: [always|never|change] default: always
       on_failure: always  # options: [always|never|change] default: always
-      on_start: false     # default: false
+      on_start: true     # default: false
 
 branches:
   except:
