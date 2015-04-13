@@ -120,7 +120,7 @@ fos_elastica:
                         model: DashboardHub\Bundle\BeaconBundle\Entity\Page
                         provider: ~
                         listener:
-                            immediate: ~
+                            immediate: true
                         finder: ~
                     mappings:
                         url: { type: string, index: not_analyzed }
