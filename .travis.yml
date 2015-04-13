@@ -40,7 +40,7 @@ after_success:
   - eval "$(ssh-agent -s)"
   - chmod 600 .travis/deploy.pem
   - ssh-add .travis/deploy.pem
-  - git remote add ci dokku@prototype.dashboardhub.io:prototype
+  - git remote add prototype dokku@prototype.dashboardhub.io:prototype
   - git push prototype $GIT_TAG:master -f
 
 env:
