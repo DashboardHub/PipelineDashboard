@@ -36,7 +36,13 @@ after_success:
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
   - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
   # deploy
-  - sh .travis/deploy.sh $TRAVIS_BRANCH
+  #- sh .travis/deploy.sh $TRAVIS_BRANCH
+  - eval "$(ssh-agent -s)"
+  - chmod 600 .travis/deploy.pem
+  - ssh-add .travis/deploy.pem
+  - git remote add ci dokku@alpha.dashboardhub.io:alpha
+  - git push alpha $GIT_TAG:master -f
+  - ssh dokku@alpha.dashboardhub.io run alpha php app/console doctrine:schema:update --force
 
 env:
   global:
