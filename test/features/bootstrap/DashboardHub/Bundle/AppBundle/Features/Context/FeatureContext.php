@@ -18,7 +18,7 @@ class FeatureContext extends MinkContext
      */
     public function iAmLoggedIn()
     {
-        $this->getSession()->visit('/development/mock/login');
+        $this->getSession()->visit($this->getMinkParameter('base_url') . '/development/mock/login');
         $this->getSession()->getPage()->pressButton('Login');
     }
 
@@ -27,6 +27,6 @@ class FeatureContext extends MinkContext
      */
     public function iShouldWait($wait)
     {
-        sleep($wait);
+        $this->getSession()->wait($wait);
     }
 }

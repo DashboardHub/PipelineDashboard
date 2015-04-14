@@ -48,5 +48,7 @@ security:
          - { path: ^/$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/search, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/yslow, roles: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/logout, roles: ROLE_USER }
          - { path: ^/dashboard, roles: ROLE_USER }
+         - { path: ^/performance, roles: ROLE_USER }
