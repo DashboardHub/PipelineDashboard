@@ -73,6 +73,6 @@ Add a badge to you README for easy & quick access [![DashboardHub Badge](http://
 
 # Ideas
 
-All feedback / ideas are welcome! Please log under issues on Github.
+All feedback / ideas are welcome! Please log under [issues](https://github.com/DashboardHub/PipelineDashboard/issues) on Github.
 
 ---
