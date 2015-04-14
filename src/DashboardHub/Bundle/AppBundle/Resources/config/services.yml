@@ -68,3 +68,7 @@ services:
   dashboardhub_app_main.elasticsearch.client:
     class: Elasticsearch\Client
     arguments: [{"hosts" : ["%elasticsearch_host%"]}]
+
+  dashboardhub_app_main.service.statistics:
+    class: DashboardHub\Bundle\AppBundle\Service\StatisticsService
+    arguments: ["@dashboardhub_app_main.elasticsearch.client"]

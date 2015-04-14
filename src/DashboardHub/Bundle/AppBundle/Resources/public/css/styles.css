@@ -42,3 +42,7 @@ div.profile div.well p {
     text-overflow: ellipsis;
     margin: 0px;
 }
+
+.xlarge-no {
+    font-size: 450%;
+}
