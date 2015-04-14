@@ -25,6 +25,7 @@ before_script:
   - php composer.phar install --dev --no-interaction
   - php app/console doctrine:schema:update --force
   - php app/console doctrine:fixtures:load --no-interaction
+  - php app/console fos:elastica:populate
   - php app/console server:start -vvv --env=dev
 
 script:
