@@ -51,6 +51,7 @@ env:
     - SYMFONY__DATABASE__NAME="dashboardhub"
     - SYMFONY__DATABASE__USER="root"
     - SYMFONY__DATABASE__PASSWORD=""
+    - SYMFONY__ELASTICSEARCH__HOST="127.0.0.1"
 
 notifications:
   webhooks:
@@ -63,3 +64,6 @@ notifications:
 branches:
   except:
     - /^build-[0-9a-z\-\/]*/
+
+services:
+  - elasticsearch
