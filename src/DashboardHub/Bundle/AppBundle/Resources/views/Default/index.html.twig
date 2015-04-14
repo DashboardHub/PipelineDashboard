@@ -68,19 +68,19 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Total Dashboard Views</div>
-                            <div class="text-center xlarge-no bg-primary">{{ statistics.public_views.sum|number_format }}</div>
+                            <div class="text-center xlarge-no bg-primary">{{ dashboardStatistics.public_views.sum|number_format }}</div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Average ySlow Score (%)</div>
-                            <div class="text-center xlarge-no">{{ statistics.score.avg|number_format }}</div>
+                            <div class="text-center xlarge-no">{{ ySlowStatistics.score.avg|number_format }}</div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Average ySlow Page Size (k)</div>
-                            <div class="text-center xlarge-no">{{ (statistics.page_size.avg/1000)|number_format }}</div>
+                            <div class="text-center xlarge-no">{{ (ySlowStatistics.page_size.avg/1000)|number_format }}</div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Average ySlow Page Load Time (ms)</div>
-                            <div class="text-center xlarge-no">{{ statistics.page_load_time.avg|number_format }}</div>
+                            <div class="text-center xlarge-no">{{ ySlowStatistics.page_load_time.avg|number_format }}</div>
                         </div>
                     </div>
                 </div>

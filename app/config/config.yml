@@ -124,3 +124,17 @@ fos_elastica:
                         url: { type: string, index: not_analyzed }
                         created_on: { type: date, format: date_time_no_millis }
                         build: { type: string, index: not_analyzed }
+        dashboards:
+            types:
+                github:
+                    persistence:
+                        driver: orm
+                        model: DashboardHub\Bundle\AppBundle\Entity\Dashboard
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                    mappings:
+                        uid: { type: string, index: not_analyzed }
+                        repository: { type: string, index: not_analyzed }
+                        created_on: { type: date, format: date_time_no_millis }
+                        updated_on: { type: date, format: date_time_no_millis }

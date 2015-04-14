@@ -22,15 +22,10 @@ class StatisticsService
         $this->client = $client;
     }
 
-    public function getStatistics()
+    public function getYSlowStats()
     {
         $aggs = array(
             'aggs' => array(
-                'public_views' => array(
-                    'stats' => array(
-                        'field' => 'dashboard.public_views'
-                    )
-                ),
                 'requests' => array(
                     'stats' => array(
                         'field' => 'requests'
@@ -63,6 +58,33 @@ class StatisticsService
 
         $request = array(
             'index' => 'pages',
+            'body'  => array_merge($search, $aggs)
+        );
+
+        return $this->client->search($request)['aggregations'];
+    }
+
+    public function getDashboardStats()
+    {
+        $aggs = array(
+            'aggs' => array(
+                'public_views' => array(
+                    'stats' => array(
+                        'field' => 'public_views'
+                    )
+                ),
+            )
+        );
+
+        $search = array(
+            'query' => array(
+                'match_all' => array()
+            ),
+            'size'  => 0
+        );
+
+        $request = array(
+            'index' => 'dashboards',
             'body'  => array_merge($search, $aggs)
         );
 
