@@ -41,7 +41,7 @@
                             </div>
 
                             <ul class="list-group">
-                                <li class="list-group-item text-success">No setup required!</li>
+                                <li class="list-group-item list-group-item-success">No setup required!</li>
                                 <li class="list-group-item">Github Integration</li>
                                 <li class="list-group-item">Travis CI Integration</li>
                                 <li class="list-group-item">Scrutinizer Integration</li>
@@ -59,7 +59,7 @@
                             </div>
 
                             <ul class="list-group">
-                                <li class="list-group-item text-success">Public Repositories are <b>FREE</b>!</li>
+                                <li class="list-group-item list-group-item-success">Public Repositories are <b>FREE</b>!</li>
                                 <li class="list-group-item disabled">Private Repositories (coming soon)</li>
                             </ul>
                         </div>
@@ -68,7 +68,7 @@
                     <div class="col-md-6">
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Total Dashboard Views</div>
-                            <div class="text-center xlarge-no">{{ statistics.public_views.sum|number_format }}</div>
+                            <div class="text-center xlarge-no bg-primary">{{ statistics.public_views.sum|number_format }}</div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Average ySlow Score (%)</div>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Average ySlow Page Size (k)</div>
-                            <div class="text-center xlarge-no">{{ statistics.page_size.avg|number_format }}</div>
+                            <div class="text-center xlarge-no">{{ (statistics.page_size.avg/1000)|number_format }}</div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">Average ySlow Page Load Time (ms)</div>
