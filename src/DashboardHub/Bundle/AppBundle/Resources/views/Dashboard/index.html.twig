@@ -49,6 +49,11 @@
                                role="button">
                                 <i class="fa fa-pencil"></i> Edit
                             </a>
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('dashboard_hub_performance.list', { 'uid': dashboard.uid }) }}"
+                               role="button">
+                                <i class="fa fa-bar-chart"></i> Performance
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
