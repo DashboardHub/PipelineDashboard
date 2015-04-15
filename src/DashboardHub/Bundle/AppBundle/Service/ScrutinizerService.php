@@ -73,22 +73,4 @@ class ScrutinizerService
 
         return $builds;
     }
-
-    /**
-     * @param string $reponame
-     *
-     * @return array
-     */
-    public function getLatestBuild($reponame)
-    {
-        $cache = $this->cache->getItem(__METHOD__, $reponame);
-        $build = $cache->get();
-        if ($cache->isMiss()) {
-            $build = array_slice($this->getBuilds($reponame)['applications'], 0, 1);
-
-            $cache->set($build, 600);
-        }
-
-        return $build;
-    }
 }

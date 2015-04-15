@@ -209,4 +209,27 @@ class DashboardService
 
         return $badge;
     }
+
+    /**
+     * @param string $uid
+     *
+     * @return string
+     */
+    public function getBadgeViews($uid)
+    {
+        /** @var Dashboard $badge */
+        $dashboard = $this->findOneByUidAndIsPublic($uid);
+
+        $cache = $this->cache->getItem(__METHOD__, $dashboard->getPublicViews());
+        $badge = $cache->get();
+        if ($cache->isMiss()) {
+            $badge = file_get_contents('https://img.shields.io/badge/DashboardHub-' .
+                $dashboard->getPublicViews() .
+                '-green.svg');
+
+            $cache->set($badge, 60 * 60 * 24);
+        }
+
+        return $badge;
+    }
 }

@@ -30,6 +30,6 @@ dashboardhub_app_dashboard.badge:
     path:     /badge/{uid}
     defaults: { _controller: DashboardHubAppBundle:Dashboard:badge }
 
-dashboardhub_app.badge:
-    path:     /b/{uid}
-    defaults: { _controller: DashboardHubAppBundle:Dashboard:badge }
+dashboardhub_app_dashboard.badge.views:
+    path:     /badge/views/{uid}
+    defaults: { _controller: DashboardHubAppBundle:Dashboard:badgeViews }

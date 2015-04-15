@@ -2,6 +2,12 @@ language: php
 
 php:
   - 5.5
+  - 5.6
+
+matrix:
+  allowed_failures:
+    - php: 7.0
+  fast_finish: true
 
 before_install:
   - mysql -e "create database IF NOT EXISTS dashboardhub;" -uroot
@@ -27,20 +33,10 @@ after_success:
   - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
   - git push --quiet https://$GITHUBKEY@github.com/DashboardHub/PipelineDashboard $GIT_TAG > /dev/null 2>&1
 
-deploy:
-  provider: heroku
-  api_key:
-    develop:
-      secure: "APuMjriw3g77wca7s6jSL3glCR1dup/ldvxUXyCbVlmbq2P/tRAStrfXYBQvm4GLpEGF8SgeaCUC1WBTo7gUSUWj0fwbkudj/rBxW54wBkNMW86n9tbt07abcxHptUh/IHs3JDHKW23FeXHzNUdFFRogJEHchN6D/DBmWftmpXo="
-  app:
-    develop: dashboardhub-ci
-  run:
-    - php app/console doctrine:schema:update --force
-
 env:
   global:
     - secure: "GmEtyPOua9A1W7Wv+Dz1NA/Skh5yiB3VaHk2yaptet5xbAOTo66D4yhlsJFfOI8ZlSUvpEXLzh4B3zKgMzVXUv4lcSnZFP6MLJ6l4pBkivBTWfYRiwMCEZYgS7eAw1WIetFx6fuO//9m0qe33eSyRx0bZQ3b1URqSgf/2xUtX28="
-    - secure: "JNtzki5EYmIMnoYOrcnSsFRXXQ+tYrAFoFPOf5DPK2JvXCcmZWEjn1+MpyzvIpQG/jmCJ6iULADhtOeDs2q26X/kXVpcJkx7jlsdGovpJae09PPoarfpYKC+qmTLsA9rrVEB4EOQoWrB1u9qIC2z8/YVujfc7jDSOE6r92Ds758="
+    - secure: "ZIajiUHwiooq5xP9QlPG/GgTrfNbLe9QTMLQd1fc0GMSJRVJhBOT2YqaWRYLPP3jOuCtjOwzFlgER3exaxXU1FBJHXHteCfKuYlidF0JOa4ASadpPkFXdOBZsyFLhoErMxa7TsCGgQmHEpnDqe36448RaWn8ad6HeNvrjTHArDc="
     - SYMFONY__DATABASE__HOST="127.0.0.1"
     - SYMFONY__DATABASE__NAME="dashboardhub"
     - SYMFONY__DATABASE__USER="root"

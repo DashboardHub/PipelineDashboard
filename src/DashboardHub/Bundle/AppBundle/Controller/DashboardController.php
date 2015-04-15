@@ -229,4 +229,40 @@ class DashboardController extends Controller
             )
         );
     }
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function badgeViewsAction(Request $request, $uid)
+    {
+        try {
+            $badge = $this->get('dashboardhub_app_main.service.dashboard')
+                          ->getBadgeViews($uid);
+        } catch (\Exception $e) {
+            $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'danger',
+                        'Invalid Dashboard'
+                    );
+
+            return $this->redirect($this->generateUrl('dashboardhub_app_homepage'));
+        }
+
+        return $this->render(
+            'DashboardHubAppBundle:Dashboard:badge.html.twig',
+            array(
+                'badge' => $badge,
+            ),
+            new Response(
+                '',
+                200,
+                array(
+                    'ETag'          => hash('md5', $badge),
+                    'Cache-Control' => 'no-cache',
+                    'Content-Type'  => 'image/svg+xml; charset=UTF-8'
+                )
+            )
+        );
+    }
 }
