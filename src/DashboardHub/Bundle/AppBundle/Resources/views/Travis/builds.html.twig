@@ -8,6 +8,8 @@
             <th>When</th>
             <th>Duration (s)</th>
             <th>Status</th>
+            <th>Quality (%)</th>
+            <th>Coverage (%)</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +25,8 @@
                         <span class="glyphicon glyphicon-remove"></span>
                     {% endif %}
                 </td>
+                <td>{{ attribute(attribute(scrutinizer.applications, build.branch).index._embedded.project.metric_values, 'scrutinizer.quality')|number_format(3, '.', ',') * 10 }}</td>
+                <td>{{ attribute(attribute(scrutinizer.applications, build.branch).index._embedded.project.metric_values, 'scrutinizer.test_coverage')|number_format(3, '.', ',') * 100 }}</td>
             </tr>
         {% endfor %}
         </tbody>
