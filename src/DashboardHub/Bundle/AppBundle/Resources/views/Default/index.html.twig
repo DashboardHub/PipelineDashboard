@@ -83,6 +83,7 @@
                             <div class="text-center xlarge-no">{{ ySlowStatistics.page_load_time.avg|number_format }}</div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
@@ -103,6 +104,7 @@
                             <th>Name</th>
                             <th>Repository</th>
                             <th>Theme</th>
+                            <th>Views</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -112,6 +114,7 @@
                                 <td>{{ dashboard.name }}</td>
                                 <td>{{ dashboard.repository }}</td>
                                 <td>{{ attribute(themes, dashboard.theme) }}</td>
+                                <td>{{ dashboard.publicViews }}</td>
                                 <td>
                                     <a class="btn btn-default btn-xs"
                                        href="{{ path('dashboardhub_app_dashboard', { 'uid': dashboard.uid }) }}"
@@ -142,6 +145,7 @@
                             <th>Name</th>
                             <th>Repository</th>
                             <th>Theme</th>
+                            <th>Views</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -151,6 +155,7 @@
                                 <td>{{ dashboard.name }}</td>
                                 <td>{{ dashboard.repository }}</td>
                                 <td>{{ attribute(themes, dashboard.theme) }}</td>
+                                <td>{{ dashboard.publicViews }}</td>
                                 <td>
                                     <a class="btn btn-default btn-xs"
                                        href="{{ path('dashboardhub_app_dashboard', { 'uid': dashboard.uid }) }}"
