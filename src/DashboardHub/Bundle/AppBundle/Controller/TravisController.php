@@ -22,8 +22,10 @@ class TravisController extends Controller
         return $this->render(
             'DashboardHubAppBundle:Travis:builds.html.twig',
             array(
-                'builds' => $this->get('dashboardhub_app_main.service.travis')
-                                 ->getBuilds($repository, 5)
+                'builds'      => $this->get('dashboardhub_app_main.service.travis')
+                                      ->getBuilds($repository, 5),
+                'scrutinizer' => $this->get('dashboardhub_app_main.service.scrutinizer')
+                                      ->getBuilds($repository),
             )
         );
     }
@@ -39,7 +41,7 @@ class TravisController extends Controller
             'DashboardHubAppBundle:Travis:tile/latestBuild.html.twig',
             array(
                 'build' => $this->get('dashboardhub_app_main.service.travis')
-                                 ->getBuilds($repository, 1)[0]
+                                ->getBuilds($repository, 1)[0]
             )
         );
     }

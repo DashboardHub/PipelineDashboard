@@ -2,7 +2,7 @@
     <meta http-equiv="refresh" content="60">
 {% endblock meta %}
 
-<span class="pull-right btn" data-toggle="modal" data-target="#badge-markdown">
+<span class="pull-right btn" data-toggle="modal" data-target="#modal-badge">
     {{ render(controller('DashboardHubAppBundle:Dashboard:badge', { 'uid': dashboard.uid } )) }}
 </span>
 <h2>
@@ -10,7 +10,7 @@
     <span class="label label-default theme-badge">Theme::{{ attribute(themes, dashboard.theme) }}</span>
 </h2>
 
-<div class="modal fade" id="badge-markdown">
+<div class="modal fade" id="modal-badge">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -20,16 +20,30 @@
             </div>
             <div class="modal-body">
                 <div class="input-group">
-                    <div class="input-group-addon">Markdown</div>
+                    <div class="input-group-addon">Theme Markdown</div>
                     <input type="text" class="form-control"
                            value='[![DashboardHub Badge](http://dashboardhub.io/badge/{{ dashboard.uid }} "DashboardHub Badge")](http://dashboardhub.io/d/{{ dashboard.uid }})'>
                     <div class="input-group-addon">Badge</div>
                 </div>
                 <br />
                 <div class="input-group">
-                    <div class="input-group-addon">Html Code</div>
+                    <div class="input-group-addon">Theme Html</div>
                     <input type="text" class="form-control"
                            value='<a href="http://dashboardhub.io/d/{{ dashboard.uid }}"><img src="http://dashboardhub.io/badge/{{ dashboard.uid }}" alt="DashboardHub Badge" /></a>' />
+                    <div class="input-group-addon">Badge</div>
+                </div>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-addon">Views Markdown</div>
+                    <input type="text" class="form-control"
+                           value='[![DashboardHub Badge](http://dashboardhub.io/badge/views/{{ dashboard.uid }} "DashboardHub Badge")](http://dashboardhub.io/d/{{ dashboard.uid }})'>
+                    <div class="input-group-addon">Badge</div>
+                </div>
+                <br />
+                <div class="input-group">
+                    <div class="input-group-addon">Views Html</div>
+                    <input type="text" class="form-control"
+                           value='<a href="http://dashboardhub.io/d/{{ dashboard.uid }}"><img src="http://dashboardhub.io/badge/views/{{ dashboard.uid }}" alt="DashboardHub Badge" /></a>' />
                     <div class="input-group-addon">Badge</div>
                 </div>
             </div>
