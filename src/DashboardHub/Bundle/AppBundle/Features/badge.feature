@@ -13,3 +13,10 @@ Feature: Badge
     And the response should not contain "Free Sign in with Github"
     And the response should contain "DashboardHub"
     And the response should contain "GithubTravis"
+
+  Scenario: Display Views Badge
+    Given I am on "/badge/views/123"
+    Then the response should not contain "Invalid Dashboard"
+    And the response should not contain "Free Sign in with Github"
+    And the response should contain "DashboardHub"
+    And the response should not contain "GithubTravis"
