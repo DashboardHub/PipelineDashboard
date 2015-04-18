@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         {% block meta %}{% endblock %}
         <title>{% block title %}DashboardHub{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
         <!-- Latest compiled and minified CSS -->
@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
         <!-- Additional Icon set -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        {% block stylesheets %}{% endblock %}
         <!-- Our custom stylesheet -->
         <link rel="stylesheet" href="/bundles/dashboardhubapp/css/styles.css">
     </head>
