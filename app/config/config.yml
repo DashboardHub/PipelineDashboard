@@ -138,3 +138,7 @@ fos_elastica:
                         repository: { type: string, index: not_analyzed }
                         created_on: { type: date, format: date_time_no_millis }
                         updated_on: { type: date, format: date_time_no_millis }
+
+fos_rest:
+    routing_loader:
+        default_format: json

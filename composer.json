@@ -29,7 +29,8 @@
         "guzzlehttp/guzzle": "5.*",
         "friendsofsymfony/elastica-bundle": "~3.1",
         "jms/serializer-bundle": "0.13.*",
-        "elasticsearch/elasticsearch": "~1.0"
+        "elasticsearch/elasticsearch": "~1.0",
+        "friendsofsymfony/rest-bundle": "~1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
