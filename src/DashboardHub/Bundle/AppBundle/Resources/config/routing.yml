@@ -33,3 +33,8 @@ dashboardhub_app_dashboard.badge:
 dashboardhub_app_dashboard.badge.views:
     path:     /badge/views/{uid}
     defaults: { _controller: DashboardHubAppBundle:Dashboard:badgeViews }
+
+dashboardhub_api.dashboard:
+    type:     rest
+    prefix:   /api
+    resource: DashboardHub\Bundle\AppBundle\Controller\DashboardApiController
