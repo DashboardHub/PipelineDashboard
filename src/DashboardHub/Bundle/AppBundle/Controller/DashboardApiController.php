@@ -15,7 +15,7 @@ class DashboardApiController extends FOSRestController
     {
         try {
             $dashboard = $this->get('dashboardhub_app_main.service.dashboard')
-                              ->findOneByUidAndOwnedByUsernameOrIsPublic($uid);
+                              ->findOneByUidAndIsPublic($uid);
         } catch (\InvalidArgumentException $e) {
             return $this->handleView(
                 $this->view(new \stdClass(), 404)
