@@ -5,7 +5,7 @@
         {% block meta %}{% endblock %}
         <title>{% block title %}DashboardHub{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="http://cdn.dashboardhub.io/favicon.ico" />
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -31,7 +31,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="{{ path('dashboardhub_app_homepage') }}">
-                            <img src="{{ asset('bundles/dashboardhubapp/images/dashboardhub-logo-horizontal-small.png') }}" alt="DashboardHub Logo" />
+                            <img src="http://cdn.dashboardhub.io/logo-horizontal-std-109x20.png" alt="DashboardHub Logo" />
                         </a>
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
@@ -70,6 +70,12 @@
                                         <a href="http://dashboardhub.io/d/5505d755493564.48070216">
                                             <i class="fa fa-play-circle-o"></i>
                                             Demo
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://blog.dashboardhub.io">
+                                            <i class="fa fa-weixin"></i>
+                                            Blog
                                         </a>
                                     </li>
                                 </ul>
