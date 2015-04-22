@@ -1,7 +1,7 @@
 | --- | master | develop | v0.2.1 |
 | --- | ------ | ------- | ---- |
-| Dashboard | [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | --- |
-| Views | [![DashboardHub Badge](http://dashboardhub.io/badge/views/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | [![DashboardHub Badge](http://dashboardhub.io/badge/views/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | --- |
+| Dashboard | --- | [![DashboardHub Badge](http://dashboardhub.io/badge/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | --- |
+| Views | --- | [![DashboardHub Badge](http://dashboardhub.io/badge/views/5505d755493564.48070216 "DashboardHub Badge")](http://dashboardhub.io/d/5505d755493564.48070216) | --- |
 | Current Issues | --- | --- | [v0.2.1](https://github.com/DashboardHub/PipelineDashboard/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22v0.2.1%3A+ySlow+Beacon+Prototype%22) |
 | Deployment | --- | [Alpha](http://alpha.dashboardhub.io) | [Prototype](http://prototype.dashboardhub.io) |
 | Build | [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=master)](https://travis-ci.org/DashboardHub/PipelineDashboard) | [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=develop)](https://travis-ci.org/DashboardHub/PipelineDashboard) | --- |
