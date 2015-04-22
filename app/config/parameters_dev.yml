@@ -20,3 +20,5 @@ parameters:
         base_url: https://api.travis-ci.org
     scrutinizer_api:
         base_url: "https://scrutinizer-ci.com"
+    elasticsearch_host: 127.0.0.1
+    elasticsearch_port: 9200

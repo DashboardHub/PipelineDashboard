@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.rawgit.com/novus/nvd3/v1.7.1/build/nv.d3.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.rawgit.com/novus/nvd3/v1.7.1/build/nv.d3.min.js"></script>
+    <script>
+        nv.addGraph(function() {
+            var chart = nv.models.discreteBarChart()
+                            .x(function(d) { return d.label })    //Specify the data accessors.
+                            .y(function(d) { return d.value })
+                            .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+                            .tooltips(true)        //Don't show tooltips
+                            .showValues(true)       //...instead, show the bar value right on top of each bar.
+                    ;
+
+            d3.select('#chart svg')
+                    .datum(getData())
+                    .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+
+        var data = {{ pages.hits.hits|json_encode|raw }};
+        function getData() {
+            var graph = [];
+            $.each(data, function(key, value)
+            {
+                graph.push({
+                    key: value._source.url,
+                    values: [{"label": value._source.url, "value": value._source.score}]
+                });
+            });
+
+            return graph;
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+    <h2>Your Pages for build "<b>{{ build }}</b>"</h2>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div id="chart"><svg></svg></div>
+
+            <div class="clearfix"></div>
+
+            <table class="table table-striped">
+                <thead>
+                <th>Pages</th>
+                <th>Requests</th>
+                <th>Score (%)</th>
+                <th>Page Load (ms)</th>
+                <th>Page Size (kb)</th>
+                </thead>
+                <tbody>
+                {% for page in pages.hits.hits %}
+                    <tr>
+                        <td>{{ page._source.url }}</td>
+                        <td>{{ page._source.requests }}</td>
+                        <td>{{ page._source.score }}</td>
+                        <td>{{ page._source.page_load_time|number_format }}</td>
+                        <td>{{ page._source.page_size|number_format }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

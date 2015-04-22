@@ -10,6 +10,14 @@ DashboardHub\Bundle\AppBundle\Entity\Dashboard:
             joinColumn:
                 name: user_id
                 referencedColumnName: id
+    manyToOne:
+        page:
+            targetEntity: DashboardHub\Bundle\BeaconBundle\Entity\Page
+            cascade: ["persist"]
+            fetch: EAGER
+            joinColumn:
+                name: page_id
+                referencedColumnName: id
     id:
         id:
             type: integer

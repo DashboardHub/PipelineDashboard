@@ -23,7 +23,11 @@ class DefaultController extends Controller
                 'latestDashboards'  => $this->get('dashboardhub_app_main.service.dashboard')
                                             ->findAllByIsPublicAndLatest(),
                 'popularDashboards' => $this->get('dashboardhub_app_main.service.dashboard')
-                                            ->findAllByIsPublicAndPopular()
+                                            ->findAllByIsPublicAndPopular(),
+                'ySlowStatistics'        => $this->get('dashboardhub_app_main.service.statistics')
+                                            ->getYSlowStats(),
+                'dashboardStatistics'        => $this->get('dashboardhub_app_main.service.statistics')
+                                                 ->getDashboardStats(),
             )
         );
     }

@@ -105,3 +105,40 @@ hwi_oauth:
 stash:
     drivers: [ FileSystem ]
     FileSystem: ~
+
+fos_elastica:
+    serializer: ~
+    clients:
+        default: { host: "%elasticsearch_host%", port: "%elasticsearch_port%" }
+    indexes:
+        pages:
+            types:
+                yslow:
+                    persistence:
+                        driver: orm
+                        model: DashboardHub\Bundle\BeaconBundle\Entity\Page
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                    mappings:
+                        url: { type: string, index: not_analyzed }
+                        created_on: { type: date, format: date_time_no_millis }
+                        build: { type: string, index: not_analyzed }
+        dashboards:
+            types:
+                github:
+                    persistence:
+                        driver: orm
+                        model: DashboardHub\Bundle\AppBundle\Entity\Dashboard
+                        provider: ~
+                        listener: ~
+                        finder: ~
+                    mappings:
+                        uid: { type: string, index: not_analyzed }
+                        repository: { type: string, index: not_analyzed }
+                        created_on: { type: date, format: date_time_no_millis }
+                        updated_on: { type: date, format: date_time_no_millis }
+
+fos_rest:
+    routing_loader:
+        default_format: json

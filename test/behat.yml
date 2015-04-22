@@ -7,6 +7,7 @@ default:
     dashboardhub_app:
       type: symfony_bundle
       bundle: DashboardHubAppBundle
+      mink_session: selenium2
       filters:
         tags: ~@omit
       contexts:
@@ -14,6 +15,11 @@ default:
   extensions:
     Behat\Symfony2Extension: ~
     Behat\MinkExtension:
+      base_url: 'http://127.0.0.1:8000'
       sessions:
         default:
           symfony2: ~
+        selenium2:
+          selenium2:
+            wd_host: http://127.0.0.1:4444/wd/hub
+            capabilities: { "firefox": { "profile": "test/dashboardhub.zip" } }
