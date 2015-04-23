@@ -1,0 +1,10 @@
+{
+  "name": "YSlow Beacon API",
+  "operations": {
+    "GetStatistics": {
+      "httpMethod": "GET",
+      "uri": "/api/stats",
+      "summary": "GET yslow statistics"
+    }
+  }
+}

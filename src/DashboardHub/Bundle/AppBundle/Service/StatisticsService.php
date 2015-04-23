@@ -1,7 +1,8 @@
 <?php
 namespace DashboardHub\Bundle\AppBundle\Service;
 
-use Elasticsearch\Client;
+use Elasticsearch\Client as ElasticSearch;
+use Guzzle\Service\Client as Guzzle;
 
 /**
  * Class Dashboard
@@ -10,58 +11,32 @@ use Elasticsearch\Client;
 class StatisticsService
 {
     /**
-     * @var Client
+     * @var ElasticSearch
      */
-    protected $client;
+    protected $elasticSearch;
 
     /**
-     * @param Client $client
+     * @var Guzzle
      */
-    public function __construct(Client $client)
+    protected $guzzle;
+
+    /**
+     * @param ElasticSearch $elasticSearch
+     * @param Guzzle        $guzzle
+     */
+    public function __construct(ElasticSearch $elasticSearch, Guzzle $guzzle)
     {
-        $this->client = $client;
+        $this->elasticSearch = $elasticSearch;
+        $this->guzzle        = $guzzle;
     }
 
     public function getYSlowStats()
     {
-        $aggs = array(
-            'aggs' => array(
-                'requests' => array(
-                    'stats' => array(
-                        'field' => 'requests'
-                    )
-                ),
-                'page_load_time' => array(
-                    'stats' => array(
-                        'field' => 'page_load_time'
-                    )
-                ),
-                'page_size' => array(
-                    'stats' => array(
-                        'field' => 'page_size'
-                    )
-                ),
-                'score' => array(
-                    'stats' => array(
-                        'field' => 'score'
-                    )
-                ),
-            )
+        return $this->guzzle
+                ->execute(
+                    $this->guzzle
+                        ->getCommand('GetStatistics')
         );
-
-        $search = array(
-            'query' => array(
-                'match_all' => array()
-            ),
-            'size'  => 0
-        );
-
-        $request = array(
-            'index' => 'pages',
-            'body'  => array_merge($search, $aggs)
-        );
-
-        return $this->client->search($request)['aggregations'];
     }
 
     public function getDashboardStats()
@@ -88,6 +63,6 @@ class StatisticsService
             'body'  => array_merge($search, $aggs)
         );
 
-        return $this->client->search($request)['aggregations'];
+        return $this->elasticSearch->search($request)['aggregations'];
     }
 }

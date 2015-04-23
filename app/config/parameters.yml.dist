@@ -34,5 +34,6 @@ parameters:
         base_url: "https://api.travis-ci.org"
     scrutinizer_api:
         base_url: "https://scrutinizer-ci.com"
+    beacon_api: "http://beacon.dashboardhub.io"
     elasticsearch_host: "%elasticsearch.host%"
     elasticsearch_port: "%elasticsearch.port%"

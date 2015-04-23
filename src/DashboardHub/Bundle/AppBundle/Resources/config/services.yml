@@ -69,6 +69,17 @@ services:
     class: Elasticsearch\Client
     arguments: [{"hosts" : ["%elasticsearch_host%"]}]
 
+  dashboardhub_app_main.beacon.descriptions.factory:
+    class:   Guzzle\Service\Description\ServiceDescription
+    factory: [Guzzle\Service\Description\ServiceDescription, factory]
+    arguments: ["%beacon_descriptions%"]
+
+  dashboardhub_app_main.beacon.api:
+    class: Guzzle\Service\Client
+    arguments: ["%beacon_api%"]
+    calls:
+      - [setDescription, [@dashboardhub_app_main.beacon.descriptions.factory]]
+
   dashboardhub_app_main.service.statistics:
     class: DashboardHub\Bundle\AppBundle\Service\StatisticsService
-    arguments: ["@dashboardhub_app_main.elasticsearch.client"]
+    arguments: ["@dashboardhub_app_main.elasticsearch.client", "@dashboardhub_app_main.beacon.api"]
