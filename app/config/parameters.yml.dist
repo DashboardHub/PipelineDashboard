@@ -35,5 +35,6 @@ parameters:
     scrutinizer_api:
         base_url: "https://scrutinizer-ci.com"
     beacon_api: "http://beacon.dashboardhub.io"
+    beacon_descriptions: "%kernel.root_dir%/../src/DashboardHub/Bundle/AppBundle/Resources/config/descriptions.json"
     elasticsearch_host: "%elasticsearch.host%"
     elasticsearch_port: "%elasticsearch.port%"
