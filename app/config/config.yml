@@ -111,20 +111,8 @@ fos_elastica:
     clients:
         default: { host: "%elasticsearch_host%", port: "%elasticsearch_port%" }
     indexes:
-        pages:
-            types:
-                yslow:
-                    persistence:
-                        driver: orm
-                        model: DashboardHub\Bundle\BeaconBundle\Entity\Page
-                        provider: ~
-                        listener: ~
-                        finder: ~
-                    mappings:
-                        url: { type: string, index: not_analyzed }
-                        created_on: { type: date, format: date_time_no_millis }
-                        build: { type: string, index: not_analyzed }
         dashboards:
+            index_name: dashboard_dashboards
             types:
                 github:
                     persistence:
@@ -142,3 +130,4 @@ fos_elastica:
 fos_rest:
     routing_loader:
         default_format: json
+        include_format: false
