@@ -11,6 +11,12 @@ use FOS\RestBundle\Controller\FOSRestController;
  */
 class DashboardApiController extends FOSRestController
 {
+
+    /**
+     * @param string $uid
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getDashboardAction($uid)
     {
         try {
