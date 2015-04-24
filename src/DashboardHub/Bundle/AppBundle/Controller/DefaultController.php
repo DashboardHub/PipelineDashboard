@@ -19,15 +19,15 @@ class DefaultController extends Controller
         return $this->render(
             'DashboardHubAppBundle:Default:index.html.twig',
             array(
-                'themes'            => array_flip($this->container->getParameter('dashboard_hub_app.themes')),
-                'latestDashboards'  => $this->get('dashboardhub_app_main.service.dashboard')
-                                            ->findAllByIsPublicAndLatest(),
-                'popularDashboards' => $this->get('dashboardhub_app_main.service.dashboard')
-                                            ->findAllByIsPublicAndPopular(),
-                'ySlowStatistics'        => $this->get('dashboardhub_app_main.service.statistics')
-                                            ->getYSlowStats(),
-                'dashboardStatistics'        => $this->get('dashboardhub_app_main.service.statistics')
-                                                 ->getDashboardStats(),
+                'themes'              => array_flip($this->container->getParameter('dashboard_hub_app.themes')),
+                'latestDashboards'    => $this->get('dashboardhub_app_main.service.dashboard')
+                                              ->findAllByIsPublicAndLatest(),
+                'popularDashboards'   => $this->get('dashboardhub_app_main.service.dashboard')
+                                              ->findAllByIsPublicAndPopular(),
+                'ySlowStatistics'     => $this->get('dashboardhub_app_main.service.statistics')
+                                              ->getYSlowStats(),
+                'dashboardStatistics' => $this->get('dashboardhub_app_main.service.statistics')
+                                              ->getDashboardStats(),
             )
         );
     }
