@@ -59,7 +59,7 @@ class StatisticsService
         );
 
         $request = array(
-            'index' => 'dashboards',
+            'index' => 'dashboard_dashboards',
             'body'  => array_merge($search, $aggs)
         );
 
