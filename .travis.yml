@@ -13,7 +13,7 @@ before_install:
   - mysql -e "create database IF NOT EXISTS dashboardhub;" -uroot
 
 before_script:
-  - curl -s http://getcomposer.org/installer | php
+  - curl -s https://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
   - php app/console doctrine:schema:update --force
   - php app/console doctrine:fixtures:load --no-interaction 
