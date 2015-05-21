@@ -74,6 +74,14 @@ Add a badge to you README for easy & quick access [![DashboardHub Badge](http://
 
 ---
 
+## Dependencies on Micro Services
+
+* [Dashboard Service](https://github.com/DashboardHub/DashboardService)
+* [External Aggregator Service](https://github.com/DashboardHub/ExternalServiceAggregator)
+* [Beacon Service](https://github.com/DashboardHub/BeaconService)
+
+---
+
 # Ideas
 
 All feedback / ideas are welcome! Please log under [issues](https://github.com/DashboardHub/PipelineDashboard/issues) on Github.
