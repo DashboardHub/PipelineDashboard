@@ -53,7 +53,7 @@ Add a badge to you README for easy & quick access [![DashboardHub Badge](http://
 
    More information on composer here https://getcomposer.org/download/
 
-3. Update config parameters 
+3. Update config parameters **(DEPRECATED)**
    * **DEV** `app/config/parameters_dev.yml`
    * **PROD** `app/config/parameters.yml` 
         or use **ENV** variables
