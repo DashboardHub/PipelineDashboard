@@ -82,8 +82,14 @@ Add a badge to you README for easy & quick access [![DashboardHub Badge](http://
 
 ---
 
-# Ideas
+## Ideas
 
 All feedback / ideas are welcome! Please log under [issues](https://github.com/DashboardHub/PipelineDashboard/issues) on Github.
 
 ---
+
+## Contributors
+
+* Eddie Jaoude [eddiejaoude](http://github.com/eddiejaoude) [lead developer]
+* Other [awesome developers]
+  (https://github.com/DashboardHub/PipelineDashboard/graphs/contributors)
