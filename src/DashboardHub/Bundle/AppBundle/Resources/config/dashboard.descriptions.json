@@ -1,0 +1,10 @@
+{
+  "name": "Dashboard API",
+  "operations": {
+    "FindAllByAuthenticatedUserAndDefaults": {
+      "httpMethod": "GET",
+      "uri": "/api/dashboards",
+      "summary": "GET My Dashboards & Defaults"
+    }
+  }
+}

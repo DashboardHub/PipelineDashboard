@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+    <div class="panel-heading">YSlow Builds</div>
+
+    <table class="table table-striped">
+        <thead>
+        <th>Build</th>
+        <th>Pages</th>
+        <th>Min / Max Requests</th>
+        <th>Min / Max Score (%)</th>
+        <th>Min / Max Page Load (ms)</th>
+        <th>Min / Max Page Size (kb)</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        {% for build in builds.aggregations.builds.buckets %}
+            <tr>
+                <td>{{ build.key }}</td>
+                <td>{{ build.doc_count }}</td>
+                <td>{{ build.requests.min }} / {{ build.requests.max }}</td>
+                <td>{{ build.score.min }} / {{ build.score.max }}</td>
+                <td>{{ build.pageload.min|number_format }} / {{ build.pageload.max|number_format }}</td>
+                <td>{{ build.pagesize.min|number_format }} / {{ build.pagesize.max|number_format }}</td>
+                <td>
+                    <a class="btn btn-default btn-xs"
+                       href="{{ path('dashboard_hub_performance.builds', { 'uid': uid, 'build': build.key }) }}"
+                       role="button">
+                        <i class="fa fa-bar-chart"></i> Pages
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

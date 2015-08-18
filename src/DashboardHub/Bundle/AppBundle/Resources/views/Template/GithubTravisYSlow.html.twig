@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="/bundles/dashboardhubapp/js/jquery.sparkline.min.js"></script>
+
+    <script type="text/javascript">
+        $.fn.sparkline.defaults.line.minSpotColor = 'red';
+        $.fn.sparkline.defaults.line.maxSpotColor = 'red';
+        $.fn.sparkline.defaults.line.width = '100%';
+        $.fn.sparkline.defaults.common.disableTooltips = true;
+        $(function () {
+            $('.inlinesparkline').sparkline();
+        });
+    </script>
+{% endblock javascripts %}
+
+{% block body %}
+    {% include 'DashboardHubAppBundle:Template:header.html.twig' %}
+
+    <div class="row tiles">
+        <div class="col-md-2">
+            {{ render(controller('DashboardHubAppBundle:Github:currentMilestone', { 'repository': dashboard.repository } )) }}
+        </div>
+        <div class="col-md-2">
+            {{ render(controller('DashboardHubAppBundle:Travis:latestBuild', { 'repository': dashboard.repository } )) }}
+        </div>
+        <div class="col-md-2">
+            {{ render(controller('DashboardHubAppBundle:Travis:buildDuration', { 'repository': dashboard.repository } )) }}
+        </div>
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:YSlow:latestBuild', { 'repository': dashboard.repository } )) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Github:events', { 'repository': dashboard.repository } )) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Github:pullrequests', { 'repository': dashboard.repository } )) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Github:issues', { 'repository': dashboard.repository } )) }}
+        </div>
+
+        <div class="col-md-6">
+            {{ render(controller('DashboardHubAppBundle:Travis:builds', { 'repository': dashboard.repository } )) }}
+        </div>
+    </div>
+{% endblock %}

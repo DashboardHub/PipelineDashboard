@@ -1,7 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
     database_driver: pdo_mysql
-    database_host: 127.0.0.1
+    database_host: 192.168.59.103
     database_port: null
     database_name: dashboardhub
     database_user: root
@@ -22,5 +22,5 @@ parameters:
         base_url: https://scrutinizer-ci.com
     beacon_api: http://beacon.dashboardhub.io
     beacon_descriptions: "%kernel.root_dir%/../src/DashboardHub/Bundle/AppBundle/Resources/config/descriptions.json"
-    elasticsearch_host: 127.0.0.1
+    elasticsearch_host: 192.168.59.103
     elasticsearch_port: 9200
