@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Pipeline Dashboard:: Home</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div>
+        <h2>Your World in One Place</h2>
+        <p>Your Pipeline in One Place. Github, TravisCI etc reporting back to your Dashboard Hub.</p>
+        <p>For more information please visit our <a href="http://dashboardhub.io">DashboardHub Website</a></p>
+    </div>
+
+    <div class="card-group">
+        <div class="card">
+            <div class="card-header">
+                Recently Added Dashboards
+            </div>
+            <div class="card-block">
+                <table id="latest" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Repository</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${Projects}">
+                        <td th:text="${project.name}">name</td>
+                        <td th:text="${project.description}">description</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Most Popular Dashboards
+            </div>
+            <div class="card-block">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Repository</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <td>Larry the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+            stompClient.subscribe('/project/new', function(message){
+                var data = JSON.parse(message.body);
+                var table = $('table#latest tbody');
+
+                table.prepend('<tr><td>' + data.name + '</td><td>' + data.description + '</td></tr>')
+            });
+        });
+
+    </script>
+</div>
+
+</body>
+</html>
