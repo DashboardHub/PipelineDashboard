@@ -7,6 +7,8 @@ public class Project {
 
     private String description;
 
+    private Integer views = 0;
+
     public Project(String name, String description) {
         this.name = name;
         this.description = description;
@@ -16,15 +18,29 @@ public class Project {
         return name;
     }
 
-    public void setName(String name) {
+    public Project setName(String name) {
         this.name = name;
+
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Project setDescription(String description) {
         this.description = description;
+
+        return this;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public Project setViews(Integer views) {
+        this.views = views;
+
+        return this;
     }
 }

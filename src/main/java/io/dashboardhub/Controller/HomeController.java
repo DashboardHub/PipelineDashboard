@@ -21,7 +21,8 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(Model model) throws Exception {
-        model.addAttribute("Projects", projectService.getLatest());
+        model.addAttribute("latest", projectService.getLatest());
+        model.addAttribute("popular", projectService.getPopular());
 
         return "home";
     }

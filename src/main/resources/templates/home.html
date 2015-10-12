@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="project : ${Projects}">
+                    <tr th:each="project : ${latest}">
                         <td th:text="${project.name}">name</td>
                         <td th:text="${project.description}">description</td>
                     </tr>
@@ -42,25 +42,19 @@
                 Most Popular Dashboards
             </div>
             <div class="card-block">
-                <table class="table table-hover">
+                <table id="popular" class="table table-hover">
                     <thead>
                     <tr>
                         <th>Name</th>
                         <th>Repository</th>
+                        <th>Views</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <td>Larry the Bird</td>
-                        <td>@twitter</td>
+                    <tr th:each="project : ${popular}">
+                        <td th:text="${project.name}">name</td>
+                        <td th:text="${project.description}">description</td>
+                        <td th:text="${project.views}">views</td>
                     </tr>
                     </tbody>
                 </table>
@@ -72,11 +66,28 @@
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
         stompClient.connect({}, function(frame) {
-            stompClient.subscribe('/project/new', function(message){
+            stompClient.subscribe('/project/latest', function(message){
                 var data = JSON.parse(message.body);
                 var table = $('table#latest tbody');
 
-                table.prepend('<tr><td>' + data.name + '</td><td>' + data.description + '</td></tr>')
+                var rows = [];
+                $.each(data, function(index, value){
+                    rows.push('<tr><td>' + value.name + '</td><td>' + value.description + '</td></tr>');
+                });
+
+                table.html(rows);
+            });
+
+            stompClient.subscribe('/project/popular', function(message){
+                var data = JSON.parse(message.body);
+                var table = $('table#popular tbody');
+
+                var rows = [];
+                $.each(data, function(index, value){
+                    rows.push('<tr><td>' + value.name + '</td><td>' + value.description + '</td><td>' + value.views + '</td></tr>');
+                });
+
+                table.html(rows);
             });
         });
 
