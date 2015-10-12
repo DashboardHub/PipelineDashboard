@@ -15,7 +15,7 @@ public class HomeController {
     private ProjectService projectService;
 
     @RequestMapping("/")
-    public String home(Model model) throws Exception {
+    public String home(Model model) {
         model.addAttribute("latest", projectService.getLatest());
         model.addAttribute("popular", projectService.getPopular());
 
