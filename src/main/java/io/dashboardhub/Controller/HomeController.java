@@ -1,10 +1,5 @@
 package io.dashboardhub.Controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import io.dashboardhub.Entity.Project;
 import io.dashboardhub.Service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
