@@ -1,6 +1,8 @@
 package io.dashboardhub.Entity;
 
 
+import java.util.List;
+
 public class Project {
 
     private String name;
@@ -8,6 +10,8 @@ public class Project {
     private String description;
 
     private Integer views = 0;
+
+    private List<Repository> repositories;
 
     public Project(String name, String description) {
         this.name = name;
@@ -40,6 +44,16 @@ public class Project {
 
     public Project setViews(Integer views) {
         this.views = views;
+
+        return this;
+    }
+
+    public List<Repository> getRepositories() {
+        return repositories;
+    }
+
+    public Project setRepositories(List<Repository> repositories) {
+        this.repositories = repositories;
 
         return this;
     }

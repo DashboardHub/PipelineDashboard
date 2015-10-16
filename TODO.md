@@ -7,15 +7,17 @@
 * [x] Layout Design - bootstrap 4
 * [x] Pages inherit from Layout
 * [x] Homepage - layout
-* [ ] Homepage - list new public projects (public websockets?)
-* [ ] Homepage - list most popular projets & views (public websockets?)
-* [ ] Projects page - layout, list my projects (private websockets?)
-* [ ] Spec tests - Controllers
+* [x] Homepage - list new public projects (public websockets?)
+* [x] Homepage - list most popular projets & views (public websockets?)
+* [x] Projects page - layout, list my projects
+* [ ] Homepage Service calls in Parallel
+* [ ] Add JS dependencies locally
+* [ ] Homepage data via REST API (DashboardService)
+* [ ] CRUD for Projects & Rest calls
+* [ ] Spec tests - Controllers, Service etc..
 * [ ] Login page - list options (github, twitter...)
-
----
-
-* [ ] Pull Request
+* [ ] Project Dashboard (Repositoy list overview)
+* [ ] Repository Dashboard (Details)
 
 ---
 

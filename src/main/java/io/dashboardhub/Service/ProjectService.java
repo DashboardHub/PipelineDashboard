@@ -1,15 +1,16 @@
 package io.dashboardhub.Service;
 
 import io.dashboardhub.Entity.Project;
+import io.dashboardhub.Repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.core.MessageSendingOperations;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.concurrent.Future;
 
 @Service
 public class ProjectService {
@@ -17,23 +18,17 @@ public class ProjectService {
     @Autowired
     private MessageSendingOperations<String> messagingTemplate;
 
-    public List getLatest() {
-        return this.generateData();
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Async("taskExecutor")
+    public Future<List<Project>> getLatest() {
+        return new AsyncResult<List<Project>>(this.projectRepository.getLatest());
     }
 
-    public List getPopular() {
-        return this.generateData();
-    }
-
-    private List generateData() {
-        ArrayList<Project> projects = new ArrayList<Project>();
-
-        projects.add(new Project("title10", "description10").setViews(new Random().nextInt(10000)));
-        projects.add(new Project("title20", "description20").setViews(new Random().nextInt(1000)));
-
-        projects.add(new Project("title", UUID.randomUUID().toString()).setViews(new Random().nextInt(100)));
-
-        return projects;
+    @Async("taskExecutor")
+    public Future<List<Project>> getPopular() {
+        return new AsyncResult<List<Project>>(this.projectRepository.getPopular());
     }
 
     /**
@@ -42,7 +37,7 @@ public class ProjectService {
     @Scheduled(fixedDelay = 5000)
     public void sendLatestUpdates() {
         this.messagingTemplate.convertAndSend(
-                "/project/latest", this.generateData());
+                "/project/latest", projectRepository.generateData());
 
     }
 
@@ -52,7 +47,6 @@ public class ProjectService {
     @Scheduled(fixedDelay = 1000)
     public void sendPopularUpdates() {
         this.messagingTemplate.convertAndSend(
-                "/project/popular", this.generateData());
-
+                "/project/popular", projectRepository.generateData());
     }
 }

@@ -3,7 +3,7 @@ server:
   port: 8080
 
 security:
-  ignored: /,/favicon.ico,/js/**,/css/**,/webjars/**,/ws/**
+  ignored: /,/favicon.ico,/js/**,/css/**,/webjars/**,/ws/**,/projects/**
   sessions: ALWAYS
 
 ---
