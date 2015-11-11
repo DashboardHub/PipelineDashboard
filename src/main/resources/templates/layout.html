@@ -9,9 +9,18 @@
           th:href="@{/css/styles.css}"
           href="../../css/styles.css"/>
 
-    <script type="text/javascript" src="//cdn.jsdelivr.net/sockjs/1.0.0/sockjs.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript"
+            th:href="@{/js/sockjs-1.0.0.min.js}"
+            src="../../js/sockjs-1.0.0.min.js">
+    </script>
+    <script type="text/javascript"
+            th:href="@{/js/stomp-2.3.3.min.js}"
+            src="../../js/stomp-2.3.3.min.js">
+    </script>
+    <script type="text/javascript"
+            th:href="@{/js/jquery-2.1.4.min.js}"
+            src="../../js/jquery-2.1.4.min.js">
+    </script>
 </head>
 <body>
 
@@ -27,6 +36,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://dashboardhub.io">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:action="@{/projects}" href="/projects">Projects</a>
             </li>
         </ul>
     </div>
