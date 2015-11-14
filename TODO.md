@@ -10,18 +10,19 @@
 * [x] Homepage - list new public projects (public websockets?)
 * [x] Homepage - list most popular projets & views (public websockets?)
 * [x] Projects page - layout, list my projects
-* [ ] Homepage Service calls in Parallel
-* [ ] Add JS dependencies locally
+* [x] Add JS dependencies locally
+* [x] Logging (CRUD)
+* [ ] Config from config file for test (host)
+* [ ] CRUD for Projects & Rest calls (Form) & validation / errors
+* [ ] Bootstrap form partial thymeleaf template
+* [ ] make directories lower case
+* [ ] added interfaces - service / rposotory etc
 * [ ] Homepage data via REST API (DashboardService)
-* [ ] CRUD for Projects & Rest calls
 * [ ] Spec tests - Controllers, Service etc..
 * [ ] Login page - list options (github, twitter...)
 * [ ] Project Dashboard (Repositoy list overview)
 * [ ] Repository Dashboard (Details)
-
----
-
-* [ ] Config from config file for test (host) - Simon?
+* [ ] Homepage Service calls in Parallel
 
 ---
 
