@@ -1,5 +1,10 @@
 package io.dashboardhub.Entity;
 
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Repository {
 
     private String name;
@@ -8,50 +13,10 @@ public class Repository {
 
     private String url;
 
-    private Integer views;
+    private Integer views = 0;
 
     public Repository(String name, String url) {
         this.name = name;
         this.url = url;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Repository setName(String name) {
-        this.name = name;
-
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Repository setDescription(String description) {
-        this.description = description;
-
-        return this;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public Repository setUrl(String url) {
-        this.url = url;
-
-        return this;
-    }
-
-    public Integer getViews() {
-        return views;
-    }
-
-    public Repository setViews(Integer views) {
-        this.views = views;
-
-        return this;
     }
 }

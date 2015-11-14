@@ -1,60 +1,32 @@
 package io.dashboardhub.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import lombok.Data;
 
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonRootName(value = "_embedded.project")
 public class Project {
 
+    @Size(min=4, max=32)
     private String name;
 
     private String description;
 
+    private Boolean isPublic = true;
+
     private Integer views = 0;
 
-    private List<Repository> repositories;
+    private List<Repository> repositories = new ArrayList<Repository>();
 
-    public Project(String name, String description) {
+    Project() {}
+
+    public Project(String name) {
         this.name = name;
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Project setName(String name) {
-        this.name = name;
-
-        return this;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Project setDescription(String description) {
-        this.description = description;
-
-        return this;
-    }
-
-    public Integer getViews() {
-        return views;
-    }
-
-    public Project setViews(Integer views) {
-        this.views = views;
-
-        return this;
-    }
-
-    public List<Repository> getRepositories() {
-        return repositories;
-    }
-
-    public Project setRepositories(List<Repository> repositories) {
-        this.repositories = repositories;
-
-        return this;
     }
 }
