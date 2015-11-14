@@ -29,16 +29,16 @@
         &#9776;
     </button>
     <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-        <a class="navbar-brand" href="#">Pipeline Dashboard</a>
+        <a class="navbar-brand" href="/">Pipeline Dashboard</a>
         <ul class="nav navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://dashboardhub.io">About</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:action="@{/projects}" href="/projects">Projects</a>
+                <a class="nav-link" th:action="@{/projects}" href="/projects">My Projects</a>
             </li>
         </ul>
     </div>
@@ -47,7 +47,11 @@
 <div class="container">
 
     <div class="alert alert-warning" role="alert">
-        <strong>Beta!</strong> Currently in Beta mode.
+        <strong>Beta v0.2.0</strong> Currently in Beta mode.
+    </div>
+
+    <div class="alert alert-danger" role="alert" th:if="${error != null}">
+        <strong>Error!</strong> <span th:text="${error}"></span>
     </div>
 
     <div layout:fragment="content">
