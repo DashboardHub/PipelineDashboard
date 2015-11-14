@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-import java.util.concurrent.Future;
+import javax.validation.Valid;
 
 @Controller
 @EnableOAuth2Sso
@@ -18,17 +20,35 @@ public class ProjectsController {
     @Autowired
     private ProjectService projectService;
 
-    @RequestMapping("/projects")
+    @RequestMapping(value = {"/projects"}, method = RequestMethod.GET)
     public String list(Model model) {
         // @TODO: should be getMyProjects
-        Future<List<Project>> latest = projectService.getLatest();
+        model.addAttribute("projects", this.projectService.getAll());
 
-        try {
-            model.addAttribute("projects", latest.get());
-        } catch(Exception e) {
-            System.out.println("ERROR in async thread " + e.getMessage());
+        return "projects/list";
+    }
+
+    @RequestMapping(value = {"/projects/add"}, method = RequestMethod.GET)
+    public String add(@ModelAttribute Project project, Model model) {
+        model.addAttribute("project", project);
+
+        return "projects/add";
+    }
+
+    @RequestMapping(value = {"/projects/add"}, method = RequestMethod.POST)
+    public String save(@Valid Project project, BindingResult bindingResult, Model model) {
+        model.addAttribute("project", project);
+
+        if (bindingResult.hasErrors()) {
+            return "projects/add";
         }
 
-        return "projects";
+        if (this.projectService.save(project)) {
+            return "redirect:/projects";
+        }
+
+        model.addAttribute("error", "An error occurred please try again");
+
+        return "projects/add";
     }
 }

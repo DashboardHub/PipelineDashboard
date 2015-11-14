@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Add Project :: Pipeline Dashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="card-group">
+        <div class="card">
+            <div class="card-header">
+                Add Project
+            </div>
+            <div class="card-block">
+                <form action="#" th:action="@{/projects/add}" th:object="${project}" method="post">
+                    <fieldset class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
+                        <label class="control-label" for="name">Name</label>
+                        <input type="text" class="form-control form-control-error" id="name" placeholder="Name" th:field="*{name}" />
+                        <small class="text-help has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
+                    </fieldset>
+                    <fieldset class="form-group" th:classappend="${#fields.hasErrors('description')} ? 'has-error'">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                        <small class="text-help has-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</small>
+                    </fieldset>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" th:field="*{isPublic}" value="true" /> Is a Public Project?
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

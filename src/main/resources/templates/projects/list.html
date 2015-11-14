@@ -3,11 +3,15 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Pipeline Dashboard:: Projects</title>
+    <title>Projects :: Pipeline Dashboard</title>
 </head>
 <body>
 
 <div layout:fragment="content" class="container">
+
+    <div class="pull-right">
+        <a href="/projects/add" type="button" class="btn btn-primary">Create</a>
+    </div>
 
     <div>
         <p>Your Private and Public Projects</p>
