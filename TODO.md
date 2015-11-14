@@ -1,7 +1,13 @@
+### Must able to do
+
 * [x] Public / protect pages
 * [x] GitHub OAuth
 * Testing
   * [x] BDD - cucumber
+
+---
+
+### Phase 1
 
 * [x] Autoload/no cache
 * [x] Layout Design - bootstrap 4
@@ -11,20 +17,31 @@
 * [x] Homepage - list most popular projets & views (public websockets?)
 * [x] Projects page - layout, list my projects
 * [x] Add JS dependencies locally
-* [x] Logging (CRUD)
-* [ ] Config from config file for test (host)
+* [x] Logging
+* [ ] Config from config file for test & repository (host)
 * [ ] CRUD for Projects & Rest calls (Form) & validation / errors
-* [ ] Bootstrap form partial thymeleaf template
+
 * [ ] make directories lower case
-* [ ] added interfaces - service / rposotory etc
+* [ ] added interfaces - service / repository etc
 * [ ] Homepage data via REST API (DashboardService)
 * [ ] Spec tests - Controllers, Service etc..
-* [ ] Login page - list options (github, twitter...)
+
 * [ ] Project Dashboard (Repositoy list overview)
 * [ ] Repository Dashboard (Details)
+
+* [ ] Javascript websocket connection fail, display alert on page (use error alert, but warning colours)
+
+---
+
+### Phase 2
+
+* [ ] Bootstrap form partial thymeleaf template
+* [ ] Login page - list options (github, twitter...)
 * [ ] Homepage Service calls in Parallel
 
 ---
+
+### Appendix / Notes
 
 * [ ] Testing
     * jUnit
