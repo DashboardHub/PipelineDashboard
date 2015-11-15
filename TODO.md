@@ -18,7 +18,9 @@
 * [x] Projects page - layout, list my projects
 * [x] Add JS dependencies locally
 * [x] Logging
+* [ ] Javascript websocket connection fail, display alert on page (use error alert, but warning colours)
 * [ ] Config from config file for test & repository (host)
+* [ ] GitHub OAuth keys to ENV vars
 * [ ] CRUD for Projects & Rest calls (Form) & validation / errors
 
 * [ ] make directories lower case
@@ -28,8 +30,6 @@
 
 * [ ] Project Dashboard (Repositoy list overview)
 * [ ] Repository Dashboard (Details)
-
-* [ ] Javascript websocket connection fail, display alert on page (use error alert, but warning colours)
 
 ---
 
