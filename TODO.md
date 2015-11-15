@@ -18,6 +18,7 @@
 * [x] Projects page - layout, list my projects
 * [x] Add JS dependencies locally
 * [x] Logging
+* [ ] Display username when logged in
 * [ ] Javascript websocket connection fail, display alert on page (use error alert, but warning colours)
 * [ ] Config from config file for test & repository (host)
 * [ ] GitHub OAuth keys to ENV vars
