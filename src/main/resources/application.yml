@@ -1,0 +1,33 @@
+server:
+  port: ${port:8081}
+debug: true
+spring:
+  resources:
+    chain:
+      enabled: true
+security:
+  sessions: ALWAYS
+  oauth2:
+    client:
+      clientId: xxx
+      clientSecret: xxx
+      accessTokenUri: https://github.com/login/oauth/access_token
+      userAuthorizationUri: https://github.com/login/oauth/authorize
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://api.github.com/user
+#      preferTokenInfo: false
+logging:
+  level:
+    org.springframework.security: DEBUG
+# @ToDo: remove duplication in config
+github:
+  client:
+    clientId: xxx
+    clientSecret: xxx
+    accessTokenUri: https://github.com/login/oauth/access_token
+    userAuthorizationUri: https://github.com/login/oauth/authorize
+    clientAuthenticationScheme: form
+    scope: write:org,repo,user:email,public_repo # https://developer.github.com/v3/oauth/#scopes
+  resource:
+    userInfoUri: https://api.github.com/user
