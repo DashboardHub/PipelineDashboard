@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Home :: Pipeline Dashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div>
+        <h2>Your World in One Place</h2>
+        <p>Your Pipeline in One Place. Github, TravisCI etc reporting back to your Dashboard Hub.</p>
+        <p>For more information please visit our <a href="http://dashboardhub.io">DashboardHub Website</a></p>
+    </div>
+
+    <div class="card-group">
+        <div class="card">
+            <div class="card-header">
+                Recently Added Dashboards
+            </div>
+            <div class="card-block">
+                <table id="latest" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${latest}">
+                        <td th:text="${project.name}">name</td>
+                        <td th:text="${project.description}">description</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                Most Popular Dashboards
+            </div>
+            <div class="card-block">
+                <table id="popular" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Views</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${popular}">
+                        <td th:text="${project.name}">name</td>
+                        <td th:text="${project.description}">description</td>
+                        <td th:text="${project.views}">views</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var socket = new SockJS('/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function(frame) {
+            stompClient.subscribe('/project/latest', function(message){
+                var data = JSON.parse(message.body);
+                var table = $('table#latest tbody');
+
+                var rows = [];
+                $.each(data, function(index, value){
+                    rows.push('<tr><td>' + value.name + '</td><td>' + value.description + '</td></tr>');
+                });
+
+                table.html(rows);
+            });
+
+            stompClient.subscribe('/project/popular', function(message){
+                var data = JSON.parse(message.body);
+                var table = $('table#popular tbody');
+
+                var rows = [];
+                $.each(data, function(index, value){
+                    rows.push('<tr><td>' + value.name + '</td><td>' + value.description + '</td><td>' + value.views + '</td></tr>');
+                });
+
+                table.html(rows);
+            });
+        });
+
+    </script>
+</div>
+
+</body>
+</html>

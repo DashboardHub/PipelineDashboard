@@ -1,0 +1,28 @@
+debug: true
+server:
+  port: ${port:8081}
+
+security:
+  ignored: /favicon.ico,/js/**,/css/**,/webjars/**,/ws/**,/error, /metrics # /
+  sessions: ALWAYS
+
+---
+spring:
+  profiles: default
+security:
+  oauth2:
+    client:
+      clientId: b8552335dab47905366f # @TODO: These should come from ENV vars or Config Service
+      clientSecret: cd745f31e559f94cd8887efea6e313b93cbd4d50 # @TODO: These should come from ENV vars or Config Service
+      accessTokenUri: https://github.com/login/oauth/access_token
+      userAuthorizationUri: https://github.com/login/oauth/authorize
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://api.github.com/user
+      preferTokenInfo: false
+
+---
+spring:
+  profiles: prod
+server:
+  port: ${port:80}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Projects :: Pipeline Dashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="pull-right">
+        <a href="/projects/add" type="button" class="btn btn-primary">Create</a>
+    </div>
+
+    <div>
+        <p>Your Private and Public Projects</p>
+    </div>
+
+    <div class="card-group" th:each="project : ${projects}">
+        <div class="card">
+            <div class="card-header">
+                <p th:text="${project.name}">name</p>
+            </div>
+            <div class="card-block">
+                <table id="latest" class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="repository : ${project.repositories}">
+                        <td th:text="${repository.name}">name</td>
+                        <td th:text="${repository.url}">url</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
