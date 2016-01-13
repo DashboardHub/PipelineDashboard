@@ -15,7 +15,7 @@ public class PipelinedashboardApplication {
 	}
 
 	@Bean
-	public AuthenticationListener authenticatonListener() {
+	public AuthenticationListener authenticationListener() {
 		return new AuthenticationListener();
 	}
 }
