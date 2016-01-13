@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Login:: PipelineDashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    Login with...
+                </div>
+                <div class="card-block">
+                    <div class="list-group">
+                        <a href="/login/github" th:action="@{/login/github}" class="list-group-item">
+                            <i class="fa fa-github-square fa-1x"></i>
+                            GitHub
+                        </a>
+                        <span class="list-group-item disabled">
+                            <i class="fa fa-facebook-square fa-1x"></i>
+                            Facebook
+                        </span>
+                        <span class="list-group-item disabled">
+                            <i class="fa fa-twitter-square fa-1x"></i>
+                            Twitter
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    Secure Authentication
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+</div>
+
+</body>
+</html>
