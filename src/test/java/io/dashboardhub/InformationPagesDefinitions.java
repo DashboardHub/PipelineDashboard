@@ -15,7 +15,7 @@ public class InformationPagesDefinitions implements En {
 
     public WebDriver driver = new FirefoxDriver();
 
-    private String host = "http://localhost:8080";
+    private String host = "http://localhost:80";
 
     @Given("^I am a visitor$")
     public void IAmAVistor() {
