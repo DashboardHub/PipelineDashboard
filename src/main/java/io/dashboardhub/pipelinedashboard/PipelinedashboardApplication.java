@@ -13,9 +13,4 @@ public class PipelinedashboardApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PipelinedashboardApplication.class, args);
 	}
-
-	@Bean
-	public AuthenticationListener authenticationListener() {
-		return new AuthenticationListener();
-	}
 }
