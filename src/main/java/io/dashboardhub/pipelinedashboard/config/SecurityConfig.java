@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    @ConfigurationProperties("github")
+    @ConfigurationProperties("security.oauth2")
     ClientResourcesConfig github() {
         return new ClientResourcesConfig();
     }
