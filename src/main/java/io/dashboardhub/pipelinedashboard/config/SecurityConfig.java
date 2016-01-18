@@ -3,8 +3,10 @@ package io.dashboardhub.pipelinedashboard.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
@@ -22,6 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     OAuth2ClientContext oauth2ClientContext;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -57,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 path);
         OAuth2RestTemplate githubTemplate = new OAuth2RestTemplate(client.getClient(),
                 oauth2ClientContext);
+        githubFilter.setApplicationEventPublisher(applicationEventPublisher);
         githubFilter.setRestTemplate(githubTemplate);
         githubFilter.setTokenServices(new UserInfoTokenServices(
                 client.getResource().getUserInfoUri(), client.getClient().getClientId()));
