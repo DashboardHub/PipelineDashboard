@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.client.OAuth2ClientContext;
@@ -31,15 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.antMatcher("/**")
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/", "/login**", "/webjars/**").permitAll()
                 .anyRequest().authenticated()
-            .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")//.failureUrl("/login?error")
                 .permitAll()
-            .and().logout().logoutSuccessUrl("/").permitAll()
-            .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
+                .and().logout().logoutSuccessUrl("/").permitAll()
+                .and().addFilterBefore(ssoFilter(), BasicAuthenticationFilter.class)
         ;
     }
 
@@ -54,18 +53,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         List<Filter> filters = new ArrayList<>();
         filters.add(ssoFilter(this.github(), "/login/github"));
         filter.setFilters(filters);
+
         return filter;
     }
 
     private Filter ssoFilter(ClientResourcesConfig client, String path) {
-        OAuth2ClientAuthenticationProcessingFilter githubFilter = new OAuth2ClientAuthenticationProcessingFilter(
-                path);
-        OAuth2RestTemplate githubTemplate = new OAuth2RestTemplate(client.getClient(),
-                oauth2ClientContext);
+        OAuth2ClientAuthenticationProcessingFilter githubFilter = new OAuth2ClientAuthenticationProcessingFilter(path);
+        OAuth2RestTemplate githubTemplate = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
         githubFilter.setApplicationEventPublisher(applicationEventPublisher);
         githubFilter.setRestTemplate(githubTemplate);
-        githubFilter.setTokenServices(new UserInfoTokenServices(
-                client.getResource().getUserInfoUri(), client.getClient().getClientId()));
+        githubFilter.setTokenServices(
+                new UserInfoTokenServices(
+                        client.getResource().getUserInfoUri(), client.getClient().getClientId()
+                )
+        );
+
         return githubFilter;
     }
 }
