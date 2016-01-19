@@ -9,27 +9,19 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(name = "provider_username_idx", columnNames = {"provider", "username"} ))
+@Table(uniqueConstraints = @UniqueConstraint(name = "username_idx", columnNames = {"username"} ))
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @Size(min = 1, max = 255)
-    private Integer uid;
-
-    @NotNull
-    @Size(min = 6, max = 16)
-    private String provider;
+    private String uid;
 
     @NotNull
     @Size(min = 1, max = 255)
     private String username;
 
-    @NotNull
-    @Size(min = 1, max = 255)
     private String name;
 
 //    @ManyToMany
@@ -39,8 +31,7 @@ public class User {
     User() {
     }
 
-    public User(Integer uid, String username) {
-        this.uid = uid;
+    public User(String username) {
         this.username = username;
     }
 }

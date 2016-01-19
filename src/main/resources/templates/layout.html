@@ -36,16 +36,16 @@
             <li class="nav-item">
                 <a class="nav-link" th:action="@{/}" href="/">Home</a>
             </li>
-            <li class="nav-item" th:if="${currentUser.uid}">
+            <li class="nav-item" th:if="${currentUser.username}">
                 <a class="nav-link" th:text="${currentUser.username}" th:action="@{/project}" href="/project">My Projects</a>
             </li>
-            <li class="nav-item" th:if="${currentUser.uid}">
+            <li class="nav-item" th:if="${currentUser.username}">
                 <form method="post" action="/logout" th:action="@{/logout}">
                     <input type="submit" class="btn btn-primary" value="Logout" />
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 </form>
             </li>
-            <li class="nav-item" th:unless="${currentUser.uid}">
+            <li class="nav-item" th:unless="${currentUser.username}">
                 <a class="nav-link" th:action="@{/login}" href="/login">Welcome Guest, please Login</a>
             </li>
         </ul>

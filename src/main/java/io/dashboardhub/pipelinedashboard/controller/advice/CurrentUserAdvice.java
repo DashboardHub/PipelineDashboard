@@ -13,9 +13,9 @@ public class CurrentUserAdvice {
     public User getCurrentUser(Principal principal) {
 
         if (principal == null) {
-            return new User(null, "Guest");
+            return new User(null);
         }
 
-        return new User(principal.hashCode(), principal.getName());
+        return new User(principal.getName());
     }
 }
