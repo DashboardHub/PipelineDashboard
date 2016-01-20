@@ -5,6 +5,10 @@ spring:
   resources:
     chain:
       enabled: true
+  cache:
+    cache-names: foo
+    guava:
+      spec: maximumSize=500,expireAfterAccess=600s
 security:
   sessions: ALWAYS
   oauth2:
