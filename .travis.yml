@@ -10,8 +10,3 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script: mvn test
-
-env:
-  global:
-    - secure: "FdQ/7ontMe8ZQ1KdbDD9HCqnfMU4jGeudwITwqHUJ/NtuLj722bm84a1sc3fBA4HrnbbVb9lxRp87WUCpLWrfkB3ZuuDQxvt148n3ZANSctHwfHiBkXRtxCiqm8DsRrWLEFQlNIMPn4npGH56fGoI8+shtbudcB/VPE36BGprG4="
-    - secure: "RgXx+TTYNBWHLljLez7LqogF/J6uLAmG/KKQkns0trMG2U7FVnYdtJdjPWurUqLEcsw9nuyMLKhwi4NvywQAb0XT32w8giG1QXLLXJ+A5NWwrDvTDXsz0DZsI0DZsxFH4il0rAHlH8kUFeXRIPkmiNn6+k8BDNJLfZu0pOVQOyE="
