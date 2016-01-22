@@ -1,4 +1,4 @@
-package io.dashboardhub.pipelinedashboard;
+package io.dashboardhub.pipelinedashboard.secure;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class LoginDefs {
+public class GuestDefinitions {
 
     final private String baseUrl = "http://localhost:8081";
 

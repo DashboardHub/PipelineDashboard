@@ -1,4 +1,4 @@
-Feature: Application Security
+Feature: Guest can not access Secure pages
 
   Scenario: Non Authorised user trying to access secure pages
     Given I am not logged in
