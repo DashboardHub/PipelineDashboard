@@ -13,8 +13,8 @@ security:
   sessions: ALWAYS
   oauth2:
     client:
-      clientId: xxx
-      clientSecret: yyy
+      clientId: ${clientId}
+      clientSecret: ${clientSecret}
       accessTokenUri: https://github.com/login/oauth/access_token
       userAuthorizationUri: https://github.com/login/oauth/authorize
       clientAuthenticationScheme: form
