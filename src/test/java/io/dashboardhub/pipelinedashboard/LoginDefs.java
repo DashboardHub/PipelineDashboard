@@ -9,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LoginDefs {
 
-    private String baseUrl = "http://localhost:8081";
+    final private String baseUrl = "http://localhost:8081";
 
     private WebDriver driver = new FirefoxDriver();
 
@@ -20,7 +20,7 @@ public class LoginDefs {
 
     @When("^I try to access a secure page$")
     public void I_try_to_access_a_secure_page() {
-        this.driver.navigate().to(this.baseUrl + "/project");
+        this.driver.get(this.baseUrl + "/project");
     }
 
     @Then("^I get redirected to the login page$")
