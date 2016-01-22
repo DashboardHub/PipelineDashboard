@@ -8,20 +8,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class LoginDefs {
 
-//    private WebDriver driver = new FirefoxDriver();
+    private WebDriver driver = new FirefoxDriver();
 
     @Given("^I am not logged in$")
     public void I_am_not_logged_in() {
-        FirefoxDriver driver = new FirefoxDriver();
-//        this.driver.get("http://localhost:8081/logout");
+        driver.get("http://localhost:8081/logout");
     }
 
-//    @Given("^I see (\\s+)$")
-//    public boolean I_see(String text) {
-//        return true;
-////        this.driver.getPageSource().contains(text);
-//
-//    }
+    @Given("^I see (\\s+)$")
+    public boolean I_see(String text) {
+        return driver.getPageSource().contains(text);
+    }
 
     @When("^I try to access a secure page$")
     public void I_try_to_access_a_secure_page() {
