@@ -11,3 +11,7 @@ No need to log into multiple places, all your metrics in one place!
 `mvn spring-boot:run`
 
 Reference: [Running Spring Boot App](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-running-your-application.html#using-boot-running-from-an-ide)
+
+## Running tests
+
+`mvn test`
