@@ -13,8 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @IntegrationTest("server.port:8081")
 public class PipelinedashboardApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
-
+    @Test
+    public void contextLoads() {
+    }
 }
