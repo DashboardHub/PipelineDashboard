@@ -12,13 +12,10 @@ public class GuestDefinitions {
 
     private static final String baseUrl = "http://localhost:8081";
 
-    private WebDriver driver;
+    private WebDriver driver = new FirefoxDriver();
 
     @Given("^I am not logged in$")
     public void I_am_not_logged_in() {
-        FirefoxProfile fp = new FirefoxProfile();
-        fp.setPreference("network.http.prompt-temp-redirect", false);
-        driver = new FirefoxDriver();
         driver.get(baseUrl + "/logout");
     }
 
