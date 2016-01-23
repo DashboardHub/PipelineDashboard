@@ -9,7 +9,7 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
-script: mvn test
+script: mvn clean verify
 
 env:
   global:
