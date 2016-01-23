@@ -13,5 +13,5 @@ script: mvn clean verify
 
 env:
   global:
-    - secure: "FdQ/7ontMe8ZQ1KdbDD9HCqnfMU4jGeudwITwqHUJ/NtuLj722bm84a1sc3fBA4HrnbbVb9lxRp87WUCpLWrfkB3ZuuDQxvt148n3ZANSctHwfHiBkXRtxCiqm8DsRrWLEFQlNIMPn4npGH56fGoI8+shtbudcB/VPE36BGprG4="
-    - secure: "RgXx+TTYNBWHLljLez7LqogF/J6uLAmG/KKQkns0trMG2U7FVnYdtJdjPWurUqLEcsw9nuyMLKhwi4NvywQAb0XT32w8giG1QXLLXJ+A5NWwrDvTDXsz0DZsI0DZsxFH4il0rAHlH8kUFeXRIPkmiNn6+k8BDNJLfZu0pOVQOyE="
+    - secure: "YZ5XMGMHc1Z8W9BNRkMhwwCeiLGWQrdstYakCP83B2YgaSpQwURLwu3XYmhcXLl+rqU5amm4cxw3l1xPxYvjEiVdQSK3PMqlrYcheXXz6BCbzJNij1vYxUDPEjvGrs/IQ2EocNtVSfVJUZoIu5fjmHw2MFf1n25E9YUBjy9mJiA="
+    - secure: "Roh7roZ+j9eWiZSV32UP+PPWl3f5ShJAegfm6W0hWSyXjVa369Ljz0p1h3g+39T/jYYHv5u0y7klQ3quwESfhlJ8P/hazzccnFk2nvNsW2ic/vcQG/1IucVM83ZeUwg4BMOzf0Jcro5ndqnnK+7DWZk3ZV69YmMOwEr9lB6HVB8="
