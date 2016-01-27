@@ -1,0 +1,17 @@
+language: java
+jdk:
+  - oraclejdk8
+sudo: false
+install: true
+
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
+
+script: mvn clean verify
+
+env:
+  global:
+    - secure: "YZ5XMGMHc1Z8W9BNRkMhwwCeiLGWQrdstYakCP83B2YgaSpQwURLwu3XYmhcXLl+rqU5amm4cxw3l1xPxYvjEiVdQSK3PMqlrYcheXXz6BCbzJNij1vYxUDPEjvGrs/IQ2EocNtVSfVJUZoIu5fjmHw2MFf1n25E9YUBjy9mJiA="
+    - secure: "Roh7roZ+j9eWiZSV32UP+PPWl3f5ShJAegfm6W0hWSyXjVa369Ljz0p1h3g+39T/jYYHv5u0y7klQ3quwESfhlJ8P/hazzccnFk2nvNsW2ic/vcQG/1IucVM83ZeUwg4BMOzf0Jcro5ndqnnK+7DWZk3ZV69YmMOwEr9lB6HVB8="
