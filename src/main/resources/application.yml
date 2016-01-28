@@ -1,5 +1,5 @@
 server:
-  port: ${port:8081}
+  port: 8081
 debug: true
 spring:
   resources:
@@ -25,3 +25,8 @@ security:
 logging:
   level:
     org.springframework.security: DEBUG
+---
+spring:
+    profiles: test
+server:
+  port: 0
