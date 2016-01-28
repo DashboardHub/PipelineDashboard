@@ -29,4 +29,4 @@ logging:
 spring:
     profiles: test
 server:
-  port: 8082
+  port: 0
