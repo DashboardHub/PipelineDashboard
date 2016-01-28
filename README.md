@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=prototype-v0.3)](https://travis-ci.org/DashboardHub/PipelineDashboard)
+
 # DashboardHub:: Pipeline Dashboard
 
 Focus on what matters to you!
