@@ -3,12 +3,13 @@ package io.dashboardhub.pipelinedashboard.secure;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class ProjectDefinitions {
+public class ProjectDefinitions extends PipelinedashboardApplicationTests {
 
     final private String baseUrl = "http://localhost:8082";
 
