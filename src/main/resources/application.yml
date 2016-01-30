@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/194-create-release-2016-01-30-457
 server:
   port: 8081
 debug: true
