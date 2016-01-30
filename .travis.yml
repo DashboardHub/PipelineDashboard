@@ -11,6 +11,11 @@ before_script:
 
 script: mvn clean verify
 
+after_success:
+  - export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
+  - sed -i -e "s?--BUILD-VERSION--?$GIT_TAG?g" src/main/resources/application.yml
+  - cat src/main/resources/application.yml # @ToDo: will go when Release is created
+
 env:
   global:
     - secure: "YZ5XMGMHc1Z8W9BNRkMhwwCeiLGWQrdstYakCP83B2YgaSpQwURLwu3XYmhcXLl+rqU5amm4cxw3l1xPxYvjEiVdQSK3PMqlrYcheXXz6BCbzJNij1vYxUDPEjvGrs/IQ2EocNtVSfVJUZoIu5fjmHw2MFf1n25E9YUBjy9mJiA="
