@@ -14,9 +14,20 @@ script: mvn clean verify
 after_success:
   - export GIT_TAG=build-$TRAVIS_BRANCH-$(date -u "+%Y-%m-%d")-$TRAVIS_BUILD_NUMBER
   - sed -i -e "s?--BUILD-VERSION--?$GIT_TAG?g" src/main/resources/application.yml
-  - cat src/main/resources/application.yml # @ToDo: will go when Release is created
+
+branches:
+  except:
+    - "/^build-[0-9a-z\\-]*/"
 
 env:
   global:
     - secure: "YZ5XMGMHc1Z8W9BNRkMhwwCeiLGWQrdstYakCP83B2YgaSpQwURLwu3XYmhcXLl+rqU5amm4cxw3l1xPxYvjEiVdQSK3PMqlrYcheXXz6BCbzJNij1vYxUDPEjvGrs/IQ2EocNtVSfVJUZoIu5fjmHw2MFf1n25E9YUBjy9mJiA="
     - secure: "Roh7roZ+j9eWiZSV32UP+PPWl3f5ShJAegfm6W0hWSyXjVa369Ljz0p1h3g+39T/jYYHv5u0y7klQ3quwESfhlJ8P/hazzccnFk2nvNsW2ic/vcQG/1IucVM83ZeUwg4BMOzf0Jcro5ndqnnK+7DWZk3ZV69YmMOwEr9lB6HVB8="
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Cl06Hnelx6LZ1PqDtIJuKc3Hf3bzp0DwHGzxUp2SyvC7w6t76CWfKgvShtosvTeCcPEQFsuFszJYVGIpchKSOTlvUkw4TRK4aXHb3T+erySnuxOUR1k4fPcWNYvoySHEyIO+XyEY09P2KUjqo3SHEqtv5zos+9WnRoQl5vqbtqM=
+  file: src/main/resources/application.yml
+  on:
+    repo: DashboardHub/PipelineDashboard
