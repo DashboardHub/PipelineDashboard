@@ -30,4 +30,4 @@ deploy:
     secure: Cl06Hnelx6LZ1PqDtIJuKc3Hf3bzp0DwHGzxUp2SyvC7w6t76CWfKgvShtosvTeCcPEQFsuFszJYVGIpchKSOTlvUkw4TRK4aXHb3T+erySnuxOUR1k4fPcWNYvoySHEyIO+XyEY09P2KUjqo3SHEqtv5zos+9WnRoQl5vqbtqM=
   file: src/main/resources/application.yml
   on:
-    repo: DashboardHub/PipelineDashboard
+    branch: feature/**
