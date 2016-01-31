@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-prototype-v0.3-2016-01-31-463
 server:
   port: 8081
 debug: true
