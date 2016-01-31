@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -23,10 +26,10 @@ public class User {
     private String username;
 
     private String name;
+    private String email;
 
-//    @ManyToMany
-//    @JoinTable(name="users_projects")
-//    private Set<Project> projects;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Login> logins;
 
     User() {
     }
