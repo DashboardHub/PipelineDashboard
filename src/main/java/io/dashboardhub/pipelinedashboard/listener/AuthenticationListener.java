@@ -22,10 +22,8 @@ public class AuthenticationListener implements ApplicationListener<InteractiveAu
             this.userService.save(new User(event.getAuthentication().getName()));
         }
 
-        Login login = new Login();
-
         user = this.userService.findByUsername(event.getAuthentication().getName());
-        user.getLogins().add(login);
+        user.getLogins().add(new Login());
         this.userService.save(user);
     }
 }
