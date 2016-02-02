@@ -4,9 +4,12 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationContextLoader;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,7 +30,8 @@ public abstract class PipelinedashboardApplicationTests {
         return "http://localhost:" + port;
     }
 
-    protected WebDriver driver = new FirefoxDriver();
+    @Autowired
+    protected WebDriver driver;
 
     protected String withBaseUrl(String path) {
         return getBaseUrl() + path;
