@@ -39,7 +39,10 @@
                 <a class="nav-link" th:action="@{/}" href="/">Home</a>
             </li>
             <li class="nav-item" th:if="${currentUser.username}">
-                <a class="nav-link" id="username" th:text="${currentUser.username}" th:action="@{/project}" href="/project">My Projects</a>
+                <a class="nav-link" th:action="@{/project}" href="/project">Projects</a>
+            </li>
+            <li class="nav-item" th:if="${currentUser.username}">
+                <a class="nav-link" id="username" th:text="${currentUser.username}" th:action="@{/profile}" href="/profile">Profile</a>
             </li>
             <li class="nav-item" th:if="${currentUser.username}">
                 <form method="post" action="/logout" th:action="@{/logout}">
