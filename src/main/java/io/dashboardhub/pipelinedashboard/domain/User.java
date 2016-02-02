@@ -28,8 +28,8 @@ public class User {
     private String name;
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Login> logins;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Login> logins;
 
     User() {
     }
