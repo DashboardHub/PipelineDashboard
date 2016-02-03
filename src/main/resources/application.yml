@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/185-audit-user-login-2016-02-03-474
 server:
   port: 8081
 debug: true
