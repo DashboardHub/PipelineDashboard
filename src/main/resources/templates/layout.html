@@ -66,6 +66,10 @@
     <strong>Error!</strong> <span th:text="${error}"></span>
 </div>
 
+<div class="alert alert-success" role="alert" th:if="${success != null}">
+    <strong>Success!</strong> <span th:text="${success}"></span>
+</div>
+
 <div layout:fragment="content">
     Layout
 </div>
