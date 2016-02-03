@@ -1,4 +1,4 @@
-package io.dashboardhub.pipelinedashboard.secure;
+package io.dashboardhub.pipelinedashboard.definitions;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -21,6 +21,5 @@ public class GuestDefinitions extends PipelinedashboardApplicationTests {
     @Then("^I get redirected to the login page$")
     public void I_get_redirected_to_the_login_page() {
         Assert.assertEquals(withBaseUrl("/login"), driver.getCurrentUrl());
-        driver.close();
     }
 }
