@@ -1,12 +1,13 @@
 package io.dashboardhub.pipelinedashboard.listener;
 
-import io.dashboardhub.pipelinedashboard.domain.Login;
 import io.dashboardhub.pipelinedashboard.domain.User;
 import io.dashboardhub.pipelinedashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
 
 @Component
 public class AuthenticationListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
@@ -16,14 +17,14 @@ public class AuthenticationListener implements ApplicationListener<InteractiveAu
 
     @Override
     public void onApplicationEvent(final InteractiveAuthenticationSuccessEvent event) {
-        User user = this.userService.findByUsername(event.getAuthentication().getName());
+        User user = userService.findByUsername(event.getAuthentication().getName());
 
         if (user == null) {
-            this.userService.save(new User(event.getAuthentication().getName()));
+            userService.save(new User(event.getAuthentication().getName()));
         }
 
-        user = this.userService.findByUsername(event.getAuthentication().getName());
-        user.getLogins().add(new Login());
-        this.userService.save(user);
+        user = userService.findByUsername(event.getAuthentication().getName());
+        user.setLastLoggedIn(new Date());
+        userService.save(user);
     }
 }
