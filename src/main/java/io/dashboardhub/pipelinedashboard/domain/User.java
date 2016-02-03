@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -23,10 +23,9 @@ public class User {
     private String username;
 
     private String name;
+    private String email;
 
-//    @ManyToMany
-//    @JoinTable(name="users_projects")
-//    private Set<Project> projects;
+    private Date lastLoggedIn;
 
     User() {
     }
