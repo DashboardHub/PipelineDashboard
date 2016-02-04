@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/207-update-profile-2016-02-04-479
 server:
   port: 8081
 debug: true
