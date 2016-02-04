@@ -39,7 +39,10 @@
                 <a class="nav-link" th:action="@{/}" href="/">Home</a>
             </li>
             <li class="nav-item" th:if="${currentUser.username}">
-                <a class="nav-link" id="username" th:text="${currentUser.username}" th:action="@{/project}" href="/project">My Projects</a>
+                <a class="nav-link" th:action="@{/project}" href="/project">Projects</a>
+            </li>
+            <li class="nav-item" th:if="${currentUser.username}">
+                <a class="nav-link" id="username" th:text="${currentUser.username}" th:action="@{/profile}" href="/profile">Profile</a>
             </li>
             <li class="nav-item" th:if="${currentUser.username}">
                 <form method="post" action="/logout" th:action="@{/logout}">
@@ -59,8 +62,12 @@
     <strong th:text="${version}">version</strong> Currently in Prototype
 </div>
 
-<div class="alert alert-danger" role="alert" th:if="${error != null}">
+<div id="alert-error" class="alert alert-danger" role="alert" th:if="${error != null}">
     <strong>Error!</strong> <span th:text="${error}"></span>
+</div>
+
+<div id="alert-successful" class="alert alert-success" role="alert" th:if="${success != null}">
+    <strong>Success!</strong> <span th:text="${success}"></span>
 </div>
 
 <div layout:fragment="content">

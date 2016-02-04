@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Profile:: PipelineDashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="row">
+        <div id="lastLoggedIn" class="alert alert-warning" role="alert" th:if="${user.lastLoggedIn != null}">
+            Last logged in at <strong th:text="${user.lastLoggedIn}"></strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card">
+            <form id="form-profile" th:action="@{/profile}" th:object="${user}" method="post">
+                <div class="card-header">
+                    Update Profile
+                </div>
+                
+                <div class="card-block">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? has-danger">
+                        <label for="name" class="form-control-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" />
+                        <small class="text-help has-danger" id="name-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="form-control-label disabled">Username</label>
+                        <input type="text" class="form-control disabled" disabled="disabled" id="username" th:field="*{username}" />
+                        <input type="hidden" name="username" th:field="*{username}" />
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-danger">
+                        <label for="email" class="form-control-label">Email</label>
+                        <input type="text" class="form-control" id="email" th:field="*{email}" />
+                        <small class="text-help has-danger" id="email-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</small>
+                    </div>
+                </div>
+
+                <div class="card-footer text-muted">
+                    <input type="hidden" id="lastLoggedIn" th:field="*{lastLoggedIn}" />
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

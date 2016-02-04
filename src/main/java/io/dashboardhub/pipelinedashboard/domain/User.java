@@ -1,11 +1,12 @@
 package io.dashboardhub.pipelinedashboard.domain;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -19,14 +20,15 @@ public class User {
     private String uid;
 
     @NotNull
-    @Size(min = 1, max = 255)
     private String username;
 
+    @Size(min = 5, max = 255)
     private String name;
 
-//    @ManyToMany
-//    @JoinTable(name="users_projects")
-//    private Set<Project> projects;
+    @Email
+    private String email;
+
+    private String lastLoggedIn;
 
     User() {
     }
