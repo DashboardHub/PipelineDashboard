@@ -11,13 +11,8 @@ import java.util.List;
 
 public class LoginHistoryDefinition extends PipelinedashboardApplicationTests {
 
-    @When("^I go (.*)$")
-    public void I_go_to(String uri) {
-        driver.get(withBaseUrl(uri));
-    }
-
     @Then("^I see (.*) element in (.*)$")
-    public void I_get_the_project_page(int count, String id) throws Exception {
+    public void I_see_element_in(int count, String id) throws Exception {
         List<WebElement> rows = driver.findElements(By.cssSelector("table#" + id + " tbody tr"));
 
         Assert.assertEquals(count, rows.size());
