@@ -15,8 +15,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User findByCurrentUsername() {
+    public User findByCurrentUser() {
         return this.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    public User saveByCurrentUser(User user) {
+        user.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return this.save(user);
     }
 
     public User findByUsername(String username) {
@@ -24,6 +29,16 @@ public class UserService {
     }
 
     public User save(User user) {
+        User existingUser = this.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            existingUser.setName(user.getName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setLastLoggedIn(user.getLastLoggedIn());
+
+            return this.userRepository.save(existingUser);
+        }
+
         return this.userRepository.save(user);
     }
 }
+
