@@ -9,7 +9,8 @@ import org.openqa.selenium.By;
 public class FormDefinitions extends PipelinedashboardApplicationTests {
 
     @When("^I fill in the field (.*) with (.*)$")
-    public void I_fill_in_the_fied(String field, String value) {
+    public void I_fill_in_the_field(String field, String value) {
+        driver.findElement(By.id(field)).clear();
         driver.findElement(By.id(field)).sendKeys(value);
     }
 
