@@ -5,9 +5,6 @@ import io.dashboardhub.pipelinedashboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.security.Principal;
 
 @Service
 public class UserService {
@@ -25,20 +22,20 @@ public class UserService {
     }
 
     public User findByUsername(String username) {
-        return this.userRepository.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     public User save(User user) {
-        User existingUser = this.findByUsername(user.getUsername());
+        User existingUser = findByUsername(user.getUsername());
         if (existingUser != null) {
             existingUser.setName(user.getName());
             existingUser.setEmail(user.getEmail());
             existingUser.setLastLoggedIn(user.getLastLoggedIn());
 
-            return this.userRepository.save(existingUser);
+            return userRepository.save(existingUser);
         }
 
-        return this.userRepository.save(user);
+        return userRepository.save(user);
     }
 }
 
