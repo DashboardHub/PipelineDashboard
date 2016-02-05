@@ -16,7 +16,7 @@ public class AccountController {
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public String profile(Model model) {
-        User user = this.userService.findByCurrentUsername();
+        User user = userService.findByCurrentUsername();
         model.addAttribute("user", user);
 
         return "account/profile";
