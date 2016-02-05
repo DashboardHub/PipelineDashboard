@@ -12,6 +12,6 @@ public class VersionAdvice {
 
     @ModelAttribute("version")
     public String getVersion() {
-        return this.version;
+        return version;
     }
 }
