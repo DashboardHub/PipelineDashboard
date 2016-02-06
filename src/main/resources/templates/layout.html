@@ -41,6 +41,23 @@
                     Home
                 </a>
             </li>
+            <li class="nav-item dropdown" th:if="${currentUser.username}">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+                   role="button" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-book"></i>
+                    Projects
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{/project}">
+                        <i class="fa fa-list"></i>
+                        List
+                    </a>
+                    <a class="dropdown-item" th:href="@{/project/add}">
+                        <i class="fa fa-plus-square"></i>
+                        Add
+                    </a>
+                </div>
+            </li>
             <li class="nav-item" th:if="${currentUser.username}">
                 <a class="nav-link" id="username" th:action="@{/profile}" href="/profile">
                     <i class="fa fa-user"></i>
