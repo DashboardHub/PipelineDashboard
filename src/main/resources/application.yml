@@ -1,7 +1,6 @@
 version: --BUILD-VERSION--
 server:
   port: 8081
-debug: true
 spring:
   resources:
     chain:
@@ -28,6 +27,11 @@ logging:
     org.springframework.security: DEBUG
 ---
 spring:
+    profiles: dev
+debug: true
+---
+spring:
     profiles: test
+debug: true
 server:
   port: 0

@@ -1,22 +1,30 @@
 package io.dashboardhub.pipelinedashboard.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
+import java.util.UUID;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(name = "username_idx", columnNames = {"username"} ))
-public final class User {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String uid;
+    private UUID uid;
 
     @NotNull
     private String username;
@@ -34,5 +42,6 @@ public final class User {
 
     public User(String username) {
         this.username = username;
+        this.uid = UUID.randomUUID();
     }
 }

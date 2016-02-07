@@ -1,6 +1,9 @@
 package io.dashboardhub.pipelinedashboard.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,9 +11,12 @@ import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(name = "uid_idx", columnNames = "uid"))
-public final class Project {
+public class Project extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
