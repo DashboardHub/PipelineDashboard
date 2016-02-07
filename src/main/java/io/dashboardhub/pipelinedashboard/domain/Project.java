@@ -30,6 +30,6 @@ public class Project {
     @NotNull
     private Boolean isPrivate = false;
 
-//    @ManyToMany(mappedBy="users")
-//    private Set<User> users;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 }
