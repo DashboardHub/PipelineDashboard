@@ -24,7 +24,7 @@ public class AuthenticationListener implements ApplicationListener<InteractiveAu
         }
 
         user = userService.findByUsername(event.getAuthentication().getName());
-        user.setLastLoggedIn(new Date());
+        user.setLastLoggedIn(new Date().toString());
         userService.save(user);
     }
 }
