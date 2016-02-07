@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/174-projects-2016-02-07-495
 server:
   port: 8081
 debug: true
