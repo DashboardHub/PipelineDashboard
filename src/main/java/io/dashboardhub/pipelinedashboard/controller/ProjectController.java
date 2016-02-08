@@ -2,6 +2,8 @@ package io.dashboardhub.pipelinedashboard.controller;
 
 import io.dashboardhub.pipelinedashboard.domain.Project;
 import io.dashboardhub.pipelinedashboard.service.ProjectService;
+import io.dashboardhub.pipelinedashboard.service.UserService;
+import io.dashboardhub.pipelinedashboard.service.exception.PermissionDeniedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +23,7 @@ public class ProjectController {
 
     @RequestMapping(value = {"/project"}, method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("projects", projectService.findAll());
+        model.addAttribute("projects", projectService.findAllByCurrentUser());
 
         return "project/list";
     }
@@ -80,16 +82,19 @@ public class ProjectController {
             final RedirectAttributes redirectAttributes,
             Model model
     ) {
-
-        projectService.findByUid(uid);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("error", "An error occurred please try again");
+            model.addAttribute("error", "Error occurred, please try again");
 
             return "project/edit";
         }
 
-        projectService.save(project);
-        redirectAttributes.addFlashAttribute("success", "Successfully saved");
+        try {
+            projectService.save(project);
+            redirectAttributes.addFlashAttribute("success", "Successfully saved");
+        } catch (PermissionDeniedException e) {
+            redirectAttributes.addFlashAttribute("error", "Permission denied");
+        }
+
 
         return "redirect:/project";
     }
@@ -98,13 +103,17 @@ public class ProjectController {
     public String delete(@PathVariable("uid") String uid, final RedirectAttributes redirectAttributes, Model model) {
         Project project = projectService.findByUid(uid);
         if (project == null) {
-            redirectAttributes.addFlashAttribute("error", "An error occurred please try again");
+            redirectAttributes.addFlashAttribute("error", "Not found");
 
             return "redirect:/project";
         }
 
-        projectService.delete(project);
-        redirectAttributes.addFlashAttribute("success", "Successfully removed");
+        try {
+            projectService.delete(project);
+            redirectAttributes.addFlashAttribute("success", "Successfully removed");
+        } catch (PermissionDeniedException e) {
+            redirectAttributes.addFlashAttribute("error", "Permission denied");
+        }
 
         return "redirect:/project";
     }
