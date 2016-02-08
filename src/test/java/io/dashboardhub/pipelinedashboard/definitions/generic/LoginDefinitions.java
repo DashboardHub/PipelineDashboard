@@ -1,4 +1,4 @@
-package io.dashboardhub.pipelinedashboard.definitions;
+package io.dashboardhub.pipelinedashboard.definitions.generic;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
