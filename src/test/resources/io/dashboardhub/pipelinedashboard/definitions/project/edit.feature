@@ -31,4 +31,4 @@ Feature: Edit project
     Then I get redirected to the /project page
       And I see element alert-error
       And I go /project/edit/create-example-test-project-3
-      And the field name contains create-example-test-project-name create-example-test-project-3
+      And the field name contains example-test-project-name create-example-test-project-3
