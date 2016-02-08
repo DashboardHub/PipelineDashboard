@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -18,20 +18,18 @@ public class Project {
 
     @NotNull
     @Size(min = 1, max = 255)
-    private Long uid;
+    private String uid = UUID.randomUUID().toString();
 
     @NotNull
-    @Size(min = 1, max = 255)
+    @Size(min = 5, max = 64)
     private String name;
 
-//    @ManyToMany(mappedBy="users")
-//    private Set<User> users;
+    @Size(max = 1024)
+    private String description;
 
-    Project() {
-    }
+    @NotNull
+    private Boolean isPrivate = false;
 
-    public Project(Long uid, String name) {
-        this.uid = uid;
-        this.name = name;
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 }

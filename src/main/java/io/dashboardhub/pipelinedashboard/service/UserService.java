@@ -12,12 +12,17 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private String getCurrentUsername() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
     public User findByCurrentUser() {
-        return this.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        return this.findByUsername(getCurrentUsername());
     }
 
     public User saveByCurrentUser(User user) {
-        user.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setUsername(getCurrentUsername());
+
         return this.save(user);
     }
 

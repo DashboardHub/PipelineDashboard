@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Project Edit:: PipelineDashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="row">
+        <div class="card">
+            <form id="form-project" th:action="@{/project/edit/{uid}(uid=${project.uid})}" th:object="${project}" method="post">
+                <div class="card-header">
+                    Edit Project
+                </div>
+
+                <div class="card-block">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? has-danger">
+                        <label for="name" class="form-control-label">Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}" />
+                        <small class="text-help has-danger" id="name-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="form-control-label disabled">Description</label>
+                        <input type="text" class="form-control" id="description" th:field="*{description}" />
+                        <small class="text-help has-danger" id="description-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</small>
+                    </div>
+                    <div class="checkbox">
+                        <label for="isPrivate" class="form-control-label">
+                            <input type="checkbox" class="form-control" id="isPrivate" th:field="*{isPrivate}" />
+                            Private?
+                        </label>
+                        <small class="text-help has-danger" id="isPrivate-error" th:if="${#fields.hasErrors('isPrivate')}" th:errors="*{isPrivate}">IsPrivate Error</small>
+                    </div>
+                </div>
+
+                <div class="card-footer text-muted">
+                    <input class="btn btn-primary" type="submit" value="Save" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
