@@ -12,19 +12,19 @@
     <div class="row">
         <div class="card" th:each="project : ${projects}">
             <div class="card-header">
-                <span class="pull-right">
-                    <a th:href="@{/project/edit/{uid}(uid=${project.uid})}"><i class="fa fa-pencil-square"></i></a>
-                    <a th:href="@{/project/delete/{uid}(uid=${project.uid})}"><i class="fa fa-minus-square"></i></a>
-                </span>
                 <i class="fa fa-lock" th:if="${project.isPrivate}"></i>
                 <i class="fa fa-unlock" th:unless="${project.isPrivate}"></i>
-                <span th:text="${project.name}"></span>
+                <span th:text="${project.name}"></span> by <span th:text="${project.user.username}"></span>
             </div>
             <div class="card-block">
                 <p th:text="${project.description}"></p>
             </div>
             <div class="card-footer text-muted">
-
+                <span>Actions </span>
+                <span class="pull-right">
+                    <a th:href="@{/project/edit/{uid}(uid=${project.uid})}"><i class="fa fa-pencil-square"></i></a>
+                    <a th:href="@{/project/delete/{uid}(uid=${project.uid})}"><i class="fa fa-minus-square"></i></a>
+                </span>
             </div>
         </div>
     </div>
