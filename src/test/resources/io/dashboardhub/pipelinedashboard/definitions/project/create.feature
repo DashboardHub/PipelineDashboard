@@ -1,4 +1,4 @@
-Feature: CRUD project
+Feature: Create project
 
   Scenario: Create project successfully
     Given I am logged in
@@ -12,11 +12,10 @@ Feature: CRUD project
   Scenario: Create project unsuccessfully
     Given I am logged in
     When I go /project/add
-    And I fill in the field name with N
-    And I fill in the field description with D
-    And Submit the form form-project
+      And I fill in the field name with N
+      And I fill in the field description with D
+      And Submit the form form-project
     Then I see element alert-error
-    And I see element alert-error
-    And I see element name-error
-    And the field name contains N
-    And the field description contains D
+      And I see element name-error
+      And the field name contains N
+      And the field description contains D
