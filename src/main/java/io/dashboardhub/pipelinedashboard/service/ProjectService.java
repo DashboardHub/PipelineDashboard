@@ -5,7 +5,6 @@ import io.dashboardhub.pipelinedashboard.domain.User;
 import io.dashboardhub.pipelinedashboard.repository.ProjectRepository;
 import io.dashboardhub.pipelinedashboard.service.exception.PermissionDeniedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,16 +16,12 @@ public class ProjectService {
     @Autowired
     private UserService userService;
 
-    private String getCurrentUsername() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
     public Iterable<Project> findAllByCurrentUser() {
-        return this.projectRepository.findAllByUsername(getCurrentUsername());
+        return this.projectRepository.findAllByUsername(userService.getCurrentUsername());
     }
 
     public Iterable<Project> findAllByPublicOrOwner() {
-        return this.projectRepository.findAllPublicOrOwner(getCurrentUsername());
+        return this.projectRepository.findAllPublicOrOwner(userService.getCurrentUsername());
     }
 
     public Iterable<Project> findAllByPublic() {
@@ -34,11 +29,11 @@ public class ProjectService {
     }
 
     public Project findByUid(String uuid) {
-        return this.projectRepository.findByUid(uuid, getCurrentUsername());
+        return this.projectRepository.findByUid(uuid, userService.getCurrentUsername());
     }
 
     public void delete(Project project) {
-        if (!project.getUser().getUsername().equals(getCurrentUsername())) {
+        if (!project.getUser().getUsername().equals(userService.getCurrentUsername())) {
             throw new PermissionDeniedException("Permission denied");
         }
 
