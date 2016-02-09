@@ -37,15 +37,12 @@ public class ProjectService {
         return this.projectRepository.findByUid(uuid, getCurrentUsername());
     }
 
-    public Boolean delete(Project project) {
-
-        if (project.getUser().getUsername().equals(getCurrentUsername())) {
-            projectRepository.delete(project);
-
-            return true;
+    public void delete(Project project) {
+        if (!project.getUser().getUsername().equals(getCurrentUsername())) {
+            throw new PermissionDeniedException("Permission denied");
         }
 
-        throw new PermissionDeniedException("Permission denied");
+        projectRepository.delete(project);
     }
 
     public Project save(Project project) {
