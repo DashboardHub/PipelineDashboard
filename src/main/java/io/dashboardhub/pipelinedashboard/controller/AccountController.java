@@ -1,7 +1,7 @@
 package io.dashboardhub.pipelinedashboard.controller;
 
 import io.dashboardhub.pipelinedashboard.domain.User;
-import io.dashboardhub.pipelinedashboard.service.UserService;
+import io.dashboardhub.pipelinedashboard.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +16,11 @@ import javax.validation.Valid;
 public class AccountController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @RequestMapping(value = {"/profile"}, method = RequestMethod.GET)
     public String profile(Model model) {
-        User user = userService.findByCurrentUser();
+        User user = userServiceImpl.findByCurrentUser();
         model.addAttribute("user", user);
 
         return "account/profile";
@@ -34,14 +34,14 @@ public class AccountController {
             Model model
     ) {
 
-        this.userService.findByCurrentUser();
+        this.userServiceImpl.findByCurrentUser();
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", "An error occurred please try again");
 
             return "account/profile";
         }
 
-        this.userService.saveByCurrentUser(user);
+        this.userServiceImpl.saveByCurrentUser(user);
         redirectAttributes.addFlashAttribute("success", "Successfully saved");
 
         return "redirect:/profile";
