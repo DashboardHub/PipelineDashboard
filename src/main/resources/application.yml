@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/custom-spring-boot-banner-2016-02-11-508
 server:
   port: 8081
 debug: true
