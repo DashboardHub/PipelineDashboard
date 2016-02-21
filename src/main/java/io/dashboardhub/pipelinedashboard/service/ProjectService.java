@@ -1,63 +1,18 @@
 package io.dashboardhub.pipelinedashboard.service;
 
 import io.dashboardhub.pipelinedashboard.domain.Project;
-import io.dashboardhub.pipelinedashboard.domain.User;
-import io.dashboardhub.pipelinedashboard.repository.ProjectRepository;
-import io.dashboardhub.pipelinedashboard.service.exception.PermissionDeniedException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class ProjectService {
+public interface ProjectService {
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    Iterable<Project> findAllByCurrentUser();
 
-    @Autowired
-    private UserService userService;
+    Iterable<Project> findAllByPublicOrOwner();
 
-    public Iterable<Project> findAllByCurrentUser() {
-        return this.projectRepository.findAllByUsername(userService.getCurrentUsername());
-    }
+    Iterable<Project> findAllByPublic();
 
-    public Iterable<Project> findAllByPublicOrOwner() {
-        return this.projectRepository.findAllPublicOrOwner(userService.getCurrentUsername());
-    }
+    Project findByUid(String uuid);
 
-    public Iterable<Project> findAllByPublic() {
-        return this.projectRepository.findAllPublic();
-    }
+    void delete(Project project);
 
-    public Project findByUid(String uuid) {
-        return this.projectRepository.findByUid(uuid, userService.getCurrentUsername());
-    }
-
-    public void delete(Project project) {
-        if (!project.getUser().getUsername().equals(userService.getCurrentUsername())) {
-            throw new PermissionDeniedException("Permission denied");
-        }
-
-        projectRepository.delete(project);
-    }
-
-    public Project save(Project project) {
-        User user = userService.findByCurrentUser();
-
-        Project existingProject = findByUid(project.getUid());
-        if (existingProject != null) {
-            if (existingProject.getUser() != user) {
-                throw new PermissionDeniedException("Not owner of Project");
-            }
-
-            existingProject.setName(project.getName());
-            existingProject.setDescription(project.getDescription());
-            existingProject.setIsPrivate(project.getIsPrivate());
-
-            return projectRepository.save(existingProject);
-        }
-
-        project.setUser(user);
-
-        return projectRepository.save(project);
-    }
+    Project save(Project project);
 }

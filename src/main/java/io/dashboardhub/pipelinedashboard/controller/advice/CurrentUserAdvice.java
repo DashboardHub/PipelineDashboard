@@ -1,7 +1,7 @@
 package io.dashboardhub.pipelinedashboard.controller.advice;
 
 import io.dashboardhub.pipelinedashboard.domain.User;
-import io.dashboardhub.pipelinedashboard.service.UserService;
+import io.dashboardhub.pipelinedashboard.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +12,7 @@ import java.security.Principal;
 public class CurrentUserAdvice {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userServiceImpl;
 
     @ModelAttribute("currentUser")
     public User getCurrentUser(Principal principal) {
@@ -21,6 +21,6 @@ public class CurrentUserAdvice {
             return new User(null);
         }
 
-        return userService.findByCurrentUser();
+        return userServiceImpl.findByCurrentUser();
     }
 }
