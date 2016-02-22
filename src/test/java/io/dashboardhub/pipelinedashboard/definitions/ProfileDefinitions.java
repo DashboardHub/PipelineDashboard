@@ -2,6 +2,6 @@ package io.dashboardhub.pipelinedashboard.definitions;
 
 import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 
-public class ProfileDefinitions extends PipelinedashboardApplicationTests {
+public final class ProfileDefinitions extends PipelinedashboardApplicationTests {
 
 }
