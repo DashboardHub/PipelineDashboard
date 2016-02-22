@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 @ControllerAdvice
-public class VersionAdvice {
+public final class VersionAdvice {
 
     @Value("${version}")
-    protected String version;
+    private String version;
 
     @ModelAttribute("version")
     public String getVersion() {
