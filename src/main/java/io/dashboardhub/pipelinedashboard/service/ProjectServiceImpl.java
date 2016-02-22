@@ -14,26 +14,26 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
 
     @Autowired
-    private UserServiceImpl userServiceImpl;
+    private UserService userService;
 
     public Iterable<Project> findAllByCurrentUser() {
-        return this.projectRepository.findAllByUsername(userServiceImpl.getCurrentUsername());
+        return projectRepository.findAllByUsername(userService.getCurrentUsername());
     }
 
     public Iterable<Project> findAllByPublicOrOwner() {
-        return this.projectRepository.findAllPublicOrOwner(userServiceImpl.getCurrentUsername());
+        return projectRepository.findAllPublicOrOwner(userService.getCurrentUsername());
     }
 
     public Iterable<Project> findAllByPublic() {
-        return this.projectRepository.findAllPublic();
+        return projectRepository.findAllPublic();
     }
 
     public Project findByUid(String uuid) {
-        return this.projectRepository.findByUid(uuid, userServiceImpl.getCurrentUsername());
+        return projectRepository.findByUid(uuid, userService.getCurrentUsername());
     }
 
     public void delete(Project project) {
-        if (!project.getUser().getUsername().equals(userServiceImpl.getCurrentUsername())) {
+        if (!project.getUser().getUsername().equals(userService.getCurrentUsername())) {
             throw new PermissionDeniedException("Permission denied");
         }
 
@@ -41,7 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public Project save(Project project) {
-        User user = userServiceImpl.findByCurrentUser();
+        User user = userService.findByCurrentUser();
 
         Project existingProject = findByUid(project.getUid());
         if (existingProject != null) {

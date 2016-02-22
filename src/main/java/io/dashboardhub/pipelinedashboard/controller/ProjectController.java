@@ -1,7 +1,7 @@
 package io.dashboardhub.pipelinedashboard.controller;
 
 import io.dashboardhub.pipelinedashboard.domain.Project;
-import io.dashboardhub.pipelinedashboard.service.ProjectServiceImpl;
+import io.dashboardhub.pipelinedashboard.service.ProjectService;
 import io.dashboardhub.pipelinedashboard.service.exception.PermissionDeniedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +15,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-public class ProjectController {
+public final class ProjectController {
 
     @Autowired
-    private ProjectServiceImpl projectServiceImpl;
+    private ProjectService projectService;
 
     @RequestMapping(value = {"/project"}, method = RequestMethod.GET)
     public String list(Model model) {
-        model.addAttribute("projects", projectServiceImpl.findAllByCurrentUser());
+        model.addAttribute("projects", projectService.findAllByCurrentUser());
 
         return "project/list";
     }
@@ -40,7 +40,7 @@ public class ProjectController {
     @RequestMapping(value = {"/project/edit/{uid}"}, method = RequestMethod.GET)
     public String edit(@PathVariable("uid") String uid, Model model, final RedirectAttributes redirectAttributes) {
 
-        Project project = projectServiceImpl.findByUid(uid);
+        Project project = projectService.findByUid(uid);
         if (project == null) {
             redirectAttributes.addFlashAttribute("error", "Not found");
 
@@ -67,7 +67,7 @@ public class ProjectController {
             return "project/add";
         }
 
-        projectServiceImpl.save(project);
+        projectService.save(project);
         redirectAttributes.addFlashAttribute("success", "Successfully saved");
 
         return "redirect:/project";
@@ -88,7 +88,7 @@ public class ProjectController {
         }
 
         try {
-            projectServiceImpl.save(project);
+            projectService.save(project);
             redirectAttributes.addFlashAttribute("success", "Successfully saved");
         } catch (PermissionDeniedException e) {
             redirectAttributes.addFlashAttribute("error", "Permission denied");
@@ -100,7 +100,7 @@ public class ProjectController {
 
     @RequestMapping(value = {"/project/delete/{uid}"}, method = RequestMethod.GET)
     public String delete(@PathVariable("uid") String uid, final RedirectAttributes redirectAttributes, Model model) {
-        Project project = projectServiceImpl.findByUid(uid);
+        Project project = projectService.findByUid(uid);
         if (project == null) {
             redirectAttributes.addFlashAttribute("error", "Not found");
 
@@ -108,7 +108,7 @@ public class ProjectController {
         }
 
         try {
-            projectServiceImpl.delete(project);
+            projectService.delete(project);
             redirectAttributes.addFlashAttribute("success", "Successfully removed");
         } catch (PermissionDeniedException e) {
             redirectAttributes.addFlashAttribute("error", "Permission denied");
