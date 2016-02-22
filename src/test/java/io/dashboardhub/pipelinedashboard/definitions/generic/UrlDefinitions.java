@@ -4,7 +4,7 @@ import cucumber.api.java.en.When;
 import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 import org.junit.Assert;
 
-public class UrlDefinitions extends PipelinedashboardApplicationTests {
+public final class UrlDefinitions extends PipelinedashboardApplicationTests {
 
     @When("^I go (.*)$")
     public void I_go_to(String uri) {

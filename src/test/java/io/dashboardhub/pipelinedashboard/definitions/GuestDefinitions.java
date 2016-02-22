@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class GuestDefinitions extends PipelinedashboardApplicationTests {
+public final class GuestDefinitions extends PipelinedashboardApplicationTests {
 
     @Given("^I am not logged in$")
     public void I_am_not_logged_in() {

@@ -1,15 +1,14 @@
 package io.dashboardhub.pipelinedashboard.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class AuthenticationController {
+public final class AuthenticationController {
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public String login(Model model) {
+    public String login() {
         return "authentication/login";
     }
 }

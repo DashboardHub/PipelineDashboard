@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 @Component
-public class AuthenticationListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
+public final class AuthenticationListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
     @Autowired
     private UserService userService;

@@ -17,7 +17,7 @@ import java.util.List;
 @Profile("test")
 @Primary
 @Service
-public class AuthenticationProviderMock implements AuthenticationProvider {
+public final class AuthenticationProviderMock implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

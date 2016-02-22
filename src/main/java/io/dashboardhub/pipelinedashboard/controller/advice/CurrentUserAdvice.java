@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import java.security.Principal;
 
 @ControllerAdvice
-public class CurrentUserAdvice {
+public final class CurrentUserAdvice {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @ModelAttribute("currentUser")
     public User getCurrentUser(Principal principal) {

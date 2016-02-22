@@ -1,46 +1,16 @@
 package io.dashboardhub.pipelinedashboard.service;
 
 import io.dashboardhub.pipelinedashboard.domain.User;
-import io.dashboardhub.pipelinedashboard.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
+public interface UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    String getCurrentUsername();
 
-    public String getCurrentUsername() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
+    User findByCurrentUser();
 
-    public User findByCurrentUser() {
-        return this.findByUsername(getCurrentUsername());
-    }
+    User saveByCurrentUser(User user);
 
-    public User saveByCurrentUser(User user) {
-        user.setUsername(getCurrentUsername());
+    User findByUsername(String username);
 
-        return this.save(user);
-    }
-
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    public User save(User user) {
-        User existingUser = findByUsername(user.getUsername());
-        if (existingUser != null) {
-            existingUser.setName(user.getName());
-            existingUser.setEmail(user.getEmail());
-            existingUser.setLastLoggedIn(user.getLastLoggedIn());
-
-            return userRepository.save(existingUser);
-        }
-
-        return userRepository.save(user);
-    }
+    User save(User user);
 }
-

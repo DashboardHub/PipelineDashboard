@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(name = "uid_idx", columnNames = "uid"))
-public class Project {
+public final class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

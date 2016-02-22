@@ -10,13 +10,13 @@ import io.dashboardhub.pipelinedashboard.repository.UserRepository;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class ProjectDefinitions extends PipelinedashboardApplicationTests {
+public final class ProjectDefinitions extends PipelinedashboardApplicationTests {
 
     @Autowired
-    ProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @When("^I have a project with uid (.*) owned by (.*)$")
     public void I_have_a_project(String uid, String username) {
