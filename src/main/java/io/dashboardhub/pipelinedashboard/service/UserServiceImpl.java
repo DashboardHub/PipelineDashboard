@@ -17,13 +17,13 @@ public class UserServiceImpl implements UserService {
     }
 
     public User findByCurrentUser() {
-        return this.findByUsername(getCurrentUsername());
+        return findByUsername(getCurrentUsername());
     }
 
     public User saveByCurrentUser(User user) {
         user.setUsername(getCurrentUsername());
 
-        return this.save(user);
+        return save(user);
     }
 
     public User findByUsername(String username) {
