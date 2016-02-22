@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/added-service-interfaces-2016-02-22-516
 server:
   port: 8081
 debug: true
