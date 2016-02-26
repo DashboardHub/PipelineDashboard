@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -29,6 +30,9 @@ public final class Project {
 
     @NotNull
     private Boolean isPrivate = false;
+
+    @NotNull
+    private Date createdOn = new Date();
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
