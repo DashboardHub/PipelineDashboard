@@ -24,6 +24,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projectRepository.findAllPublicOrOwner(userService.getCurrentUsername());
     }
 
+    public Iterable<Project> findAllByPublicRecent() {
+        return projectRepository.findAllPublicRecent();
+    }
+
     public Iterable<Project> findAllByPublic() {
         return projectRepository.findAllPublic();
     }
