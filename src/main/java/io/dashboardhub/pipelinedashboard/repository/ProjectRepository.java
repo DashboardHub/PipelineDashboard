@@ -15,6 +15,9 @@ public interface ProjectRepository extends PagingAndSortingRepository<Project, L
     @Query("SELECT p FROM Project p WHERE p.isPrivate = false")
     Iterable<Project> findAllPublic();
 
+    @Query("SELECT p FROM Project p WHERE p.isPrivate = false ORDER BY createdOn DESC")
+    Iterable<Project> findAllPublicRecent();
+
     @Query("SELECT p FROM Project p JOIN p.user u WHERE u.username = :username")
     Iterable<Project> findAllByUsername(@Param("username") String username);
 
