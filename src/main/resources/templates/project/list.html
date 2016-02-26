@@ -15,7 +15,9 @@
                 <div class="card-header">
                     <i class="fa fa-lock" th:if="${project.isPrivate}"></i>
                     <i class="fa fa-unlock" th:unless="${project.isPrivate}"></i>
-                    <span th:text="${project.name}"></span> by <span th:text="${project.user.username}"></span>
+                    <span th:text="${project.name}"></span> by
+                    <span th:if="${project.user.name}" th:text="${project.user.name}"></span>
+                    <span th:unless="${project.user.name}" th:text="${project.user.username}"></span>
                 </div>
                 <div class="card-block">
                     <p th:text="${project.description}"></p>
