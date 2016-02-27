@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-feature/182/homepage-2016-02-27-518
 server:
   port: 8081
 debug: true
