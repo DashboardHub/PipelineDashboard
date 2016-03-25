@@ -6,7 +6,7 @@ import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-public class FormDefinitions extends PipelinedashboardApplicationTests {
+public final class FormDefinitions extends PipelinedashboardApplicationTests {
 
     @When("^I fill in the field (.*) with (.*)$")
     public void I_fill_in_the_field(String field, String value) {

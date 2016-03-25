@@ -7,7 +7,7 @@ import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-public class LoginDefinitions extends PipelinedashboardApplicationTests {
+public final class LoginDefinitions extends PipelinedashboardApplicationTests {
 
     @Given("^I am logged in$")
     public void I_am_logged_in() {

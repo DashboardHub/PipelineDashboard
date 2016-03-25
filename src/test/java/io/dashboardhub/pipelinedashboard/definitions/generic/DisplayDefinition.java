@@ -5,7 +5,7 @@ import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 
-public class DisplayDefinition extends PipelinedashboardApplicationTests {
+public final class DisplayDefinition extends PipelinedashboardApplicationTests {
 
     @Then("^I see element (.*)")
     public void I_see_element(String element) {
