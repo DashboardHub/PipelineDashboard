@@ -9,6 +9,13 @@ spring:
     cache-names: foo
     guava:
       spec: maximumSize=500,expireAfterAccess=600s
+  datasource:
+    url: jdbc:mysql://localhost:3306/dashboardhub
+    username: ???
+    password: ???
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # TODO: move this into a dev only profile
 security:
   sessions: ALWAYS
   oauth2:

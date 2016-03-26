@@ -1,7 +1,6 @@
 package io.dashboardhub.pipelinedashboard.config;
 
 import org.springframework.data.auditing.DateTimeProvider;
-import org.springframework.stereotype.Component;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

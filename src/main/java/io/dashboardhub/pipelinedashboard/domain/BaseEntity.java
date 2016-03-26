@@ -1,32 +1,42 @@
 package io.dashboardhub.pipelinedashboard.domain;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.ZonedDateTime;
+
+//import org.hibernate.annotations.Type;
 
 @Data
 @MappedSuperclass
-public abstract class BaseEntity {
+@Audited
+abstract class BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "created_by_user", nullable = false)
     @CreatedBy
     private String createdByUser;
 
-    @Column(name = "creation_time", nullable = false)
+    @Column(name = "creation_time", nullable = false, columnDefinition = "TIMESTAMP")
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
     @CreatedDate
     private ZonedDateTime creationTime;
 
-    @Column(name = "modified_by_user", nullable = false)
+    @Column(name = "modified_by_user")
     @LastModifiedBy
     private String modifiedByUser;
 
-    @Column(name = "modification_time")
+    @Column(name = "modification_time", columnDefinition = "TIMESTAMP")
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
     @LastModifiedDate
     private ZonedDateTime modificationTime;
 }

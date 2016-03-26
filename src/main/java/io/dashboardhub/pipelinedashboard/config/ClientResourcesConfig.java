@@ -5,7 +5,9 @@ import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResour
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 
 class ClientResourcesConfig {
+
     private OAuth2ProtectedResourceDetails client = new AuthorizationCodeResourceDetails();
+
     private ResourceServerProperties resource = new ResourceServerProperties();
 
     public OAuth2ProtectedResourceDetails getClient() {

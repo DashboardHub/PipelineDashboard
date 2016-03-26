@@ -18,10 +18,6 @@ import java.util.UUID;
 @Table(uniqueConstraints = @UniqueConstraint(name = "uid_idx", columnNames = "uid"))
 public class Project extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @NotNull
     @Size(min = 1, max = 255)
     private String uid = UUID.randomUUID().toString();
