@@ -3,6 +3,7 @@ package io.dashboardhub.pipelinedashboard.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.hibernate.validator.constraints.Email;
@@ -24,6 +25,8 @@ import java.util.UUID;
 @Table(uniqueConstraints = @UniqueConstraint(name = "username_idx", columnNames = {"username"}))
 public class User extends BaseEntity {
 
+    @NotNull
+    @Type(type = "uuid-char")
     private UUID uid;
 
     @NotNull
