@@ -3,6 +3,7 @@ package io.dashboardhub.pipelinedashboard.controller;
 import io.dashboardhub.pipelinedashboard.domain.User;
 import io.dashboardhub.pipelinedashboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.history.Revisions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,5 +46,18 @@ public final class AccountController {
         redirectAttributes.addFlashAttribute("success", "Successfully saved");
 
         return "redirect:/profile";
+    }
+
+    @RequestMapping(value = {"/profile/history"}, method = RequestMethod.GET)
+    public String profileHistory(Model model) {
+        User user = userService.findByCurrentUser();
+        model.addAttribute("user", user);
+
+        Revisions<Integer, User> revisions = userService.findRevisions(user);
+
+        model.addAttribute("revisions", revisions.getContent());
+
+
+        return "account/history";
     }
 }

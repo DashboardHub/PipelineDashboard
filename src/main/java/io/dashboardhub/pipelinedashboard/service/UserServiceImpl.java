@@ -3,6 +3,8 @@ package io.dashboardhub.pipelinedashboard.service;
 import io.dashboardhub.pipelinedashboard.domain.User;
 import io.dashboardhub.pipelinedashboard.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.history.Revisions;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +49,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return userRepository.save(user);
+    }
+
+    public Revisions<Integer, User> findRevisions(User user) {
+        return userRepository.findRevisions(user.getId());
     }
 }
 
