@@ -30,13 +30,19 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username);
     }
 
+    public void updateLastLoggedIn(User user) {
+        User existingUser = findByUsername(user.getUsername());
+        if (existingUser != null) {
+            existingUser.setLastLoggedIn(user.getLastLoggedIn());
+            userRepository.save(existingUser);
+        }
+    }
+
     public User save(User user) {
         User existingUser = findByUsername(user.getUsername());
         if (existingUser != null) {
             existingUser.setName(user.getName());
             existingUser.setEmail(user.getEmail());
-            existingUser.setLastLoggedIn(user.getLastLoggedIn());
-
             return userRepository.save(existingUser);
         }
 

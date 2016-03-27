@@ -7,13 +7,12 @@ import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Data
@@ -38,7 +37,10 @@ public class User extends BaseEntity {
     @Email
     private String email;
 
-    private String lastLoggedIn;
+    @Column(name = "last_logged_in", columnDefinition = "TIMESTAMP")
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private ZonedDateTime lastLoggedIn;
 
     private User() {}
 
