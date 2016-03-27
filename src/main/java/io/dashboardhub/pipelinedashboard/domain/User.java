@@ -26,8 +26,8 @@ import java.util.UUID;
 public class User extends BaseEntity {
 
     @NotNull
-    @Type(type = "uuid-char")
-    private UUID uid;
+//    @Type(type = "uuid-char")
+    private String uid;
 
     @NotNull
     private String username;
@@ -40,11 +40,10 @@ public class User extends BaseEntity {
 
     private String lastLoggedIn;
 
-    User() {
-    }
+    private User() {}
 
     public User(String username) {
         this.username = username;
-        this.uid = UUID.randomUUID();
+        this.uid = UUID.randomUUID().toString();
     }
 }

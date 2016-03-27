@@ -11,8 +11,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.ZonedDateTime;
 
-//import org.hibernate.annotations.Type;
-
 @Data
 @MappedSuperclass
 @Audited
@@ -22,7 +20,7 @@ abstract class BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "created_by_user", nullable = false)
+    @Column(name = "created_by_user")
     @CreatedBy
     private String createdByUser;
 

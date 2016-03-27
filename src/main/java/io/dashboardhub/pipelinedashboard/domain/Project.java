@@ -19,8 +19,7 @@ import java.util.UUID;
 public class Project extends BaseEntity {
 
     @NotNull
-    @Size(min = 1, max = 255)
-    private String uid = UUID.randomUUID().toString();
+    private String uid;
 
     @NotNull
     @Size(min = 5, max = 64)
@@ -30,8 +29,13 @@ public class Project extends BaseEntity {
     private String description;
 
     @NotNull
-    private Boolean isPrivate = false;
+    private Boolean isPrivate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
+
+    public Project() {
+        this.isPrivate = false;
+        this.uid = UUID.randomUUID().toString();
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class ApplicationConfig {
 
-    @Profile("!test")
+//    @Profile("!test")
     @Bean
     public DateTimeService currentTimeDateTimeService() {
         return new CurrentTimeDateTimeService();
