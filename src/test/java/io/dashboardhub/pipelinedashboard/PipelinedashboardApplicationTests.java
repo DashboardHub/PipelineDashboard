@@ -1,5 +1,6 @@
 package io.dashboardhub.pipelinedashboard;
 
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
