@@ -22,10 +22,9 @@ import java.util.UUID;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(name = "username_idx", columnNames = {"username"}))
-public class User extends BaseEntity {
+public final class User extends BaseEntity {
 
     @NotNull
-//    @Type(type = "uuid-char")
     private String uid;
 
     @NotNull

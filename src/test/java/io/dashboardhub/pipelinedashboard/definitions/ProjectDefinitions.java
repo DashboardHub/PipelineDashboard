@@ -10,8 +10,6 @@ import io.dashboardhub.pipelinedashboard.repository.UserRepository;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.UUID;
-
 public final class ProjectDefinitions extends PipelinedashboardApplicationTests {
 
     @Autowired

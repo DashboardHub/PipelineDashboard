@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(uniqueConstraints = @UniqueConstraint(name = "uid_idx", columnNames = "uid"))
-public class Project extends BaseEntity {
+public final class Project extends BaseEntity {
 
     @NotNull
     private String uid;
