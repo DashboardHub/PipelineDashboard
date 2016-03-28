@@ -14,7 +14,7 @@ spring:
       url: jdbc:h2:mem:test;MODE=MySQL
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create-drop # TODO: move this into a dev only profile
 security:
   sessions: ALWAYS
   oauth2:
