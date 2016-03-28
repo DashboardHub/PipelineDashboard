@@ -25,3 +25,15 @@ Feature: User can update their profile
       And I see element email-error
       And the field name contains N
       And the field email contains E
+
+  Scenario: Updating user entity should be audited
+    Given I am logged in
+    When I go /profile
+      And I fill in the field name with updatedtestname
+      And I fill in the field email with updatedtest@email.com
+    And Submit the form form-profile
+      Then There is a new revision for my User
+      And the latest revised value for name is updatedtestname
+      And the previous revised value for name is null
+      And the latest revised value for email is updatedtest@email.com
+      And the previous revised value for email is null
