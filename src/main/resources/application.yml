@@ -10,12 +10,11 @@ spring:
     guava:
       spec: maximumSize=500,expireAfterAccess=600s
   datasource:
-    url: jdbc:mysql://localhost:3306/dashboardhub
-    username: ???
-    password: ???
+#      driverClassName: org.h2.Driver
+      url: jdbc:h2:mem:test;MODE=MySQL
   jpa:
     hibernate:
-      ddl-auto: create-drop # TODO: move this into a dev only profile
+      ddl-auto: create-drop
 security:
   sessions: ALWAYS
   oauth2:
@@ -35,6 +34,13 @@ logging:
 ---
 spring:
     profiles: dev
+    datasource:
+      url: jdbc:mysql://localhost:3306/dashboardhub
+      username: ???
+      password: ???
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
 debug: true
 ---
 spring:
