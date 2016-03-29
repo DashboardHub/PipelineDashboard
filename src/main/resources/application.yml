@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-204-entity-auditing-2016-03-29-544
 server:
   port: 8081
 spring:
