@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Project List:: PipelineDashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <h1>All Users</h1>
+    <table>
+        <tr>
+            <th>user</th>
+        </tr>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.toString()}">username</td>
+        </tr>
+    </table>
+    <p th:text="${revisions.toString()}">lala</p>
+</div>
+
+</body>
+</html>

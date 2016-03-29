@@ -2,6 +2,8 @@ package io.dashboardhub.pipelinedashboard.service;
 
 import io.dashboardhub.pipelinedashboard.domain.Project;
 
+import java.util.UUID;
+
 public interface ProjectService {
 
     Iterable<Project> findAllByCurrentUser();
