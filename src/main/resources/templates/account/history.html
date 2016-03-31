@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+    <title>Profile:: PipelineDashboard</title>
+</head>
+<body>
+
+<div layout:fragment="content" class="container">
+
+    <div class="row">
+        <div id="lastLoggedIn" class="alert alert-warning" role="alert" th:if="${user.lastLoggedIn != null}">
+            Last logged in at <strong th:text="${user.lastLoggedIn}"></strong>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="card">
+            <table>
+                <tr th:each="revision : ${revisions}">
+                    <td th:text="${revision.getRevisionDate()}"></td>
+                    <td th:text="${revision.getEntity().toString()}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

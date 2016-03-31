@@ -1,7 +1,6 @@
 version: --BUILD-VERSION--
 server:
   port: 8081
-debug: true
 spring:
   resources:
     chain:
@@ -10,6 +9,12 @@ spring:
     cache-names: foo
     guava:
       spec: maximumSize=500,expireAfterAccess=600s
+  datasource:
+#      driverClassName: org.h2.Driver
+      url: jdbc:h2:mem:test;MODE=MySQL
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # TODO: move this into a dev only profile
 security:
   sessions: ALWAYS
   oauth2:
@@ -28,6 +33,18 @@ logging:
     org.springframework.security: DEBUG
 ---
 spring:
+    profiles: dev
+    datasource:
+      url: jdbc:mysql://localhost:3306/dashboardhub
+      username: ???
+      password: ???
+    jpa:
+      hibernate:
+        ddl-auto: create-drop
+debug: true
+---
+spring:
     profiles: test
+debug: true
 server:
   port: 0
