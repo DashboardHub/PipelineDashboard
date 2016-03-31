@@ -1,5 +1,6 @@
-package io.dashboardhub.pipelinedashboard.config;
+package io.dashboardhub.pipelinedashboard.provider;
 
+import io.dashboardhub.pipelinedashboard.service.DateTimeService;
 import org.springframework.data.auditing.DateTimeProvider;
 
 import java.util.Calendar;

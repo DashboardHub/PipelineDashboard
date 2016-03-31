@@ -17,8 +17,8 @@ public final class ProfileDefinitions extends PipelinedashboardApplicationTests 
     @Autowired
     private UserRepository userRepository;
 
-    @Then("^There is a new revision for my User$")
-    public void There_is_a_new_audit_entry_for_my_user() throws Exception {
+    @Then("^there is a new revision for my User$")
+    public void there_is_a_new_audit_entry_for_my_user() throws Exception {
         User currentUser = userRepository.findByUsername("TestUser");
         Revision<Integer, User> latestRevision = userRepository.findLastChangeRevision(currentUser.getId());
         Assert.assertTrue(latestRevision.getRevisionNumber() > 1);

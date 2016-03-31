@@ -1,5 +1,8 @@
 package io.dashboardhub.pipelinedashboard.config;
 
+import io.dashboardhub.pipelinedashboard.auditor.UsernameAuditor;
+import io.dashboardhub.pipelinedashboard.provider.AuditingDateTimeProvider;
+import io.dashboardhub.pipelinedashboard.service.DateTimeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.auditing.DateTimeProvider;
@@ -20,6 +23,6 @@ public class PersistenceConfig {
 
     @Bean
     AuditorAware<String> auditorProvider() {
-        return new UsernameAuditorAware();
+        return new UsernameAuditor();
     }
 }

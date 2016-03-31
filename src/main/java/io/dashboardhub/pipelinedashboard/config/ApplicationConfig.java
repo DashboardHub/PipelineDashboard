@@ -1,14 +1,15 @@
 package io.dashboardhub.pipelinedashboard.config;
 
+import io.dashboardhub.pipelinedashboard.service.CurrentTimeDateTimeServiceImpl;
+import io.dashboardhub.pipelinedashboard.service.DateTimeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class ApplicationConfig {
 
     @Bean
     public DateTimeService currentTimeDateTimeService() {
-        return new CurrentTimeDateTimeService();
+        return new CurrentTimeDateTimeServiceImpl();
     }
 }
