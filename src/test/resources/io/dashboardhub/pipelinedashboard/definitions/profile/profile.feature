@@ -36,7 +36,7 @@ Feature: User can update their profile
       And I fill in the field name with updatedtestname
       And I fill in the field email with updatedtest@email.com
       And Submit the form form-profile
-    Then There is a new revision for my User
+    Then there is a new revision for my User
       And the latest revised value for name is updatedtestname
       And the previous revised value for name is testname
       And the latest revised value for email is updatedtest@email.com

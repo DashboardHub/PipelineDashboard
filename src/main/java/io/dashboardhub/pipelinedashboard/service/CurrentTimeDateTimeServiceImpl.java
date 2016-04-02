@@ -1,8 +1,8 @@
-package io.dashboardhub.pipelinedashboard.config;
+package io.dashboardhub.pipelinedashboard.service;
 
 import java.time.ZonedDateTime;
 
-public class CurrentTimeDateTimeService implements DateTimeService {
+public class CurrentTimeDateTimeServiceImpl implements DateTimeService {
 
     @Override
     public ZonedDateTime getCurrentDateAndTime() {

@@ -1,4 +1,4 @@
-package io.dashboardhub.pipelinedashboard.config;
+package io.dashboardhub.pipelinedashboard.service;
 
 import java.time.ZonedDateTime;
 

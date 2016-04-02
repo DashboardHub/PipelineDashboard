@@ -1,10 +1,10 @@
-package io.dashboardhub.pipelinedashboard.config;
+package io.dashboardhub.pipelinedashboard.auditor;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public class UsernameAuditorAware implements AuditorAware<String> {
+public class UsernameAuditor implements AuditorAware<String> {
 
     public String getCurrentAuditor() {
 
