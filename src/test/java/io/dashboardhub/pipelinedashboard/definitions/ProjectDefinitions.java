@@ -18,8 +18,8 @@ public final class ProjectDefinitions extends PipelinedashboardApplicationTests 
     @Autowired
     private UserRepository userRepository;
 
-    @When("^I have a project with uid (.*) owned by (.*)$")
-    public void I_have_a_project(String uid, String username) {
+    @When("^I have a (public|private) project with uid (.*) owned by (.*)$")
+    public void I_have_a_project(String visibility, String uid, String username) {
         User user = userRepository.findByUsername(username);
 
         if (user == null) {
@@ -31,6 +31,7 @@ public final class ProjectDefinitions extends PipelinedashboardApplicationTests 
         project.setName("example-test-project-name " + uid);
         project.setDescription("example-test-project-description " + uid);
         project.setUser(user);
+        project.setIsPrivate(visibility.equals("private"));
 
         projectRepository.save(project);
     }
