@@ -1,6 +1,5 @@
 package io.dashboardhub.pipelinedashboard.definitions;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import io.dashboardhub.pipelinedashboard.PipelinedashboardApplicationTests;
 import io.dashboardhub.pipelinedashboard.domain.User;
