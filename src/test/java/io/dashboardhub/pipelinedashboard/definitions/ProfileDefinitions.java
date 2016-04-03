@@ -24,12 +24,12 @@ public final class ProfileDefinitions extends PipelinedashboardApplicationTests 
         Assert.assertTrue(latestRevision.getRevisionNumber() > 1);
     }
 
-    @And("^the latest revised value for (.*) is (.*)$")
+    @Then("^the latest revised value for (.*) is (.*)$")
     public void the_latest_revised_value_for(String fieldName, String value) throws Exception {
         checkRevisionFieldValue(fieldName, value, 0);
     }
 
-    @And("^the previous revised value for (.*) is (.*)$")
+    @Then("^the previous revised value for (.*) is (.*)$")
     public void the_previous_revised_value_for(String fieldName, String value) throws Exception {
         checkRevisionFieldValue(fieldName, value, 1);
     }
