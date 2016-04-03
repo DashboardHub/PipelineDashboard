@@ -26,4 +26,9 @@ public final class DisplayDefinition extends PipelinedashboardApplicationTests {
 
         Assert.assertEquals(false, found);
     }
+
+    @Then("^I see a minimum of (.*) (.*) elements$")
+    public void I_see_a_list_of_elements(Integer size, String className) {
+        Assert.assertTrue(size < ((Integer) driver.findElements(By.className(className)).size()));
+    }
 }

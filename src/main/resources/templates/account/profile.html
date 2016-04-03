@@ -19,9 +19,10 @@
         <div class="card">
             <form id="form-profile" th:action="@{/profile}" th:object="${user}" method="post">
                 <div class="card-header">
+                    <a th:href="@{/profile/history}"><i class="fa fa-history"></i></a>
                     Update Profile
                 </div>
-                
+
                 <div class="card-block">
                     <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? has-danger">
                         <label for="name" class="form-control-label">Full Name</label>

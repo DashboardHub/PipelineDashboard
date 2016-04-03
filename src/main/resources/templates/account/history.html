@@ -17,11 +17,25 @@
 
     <div class="row">
         <div class="card">
-            <table>
-                <tr th:each="revision : ${revisions}">
-                    <td th:text="${revision.getRevisionDate()}"></td>
-                    <td th:text="${revision.getEntity().toString()}"></td>
-                </tr>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Audit Date</th>
+                        <th>User</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Last Logged In</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="revision : ${revisions}" class="revision">
+                        <th scope="row" th:text="${revision.getRevisionDate()}"></th>
+                        <td th:text="${revision.getEntity().createdByUser}"></td>
+                        <td th:text="${revision.getEntity().name}"></td>
+                        <td th:text="${revision.getEntity().email}"></td>
+                        <td th:text="${revision.getEntity().lastLoggedIn}"></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
