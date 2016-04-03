@@ -10,7 +10,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @EnableCaching
 public class PipelinedashboardApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PipelinedashboardApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PipelinedashboardApplication.class, args);
+    }
 }

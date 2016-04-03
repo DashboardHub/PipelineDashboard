@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 @Component
@@ -20,11 +21,10 @@ public final class AuthenticationListener implements ApplicationListener<Interac
         User user = userService.findByUsername(event.getAuthentication().getName());
 
         if (user == null) {
-            userService.save(new User(event.getAuthentication().getName()));
+            user = userService.save(new User(event.getAuthentication().getName()));
         }
 
-        user = userService.findByUsername(event.getAuthentication().getName());
-        user.setLastLoggedIn(new Date().toString());
-        userService.save(user);
+        user.setLastLoggedIn(ZonedDateTime.now());
+        userService.updateLastLoggedIn(user);
     }
 }
