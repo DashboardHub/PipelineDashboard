@@ -1,21 +1,30 @@
 package io.dashboardhub.pipelinedashboard.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.hibernate.annotations.Type;
+import org.hibernate.envers.Audited;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.hibernate.validator.constraints.Email;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.ZonedDateTime;
+import java.util.UUID;
 
 @Data
+@Audited
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(name = "username_idx", columnNames = {"username"} ))
-public final class User {
+@EntityListeners(AuditingEntityListener.class)
+@Table(uniqueConstraints = @UniqueConstraint(name = "username_idx", columnNames = {"username"}))
+public final class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    @NotNull
     private String uid;
 
     @NotNull
@@ -27,12 +36,15 @@ public final class User {
     @Email
     private String email;
 
-    private String lastLoggedIn;
+    @Column(name = "last_logged_in", columnDefinition = "TIMESTAMP")
+    @Type(type = "org.jadira.usertype.dateandtime.threeten.PersistentZonedDateTime")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private ZonedDateTime lastLoggedIn;
 
-    User() {
-    }
+    private User() {}
 
     public User(String username) {
         this.username = username;
+        this.uid = UUID.randomUUID().toString();
     }
 }
