@@ -1,4 +1,4 @@
-version: --BUILD-VERSION--
+version: build-prototype-v0.3-2016-04-05-557
 server:
   port: 8081
 spring:
