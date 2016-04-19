@@ -12,6 +12,8 @@ public interface ProjectService {
 
     Iterable<Project> findAllByPublic();
 
+    Iterable<Project> findAllByPublicRecent();
+
     Project findByUid(String uuid);
 
     void delete(Project project);

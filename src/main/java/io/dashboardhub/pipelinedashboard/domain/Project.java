@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -30,6 +31,9 @@ public final class Project extends BaseEntity {
 
     @NotNull
     private Boolean isPrivate;
+
+    @NotNull
+    private Date createdOn = new Date();
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;

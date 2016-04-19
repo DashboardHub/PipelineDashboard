@@ -10,29 +10,22 @@
 <div layout:fragment="content" class="container">
 
     <div class="row">
-        <div class="card">
-            <div class="card-header">
-                Most Popular Project Dashboards
-            </div>
-            <div class="card-block">
-
-            </div>
-            <div class="card-footer text-muted">
-
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="card">
-            <div class="card-header">
-                Most Recent Project Dashboards
-            </div>
-            <div class="card-block">
-
-            </div>
-            <div class="card-footer text-muted">
-
+        <h2>Recent Project Dashboards</h2>
+        <div th:each="project : ${projects}">
+            <div class="card" th:id="uid_ + ${project.uid}">
+                <div class="card-header">
+                    <i class="fa fa-lock" th:if="${project.isPrivate}"></i>
+                    <i class="fa fa-unlock" th:unless="${project.isPrivate}"></i>
+                    <span th:text="${project.name}"></span> by
+                    <span th:if="${project.user.name}" th:text="${project.user.name}"></span>
+                    <span th:unless="${project.user.name}" th:text="${project.user.username}"></span>
+                </div>
+                <div class="card-block">
+                    <p th:text="${project.description}"></p>
+                </div>
+                <div class="card-footer text-muted">
+                    Created on <span th:text="${project.createdOn}"></span>
+                </div>
             </div>
         </div>
     </div>

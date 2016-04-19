@@ -2,7 +2,7 @@ Feature: Edit project
 
   Scenario: Edit project successfully
     Given I am logged in
-      And I have a project with uid create-example-test-project-1 owned by TestUser
+      And I have a public project with uid create-example-test-project-1 owned by TestUser
     When I go /project/edit/create-example-test-project-1
       And I fill in the field name with testname-update
       And I fill in the field description with testdescription-update
@@ -14,7 +14,7 @@ Feature: Edit project
 
   Scenario: Edit project unsuccessfully
     Given I am logged in
-      And I have a project with uid create-example-test-project-2 owned by TestUser
+      And I have a public project with uid create-example-test-project-2 owned by TestUser
     When I go /project/edit/create-example-test-project-1
       And I fill in the field name with N
       And Submit the form form-project
@@ -24,7 +24,7 @@ Feature: Edit project
 
   Scenario: Edit someone elses project unsuccessfully
     Given I am logged in
-      And I have a project with uid create-example-test-project-3 owned by AnotherUser
+      And I have a public project with uid create-example-test-project-3 owned by AnotherUser
     When I go /project/edit/create-example-test-project-3
       And I fill in the field name with testname-update-testuser
       And Submit the form form-project
