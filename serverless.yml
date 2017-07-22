@@ -20,6 +20,8 @@ service: PipelineDashboard
 provider:
   name: aws
   runtime: nodejs6.10
+  profile: jaoudestudios
+  region: eu-west-2
 
 # you can overwrite defaults here
 #  stage: dev
@@ -56,7 +58,11 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handler.ping
+    events:
+      - http:
+          path: environments
+          method: get
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
