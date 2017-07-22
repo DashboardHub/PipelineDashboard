@@ -1,0 +1,21 @@
+{
+  "name": "pipelinedashboard",
+  "version": "0.7.0",
+  "description": "Pipeline Dashboard to display your deployed versions",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DashboardHub/PipelineDashboard.git"
+  },
+  "keywords": [
+    "pipeline",
+    "dashboard",
+    "deployments",
+    "deployed"
+  ],
+  "author": "Eddie Jaoude",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/DashboardHub/PipelineDashboard/issues"
+  },
+  "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme"
+}
