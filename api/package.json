@@ -17,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/DashboardHub/PipelineDashboard/issues"
   },
-  "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme"
+  "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
+  "dependencies": {
+    "aws-sdk": "^2.88.0"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.22",
+    "serverless-offline": "^3.15.1"
+  }
 }
