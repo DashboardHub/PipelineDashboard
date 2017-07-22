@@ -1,0 +1,11 @@
+{
+  "dynamodb": {
+    "environments": {
+      "table": "pipelinedashboard-environments"
+    }
+  },
+  "offline": {
+    "region": "localhost",
+    "endpoint": "http://localhost:8000"
+  }
+}
