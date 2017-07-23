@@ -18,6 +18,8 @@ module.exports.create = (event, context, callback) => {
         Item: {
             id: uuid.v1(),
             name: data.name,
+            description: data.description,
+            tags: data.tags,
             isPrivate: false,
             createdAt: timestamp,
             updatedAt: timestamp,
