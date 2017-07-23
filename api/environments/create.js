@@ -12,7 +12,7 @@ module.exports.create = (event, context, callback) => {
     if (typeof data.name !== 'string' || !validator.isLength(data.name, {min: 3, max: 32})) {
         return callback(null, {
             statusCode: 400,
-            body: JSON.stringify({message: 'Validation Error: "name" is required and must be a "string" between 3 and 32}),
+            body: JSON.stringify({message: 'Validation Error: "name" is required and must be a "string" between 3 and 32'}),
         });
     }
 
