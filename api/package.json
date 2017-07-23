@@ -20,7 +20,8 @@
   "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
   "dependencies": {
     "aws-sdk": "^2.88.0",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "validator": "^8.0.0"
   },
   "devDependencies": {
     "serverless-dynamodb-local": "^0.2.22",
