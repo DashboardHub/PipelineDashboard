@@ -15,19 +15,28 @@ module.exports.create = (event, context, callback) => {
 
     if (data.description) {
         if (typeof data.description !== 'string' || !validator.isLength(data.description, {min: 3, max: 1024})) {
-            return callback(new Error('[400] Validation Error: "description" is optional but a "string" must be between 3 and 1024'));
+            return callback(null, {
+                statusCode: 400,
+                body: JSON.stringify({message: 'Validation Error: "description" is optional but a "string" must be between 3 and 1024'}),
+            });
         }
     }
 
     if (data.tags) {
         if (!Array.isArray(data.tags)) {
-            return callback(new Error('[400] Validation Error: "tags" is optional but must be an "array"'));
+            return callback(null, {
+                statusCode: 400,
+                body: JSON.stringify({message: 'Validation Error: "tags" is optional but must be an "array"'}),
+            });
         }
     }
 
     if (data.isPrivate) {
         if (typeof data.isPrivate !== 'boolean') {
-            return callback(new Error('[400] Validation Error: "isPrivate" is optional but must be a "boolean"'));
+            return callback(null, {
+                statusCode: 400,
+                body: JSON.stringify({message: 'Validation Error: "isPrivate" is optional but must be a "boolean"'}),
+            });
         }
     }
 
@@ -37,7 +46,7 @@ module.exports.create = (event, context, callback) => {
             id: uuid.v1(),
             name: data.name,
             description: data.description,
-            tags: data.tags || [],
+            tags: data.tags,
             isPrivate: false,
             createdAt: timestamp,
             updatedAt: timestamp,
