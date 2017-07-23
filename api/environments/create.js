@@ -10,7 +10,10 @@ module.exports.create = (event, context, callback) => {
     const data = JSON.parse(event.body);
 
     if (typeof data.name !== 'string' || !validator.isLength(data.name, {min: 3, max: 32})) {
-        return callback(new Error('[400] Validation Error: "name" is required and must be a "string" between 3 and 32'));
+        return callback(null, {
+            statusCode: 400,
+            body: JSON.stringify({message: 'Validation Error: "name" is required and must be a "string" between 3 and 32}),
+        });
     }
 
     if (data.description) {
