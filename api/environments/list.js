@@ -13,15 +13,15 @@ module.exports.list = (event, context, callback) => {
         // handle potential errors
         if (error) {
             console.error(error);
-            callback(new Error('Couldn\'t fetch the environments.'));
-            return;
+            return callback(new Error('Couldn\'t fetch the environments.'));
         }
 
-        // create a response
-        const response = {
+        callback(null, {
             statusCode: 200,
-            body: JSON.stringify(result.Items),
-        };
-        callback(null, response);
+            body: JSON.stringify({
+                total: result.Items.length,
+                list: result.Items
+            })
+        });
     });
 };
