@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { EnviromnentsComponent } from './enviromnents/enviromnents.component';
+import { EnvironmentsComponent } from './environments/environments.component';
 
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
@@ -11,14 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CovalentLayoutModule } from '@covalent/core';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: EnviromnentsComponent},
+  { path: '', pathMatch: 'full', component: EnvironmentsComponent},
   { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    EnviromnentsComponent
+    EnvironmentsComponent
   ],
   imports: [
     RouterModule.forRoot(

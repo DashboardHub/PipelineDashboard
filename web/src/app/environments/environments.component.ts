@@ -4,12 +4,12 @@ import { Environment } from './environment';
 import {EnvironmentsService} from "./environments.service";
 
 @Component({
-  selector: 'app-enviromnents',
-  templateUrl: './enviromnents.component.html',
-  styleUrls: ['./enviromnents.component.css'],
+  selector: 'app-environments',
+  templateUrl: './environments.component.html',
+  styleUrls: ['./environments.component.css'],
   providers: [EnvironmentsService]
 })
-export class EnviromnentsComponent implements OnInit {
+export class EnvironmentsComponent implements OnInit {
 
   environments: Array<Environment> = [];
 
