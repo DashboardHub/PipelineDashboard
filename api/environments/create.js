@@ -6,7 +6,7 @@ const config = require('../config');
 const validator = require('validator');
 
 module.exports.create = (event, context, callback) => {
-    const timestamp = new Date().getTime();
+    const timestamp = new Date().toISOString();
     const data = JSON.parse(event.body);
 
     if (typeof data.name !== 'string' || !validator.isLength(data.name, {min: 3, max: 32})) {
@@ -65,6 +65,9 @@ module.exports.create = (event, context, callback) => {
         }
 
         callback(null, {
+            headers: {
+                "Access-Control-Allow-Origin" : "*"
+            },
             statusCode: 200,
             body: JSON.stringify(params.Item),
         });
