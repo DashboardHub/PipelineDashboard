@@ -19,6 +19,8 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/@covalent/core/common/platform.scss",
+        "styles.scss",
         "styles.css"
       ],
       "scripts": [],
