@@ -1,6 +1,6 @@
 export class Environment {
   id: string;
-  name: string;
+  title: string;
   description: string;
   url: string;
   isPrivate: boolean;
@@ -8,7 +8,7 @@ export class Environment {
   updatedAt: string;
   createdAt: string;
 
-  constructor(name: string) {
-    this.name = name;
+  constructor(title: string) {
+    this.title = title;
   }
 }

@@ -11,11 +11,13 @@ import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CovalentLayoutModule } from '@covalent/core';
 import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
+import { EnvironmentViewComponent } from './environments/environment-view/environment-view.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: EnvironmentsComponent},
-  { path: 'environments', pathMatch: 'full', component: EnvironmentsComponent},
-  { path: 'environments/add', pathMatch: 'full', component: EnvironmentAddComponent},
+  { path: '', pathMatch: 'full', component: EnvironmentsComponent },
+  { path: 'environments', pathMatch: 'full', component: EnvironmentsComponent },
+  { path: 'environments/add', pathMatch: 'full', component: EnvironmentAddComponent },
+  { path: 'environments/:id', pathMatch: 'full', component: EnvironmentViewComponent },
   { path: '**', redirectTo: '' }
 ];
 
@@ -23,7 +25,8 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     EnvironmentsComponent,
-    EnvironmentAddComponent
+    EnvironmentAddComponent,
+    EnvironmentViewComponent
   ],
   imports: [
     RouterModule.forRoot(

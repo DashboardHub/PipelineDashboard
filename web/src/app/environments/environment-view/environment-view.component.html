@@ -1,0 +1,20 @@
+<md-card>
+  <md-card-header>
+    <md-card-title>Add Environment</md-card-title>
+    <md-card-subtitle>
+      <a md-button routerLink="/environments">
+        <md-icon>arrow_back</md-icon>
+        <span>Back to list</span>
+      </a>
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <h2>{{ environment.title }}</h2>
+    <p>{{ environment.description }}</p>
+    <a *ngIf="environment.url">{{ environment.url }}</a>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button color="primary"
+            (click)="edit(environment.id)">EDIT</button>
+  </md-card-actions>
+</md-card>

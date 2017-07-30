@@ -12,7 +12,8 @@
     <md-list>
       <md-list-item *ngFor="let environment of environments.list">
         <md-icon md-list-icon>computer</md-icon>
-        <h4 md-line>{{environment.name}}
+        <h4 md-line>
+          <a [routerLink]="['/environments', environment.id]">{{environment.title}}</a>
           <md-icon *ngIf="environment.isPrivate">lock</md-icon>
           <md-icon *ngIf="!environment.isPrivate">lock_open</md-icon>
         </h4>
