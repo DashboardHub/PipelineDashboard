@@ -30,7 +30,6 @@ provider:
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:UpdateItem
-        - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.environments.table}"
 
 # you can overwrite defaults here
@@ -85,6 +84,14 @@ functions:
           cors: true
   environmentGet:
     handler: environments/get.get
+    events:
+      - http:
+          path: environments/{id}
+          method: get
+          integration: lambda-proxy
+          cors: true
+  environmentUpdate:
+    handler: environments/update.update
     events:
       - http:
           path: environments/{id}

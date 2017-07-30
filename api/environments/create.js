@@ -9,10 +9,10 @@ module.exports.create = (event, context, callback) => {
     const timestamp = new Date().toISOString();
     const data = JSON.parse(event.body);
 
-    if (typeof data.name !== 'string' || !validator.isLength(data.name, {min: 3, max: 32})) {
+    if (typeof data.title !== 'string' || !validator.isLength(data.title, {min: 3, max: 32})) {
         return callback(null, {
             statusCode: 400,
-            body: JSON.stringify({message: 'Validation Error: "name" is required and must be a "string" between 3 and 32'}),
+            body: JSON.stringify({message: 'Validation Error: "title" is required and must be a "string" between 3 and 32'}),
         });
     }
 
@@ -47,7 +47,7 @@ module.exports.create = (event, context, callback) => {
         TableName: config.dynamodb.environments.table,
         Item: {
             id: uuid.v1(),
-            name: data.name,
+            title: data.title,
             description: data.description,
             tags: data.tags,
             isPrivate: false,
