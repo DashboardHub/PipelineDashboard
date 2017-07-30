@@ -1,26 +1,27 @@
-<md-list>
-  <h3 md-subheader>
-    <button md-icon-button [mdMenuTriggerFor]="menu">
-      <md-icon>more_vert</md-icon>
-    </button>
-    <md-menu #menu="mdMenu">
-      <a md-menu-item>
+<md-card>
+  <md-card-header>
+    <md-card-title>Public Environment list</md-card-title>
+    <md-card-subtitle>
+      <a md-button routerLink="/environments/add">
         <md-icon>add</md-icon>
         <span>Add</span>
       </a>
-    </md-menu>
-    Public Environment List
-  </h3>
-  <md-list-item *ngFor="let environment of environments.list">
-    <md-icon md-list-icon>computer</md-icon>
-    <h4 md-line>{{environment.name}}
-      <md-icon *ngIf="environment.isPrivate">lock</md-icon>
-      <md-icon *ngIf="!environment.isPrivate">lock_open</md-icon>
-    </h4>
-    <p md-line>{{environment.description}} {{environment.url}}</p>
-    <p md-line>{{environment.createdAt | date}}, {{environment.updatedAt | date}}</p>
-    <md-chip-list class="mat-chip-list-stacked">
-      <md-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{tag}}</md-chip>
-    </md-chip-list>
-  </md-list-item>
-</md-list>
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <md-list>
+      <md-list-item *ngFor="let environment of environments.list">
+        <md-icon md-list-icon>computer</md-icon>
+        <h4 md-line>{{environment.name}}
+          <md-icon *ngIf="environment.isPrivate">lock</md-icon>
+          <md-icon *ngIf="!environment.isPrivate">lock_open</md-icon>
+        </h4>
+        <p md-line>{{environment.description}} {{environment.url}}</p>
+        <p md-line>{{environment.createdAt | date}}, {{environment.updatedAt | date}}</p>
+        <md-chip-list class="mat-chip-list-stacked">
+          <md-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{tag}}</md-chip>
+        </md-chip-list>
+      </md-list-item>
+    </md-list>
+  </md-card-content>
+</md-card>

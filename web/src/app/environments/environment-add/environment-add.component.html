@@ -1,0 +1,69 @@
+<md-card>
+  <md-card-header>
+    <md-card-title>Add Environment</md-card-title>
+    <md-card-subtitle>
+      <a md-button routerLink="/environments">
+        <md-icon>arrow_back</md-icon>
+        <span>Back to list</span>
+      </a>
+    </md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <form #form="ngForm" class="form-full">
+      <md-input-container>
+        <input mdInput class="form-control" placeholder="Name"
+               required minlength="3" maxlength="32"
+               name="name" [(ngModel)]="environment.name"
+               #name="ngModel">
+        <div *ngIf="name.errors && (name.dirty || name.touched)">
+          <md-error *ngIf="name.errors.required">
+            Name is required
+          </md-error>
+          <md-error *ngIf="name.errors.minlength">
+            Name must be at least 3 characters long.
+          </md-error>
+          <md-error *ngIf="name.errors.maxlength">
+            Name cannot be more than 32 characters long.
+          </md-error>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput class="form-control" placeholder="Description"
+               minlength="3" maxlength="128"
+               name="description" [(ngModel)]="environment.description"
+               #description="ngModel">
+        <div *ngIf="description.errors && (description.dirty || description.touched)">
+          <md-error *ngIf="description.errors.minlength">
+            Description must be at least 3 characters long.
+          </md-error>
+          <md-error *ngIf="description.errors.maxlength">
+            Description cannot be more than 128 characters long.
+          </md-error>
+        </div>
+      </md-input-container>
+      <md-input-container>
+        <input mdInput class="form-control" placeholder="Url"
+               minlength="3" maxlength="128"
+               name="url" [(ngModel)]="environment.url"
+               #url="ngModel">
+        <div *ngIf="url.errors && (url.dirty || url.touched)">
+          <md-error *ngIf="url.errors.minlength">
+            Url must be at least 3 characters long.
+          </md-error>
+          <md-error *ngIf="url.errors.maxlength">
+            Url cannot be more than 128 characters long.
+          </md-error>
+        </div>
+      </md-input-container>
+      <md-checkbox [disabled]="true" value="false">Is private
+        <md-icon mdTooltip="During BETA private is not allowed">info</md-icon>
+      </md-checkbox>
+    </form>
+  </md-card-content>
+  <md-card-actions>
+    <button md-button>CANCEL</button>
+    <button md-button color="primary"
+      [disabled]="!form.valid"
+      (click)="add(form)">SAVE</button>
+  </md-card-actions>
+</md-card>

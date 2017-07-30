@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule }   from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EnvironmentsComponent } from './environments/environments.component';
@@ -9,27 +10,32 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CovalentLayoutModule } from '@covalent/core';
+import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: EnvironmentsComponent},
+  { path: 'environments', pathMatch: 'full', component: EnvironmentsComponent},
+  { path: 'environments/add', pathMatch: 'full', component: EnvironmentAddComponent},
   { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    EnvironmentsComponent
+    EnvironmentsComponent,
+    EnvironmentAddComponent
   ],
   imports: [
     RouterModule.forRoot(
       routes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     BrowserModule,
     BrowserAnimationsModule,
     CovalentLayoutModule,
     HttpModule,
     MaterialModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

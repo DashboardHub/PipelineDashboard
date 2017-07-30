@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { Environment } from './environment';
+import {Environment} from './environment';
 import {EnvironmentsService} from "./environments.service";
 
 @Component({
@@ -13,7 +13,8 @@ export class EnvironmentsComponent implements OnInit {
 
   environments: Array<Environment> = [];
 
-  constructor(private environmentService: EnvironmentsService) { }
+  constructor(private environmentService: EnvironmentsService) {
+  }
 
   ngOnInit() {
     this.getEnvironments();
