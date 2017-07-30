@@ -95,7 +95,7 @@ functions:
     events:
       - http:
           path: environments/{id}
-          method: get
+          method: patch
           integration: lambda-proxy
           cors: true
 
