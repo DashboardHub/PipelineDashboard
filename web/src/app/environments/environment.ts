@@ -7,4 +7,8 @@ export class Environment {
   tags: Array<string>;
   updatedAt: string;
   createdAt: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
 }
