@@ -83,6 +83,14 @@ functions:
           method: get
           integration: lambda-proxy
           cors: true
+  environmentGet:
+    handler: environments/get.get
+    events:
+      - http:
+          path: environments/{id}
+          method: get
+          integration: lambda-proxy
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
