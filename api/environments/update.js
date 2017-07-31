@@ -42,7 +42,7 @@ module.exports.update = (event, context, callback) => {
                 updateExpression.push('title = :title');
             break;
             case '/description':
-                params.ExpressionAttributeValues[':description'] = item.value;
+                params.ExpressionAttributeValues[':description'] = item.value.length === 0 ? null : item.value;
                 updateExpression.push('description = :description');
             break;
         }
