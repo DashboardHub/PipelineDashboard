@@ -61,9 +61,9 @@
     </form>
   </md-card-content>
   <md-card-actions>
-    <a md-button routerLink="/environments">CANCEL</a>
+    <a md-button routerLink="/environments/{{ environment.id }}/edit">CANCEL</a>
     <button md-button color="primary"
-      [disabled]="!form.valid"
-      (click)="add(form)">SAVE</button>
+            [disabled]="!form.valid"
+            (click)="save(form)">SAVE</button>
   </md-card-actions>
 </md-card>

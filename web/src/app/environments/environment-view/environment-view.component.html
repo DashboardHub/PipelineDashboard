@@ -11,10 +11,11 @@
   <md-card-content>
     <h2>{{ environment.title }}</h2>
     <p>{{ environment.description }}</p>
-    <a *ngIf="environment.url">{{ environment.url }}</a>
+    <a *ngIf="environment.link">{{ environment.link }}</a>
   </md-card-content>
   <md-card-actions>
-    <button md-button color="primary"
-            (click)="edit(environment.id)">EDIT</button>
+    <a md-button color="primary"
+       routerLink="/environments/{{ environment.id }}/edit">
+      <md-icon>mode_edit</md-icon> EDIT</a>
   </md-card-actions>
 </md-card>

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {Http} from '@angular/http';
 import {Environment} from "./environment";
-import {HttpParams} from "@angular/common/http";
 
 @Injectable()
 export class EnvironmentsService {
@@ -21,6 +20,24 @@ export class EnvironmentsService {
 
   addEnvironment(environment: Environment): Promise<Environment> {
     return this.http.post(this.url, environment)
+      .toPromise()
+      .then(response => response.json() as Environment)
+      .catch(this.handleError);
+  }
+
+  saveEnvironment(environment: Environment): Promise<Environment> {
+    const updateProperties: Array<string> = ['title', 'description', 'link'];
+
+    let patch: Array<any> = updateProperties.map((item) => {
+      return {
+        op: 'replace',
+        path: '/' + item,
+        value: environment[item] || ''
+      };
+    });
+  console.log(patch);
+
+    return this.http.patch(this.url + '/' + environment.id, patch)
       .toPromise()
       .then(response => response.json() as Environment)
       .catch(this.handleError);

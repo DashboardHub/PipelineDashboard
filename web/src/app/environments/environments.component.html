@@ -17,7 +17,7 @@
           <md-icon *ngIf="environment.isPrivate">lock</md-icon>
           <md-icon *ngIf="!environment.isPrivate">lock_open</md-icon>
         </h4>
-        <p md-line>{{environment.description}} {{environment.url}}</p>
+        <p md-line>{{environment.description}} {{environment.link}}</p>
         <p md-line>{{environment.createdAt | date}}, {{environment.updatedAt | date}}</p>
         <md-chip-list class="mat-chip-list-stacked">
           <md-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{tag}}</md-chip>

@@ -2,7 +2,7 @@ export class Environment {
   id: string;
   title: string;
   description: string;
-  url: string;
+  link: string;
   isPrivate: boolean;
   tags: Array<string>;
   updatedAt: string;
