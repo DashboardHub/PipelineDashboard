@@ -32,7 +32,7 @@ module.exports.update = (event, context, callback) => {
         if (!item.op || !item.path || !item.value) {
             return callback(null, {
                 statusCode: 400,
-                body: JSON.stringify({message: 'Validation Error: each "patch" item must be have a "replace", "path", "value"'}),
+                body: JSON.stringify({message: 'Validation Error: each "patch" item must be have a "op", "path", "value"'}),
             });
         }
 
