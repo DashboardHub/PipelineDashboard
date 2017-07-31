@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Environment} from "../environment";
 import {EnvironmentsService} from "../environments.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-environment-add',
@@ -12,7 +13,7 @@ export class EnvironmentAddComponent implements OnInit {
 
   environment: Environment = new Environment('');
 
-  constructor(private environmentService: EnvironmentsService) {
+  constructor(private router: Router, private environmentService: EnvironmentsService) {
   }
 
   ngOnInit() {
@@ -22,7 +23,7 @@ export class EnvironmentAddComponent implements OnInit {
   add(environment: Environment): void {
     this.environmentService
       .addEnvironment(this.environment)
-      .then((environment) => console.log(environment)); // @TODO: redirect to details page
+      .then((environment) => this.router.navigate(['/environments/' + environment.id]));
   }
 
 }

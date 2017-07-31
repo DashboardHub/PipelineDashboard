@@ -32,7 +32,7 @@ export class EnvironmentEditComponent implements OnInit {
   save(environment: Environment): void {
     this.environmentService
       .saveEnvironment(this.environment)
-      .then((environment) => console.log(environment)); // @TODO: redirect to details page
+      .then((environment) => this.router.navigate(['/environments/' + environment.id]));
   }
 
 }
