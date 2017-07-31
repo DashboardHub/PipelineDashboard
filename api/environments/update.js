@@ -45,13 +45,17 @@ module.exports.update = (event, context, callback) => {
                 params.ExpressionAttributeValues[':description'] = item.value.length === 0 ? null : item.value;
                 updateExpression.push('description = :description');
             break;
+            case '/link':
+                params.ExpressionAttributeValues[':link'] = item.value.length === 0 ? null : item.value;
+                updateExpression.push('link = :link');
+            break;
         }
     });
 
     if (updateExpression.length === 0) {
         return callback(null, {
             statusCode: 400,
-            body: JSON.stringify({message: 'Validation Error: no update to perform "path"  must be one of "title", "description"'}),
+            body: JSON.stringify({message: 'Validation Error: no update to perform "path"  must be one of "title", "description", "link"'}),
         });
     }
 

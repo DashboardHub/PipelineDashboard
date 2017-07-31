@@ -49,6 +49,7 @@ module.exports.create = (event, context, callback) => {
             id: uuid.v1(),
             title: data.title,
             description: data.description,
+            link: data.link,
             tags: data.tags,
             isPrivate: false,
             createdAt: timestamp,
