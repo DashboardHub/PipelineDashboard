@@ -12,7 +12,7 @@ module.exports.update = (event, context, callback) => {
             id: event.pathParameters.id,
         },
         ExpressionAttributeValues: {
-            ':updatedAt': new Date()
+            ':updatedAt': new Date().toISOString()
         },
         UpdateExpression: '',
         ReturnValues: 'ALL_NEW',
