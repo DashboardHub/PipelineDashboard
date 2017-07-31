@@ -29,7 +29,7 @@ module.exports.update = (event, context, callback) => {
 
     let updateExpression = [];
     data.map((item) => {
-        if (!item.op || !item.path || !item.value) {
+        if (item.op === undefined || item.path === undefined || item.value === undefined) {
             return callback(null, {
                 statusCode: 400,
                 body: JSON.stringify({message: 'Validation Error: each "patch" item must be have a "op", "path", "value"'}),
