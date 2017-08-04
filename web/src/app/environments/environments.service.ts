@@ -6,20 +6,20 @@ import {Environment} from "./environment";
 @Injectable()
 export class EnvironmentsService {
 
-  private url: string = 'https://4ndvu62321.execute-api.eu-west-2.amazonaws.com/dev/environments';
+  private url: string = 'https://f2mxya1kqb.execute-api.eu-west-2.amazonaws.com/dev';
 
   constructor(private http: Http) {
   }
 
   getEnvironments(): Promise<Array<Environment>> {
-    return this.http.get(this.url)
+    return this.http.get(this.url + '/environments')
       .toPromise()
       .then(response => response.json() as Array<Environment>)
       .catch(this.handleError);
   }
 
   addEnvironment(environment: Environment): Promise<Environment> {
-    return this.http.post(this.url, environment)
+    return this.http.post(this.url + '/environments', environment)
       .toPromise()
       .then(response => response.json() as Environment)
       .catch(this.handleError);
@@ -37,14 +37,14 @@ export class EnvironmentsService {
     });
   console.log(patch);
 
-    return this.http.patch(this.url + '/' + environment.id, patch)
+    return this.http.patch(this.url + '/environments' + '/' + environment.id, patch)
       .toPromise()
       .then(response => response.json() as Environment)
       .catch(this.handleError);
   }
 
   getEnvironment(id: string): Promise<Environment> {
-    return this.http.get(this.url + '/' + id)
+    return this.http.get(this.url + '/environments' + '/' + id)
       .toPromise()
       .then(response => response.json() as Environment)
       .catch(this.handleError);

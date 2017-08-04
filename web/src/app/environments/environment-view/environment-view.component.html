@@ -9,7 +9,7 @@
     </md-card-subtitle>
   </md-card-header>
   <md-card-content>
-    <h2>{{ environment.title }}</h2>
+    <h2>{{ environment.title }}<span *ngIf="environment.latestRelease"> - {{ environment.latestRelease }} ({{ environment.releases }})</span></h2>
     <p>{{ environment.description }}</p>
     <a *ngIf="environment.link">{{ environment.link }}</a>
   </md-card-content>
