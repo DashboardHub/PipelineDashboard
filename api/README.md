@@ -91,7 +91,7 @@ POST /environments
 
 ### Details
 
-`GET /environments/ec546590-7510-11e7-91bc-8353beebb88a`
+`GET /environments/{id}
 
 ```json
 {
@@ -110,7 +110,7 @@ POST /environments
 ### Update
 
 ```
-PATCH /environments/ec546590-7510-11e7-91bc-8353beebb88a
+PATCH /environments/{id}
 
 [
 	{
@@ -137,5 +137,31 @@ PATCH /environments/ec546590-7510-11e7-91bc-8353beebb88a
     "isPrivate": false,
     "createdAt": "2017-07-30T10:22:00.297Z",
     "updatedAt": "2017-07-30T10:22:00.297Z"
+}
+```
+
+### Deployed version
+
+```
+POST /environments/{id}/deployed
+
+{
+	"release": "v0.0.3"
+}
+```
+
+```json
+{
+    "latestRelease": "v0.0.3",
+    "isPrivate": false,
+    "releases": 2,
+    "updatedAt": "2017-08-04T08:28:05.848Z",
+    "createdAt": "2017-08-04T08:27:14.578Z",
+    "description": "This is a test server 2",
+    "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
+    "tags": [
+        "test"
+    ],
+    "title": "Test server 2"
 }
 ```
