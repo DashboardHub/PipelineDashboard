@@ -194,11 +194,11 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: environmentId
+            AttributeName: id
             AttributeType: S
         KeySchema:
           -
-            AttributeName: environmentId
+            AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
