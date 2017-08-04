@@ -31,6 +31,12 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.environments.table}"
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.deployed.table}"
 
 # you can overwrite defaults here
 #  stage: dev
@@ -98,6 +104,14 @@ functions:
           method: patch
           integration: lambda-proxy
           cors: true
+  DeployedCreate:
+    handler: environments/deployed/create.create
+    events:
+      - http:
+          path: environments/{id}/deployed
+          method: post
+          integration: lambda-proxy
+          cors: true
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -158,7 +172,7 @@ custom:
 
 resources:
   Resources:
-    TodosDynamoDbTable:
+    EnvironmentsDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
@@ -174,3 +188,19 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${file(./config.json):dynamodb.environments.table}
+    DeployedDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: environmentId
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: environmentId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${file(./config.json):dynamodb.deployed.table}

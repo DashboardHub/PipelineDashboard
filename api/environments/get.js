@@ -19,6 +19,13 @@ module.exports.get = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
+        if (!result.Item) {
+            return callback(null, {
+                statusCode: 404,
+                body: JSON.stringify({message: 'Not found'}),
+            });
+        }
+
         callback(null, {
             headers: {
                 "Access-Control-Allow-Origin" : "*"

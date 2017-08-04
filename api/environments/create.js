@@ -51,6 +51,8 @@ module.exports.create = (event, context, callback) => {
             description: data.description,
             link: data.link,
             tags: data.tags,
+            latestRelease: null,
+            releases: 0,
             isPrivate: false,
             createdAt: timestamp,
             updatedAt: timestamp,
@@ -69,7 +71,7 @@ module.exports.create = (event, context, callback) => {
             headers: {
                 "Access-Control-Allow-Origin" : "*"
             },
-            statusCode: 200,
+            statusCode: 201,
             body: JSON.stringify(params.Item),
         });
     });
