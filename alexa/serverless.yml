@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: PipelineDashboardApi
+service: PipelineDashboardAlexa
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -21,22 +21,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   profile: jaoudestudios
-  region: eu-west-2
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:Scan
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-        - dynamodb:UpdateItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.environments.table}"
-    - Effect: Allow
-      Action:
-        - dynamodb:Query
-        - dynamodb:GetItem
-        - dynamodb:PutItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.deployed.table}"
+  region: eu-west-1
 
 # you can overwrite defaults here
 #  stage: dev
@@ -72,46 +57,10 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  environmentCreate:
-    handler: environments/create.create
-    events:
-      - http:
-          path: environments
-          method: post
-          integration: lambda-proxy
-          cors: true
   environmentList:
-    handler: environments/list.list
+    handler: handler.list
     events:
-      - http:
-          path: environments
-          method: get
-          integration: lambda-proxy
-          cors: true
-  environmentGet:
-    handler: environments/get.get
-    events:
-      - http:
-          path: environments/{id}
-          method: get
-          integration: lambda-proxy
-          cors: true
-  environmentUpdate:
-    handler: environments/update.update
-    events:
-      - http:
-          path: environments/{id}
-          method: patch
-          integration: lambda-proxy
-          cors: true
-  DeployedCreate:
-    handler: environments/deployed/create.create
-    events:
-      - http:
-          path: environments/{id}/deployed
-          method: post
-          integration: lambda-proxy
-          cors: true
+      - alexaSkill
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -156,51 +105,3 @@ functions:
 #     NewOutput:
 #       Description: "Description for the output"
 #       Value: "Some output value"
-
-plugins:
-  - serverless-dynamodb-local
-  - serverless-offline
-
-custom:
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-    migration:
-      dir: offline/migrations
-
-resources:
-  Resources:
-    EnvironmentsDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${file(./config.json):dynamodb.environments.table}
-    DeployedDynamoDbTable:
-      Type: 'AWS::DynamoDB::Table'
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          -
-            AttributeName: id
-            AttributeType: S
-        KeySchema:
-          -
-            AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${file(./config.json):dynamodb.deployed.table}
