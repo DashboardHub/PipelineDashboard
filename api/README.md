@@ -36,7 +36,9 @@ Install [Serverless](https://serverless.com) with `npm install -g serverless`.
     "total": 2,
     "list": [
         {
+            "latestRelease": null,
             "isPrivate": false,
+            "releases": 0,
             "updatedAt": "2017-07-30T10:22:00.297Z",
             "createdAt": "2017-07-30T10:22:00.297Z",
             "description": "This is a test server",
@@ -47,16 +49,18 @@ Install [Serverless](https://serverless.com) with `npm install -g serverless`.
             "title": "Test server"
         },
         {
+            "latestRelease": "v0.0.3",
             "isPrivate": false,
-            "updatedAt": {},
-            "createdAt": "2017-07-30T10:21:43.477Z",
-            "description": "test description 2",
-            "id": "e24e0560-7510-11e7-91bc-8353beebb88a",
+            "releases": 2,
+            "updatedAt": "2017-08-04T08:44:56.748Z",
+            "createdAt": "2017-08-04T08:27:14.578Z",
+            "link": null,
+            "description": "This is a test server 2 aaaa",
+            "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
             "tags": [
-                "prod",
-                "live"
+                "test"
             ],
-            "title": "test server 2"
+            "title": "Test server 2"
         }
     ]
 }
@@ -95,15 +99,18 @@ POST /environments
 
 ```json
 {
-    "id": "ec546590-7510-11e7-91bc-8353beebb88a",
-    "title": "Test server",
-    "description": "This is a test server",
-    "tags": [
-        "dev"
-    ],
+    "latestRelease": "v0.0.3",
     "isPrivate": false,
-    "createdAt": "2017-07-30T10:22:00.297Z",
-    "updatedAt": "2017-07-30T10:22:00.297Z"
+    "releases": 2,
+    "updatedAt": "2017-08-04T08:44:56.748Z",
+    "createdAt": "2017-08-04T08:27:14.578Z",
+    "link": null,
+    "description": "This is a test server 2 aaaa",
+    "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
+    "tags": [
+        "test"
+    ],
+    "title": "Test server 2"
 }
 ```
 
