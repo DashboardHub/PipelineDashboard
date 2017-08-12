@@ -57,8 +57,12 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
+  environmentHelp:
+    handler: help.help
+    events:
+      - alexaSkill
   environmentList:
-    handler: handler.list
+    handler: list.list
     events:
       - alexaSkill
 

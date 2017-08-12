@@ -13,3 +13,12 @@ Install [Serverless](https://serverless.com) with `npm install -g serverless`.
 ### Delete Deployment
 
 `serverless remove`
+
+### AWS Developer
+
+https://developer.amazon.com/
+
+### Alexa
+
+`Alexa ask Dashboard Hub help to list options`
+`Alexa ask Dashboard Hub list what is deployed`

@@ -4,7 +4,7 @@ const https = require('https');
 module.exports.list = (event, context, callback) => {
 
     const url = process.env.API_URL;
-    https.get(url, res => {
+    https.get(`${url}/environments`, res => {
         res.setEncoding('utf8');
         let body = '';
         res.on('data', data => {
