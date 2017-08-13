@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 import {Http} from '@angular/http';
 import {Environment} from "./environment";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class EnvironmentsService {
 
-  private url: string = 'https://f2mxya1kqb.execute-api.eu-west-2.amazonaws.com/dev';
+  private url: string = environment.api;
 
   constructor(private http: Http) {
   }
