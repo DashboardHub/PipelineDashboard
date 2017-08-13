@@ -36,7 +36,6 @@ export class EnvironmentsService {
         value: environment[item] || ''
       };
     });
-  console.log(patch);
 
     return this.http.patch(this.url + '/environments' + '/' + environment.id, patch)
       .toPromise()
