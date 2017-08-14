@@ -3,6 +3,7 @@ import 'rxjs/add/operator/toPromise';
 import {Http} from '@angular/http';
 import {Environment} from "./environment";
 import { environment } from '../../environments/environment';
+import {List} from "./list";
 
 @Injectable()
 export class EnvironmentsService {
@@ -12,10 +13,10 @@ export class EnvironmentsService {
   constructor(private http: Http) {
   }
 
-  getEnvironments(): Promise<Array<Environment>> {
+  getEnvironments(): Promise<List> {
     return this.http.get(this.url + '/environments')
       .toPromise()
-      .then(response => response.json() as Array<Environment>)
+      .then(response => response.json() as List)
       .catch(this.handleError);
   }
 

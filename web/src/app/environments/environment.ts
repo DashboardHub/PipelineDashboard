@@ -3,6 +3,8 @@ export class Environment {
   title: string;
   description: string;
   link: string;
+  latestRelease: string;
+  releases: number;
   isPrivate: boolean;
   tags: Array<string>;
   updatedAt: string;

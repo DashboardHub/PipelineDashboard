@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Environment} from './environment';
 import {EnvironmentsService} from "./environments.service";
+import {List} from "./list";
+import {Environment} from "./environment";
 
 @Component({
   selector: 'app-environments',
@@ -11,7 +12,7 @@ import {EnvironmentsService} from "./environments.service";
 })
 export class EnvironmentsComponent implements OnInit {
 
-  environments: Array<Environment> = [];
+  environments: List = new List();
 
   constructor(private environmentService: EnvironmentsService) {
   }
@@ -23,7 +24,10 @@ export class EnvironmentsComponent implements OnInit {
   getEnvironments(): void {
     this.environmentService
       .getEnvironments()
-      .then((environments) => this.environments = environments);
+      .then((environments) => {
+        console.log(environments);
+        this.environments = environments;
+      });
   }
 
 }
