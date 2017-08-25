@@ -25,7 +25,7 @@ module.exports.list = (event, context, callback) => {
                         type: 'PlainText',
                         text: `There are ${body.total} environments in total. ${environments.join(', ')}`,
                     },
-                    shouldEndSession: false,
+                    shouldEndSession: true,
                 },
             });
         });

@@ -8,7 +8,7 @@ module.exports.help = (event, context, callback) => {
                 type: 'PlainText',
                 text: 'This is the help section. One voice command available. One, To list the environments and their release version, please use. Alexa ask Dashboard Hub what is deployed',
             },
-            shouldEndSession: false,
+            shouldEndSession: true,
         },
     });
 };
