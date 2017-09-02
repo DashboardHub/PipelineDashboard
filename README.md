@@ -1,3 +1,5 @@
+[![Floobits Status](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard.svg)](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard/redirect)
+
 # PipelineDashboard
 
 Display your deployed versions.
@@ -14,6 +16,10 @@ Using `make`:
 
 - API `make api.run`
 - UI `make ui.run`
+
+## Collaboration
+
+Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) to do realtime coding collaboration.
 
 ---
 
