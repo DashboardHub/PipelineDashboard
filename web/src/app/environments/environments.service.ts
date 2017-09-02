@@ -13,10 +13,10 @@ export class EnvironmentsService {
   constructor(private http: Http) {
   }
 
-  getEnvironments(): Promise<List> {
+  getEnvironments(): Promise<List<Environment>> {
     return this.http.get(this.url + '/environments')
       .toPromise()
-      .then(response => response.json() as List)
+      .then(response => response.json() as List<Environment>)
       .catch(this.handleError);
   }
 

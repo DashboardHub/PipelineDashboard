@@ -12,7 +12,7 @@ import {Environment} from "./environment";
 })
 export class EnvironmentsComponent implements OnInit {
 
-  environments: List = new List();
+  environments: List<Environment> = new List<Environment>();
 
   constructor(private environmentService: EnvironmentsService) {
   }
@@ -24,10 +24,7 @@ export class EnvironmentsComponent implements OnInit {
   getEnvironments(): void {
     this.environmentService
       .getEnvironments()
-      .then((environments) => {
-        console.log(environments);
-        this.environments = environments;
-      });
+      .then((environments) => this.environments = environments);
   }
 
 }
