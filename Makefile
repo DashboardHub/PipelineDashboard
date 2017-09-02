@@ -3,6 +3,10 @@
 help:
 	@echo 'Please read the documentation in "https://github.com/DashboardHub/PipelineDashboard"'
 
+api: api.run
+
+ui: ui.run
+
 # API
 api.run:
 	(cd api; serverless offline start)
