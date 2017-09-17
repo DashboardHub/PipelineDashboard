@@ -10,4 +10,4 @@ install:
   - make install
 
 script:
-  - echo "No tests, this is a PROTOTYPE only"
+  - echo 'No tests, this is a PROTOTYPE only'
