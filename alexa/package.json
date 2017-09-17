@@ -1,7 +1,11 @@
 {
   "name": "pipeline-dashboard",
-  "version": "0.7.0",
+  "version": "0.7.x",
   "description": "Alexa skill for your deployed environments",
   "author": "Eddie Jaoude",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DashboardHub/PipelineDashboard.git"
+  }
 }

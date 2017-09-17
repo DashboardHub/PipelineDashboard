@@ -1,6 +1,6 @@
 {
   "name": "pipelinedashboard",
-  "version": "0.0.0",
+  "version": "0.7.x",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
