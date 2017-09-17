@@ -11,6 +11,12 @@ ui: ui.run
 api.run:
 	(cd api; serverless offline start)
 
+api.deploy:
+	(cd api; serverless deploy -v)
+
+api.remove:
+	(cd api; serverless remove -v)
+
 # UI
 ui.run:
 	(cd web; ng serve)
