@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "8"
+
+branches:
+  only:
+  - "prototype-v0.7.0"
+
+install:
+  - make install
+
+script:
+  - echo "No tests, this is a PROTOTYPE only"
+
+deploy:
+  - make deploy
