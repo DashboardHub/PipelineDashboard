@@ -13,6 +13,7 @@ import { CovalentLayoutModule } from '@covalent/core';
 import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
 import { EnvironmentViewComponent } from './environments/environment-view/environment-view.component';
 import { EnvironmentEditComponent } from './environments/environment-edit/environment-edit.component';
+import { MomentModule } from 'angular2-moment';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: EnvironmentsComponent },
@@ -41,7 +42,8 @@ const routes: Routes = [
     CovalentLayoutModule,
     HttpModule,
     MaterialModule,
-    FormsModule
+    FormsModule,
+    MomentModule
   ],
   providers: [],
   bootstrap: [AppComponent]

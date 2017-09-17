@@ -21,7 +21,7 @@
           </span>
         </h4>
         <p md-line>{{environment.description}} {{environment.link}}</p>
-        <p md-line>{{environment.createdAt | date:'medium'}}, {{environment.updatedAt | date:'medium'}}</p>
+        <p md-line>{{environment.createdAt | date:'medium'}}, <strong>Last update on {{environment.updatedAt | amTimeAgo}}</strong></p>
         <md-chip-list class="mat-chip-list-stacked">
           <md-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{tag}}</md-chip>
         </md-chip-list>
