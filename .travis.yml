@@ -6,6 +6,9 @@ branches:
   only:
   - "prototype-v0.7.0"
 
+before_install:
+  - npm install serverless -g
+
 install:
   - make install
 
