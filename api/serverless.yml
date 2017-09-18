@@ -20,7 +20,6 @@ service: PipelineDashboardApi
 provider:
   name: aws
   runtime: nodejs6.10
-  profile: jaoudestudios
   region: eu-west-2
   iamRoleStatements:
     - Effect: Allow
@@ -104,7 +103,7 @@ functions:
           method: patch
           integration: lambda-proxy
           cors: true
-  DeployedCreate:
+  deployedCreate:
     handler: environments/deployed/create.create
     events:
       - http:
@@ -112,6 +111,12 @@ functions:
           method: post
           integration: lambda-proxy
           cors: true
+#  preSignUp:
+#    handler: preSignUp.handler
+#    events:
+#      - cognitoUserPool:
+#          pool: PipelineDashboard
+#          trigger: PreSignUp
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
