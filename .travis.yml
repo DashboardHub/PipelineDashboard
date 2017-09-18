@@ -11,3 +11,6 @@ install:
 
 script:
   - echo 'No tests, this is a PROTOTYPE only'
+
+after_success:
+  - make deploy

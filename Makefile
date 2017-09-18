@@ -53,4 +53,4 @@ ui.version:
 	(cd web/dist; echo "0.7.${TRAVIS_BUILD_NUMBER}" > VERSION)
 
 ui.sync:
-	(cd web; aws s3 sync dist s3://pipelinedashboard-ui --delete --profile jaoudestudios)
+	(cd web; aws s3 sync dist s3://pipelinedashboard-ui --delete --region eu-west-2)
