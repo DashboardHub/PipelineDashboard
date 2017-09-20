@@ -16,7 +16,7 @@ deploy: alexa.deploy api.deploy ui.deploy
 
 # ALEXA
 alexa.install:
-	(cd alexa; npm install; serverless dynamodb install)
+	(cd alexa; npm install)
 
 alexa.deploy:
 	(cd alexa; serverless deploy -v)
