@@ -1,7 +1,14 @@
 {
   "name": "pipelinedashboard",
-  "version": "0.7.x",
+  "version": "0.7.0",
+  "author": "Eddie Jaoude",
+  "description": "Pipeline Dashboard to display your deployed versions",
+  "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/DashboardHub/PipelineDashboard.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
