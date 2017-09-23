@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  api: 'https://iklni2x68e.execute-api.eu-west-2.amazonaws.com/dev'
+  api: 'https://iklni2x68e.execute-api.eu-west-2.amazonaws.com/dev',
+  version: 'x.x.x'
 };

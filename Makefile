@@ -44,13 +44,13 @@ ui.install:
 ui.run:
 	(cd web; ng serve)
 
-ui.deploy: ui.build ui.version ui.sync
+ui.deploy: ui.version ui.build ui.sync
 
 ui.build:
 	(cd web; ng build --prod --aot --env=prod)
 
 ui.version:
-	(cd web/dist; echo "0.7.${TRAVIS_BUILD_NUMBER}" > VERSION)
+	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}/g' environment.prod.ts)
 
 ui.sync:
 	(cd web; aws s3 sync dist s3://pipelinedashboard-ui --delete --region eu-west-2)
