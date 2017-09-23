@@ -1,4 +1,5 @@
 [![Floobits Status](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard.svg)](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard/redirect)
+[![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=prototype-v0.7.0)](https://travis-ci.org/DashboardHub/PipelineDashboard)
 
 # PipelineDashboard
 
