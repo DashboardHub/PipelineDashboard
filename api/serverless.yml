@@ -112,7 +112,7 @@ functions:
           integration: lambda-proxy
           cors: true
   cognitoRegister:
-    handler: cognito/register
+    handler: cognito/register.preSignUp
     events:
       - cognitoUserPool:
           pool: DashboardHub

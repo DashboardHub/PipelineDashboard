@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.get = (event, context, callback) => {
+module.exports.preSignUp = (event, context, callback) => {
 
     callback(null, {
         headers: {
