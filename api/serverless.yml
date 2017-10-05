@@ -111,12 +111,12 @@ functions:
           method: post
           integration: lambda-proxy
           cors: true
-#  preSignUp:
-#    handler: preSignUp.handler
-#    events:
-#      - cognitoUserPool:
-#          pool: PipelineDashboard
-#          trigger: PreSignUp
+  cognitoRegister:
+    handler: cognito/register
+    events:
+      - cognitoUserPool:
+          pool: DashboardHub
+          trigger: PreSignUp
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
