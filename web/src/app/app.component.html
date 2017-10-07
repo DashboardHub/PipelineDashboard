@@ -1,7 +1,10 @@
-<md-toolbar color="primary">
-  <div layout="row">
-    <div>Pipeline Dashboard v{{ version }}</div>
-  </div>
-</md-toolbar>
+<mat-toolbar color="primary">
+  <span>Pipeline Dashboard v{{ version }}</span>
+  <span class="spread-spacer"></span>
+  <a mat-button routerLink="/auth/login">
+    <mat-icon>verified_user</mat-icon>
+    <span>Login</span>
+  </a>
+</mat-toolbar>
 
 <router-outlet></router-outlet>

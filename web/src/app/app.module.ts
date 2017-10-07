@@ -7,7 +7,14 @@ import { AppComponent } from './app.component';
 import { EnvironmentsComponent } from './environments/environments.component';
 
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import {
+  MatToolbarModule,
+  MatChipsModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CovalentLayoutModule } from '@covalent/core';
 import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
@@ -41,7 +48,15 @@ const routes: Routes = [
     BrowserAnimationsModule,
     CovalentLayoutModule,
     HttpModule,
-    MaterialModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatToolbarModule,
+    MatTooltipModule,
     FormsModule,
     MomentModule
   ],

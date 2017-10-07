@@ -1,31 +1,31 @@
-<md-card>
-  <md-card-header>
-    <md-card-title>Public Environment list ({{ environments.total }})</md-card-title>
-    <md-card-subtitle>
-      <a md-button routerLink="/environments/add">
-        <md-icon>add</md-icon>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Public Environment list ({{ environments.total }})</mat-card-title>
+    <mat-card-subtitle>
+      <a mat-button routerLink="/environments/add">
+        <mat-icon>add</mat-icon>
         <span>Add</span>
       </a>
-    </md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
-    <md-list>
-      <md-list-item *ngFor="let environment of environments.list">
-        <md-icon md-list-icon>computer</md-icon>
-        <h4 md-line>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let environment of environments.list">
+        <mat-icon mat-list-icon>computer</mat-icon>
+        <h4 mat-line>
           <a [routerLink]="['/environments', environment.id]">{{environment.title}}</a>
-          <md-icon *ngIf="environment.isPrivate">lock</md-icon>
-          <md-icon *ngIf="!environment.isPrivate">lock_open</md-icon>
+          <mat-icon *ngIf="environment.isPrivate">lock</mat-icon>
+          <mat-icon *ngIf="!environment.isPrivate">lock_open</mat-icon>
           <span *ngIf="environment.latestRelease">
             {{ environment.latestRelease }} ({{ environment.releases }})
           </span>
         </h4>
-        <p md-line>{{environment.description}} {{environment.link}}</p>
-        <p md-line>{{environment.createdAt | date:'medium'}}, <strong>Last update on {{environment.updatedAt | amTimeAgo}}</strong></p>
-        <md-chip-list class="mat-chip-list-stacked">
-          <md-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{tag}}</md-chip>
-        </md-chip-list>
-      </md-list-item>
-    </md-list>
-  </md-card-content>
-</md-card>
+        <p mat-line>{{environment.description}} {{environment.link}}</p>
+        <p mat-line>{{environment.createdAt | date:'medium'}}, <strong>Last update on {{environment.updatedAt | amTimeAgo}}</strong></p>
+        <mat-chip-list class="mat-chip-list-stacked">
+          <mat-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{tag}}</mat-chip>
+        </mat-chip-list>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

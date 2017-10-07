@@ -1,69 +1,69 @@
-<md-card>
-  <md-card-header>
-    <md-card-title>Add Environment</md-card-title>
-    <md-card-subtitle>
-      <a md-button routerLink="/environments">
-        <md-icon>arrow_back</md-icon>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add Environment</mat-card-title>
+    <mat-card-subtitle>
+      <a mat-button routerLink="/environments">
+        <mat-icon>arrow_back</mat-icon>
         <span>Back to list</span>
       </a>
-    </md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
     <form #form="ngForm" class="form-full">
-      <md-input-container>
-        <input mdInput class="form-control" placeholder="Title"
+      <mat-input-container>
+        <input matInput class="form-control" placeholder="Title"
                required minlength="3" maxlength="32"
                name="title" [(ngModel)]="environment.title"
                #title="ngModel">
         <div *ngIf="title.errors && (title.dirty || title.touched)">
-          <md-error *ngIf="title.errors.required">
+          <mat-error *ngIf="title.errors.required">
             Title is required
-          </md-error>
-          <md-error *ngIf="title.errors.minlength">
+          </mat-error>
+          <mat-error *ngIf="title.errors.minlength">
             Title must be at least 3 characters long.
-          </md-error>
-          <md-error *ngIf="title.errors.maxlength">
+          </mat-error>
+          <mat-error *ngIf="title.errors.maxlength">
             Title cannot be more than 32 characters long.
-          </md-error>
+          </mat-error>
         </div>
-      </md-input-container>
-      <md-input-container>
-        <input mdInput class="form-control" placeholder="Description"
+      </mat-input-container>
+      <mat-input-container>
+        <input matInput class="form-control" placeholder="Description"
                minlength="3" maxlength="128"
                name="description" [(ngModel)]="environment.description"
                #description="ngModel">
         <div *ngIf="description.errors && (description.dirty || description.touched)">
-          <md-error *ngIf="description.errors.minlength">
+          <mat-error *ngIf="description.errors.minlength">
             Description must be at least 3 characters long.
-          </md-error>
-          <md-error *ngIf="description.errors.maxlength">
+          </mat-error>
+          <mat-error *ngIf="description.errors.maxlength">
             Description cannot be more than 128 characters long.
-          </md-error>
+          </mat-error>
         </div>
-      </md-input-container>
-      <md-input-container>
-        <input mdInput class="form-control" placeholder="Link"
+      </mat-input-container>
+      <mat-input-container>
+        <input matInput class="form-control" placeholder="Link"
                minlength="3" maxlength="128"
                name="link" [(ngModel)]="environment.link"
                #link="ngModel">
         <div *ngIf="link.errors && (link.dirty || link.touched)">
-          <md-error *ngIf="link.errors.minlength">
+          <mat-error *ngIf="link.errors.minlength">
             Link must be at least 3 characters long.
-          </md-error>
-          <md-error *ngIf="link.errors.maxlength">
+          </mat-error>
+          <mat-error *ngIf="link.errors.maxlength">
             Link cannot be more than 128 characters long.
-          </md-error>
+          </mat-error>
         </div>
-      </md-input-container>
-      <md-checkbox [disabled]="true" value="false">Is private
-        <md-icon mdTooltip="During BETA private is not allowed">info</md-icon>
-      </md-checkbox>
+      </mat-input-container>
+      <mat-checkbox [disabled]="true" value="false">Is private
+        <mat-icon matTooltip="During BETA private is not allowed">info</mat-icon>
+      </mat-checkbox>
     </form>
-  </md-card-content>
-  <md-card-actions>
-    <a md-button routerLink="/environments/{{ environment.id }}/edit">CANCEL</a>
-    <button md-button color="primary"
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button routerLink="/environments/{{ environment.id }}/edit">CANCEL</a>
+    <button mat-button color="primary"
             [disabled]="!form.valid"
             (click)="save(form)">SAVE</button>
-  </md-card-actions>
-</md-card>
+  </mat-card-actions>
+</mat-card>
