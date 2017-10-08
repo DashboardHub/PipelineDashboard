@@ -30,10 +30,16 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: EnvironmentsComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'environments', pathMatch: 'full', component: EnvironmentsComponent },
-  { path: 'environments/add', pathMatch: 'full', component: EnvironmentAddComponent },
-  { path: 'environments/:id/edit', pathMatch: 'full', component: EnvironmentEditComponent },
-  { path: 'environments/:id', pathMatch: 'full', component: EnvironmentViewComponent },
+  {
+    path: 'environments',
+    canActivate: [AuthGuard],
+    children: [
+      { path: '', pathMatch: 'full', component: EnvironmentsComponent },
+      { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
+      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent },
+      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent }
+    ]
+  },
   { path: '**', redirectTo: '' }
 ];
 
