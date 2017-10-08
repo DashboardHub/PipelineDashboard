@@ -1,3 +1,7 @@
 .spread-spacer {
   flex: 1 1 auto;
 }
+
+img.avatar {
+  height: 1.8rem;
+}

@@ -1,9 +1,17 @@
 <mat-toolbar color="primary">
-  <span>Pipeline Dashboard v{{ version }}</span>
+  <a mat-button [routerLink]="['/']">Pipeline Dashboard v{{ version }}</a>
   <span class="spread-spacer"></span>
-  <a mat-button routerLink="/auth/login">
+  <a mat-button *ngIf="!auth.isAuthenticated()" (click)="auth.login()">
     <mat-icon>verified_user</mat-icon>
     <span>Login</span>
+  </a>
+  <a mat-button *ngIf="auth.isAuthenticated()" [routerLink]="['/profile']">
+    <img src="{{ profile?.picture }}" class="avatar" alt="{{ profile?.name }}">
+    <span>{{ profile?.name }}</span>
+  </a>
+  <a mat-button *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
+    <mat-icon>verified_user</mat-icon>
+    <span>Logout</span>
   </a>
 </mat-toolbar>
 

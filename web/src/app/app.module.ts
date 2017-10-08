@@ -21,9 +21,15 @@ import { EnvironmentAddComponent } from './environments/environment-add/environm
 import { EnvironmentViewComponent } from './environments/environment-view/environment-view.component';
 import { EnvironmentEditComponent } from './environments/environment-edit/environment-edit.component';
 import { MomentModule } from 'angular2-moment';
+import { AuthService } from "./auth/auth.service";
+import { CallbackComponent } from "./auth/callback.component";
+import { ProfileComponent } from "./auth/profile/profile.component";
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: EnvironmentsComponent },
+  { path: 'callback', component: CallbackComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'environments', pathMatch: 'full', component: EnvironmentsComponent },
   { path: 'environments/add', pathMatch: 'full', component: EnvironmentAddComponent },
   { path: 'environments/:id/edit', pathMatch: 'full', component: EnvironmentEditComponent },
@@ -34,10 +40,12 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    CallbackComponent,
     EnvironmentsComponent,
     EnvironmentAddComponent,
     EnvironmentViewComponent,
-    EnvironmentEditComponent
+    EnvironmentEditComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -60,7 +68,7 @@ const routes: Routes = [
     FormsModule,
     MomentModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
