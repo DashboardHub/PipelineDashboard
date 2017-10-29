@@ -23,7 +23,7 @@ export class EnvironmentsComponent implements OnInit {
 
   getEnvironments(): void {
     this.environmentService
-      .getEnvironments()
+      .getPublicEnvironments()
       .then((environments) => this.environments = environments);
   }
 

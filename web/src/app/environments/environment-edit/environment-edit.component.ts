@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {EnvironmentsService} from "../environments.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {Environment} from "../environment";
+import { EnvironmentsService } from "../environments.service";
+import { ActivatedRoute } from "@angular/router";
+import { Environment } from "../environment";
 
 @Component({
   selector: 'app-environment-edit',
@@ -14,7 +14,6 @@ export class EnvironmentEditComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private environmentService: EnvironmentsService
   ) { }
 
@@ -26,13 +25,15 @@ export class EnvironmentEditComponent implements OnInit {
   getEnvironment(): void {
     this.environmentService
       .getEnvironment(this.environment.id)
-      .then((environment) => this.environment = environment);
+      .subscribe(
+        data => this.environment = data,
+        error => console.log(error)
+      );
   }
 
-  save(environment: Environment): void {
+  save(): void {
     this.environmentService
-      .saveEnvironment(this.environment)
-      .then((environment) => this.router.navigate(['/environments/' + environment.id]));
+      .saveEnvironment(this.environment);
   }
 
 }

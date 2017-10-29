@@ -14,9 +14,9 @@ export class AuthService {
     clientID: environment.auth.clientID,
     domain: environment.auth.domain,
     responseType: 'token id_token',
-    audience: `https://${environment.auth.domain}/userinfo`,
+    audience: `https://${environment.auth.domain}/api/v2/`,
     redirectUri: environment.auth.callbackURL,
-    scope: 'openid profile'
+    scope: 'openid profile write:environments'
   });
 
   userProfile: Profile;

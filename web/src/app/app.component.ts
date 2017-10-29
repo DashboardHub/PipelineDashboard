@@ -4,8 +4,6 @@ import { environment } from '../environments/environment';
 import { AuthService } from './auth/auth.service';
 import { Profile } from "./auth/profile";
 
-import { Subscription } from 'rxjs/Subscription';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,13 +14,16 @@ export class AppComponent implements OnInit {
 
   profile: Profile;
 
-  subscription: Subscription;
-
-  constructor(public auth: AuthService) {
+  constructor(private auth: AuthService) {
     auth.handleAuthentication();
   }
 
   ngOnInit(): void {
-    this.subscription = this.auth.subscribeProfile().subscribe(profile => { this.profile = profile; });
+    if (this.auth.isAuthenticated()) {
+      this.auth.getProfile((err) => console.log);
+    }
+
+    this.auth.subscribeProfile()
+      .subscribe(profile => this.profile = profile);
   }
 }
