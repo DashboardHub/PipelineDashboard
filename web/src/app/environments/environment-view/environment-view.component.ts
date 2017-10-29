@@ -22,8 +22,6 @@ export class EnvironmentViewComponent implements OnInit {
   ngOnInit() {
     this.environment.id = this.route.snapshot.params.id;
     this.getEnvironment();
-
-    // this.profile = this.route.snapshot.data['profile'];
   }
 
   getEnvironment(): void {

@@ -10,7 +10,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class AuthService {
 
-  auth0 = new auth0.WebAuth({
+  private auth0 = new auth0.WebAuth({
     clientID: environment.auth.clientID,
     domain: environment.auth.domain,
     responseType: 'token id_token',
@@ -19,7 +19,7 @@ export class AuthService {
     scope: 'openid profile write:environments'
   });
 
-  userProfile: Profile;
+  public userProfile: Profile;
 
   private subject = new Subject<Profile>();
 
@@ -36,15 +36,12 @@ export class AuthService {
         this.setSession(authResult);
         this.getProfile((err) => {
           if (err) {
-            console.log(err);
             throw new Error('Failed to fetch profile');
           }
           this.router.navigate(['/']);
         });
       } else if (err) {
         this.router.navigate(['/']);
-        console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
       }
     });
   }
@@ -62,7 +59,7 @@ export class AuthService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
-    // Go back to the home route
+
     this.router.navigate(['/']);
   }
 

@@ -25,7 +25,6 @@ import { AuthService } from "./auth/auth.service";
 import { CallbackComponent } from "./auth/callback.component";
 import { ProfileComponent } from "./auth/profile/profile.component";
 import { AuthGuard } from "./auth/auth.guard";
-import { ProfileResolver } from "./auth/profile.resolver";
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { EnvironmentListComponent } from "./environments/environment-list/environment-list.component";
@@ -44,7 +43,6 @@ const routes: Routes = [
   {
     path: 'environments',
     canActivate: [AuthGuard],
-    // resolve: { profile: ProfileResolver },
     children: [
       { path: 'list', pathMatch: 'full', component: EnvironmentListComponent },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
@@ -95,8 +93,7 @@ const routes: Routes = [
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    },
-    ProfileResolver
+    }
   ],
   bootstrap: [AppComponent]
 })
