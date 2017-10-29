@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
 const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET;
-const CERT = fs.readFileSync('./../dashboardhub.pem');
+const CERT = fs.readFileSync('./dashboardhub.pem');
 
 // Policy helper function
 const generatePolicy = (principalId, effect, resource) => {
