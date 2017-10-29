@@ -1,11 +1,8 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
-const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET;
 const CERT = fs.readFileSync('./dashboardhub.pem');
 
-// Policy helper function
 const generatePolicy = (principalId, effect, resource) => {
     const authResponse = {};
     authResponse.principalId = principalId;
@@ -26,11 +23,7 @@ const generatePolicy = (principalId, effect, resource) => {
 module.exports.auth = (event, context, cb) => {
     if (event.authorizationToken) {
         const token = event.authorizationToken.substring(7);
-
-        const options = {
-            // audience: AUTH0_CLIENT_ID,
-            algorithms: ['RS256']
-        };
+        const options = { algorithms: ['RS256'] };
 
         jwt.verify(token, CERT, options, (err, decoded) => {
             if (err) {

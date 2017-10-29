@@ -25,7 +25,6 @@ module.exports.create = (event, context, callback) => {
     };
 
     dynamodb.get(environmentParams, (error, result) => {
-        // handle potential errors
         if (error) {
             console.error(error);
             return callback(new Error('Couldn\'t fetch the item.'));
@@ -55,9 +54,7 @@ module.exports.create = (event, context, callback) => {
             },
         };
 
-        // write the environment to the database
         dynamodb.put(deployedParams, (error) => {
-            // handle potential errors
             if (error) {
                 console.error(error);
                 return callback(new Error('Couldn\'t create the deployed item.'));
@@ -76,7 +73,6 @@ module.exports.create = (event, context, callback) => {
             };
 
             dynamodb.update(updateParams, (error, result) => {
-                // handle potential errors
                 if (error) {
                     console.error(error);
                     return callback(new Error('Couldn\'t fetch the item.'));
