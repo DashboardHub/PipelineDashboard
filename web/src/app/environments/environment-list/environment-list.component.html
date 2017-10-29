@@ -1,13 +1,13 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Public Environment list ({{ environments.total }})</mat-card-title>
+    <mat-card-title>Your Environment list ({{ environments.total }})</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let environment of environments.list">
         <mat-icon mat-list-icon>computer</mat-icon>
         <h4 mat-line>
-          {{ environment.title }}
+          <a [routerLink]="['/environments', environment.id]">{{ environment.title }}</a>
           <mat-icon *ngIf="environment.isPrivate">lock</mat-icon>
           <mat-icon *ngIf="!environment.isPrivate">lock_open</mat-icon>
           <span *ngIf="environment.latestRelease">

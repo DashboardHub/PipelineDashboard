@@ -36,6 +36,9 @@ provider:
         - dynamodb:GetItem
         - dynamodb:PutItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.deployed.table}"
+  environment:
+    AUTH0_CLIENT_ID: ${file(./config.json):envars.AUTH0_CLIENT_ID}
+    AUTH0_CLIENT_SECRET: ${file(./config.json):envars.AUTH0_CLIENT_SECRET}
 
 # you can overwrite defaults here
 #  stage: dev
@@ -71,38 +74,96 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  environmentCreate:
-    handler: environments/create.create
-    events:
-      - http:
-          path: environments
-          method: post
-          integration: lambda-proxy
-          cors: true
-  environmentList:
-    handler: environments/list.list
+  auth:
+    handler: auth/handler.auth
+  publicEnvironmentList:
+    handler: environments/list.public
     events:
       - http:
           path: environments
           method: get
           integration: lambda-proxy
           cors: true
+  environmentList:
+      handler: environments/list.private
+      events:
+        - http:
+            path: environments/list
+            authorizer: auth
+            method: get
+            integration: lambda
+            cors:
+              origins:
+                - '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
   environmentGet:
     handler: environments/get.get
     events:
       - http:
           path: environments/{id}
+          integration: lambda
+          authorizer: auth
           method: get
-          integration: lambda-proxy
-          cors: true
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  environmentCreate:
+    handler: environments/create.create
+    events:
+      - http:
+          path: environments
+          integration: lambda
+          authorizer: auth
+          method: post
+          response:
+            statusCodes:
+              201:
+                pattern: ''
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   environmentUpdate:
     handler: environments/update.update
     events:
       - http:
           path: environments/{id}
+          integration: lambda
+          authorizer: auth
           method: patch
-          integration: lambda-proxy
-          cors: true
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   deployedCreate:
     handler: environments/deployed/create.create
     events:
@@ -111,12 +172,6 @@ functions:
           method: post
           integration: lambda-proxy
           cors: true
-  cognitoRegister:
-    handler: cognito/register.preSignUp
-    events:
-      - cognitoUserPool:
-          pool: DashboardHub
-          trigger: PreSignUp
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -181,31 +236,27 @@ resources:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
+        TableName: ${file(./config.json):dynamodb.environments.table}
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${file(./config.json):dynamodb.environments.table}
     DeployedDynamoDbTable:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
+        TableName: ${file(./config.json):dynamodb.deployed.table}
         AttributeDefinitions:
-          -
-            AttributeName: id
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          -
-            AttributeName: id
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${file(./config.json):dynamodb.deployed.table}

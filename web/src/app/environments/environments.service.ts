@@ -4,30 +4,48 @@ import {Http} from '@angular/http';
 import {Environment} from "./environment";
 import { environment } from '../../environments/environment';
 import {List} from "./list";
+import { AuthHttp } from "angular2-jwt";
+import 'rxjs/add/operator/map';
+import { Router } from "@angular/router";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class EnvironmentsService {
 
   private url: string = environment.api;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {
   }
 
-  getEnvironments(): Promise<List<Environment>> {
+  getPublicEnvironments(): any { // @TODO: any
     return this.http.get(this.url + '/environments')
       .toPromise()
       .then(response => response.json() as List<Environment>)
       .catch(this.handleError);
   }
 
-  addEnvironment(environment: Environment): Promise<Environment> {
-    return this.http.post(this.url + '/environments', environment)
+  getPublicEnvironment(id: string): Promise<Environment> {
+    return this.http.get(this.url + '/environments' + '/' + id)
       .toPromise()
       .then(response => response.json() as Environment)
       .catch(this.handleError);
   }
 
-  saveEnvironment(environment: Environment): Promise<Environment> {
+  getEnvironments(): any { // @TODO: any
+    return this.authHttp.get(this.url + '/environments/list')
+      .map(response => response.json() as List<Environment>)
+  }
+
+  addEnvironment(environment: Environment): void {
+    this.authHttp.post(this.url + '/environments', environment)
+      .map(response => response.json())
+      .subscribe(
+        data => this.router.navigate(['/environments/' + data.id]),
+        error => console.log(error)
+      );
+  }
+
+  saveEnvironment(environment: Environment): void {
     const updateProperties: Array<string> = ['title', 'description', 'link'];
 
     let patch: Array<any> = updateProperties.map((item) => {
@@ -38,17 +56,17 @@ export class EnvironmentsService {
       };
     });
 
-    return this.http.patch(this.url + '/environments' + '/' + environment.id, patch)
-      .toPromise()
-      .then(response => response.json() as Environment)
-      .catch(this.handleError);
+    this.authHttp.patch(this.url + '/environments' + '/' + environment.id, patch)
+      .map(response => response.json())
+      .subscribe(
+        data => this.router.navigate(['/environments/' + data.id]),
+        error => console.log(error)
+      );
   }
 
-  getEnvironment(id: string): Promise<Environment> {
-    return this.http.get(this.url + '/environments' + '/' + id)
-      .toPromise()
-      .then(response => response.json() as Environment)
-      .catch(this.handleError);
+  getEnvironment(id: string): Observable<Environment> {
+    return this.authHttp.get(this.url + '/environments' + '/' + id)
+      .map(response => response.json() as Environment);
   }
 
   private handleError(error: any): Promise<any> {

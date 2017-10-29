@@ -29,7 +29,8 @@ Install [Serverless](https://serverless.com) with `npm install -g serverless`.
 
 ### List
 
-`GET /environments`
+Public list `GET /environments`
+Private list `GET /environments/list`
 
 ```json
 {

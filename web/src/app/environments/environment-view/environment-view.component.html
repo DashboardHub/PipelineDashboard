@@ -1,21 +1,21 @@
-<md-card>
-  <md-card-header>
-    <md-card-title>Add Environment</md-card-title>
-    <md-card-subtitle>
-      <a md-button routerLink="/environments">
-        <md-icon>arrow_back</md-icon>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add Environment</mat-card-title>
+    <mat-card-subtitle>
+      <a mat-button routerLink="/environments/list">
+        <mat-icon>arrow_back</mat-icon>
         <span>Back to list</span>
       </a>
-    </md-card-subtitle>
-  </md-card-header>
-  <md-card-content>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
     <h2>{{ environment.title }}<span *ngIf="environment.latestRelease"> - {{ environment.latestRelease }} ({{ environment.releases }})</span></h2>
     <p>{{ environment.description }}</p>
     <a *ngIf="environment.link">{{ environment.link }}</a>
-  </md-card-content>
-  <md-card-actions>
-    <a md-button color="primary"
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button color="primary"
        routerLink="/environments/{{ environment.id }}/edit">
-      <md-icon>mode_edit</md-icon> EDIT</a>
-  </md-card-actions>
-</md-card>
+      <mat-icon>mode_edit</mat-icon> EDIT</a>
+  </mat-card-actions>
+</mat-card>

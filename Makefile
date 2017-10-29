@@ -3,6 +3,12 @@
 help:
 	@echo 'Please read the documentation in "https://github.com/DashboardHub/PipelineDashboard"'
 
+guard-%:
+	@ if [ "${${*}}" = "" ]; then \
+		echo "Environment variable $* is not set"; \
+		exit 1; \
+	fi
+
 # ALIAS
 run: api ui
 
@@ -31,7 +37,9 @@ api.install:
 api.run:
 	(cd api; serverless offline start)
 
-api.deploy:
+api.deploy: guard-AUTH0_CLIENT_ID guard-AUTH0_CLIENT_SECRET
+	(cd api; sed -i 's|{{ AUTH0_CLIENT_ID }}|${AUTH0_CLIENT_ID}|g' ./config.json)
+	(cd api; sed -i 's|{{ AUTH0_CLIENT_SECRET }}|${AUTH0_CLIENT_SECRET}|g' ./config.json)
 	(cd api; serverless deploy -v)
 
 api.remove:
