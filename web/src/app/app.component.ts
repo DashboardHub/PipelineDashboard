@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   profile: Profile;
 
-  constructor(private auth: AuthService) {
+  constructor(public auth: AuthService) {
     auth.handleAuthentication();
   }
 
