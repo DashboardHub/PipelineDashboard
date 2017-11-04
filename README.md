@@ -18,6 +18,9 @@ Using `make`.
 Open 2 terminals and run each of these commands in its own terminal:
 
 - API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY make api`
+
+*NOTE: You will need a `pem` file for local development*
+
 - UI `make ui`
 
 ## Collaboration
