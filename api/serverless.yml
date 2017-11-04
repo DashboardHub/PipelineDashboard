@@ -217,18 +217,18 @@ functions:
 #       Description: "Description for the output"
 #       Value: "Some output value"
 
-#plugins:
-#  - serverless-dynamodb-local
-#  - serverless-offline
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
 
-#custom:
-#  dynamodb:
-#    start:
-#      port: 8000
-#      inMemory: true
-#      migrate: true
-#    migration:
-#      dir: offline/migrations
+custom:
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
 
 resources:
   Resources:

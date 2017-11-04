@@ -10,8 +10,6 @@ guard-%:
 	fi
 
 # ALIAS
-run: api ui
-
 api: api.run
 
 ui: ui.run
@@ -31,15 +29,20 @@ alexa.remove:
 	(cd alexa; serverless remove -v)
 
 # API
+api.clean:
+	(cd api; git checkout ./config.json)
+
 api.install:
 	(cd api; npm install)
 
-api.run:
-	(cd api; serverless offline start)
-
-api.deploy: guard-AUTH0_CLIENT_ID guard-AUTH0_CLIENT_SECRET
+api.env: guard-AUTH0_CLIENT_ID guard-AUTH0_CLIENT_SECRET api.clean
 	(cd api; sed -i 's|{{ AUTH0_CLIENT_ID }}|${AUTH0_CLIENT_ID}|g' ./config.json)
 	(cd api; sed -i 's|{{ AUTH0_CLIENT_SECRET }}|${AUTH0_CLIENT_SECRET}|g' ./config.json)
+
+api.run: api.env
+	(cd api; serverless offline start)
+
+api.deploy: api.env
 	(cd api; serverless deploy -v)
 
 api.remove:

@@ -13,10 +13,12 @@ Display your deployed versions.
 
 ## QUICK START
 
-Using `make`:
+Using `make`.
 
-- API `make api.run`
-- UI `make ui.run`
+Open 2 terminals and run each of these commands in its own terminal:
+
+- API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY make api`
+- UI `make ui`
 
 ## Collaboration
 
