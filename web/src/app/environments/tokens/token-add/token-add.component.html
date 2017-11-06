@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Add Token</mat-card-title>
+    <mat-card-subtitle>Tokens are used to give push access to deployed versions</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form #form="ngForm" class="form-full">
+      <mat-form-field>
+        <input matInput class="form-control" placeholder="Name"
+               required minlength="3" maxlength="32"
+               name="name" [(ngModel)]="token.name"
+               #name="ngModel">
+        <div *ngIf="name.errors && (name.dirty || name.touched)">
+          <mat-error *ngIf="name.errors.required">
+            Name is required
+          </mat-error>
+          <mat-error *ngIf="name.errors.minlength">
+            Name must be at least 3 characters long.
+          </mat-error>
+          <mat-error *ngIf="name.errors.maxlength">
+            Name cannot be more than 32 characters long.
+          </mat-error>
+        </div>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary"
+      [disabled]="!form.valid"
+      (click)="add()">SAVE</button>
+  </mat-card-actions>
+</mat-card>

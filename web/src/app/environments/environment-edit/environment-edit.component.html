@@ -1,12 +1,12 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Add Environment</mat-card-title>
-    <mat-card-subtitle>
-      <a mat-button routerLink="/environments">
+    <mat-card-title>
+      <a mat-button [routerLink]="['/environments', environment.id]">
         <mat-icon>arrow_back</mat-icon>
-        <span>Back to list</span>
+        <span>Back to view</span>
       </a>
-    </mat-card-subtitle>
+    </mat-card-title>
+    <mat-card-subtitle>Add Environment</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <form #form="ngForm" class="form-full">
@@ -61,7 +61,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions>
-    <a mat-button routerLink="/environments/{{ environment.id }}/edit">CANCEL</a>
+    <a mat-button [routerLink]="['/environments', environment.id]">CANCEL</a>
     <button mat-button color="primary"
             [disabled]="!form.valid"
             (click)="save()">SAVE</button>

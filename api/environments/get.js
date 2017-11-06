@@ -8,21 +8,27 @@ module.exports.get = (event, context, callback) => {
 
     const params = {
         TableName: config.dynamodb.environments.table,
-        Key: {
-            id: id
+        FilterExpression:'#id = :id and #owner = :owner',
+        ExpressionAttributeNames: {
+            '#id':'id',
+            '#owner':'owner'
+        },
+        ExpressionAttributeValues: {
+            ':id': id,
+            ':owner': event.principalId
         }
     };
 
-    dynamodb.get(params, (error, result) => {
+    dynamodb.scan(params, (error, result) => {
         if (error) {
             console.error(error);
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (!result.Item) {
+        if (result.Items.length !== 1) {
             return callback(new Error('[404] Not found'));
         }
 
-        callback(null, result.Item);
+        callback(null, result.Items[0]);
     });
 };

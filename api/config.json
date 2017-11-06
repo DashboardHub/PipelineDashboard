@@ -3,6 +3,9 @@
     "environments": {
       "table": "pipelinedashboard-environments"
     },
+    "tokens": {
+      "table": "pipelinedashboard-tokens"
+    },
     "deployed": {
       "table": "pipelinedashboard-deployed"
     }
@@ -12,7 +15,7 @@
     "endpoint": "http://localhost:8000"
   },
   "envars": {
-    "AUTH0_CLIENT_ID": "{{ AUTH0_CLIENT_ID }}",
-    "AUTH0_CLIENT_SECRET": "{{ AUTH0_CLIENT_SECRET }}"
+    "AUTH0_CLIENT_ID": "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79",
+    "AUTH0_CLIENT_SECRET": "2Uebe_0wXiKT0iwUZABvclzuI1608-MMd2h9xnOQahZ1qnNvOj7LU6k_AESg50CW"
   }
 }
