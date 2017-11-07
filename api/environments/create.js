@@ -43,6 +43,7 @@ module.exports.create = (event, context, callback) => {
             latestRelease: null,
             releases: 0,
             isPrivate: false,
+            tokens: [],
             createdAt: timestamp,
             updatedAt: timestamp,
         },

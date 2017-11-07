@@ -3,9 +3,6 @@
     "environments": {
       "table": "pipelinedashboard-environments"
     },
-    "tokens": {
-      "table": "pipelinedashboard-tokens"
-    },
     "deployed": {
       "table": "pipelinedashboard-deployed"
     }

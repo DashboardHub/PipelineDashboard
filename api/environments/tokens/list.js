@@ -6,7 +6,7 @@ const config = require('../../config');
 module.exports.list = (event, context, callback) => {
     const id = event.path.id;
 
-    const getParams = {
+    const params = {
         TableName: config.dynamodb.environments.table,
         FilterExpression:'#id = :id and #owner = :owner',
         ExpressionAttributeNames: {
@@ -19,7 +19,7 @@ module.exports.list = (event, context, callback) => {
         }
     };
 
-    dynamodb.scan(getParams, (error, result) => {
+    dynamodb.scan(params, (error, result) => {
         if (error) {
             console.error(error);
             return callback(new Error('Couldn\'t fetch the item.'));
@@ -29,28 +29,11 @@ module.exports.list = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        const params = {
-            TableName: config.dynamodb.tokens.table,
-            FilterExpression: '#environmentId = :environmentId',
-            ExpressionAttributeNames: {
-                '#environmentId': 'environmentId'
-            },
-            ExpressionAttributeValues: {
-                ':environmentId': id
+        callback(null,
+            {
+                total: result.Items[0].length,
+                list: result.Items[0].tokens
             }
-        };
-
-        dynamodb.scan(params, (error, result) => {
-            if (error) {
-                console.error(error);
-                return callback(new Error('Couldn\'t fetch the tokens.'));
-            }
-
-            callback(null, {
-                total: result.Items.length,
-                list: result.Items
-            });
-        });
-
+        );
     });
 };
