@@ -31,7 +31,7 @@ module.exports.list = (event, context, callback) => {
 
         callback(null,
             {
-                total: result.Items[0].length,
+                total: result.Items[0].length | 0,
                 list: result.Items[0].tokens
             }
         );

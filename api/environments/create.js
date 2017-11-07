@@ -55,6 +55,6 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('Couldn\'t create the environment item.'));
         }
 
-        callback(null, params.Item);
+        callback(null, JSON.stringify(params.Item));
     });
 };

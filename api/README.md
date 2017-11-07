@@ -208,7 +208,6 @@ GET /environments/{id}/tokens
 
 #### Create
 
-
 ```
 POST /environments/{id}/tokens
 

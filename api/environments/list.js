@@ -46,7 +46,7 @@ module.exports.private = (event, context, callback) => {
         }
 
         callback(null, {
-            total: result.Items.length,
+            total: result.Items.length | 0,
             list: result.Items
         });
     });

@@ -81,6 +81,9 @@ functions:
           authorizer: auth
           method: post
           response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
             statusCodes:
               201:
                 pattern: ''
@@ -123,6 +126,9 @@ functions:
           authorizer: auth
           method: post
           response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
             statusCodes:
               201:
                 pattern: ''

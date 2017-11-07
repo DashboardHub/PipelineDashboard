@@ -74,7 +74,7 @@ module.exports.create = (event, context, callback) => {
                 return callback(new Error('Couldn\'t fetch the item.'));
             }
 
-            callback(null, result.Attributes);
+            callback(null, JSON.stringify(result.Attributes));
         });
     });
 };
