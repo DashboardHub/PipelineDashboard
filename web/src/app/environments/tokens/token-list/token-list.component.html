@@ -7,6 +7,7 @@
       <mat-list-item *ngFor="let token of tokens.list">
         <mat-icon mat-list-icon>vpn_key</mat-icon>
         <h4 mat-line>{{ token.name }} ({{ token.id }})</h4>
+        <button (click)="deleteToken(token)"><mat-icon mat-list-icon>delete</mat-icon></button>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

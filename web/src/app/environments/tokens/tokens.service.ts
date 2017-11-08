@@ -37,6 +37,15 @@ export class TokensService {
       );
   }
 
+  deleteToken(token: Token): void {
+    this.authHttp.delete(`${this.url}/environments/${token.environmentId}/tokens/${token.id}`)
+      // .map(response => response.json() as Token)
+      .subscribe(
+        data => this.getTokens(token.environmentId),
+        error => console.log(error)
+      );
+  }
+
   subscribeTokens(): Observable<any> {
     return this.subject.asObservable();
   }

@@ -34,4 +34,9 @@ export class TokenListComponent implements OnInit {
       .getTokens(environmentId);
   }
 
+  deleteToken(token: Token): void {
+    this.tokenService
+      .deleteToken(token);
+  }
+
 }
