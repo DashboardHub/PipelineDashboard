@@ -6,35 +6,33 @@ const config = require('../../config');
 const validator = require('validator');
 
 module.exports.create = (event, context, callback) => {
-    const environment = event.pathParameters.id;
-    const timestamp = new Date().toISOString();
-    const data = JSON.parse(event.body);
+    const id = event.path.id;
+    const tokenId = event.path.tokenId;
+    const data = event.body;
 
-    if (typeof environment !== 'string') {
-        return callback(null, {
-            statusCode: 400,
-            body: JSON.stringify({message: 'Validation Error: "environment id" is required'}),
-        });
-    }
-
-    const environmentParams = {
+    const getParams = {
         TableName: config.dynamodb.environments.table,
-        Key: {
-            id: environment
+        FilterExpression:'#id = :id',
+        ExpressionAttributeNames: {
+            '#id':'id'
+        },
+        ExpressionAttributeValues: {
+            ':id': id
         }
     };
 
-    dynamodb.get(environmentParams, (error, result) => {
+    const now = new Date().toISOString();
+    dynamodb.scan(getParams, (error, result) => {
+        let environment = result.Items[0];
+        let token = environment.tokens.filter((token) => token.id === tokenId);
+
         if (error) {
             console.error(error);
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (!result.Item) {
-            return callback(null, {
-                statusCode: 404,
-                body: JSON.stringify({message: 'Not found'}),
-            });
+        if (result.Items.length !== 1 || token.length === 0) {
+            return callback(new Error('[404] Not found'));
         }
 
         if (typeof data.release !== 'string' || !validator.isLength(data.release, {min: 3, max: 32})) {
@@ -44,48 +42,24 @@ module.exports.create = (event, context, callback) => {
             });
         }
 
-        const deployedParams = {
+        const params = {
             TableName: config.dynamodb.deployed.table,
             Item: {
                 id: uuidv1(),
-                environmentId: environment,
+                environmentId: environment.id,
+                token: token[0],
                 release: data.release,
-                createdAt: timestamp,
+                createdAt: now
             },
         };
 
-        dynamodb.put(deployedParams, (error) => {
+        dynamodb.put(params, (error) => {
             if (error) {
                 console.error(error);
-                return callback(new Error('Couldn\'t create the deployed item.'));
+                return callback(new Error('Couldn\'t create the environment item.'));
             }
 
-            let updateParams = {
-                TableName: config.dynamodb.environments.table,
-                Key: { id: environment },
-                ExpressionAttributeValues: {
-                    ':latestRelease': data.release,
-                    ':releases': ++result.Item.releases,
-                    ':updatedAt': new Date().toISOString()
-                },
-                UpdateExpression: 'SET latestRelease = :latestRelease, releases = :releases, updatedAt = :updatedAt',
-                ReturnValues: 'ALL_NEW',
-            };
-
-            dynamodb.update(updateParams, (error, result) => {
-                if (error) {
-                    console.error(error);
-                    return callback(new Error('Couldn\'t fetch the item.'));
-                }
-
-                callback(null, {
-                    headers: {
-                        "Access-Control-Allow-Origin" : "*"
-                    },
-                    statusCode: 201,
-                    body: JSON.stringify(result.Attributes),
-                });
-            });
+            callback(null, JSON.stringify(params.Item));
         });
     });
 };

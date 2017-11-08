@@ -182,14 +182,39 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+  deployedList:
+    handler: environments/deployed/list.list
+    events:
+      - http:
+          path: environments/{id}/deployed
+          authorizer: auth
+          method: get
+          integration: lambda
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   deployedCreate:
     handler: environments/deployed/create.create
     events:
       - http:
-          path: environments/{id}/deployed
+          path: environments/{id}/deployed/{tokenId}
           method: post
-          integration: lambda-proxy
-          cors: true
+          integration: lambda
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
 
 plugins:
   - serverless-dynamodb-local
