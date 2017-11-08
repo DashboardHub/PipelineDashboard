@@ -16,7 +16,7 @@ ui: ui.run
 
 install: alexa.install api.install ui.install
 
-deploy: alexa.deploy api.deploy ui.deploy
+deploy: alexa.deploy api.deploy ui.deploy general.version
 
 # ALEXA
 alexa.install:
@@ -65,3 +65,8 @@ ui.version:
 
 ui.sync:
 	(cd web; aws s3 sync dist s3://pipelinedashboard-ui --delete --region eu-west-2)
+
+# GENERAL
+
+general.version:
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' http://localhost:3000/environments/b468ae40-c44b-11e7-bd24-ff1141ed26f0/deployed/${DH_TOKEN}
