@@ -30,7 +30,7 @@ module.exports.list = (event, context, callback) => {
         }
 
 
-        const params = {
+        const deployedParams = {
             TableName: config.dynamodb.deployed.table,
             FilterExpression:'#environmentId = :environmentId',
             ExpressionAttributeNames: {
@@ -41,7 +41,7 @@ module.exports.list = (event, context, callback) => {
             }
         };
 
-        dynamodb.scan(params, (error, result) => {
+        dynamodb.scan(deployedParams, (error, result) => {
             if (error) {
                 console.error(error);
                 return callback(new Error('Couldn\'t fetch the item.'));
