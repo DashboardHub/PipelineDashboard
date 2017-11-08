@@ -31,6 +31,7 @@ import { EnvironmentListComponent } from "./environments/environment-list/enviro
 import { TokenAddComponent } from "./environments/tokens/token-add/token-add.component";
 import { TokenListComponent } from "./environments/tokens/token-list/token.list.component";
 import { TokenComponent } from "./environments/tokens/token.component";
+import { DeployedListComponent } from "./environments/deployed/deployed-list/deployed.list.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -68,6 +69,7 @@ const routes: Routes = [
     TokenComponent,
     TokenAddComponent,
     TokenListComponent,
+    DeployedListComponent,
     ProfileComponent
   ],
   imports: [
