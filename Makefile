@@ -69,4 +69,4 @@ ui.sync:
 # GENERAL
 
 general.version:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' http://localhost:3000/environments/b468ae40-c44b-11e7-bd24-ff1141ed26f0/deployed/${DH_TOKEN}
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' https://iklni2x68e.execute-api.eu-west-2.amazonaws.com/dev/environments/b468ae40-c44b-11e7-bd24-ff1141ed26f0/deployed/${DH_TOKEN}
