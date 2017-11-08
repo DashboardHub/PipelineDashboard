@@ -1,9 +1,9 @@
 'use strict';
 
-const dynamodb = require('../dynamodb');
-const config = require('../config');
+const dynamodb = require('../../dynamodb');
+const config = require('../../config');
 
-module.exports.get = (event, context, callback) => {
+module.exports.list = (event, context, callback) => {
     const id = event.path.id;
 
     const params = {
@@ -29,6 +29,11 @@ module.exports.get = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        callback(null, result.Items[0]);
+        callback(null,
+            {
+                total: result.Items[0].tokens.length | 0,
+                list: result.Items[0].tokens
+            }
+        );
     });
 };

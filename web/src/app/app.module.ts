@@ -28,6 +28,9 @@ import { AuthGuard } from "./auth/auth.guard";
 
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { EnvironmentListComponent } from "./environments/environment-list/environment-list.component";
+import { TokenAddComponent } from "./environments/tokens/token-add/token-add.component";
+import { TokenListComponent } from "./environments/tokens/token-list/token.list.component";
+import { TokenComponent } from "./environments/tokens/token.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -62,6 +65,9 @@ const routes: Routes = [
     EnvironmentViewComponent,
     EnvironmentEditComponent,
     EnvironmentListComponent,
+    TokenComponent,
+    TokenAddComponent,
+    TokenListComponent,
     ProfileComponent
   ],
   imports: [

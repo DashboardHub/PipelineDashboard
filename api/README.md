@@ -6,7 +6,19 @@ Using Serverless framework on AWS Lambda
 
 Install [Serverless](https://serverless.com) with `npm install -g serverless`.
 
-### Deploy
+### Run locally
+
+1. `npm install`
+2. `serverless dynamodb install`
+3. `serverless offline start` (need `java` installed)
+4. `serverless dynamodb migrate` (this imports schema)
+5. `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY make api`
+
+*NOTE: You will need a `pem` file for local development*
+
+*NOTE: Local API will need to be restarted for changes to take effect*
+
+### Deployment
 
 `serverless deploy -v`
 
@@ -14,20 +26,15 @@ Install [Serverless](https://serverless.com) with `npm install -g serverless`.
 
 `serverless remove`
 
-## Development
-
-1. `npm install`
-2. `serverless dynamodb install`
-3. `serverless offline start` (need `java` installed)
-4. `serverless dynamodb migrate` (this imports schema)
-
-### Debugging
+#### Debugging
 
 `serverless logs -f environmentList -t`
 
-## Restful API
+## Restful API documentation
 
-### List
+### Environments
+
+#### List
 
 Public list `GET /environments`
 Private list `GET /environments/list`
@@ -67,7 +74,7 @@ Private list `GET /environments/list`
 }
 ```
 
-### Create
+#### Create
 
 ```
 POST /environments
@@ -94,7 +101,7 @@ POST /environments
 }
 ```
 
-### Details
+#### Details
 
 `GET /environments/{id}
 
@@ -115,7 +122,7 @@ POST /environments
 }
 ```
 
-### Update
+#### Update
 
 ```
 PATCH /environments/{id}
@@ -150,6 +157,8 @@ PATCH /environments/{id}
 
 ### Deployed version
 
+#### Create
+
 ```
 POST /environments/{id}/deployed
 
@@ -171,5 +180,39 @@ POST /environments/{id}/deployed
         "test"
     ],
     "title": "Test server 2"
+}
+```
+
+### Tokens
+
+#### List
+
+```
+GET /environments/{id}/tokens
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "name": "CI server",
+      "createdAt": "2017-11-06T06:38:27.024Z",
+      "id": "184a9d00-c2bd-11e7-829d-851258883d74",
+      "environmentId": "14c9dab0-c2bd-11e7-829d-851258883d74",
+      "token": "184ac410-c2bd-11e7-829d-851258883d74"
+    }
+  ]
+}
+```
+
+#### Create
+
+```
+POST /environments/{id}/tokens
+
+{
+  "name": "aaaaa",
+  "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
 }
 ```

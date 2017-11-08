@@ -81,6 +81,9 @@ functions:
           authorizer: auth
           method: post
           response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
             statusCodes:
               201:
                 pattern: ''
@@ -105,6 +108,71 @@ functions:
             parameters:
               paths:
                 id: true
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  tokenCreate:
+    handler: environments/tokens/create.create
+    events:
+      - http:
+          path: environments/{id}/tokens
+          integration: lambda
+          authorizer: auth
+          method: post
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              201:
+                pattern: ''
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  tokenDelete:
+    handler: environments/tokens/delete.delete
+    events:
+      - http:
+          path: environments/{id}/tokens/{tokenId}
+          integration: lambda
+          authorizer: auth
+          method: delete
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              204:
+                pattern: ''
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  tokenList:
+    handler: environments/tokens/list.list
+    events:
+      - http:
+          path: environments/{id}/tokens
+          authorizer: auth
+          method: get
+          integration: lambda
           cors:
             origins:
               - '*'

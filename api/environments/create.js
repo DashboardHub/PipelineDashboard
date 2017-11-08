@@ -1,6 +1,6 @@
 'use strict';
 
-const uuid = require('uuid');
+const uuidv1 = require('uuid/v1');
 const dynamodb = require('../dynamodb');
 const config = require('../config');
 const validator = require('validator');
@@ -34,7 +34,7 @@ module.exports.create = (event, context, callback) => {
     const params = {
         TableName: config.dynamodb.environments.table,
         Item: {
-            id: uuid.v1(),
+            id: uuidv1(),
             owner: event.principalId,
             title: data.title,
             description: data.description,
@@ -43,6 +43,7 @@ module.exports.create = (event, context, callback) => {
             latestRelease: null,
             releases: 0,
             isPrivate: false,
+            tokens: [],
             createdAt: timestamp,
             updatedAt: timestamp,
         },
@@ -54,6 +55,6 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('Couldn\'t create the environment item.'));
         }
 
-        callback(null, params.Item);
+        callback(null, JSON.stringify(params.Item));
     });
 };

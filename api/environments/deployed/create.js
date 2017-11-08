@@ -1,6 +1,6 @@
 'use strict';
 
-const uuid = require('uuid');
+const uuidv1 = require('uuid/v1');
 const dynamodb = require('../../dynamodb');
 const config = require('../../config');
 const validator = require('validator');
@@ -47,7 +47,7 @@ module.exports.create = (event, context, callback) => {
         const deployedParams = {
             TableName: config.dynamodb.deployed.table,
             Item: {
-                id: uuid.v1(),
+                id: uuidv1(),
                 environmentId: environment,
                 release: data.release,
                 createdAt: timestamp,
