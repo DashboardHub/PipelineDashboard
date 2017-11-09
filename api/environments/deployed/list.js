@@ -32,13 +32,13 @@ module.exports.list = (event, context, callback) => {
 
         const deployedParams = {
             TableName: config.dynamodb.deployed.table,
-            FilterExpression:'#environmentId = :environmentId',
-            ExpressionAttributeNames: {
-                '#environmentId':'environmentId'
-            },
-            ExpressionAttributeValues: {
-                ':environmentId': id
-            }
+            // FilterExpression:'#environmentId = :environmentId',
+            // ExpressionAttributeNames: {
+            //     '#environmentId':'environmentId'
+            // },
+            // ExpressionAttributeValues: {
+            //     ':environmentId': id
+            // }
         };
 
         dynamodb.scan(deployedParams, (error, result) => {
