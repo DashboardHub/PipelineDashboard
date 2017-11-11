@@ -1,56 +1,36 @@
 'use strict';
 
-const dynamodb = require('../../dynamodb');
 const config = require('../../config');
+const deployed = require('../../models/deployed');
+const dynamoose = require('dynamoose');
+
+dynamoose.local();
+dynamoose.AWS.config.update({
+    region: 'eu-west-2'
+});
+const Deployed = dynamoose.model(config.dynamodb.deployed.table, deployed.schema, {
+    create: true, // Create table in DB, if it does not exist,
+    update: false, // Update remote indexes if they do not match local index structure
+    waitForActive: false, // Wait for table to be created before trying to use it
+    waitForActiveTimeout: 180000 // wait 3 minutes for table to activate
+});
 
 module.exports.list = (event, context, callback) => {
     const id = event.path.id;
 
-    // const params = {
-    //     TableName: config.dynamodb.environments.table,
-    //     FilterExpression:'#id = :id and #owner = :owner',
-    //     ExpressionAttributeNames: {
-    //         '#id':'id',
-    //         '#owner':'owner'
-    //     },
-    //     ExpressionAttributeValues: {
-    //         ':id': id,
-    //         ':owner': event.principalId
-    //     }
-    // };
-    //
-    // dynamodb.scan(params, (error, result) => {
-    //     if (error) {
-    //         console.error(error);
-    //         return callback(new Error('Couldn\'t fetch the item.'));
-    //     }
-    //
-    //     if (result.Items.length !== 1) {
-    //         return callback(new Error('[404] Not found'));
-    //     }
+    // @TODO: check owner
 
+    Deployed.scan().exec(function (err, deploys) {
+        if (err) {
+            console.log(err);
+            return callback(new Error('Couldn\'t fetch the items.'));
+        }
 
-        const deployedParams = {
-            TableName: config.dynamodb.deployed.table,
-            // FilterExpression:'#environmentId = :environmentId',
-            // ExpressionAttributeNames: {
-            //     '#environmentId':'environmentId'
-            // },
-            // ExpressionAttributeValues: {
-            //     ':environmentId': id
-            // }
-        };
+        console.log(deploys);
 
-        dynamodb.scan(deployedParams, (error, result) => {
-            if (error) {
-                console.error(error);
-                return callback(new Error('Couldn\'t fetch the item.'));
-            }
-
-            callback(null, {
-                total: result.Items.length | 0,
-                list: result.Items
-            });
-        });
-    // });
+        callback(null, JSON.stringify({
+            total: deploys.length | 0,
+            list: deploys.map((deploy) => deploy)
+        }));
+    });
 };

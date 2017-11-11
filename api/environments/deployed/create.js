@@ -4,6 +4,19 @@ const uuidv1 = require('uuid/v1');
 const dynamodb = require('../../dynamodb');
 const config = require('../../config');
 const validator = require('validator');
+const deployed = require('../../models/deployed');
+const dynamoose = require('dynamoose');
+
+dynamoose.local();
+dynamoose.AWS.config.update({
+    region: 'eu-west-2'
+});
+const Deployed = dynamoose.model(config.dynamodb.deployed.table, deployed.schema, {
+    create: true, // Create table in DB, if it does not exist,
+    update: false, // Update remote indexes if they do not match local index structure
+    waitForActive: false, // Wait for table to be created before trying to use it
+    waitForActiveTimeout: 180000 // wait 3 minutes for table to activate
+});
 
 module.exports.create = (event, context, callback) => {
     const id = event.path.id;
@@ -42,24 +55,17 @@ module.exports.create = (event, context, callback) => {
             });
         }
 
-        const params = {
-            TableName: config.dynamodb.deployed.table,
-            Item: {
-                id: uuidv1(),
-                environmentId: environment.id,
-                token: token[0],
-                release: data.release,
-                createdAt: now
-            },
+        let item = {
+            id: uuidv1(),
+            environmentId: environment.id,
+            token: token[0],
+            release: data.release
         };
-
-        dynamodb.put(params, (error) => {
-            if (error) {
-                console.error(error);
-                return callback(new Error('Couldn\'t create the environment item.'));
-            }
-
-            callback(null, JSON.stringify(params.Item));
+        let deploy = new Deployed(item);
+        deploy.save(function (err) {
+            if(err) { return console.log(err); }
+            console.log('Ta-da!');
+            callback(null, JSON.stringify(item));
         });
     });
 };

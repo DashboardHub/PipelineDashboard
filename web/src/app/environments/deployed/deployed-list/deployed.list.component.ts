@@ -23,8 +23,8 @@ export class DeployedListComponent implements OnInit {
 
   ngOnInit() {
     this.deployedService.subscribeDeployed()
-      .subscribe(deployeds => {
-        this.deployed = deployeds
+      .subscribe(deploys => {
+        this.deployed = deploys
       });
 
     this.getTokens(this.route.snapshot.params.id);
