@@ -7,7 +7,7 @@ const validator = require('validator');
 const deployed = require('../../models/deployed');
 const dynamoose = require('dynamoose');
 
-dynamoose.local();
+// dynamoose.local();
 dynamoose.AWS.config.update({
     region: 'eu-west-2'
 });
