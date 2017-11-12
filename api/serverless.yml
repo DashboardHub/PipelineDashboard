@@ -19,6 +19,7 @@ provider:
       Action:
         - dynamodb:CreateTable
         - dynamodb:Query
+        - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:DescribeTable
