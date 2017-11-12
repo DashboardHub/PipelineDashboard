@@ -7,6 +7,7 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - dynamodb:CreateTable
         - dynamodb:Query
         - dynamodb:Scan
         - dynamodb:GetItem
@@ -16,6 +17,7 @@ provider:
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.environments.table}"
     - Effect: Allow
       Action:
+        - dynamodb:CreateTable
         - dynamodb:Query
         - dynamodb:GetItem
         - dynamodb:PutItem
