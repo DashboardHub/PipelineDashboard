@@ -64,8 +64,7 @@ module.exports.create = (event, context, callback) => {
         let deploy = new Deployed(item);
         deploy.save(function (err) {
             if(err) { return console.log(err); }
-            console.log('Ta-da!');
-            callback(null, JSON.stringify(item));
+            callback(null, item);
         });
     });
 };

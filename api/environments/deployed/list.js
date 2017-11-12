@@ -26,11 +26,9 @@ module.exports.list = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the items.'));
         }
 
-        console.log(deploys);
-
-        callback(null, JSON.stringify({
+        callback(null, {
             total: deploys.length | 0,
             list: deploys.map((deploy) => deploy)
-        }));
+        });
     });
 };
