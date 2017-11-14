@@ -24,7 +24,7 @@ deploy:
   - provider: script
     script: make deploy.dev
     on:
-      branch: /^prototype-v0.7.0-.*$/
+      branch: prototype-v0.7.0
   - provider: script
     script: make deploy
     on:
