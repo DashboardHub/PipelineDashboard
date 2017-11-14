@@ -1,56 +1,28 @@
 'use strict';
 
-const dynamodb = require('../../dynamodb');
-const config = require('../../config');
+const deployed = require('../../models/deployed');
+const environment = require('../../models/environment');
 
 module.exports.list = (event, context, callback) => {
     const id = event.path.id;
 
-    const params = {
-        TableName: config.dynamodb.environments.table,
-        FilterExpression:'#id = :id and #owner = :owner',
-        ExpressionAttributeNames: {
-            '#id':'id',
-            '#owner':'owner'
-        },
-        ExpressionAttributeValues: {
-            ':id': id,
-            ':owner': event.principalId
-        }
-    };
-
-    dynamodb.scan(params, (error, result) => {
-        if (error) {
-            console.error(error);
-            return callback(new Error('Couldn\'t fetch the item.'));
-        }
-
-        if (result.Items.length !== 1) {
+    environment.model.get({ id }, function(err, environment) {
+        if(err) { return console.log(err); }
+        if (environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
-
-        const deployedParams = {
-            TableName: config.dynamodb.deployed.table,
-            FilterExpression:'#environmentId = :environmentId',
-            ExpressionAttributeNames: {
-                '#environmentId':'environmentId'
-            },
-            ExpressionAttributeValues: {
-                ':environmentId': id
-            }
-        };
-
-        dynamodb.scan(deployedParams, (error, result) => {
-            if (error) {
-                console.error(error);
-                return callback(new Error('Couldn\'t fetch the item.'));
+        deployed.model.scan().exec(function (err, results) {
+            if (err) {
+                console.log(err);
+                return callback(new Error('Couldn\'t fetch the items.'));
             }
 
             callback(null, {
-                total: result.Items.length | 0,
-                list: result.Items
+                total: results.length,
+                list: results
             });
         });
     });
+
 };

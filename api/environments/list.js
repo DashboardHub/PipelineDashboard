@@ -1,53 +1,42 @@
 'use strict';
 
-const dynamodb = require('../dynamodb');
-const config = require('../config');
+const environment = require('./../models/environment');
 
 module.exports.public = (event, context, callback) => {
-    const params = {
-        TableName: config.dynamodb.environments.table,
-    };
 
-    dynamodb.scan(params, (error, result) => {
-        if (error) {
-            console.error(error);
-            return callback(new Error('Couldn\'t fetch the environments.'));
+    environment.model.scan('isPrivate').eq(false).exec(function (err, results) {
+        if (err) {
+            console.log(err);
+            return callback(new Error('Couldn\'t fetch the items.'));
         }
 
-        callback(null, {
+        return callback(null, {
             headers: {
                 "Access-Control-Allow-Origin": "*"
             },
             statusCode: 200,
             body: JSON.stringify({
-                total: result.Items.length,
-                list: result.Items
+                total: results.length,
+                list: results
             })
         });
+
     });
+
 };
 
 module.exports.private = (event, context, callback) => {
-    const params = {
-        TableName: config.dynamodb.environments.table,
-        FilterExpression: '#owner = :owner',
-        ExpressionAttributeNames: {
-            '#owner': 'owner'
-        },
-        ExpressionAttributeValues: {
-            ':owner': event.principalId
-        }
-    };
 
-    dynamodb.scan(params, (error, result) => {
-        if (error) {
-            console.error(error);
-            return callback(new Error('Couldn\'t fetch the environments.'));
+    environment.model.scan('owner').eq(event.principalId).exec(function (err, results) {
+        if (err) {
+            console.log(err);
+            return callback(new Error('Couldn\'t fetch the items.'));
         }
 
-        callback(null, {
-            total: result.Items.length | 0,
-            list: result.Items
+        return callback(null, {
+            total: results.length,
+            list: results
         });
     });
+
 };

@@ -1,44 +1,20 @@
 'use strict';
 
-const dynamodb = require('../dynamodb');
-const config = require('../config');
+const environmentModel = require('./../models/environment');
 
 module.exports.update = (event, context, callback) => {
     const id = event.path.id;
     const data = event.body;
 
-    const getParams = {
-        TableName: config.dynamodb.environments.table,
-        FilterExpression:'#id = :id and #owner = :owner',
-        ExpressionAttributeNames: {
-            '#id':'id',
-            '#owner':'owner'
-        },
-        ExpressionAttributeValues: {
-            ':id': id,
-            ':owner': event.principalId
-        }
-    };
-
-    dynamodb.scan(getParams, (error, result) => {
-        if (error) {
-            console.error(error);
+    environmentModel.model.get({ id }, function (err, environment) {
+        if (err) {
+            console.error(err);
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (result.Items.length !== 1) {
+        if (environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
-
-        let updateParams = {
-            TableName: config.dynamodb.environments.table,
-            Key: { id },
-            ExpressionAttributeValues: {
-                ':updatedAt': new Date().toISOString()
-            },
-            UpdateExpression: '',
-            ReturnValues: 'ALL_NEW',
-        };
 
         if (data) {
             if (!Array.isArray(data)) {
@@ -46,7 +22,29 @@ module.exports.update = (event, context, callback) => {
             }
         }
 
-        let updateExpression = [];
+        // @TODO: add validation to model
+        // if (typeof data.title !== 'string' || !validator.isLength(data.title, {min: 3, max: 32})) {
+        //     return callback(new Error('[400] Validation Error: "title" is required and must be a "string" between 3 and 32'));
+        // }
+        //
+        // if (data.description) {
+        //     if (typeof data.description !== 'string' || !validator.isLength(data.description, {min: 3, max: 1024})) {
+        //         return callback(new Error('[400] Validation Error: "description" is optional but a "string" must be between 3 and 1024'));
+        //     }
+        // }
+        //
+        // if (data.tags) {
+        //     if (!Array.isArray(data.tags)) {
+        //         return callback(new Error('[400] Validation Error: "tags" is optional but must be an "array"'));
+        //     }
+        // }
+        //
+        // if (data.isPrivate) {
+        //     if (typeof data.isPrivate !== 'boolean') {
+        //         return callback(new Error('[400] Validation Error: "isPrivate" is optional but must be a "boolean"'));
+        //     }
+        // }
+
         data.map((item) => {
             if (item.op === undefined || item.path === undefined || item.value === undefined) {
                 return callback(new Error('[400] Validation Error: each "patch" item must be have a "op", "path", "value"'));
@@ -54,33 +52,16 @@ module.exports.update = (event, context, callback) => {
 
             switch (item.path) {
                 case '/title':
-                    updateParams.ExpressionAttributeValues[':title'] = item.value;
-                    updateExpression.push('title = :title');
-                    break;
                 case '/description':
-                    updateParams.ExpressionAttributeValues[':description'] = item.value.length === 0 ? null : item.value;
-                    updateExpression.push('description = :description');
-                    break;
                 case '/link':
-                    updateParams.ExpressionAttributeValues[':link'] = item.value.length === 0 ? null : item.value;
-                    updateExpression.push('link = :link');
+                    environment[item.path.substr(1)] = item.value;
                     break;
             }
         });
 
-        if (updateExpression.length === 0) {
-            return callback(new Error('[400] Validation Error: no update to perform "path"  must be one of "title", "description", "link"'));
-        }
-
-        updateParams.UpdateExpression = 'SET ' + updateExpression.join(',') + ', updatedAt = :updatedAt';
-
-        dynamodb.update(updateParams, (error, result) => {
-            if (error) {
-                console.error(error);
-                return callback(new Error('Couldn\'t fetch the item.'));
-            }
-
-            callback(null, result.Attributes);
+        environmentModel.model.update({ id }, { title: environment.title, description: environment.description, link: environment.link }, function (err) {
+            if(err) { return console.log(err); }
+            callback(null, environment);
         });
     });
 };

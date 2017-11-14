@@ -5,6 +5,7 @@ node_js:
 branches:
   only:
   - prototype-v0.7.0
+  - master
 
 before_install:
   - npm install -g serverless
@@ -19,5 +20,12 @@ install:
 script:
   - echo 'No tests, this is a PROTOTYPE only'
 
-after_success:
-  - make deploy
+deploy:
+  - provider: script
+    script: make deploy.dev
+    on:
+      branch: prototype-v0.7.0
+  - provider: script
+    script: make deploy
+    on:
+      branch: master

@@ -7,17 +7,22 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - dynamodb:CreateTable
         - dynamodb:Query
         - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
         - dynamodb:UpdateItem
+        - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.environments.table}"
     - Effect: Allow
       Action:
+        - dynamodb:CreateTable
         - dynamodb:Query
+        - dynamodb:Scan
         - dynamodb:GetItem
         - dynamodb:PutItem
+        - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.deployed.table}"
   environment:
     AUTH0_CLIENT_ID: ${file(./config.json):envars.AUTH0_CLIENT_ID}
