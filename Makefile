@@ -61,7 +61,7 @@ ui.build:
 	(cd web; ng build --prod --aot --env=prod)
 
 ui.version:
-	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}/g' environment.prod.ts)
+	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
 
 ui.sync:
 	(cd web; aws s3 sync dist s3://pipeline-dev.dashboardhub.io --delete --region eu-west-2)
