@@ -221,18 +221,18 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
 
-plugins:
-  - serverless-dynamodb-local
-  - serverless-offline
-
-custom:
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-    migration:
-      dir: offline/migrations
+#plugins:
+#  - serverless-dynamodb-local
+#  - serverless-offline
+#
+#custom:
+#  dynamodb:
+#    start:
+#      port: 8000
+#      inMemory: true
+#      migrate: true
+#    migration:
+#      dir: offline/migrations
 
 resources:
   Resources:
