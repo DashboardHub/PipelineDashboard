@@ -64,7 +64,7 @@ ui.version:
 	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}/g' environment.prod.ts)
 
 ui.sync:
-	(cd web; aws s3 sync dist s3://pipelinedashboard-ui --delete --region eu-west-2)
+	(cd web; aws s3 sync dist s3://pipeline-dev.dashboardhub.io --delete --region eu-west-2)
 
 # GENERAL
 
