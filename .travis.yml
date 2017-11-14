@@ -22,10 +22,10 @@ script:
 
 deploy:
   - provider: script
-    script: make deploy.dev
+    script: make install deploy.dev
     on:
       branch: prototype-v0.7.0
   - provider: script
-    script: make deploy
+    script: make install deploy
     on:
       branch: master
