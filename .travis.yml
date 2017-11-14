@@ -13,6 +13,7 @@ before_install:
   - sudo apt-get install python3
   - sudo pip install awscli
   - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in dashboardhub.pem.enc -out dashboardhub.pem -d)
+  - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in dashboardhub.test.pem.enc -out dashboardhub.test.pem -d)
 
 install:
   - make install
