@@ -1,7 +1,6 @@
 const dynamoose = require('dynamoose');
 
-// @TODO: for development
-if (proces.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
     dynamoose.local();
     dynamoose.AWS.config.update({
         region: 'eu-west-2'
