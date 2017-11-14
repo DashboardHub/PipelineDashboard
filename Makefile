@@ -54,7 +54,7 @@ api.deploy: api.env
 	(cd api; serverless deploy -v --stage production)
 
 api.deploy.dev: api.env.dev
-	(cd api; serverless deploy -v --stage dev)
+	(cd api; serverless deploy -v)
 
 api.remove:
 	(cd api; serverless remove -v)
