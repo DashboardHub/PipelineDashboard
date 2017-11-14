@@ -12,18 +12,38 @@ const schema = new Schema({
             hashKey: true,
             required: true
         },
-        environmentId: {
+        owner: {
             type: String,
             required: true
         },
-        release: {
+        title: {
             type: String,
             required: true,
             trim: true
         },
-        token: {
-            type: Object,
-            required: true
+        description: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        link: {
+            type: String,
+            default: '',
+            trim: true
+        },
+        releases: {
+            type: Number,
+            default: 0,
+            trim: true
+        },
+        isPrivate: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        tokens: {
+            type: Array,
+            default: []
         }
     },
     {
@@ -33,10 +53,10 @@ const schema = new Schema({
         throughput: { read: 1, write: 1 }
     });
 
-let model = client.dynamoose.model(config.dynamodb.deployed.table, schema, {
+let model = client.dynamoose.model(config.dynamodb.environments.table, schema, {
     create: true, // Create table in DB, if it does not exist,
     update: true, // Update remote indexes if they do not match local index structure
-    waitForActive: false, // Wait for table to be created before trying to use it
+    waitForActive: true, // Wait for table to be created before trying to use it
     waitForActiveTimeout: 180000 // wait 3 minutes for table to activate
 });
 

@@ -1,39 +1,24 @@
 'use strict';
 
-const dynamodb = require('../../dynamodb');
-const config = require('../../config');
+const environment = require('./../../models/environment');
 
 module.exports.list = (event, context, callback) => {
     const id = event.path.id;
 
-    const params = {
-        TableName: config.dynamodb.environments.table,
-        FilterExpression:'#id = :id and #owner = :owner',
-        ExpressionAttributeNames: {
-            '#id':'id',
-            '#owner':'owner'
-        },
-        ExpressionAttributeValues: {
-            ':id': id,
-            ':owner': event.principalId
-        }
-    };
-
-    dynamodb.scan(params, (error, result) => {
-        if (error) {
-            console.error(error);
+    environment.model.get({ id }, function(err, result) {
+        if (err) {
+            console.error(err);
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (result.Items.length !== 1) {
+        if (result.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
-        callback(null,
-            {
-                total: result.Items[0].tokens.length | 0,
-                list: result.Items[0].tokens
-            }
-        );
+        return callback(null, {
+            total: result.tokens.length,
+            list: result.tokens
+        });
     });
+
 };
