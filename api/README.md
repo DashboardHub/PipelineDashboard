@@ -12,7 +12,7 @@ Install [Serverless](https://serverless.com) with `npm install -g serverless`.
 2. `serverless dynamodb install`
 3. `serverless offline start` (need `java` installed)
 4. `serverless dynamodb migrate` (this imports schema)
-5. `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY make api`
+5. `AUTH0_CLIENT_ID_DEV=XXX AUTH0_CLIENT_SECRET_DEV=YYY NODE_ENV=development make api`
 
 *NOTE: You will need a `pem` file for local development*
 
