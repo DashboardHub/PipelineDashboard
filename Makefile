@@ -54,6 +54,8 @@ api.deploy: api.env
 	(cd api; serverless deploy -v --stage production)
 
 api.deploy.test: api.env.test
+	(ls -l)
+	(cd api; ls -l)
 	(cd api; mv dashboardhub.test.pem dashboardhub.pem)
 	(cd api; serverless deploy -v)
 
