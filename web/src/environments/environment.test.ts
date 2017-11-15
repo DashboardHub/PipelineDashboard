@@ -5,7 +5,7 @@ export const environment = {
 
   auth: {
     clientID: 'xdqxRAJrbkYJoESk09s5paGUxHbKTJlA',
-    domain: 'dashboardhub-dev.eu.auth0.com',
+    domain: 'dashboardhub-test.eu.auth0.com',
     callbackURL: 'http://pipeline-test.dashboardhub.io/callback'
   }
 };
