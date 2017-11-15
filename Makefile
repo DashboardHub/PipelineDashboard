@@ -53,6 +53,7 @@ api.run: api.env.test
 	(cd api; serverless offline start)
 
 api.deploy: api.env
+	(cd api; mv dashboardhub.prod.pem dashboardhub.pem)
 	(cd api; serverless deploy -v --stage production)
 
 api.deploy.test: api.env.test
