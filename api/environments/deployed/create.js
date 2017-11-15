@@ -15,11 +15,11 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (environment.owner !== event.principalId) {
+        let token = environment.tokens.filter((token) => token.id === tokenId);
+
+        if (token.length !== 1) {
             return callback(new Error('[404] Not found'));
         }
-
-        let token = environment.tokens.filter((token) => token.id === tokenId);
 
         // @TODO: add validation to model
         // if (typeof data.release !== 'string' || !validator.isLength(data.release, {min: 3, max: 32})) {
