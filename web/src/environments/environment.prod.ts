@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api: 'https://iklni2x68e.execute-api.eu-west-2.amazonaws.com/dev',
+  api: 'https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production',
   version: 'x.x.x',
 
   auth: {
