@@ -92,7 +92,7 @@ ui.sync.test:
 # GENERAL
 
 general.version:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' https://iklni2x68e.execute-api.eu-west-2.amazonaws.com/dev/environments/9d5200a0-c9da-11e7-9ed1-036bf29ea366/deployed/${DH_TOKEN}
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}
 
 general.version.test:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' https://iklni2x68e.execute-api.eu-west-2.amazonaws.com/dev/environments/71be69c0-c9d9-11e7-a91e-2d47ff423a31/deployed/${DH_TOKEN_TEST}
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"0.7.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}
