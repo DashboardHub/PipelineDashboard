@@ -10,8 +10,8 @@ module.exports.create = (event, context, callback) => {
     const data = event.body;
 
     environmentModel.model.get({ id }, function (err, environment) {
-        if (error) {
-            console.error(error);
+        if (err) {
+            console.error(err);
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
