@@ -55,7 +55,7 @@ api.deploy: api.env
 
 api.deploy.test: api.env.test
 	(cd api; mv dashboardhub.test.pem dashboardhub.pem)
-	(cd api; serverless deploy -v)
+	(cd api; serverless deploy -v --stage test)
 
 api.remove:
 	(cd api; serverless remove -v)
