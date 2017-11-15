@@ -12,7 +12,7 @@ module.exports.list = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        deployed.model.scan().exec(function (err, results) {
+        deployed.model.scan('environmentId').contains(id).exec(function (err, results) {
             if (err) {
                 console.log(err);
                 return callback(new Error('Couldn\'t fetch the items.'));
