@@ -35,7 +35,11 @@ module.exports.create = (event, context, callback) => {
         let deploy = new deployedModel.model(item);
         deploy.save(function (err) {
             if(err) { return console.log(err); }
-            callback(null, item);
+
+            environmentModel.model.update({ id }, { releases: environment.releases + 1, latestRelease: item }, function (err) {
+                if(err) { return console.log(err); }
+                callback(null, item);
+            });
         });
     });
 };

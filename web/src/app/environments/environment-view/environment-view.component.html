@@ -13,7 +13,7 @@
     <mat-card-subtitle>Environment Details</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <h2>{{ environment.title }}<span *ngIf="environment.latestRelease"> - {{ environment.latestRelease }} ({{ environment.releases }})</span></h2>
+    <h2>{{ environment.title }}<span *ngIf="environment.latestRelease"> - {{ environment.latestRelease.release }} ({{ environment.releases }})</span></h2>
     <p>{{ environment.description }}</p>
     <a *ngIf="environment.link">{{ environment.link }}</a>
   </mat-card-content>
