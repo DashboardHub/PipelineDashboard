@@ -11,7 +11,7 @@
           <mat-icon *ngIf="environment.isPrivate">lock</mat-icon>
           <mat-icon *ngIf="!environment.isPrivate">lock_open</mat-icon>
           <span *ngIf="environment.latestRelease">
-            {{ environment.latestRelease }} ({{ environment.releases }})
+            {{ environment.latestRelease.release }} ({{ environment.releases }})
           </span>
         </h4>
         <p mat-line>{{ environment.description}} {{ environment.link }}</p>

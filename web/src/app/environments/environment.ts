@@ -1,9 +1,11 @@
+import { Deployed } from "./deployed/deployed";
+
 export class Environment {
   id: string;
   title: string;
   description: string;
   link: string;
-  latestRelease: string;
+  latestRelease: Deployed;
   releases: number;
   isPrivate: boolean;
   tags: Array<string>;

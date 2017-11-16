@@ -36,6 +36,9 @@ const schema = new Schema({
             default: 0,
             trim: true
         },
+        latestRelease: {
+            type: Object
+        },
         isPrivate: {
             type: Boolean,
             required: true,
