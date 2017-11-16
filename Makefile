@@ -86,6 +86,7 @@ ui.version:
 
 ui.sync:
 	(cd web; aws s3 sync dist s3://pipeline.dashboardhub.io --delete --region eu-west-2)
+	aws cloudfront create-invalidation --distribution-id ${AWS_CLOUDFRONT_ID} --paths /\*
 
 ui.sync.test:
 	(cd web; aws s3 sync dist s3://pipeline-test.dashboardhub.io --delete --region eu-west-2)
