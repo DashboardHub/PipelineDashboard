@@ -155,6 +155,14 @@ PATCH /environments/{id}
 }
 ```
 
+#### Delete
+
+`DELETE /environments/{id}
+
+```json
+{}
+```
+
 ### Deployed version
 
 #### Create

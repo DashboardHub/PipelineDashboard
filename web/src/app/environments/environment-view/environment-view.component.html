@@ -9,6 +9,9 @@
          routerLink="/environments/{{ environment.id }}/edit">
         <mat-icon>mode_edit</mat-icon> EDIT
       </a>
+      <button  mat-button color="primary" (click)="deleteEnvironment()">
+        <mat-icon>delete</mat-icon> DELETE
+      </button>
     </mat-card-title>
     <mat-card-subtitle>Environment Details</mat-card-subtitle>
   </mat-card-header>
