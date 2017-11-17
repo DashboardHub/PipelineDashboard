@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {EnvironmentsService} from "../environments.service";
 import {Environment} from "../environment";
 import { Profile } from "../../auth/profile";
@@ -16,6 +16,7 @@ export class EnvironmentViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private environmentService: EnvironmentsService
   ) { }
 
@@ -29,6 +30,15 @@ export class EnvironmentViewComponent implements OnInit {
       .getEnvironment(this.environment.id)
       .subscribe(
         data => this.environment = data,
+        error => console.log(error)
+      );
+  }
+
+  deleteEnvironment(): void {
+    this.environmentService
+      .deleteEnvironment(this.environment.id)
+      .subscribe(
+        data =>  this.router.navigate(['/environments/list']),
         error => console.log(error)
       );
   }

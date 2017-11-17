@@ -122,6 +122,27 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+  environmentDelete:
+    handler: environments/delete.delete
+    events:
+      - http:
+          path: environments/{id}
+          integration: lambda
+          authorizer: auth
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   tokenCreate:
     handler: environments/tokens/create.create
     events:

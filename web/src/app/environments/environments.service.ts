@@ -69,6 +69,11 @@ export class EnvironmentsService {
       .map(response => response.json() as Environment);
   }
 
+  deleteEnvironment(id: string): Observable<Environment> {
+    return this.authHttp.delete(this.url + '/environments' + '/' + id)
+      .map(response => response.json());
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
