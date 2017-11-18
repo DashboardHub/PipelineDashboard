@@ -8,7 +8,7 @@ module.exports.list = (event, context, callback) => {
 
     environment.model.get({ id }, function(err, environment) {
         if(err) { return console.log(err); }
-        if (environment.owner !== event.principalId) {
+        if (!environment || environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
