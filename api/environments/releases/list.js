@@ -31,6 +31,8 @@ module.exports.list = (event, context, callback) => {
             }, {});
 
             let releases = [];
+
+            Object.values = obj => Object.keys(obj).map(key => obj[key]); // @TODO: temporary fix for older lambda
             Object.values(states).forEach((release) => {
                 releases.push({
                     version: release.version,
