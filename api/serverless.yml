@@ -243,6 +243,23 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+  releaseList:
+    handler: environments/releases/list.list
+    events:
+      - http:
+          path: environments/{id}/releases
+          authorizer: auth
+          method: get
+          integration: lambda
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
 
 plugins:
   - serverless-dynamodb-local

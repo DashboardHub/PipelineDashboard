@@ -18,38 +18,9 @@ module.exports.list = (event, context, callback) => {
                 return callback(new Error('Couldn\'t fetch the items.'));
             }
 
-            let states = deploys.reduce((tally, deploy) => {
-                if (!tally[deploy.release]) {
-                    tally[deploy.release] = {
-                        version: deploy.release,
-                        token: deploy.token
-                    };
-                }
-
-                tally[deploy.release][deploy.state] = deploy.createdAt;
-                return tally;
-            }, {});
-
-            let releases = [];
-            Object.values(states).forEach((release) => {
-                releases.push({
-                    version: release.version,
-                    token: release.token,
-                    finishDeploy: release.finishDeploy || null,
-                    startDeploy: release.startDeploy || null,
-                    finishBuild: release.finishBuild || null,
-                    startBuild: release.startBuild || null,
-                    latest: {
-                        createdAt: release.finishDeploy || release.startDeploy || release.finishBuild || release.startBuild,
-                        state: release.finishDeploy ? 'finishDeploy' : release.startDeploy ? 'startDeploy' : release.finishBuild ? 'finishBuild' : release.startBuild ? 'startBuild' : null
-                    }
-                });
-            });
-
             callback(null, {
                 total: deploys.length,
-                list: deploys,
-                releases: releases
+                list: deploys
             });
         });
     });
