@@ -7,6 +7,7 @@ const deployedModel = require('../../models/deployed');
 module.exports.create = (event, context, callback) => {
     const id = event.path.id;
     const tokenId = event.path.tokenId;
+    const state = event.path.state;
     const data = event.body;
 
     environmentModel.model.get({ id }, function (err, environment) {
@@ -26,8 +27,9 @@ module.exports.create = (event, context, callback) => {
         let item = {
             id: uuidv1(),
             environmentId: environment.id,
-            token: token[0],
-            release: data.release
+            release: data.release,
+            state: state,
+            token: token[0]
         };
         let deploy = new deployedModel.model(item);
 
