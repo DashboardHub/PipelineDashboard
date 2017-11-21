@@ -1,16 +1,16 @@
 'use strict';
 
-const environment = require('./../models/environment');
+const environmentModel = require('./../models/environment');
 
 module.exports.get = (event, context, callback) => {
     const id = event.path.id;
 
-    environment.model.get({ id }, function(err, result) {
+    environmentModel.model.get({ id }, function(err, environment) {
         if(err) { return console.log(err); }
-        if (result.owner !== event.principalId) {
+        if (!environment || environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
-        return callback(null, result);
+        return callback(null, environment);
     });
 };

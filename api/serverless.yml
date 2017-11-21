@@ -231,7 +231,7 @@ functions:
     handler: environments/deployed/create.create
     events:
       - http:
-          path: environments/{id}/deployed/{tokenId}
+          path: environments/{id}/deployed/{tokenId}/{state}
           method: post
           integration: lambda
           cors:

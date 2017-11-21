@@ -1,6 +1,7 @@
 'use strict';
 
 const client = require('./../dynamoose');
+const validator = require('validator');
 
 const config = require('../config');
 
@@ -19,7 +20,14 @@ const schema = new Schema({
         release: {
             type: String,
             required: true,
-            trim: true
+            trim: true,
+            validate: ((value) => typeof value === 'string' && validator.isLength(value, {min: 1, max: 32}))
+        },
+        state: {
+            type: String,
+            required: true,
+            trim: true,
+            validate: ((value) => typeof value === 'string' && validator.isIn(value, [ 'startBuild', 'finishBuild', 'startDeploy', 'finishDeploy' ]))
         },
         token: {
             type: Object,

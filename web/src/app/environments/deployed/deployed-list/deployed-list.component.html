@@ -1,12 +1,26 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Your Deploys({{ deployed.total }})</mat-card-title>
+    <mat-card-title>Your release summary</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let deploy of deployed.releases">
+        <mat-icon mat-list-icon>bookmark_border</mat-icon>
+        <h4 mat-line><b>{{ deploy.version }}</b> in state <b>{{ deploy.latest.state }}</b> by {{ deploy.token.name }} at {{ deploy.latest.createdAt | date:'medium' }}</h4>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Your deploys ({{ deployed.total }})</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let deploy of deployed.list">
         <mat-icon mat-list-icon>bookmark_border</mat-icon>
-        <h4 mat-line>{{ deploy.release }} by {{ deploy.token.name }} at {{ deploy.createdAt | date:'medium' }}</h4>
+        <h4 mat-line><b>{{ deploy.release }}</b> in state <b>{{ deploy.state }}</b> by {{ deploy.token.name }} at {{ deploy.createdAt | date:'medium' }}</h4>
       </mat-list-item>
     </mat-list>
   </mat-card-content>

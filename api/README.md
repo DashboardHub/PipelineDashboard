@@ -167,8 +167,10 @@ PATCH /environments/{id}
 
 #### Create
 
+`state` options: `startBuild`, `finishBuild`, `startDeploy`, `finishDeploy`
+
 ```
-POST /environments/{id}/deployed
+POST /environments/{id}/deployed/{token}/{state}
 
 {
 	"release": "v0.0.3"
@@ -177,17 +179,13 @@ POST /environments/{id}/deployed
 
 ```json
 {
-    "latestRelease": "v0.0.3",
-    "isPrivate": false,
-    "releases": 2,
+    "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
+    "enviromentId": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
+    "release": "v0.0.3",
+    "state": "startDeploy",
     "updatedAt": "2017-08-04T08:28:05.848Z",
     "createdAt": "2017-08-04T08:27:14.578Z",
-    "description": "This is a test server 2",
-    "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
-    "tags": [
-        "test"
-    ],
-    "title": "Test server 2"
+    "token": {}
 }
 ```
 
@@ -222,5 +220,14 @@ POST /environments/{id}/tokens
 {
   "name": "aaaaa",
   "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
+}
+```
+
+```json
+{
+  "id": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
+  "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
+  "name": "aaaaa",
+  "token": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
 }
 ```
