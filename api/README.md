@@ -169,6 +169,8 @@ PATCH /environments/{id}
 
 `state` options: `startBuild`, `finishBuild`, `startDeploy`, `finishDeploy`
 
+> e.g. POST /environments/{id}/deployed/{token}/finishDeploy 
+
 ```
 POST /environments/{id}/deployed/{token}/{state}
 

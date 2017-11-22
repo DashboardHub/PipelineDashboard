@@ -14,7 +14,9 @@ api: api.run
 
 ui: ui.run
 
-install: alexa.install api.install ui.install
+install: pipeline.version.startBuild alexa.install api.install ui.install pipeline.version.finishBuild
+
+install.test: pipeline.version.test.startBuild alexa.install api.install ui.install pipeline.version.test.finishBuild
 
 deploy: pipeline.version.startDeploy alexa.deploy api.deploy ui.deploy pipeline.version.finishDeploy
 
