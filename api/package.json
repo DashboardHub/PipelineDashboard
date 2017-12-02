@@ -19,14 +19,14 @@
   },
   "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
   "dependencies": {
-    "aws-sdk": "^2.88.0",
+    "aws-sdk": "^2.162.0",
     "dynamoose": "^0.8.6",
     "jsonwebtoken": "^8.1.0",
     "uuid": "^3.1.0",
-    "validator": "^8.0.0"
+    "validator": "^9.1.2"
   },
   "devDependencies": {
-    "serverless-dynamodb-local": "^0.2.22",
-    "serverless-offline": "^3.15.1"
+    "serverless-dynamodb-local": "^0.2.26",
+    "serverless-offline": "^3.16.0"
   }
 }
