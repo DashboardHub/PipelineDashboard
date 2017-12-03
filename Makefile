@@ -15,6 +15,7 @@ api: api.run
 ui: ui.run
 
 install.local: alexa.install api.install ui.install
+	serverless dynamodb install
 
 install: pipeline.version.startBuild alexa.install api.install ui.install pipeline.version.finishBuild
 
@@ -39,7 +40,7 @@ api.clean:
 	(cd api; git checkout ./config.json)
 
 api.install:
-	(cd api; npm install; serverless dynamodb install)
+	(cd api; npm install)
 
 api.env: guard-AUTH0_CLIENT_ID guard-AUTH0_CLIENT_SECRET api.clean
 	(cd api; sed -i 's|{{ AUTH0_CLIENT_ID }}|${AUTH0_CLIENT_ID}|g' ./config.json)
