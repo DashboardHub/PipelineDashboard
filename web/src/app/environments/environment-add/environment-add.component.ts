@@ -5,8 +5,7 @@ import {EnvironmentsService} from "../environments.service";
 @Component({
   selector: 'app-environment-add',
   templateUrl: './environment-add.component.html',
-  styleUrls: ['./environment-add.component.css'],
-  providers: [EnvironmentsService]
+  styleUrls: ['./environment-add.component.css']
 })
 export class EnvironmentAddComponent implements OnInit {
 

@@ -7,8 +7,7 @@ import { Environment } from './../environment';
 @Component({
   selector: 'app-environment-list',
   templateUrl: './environment-list.component.html',
-  styleUrls: ['./environment-list.component.css'],
-  providers: [EnvironmentsService]
+  styleUrls: ['./environment-list.component.css']
 })
 export class EnvironmentListComponent implements OnInit {
 

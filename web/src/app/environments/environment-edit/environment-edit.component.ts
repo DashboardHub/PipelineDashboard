@@ -6,8 +6,7 @@ import { Environment } from "../environment";
 @Component({
   selector: 'app-environment-edit',
   templateUrl: './environment-edit.component.html',
-  styleUrls: ['./environment-edit.component.css'],
-  providers: [EnvironmentsService]
+  styleUrls: ['./environment-edit.component.css']
 })
 export class EnvironmentEditComponent implements OnInit {
   environment: Environment = new Environment('');
