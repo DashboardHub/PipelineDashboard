@@ -5,15 +5,9 @@
 
 Display your deployed versions.
 
-## SUB PROJECTS
-
-* API, read the [API](api/README.md) docs 
-* Web UI, read the [UI](web/README.md) docs 
-* Alexa Skill, read the [Alexa Skill](alexa/README.md) docs 
-
 ## QUICK START
 
-Using `make` to build and run the project(s).
+Using `make` to build and run the project(s):
 
 Install the `npm` dependencies for all projects, use `make install.local`
 
@@ -24,6 +18,12 @@ Open 2 terminals and run each of these commands in its own terminal:
 *NOTE: You will need a `pem` file for local development*
 
 - UI `make ui`
+
+## SUB PROJECTS
+
+* API, read the [API](api/README.md) docs 
+* Web UI, read the [UI](web/README.md) docs 
+* Alexa Skill, read the [Alexa Skill](alexa/README.md) docs 
 
 ## Collaboration
 

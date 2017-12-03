@@ -2,21 +2,10 @@
 
 Using Serverless framework on AWS Lambda
 
-## QuickStart
+## Requirements
 
-Install [Serverless](https://serverless.com) with `npm install -g serverless`.
-
-### Run locally
-
-1. `npm install`
-2. `serverless dynamodb install`
-3. `serverless offline start` (need `java` installed)
-4. `serverless dynamodb migrate` (this imports schema)
-5. `AUTH0_CLIENT_ID_DEV=XXX AUTH0_CLIENT_SECRET_DEV=YYY NODE_ENV=development make api`
-
-*NOTE: You will need a `pem` file for local development*
-
-*NOTE: Local API will need to be restarted for changes to take effect*
+- [Serverless](https://serverless.com) with `npm install -g serverless`.
+- `java`
 
 ### Deployment
 
