@@ -13,7 +13,9 @@ Display your deployed versions.
 
 ## QUICK START
 
-Using `make`.
+Using `make` to build and run the project(s).
+
+Install the `npn` dependencies for all projects, use `make install.local`
 
 Open 2 terminals and run each of these commands in its own terminal:
 
