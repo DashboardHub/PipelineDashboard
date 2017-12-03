@@ -41,11 +41,36 @@ functions:
           method: get
           integration: lambda-proxy
           cors: true
+  publicEnvironmentSummary:
+    handler: environments/summary.public
+    events:
+      - http:
+          path: summary
+          method: get
+          integration: lambda-proxy
+          cors: true
   environmentList:
       handler: environments/list.private
       events:
         - http:
             path: environments/list
+            authorizer: auth
+            method: get
+            integration: lambda
+            cors:
+              origins:
+                - '*'
+              headers:
+                - Content-Type
+                - X-Amz-Date
+                - Authorization
+                - X-Api-Key
+                - X-Amz-Security-Token
+  environmentSummary:
+      handler: environments/summary.private
+      events:
+        - http:
+            path: environments/summary
             authorizer: auth
             method: get
             integration: lambda

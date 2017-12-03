@@ -1,12 +1,15 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Public Environment list ({{ environments.total }})</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let environment of environments.list">
-        <mat-icon mat-list-icon *ngIf="environment.isPrivate">lock</mat-icon>
-        <mat-icon mat-list-icon *ngIf="!environment.isPrivate">lock_open</mat-icon>
+<app-environments-summary></app-environments-summary>
+
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Public Environment list ({{ environments.total }})</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let environment of environments.list">
+          <mat-icon mat-list-icon *ngIf="environment.isPrivate">lock</mat-icon>
+          <mat-icon mat-list-icon *ngIf="!environment.isPrivate">lock_open</mat-icon>
           <h4 mat-line>
             {{ environment.title }}
             <span *ngIf="environment.latestRelease">
@@ -19,7 +22,8 @@
           <mat-chip-list class="mat-chip-list-stacked">
             <mat-chip *ngFor="let tag of environment.tags" color="primary" selected="true">{{ tag }}</mat-chip>
           </mat-chip-list>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

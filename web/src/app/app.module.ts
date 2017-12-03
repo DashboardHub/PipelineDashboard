@@ -32,6 +32,11 @@ import { TokenAddComponent } from "./environments/tokens/token-add/token-add.com
 import { TokenListComponent } from "./environments/tokens/token-list/token.list.component";
 import { TokenComponent } from "./environments/tokens/token.component";
 import { DeployedListComponent } from "./environments/deployed/deployed-list/deployed.list.component";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { EnvironmentsSummaryComponent } from "./environments/summary/environments-summary.component";
+import { EnvironmentsService } from "./environments/environments.service";
+import { EnvironmentsSummaryPublicResolver } from "./environments/summary/environments-summary.public.resolver";
+import { EnvironmentsSummaryPrivateResolver } from "./environments/summary/environments-summary.private.resolver";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -41,14 +46,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 }
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: EnvironmentsComponent },
+  { path: '', pathMatch: 'full', component: EnvironmentsComponent, resolve: { summary: EnvironmentsSummaryPublicResolver } },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'environments',
     canActivate: [AuthGuard],
     children: [
-      { path: 'list', pathMatch: 'full', component: EnvironmentListComponent },
+      { path: 'list', pathMatch: 'full', component: EnvironmentListComponent, resolve: { summary: EnvironmentsSummaryPrivateResolver } },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
       { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent }
@@ -66,6 +71,7 @@ const routes: Routes = [
     EnvironmentViewComponent,
     EnvironmentEditComponent,
     EnvironmentListComponent,
+    EnvironmentsSummaryComponent,
     TokenComponent,
     TokenAddComponent,
     TokenListComponent,
@@ -92,7 +98,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     FormsModule,
-    MomentModule
+    MomentModule,
+    NgxChartsModule
   ],
   providers: [
     AuthService,
@@ -101,7 +108,10 @@ const routes: Routes = [
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    }
+    },
+    EnvironmentsService,
+    EnvironmentsSummaryPublicResolver,
+    EnvironmentsSummaryPrivateResolver
   ],
   bootstrap: [AppComponent]
 })

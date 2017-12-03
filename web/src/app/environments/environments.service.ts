@@ -8,6 +8,7 @@ import { AuthHttp } from "angular2-jwt";
 import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
+import { Summary } from "./summary/summary";
 
 @Injectable()
 export class EnvironmentsService {
@@ -72,6 +73,16 @@ export class EnvironmentsService {
   deleteEnvironment(id: string): Observable<Environment> {
     return this.authHttp.delete(this.url + '/environments' + '/' + id)
       .map(response => response.json());
+  }
+
+  getPublicEnvironmentSummary(): any { // @TODO: any
+    return this.http.get(this.url + '/summary')
+      .map(response => response.json() as Summary)
+  }
+
+  getPrivateEnvironmentSummary(): any { // @TODO: any
+    return this.authHttp.get(this.url + '/environments/summary')
+      .map(response => response.json() as Summary)
   }
 
   private handleError(error: any): Promise<any> {
