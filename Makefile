@@ -15,7 +15,7 @@ api: api.run
 ui: ui.run
 
 install.local: alexa.install api.install ui.install
-	serverless dynamodb install
+	(cd api; serverless dynamodb install)
 
 install: pipeline.version.startBuild alexa.install api.install ui.install pipeline.version.finishBuild
 
