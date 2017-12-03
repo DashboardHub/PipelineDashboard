@@ -39,7 +39,6 @@ module.exports.create = (event, context, callback) => {
                 switch(err.name) {
                     case 'ValidationError':
                         return callback(new Error(`[400] ${err.message}`));
-                        break;
                     default:
                         return callback(new Error(`[500] ${err.message}`));
                 }
@@ -51,7 +50,12 @@ module.exports.create = (event, context, callback) => {
             }, function (err) {
                 if (err) {
                     console.log(err);
-                    return callback(new Error(`[500] ${err.message}`));
+                    switch(err.name) {
+                        case 'ValidationError':
+                            return callback(new Error(`[400] ${err.message}`));
+                        default:
+                            return callback(new Error(`[500] ${err.message}`));
+                    }
                 }
                 callback(null, item);
             });
