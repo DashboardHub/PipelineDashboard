@@ -7,8 +7,7 @@ import { Profile } from "../../auth/profile";
 @Component({
   selector: 'app-environment-view',
   templateUrl: './environment-view.component.html',
-  styleUrls: ['./environment-view.component.css'],
-  providers: [EnvironmentsService]
+  styleUrls: ['./environment-view.component.css']
 })
 export class EnvironmentViewComponent implements OnInit {
   environment: Environment = new Environment('');
