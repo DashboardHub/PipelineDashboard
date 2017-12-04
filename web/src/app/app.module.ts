@@ -37,6 +37,7 @@ import { EnvironmentsSummaryComponent } from "./environments/summary/environment
 import { EnvironmentsService } from "./environments/environments.service";
 import { EnvironmentsSummaryPublicResolver } from "./environments/summary/environments-summary.public.resolver";
 import { EnvironmentsSummaryPrivateResolver } from "./environments/summary/environments-summary.private.resolver";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -87,6 +88,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     CovalentLayoutModule,
     HttpModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,

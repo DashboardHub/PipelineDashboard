@@ -1,13 +1,13 @@
-<div class="panel panel-default profile-area">
-  <div class="panel-heading">
-    <h3>Profile</h3>
-  </div>
-  <div class="panel-body">
-    <img src="{{ profile?.picture }}" class="avatar" alt="avatar">
-    <div>
-      <label><i class="glyphicon glyphicon-user"></i> Nickname</label>
-      <h3 class="nickname">{{ profile?.nickname }}</h3>
-    </div>
-    <pre class="full-profile">{{ profile | json }}</pre>
-  </div>
-</div>
+<mat-card>
+  <mat-card-header>
+    <img mat-card-avatar src="{{ profile?.picture }}">
+    <mat-card-title>{{ profile?.name }}</mat-card-title>
+    <mat-card-subtitle>{{ profile?.nickname }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Logged in using <b>{{ profile?.sub.split('|')[0].toUpperCase() }}</b></p>
+  </mat-card-content>
+  <mat-card-actions>
+
+  </mat-card-actions>
+</mat-card>
