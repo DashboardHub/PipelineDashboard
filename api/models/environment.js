@@ -50,11 +50,13 @@ const schema = new Schema({
         },
         tokens: {
             type: Array,
-            default: []
+            default: [],
+            validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
         },
         tags: {
             type: Array,
-            default: []
+            default: [],
+            validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
         }
     },
     {
