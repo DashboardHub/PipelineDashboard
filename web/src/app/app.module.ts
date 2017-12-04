@@ -38,6 +38,9 @@ import { EnvironmentsService } from "./environments/environments.service";
 import { EnvironmentsSummaryPublicResolver } from "./environments/summary/environments-summary.public.resolver";
 import { EnvironmentsSummaryPrivateResolver } from "./environments/summary/environments-summary.private.resolver";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { EnvironmentsResolver } from "./environments/environments.resolver";
+import { EnvironmentsListResolver } from "./environments/environment-list/environments-list.resolver";
+import { EnvironmentViewResolver } from "./environments/environment-view/environment-view.resolver";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -47,17 +50,27 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 }
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: EnvironmentsComponent, resolve: { summary: EnvironmentsSummaryPublicResolver } },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: EnvironmentsComponent,
+    resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver }
+  },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {
     path: 'environments',
     canActivate: [AuthGuard],
     children: [
-      { path: 'list', pathMatch: 'full', component: EnvironmentListComponent, resolve: { summary: EnvironmentsSummaryPrivateResolver } },
+      {
+        path: 'list',
+        pathMatch: 'full',
+        component: EnvironmentListComponent,
+        resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
+      },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
-      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent },
-      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent }
+      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
   { path: '**', redirectTo: '' }
@@ -112,6 +125,9 @@ const routes: Routes = [
       deps: [Http, RequestOptions]
     },
     EnvironmentsService,
+    EnvironmentsResolver,
+    EnvironmentViewResolver,
+    EnvironmentsListResolver,
     EnvironmentsSummaryPublicResolver,
     EnvironmentsSummaryPrivateResolver
   ],
