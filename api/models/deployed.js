@@ -21,13 +21,13 @@ const schema = new Schema({
             type: String,
             required: true,
             trim: true,
-            validate: ((value) => typeof value === 'string' && validator.isLength(value, {min: 1, max: 32}))
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 1, max: 32}))
         },
         state: {
             type: String,
             required: true,
             trim: true,
-            validate: ((value) => typeof value === 'string' && validator.isIn(value, [ 'startBuild', 'finishBuild', 'startDeploy', 'finishDeploy' ]))
+            validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'startBuild', 'finishBuild', 'startDeploy', 'finishDeploy' ]))
         },
         token: {
             type: Object,

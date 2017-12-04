@@ -17,11 +17,6 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        // @TODO: add validation to model
-        // if (typeof data.name !== 'string' || !validator.isLength(data.name, {min: 3, max: 32})) {
-        //     return callback(new Error('[400] Validation Error: "title" is required and must be a "string" between 3 and 32'));
-        // }
-
         let token = {
             id: uuidv1(),
             environmentId: id,
