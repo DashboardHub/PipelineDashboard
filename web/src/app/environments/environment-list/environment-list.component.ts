@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { EnvironmentsService } from './../environments.service';
 import { List } from './../list';
 import { Environment } from './../environment';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-environment-list',
@@ -13,20 +14,10 @@ export class EnvironmentListComponent implements OnInit {
 
   environments: List<Environment> = new List<Environment>();
 
-  constructor(private environmentService: EnvironmentsService) {
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.getEnvironments();
+    this.environments = this.route.snapshot.data['environments'];
   }
-
-  getEnvironments(): void {
-    this.environmentService
-      .getEnvironments()
-      .subscribe(
-        data => this.environments = data,
-        error => console.log(error)
-      );
-  }
-
 }
