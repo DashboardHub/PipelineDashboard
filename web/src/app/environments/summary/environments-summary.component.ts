@@ -13,7 +13,6 @@ export class EnvironmentsSummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.summary.push({ name: 'Environments', value: this.route.snapshot.data['summary'].environments });
     this.summary.push({ name: 'Deploys', value: this.route.snapshot.data['summary'].deploys });
   }
