@@ -2,23 +2,6 @@
 
 Using Serverless framework on AWS Lambda
 
-## Requirements
-
-- [Serverless](https://serverless.com) with `npm install -g serverless`.
-- `java`
-
-### Deployment
-
-`serverless deploy -v`
-
-### Delete Deployment
-
-`serverless remove`
-
-#### Debugging
-
-`serverless logs -f environmentList -t`
-
 ## Restful API documentation
 
 ### Environments

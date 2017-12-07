@@ -5,19 +5,25 @@
 
 Display your deployed versions.
 
+### REQUIREMENTS
+
+- `node` & `npm`
+- [Serverless](https://serverless.com) with `npm install -g serverless`.
+- `java`
+
 ## QUICK START
 
 Using `make` to build and run the project(s):
 
-Install the `npm` dependencies for all projects, use `make install.local`
+- 1. Install the `npm` dependencies for all projects, use `make install.local`
 
 Open 2 terminals and run each of these commands in its own terminal:
 
-- API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY make api`
+- 2. API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY NODE_ENV=development make api`
 
 *NOTE: You will need a `pem` file for local development*
 
-- UI `make ui`
+- 3. UI `make ui`
 
 ## SUB PROJECTS
 
