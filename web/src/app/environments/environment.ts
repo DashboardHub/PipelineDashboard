@@ -7,6 +7,7 @@ export class Environment {
   link: string;
   latestRelease: Deployed;
   releases: number;
+  progress: number;
   isPrivate: boolean;
   tags: Array<string>;
   updatedAt: string;
