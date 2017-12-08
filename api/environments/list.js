@@ -17,7 +17,28 @@ module.exports.public = (event, context, callback) => {
             statusCode: 200,
             body: JSON.stringify({
                 total: results.length,
-                list: results
+                list: results.map((environment) => {
+                    if (environment.latestRelease) {
+                        switch (environment.latestRelease.state) {
+                            case 'startBuild':
+                                environment.progress = 25;
+                                break;
+                            case 'finishBuild':
+                                environment.progress = 50;
+                                break;
+                            case 'startDeploy':
+                                environment.progress = 75;
+                                break;
+                            case 'finishDeploy':
+                                environment.progress = 100;
+                                break;
+                            default:
+                                environment.progress = 0;
+                        }
+                    }
+
+                    return environment;
+                })
             })
         });
 

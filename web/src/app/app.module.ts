@@ -13,10 +13,10 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatIconModule,
-  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule
+  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CovalentLayoutModule } from '@covalent/core';
+import { CovalentLayoutModule, CovalentMessageModule, CovalentNotificationsModule } from '@covalent/core';
 import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
 import { EnvironmentViewComponent } from './environments/environment-view/environment-view.component';
 import { EnvironmentEditComponent } from './environments/environment-edit/environment-edit.component';
@@ -100,6 +100,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     CovalentLayoutModule,
+    CovalentMessageModule,
     HttpModule,
     FlexLayoutModule,
     MatButtonModule,
@@ -109,12 +110,14 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
     FormsModule,
     MomentModule,
-    NgxChartsModule
+    NgxChartsModule,
+    CovalentNotificationsModule
   ],
   providers: [
     AuthService,
