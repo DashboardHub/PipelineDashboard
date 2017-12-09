@@ -1,19 +1,5 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Your release summary ({{ releases.total }})</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item *ngFor="let release of releases.list">
-        <mat-icon mat-list-icon>bookmark_border</mat-icon>
-        <h4 mat-line><b>{{ release.version }}</b> in state <b>{{ release.latest.state }}</b> by {{ release.token.name }} at {{ release.latest.createdAt | date:'medium' }}</h4>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
-
-<mat-card>
-  <mat-card-header>
     <mat-card-title>Your deploys ({{ deployed.total }})</mat-card-title>
   </mat-card-header>
   <mat-card-content>

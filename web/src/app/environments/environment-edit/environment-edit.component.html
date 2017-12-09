@@ -1,69 +1,75 @@
+<mat-toolbar>
+  <a mat-button [routerLink]="['/environments', environment.id]">
+    <mat-icon>arrow_back</mat-icon>
+    <span>Back to view</span>
+  </a>
+</mat-toolbar>
+
 <mat-card>
   <mat-card-header>
-    <mat-card-title>
-      <a mat-button [routerLink]="['/environments', environment.id]">
-        <mat-icon>arrow_back</mat-icon>
-        <span>Back to view</span>
-      </a>
-    </mat-card-title>
-    <mat-card-subtitle>Add Environment</mat-card-subtitle>
+    <mat-card-title>Add Environment</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form #form="ngForm" class="form-full">
-      <mat-input-container>
-        <input matInput class="form-control" placeholder="Title"
-               required minlength="3" maxlength="32"
-               name="title" [(ngModel)]="environment.title"
-               #title="ngModel">
-        <div *ngIf="title.errors && (title.dirty || title.touched)">
-          <mat-error *ngIf="title.errors.required">
-            Title is required
-          </mat-error>
-          <mat-error *ngIf="title.errors.minlength">
-            Title must be at least 3 characters long.
-          </mat-error>
-          <mat-error *ngIf="title.errors.maxlength">
-            Title cannot be more than 32 characters long.
-          </mat-error>
-        </div>
-      </mat-input-container>
-      <mat-input-container>
-        <input matInput class="form-control" placeholder="Description"
-               minlength="3" maxlength="128"
-               name="description" [(ngModel)]="environment.description"
-               #description="ngModel">
-        <div *ngIf="description.errors && (description.dirty || description.touched)">
-          <mat-error *ngIf="description.errors.minlength">
-            Description must be at least 3 characters long.
-          </mat-error>
-          <mat-error *ngIf="description.errors.maxlength">
-            Description cannot be more than 128 characters long.
-          </mat-error>
-        </div>
-      </mat-input-container>
-      <mat-input-container>
-        <input matInput class="form-control" placeholder="Link"
-               minlength="3" maxlength="128"
-               name="link" [(ngModel)]="environment.link"
-               #link="ngModel">
-        <div *ngIf="link.errors && (link.dirty || link.touched)">
-          <mat-error *ngIf="link.errors.minlength">
-            Link must be at least 3 characters long.
-          </mat-error>
-          <mat-error *ngIf="link.errors.maxlength">
-            Link cannot be more than 128 characters long.
-          </mat-error>
-        </div>
-      </mat-input-container>
-      <mat-checkbox [disabled]="true" value="false">Is private
-        <mat-icon matTooltip="During BETA private is not allowed">info</mat-icon>
-      </mat-checkbox>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input matInput class="form-control" placeholder="Title"
+                 required minlength="3" maxlength="32"
+                 name="title" [(ngModel)]="environment.title"
+                 #title="ngModel">
+          <div *ngIf="title.errors && (title.dirty || title.touched)">
+            <mat-error *ngIf="title.errors.required">
+              Title is required
+            </mat-error>
+            <mat-error *ngIf="title.errors.minlength">
+              Title must be at least 3 characters long.
+            </mat-error>
+            <mat-error *ngIf="title.errors.maxlength">
+              Title cannot be more than 32 characters long.
+            </mat-error>
+          </div>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput class="form-control" placeholder="Link"
+                 minlength="3" maxlength="128"
+                 name="link" [(ngModel)]="environment.link"
+                 #link="ngModel">
+          <div *ngIf="link.errors && (link.dirty || link.touched)">
+            <mat-error *ngIf="link.errors.minlength">
+              Link must be at least 3 characters long.
+            </mat-error>
+            <mat-error *ngIf="link.errors.maxlength">
+              Link cannot be more than 128 characters long.
+            </mat-error>
+          </div>
+        </mat-form-field>
+      </div>
+      <div fxLayout="column" fxLayoutGap="10px">
+        <mat-form-field>
+          <input matInput class="form-control" placeholder="Description"
+                 minlength="3" maxlength="128"
+                 name="description" [(ngModel)]="environment.description"
+                 #description="ngModel">
+          <div *ngIf="description.errors && (description.dirty || description.touched)">
+            <mat-error *ngIf="description.errors.minlength">
+              Description must be at least 3 characters long.
+            </mat-error>
+            <mat-error *ngIf="description.errors.maxlength">
+              Description cannot be more than 128 characters long.
+            </mat-error>
+          </div>
+        </mat-form-field>
+        <mat-checkbox [disabled]="true" value="false">Is private
+          <mat-icon matTooltip="During ALPHA private is not allowed">info</mat-icon>
+        </mat-checkbox>
+      </div>
     </form>
   </mat-card-content>
   <mat-card-actions>
     <a mat-button [routerLink]="['/environments', environment.id]">CANCEL</a>
     <button mat-button color="primary"
             [disabled]="!form.valid"
-            (click)="save()">SAVE</button>
+            (click)="save()">SAVE
+    </button>
   </mat-card-actions>
 </mat-card>

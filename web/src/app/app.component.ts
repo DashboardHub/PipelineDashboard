@@ -4,6 +4,7 @@ import { environment } from '../environments/environment';
 import { AuthService } from './auth/auth.service';
 import { Profile } from "./auth/profile";
 import { EnvironmentsService } from "./environments/environments.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -16,15 +17,11 @@ export class AppComponent implements OnInit {
 
   profile: Profile;
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, private route: ActivatedRoute) {
     auth.handleAuthentication();
   }
 
   ngOnInit(): void {
-    if (this.auth.isAuthenticated()) {
-      this.auth.getProfile((err) => console.log);
-    }
-
     this.auth.subscribeProfile()
       .subscribe(profile => this.profile = profile);
   }

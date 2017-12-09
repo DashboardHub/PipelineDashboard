@@ -7,12 +7,12 @@ import { Deployed } from "../deployed";
 import { Release } from "../releases";
 
 @Component({
-  selector: 'app-deployed-list',
-  templateUrl: './deployed-list.component.html',
-  styleUrls: ['./deployed-list.component.css'],
+  selector: 'app-deployed-summary',
+  templateUrl: './deployed-summary.component.html',
+  styleUrls: ['./deployed-summary.component.css'],
   providers: [DeployedService]
 })
-export class DeployedListComponent implements OnInit {
+export class DeployedSummaryComponent implements OnInit {
 
   deployed: List<Deployed> = new List<Deployed>();
   releases: List<Release> = new List<Release>();
@@ -24,16 +24,16 @@ export class DeployedListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.deployedService.subscribeDeployed()
-      .subscribe(deploys => {
-        this.deployed = deploys
+    this.deployedService.subscribeReleases()
+      .subscribe(releases => {
+        this.releases = releases
       });
 
-    this.getDeployed(this.route.snapshot.params.id);
+    this.getReleases(this.route.snapshot.params.id);
   }
 
-  getDeployed(environmentId: string): void {
+  getReleases(environmentId: string): void {
     this.deployedService
-      .getDeployed(environmentId);
+      .getReleases(environmentId);
   }
 }
