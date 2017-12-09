@@ -16,11 +16,10 @@ import {
   MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CovalentLayoutModule, CovalentMessageModule, CovalentNotificationsModule } from '@covalent/core';
+import { CovalentCommonModule, CovalentMessageModule, CovalentNotificationsModule } from '@covalent/core';
 import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
 import { EnvironmentViewComponent } from './environments/environment-view/environment-view.component';
 import { EnvironmentEditComponent } from './environments/environment-edit/environment-edit.component';
-import { MomentModule } from 'angular2-moment';
 import { AuthService } from "./auth/auth.service";
 import { CallbackComponent } from "./auth/callback.component";
 import { ProfileComponent } from "./auth/profile/profile.component";
@@ -41,6 +40,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { EnvironmentsResolver } from "./environments/environments.resolver";
 import { EnvironmentsListResolver } from "./environments/environment-list/environments-list.resolver";
 import { EnvironmentViewResolver } from "./environments/environment-view/environment-view.resolver";
+import { ProfileResolver } from "./auth/profile.resolver";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -54,13 +54,14 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     component: EnvironmentsComponent,
-    resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver }
+    resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
   },
   { path: 'callback', component: CallbackComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
   {
     path: 'environments',
     canActivate: [AuthGuard],
+    resolve: { profile: ProfileResolver },
     children: [
       {
         path: 'list',
@@ -99,7 +100,6 @@ const routes: Routes = [
     ),
     BrowserModule,
     BrowserAnimationsModule,
-    CovalentLayoutModule,
     CovalentMessageModule,
     HttpModule,
     FlexLayoutModule,
@@ -115,9 +115,9 @@ const routes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     FormsModule,
-    MomentModule,
     NgxChartsModule,
-    CovalentNotificationsModule
+    CovalentNotificationsModule,
+    CovalentCommonModule
   ],
   providers: [
     AuthService,
@@ -132,7 +132,8 @@ const routes: Routes = [
     EnvironmentViewResolver,
     EnvironmentsListResolver,
     EnvironmentsSummaryPublicResolver,
-    EnvironmentsSummaryPrivateResolver
+    EnvironmentsSummaryPrivateResolver,
+    ProfileResolver
   ],
   bootstrap: [AppComponent]
 })

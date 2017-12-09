@@ -70,19 +70,23 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-  public getProfile(cb): void {
+  public getProfile(cb): Promise<void> {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       throw new Error('Access token must exist to fetch profile');
     }
 
     const self = this;
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        self.userProfile = profile;
-        this.subject.next(profile);
-      }
-      cb(err);
+
+    return new Promise<void>(resolve => {
+      this.auth0.client.userInfo(accessToken, (err, profile) => {
+        if (profile) {
+          self.userProfile = profile;
+          resolve(profile);
+          this.subject.next(profile);
+        }
+        cb(err);
+      });
     });
   }
 
