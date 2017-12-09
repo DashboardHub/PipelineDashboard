@@ -8,7 +8,8 @@ Display your deployed versions.
 ### REQUIREMENTS
 
 - `node` & `npm`
-- [Serverless](https://serverless.com) with `npm install -g serverless`.
+- [Serverless](https://serverless.com) with `npm install -g serverless`
+- [AngularCLI](https://cli.angular.io) with `npm install -g @angular/cli`
 - `java`
 
 ## QUICK START
