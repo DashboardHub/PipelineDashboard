@@ -13,7 +13,8 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatIconModule,
-  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule
+  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule,
+  MatTabsModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CovalentCommonModule, CovalentMessageModule, CovalentNotificationsModule } from '@covalent/core';
@@ -41,6 +42,7 @@ import { EnvironmentsResolver } from "./environments/environments.resolver";
 import { EnvironmentsListResolver } from "./environments/environment-list/environments-list.resolver";
 import { EnvironmentViewResolver } from "./environments/environment-view/environment-view.resolver";
 import { ProfileResolver } from "./auth/profile.resolver";
+import { DeployedSummaryComponent } from "./environments/deployed/deployed-summary/deployed-summary.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -91,6 +93,7 @@ const routes: Routes = [
     TokenAddComponent,
     TokenListComponent,
     DeployedListComponent,
+    DeployedSummaryComponent,
     ProfileComponent
   ],
   imports: [
@@ -114,6 +117,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatTabsModule,
     FormsModule,
     NgxChartsModule,
     CovalentNotificationsModule,
