@@ -66,6 +66,12 @@ const routes: Routes = [
     resolve: { profile: ProfileResolver },
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        component: EnvironmentListComponent,
+        resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
+      },
+      {
         path: 'list',
         pathMatch: 'full',
         component: EnvironmentListComponent,
