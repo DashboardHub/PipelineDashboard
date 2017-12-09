@@ -1,12 +1,13 @@
+<mat-toolbar>
+  <a mat-button [routerLink]="['/environments', environment.id]">
+    <mat-icon>arrow_back</mat-icon>
+    <span>Back to list</span>
+  </a>
+</mat-toolbar>
+
 <mat-card>
   <mat-card-header>
-    <mat-card-title>
-      <a mat-button [routerLink]="['/environments', environment.id]">
-        <mat-icon>arrow_back</mat-icon>
-        <span>Back to view</span>
-      </a>
-    </mat-card-title>
-    <mat-card-subtitle>Add Environment</mat-card-subtitle>
+    <mat-card-title>Add Environment</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form #form="ngForm" class="form-full">
