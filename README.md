@@ -5,23 +5,32 @@
 
 Display your deployed versions.
 
+### REQUIREMENTS
+
+- `node` & `npm`
+- [Serverless](https://serverless.com) with `npm install -g serverless`
+- [AngularCLI](https://cli.angular.io) with `npm install -g @angular/cli`
+- `java`
+
+## QUICK START
+
+Using `make` to build and run the project(s):
+
+- 1. Install the `npm` dependencies for all projects, use `make install.local`
+
+Open 2 terminals and run each of these commands in its own terminal:
+
+- 2. API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY NODE_ENV=development make api`
+
+*NOTE: You will need a `pem` file for local development*
+
+- 3. UI `make ui`
+
 ## SUB PROJECTS
 
 * API, read the [API](api/README.md) docs 
 * Web UI, read the [UI](web/README.md) docs 
 * Alexa Skill, read the [Alexa Skill](alexa/README.md) docs 
-
-## QUICK START
-
-Using `make`.
-
-Open 2 terminals and run each of these commands in its own terminal:
-
-- API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY make api`
-
-*NOTE: You will need a `pem` file for local development*
-
-- UI `make ui`
 
 ## Collaboration
 

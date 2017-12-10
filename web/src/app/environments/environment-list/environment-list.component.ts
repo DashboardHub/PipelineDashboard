@@ -1,33 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 
-import { EnvironmentsService } from './../environments.service';
 import { List } from './../list';
 import { Environment } from './../environment';
+import { ActivatedRoute } from "@angular/router";
+import { Profile } from "../../auth/profile";
 
 @Component({
   selector: 'app-environment-list',
   templateUrl: './environment-list.component.html',
-  styleUrls: ['./environment-list.component.css'],
-  providers: [EnvironmentsService]
+  styleUrls: ['./environment-list.component.css']
 })
 export class EnvironmentListComponent implements OnInit {
 
   environments: List<Environment> = new List<Environment>();
 
-  constructor(private environmentService: EnvironmentsService) {
+  profile: Profile;
+
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.getEnvironments();
+    this.environments = this.route.snapshot.data['environments'];
+    this.profile = this.route.snapshot.data['profile'];
   }
-
-  getEnvironments(): void {
-    this.environmentService
-      .getEnvironments()
-      .subscribe(
-        data => this.environments = data,
-        error => console.log(error)
-      );
-  }
-
 }

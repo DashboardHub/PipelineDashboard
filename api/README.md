@@ -2,34 +2,6 @@
 
 Using Serverless framework on AWS Lambda
 
-## QuickStart
-
-Install [Serverless](https://serverless.com) with `npm install -g serverless`.
-
-### Run locally
-
-1. `npm install`
-2. `serverless dynamodb install`
-3. `serverless offline start` (need `java` installed)
-4. `serverless dynamodb migrate` (this imports schema)
-5. `AUTH0_CLIENT_ID_DEV=XXX AUTH0_CLIENT_SECRET_DEV=YYY NODE_ENV=development make api`
-
-*NOTE: You will need a `pem` file for local development*
-
-*NOTE: Local API will need to be restarted for changes to take effect*
-
-### Deployment
-
-`serverless deploy -v`
-
-### Delete Deployment
-
-`serverless remove`
-
-#### Debugging
-
-`serverless logs -f environmentList -t`
-
 ## Restful API documentation
 
 ### Environments
@@ -167,8 +139,12 @@ PATCH /environments/{id}
 
 #### Create
 
+`state` options: `startBuild`, `finishBuild`, `startDeploy`, `finishDeploy`
+
+> e.g. POST /environments/{id}/deployed/{token}/finishDeploy 
+
 ```
-POST /environments/{id}/deployed
+POST /environments/{id}/deployed/{token}/{state}
 
 {
 	"release": "v0.0.3"
@@ -177,17 +153,13 @@ POST /environments/{id}/deployed
 
 ```json
 {
-    "latestRelease": "v0.0.3",
-    "isPrivate": false,
-    "releases": 2,
+    "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
+    "enviromentId": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
+    "release": "v0.0.3",
+    "state": "startDeploy",
     "updatedAt": "2017-08-04T08:28:05.848Z",
     "createdAt": "2017-08-04T08:27:14.578Z",
-    "description": "This is a test server 2",
-    "id": "b82fcf20-78ee-11e7-9196-efded3e8d95c",
-    "tags": [
-        "test"
-    ],
-    "title": "Test server 2"
+    "token": {}
 }
 ```
 
@@ -222,5 +194,13 @@ POST /environments/{id}/tokens
 {
   "name": "aaaaa",
   "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
+}
+```
+
+```json
+{
+  "id": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
+  "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
+  "name": "aaaaa"
 }
 ```

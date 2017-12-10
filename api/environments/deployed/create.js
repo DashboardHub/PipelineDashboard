@@ -7,6 +7,7 @@ const deployedModel = require('../../models/deployed');
 module.exports.create = (event, context, callback) => {
     const id = event.path.id;
     const tokenId = event.path.tokenId;
+    const state = event.path.state;
     const data = event.body;
 
     environmentModel.model.get({ id }, function (err, environment) {
@@ -15,29 +16,47 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
+        if (!environment) { return callback(new Error('[404] Not found')); }
+
         let token = environment.tokens.filter((token) => token.id === tokenId);
 
         if (token.length !== 1) {
             return callback(new Error('[404] Not found'));
         }
 
-        // @TODO: add validation to model
-        // if (typeof data.release !== 'string' || !validator.isLength(data.release, {min: 3, max: 32})) {
-        //     return callback(new Error('[400] Validation Error: "release" is required and must be a "string" between 3 and 32'));
-        // }
-
         let item = {
             id: uuidv1(),
             environmentId: environment.id,
-            token: token[0],
-            release: data.release
+            release: data.release,
+            state: state,
+            token: token[0]
         };
         let deploy = new deployedModel.model(item);
-        deploy.save(function (err) {
-            if(err) { return console.log(err); }
 
-            environmentModel.model.update({ id }, { releases: environment.releases + 1, latestRelease: item }, function (err) {
-                if(err) { return console.log(err); }
+        deploy.save(function (err) {
+            if (err) {
+                console.log(err);
+                switch(err.name) {
+                    case 'ValidationError':
+                        return callback(new Error(`[400] ${err.message}`));
+                    default:
+                        return callback(new Error(`[500] ${err.message}`));
+                }
+            }
+
+            environmentModel.model.update({ id }, {
+                releases: environment.releases + 1,
+                latestRelease: item
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    switch(err.name) {
+                        case 'ValidationError':
+                            return callback(new Error(`[400] ${err.message}`));
+                        default:
+                            return callback(new Error(`[500] ${err.message}`));
+                    }
+                }
                 callback(null, item);
             });
         });

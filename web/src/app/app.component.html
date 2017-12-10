@@ -23,4 +23,13 @@
   </a>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<section>
+  <router-outlet></router-outlet>
+</section>
+
+<mat-toolbar class="footer text-md">
+  <a mat-button href="http://dashboardhub.io/" target="_blank">DashboardHub</a>
+  <a mat-button [routerLink]="['pricing']">Pricing</a>
+  <a mat-button href="https://github.com/DashboardHub" target="_blank">GitHub</a>
+  <a mat-button href="https://twitter.com/dashboardhub" target="_blank">Twitter</a>
+</mat-toolbar>

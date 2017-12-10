@@ -6,8 +6,7 @@ import { Environment } from "../environment";
 @Component({
   selector: 'app-environment-edit',
   templateUrl: './environment-edit.component.html',
-  styleUrls: ['./environment-edit.component.css'],
-  providers: [EnvironmentsService]
+  styleUrls: ['./environment-edit.component.css']
 })
 export class EnvironmentEditComponent implements OnInit {
   environment: Environment = new Environment('');
@@ -18,17 +17,7 @@ export class EnvironmentEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.environment.id = this.route.snapshot.params.id;
-    this.getEnvironment();
-  }
-
-  getEnvironment(): void {
-    this.environmentService
-      .getEnvironment(this.environment.id)
-      .subscribe(
-        data => this.environment = data,
-        error => console.log(error)
-      );
+    this.environment = this.route.snapshot.data['environment'];
   }
 
   save(): void {

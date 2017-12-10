@@ -8,6 +8,7 @@ import { AuthHttp } from "angular2-jwt";
 import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
+import { Summary } from "./summary/summary";
 
 @Injectable()
 export class EnvironmentsService {
@@ -17,7 +18,7 @@ export class EnvironmentsService {
   constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {
   }
 
-  getPublicEnvironments(): any { // @TODO: any
+  getPublicEnvironments(): Promise<List<Environment>> {
     return this.http.get(this.url + '/environments')
       .toPromise()
       .then(response => response.json() as List<Environment>)
@@ -31,7 +32,7 @@ export class EnvironmentsService {
       .catch(this.handleError);
   }
 
-  getEnvironments(): any { // @TODO: any
+  getEnvironments(): Observable<List<Environment>> {
     return this.authHttp.get(this.url + '/environments/list')
       .map(response => response.json() as List<Environment>)
   }
@@ -72,6 +73,16 @@ export class EnvironmentsService {
   deleteEnvironment(id: string): Observable<Environment> {
     return this.authHttp.delete(this.url + '/environments' + '/' + id)
       .map(response => response.json());
+  }
+
+  getPublicEnvironmentSummary(): Observable<Summary> {
+    return this.http.get(this.url + '/summary')
+      .map(response => response.json() as Summary)
+  }
+
+  getPrivateEnvironmentSummary(): Observable<Summary> {
+    return this.authHttp.get(this.url + '/environments/summary')
+      .map(response => response.json() as Summary)
   }
 
   private handleError(error: any): Promise<any> {

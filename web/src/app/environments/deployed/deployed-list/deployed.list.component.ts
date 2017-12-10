@@ -4,6 +4,7 @@ import { DeployedService } from './../deployed.service';
 import { List } from './../../list';
 import { ActivatedRoute } from "@angular/router";
 import { Deployed } from "../deployed";
+import { Release } from "../releases";
 
 @Component({
   selector: 'app-deployed-list',
@@ -14,6 +15,7 @@ import { Deployed } from "../deployed";
 export class DeployedListComponent implements OnInit {
 
   deployed: List<Deployed> = new List<Deployed>();
+  releases: List<Release> = new List<Release>();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,10 +29,10 @@ export class DeployedListComponent implements OnInit {
         this.deployed = deploys
       });
 
-    this.getTokens(this.route.snapshot.params.id);
+    this.getDeployed(this.route.snapshot.params.id);
   }
 
-  getTokens(environmentId: string): void {
+  getDeployed(environmentId: string): void {
     this.deployedService
       .getDeployed(environmentId);
   }

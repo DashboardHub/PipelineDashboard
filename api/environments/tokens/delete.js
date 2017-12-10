@@ -12,12 +12,13 @@ module.exports.delete = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (environment.owner !== event.principalId) {
+        if (!environment || environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
         let tokens = environment.tokens.filter((token) => token.id !== tokenId);
-        environmentModel.model.update({ id }, { tokens }, function (err) {
+
+        environmentModel.model.update({ id }, { tokens }, { allowEmptyArray:true }, function (err) {
             if(err) { return console.log(err); }
             callback(null, environment.tokens);
         });

@@ -12,7 +12,7 @@ module.exports.update = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (environment.owner !== event.principalId) {
+        if (!environment || environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
@@ -21,29 +21,6 @@ module.exports.update = (event, context, callback) => {
                 return callback(new Error('[400] Validation Error: "patch" must be an "array" of operations'));
             }
         }
-
-        // @TODO: add validation to model
-        // if (typeof data.title !== 'string' || !validator.isLength(data.title, {min: 3, max: 32})) {
-        //     return callback(new Error('[400] Validation Error: "title" is required and must be a "string" between 3 and 32'));
-        // }
-        //
-        // if (data.description) {
-        //     if (typeof data.description !== 'string' || !validator.isLength(data.description, {min: 3, max: 1024})) {
-        //         return callback(new Error('[400] Validation Error: "description" is optional but a "string" must be between 3 and 1024'));
-        //     }
-        // }
-        //
-        // if (data.tags) {
-        //     if (!Array.isArray(data.tags)) {
-        //         return callback(new Error('[400] Validation Error: "tags" is optional but must be an "array"'));
-        //     }
-        // }
-        //
-        // if (data.isPrivate) {
-        //     if (typeof data.isPrivate !== 'boolean') {
-        //         return callback(new Error('[400] Validation Error: "isPrivate" is optional but must be a "boolean"'));
-        //     }
-        // }
 
         data.map((item) => {
             if (item.op === undefined || item.path === undefined || item.value === undefined) {
@@ -60,7 +37,16 @@ module.exports.update = (event, context, callback) => {
         });
 
         environmentModel.model.update({ id }, { title: environment.title, description: environment.description, link: environment.link }, function (err) {
-            if(err) { return console.log(err); }
+            if (err) {
+                console.log(err);
+                switch(err.name) {
+                    case 'ValidationError':
+                        return callback(new Error(`[400] ${err.message}`));
+                    default:
+                        return callback(new Error(`[500] ${err.message}`));
+                }
+            }
+
             callback(null, environment);
         });
     });

@@ -13,14 +13,14 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatIconModule,
-  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule
+  MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule,
+  MatTabsModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CovalentLayoutModule } from '@covalent/core';
+import { CovalentCommonModule, CovalentMessageModule, CovalentNotificationsModule } from '@covalent/core';
 import { EnvironmentAddComponent } from './environments/environment-add/environment-add.component';
 import { EnvironmentViewComponent } from './environments/environment-view/environment-view.component';
 import { EnvironmentEditComponent } from './environments/environment-edit/environment-edit.component';
-import { MomentModule } from 'angular2-moment';
 import { AuthService } from "./auth/auth.service";
 import { CallbackComponent } from "./auth/callback.component";
 import { ProfileComponent } from "./auth/profile/profile.component";
@@ -32,6 +32,18 @@ import { TokenAddComponent } from "./environments/tokens/token-add/token-add.com
 import { TokenListComponent } from "./environments/tokens/token-list/token.list.component";
 import { TokenComponent } from "./environments/tokens/token.component";
 import { DeployedListComponent } from "./environments/deployed/deployed-list/deployed.list.component";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { EnvironmentsSummaryComponent } from "./environments/summary/environments-summary.component";
+import { EnvironmentsService } from "./environments/environments.service";
+import { EnvironmentsSummaryPublicResolver } from "./environments/summary/environments-summary.public.resolver";
+import { EnvironmentsSummaryPrivateResolver } from "./environments/summary/environments-summary.private.resolver";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { EnvironmentsResolver } from "./environments/environments.resolver";
+import { EnvironmentsListResolver } from "./environments/environment-list/environments-list.resolver";
+import { EnvironmentViewResolver } from "./environments/environment-view/environment-view.resolver";
+import { ProfileResolver } from "./auth/profile.resolver";
+import { DeployedSummaryComponent } from "./environments/deployed/deployed-summary/deployed-summary.component";
+import { PricingComponent } from "./pricing/pricing.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -41,17 +53,35 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 }
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: EnvironmentsComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: EnvironmentsComponent,
+    resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
+  },
+  { path: 'pricing', component: PricingComponent },
   { path: 'callback', component: CallbackComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
   {
     path: 'environments',
     canActivate: [AuthGuard],
+    resolve: { profile: ProfileResolver },
     children: [
-      { path: 'list', pathMatch: 'full', component: EnvironmentListComponent },
+      {
+        path: '',
+        pathMatch: 'full',
+        component: EnvironmentListComponent,
+        resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
+      },
+      {
+        path: 'list',
+        pathMatch: 'full',
+        component: EnvironmentListComponent,
+        resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
+      },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
-      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent },
-      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent }
+      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
   { path: '**', redirectTo: '' }
@@ -66,11 +96,14 @@ const routes: Routes = [
     EnvironmentViewComponent,
     EnvironmentEditComponent,
     EnvironmentListComponent,
+    EnvironmentsSummaryComponent,
     TokenComponent,
     TokenAddComponent,
     TokenListComponent,
     DeployedListComponent,
-    ProfileComponent
+    DeployedSummaryComponent,
+    ProfileComponent,
+    PricingComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -79,8 +112,9 @@ const routes: Routes = [
     ),
     BrowserModule,
     BrowserAnimationsModule,
-    CovalentLayoutModule,
+    CovalentMessageModule,
     HttpModule,
+    FlexLayoutModule,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
@@ -88,11 +122,15 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatTabsModule,
     FormsModule,
-    MomentModule
+    NgxChartsModule,
+    CovalentNotificationsModule,
+    CovalentCommonModule
   ],
   providers: [
     AuthService,
@@ -101,7 +139,14 @@ const routes: Routes = [
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
-    }
+    },
+    EnvironmentsService,
+    EnvironmentsResolver,
+    EnvironmentViewResolver,
+    EnvironmentsListResolver,
+    EnvironmentsSummaryPublicResolver,
+    EnvironmentsSummaryPrivateResolver,
+    ProfileResolver
   ],
   bootstrap: [AppComponent]
 })

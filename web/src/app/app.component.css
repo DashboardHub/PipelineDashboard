@@ -1,7 +1,12 @@
-.spread-spacer {
-  flex: 1 1 auto;
-}
-
 img.avatar {
   height: 1.8rem;
+}
+
+section {
+  margin: 0 20px;
+}
+
+.footer {
+  height: 2.5rem;
+  margin-top:3rem;
 }

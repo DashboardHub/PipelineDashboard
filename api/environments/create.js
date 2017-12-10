@@ -5,32 +5,9 @@ const environment = require('./../models/environment');
 
 module.exports.create = (event, context, callback) => {
     const data = event.body;
-
-    // @TODO: add validation to model
-    // if (typeof data.title !== 'string' || !validator.isLength(data.title, {min: 3, max: 32})) {
-    //     return callback(new Error('[400] Validation Error: "title" is required and must be a "string" between 3 and 32'));
-    // }
-    //
-    // if (data.description) {
-    //     if (typeof data.description !== 'string' || !validator.isLength(data.description, {min: 3, max: 1024})) {
-    //         return callback(new Error('[400] Validation Error: "description" is optional but a "string" must be between 3 and 1024'));
-    //     }
-    // }
-    //
-    // if (data.tags) {
-    //     if (!Array.isArray(data.tags)) {
-    //         return callback(new Error('[400] Validation Error: "tags" is optional but must be an "array"'));
-    //     }
-    // }
-    //
-    // if (data.isPrivate) {
-    //     if (typeof data.isPrivate !== 'boolean') {
-    //         return callback(new Error('[400] Validation Error: "isPrivate" is optional but must be a "boolean"'));
-    //     }
-    // }
-
+    const id = uuidv1();
     const params = {
-        id: uuidv1(),
+        id: id,
         owner: event.principalId,
         title: data.title,
         description: data.description,
@@ -39,12 +16,28 @@ module.exports.create = (event, context, callback) => {
         latestRelease: null,
         releases: 0,
         isPrivate: false,
-        tokens: []
+        tokens: [
+            {
+                id: uuidv1(),
+                environmentId: id,
+                name: 'Continuous Integration Server',
+                token: uuidv1()
+            }
+        ]
     };
 
     let environmentModel = new environment.model(params);
     environmentModel.save(function (err) {
-        if(err) { return console.log(err); }
+        if (err) {
+            console.log(err);
+            switch(err.name) {
+                case 'ValidationError':
+                    return callback(new Error(`[400] ${err.message}`));
+                default:
+                    return callback(new Error(`[500] ${err.message}`));
+            }
+        }
+
         callback(null, JSON.stringify(params));
     });
 };

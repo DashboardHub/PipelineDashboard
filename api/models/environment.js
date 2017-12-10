@@ -1,6 +1,7 @@
 'use strict';
 
 const client = require('./../dynamoose');
+const validator = require('validator');
 
 const config = require('../config');
 
@@ -19,17 +20,20 @@ const schema = new Schema({
         title: {
             type: String,
             required: true,
-            trim: true
+            trim: true,
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 3, max: 32}))
         },
         description: {
             type: String,
             default: '',
-            trim: true
+            trim: true,
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 3, max: 1024}))
         },
         link: {
             type: String,
             default: '',
-            trim: true
+            trim: true,
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 3, max: 1024}))
         },
         releases: {
             type: Number,
@@ -46,7 +50,13 @@ const schema = new Schema({
         },
         tokens: {
             type: Array,
-            default: []
+            default: [],
+            validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
+        },
+        tags: {
+            type: Array,
+            default: [],
+            validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
         }
     },
     {
