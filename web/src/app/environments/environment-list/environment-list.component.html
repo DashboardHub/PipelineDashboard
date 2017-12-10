@@ -5,7 +5,7 @@
 <section>
   <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-between">
     <mat-card fxFlex="24%" *ngFor="let environment of environments.list">
-      <mat-card-header>
+      <mat-card-header class="bgc-blue-600">
         <mat-card-title *ngIf="!profile || environment.owner !== profile.sub">{{ environment.title }}</mat-card-title>
         <mat-card-title *ngIf="profile && environment.owner === profile.sub" [routerLink]="['/environments', environment.id]" fxLayout="row" fxLayoutAlign="space-between">{{ environment.title }}</mat-card-title>
       </mat-card-header>

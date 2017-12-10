@@ -5,3 +5,8 @@ img.avatar {
 section {
   margin: 0 20px;
 }
+
+.footer {
+  height: 2.5rem;
+  margin-top:3rem;
+}
