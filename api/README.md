@@ -201,7 +201,6 @@ POST /environments/{id}/tokens
 {
   "id": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
   "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
-  "name": "aaaaa",
-  "token": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
+  "name": "aaaaa"
 }
 ```
