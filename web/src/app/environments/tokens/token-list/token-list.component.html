@@ -4,6 +4,31 @@
     <mat-icon mat-list-icon>vpn_key</mat-icon>
     <h4 mat-line>{{ token.name }}</h4>
     <p mat-line>{{ token.id }}</p>
-    <button mat-button (click)="deleteToken(token)"><mat-icon mat-list-icon>delete</mat-icon></button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="commands('startBuild', token)">
+        <mat-icon mat-list-icon>build</mat-icon>
+        <span>Start Build</span>
+      </button>
+      <button mat-menu-item (click)="commands('finishBuild', token)">
+        <mat-icon mat-list-icon>build</mat-icon>
+        <span>Finish Build</span>
+      </button>
+      <button mat-menu-item (click)="commands('startDeploy', token)">
+        <mat-icon mat-list-icon>build</mat-icon>
+        <span>Start Deploy</span>
+      </button>
+      <button mat-menu-item (click)="commands('finishDeploy', token)">
+        <mat-icon mat-list-icon>build</mat-icon>
+        <span>Finish Deploy</span>
+      </button>
+      <button mat-menu-item (click)="deleteToken(token)">
+        <mat-icon mat-list-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
   </mat-list-item>
 </mat-list>
