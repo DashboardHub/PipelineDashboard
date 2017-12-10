@@ -43,6 +43,7 @@ import { EnvironmentsListResolver } from "./environments/environment-list/enviro
 import { EnvironmentViewResolver } from "./environments/environment-view/environment-view.resolver";
 import { ProfileResolver } from "./auth/profile.resolver";
 import { DeployedSummaryComponent } from "./environments/deployed/deployed-summary/deployed-summary.component";
+import { PricingComponent } from "./pricing/pricing.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -58,6 +59,7 @@ const routes: Routes = [
     component: EnvironmentsComponent,
     resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
   },
+  { path: 'pricing', component: PricingComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
   {
@@ -100,7 +102,8 @@ const routes: Routes = [
     TokenListComponent,
     DeployedListComponent,
     DeployedSummaryComponent,
-    ProfileComponent
+    ProfileComponent,
+    PricingComponent
   ],
   imports: [
     RouterModule.forRoot(

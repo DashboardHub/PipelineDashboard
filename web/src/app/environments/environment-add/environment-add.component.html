@@ -6,11 +6,11 @@
 </mat-toolbar>
 
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>Add Environment</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form #form="ngForm" class="form-full">
+  <form #form="ngForm" class="form-full">
+    <mat-card-header>
+      <mat-card-title>Add Environment</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
       <div fxLayout="row" fxLayoutGap="10px">
         <mat-form-field fxFlex>
           <input matInput class="form-control" placeholder="Title"
@@ -63,13 +63,13 @@
           <mat-icon matTooltip="During ALPHA private is not allowed">info</mat-icon>
         </mat-checkbox>
       </div>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <a mat-button routerLink="/environments">CANCEL</a>
-    <button mat-button color="primary"
-            [disabled]="!form.valid"
-            (click)="add()">SAVE
-    </button>
-  </mat-card-actions>
+    </mat-card-content>
+    <mat-card-actions>
+      <a mat-button routerLink="/environments">CANCEL</a>
+      <button mat-button color="primary"
+              [disabled]="!form.valid"
+              (click)="add()">SAVE
+      </button>
+    </mat-card-actions>
+  </form>
 </mat-card>

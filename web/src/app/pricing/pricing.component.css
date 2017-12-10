@@ -1,0 +1,12 @@
+td-message {
+  margin-top: 2rem;
+}
+
+mat-card-title {
+  color: #fff;
+  padding:1rem;
+}
+
+mat-card-content {
+  height: 40rem;
+}
