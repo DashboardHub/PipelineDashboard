@@ -26,6 +26,7 @@
     "validator": "^9.1.2"
   },
   "devDependencies": {
+    "serverless": "^1.24.1",
     "serverless-domain-manager": "^1.1.24",
     "serverless-dynamodb-local": "^0.2.26",
     "serverless-offline": "^3.16.0"
