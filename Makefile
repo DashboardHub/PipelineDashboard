@@ -15,7 +15,7 @@ api: api.run
 ui: ui.run
 
 install.local: alexa.install api.install ui.install
-	(cd api; serverless dynamodb install)
+	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev)
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild alexa.install api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
@@ -30,10 +30,10 @@ alexa.install:
 	(cd alexa; npm install)
 
 alexa.deploy:
-	(cd alexa; serverless deploy -v)
+	(cd alexa; ./node_modules/serverless/bin/serverless deploy -v)
 
 alexa.remove:
-	(cd alexa; serverless remove -v)
+	(cd alexa; ./node_modules/serverless/bin/serverless remove -v)
 
 # API
 api.clean:
@@ -55,35 +55,38 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-deployed|pipelinedashboard-deployed-test|g' ./config.json)
 
 api.run: api.env.test
-	(cd api; serverless offline start)
+	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
 
 api.deploy: api.env
 	(cd api; mv dashboardhub.prod.pem dashboardhub.pem)
-	(cd api; serverless deploy -v --stage production)
+	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage production)
 
 api.deploy.test: api.env.test
 	(cd api; mv dashboardhub.test.pem dashboardhub.pem)
-	(cd api; serverless deploy -v --stage test)
+	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage test)
 
 api.remove:
-	(cd api; serverless remove -v)
+	(cd api; ./node_modules/serverless/bin/serverless remove -v --stage production)
+
+api.remove.test:
+	(cd api; ./node_modules/serverless/bin/serverless remove -v --stage test)
 
 # UI
 ui.install:
 	(cd web; npm install)
 
 ui.run:
-	(cd web; ng serve)
+	(cd web; ./node_modules/@angular/cli/bin/ng serve)
 
 ui.deploy: ui.version ui.build ui.sync
 
 ui.deploy.test: ui.version ui.build.test ui.sync.test
 
 ui.build:
-	(cd web; ng build --prod --aot --env=prod)
+	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --env=prod)
 
 ui.build.test:
-	(cd web; ng build --prod --aot --env=test)
+	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --env=test)
 
 ui.version:
 	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
