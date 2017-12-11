@@ -8,8 +8,6 @@ branches:
   - master
 
 before_install:
-  - npm install -g serverless
-  - npm install -g @angular/cli
   - sudo apt-get install python3
   - sudo pip install awscli
   - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar)

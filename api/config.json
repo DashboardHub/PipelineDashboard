@@ -1,4 +1,9 @@
 {
+  "domain": {
+    "dev": "localhost:3000",
+    "test": "api-pipeline-test.dashboardhub.io",
+    "production": "api-pipeline.dashboardhub.io"
+  },
   "dynamodb": {
     "environments": {
       "table": "pipelinedashboard-environments"
