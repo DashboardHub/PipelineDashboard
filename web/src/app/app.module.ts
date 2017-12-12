@@ -14,7 +14,7 @@ import {
   MatCheckboxModule,
   MatIconModule,
   MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule,
-  MatTabsModule, MatMenuModule
+  MatTabsModule, MatMenuModule, MatFormFieldModule, MatRadioModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -131,6 +131,8 @@ const routes: Routes = [
     MatToolbarModule,
     MatTooltipModule,
     MatTabsModule,
+    MatFormFieldModule,
+    MatRadioModule,
     FormsModule,
     NgxChartsModule,
     CovalentNotificationsModule,
