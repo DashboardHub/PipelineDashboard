@@ -9,19 +9,19 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="commands('startBuild', token)">
+      <button mat-menu-item (click)="commands('startBuild', token)" *ngIf="environment.type === 'build' || environment.type === 'build-deploy'">
         <mat-icon mat-list-icon>build</mat-icon>
         <span>Start Build</span>
       </button>
-      <button mat-menu-item (click)="commands('finishBuild', token)">
+      <button mat-menu-item (click)="commands('finishBuild', token)" *ngIf="environment.type === 'build' || environment.type === 'build-deploy'">
         <mat-icon mat-list-icon>build</mat-icon>
         <span>Finish Build</span>
       </button>
-      <button mat-menu-item (click)="commands('startDeploy', token)">
+      <button mat-menu-item (click)="commands('startDeploy', token)" *ngIf="environment.type === 'deploy' || environment.type === 'build-deploy'">
         <mat-icon mat-list-icon>build</mat-icon>
         <span>Start Deploy</span>
       </button>
-      <button mat-menu-item (click)="commands('finishDeploy', token)">
+      <button mat-menu-item (click)="commands('finishDeploy', token)" *ngIf="environment.type === 'deploy' || environment.type === 'build-deploy'">
         <mat-icon mat-list-icon>build</mat-icon>
         <span>Finish Deploy</span>
       </button>
