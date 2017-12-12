@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  api: 'https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test',
+  api: 'https://api-pipeline-test.dashboardhub.io',
   version: 'x.x.x',
 
   auth: {
