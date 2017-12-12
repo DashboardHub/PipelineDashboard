@@ -57,6 +57,12 @@ const schema = new Schema({
             type: Array,
             default: [],
             validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
+        },
+        type: {
+            type: String,
+            required: true,
+            trim: true,
+            validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'build', 'deploy', 'build-deploy' ]))
         }
     },
     {

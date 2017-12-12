@@ -297,8 +297,6 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
-    migration:
-      dir: offline/migrations
   customDomain:
     certificateName: dashboardhub.io
     domainName: ${file(./config.json):domain.${opt:stage}}

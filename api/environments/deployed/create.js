@@ -24,6 +24,24 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
+        switch (environment.type) {
+            case 'build':
+                if (!['startBuild', 'finishBuild'].includes(state)) {
+                    return callback(new Error(`[400] Deploy state "${state}" not allow in this Environment type "${environment.type}"`));
+                }
+                break;
+            case 'deploy':
+                if (!['startDeploy', 'finishDeploy'].includes(state)) {
+                    return callback(new Error(`[400] Deploy state "${state}" not allow in this Environment type "${environment.type}"`));
+                }
+                break;
+            case 'build-deploy':
+                if (!['startBuild', 'finishBuild', 'startDeploy', 'finishDeploy'].includes(state)) {
+                    return callback(new Error(`[400] Deploy state "${state}" not allow in this Environment type "${environment.type}"`));
+                }
+                break;
+        }
+
         let item = {
             id: uuidv1(),
             environmentId: environment.id,

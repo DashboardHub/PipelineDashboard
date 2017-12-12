@@ -11,6 +11,16 @@
       <mat-card-title>Add Environment</mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <mat-radio-group #type="ngModel" name="type" [(ngModel)]="environment.type" [required]="true">
+        <mat-radio-button value="build">Build Only</mat-radio-button>
+        <mat-radio-button value="deploy">Deploy Only</mat-radio-button>
+        <mat-radio-button value="build-deploy">Build and Deploy</mat-radio-button>
+        <div *ngIf="type.errors && !form.valid && form.touched">
+          <mat-error *ngIf="type.errors.required">
+            Type is required
+          </mat-error>
+        </div>
+      </mat-radio-group>
       <div fxLayout="row" fxLayoutGap="10px">
         <mat-form-field fxFlex>
           <input matInput class="form-control" placeholder="Title"
