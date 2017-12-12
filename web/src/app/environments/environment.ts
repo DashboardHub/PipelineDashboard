@@ -3,6 +3,7 @@ import { Deployed } from "./deployed/deployed";
 export class Environment {
   id: string;
   owner: string;
+  type: string;
   title: string;
   description: string;
   link: string;

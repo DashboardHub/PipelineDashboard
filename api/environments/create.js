@@ -8,6 +8,7 @@ module.exports.create = (event, context, callback) => {
     const id = uuidv1();
     const params = {
         id: id,
+        type: data.type,
         owner: event.principalId,
         title: data.title,
         description: data.description,

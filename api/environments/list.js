@@ -43,25 +43,55 @@ module.exports.private = (event, context, callback) => {
 
 let calculateProgress = (environments) => {
     return environments.map((environment) => {
-        if (environment.latestRelease) {
-            switch (environment.latestRelease.state) {
-                case 'startBuild':
-                    environment.progress = 25;
-                    break;
-                case 'finishBuild':
-                    environment.progress = 50;
-                    break;
-                case 'startDeploy':
-                    environment.progress = 75;
-                    break;
-                case 'finishDeploy':
-                    environment.progress = 100;
-                    break;
-                default:
-                    environment.progress = 0;
+            if (environment.latestRelease) {
+                switch (environment.type) {
+                    case 'build':
+                        switch (environment.latestRelease.state) {
+                            case 'startBuild':
+                                environment.progress = 50;
+                                break;
+                            case 'finishBuild':
+                                environment.progress = 100;
+                                break;
+                            default:
+                                environment.progress = 0;
+                        }
+                        break;
+                    case 'deploy':
+                        switch (environment.latestRelease.state) {
+                            case 'startDeploy':
+                                environment.progress = 50;
+                                break;
+                            case 'finishDeploy':
+                                environment.progress = 100;
+                                break;
+                            default:
+                                environment.progress = 0;
+                        }
+                        break;
+                    case 'build-deploy':
+                    default:
+                        switch (environment.latestRelease.state) {
+                            case 'startBuild':
+                                environment.progress = 25;
+                                break;
+                            case 'finishBuild':
+                                environment.progress = 50;
+                                break;
+                            case 'startDeploy':
+                                environment.progress = 75;
+                                break;
+                            case 'finishDeploy':
+                                environment.progress = 100;
+                                break;
+                            default:
+                                environment.progress = 0;
+                        }
+                        break;
+                }
             }
-        }
 
-        return environment;
-    });
+            return environment;
+        }
+    );
 };

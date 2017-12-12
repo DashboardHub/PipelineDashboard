@@ -15,8 +15,21 @@
 </mat-toolbar>
 
 <h2>{{ environment.title }}</h2>
-<p>{{ environment.description }}</p>
-<a *ngIf="environment.link">{{ environment.link }}</a>
+
+<mat-list>
+  <mat-list-item>
+    <mat-icon mat-list-icon>list</mat-icon>
+    <h4 mat-line><span class="text-upper">{{ environment.type }}</span> workflow</h4>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon mat-list-icon>description</mat-icon>
+    <h4 mat-line>{{ environment.description || '-' }}</h4>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon mat-list-icon>link</mat-icon>
+    <h4 mat-line>{{ environment.link || '-' }}</h4>
+  </mat-list-item>
+</mat-list>
 
 <mat-tab-group>
   <mat-tab label="Releases">

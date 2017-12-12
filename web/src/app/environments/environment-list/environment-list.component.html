@@ -10,6 +10,7 @@
         <mat-card-title *ngIf="profile && environment.owner === profile.sub" [routerLink]="['/environments', environment.id]" fxLayout="row" fxLayoutAlign="space-between">{{ environment.title }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+        <p mat-line><mat-icon>list</mat-icon>{{ environment.type }}</p>
         <p mat-line><mat-icon>description</mat-icon>{{ environment.description || '-' }}</p>
         <p mat-line><mat-icon>link</mat-icon>{{ environment.link || '-' }}</p>
       </mat-card-content>
