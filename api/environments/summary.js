@@ -42,6 +42,13 @@ module.exports.private = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the items.'));
         }
 
+        if (environments.length === 0) {
+            return callback(null, {
+                environments: 0,
+                deploys: 0
+            });
+        }
+
         deployedModel.model.scan('environmentId')
             .in(environments
                 .map((environment) => environment.id))
