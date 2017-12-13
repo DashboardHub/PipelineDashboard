@@ -10,6 +10,9 @@
     <mat-card-header>
       <mat-card-title>Add Environment</mat-card-title>
     </mat-card-header>
+    <td-message label="Info"
+                sublabel="The environment type is used for the deployment workflow. Build only will have two steps, 'start' and 'finish' build. Deploy only will only have two steps, 'start' and 'finish' deploy. Build and deploy will have all four steps."
+                color="accent" icon="info"></td-message>
     <mat-card-content>
       <mat-radio-group #type="ngModel" name="type" [(ngModel)]="environment.type" [required]="true">
         <mat-radio-button value="build">Build Only</mat-radio-button>

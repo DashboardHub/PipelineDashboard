@@ -25,6 +25,8 @@ Open 2 terminals and run each of these commands in its own terminal:
 
 - 3. UI `make ui`
 
+Then visit `http://localhost:4200/`
+
 ## SUB PROJECTS
 
 * API, read the [API](api/README.md) docs 
