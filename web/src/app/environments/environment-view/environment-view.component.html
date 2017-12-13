@@ -31,6 +31,9 @@
   </mat-list-item>
 </mat-list>
 
+<td-message *ngIf="environment.latestRelease" label="Latest release is {{ environment.latestRelease.release }} in {{ environment.latestRelease.state }} state"
+            sublabel="By {{ environment.latestRelease.token.name }}" icon="info" color="accent" [opened]="true"></td-message>
+
 <mat-tab-group>
   <mat-tab label="Releases">
     <app-deployed-summary></app-deployed-summary>
