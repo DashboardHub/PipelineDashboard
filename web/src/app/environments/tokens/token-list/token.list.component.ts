@@ -6,7 +6,7 @@ import { Token } from './../token';
 import { ActivatedRoute } from "@angular/router";
 import { TdDialogService } from "@covalent/core";
 
-import { environment } from './../../../../environments/environment';
+import { environment as config } from './../../../../environments/environment';
 import { Environment } from "../../environment";
 
 @Component({
@@ -49,7 +49,7 @@ export class TokenListComponent implements OnInit {
 
   commands(state, token): void {
     this.dialogService.openAlert({
-      message: `curl -XPOST -H "Content-Type: application/json" -d '{"release":"VERSION"}' ${environment.api}/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${token.id}/${state}`,
+      message: `curl -XPOST -H "Content-Type: application/json" -d '{"release":"VERSION"}' ${config.api}/environments/${this.environment.id}/deployed/${token.id}/${state}`,
       viewContainerRef: this.viewContainerRef, //OPTIONAL
       title: `${state} command for "${token.name}" token`, //OPTIONAL, hides if not provided
       closeButton: 'Close', //OPTIONAL, defaults to 'CLOSE'
