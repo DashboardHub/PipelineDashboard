@@ -39,4 +39,6 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 
 ---
 
-![Screenshot](https://user-images.githubusercontent.com/624760/29202930-8cd1823a-7e64-11e7-88ba-15739a8f03d2.png)
+![Screenshot](https://user-images.githubusercontent.com/624760/33978327-0ee1e370-e097-11e7-924c-670f76b562d3.png)
+
+![Screenshot](https://user-images.githubusercontent.com/624760/33978333-160b9bf0-e097-11e7-8ef0-efeb9751f019.png)
