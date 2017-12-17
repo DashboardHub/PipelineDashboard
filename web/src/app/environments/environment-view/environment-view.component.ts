@@ -21,6 +21,11 @@ export class EnvironmentViewComponent implements OnInit {
 
   ngOnInit() {
     this.environment = this.route.snapshot.data['environment'];
+
+    this.environmentService.subscribeEnvironment()
+      .subscribe(environment => {
+        this.environment = environment
+      });
   }
 
   deleteEnvironment(): void {

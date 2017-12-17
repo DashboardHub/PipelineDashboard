@@ -8,6 +8,8 @@ import { TdDialogService } from "@covalent/core";
 
 import { environment as config } from './../../../../environments/environment';
 import { Environment } from "../../environment";
+import { DeployedService } from "../../deployed/deployed.service";
+import { State } from "../../deployed/state";
 
 @Component({
   selector: 'app-token-list',
@@ -16,6 +18,7 @@ import { Environment } from "../../environment";
 })
 export class TokenListComponent implements OnInit {
 
+  states: Array<State>;
   tokens: List<Token> = new List<Token>();
   environment: Environment;
 
@@ -23,7 +26,8 @@ export class TokenListComponent implements OnInit {
     private route: ActivatedRoute,
     private dialogService: TdDialogService,
     private viewContainerRef: ViewContainerRef,
-    private tokenService: TokensService
+    private tokenService: TokensService,
+    private deployedService: DeployedService
   ) {
   }
 
@@ -35,6 +39,7 @@ export class TokenListComponent implements OnInit {
 
     this.getTokens(this.route.snapshot.params.id);
     this.environment = this.route.snapshot.data['environment'];
+    this.states = this.deployedService.states;
   }
 
   getTokens(environmentId: string): void {

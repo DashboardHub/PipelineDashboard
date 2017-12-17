@@ -9,8 +9,7 @@ import { Release } from "../releases";
 @Component({
   selector: 'app-deployed-summary',
   templateUrl: './deployed-summary.component.html',
-  styleUrls: ['./deployed-summary.component.css'],
-  providers: [DeployedService]
+  styleUrls: ['./deployed-summary.component.css']
 })
 export class DeployedSummaryComponent implements OnInit {
 
