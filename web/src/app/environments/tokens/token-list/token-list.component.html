@@ -1,5 +1,6 @@
 <mat-list>
-  <h3 mat-subheader>There are {{ tokens.total }} tokens. Tokens are used to give push access to deployed versions. If you think a token has been compromised, delete it and create a new one.</h3>
+  <h3 mat-subheader>There are {{ tokens.total }} tokens. Tokens are used to give push access to deployed versions. If
+    you think a token has been compromised, delete it and create a new one</h3>
   <mat-list-item *ngFor="let token of tokens.list">
     <mat-icon mat-list-icon>vpn_key</mat-icon>
     <h4 mat-line>{{ token.name }}</h4>
@@ -9,24 +10,14 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="commands('startBuild', token)" *ngIf="environment.type === 'build' || environment.type === 'build-deploy'">
-        <mat-icon mat-list-icon>build</mat-icon>
-        <span>Start Build</span>
-      </button>
-      <button mat-menu-item (click)="commands('finishBuild', token)" *ngIf="environment.type === 'build' || environment.type === 'build-deploy'">
-        <mat-icon mat-list-icon>build</mat-icon>
-        <span>Finish Build</span>
-      </button>
-      <button mat-menu-item (click)="commands('startDeploy', token)" *ngIf="environment.type === 'deploy' || environment.type === 'build-deploy'">
-        <mat-icon mat-list-icon>build</mat-icon>
-        <span>Start Deploy</span>
-      </button>
-      <button mat-menu-item (click)="commands('finishDeploy', token)" *ngIf="environment.type === 'deploy' || environment.type === 'build-deploy'">
-        <mat-icon mat-list-icon>build</mat-icon>
-        <span>Finish Deploy</span>
-      </button>
-      <button mat-menu-item (click)="deleteToken(token)">
-        <mat-icon mat-list-icon>delete</mat-icon>
+      <span *ngFor="let state of states">
+        <button mat-menu-item (click)="commands(state.value, token)" *ngIf="state.types.includes(environment.type)">
+          <mat-icon mat-list-icon>build</mat-icon>
+          <span>{{ state.name }}</span>
+        </button>
+      </span>
+      <button mat-menu-item (click)="deleteToken(token)" class="tc-red-400">
+        <mat-icon mat-list-icon class="tc-red-400">delete</mat-icon>
         <span>Delete</span>
       </button>
     </mat-menu>

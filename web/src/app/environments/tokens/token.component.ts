@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { TokensService } from "./tokens.service";
 
 @Component({
   selector: 'app-token',
-  templateUrl: './token.component.html',
-  providers: [TokensService]
+  templateUrl: './token.component.html'
 })
 export class TokenComponent {
 
