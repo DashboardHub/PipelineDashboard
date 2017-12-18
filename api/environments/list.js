@@ -4,7 +4,8 @@ const environment = require('./../models/environment');
 
 module.exports.public = (event, context, callback) => {
 
-    environment.model.scan('isPrivate').eq(false).exec(function (err, results) {
+    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'updatedAt'];
+    environment.model.scan('isPrivate').eq(false).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
             return callback(new Error('Couldn\'t fetch the items.'));
@@ -27,7 +28,8 @@ module.exports.public = (event, context, callback) => {
 
 module.exports.private = (event, context, callback) => {
 
-    environment.model.scan('owner').eq(event.principalId).exec(function (err, results) {
+    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'updatedAt'];
+    environment.model.scan('owner').eq(event.principalId).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
             return callback(new Error('Couldn\'t fetch the items.'));
