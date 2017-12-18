@@ -7,16 +7,14 @@ import {MatSnackBar} from '@angular/material';
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private auth: AuthService, public router: Router, public snackBar: MatSnackBar) { }
+  constructor(private auth: AuthService, public router: Router, private snackBar: MatSnackBar) { }
 
   canActivate() {
     if (this.auth.isAuthenticated()) {
       return true;
     }
 
-    this.snackBar.open('Permission Denied', '', {
-      duration: 2000,
-    });
+    this.snackBar.open('Permission Denied', '', { duration: 2000 });
 
     this.router.navigate(['/']);
   }
