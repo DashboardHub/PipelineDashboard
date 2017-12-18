@@ -11,6 +11,7 @@ import { Deployed } from "./deployed";
 import { Release } from "./releases";
 import { State } from "./state";
 import { EnvironmentsService } from "../environments.service";
+import { MatSnackBar } from "@angular/material";
 
 @Injectable()
 export class DeployedService {
@@ -26,7 +27,11 @@ export class DeployedService {
   private deployed: Subject<List<Deployed>> = new Subject<List<Deployed>>();
   private releases: Subject<List<Release>> = new Subject<List<Release>>();
 
-  constructor(private authHttp: AuthHttp, private environmentService: EnvironmentsService) {
+  constructor(
+    private authHttp: AuthHttp,
+    private environmentService: EnvironmentsService,
+    private snackBar: MatSnackBar
+  ) {
   }
 
   getDeployed(environmentId: string): void {
@@ -51,7 +56,10 @@ export class DeployedService {
     this.authHttp.post(`${this.url}/environments/${deployed.environmentId}/deployed/${deployed.token.id}/${deployed.state}`, deployed)
       .map(response => response.json())
       .subscribe(
-        data => this.getDeployedAndReleases(deployed.environmentId),
+        data => {
+          this.getDeployedAndReleases(deployed.environmentId);
+          this.snackBar.open(`Release ${deployed.release} added`, '', { duration: 2000 });
+        },
         error => console.log(error)
       );
   }
