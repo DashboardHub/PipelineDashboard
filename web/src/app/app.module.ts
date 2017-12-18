@@ -14,7 +14,7 @@ import {
   MatCheckboxModule,
   MatIconModule,
   MatListModule, MatButtonModule, MatInputModule, MatTooltipModule, MatSnackBarModule, MatProgressBarModule,
-  MatTabsModule, MatMenuModule, MatFormFieldModule, MatRadioModule
+  MatTabsModule, MatMenuModule, MatFormFieldModule, MatRadioModule, MatSelectModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -47,6 +47,9 @@ import { EnvironmentViewResolver } from "./environments/environment-view/environ
 import { ProfileResolver } from "./auth/profile.resolver";
 import { DeployedSummaryComponent } from "./environments/deployed/deployed-summary/deployed-summary.component";
 import { PricingComponent } from "./pricing/pricing.component";
+import { DeployedAddComponent } from "./environments/deployed/deployed-add/deployed-add.component";
+import { TokensService } from "./environments/tokens/tokens.service";
+import { DeployedService } from "./environments/deployed/deployed.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -105,6 +108,7 @@ const routes: Routes = [
     TokenListComponent,
     DeployedListComponent,
     DeployedSummaryComponent,
+    DeployedAddComponent,
     ProfileComponent,
     PricingComponent
   ],
@@ -127,6 +131,7 @@ const routes: Routes = [
     MatListModule,
     MatMenuModule,
     MatProgressBarModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
@@ -147,13 +152,15 @@ const routes: Routes = [
       useFactory: authHttpServiceFactory,
       deps: [Http, RequestOptions]
     },
+    DeployedService,
     EnvironmentsService,
     EnvironmentsResolver,
     EnvironmentViewResolver,
     EnvironmentsListResolver,
     EnvironmentsSummaryPublicResolver,
     EnvironmentsSummaryPrivateResolver,
-    ProfileResolver
+    ProfileResolver,
+    TokensService
   ],
   bootstrap: [AppComponent]
 })
