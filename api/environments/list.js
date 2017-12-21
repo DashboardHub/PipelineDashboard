@@ -4,7 +4,7 @@ const environment = require('./../models/environment');
 
 module.exports.public = (event, context, callback) => {
 
-    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'updatedAt'];
+    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'createdAt', 'updatedAt'];
     environment.model.scan('isPrivate').eq(false).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
@@ -28,7 +28,7 @@ module.exports.public = (event, context, callback) => {
 
 module.exports.private = (event, context, callback) => {
 
-    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'updatedAt'];
+    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'createdAt', 'updatedAt'];
     environment.model.scan('owner').eq(event.principalId).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
@@ -53,6 +53,7 @@ let calculateProgress = (environments) => {
                                 environment.progress = 50;
                                 break;
                             case 'finishBuild':
+                            case 'failBuild':
                                 environment.progress = 100;
                                 break;
                             default:
@@ -65,6 +66,7 @@ let calculateProgress = (environments) => {
                                 environment.progress = 50;
                                 break;
                             case 'finishDeploy':
+                            case 'failDeploy':
                                 environment.progress = 100;
                                 break;
                             default:
@@ -84,6 +86,8 @@ let calculateProgress = (environments) => {
                                 environment.progress = 75;
                                 break;
                             case 'finishDeploy':
+                            case 'failBuild':
+                            case 'failDeploy':
                                 environment.progress = 100;
                                 break;
                             default:

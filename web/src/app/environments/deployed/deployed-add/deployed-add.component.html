@@ -27,7 +27,7 @@
     <mat-form-field fxFlex="20%">
       <mat-select placeholder="State" name="state"  [(ngModel)]="deployed.state">
         <span *ngFor="let state of states">
-          <mat-option [disabled]="!state.types.includes(environment.type)" [value]="state.value">
+          <mat-option [class.tc-red-400]="state.value === 'failBuild' || state.value === 'failDeploy'" [disabled]="!state.types.includes(environment.type)" [value]="state.value">
             {{ state.name }}
           </mat-option>
         </span>

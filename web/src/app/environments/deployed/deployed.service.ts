@@ -20,8 +20,10 @@ export class DeployedService {
   states: Array<State> = [
     { name: 'Start Build', value: 'startBuild', types: ['build', 'build-deploy'] },
     { name: 'Finish Build', value: 'finishBuild', types: ['build', 'build-deploy'] },
+    { name: 'Build Failed', value: 'failBuild', types: ['build', 'build-deploy'] },
     { name: 'Start Deploy', value: 'startDeploy', types: ['deploy', 'build-deploy'] },
-    { name: 'Finish Deploy', value: 'finishDeploy', types: ['deploy', 'build-deploy'] }
+    { name: 'Finish Deploy', value: 'finishDeploy', types: ['deploy', 'build-deploy'] },
+    { name: 'Deploy Failed', value: 'failDeploy', types: ['deploy', 'build-deploy'] }
   ];
 
   private deployed: Subject<List<Deployed>> = new Subject<List<Deployed>>();
