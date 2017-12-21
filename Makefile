@@ -92,7 +92,7 @@ ui.version:
 	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
 	(cd web/src/environments; sed -i 's/x\.x\.x/0.7.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.test.ts)
 
-ui.sync:
+ui.sync: guard-AWS_CLOUDFRONT_ID
 	(cd web; aws s3 sync dist s3://pipeline.dashboardhub.io --delete --region eu-west-2)
 	aws cloudfront create-invalidation --distribution-id ${AWS_CLOUDFRONT_ID} --paths /\*
 
