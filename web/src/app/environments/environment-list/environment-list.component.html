@@ -1,6 +1,6 @@
 <app-environments-summary></app-environments-summary>
 
-<td-message label="Currently in ALPHA" sublabel="Feedback welcome" icon="warning" color="primary"
+<td-message label="Currently in ALPHA" sublabel="Feedback welcome" icon="warning" color="accent"
             [opened]="true"></td-message>
 
 <section>
@@ -8,11 +8,13 @@
     <mat-card fxFlex="24%" *ngFor="let environment of environments.list">
       <mat-card-header class="bgc-blue-600">
         <mat-card-title>
-          <a mat-button [disabled]="true" *ngIf="!profile || environment.owner !== profile.sub">{{ environment.title
-            }}</a>
+          <a mat-button [disabled]="true" *ngIf="!profile || environment.owner !== profile.sub">
+            {{ environment.title }}
+          </a>
           <a mat-button *ngIf="profile && environment.owner === profile.sub"
-             [routerLink]="['/environments', environment.id]" fxLayout="row" fxLayoutAlign="space-between">{{
-            environment.title }}</a>
+             [routerLink]="['/environments', environment.id]" fxLayout="row" fxLayoutAlign="space-between">
+            {{ environment.title }}
+          </a>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>
@@ -32,18 +34,26 @@
       <mat-card-actions>
         <td-message *ngIf="!environment.latestRelease" label="-.-" sublabel="No build / deploy" icon="info"
                     color="accent" [opened]="true"></td-message>
+
+
         <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'startBuild'"
                     label="{{ environment.latestRelease.release }}" sublabel="Started to build code" icon="info"
                     color="accent" [opened]="true"></td-message>
         <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'finishBuild'"
                     label="{{ environment.latestRelease.release }}" sublabel="Finished building code" icon="info"
                     color="accent" [opened]="true"></td-message>
+        <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'failBuild'"
+                    label="{{ environment.latestRelease.release }}" sublabel="Build failed" icon="error"
+                    color="primary" [opened]="true"></td-message>
         <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'startDeploy'"
                     label="{{ environment.latestRelease.release }}" sublabel="Started to deploy" icon="info"
                     color="accent" [opened]="true"></td-message>
         <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'finishDeploy'"
                     label="{{ environment.latestRelease.release }}" sublabel="Finished deploying" icon="info"
                     color="accent" [opened]="true"></td-message>
+        <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'failDeploy'"
+                    label="{{ environment.latestRelease.release }}" sublabel="Deploy failed" icon="error"
+                    color="primary" [opened]="true"></td-message>
         <p>
           <mat-progress-bar mode="determinate" value="{{ environment.progress }}"></mat-progress-bar>
         </p>

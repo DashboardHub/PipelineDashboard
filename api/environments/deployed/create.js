@@ -26,17 +26,17 @@ module.exports.create = (event, context, callback) => {
 
         switch (environment.type) {
             case 'build':
-                if (!['startBuild', 'finishBuild'].includes(state)) {
+                if (!['startBuild', 'finishBuild', 'failBuild'].includes(state)) {
                     return callback(new Error(`[400] Deploy state "${state}" not allow in this Environment type "${environment.type}"`));
                 }
                 break;
             case 'deploy':
-                if (!['startDeploy', 'finishDeploy'].includes(state)) {
+                if (!['startDeploy', 'finishDeploy', 'failDeploy'].includes(state)) {
                     return callback(new Error(`[400] Deploy state "${state}" not allow in this Environment type "${environment.type}"`));
                 }
                 break;
             case 'build-deploy':
-                if (!['startBuild', 'finishBuild', 'startDeploy', 'finishDeploy'].includes(state)) {
+                if (!['startBuild', 'finishBuild', 'failBuild', 'startDeploy', 'finishDeploy', 'failDeploy'].includes(state)) {
                     return callback(new Error(`[400] Deploy state "${state}" not allow in this Environment type "${environment.type}"`));
                 }
                 break;

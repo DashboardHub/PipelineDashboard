@@ -37,13 +37,15 @@ module.exports.list = (event, context, callback) => {
                 releases.push({
                     version: release.version,
                     token: release.token,
+                    failDeploy: release.failDeploy || null,
                     finishDeploy: release.finishDeploy || null,
                     startDeploy: release.startDeploy || null,
+                    failBuild: release.failBuild || null,
                     finishBuild: release.finishBuild || null,
                     startBuild: release.startBuild || null,
                     latest: {
-                        createdAt: release.finishDeploy || release.startDeploy || release.finishBuild || release.startBuild,
-                        state: release.finishDeploy ? 'finishDeploy' : release.startDeploy ? 'startDeploy' : release.finishBuild ? 'finishBuild' : release.startBuild ? 'startBuild' : null
+                        createdAt: release.failDeploy || release.failBuild || release.finishDeploy || release.startDeploy || release.finishBuild || release.startBuild,
+                        state: release.failDeploy ? 'failDeploy' : release.failBuild ? 'failBuild' : release.finishDeploy ? 'finishDeploy' : release.startDeploy ? 'startDeploy' : release.finishBuild ? 'finishBuild' : release.startBuild ? 'startBuild' : null
                     }
                 });
             });

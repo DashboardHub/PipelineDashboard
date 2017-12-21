@@ -27,7 +27,7 @@ const schema = new Schema({
             type: String,
             required: true,
             trim: true,
-            validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'startBuild', 'finishBuild', 'startDeploy', 'finishDeploy' ]))
+            validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'startBuild', 'finishBuild', 'startDeploy', 'finishDeploy', 'failBuild', 'failDeploy' ]))
         },
         token: {
             type: Object,
