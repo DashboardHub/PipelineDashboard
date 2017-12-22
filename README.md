@@ -19,13 +19,17 @@ Using `make` to build and run the project(s):
 
 Open 2 terminals and run each of these commands in its own terminal:
 
-- 2. API `AUTH0_CLIENT_ID=XXX AUTH0_CLIENT_SECRET=YYY NODE_ENV=development make api`
+- 2. API `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make api`
 
 *NOTE: You will need a `pem` file for local development*
 
 - 3. UI `make ui`
 
 Then visit `http://localhost:4200/`
+
+## Additional useful commands
+
+- `make api.clean` resets the config files (do not use if you have made manual changes to the `api/config.json file)
 
 ## SUB PROJECTS
 
