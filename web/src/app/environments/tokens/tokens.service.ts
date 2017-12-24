@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import { MatSnackBar } from "@angular/material";
 
 @Injectable()
 export class TokensService {
@@ -16,7 +17,7 @@ export class TokensService {
 
   private subject: Subject<List<Token>> = new Subject<List<Token>>();
 
-  constructor(private authHttp: AuthHttp) {
+  constructor(private authHttp: AuthHttp, private snackBar: MatSnackBar) {
   }
 
   getTokens(environmentId: string): void {
@@ -32,7 +33,10 @@ export class TokensService {
     this.authHttp.post(`${this.url}/environments/${token.environmentId}/tokens`, token)
       .map(response => response.json() as Token)
       .subscribe(
-        data => this.getTokens(token.environmentId),
+        data => {
+          this.getTokens(token.environmentId);
+          this.snackBar.open(`Token ${token.name} added`, '', { duration: 2000 });
+        },
         error => console.log(error)
       );
   }
@@ -40,7 +44,10 @@ export class TokensService {
   deleteToken(token: Token): void {
     this.authHttp.delete(`${this.url}/environments/${token.environmentId}/tokens/${token.id}`)
       .subscribe(
-        data => this.getTokens(token.environmentId),
+        data => {
+          this.getTokens(token.environmentId);
+          this.snackBar.open(`Token ${token.name} removed`, '', { duration: 2000 });
+        },
         error => console.log(error)
       );
   }
