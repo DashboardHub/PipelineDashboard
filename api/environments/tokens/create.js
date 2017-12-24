@@ -19,7 +19,6 @@ module.exports.create = (event, context, callback) => {
 
         let token = {
             id: uuidv1(),
-            environmentId: id,
             name: data.name
         };
 
