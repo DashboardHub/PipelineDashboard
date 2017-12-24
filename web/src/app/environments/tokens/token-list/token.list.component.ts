@@ -49,7 +49,7 @@ export class TokenListComponent implements OnInit {
 
   deleteToken(token: Token): void {
     this.tokenService
-      .deleteToken(token);
+      .deleteToken(this.environment.id, token);
   }
 
   commands(state, token): void {
