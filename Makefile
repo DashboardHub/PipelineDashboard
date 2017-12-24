@@ -27,6 +27,7 @@ deploy.test: pipeline.version.test.startDeploy pipeline.version.prod.test.startD
 
 # ALEXA
 alexa.install:
+	(cd alexa; rm -fr node_modules || echo "Nothing to delete")
 	(cd alexa; npm install)
 
 alexa.deploy:
@@ -40,6 +41,7 @@ api.clean:
 	(cd api; git checkout ./config.json)
 
 api.install:
+	(cd api; rm -fr node_modules || echo "Nothing to delete")
 	(cd api; npm install)
 
 api.env: guard-AUTH0_CLIENT_ID guard-AUTH0_CLIENT_SECRET api.clean
@@ -73,6 +75,7 @@ api.remove.test:
 
 # UI
 ui.install:
+	(cd web; rm -fr node_modules || echo "Nothing to delete")
 	(cd web; npm install)
 
 ui.run:
