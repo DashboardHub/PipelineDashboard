@@ -58,6 +58,11 @@ const schema = new Schema({
             default: [],
             validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
         },
+        monitors: {
+            type: Array,
+            default: [],
+            validate: ((v) => v.map((item) => (typeof item.uri === 'string' && validator.isLength(item.uri, {min: 0, max: 64}))))
+        },
         type: {
             type: String,
             required: true,

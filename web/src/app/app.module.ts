@@ -50,6 +50,9 @@ import { PricingComponent } from "./pricing/pricing.component";
 import { DeployedAddComponent } from "./environments/deployed/deployed-add/deployed-add.component";
 import { TokensService } from "./environments/tokens/tokens.service";
 import { DeployedService } from "./environments/deployed/deployed.service";
+import { MonitorListComponent } from "./environments/monitors/monitor-list/monitor-list.component";
+import { MonitorService } from "./environments/monitors/monitors.service";
+import { MonitorAddComponent } from "./environments/monitors/monitor-add/monitor-add.component";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -110,7 +113,9 @@ const routes: Routes = [
     DeployedSummaryComponent,
     DeployedAddComponent,
     ProfileComponent,
-    PricingComponent
+    PricingComponent,
+    MonitorListComponent,
+    MonitorAddComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -160,7 +165,8 @@ const routes: Routes = [
     EnvironmentsSummaryPublicResolver,
     EnvironmentsSummaryPrivateResolver,
     ProfileResolver,
-    TokensService
+    TokensService,
+    MonitorService
   ],
   bootstrap: [AppComponent]
 })

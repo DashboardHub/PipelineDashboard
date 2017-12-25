@@ -285,6 +285,82 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+  monitorCreate:
+    handler: environments/monitors/create.create
+    events:
+      - http:
+          path: environments/{id}/monitors
+          integration: lambda
+          authorizer: auth
+          method: post
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              201:
+                pattern: ''
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  monitorDelete:
+    handler: environments/monitors/delete.delete
+    events:
+      - http:
+          path: environments/{id}/monitors/{monitorId}
+          integration: lambda
+          authorizer: auth
+          method: delete
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              204:
+                pattern: ''
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  monitorList:
+    handler: environments/monitors/list.list
+    events:
+      - http:
+          path: environments/{id}/monitors
+          authorizer: auth
+          method: get
+          integration: lambda
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+  monitors:
+    handler: environments/monitors/ping.monitors
+    events:
+      - schedule: rate(10 minutes)
+      - http:
+          path: monitors
+          method: get
+          integration: lambda-proxy
+          cors: true
+  ping:
+    handler: environments/monitors/ping.ping
 
 plugins:
   - serverless-dynamodb-local
