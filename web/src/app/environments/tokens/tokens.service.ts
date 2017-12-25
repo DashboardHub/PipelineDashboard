@@ -41,11 +41,11 @@ export class TokensService {
       );
   }
 
-  deleteToken(environmentId: string, token: Token): void {
-    this.authHttp.delete(`${this.url}/environments/${environmentId}/tokens/${token.id}`)
+  deleteToken(token: Token): void {
+    this.authHttp.delete(`${this.url}/environments/${token.environmentId}/tokens/${token.id}`)
       .subscribe(
         data => {
-          this.getTokens(environmentId);
+          this.getTokens(token.environmentId);
           this.snackBar.open(`Token ${token.name} removed`, '', { duration: 2000 });
         },
         error => console.log(error)
