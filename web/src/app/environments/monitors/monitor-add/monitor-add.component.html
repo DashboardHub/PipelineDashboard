@@ -1,19 +1,19 @@
 <form #form="ngForm" class="form-full">
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field fxFlex>
-      <input matInput class="form-control" placeholder="URI"
+      <input matInput class="form-control" placeholder="Path"
              required minlength="0" maxlength="64"
-             name="uri" [(ngModel)]="monitor.uri"
-             #uri="ngModel">
-      <div *ngIf="uri.errors && (uri.dirty || uri.touched)">
-        <mat-error *ngIf="uri.errors.required">
-          URI is required
+             name="path" [(ngModel)]="monitor.path"
+             #path="ngModel">
+      <div *ngIf="path.errors && (path.dirty || path.touched)">
+        <mat-error *ngIf="path.errors.required">
+          Path is required
         </mat-error>
-        <mat-error *ngIf="uri.errors.minlength">
-          URI must be at least 3 characters long.
+        <mat-error *ngIf="path.errors.minlength">
+          Path must be at least 3 characters long.
         </mat-error>
-        <mat-error *ngIf="uri.errors.maxlength">
-          URI cannot be more than 32 characters long.
+        <mat-error *ngIf="path.errors.maxlength">
+          Path cannot be more than 32 characters long.
         </mat-error>
       </div>
     </mat-form-field>

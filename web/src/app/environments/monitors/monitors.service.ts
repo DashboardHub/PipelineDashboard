@@ -35,7 +35,7 @@ export class MonitorService {
       .subscribe(
         data => {
           this.getMonitors(monitor.environmentId);
-          this.snackBar.open(`Monitor ${monitor.uri} added`, '', { duration: 2000 });
+          this.snackBar.open(`Monitor ${monitor.path} added`, '', { duration: 2000 });
         },
         error => console.log(error)
       );
@@ -46,7 +46,7 @@ export class MonitorService {
       .subscribe(
         data => {
           this.getMonitors(monitor.environmentId);
-          this.snackBar.open(`Monitor ${monitor.uri} removed`, '', { duration: 2000 });
+          this.snackBar.open(`Monitor ${monitor.path} removed`, '', { duration: 2000 });
         },
         error => console.log(error)
       );

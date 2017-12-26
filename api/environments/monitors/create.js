@@ -23,7 +23,7 @@ module.exports.create = (event, context, callback) => {
 
         let monitor = {
             id: uuidv1(),
-            uri: data.uri,
+            path: data.path,
             method: data.method,
             cycle: data.cycle,
             expectedCode: data.expectedCode,
