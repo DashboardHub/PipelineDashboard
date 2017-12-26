@@ -354,7 +354,7 @@ functions:
     handler: environments/monitors/ping.monitors
     events:
       - schedule: rate(10 minutes)
-      - http:
+      - http: # @TODO remove
           path: monitors
           method: get
           integration: lambda-proxy
