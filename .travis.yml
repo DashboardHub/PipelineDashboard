@@ -20,7 +20,7 @@ deploy:
     skip_cleanup: true
     script: make install.test deploy.test
     on:
-      branch: prototype-v0.7.0
+      branch: prototype-v0.8.0
   - provider: script
     skip_cleanup: true
     script: make install deploy
