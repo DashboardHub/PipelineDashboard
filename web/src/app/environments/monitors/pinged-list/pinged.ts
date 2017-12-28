@@ -4,8 +4,9 @@ export class Pinged {
   monitorId: string;
   url: string;
   statusCode: number;
-  expectedCode: boolean;
-  expectedText: boolean;
+  codeMatched: boolean;
+  textMatched: boolean;
+  duration: number;
   createdAt: string;
 
   constructor(url: string) {

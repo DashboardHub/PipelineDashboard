@@ -1,7 +1,7 @@
 <form #form="ngForm" class="form-full">
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field fxFlex>
-      <input matInput class="form-control" placeholder="Path"
+      <input matInput class="form-control" placeholder="Path (e.g. /pricing)"
              minlength="0" maxlength="64"
              name="path" [(ngModel)]="monitor.path"
              #path="ngModel">

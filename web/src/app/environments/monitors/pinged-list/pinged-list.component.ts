@@ -6,6 +6,7 @@ import { TdDialogService } from "@covalent/core";
 
 import { Pinged } from "./pinged";
 import { PingedService } from "./pinged.service";
+import { Monitor } from "../monitor";
 import { Environment } from "../../environment";
 
 @Component({
@@ -16,6 +17,7 @@ export class PingedListComponent implements OnInit {
 
   pings: List<Pinged> = new List<Pinged>();
   environment: Environment;
+  monitor: Monitor;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,9 +34,10 @@ export class PingedListComponent implements OnInit {
       });
 
     this.environment = this.route.snapshot.data['environment'];
+    this.monitor = this.environment.monitors[0] || null;
 
-    if (this.environment.monitors.length > 0) {
-      this.pingedService.getPings(this.environment.id, this.environment.monitors[0].id);
+    if (this.monitor) {
+      this.pingedService.getPings(this.environment.id, this.monitor.id);
     }
   }
 

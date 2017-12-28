@@ -68,10 +68,9 @@ module.exports.ping = (event, context, callback) => {
                 url: parts.href,
                 statusCode: statusCode,
                 codeMatched: statusCode === body.monitor.expectedCode,
-                textMatched: data.includes(body.monitor.expectedText),
+                textMatched: body.monitor.expectedText ? data.includes(body.monitor.expectedText) : true,
                 duration: end
             };
-console.log(item);
 
             let pinged = new pingedModel.model(item);
 
@@ -81,13 +80,7 @@ console.log(item);
                     return callback(new Error(`[500] ${err.message}`));
                 }
 
-                return callback(null, {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*"
-                    },
-                    statusCode: 200,
-                    body: JSON.stringify(item)
-                });
+                return callback(null, item);
             });
         });
 
