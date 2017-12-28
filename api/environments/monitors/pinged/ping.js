@@ -21,7 +21,7 @@ module.exports.monitors = (event, context, callback) => {
 
         let monitors = 0;
         results.forEach((environment) => {
-            environment.monitors.forEach((monitor) => {
+            (environment.monitors || []).forEach((monitor) => {
                 monitors++;
 
                 let params = {
