@@ -36,6 +36,10 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.pinged.table}"
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: "*"
   environment:
     AUTH0_CLIENT_ID: ${file(./config.json):envars.AUTH0_CLIENT_ID}
     AUTH0_CLIENT_SECRET: ${file(./config.json):envars.AUTH0_CLIENT_SECRET}
