@@ -46,9 +46,9 @@ console.log(params); // @TODO temporary code
 };
 
 module.exports.ping = (event, context, callback) => {
+console.log(event); // @TODO temporary code
     const body = event.body;
     const start = new Date();
-console.log(body); // @TODO temporary code
 
     const parts = url.parse(`${body.environment.link}${body.monitor.path}`);
 
