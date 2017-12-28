@@ -17,6 +17,11 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
+        // for older data where property might not exist yet
+        if (!environment.monitors) {
+            environment.monitors = [];
+        }
+
         if (environment.monitors.length >= 1) {
             return callback(new Error('[400] Monitor limit reached'));
         }

@@ -16,8 +16,8 @@ module.exports.list = (event, context, callback) => {
         }
 
         return callback(null, {
-            total: environment.monitors.length,
-            list: environment.monitors
+            total: environment.monitors.length || 0,
+            list: environment.monitors || []
         });
     });
 
