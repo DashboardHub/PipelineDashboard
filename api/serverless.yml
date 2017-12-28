@@ -26,6 +26,16 @@ provider:
         - dynamodb:DeleteItem
         - dynamodb:DescribeTable
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.deployed.table}"
+    - Effect: Allow
+      Action:
+        - dynamodb:CreateTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:DeleteItem
+        - dynamodb:DescribeTable
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${file(./config.json):dynamodb.pinged.table}"
   environment:
     AUTH0_CLIENT_ID: ${file(./config.json):envars.AUTH0_CLIENT_ID}
     AUTH0_CLIENT_SECRET: ${file(./config.json):envars.AUTH0_CLIENT_SECRET}
@@ -350,17 +360,44 @@ functions:
               - Authorization
               - X-Api-Key
               - X-Amz-Security-Token
+  pingedList:
+    handler: environments/monitors/pinged/list.list
+    events:
+      - http:
+          path: environments/{id}/monitors/{monitorId}/pings
+          authorizer: auth
+          method: get
+          integration: lambda
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
   monitors:
-    handler: environments/monitors/ping.monitors
+    handler: environments/monitors/pinged/ping.monitors
     events:
       - schedule: rate(10 minutes)
-      - http: # @TODO remove
-          path: monitors
-          method: get
-          integration: lambda-proxy
-          cors: true
   ping:
-    handler: environments/monitors/ping.ping
+    handler: environments/monitors/pinged/ping.ping
+    events:
+      - http:
+          path: environments/{id}/monitors/{monitorId}/ping
+          authorizer: auth
+          method: post
+          integration: lambda
+          cors:
+            origins:
+              - '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
 
 plugins:
   - serverless-dynamodb-local
@@ -401,6 +438,20 @@ resources:
       DeletionPolicy: Retain
       Properties:
         TableName: ${file(./config.json):dynamodb.deployed.table}
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    PingedDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${file(./config.json):dynamodb.pinged.table}
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S

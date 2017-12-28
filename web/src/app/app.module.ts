@@ -53,6 +53,8 @@ import { DeployedService } from "./environments/deployed/deployed.service";
 import { MonitorListComponent } from "./environments/monitors/monitor-list/monitor-list.component";
 import { MonitorService } from "./environments/monitors/monitors.service";
 import { MonitorAddComponent } from "./environments/monitors/monitor-add/monitor-add.component";
+import { PingedListComponent } from "./environments/monitors/pinged-list/pinged-list.component";
+import { PingedService } from "./environments/monitors/pinged-list/pinged.service";
 
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
@@ -115,7 +117,8 @@ const routes: Routes = [
     ProfileComponent,
     PricingComponent,
     MonitorListComponent,
-    MonitorAddComponent
+    MonitorAddComponent,
+    PingedListComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -166,7 +169,8 @@ const routes: Routes = [
     EnvironmentsSummaryPrivateResolver,
     ProfileResolver,
     TokensService,
-    MonitorService
+    MonitorService,
+    PingedService
   ],
   bootstrap: [AppComponent]
 })

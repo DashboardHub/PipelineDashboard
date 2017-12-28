@@ -23,7 +23,6 @@ module.exports.delete = (event, context, callback) => {
             }
 
             let deletes = results.map((item) => ({ id: item.id}));
-            console.log(deletes);
 
             if (deletes.length > 0) {
                 deployed.model.batchDelete(deletes, function (err) {

@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field fxFlex>
       <input matInput class="form-control" placeholder="Path"
-             required minlength="0" maxlength="64"
+             minlength="0" maxlength="64"
              name="path" [(ngModel)]="monitor.path"
              #path="ngModel">
       <div *ngIf="path.errors && (path.dirty || path.touched)">

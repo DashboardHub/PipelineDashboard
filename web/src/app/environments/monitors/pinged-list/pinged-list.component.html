@@ -1,0 +1,8 @@
+<mat-list *ngIf="pings.total > 0">
+  <h3 mat-subheader>There are {{ pings.total }} pings.</h3>
+  <mat-list-item *ngFor="let ping of pings.list">
+    <mat-icon mat-list-icon>flight_land</mat-icon>
+    <h4 mat-line>{{ ping.statusCode }}</h4>
+    <p mat-line>{{ ping.createdAt | timeAgo }} ({{ ping.duration }}ms)</p>
+  </mat-list-item>
+</mat-list>

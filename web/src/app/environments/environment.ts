@@ -1,4 +1,6 @@
 import { Deployed } from "./deployed/deployed";
+import { Token } from "./tokens/token";
+import { Monitor } from "./monitors/monitor";
 
 export class Environment {
   id: string;
@@ -12,6 +14,8 @@ export class Environment {
   progress: number;
   isPrivate: boolean;
   tags: Array<string>;
+  tokens: Array<Token>;
+  monitors: Array<Monitor>;
   updatedAt: string;
   createdAt: string;
 
