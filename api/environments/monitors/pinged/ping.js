@@ -29,7 +29,7 @@ module.exports.monitors = (event, context, callback) => {
                     InvocationType: 'Event',
                     Payload: JSON.stringify({ body: { environment, monitor } }),
                 };
-console.log(params); // @TODO temporary code
+
                 lambda.invoke(params, function(err, data) {
                     if (err) {
                         console.log(err);
@@ -46,7 +46,6 @@ console.log(params); // @TODO temporary code
 };
 
 module.exports.ping = (event, context, callback) => {
-console.log(event); // @TODO temporary code
     const body = event.body;
     const start = new Date();
 
