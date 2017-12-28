@@ -1,7 +1,7 @@
 <form #form="ngForm" class="form-full">
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field fxFlex>
-      <input matInput class="form-control" placeholder="Path"
+      <input matInput class="form-control" placeholder="Path (e.g. /pricing)"
              minlength="0" maxlength="64"
              name="path" [(ngModel)]="monitor.path"
              #path="ngModel">
@@ -19,7 +19,7 @@
     </mat-form-field>
     <mat-form-field fxFlex="10%">
       <mat-select placeholder="Expected Code" name="expectedCode" [(ngModel)]="monitor.expectedCode" [disabled]="true">
-        <mat-option [value]="200">200</mat-option>
+        <mat-option value="200">200</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex="20%">
@@ -38,12 +38,12 @@
     </mat-form-field>
     <mat-form-field fxFlex="10%">
       <mat-select placeholder="Cycle Time" name="cycle" [(ngModel)]="monitor.cycle" [disabled]="true">
-        <mat-option [value]="10">10 mins</mat-option>
+        <mat-option value="10">10 mins</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex="10%">
       <mat-select placeholder="Method" name="method" [(ngModel)]="monitor.method" [disabled]="true">
-        <mat-option [value]="GET">GET</mat-option>
+        <mat-option value="GET">GET</mat-option>
       </mat-select>
     </mat-form-field>
     <button mat-button fxFlex="10%" color="primary"
