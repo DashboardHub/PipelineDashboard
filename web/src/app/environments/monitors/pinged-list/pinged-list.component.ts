@@ -34,7 +34,7 @@ export class PingedListComponent implements OnInit {
       });
 
     this.environment = this.route.snapshot.data['environment'];
-    this.monitor = this.environment.monitors.length === 1 ? this.environment.monitors[0] : null;
+    this.monitor = this.environment.monitors && this.environment.monitors.length === 1 ? this.environment.monitors[0] : null;
 
     if (this.monitor) {
       this.pingedService.getPings(this.environment.id, this.monitor.id);
