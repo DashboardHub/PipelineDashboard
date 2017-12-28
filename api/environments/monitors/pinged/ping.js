@@ -27,7 +27,7 @@ module.exports.monitors = (event, context, callback) => {
                 let params = {
                     FunctionName: `PipelineDashboardApi-${process.env.STAGE}-ping`,
                     InvocationType: 'Event',
-                    Payload: JSON.stringify({ environment, monitor }),
+                    Payload: JSON.stringify({ body: { environment, monitor } }),
                 };
 console.log(params); // @TODO temporary code
                 lambda.invoke(params, function(err, data) {
