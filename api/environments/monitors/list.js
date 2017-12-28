@@ -15,9 +15,14 @@ module.exports.list = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
+        // for older data where property might not exist yet
+        if (!environment.monitors) {
+            environment.monitors = [];
+        }
+
         return callback(null, {
-            total: environment.monitors.length || 0,
-            list: environment.monitors || []
+            total: environment.monitors.length,
+            list: environment.monitors
         });
     });
 
