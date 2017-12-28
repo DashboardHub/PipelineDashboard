@@ -25,7 +25,7 @@ module.exports.monitors = (event, context, callback) => {
                 monitors++;
 
                 let params = {
-                    FunctionName: 'ping',
+                    FunctionName: `PipelineDashboardApi-${process.env.STAGE}-ping`,
                     InvocationType: 'Event',
                     Payload: JSON.stringify({ environment, monitor }),
                 };
