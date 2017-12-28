@@ -27,6 +27,10 @@ const schema = new Schema({
             trim: true,
             validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 1, max: 1024}))
         },
+        statusCode: {
+            type: Number,
+            required: true
+        },
         codeMatched: {
             type: Boolean,
             required: true
@@ -47,7 +51,7 @@ const schema = new Schema({
         throughput: { read: 1, write: 1 }
     });
 
-let model = client.dynamoose.model(config.dynamodb.deployed.table, schema, {
+let model = client.dynamoose.model(config.dynamodb.pinged.table, schema, {
     create: true, // Create table in DB, if it does not exist,
     update: true, // Update remote indexes if they do not match local index structure
     waitForActive: false, // Wait for table to be created before trying to use it

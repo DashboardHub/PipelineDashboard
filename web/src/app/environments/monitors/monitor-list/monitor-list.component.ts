@@ -42,6 +42,11 @@ export class MonitorListComponent implements OnInit {
       .getMonitors(environmentId);
   }
 
+  pingMonitor(monitor: Monitor): void {
+    this.monitorService
+      .pingMonitor(this.environment, monitor);
+  }
+
   deleteMonitor(monitor: Monitor): void {
     monitor.environmentId = this.environment.id;
     this.monitorService

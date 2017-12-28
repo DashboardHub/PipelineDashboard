@@ -1,6 +1,7 @@
 'use strict';
 
 const environmentModel = require('../../models/environment');
+const pingedModel = require('../../models/pinged');
 
 module.exports.delete = (event, context, callback) => {
     const id = event.path.id;
@@ -18,9 +19,33 @@ module.exports.delete = (event, context, callback) => {
 
         let monitors = environment.monitors.filter((monitor) => monitor.id !== monitorId);
 
-        environmentModel.model.update({ id }, { monitors }, { allowEmptyArray:true }, function (err) {
-            if(err) { return console.log(err); }
-            callback(null, environment.monitors);
+        pingedModel.model.scan('monitorId').contains(monitorId).exec(function (err, results) {
+
+            let deletes = results.map((item) => ({ id: item.id }));
+
+            if (deletes.length > 0) {
+                pingedModel.model.batchDelete(deletes, function (err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+
+                    environmentModel.model.update({ id }, { monitors }, { allowEmptyArray: true }, function (err) {
+                        if (err) {
+                            return console.log(err);
+                        }
+
+                        callback(null, environment.monitors);
+                    });
+                });
+            } else {
+                environmentModel.model.update({ id }, { monitors }, { allowEmptyArray: true }, function (err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+
+                    callback(null, environment.monitors);
+                });
+            }
         });
     });
 

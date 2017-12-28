@@ -9,6 +9,8 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { MatSnackBar } from "@angular/material";
+import { PingedService } from "./pinged-list/pinged.service";
+import { Environment } from "../environment";
 
 @Injectable()
 export class MonitorService {
@@ -17,7 +19,7 @@ export class MonitorService {
 
   private subject: Subject<List<Monitor>> = new Subject<List<Monitor>>();
 
-  constructor(private authHttp: AuthHttp, private snackBar: MatSnackBar) {
+  constructor(private authHttp: AuthHttp, private pingedService: PingedService, private snackBar: MatSnackBar) {
   }
 
   getMonitors(environmentId: string): void {
@@ -50,6 +52,11 @@ export class MonitorService {
         },
         error => console.log(error)
       );
+  }
+
+  pingMonitor(environment: Environment, monitor: Monitor): void {
+    this.pingedService
+      .pingMonitor(environment, monitor);
   }
 
   subscribeMonitors(): Observable<any> {

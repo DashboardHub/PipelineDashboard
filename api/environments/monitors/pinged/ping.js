@@ -1,16 +1,18 @@
 'use strict';
 
 const aws = require('aws-sdk');
+const url = require('url');
+const http = require('http');
 const https = require('https');
 const uuidv1 = require('uuid/v1');
-const environmentModel = require('./../../models/environment');
-const monitoredModel = require('./../../models/monitored');
+const environmentModel = require('./../../../models/environment');
+const pingedModel = require('./../../../models/pinged');
 
 let lambda = new aws.Lambda();
 
 module.exports.monitors = (event, context, callback) => {
 
-    let attributes = ['id', 'url', 'monitors'];
+    let attributes = ['id', 'link', 'monitors'];
     environmentModel.model.scan('monitors').not().eq([]).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
@@ -46,8 +48,10 @@ module.exports.ping = (event, context, callback) => {
     const body = event.body;
     const start = new Date();
 
-    https.get(`${body.environment.url}${body.monitor.path}`, (resp) => {
-        const { statusCode } = res;
+    const parts = url.parse(`${body.environment.link}${body.monitor.path}`);
+
+    (parts.protocol === 'https' ? https : http).get({ hostname: parts.hostname, path: parts.path, port: parts.port }, (resp) => {
+        const { statusCode } = resp;
         let data = '';
 
         resp.on('data', (chunk) => {
@@ -61,14 +65,17 @@ module.exports.ping = (event, context, callback) => {
                 id: uuidv1(),
                 environmentId: body.environment.id,
                 monitorId: body.monitor.id,
-                url: body.environment.url + body.monitor.path,
+                url: parts.href,
+                statusCode: statusCode,
                 codeMatched: statusCode === body.monitor.expectedCode,
                 textMatched: data.includes(body.monitor.expectedText),
                 duration: end
             };
-            let monitored = new monitoredModel.model(item);
+console.log(item);
 
-            monitored.save(function (err) {
+            let pinged = new pingedModel.model(item);
+
+            pinged.save(function (err) {
                 if (err) {
                     console.log(err);
                     return callback(new Error(`[500] ${err.message}`));
