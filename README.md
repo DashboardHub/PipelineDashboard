@@ -3,7 +3,7 @@
 
 # PipelineDashboard
 
-Display your deployed versions.
+Display your **deployed versions** and **monitor** it.
 
 ### REQUIREMENTS
 
@@ -44,5 +44,7 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 ---
 
 ![Screenshot](https://user-images.githubusercontent.com/624760/33978327-0ee1e370-e097-11e7-924c-670f76b562d3.png)
+
+![Screenshot](https://user-images.githubusercontent.com/624760/34434721-ef3fb3fe-ec7f-11e7-8c53-73263fb75c97.png)
 
 ![Screenshot](https://user-images.githubusercontent.com/624760/33978333-160b9bf0-e097-11e7-8ef0-efeb9751f019.png)
