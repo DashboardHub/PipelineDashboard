@@ -1,6 +1,6 @@
 {
   "name": "pipelinedashboard",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Pipeline Dashboard to display your deployed versions",
   "repository": {
     "type": "git",

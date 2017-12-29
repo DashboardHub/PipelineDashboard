@@ -1,6 +1,6 @@
 {
   "name": "pipelinedashboard",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "author": "Eddie Jaoude",
   "description": "Pipeline Dashboard to display your deployed versions",
   "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
