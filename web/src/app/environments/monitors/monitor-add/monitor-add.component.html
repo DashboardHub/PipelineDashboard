@@ -22,7 +22,7 @@
         <mat-option value="200">200</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field fxFlex="20%">
+    <mat-form-field fxFlex>
       <input matInput class="form-control" placeholder="Expected Text"
              minlength="3" maxlength="32"
              name="expectedText" [(ngModel)]="monitor.expectedText"
@@ -35,11 +35,6 @@
           Expected text cannot be more than 32 characters long.
         </mat-error>
       </div>
-    </mat-form-field>
-    <mat-form-field fxFlex="10%">
-      <mat-select placeholder="Cycle Time" name="cycle" [(ngModel)]="monitor.cycle" [disabled]="true">
-        <mat-option value="30">30 mins</mat-option>
-      </mat-select>
     </mat-form-field>
     <mat-form-field fxFlex="10%">
       <mat-select placeholder="Method" name="method" [(ngModel)]="monitor.method" [disabled]="true">

@@ -3,7 +3,6 @@ export class Monitor {
   environmentId: string;
   path: string;
   method: string = 'GET';
-  cycle: string = '30';
   expectedCode: string = '200';
   expectedText: string;
   updatedAt: string;
