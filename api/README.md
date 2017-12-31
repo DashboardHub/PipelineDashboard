@@ -163,6 +163,34 @@ POST /environments/{id}/deployed/{token}/{state}
 }
 ```
 
+#### List
+
+```
+GET /environments/{id}/deployed
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "createdAt": "2017-12-13T07:26:26.754Z",
+      "environmentId": "b4d0b870-c9e9-11e7-aeea-eb4cced29ed2",
+      "id": "ee074a20-dfd6-11e7-bee3-55f883682be0",
+      "release": "0.7.767",
+      "state": "startDeploy",
+      "token": {
+        "environmentId": "b4d0b870-c9e9-11e7-aeea-eb4cced29ed2",
+        "id": "b74c18b0-c9e9-11e7-87a0-e11b9e1bc333",
+        "name": "TravisCI",
+        "token": "b74c18b1-c9e9-11e7-87a0-e11b9e1bc333",
+        "updatedAt": "2017-12-13T07:26:26.754Z"
+      }
+    }
+  ]
+}
+```
+
 ### Tokens
 
 #### List
@@ -214,3 +242,5 @@ DELETE /environments/{id}/tokens/{tokenId}
 ```json
 
 ```
+
+###
