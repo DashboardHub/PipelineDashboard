@@ -41,7 +41,8 @@ const schema = new Schema({
             trim: true
         },
         latestRelease: {
-            type: Object
+            type: Object,
+            default: {}
         },
         isPrivate: {
             type: Boolean,
