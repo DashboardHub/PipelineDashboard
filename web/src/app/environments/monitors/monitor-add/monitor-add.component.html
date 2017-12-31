@@ -1,10 +1,11 @@
 <form #form="ngForm" class="form-full">
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field fxFlex>
-      <input matInput class="form-control" placeholder="Path (e.g. /pricing)"
+      <input matInput class="form-control" placeholder="Path to append to URL (e.g. /pricing)"
              minlength="0" maxlength="64"
              name="path" [(ngModel)]="monitor.path"
              #path="ngModel">
+      <mat-hint>Monitor will ping every <b>30mins</b></mat-hint>
       <div *ngIf="path.errors && (path.dirty || path.touched)">
         <mat-error *ngIf="path.errors.required">
           Path is required

@@ -5,6 +5,7 @@
              required minlength="1" maxlength="32"
              name="release" [(ngModel)]="deployed.release"
              #release="ngModel">
+      <mat-hint>Create a manual Release state</mat-hint>
       <div *ngIf="release.errors && (release.dirty || release.touched)">
         <mat-error *ngIf="release.errors.required">
           Release is required
