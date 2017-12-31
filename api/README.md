@@ -204,3 +204,13 @@ POST /environments/{id}/tokens
   "name": "aaaaa"
 }
 ```
+
+#### Delete
+
+```
+DELETE /environments/{id}/tokens/{tokenId}
+```
+
+```json
+
+```
