@@ -8,7 +8,6 @@ before_install:
   - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar)
 
 script:
-  - make ui.install ui.build
   - echo 'No tests, this is a PROTOTYPE only'
 
 deploy:
