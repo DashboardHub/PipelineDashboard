@@ -49,43 +49,56 @@ module.exports.ping = (event, context, callback) => {
     const body = event.body;
     const start = new Date();
 
-    const parts = url.parse(`${body.environment.link}${body.monitor.path}`);
+    environmentModel.model.get({ id: body.environment.id }, function (err, environment) {
+        if (err) {
+            console.error(err);
+            return callback(new Error('Couldn\'t fetch the item.'));
+        }
 
-    (parts.protocol === 'https' ? https : http).get({ hostname: parts.hostname, path: parts.path, port: parts.port }, (resp) => {
-        const { statusCode } = resp;
-        let data = '';
+        let monitor = environment.monitors.filter((monitor) => monitor.id === body.monitor.id)[0];
+        if (!environment || environment.owner !== event.principalId || !monitor) {
+            return callback(new Error('[404] Not found'));
+        }
 
-        resp.on('data', (chunk) => {
-            data += chunk;
-        });
+        const parts = url.parse(`${environment.link}${monitor.path}`);
 
-        resp.on('end', () => {
-            const end = new Date() - start;
+        (parts.protocol === 'https' ? https : http).get({ hostname: parts.hostname, path: parts.path, port: parts.port }, (resp) => {
+            const { statusCode } = resp;
+            let data = '';
 
-            let item = {
-                id: uuidv1(),
-                environmentId: body.environment.id,
-                monitorId: body.monitor.id,
-                url: parts.href,
-                statusCode: statusCode,
-                codeMatched: statusCode === body.monitor.expectedCode,
-                textMatched: body.monitor.expectedText ? data.includes(body.monitor.expectedText) : true,
-                duration: end
-            };
-
-            let pinged = new pingedModel.model(item);
-
-            pinged.save(function (err) {
-                if (err) {
-                    console.log(err);
-                    return callback(new Error(`[500] ${err.message}`));
-                }
-
-                return callback(null, item);
+            resp.on('data', (chunk) => {
+                data += chunk;
             });
+
+            resp.on('end', () => {
+                const end = new Date() - start;
+
+                let item = {
+                    id: uuidv1(),
+                    environmentId: environment.id,
+                    monitorId: monitor.id,
+                    url: parts.href,
+                    statusCode: statusCode,
+                    codeMatched: statusCode === monitor.expectedCode,
+                    textMatched: monitor.expectedText ? data.includes(monitor.expectedText) : true,
+                    duration: end
+                };
+
+                let pinged = new pingedModel.model(item);
+
+                pinged.save(function (err) {
+                    if (err) {
+                        console.log(err);
+                        return callback(new Error(`[500] ${err.message}`));
+                    }
+
+                    return callback(null, item);
+                });
+            });
+
+        }).on("error", (err) => {
+            console.log("Error: " + err.message);
         });
 
-    }).on("error", (err) => {
-        console.log("Error: " + err.message);
     });
 };
