@@ -180,11 +180,7 @@ GET /environments/{id}/deployed
       "release": "0.7.767",
       "state": "startDeploy",
       "token": {
-        "environmentId": "b4d0b870-c9e9-11e7-aeea-eb4cced29ed2",
-        "id": "b74c18b0-c9e9-11e7-87a0-e11b9e1bc333",
-        "name": "TravisCI",
-        "token": "b74c18b1-c9e9-11e7-87a0-e11b9e1bc333",
-        "updatedAt": "2017-12-13T07:26:26.754Z"
+        "name": "TravisCI"
       }
     }
   ]
@@ -207,8 +203,7 @@ GET /environments/{id}/tokens
       "name": "CI server",
       "createdAt": "2017-11-06T06:38:27.024Z",
       "id": "184a9d00-c2bd-11e7-829d-851258883d74",
-      "environmentId": "14c9dab0-c2bd-11e7-829d-851258883d74",
-      "token": "184ac410-c2bd-11e7-829d-851258883d74"
+      "environmentId": "14c9dab0-c2bd-11e7-829d-851258883d74"
     }
   ]
 }
@@ -243,4 +238,34 @@ DELETE /environments/{id}/tokens/{tokenId}
 
 ```
 
-###
+### Releases
+
+#### List
+
+```
+GET /environments/{id}/releases
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "version": "0.7.736",
+      "token": {
+        "name": "TravisCI"
+      },
+      "failDeploy": null,
+      "finishDeploy": "2017-12-10T16:30:35.042Z",
+      "startDeploy": "2017-12-10T16:22:46.464Z",
+      "failBuild": null,
+      "finishBuild": "2017-12-10T16:22:45.379Z",
+      "startBuild": "2017-12-10T16:22:14.141Z",
+      "latest": {
+        "createdAt": "2017-12-10T16:30:35.042Z",
+        "state": "finishDeploy"
+      }
+    }
+  ]
+}
+```
