@@ -5,7 +5,8 @@
 
 <section>
   <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-between">
-    <mat-card fxFlex="24%" *ngFor="let environment of environments.list">
+    <mat-card fxFlex="24%" *ngFor="let environment of environments.list"
+              [class.mat-error]="environment.latestRelease && (environment.latestRelease.state === 'failBuild' || environment.latestRelease.state === 'failDeploy')">
       <mat-card-header class="bgc-blue-600">
         <mat-card-title>
           <a mat-button [disabled]="true" *ngIf="!profile || environment.owner !== profile.sub">
@@ -34,7 +35,6 @@
       <mat-card-actions>
         <td-message *ngIf="!environment.latestRelease" label="-.-" sublabel="No build / deploy" icon="info"
                     color="accent" [opened]="true"></td-message>
-
 
         <td-message *ngIf="environment.latestRelease && environment.latestRelease.state === 'startBuild'"
                     label="{{ environment.latestRelease.release }}" sublabel="Started to build code" icon="info"
