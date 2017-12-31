@@ -323,3 +323,62 @@ GET /environments/{id}/monitors
   ]
 }
 ```
+
+### Pings
+
+#### List
+
+```
+GET /environments/{id}/pings
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "duration": 128,
+      "createdAt": "2017-12-31T08:43:08.160Z",
+      "environmentId": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f",
+      "monitorId": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+      "codeMatched": false,
+      "textMatched": true,
+      "id": "a01da000-ee06-11e7-9016-9b9d57f7d18f",
+      "url": "http://pipeline.dashboardhub.io/",
+      "statusCode": 301,
+      "updatedAt": "2017-12-31T08:43:08.160Z"
+    }
+  ]
+}
+```
+
+### Ping
+
+```
+POST /environments/{id}/monitors/{monitorId}/ping
+
+{
+  "environment": {
+    "link": "http://pipeline.dashboardhub.io",
+    "id": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f"
+  },
+  "monitor": {
+    "id": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+    "path": "/",
+    "expectedCode": "200"
+  }
+}
+```
+
+```json
+{
+  "id": "f230b6b0-ee07-11e7-9016-9b9d57f7d18f",
+  "environmentId": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f",
+  "monitorId": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+  "url": "http://pipeline.dashboardhub.io/",
+  "statusCode": 301,
+  "codeMatched": false,
+  "textMatched": true,
+  "duration": 303
+}
+```
