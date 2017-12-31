@@ -5,6 +5,7 @@
              required minlength="3" maxlength="32"
              name="name" [(ngModel)]="token.name"
              #name="ngModel">
+      <mat-hint>Tokens are used to give push access to deployed versions. Tokens are like <b>passwords</b>. If you think a token has been compromised, delete it & create a new one</mat-hint>
       <div *ngIf="name.errors && (name.dirty || name.touched)">
         <mat-error *ngIf="name.errors.required">
           Name is required

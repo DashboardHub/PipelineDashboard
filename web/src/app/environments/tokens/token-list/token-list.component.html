@@ -1,6 +1,5 @@
 <mat-list>
-  <h3 mat-subheader>There are {{ tokens.total }} tokens. Tokens are used to give push access to deployed versions. If
-    you think a token has been compromised, delete it and create a new one</h3>
+  <h3 mat-subheader>There are {{ tokens.total }} tokens.</h3>
   <mat-list-item *ngFor="let token of tokens.list">
     <mat-icon mat-list-icon>vpn_key</mat-icon>
     <h4 mat-line>{{ token.name }}</h4>
