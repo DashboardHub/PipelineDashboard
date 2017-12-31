@@ -215,8 +215,7 @@ GET /environments/{id}/tokens
 POST /environments/{id}/tokens
 
 {
-  "name": "aaaaa",
-  "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
+  "name": "aaaaa"
 }
 ```
 
@@ -265,6 +264,61 @@ GET /environments/{id}/releases
         "createdAt": "2017-12-10T16:30:35.042Z",
         "state": "finishDeploy"
       }
+    }
+  ]
+}
+```
+
+### Monitors
+
+#### Create
+
+```
+POST /environments/{id}/monitors
+
+{
+  "path": "/",
+  "method": "GET",
+  "expectedCode": 200,
+  "expectedText": ""
+}
+```
+
+```json
+{
+  "id": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
+  "path": "/",
+  "method": "GET",
+  "expectedCode": 200,
+  "expectedText": ""
+}
+```
+
+#### Delete
+
+```
+DELETE /environments/{id}/monitors/{monitorId}
+```
+
+```json
+
+```
+
+#### List
+
+```
+GET /environments/{id}/monitors
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "id": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+      "path": "/",
+      "method": "GET",
+      "expectedCode": "200"
     }
   ]
 }
