@@ -57,6 +57,7 @@ module.exports.ping = (event, context, callback) => {
 
         let monitor = environment.monitors.filter((monitor) => monitor.id === body.monitor.id)[0];
         if (!environment || environment.owner !== event.principalId || !monitor) {
+            console.log(body);
             console.log(environment);
             return callback(new Error('[404] Not found'));
         }
