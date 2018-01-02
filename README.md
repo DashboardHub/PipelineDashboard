@@ -1,5 +1,6 @@
 [![Floobits Status](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard.svg)](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard/redirect)
 [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=prototype-v0.8.0)](https://travis-ci.org/DashboardHub/PipelineDashboard)
+[![Help Contribute to Open Source](https://www.codetriage.com/dashboardhub/pipelinedashboard/badges/users.svg)](https://www.codetriage.com/dashboardhub/pipelinedashboard)
 
 # PipelineDashboard
 
