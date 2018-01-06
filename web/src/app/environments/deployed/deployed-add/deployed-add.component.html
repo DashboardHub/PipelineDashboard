@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field fxFlex>
       <input matInput class="form-control" placeholder="Release version (e.g. v1.0.123)"
-             required minlength="1" maxlength="32"
+             required minlength="1" maxlength="64"
              name="release" [(ngModel)]="deployed.release"
              #release="ngModel">
       <mat-hint>Create a manual Release state</mat-hint>
@@ -14,7 +14,7 @@
           Release must be at least 1 characters long.
         </mat-error>
         <mat-error *ngIf="release.errors.maxlength">
-          Release cannot be more than 32 characters long.
+          Release cannot be more than 64 characters long.
         </mat-error>
       </div>
     </mat-form-field>
