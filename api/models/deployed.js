@@ -21,7 +21,7 @@ const schema = new Schema({
             type: String,
             required: true,
             trim: true,
-            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 1, max: 32}))
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 1, max: 64}))
         },
         state: {
             type: String,
