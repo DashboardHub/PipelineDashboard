@@ -16,6 +16,7 @@ export class Environment {
   tags: Array<string>;
   tokens: Array<Token>;
   monitors: Array<Monitor>;
+  logo: string;
   updatedAt: string;
   createdAt: string;
 
