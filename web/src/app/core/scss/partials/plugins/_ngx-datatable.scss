@@ -1,0 +1,100 @@
+.ngx-datatable {
+
+    &.material {
+        @include mat-elevation(4);
+
+        .empty-row {
+            display: flex;
+            align-items: center;
+            line-height: 1;
+            height: 56px;
+            padding: 0 24px;
+        }
+
+        .datatable-header {
+            border: none;
+            min-height: 48px;
+
+            .datatable-header-cell {
+                display: inline-flex;
+                align-items: center;
+                line-height: 1;
+                min-height: 48px;
+                font-size: 13px;
+                padding: 0 24px;
+            }
+        }
+
+        .datatable-body {
+            display: flex;
+            flex: 1 0 auto;
+
+            .datatable-scroll {
+                display: flex;
+                flex-direction: column;
+                width: 100% !important;
+            }
+
+            .datatable-row-left,
+            .datatable-row-center,
+            .datatable-row-right {
+                min-height: 48px;
+            }
+
+            .datatable-row-wrapper {
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+                &:first-child {
+                    border-top: 1px solid rgba(0, 0, 0, 0.12);
+                }
+
+                .datatable-body-cell {
+                    display: inline-flex;
+                    align-items: center;
+                    line-height: 1;
+                    min-height: 48px;
+                    transition: none;
+                    padding: 0 24px;
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .datatable-footer {
+            border: none;
+            min-height: 56px;
+
+            .datatable-footer-inner {
+                padding: 0 24px;
+
+                @include media-breakpoint('sm') {
+                    flex-direction: column;
+                    padding: 16px 0;
+                    height: auto !important;
+
+                    .datatable-pager {
+                        margin: 0 !important;
+                    }
+                }
+
+                .page-count {
+                    padding: 0;
+                }
+
+                .datatable-pager {
+                    margin: 0 0 0 24px;
+
+                    .pager {
+
+                        li {
+
+                            a {
+                                text-decoration: none !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

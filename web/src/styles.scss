@@ -1,22 +1,2 @@
-@import '~@angular/material/theming';
-@import '~@covalent/core/theming/all-theme';
-
-@include mat-core();
-
-$primary: mat-palette($mat-orange, 800);
-$accent:  mat-palette($mat-light-blue, 600, A100, A400);
-
-$warn:    mat-palette($mat-red, 600);
-
-$theme: mat-light-theme($primary, $accent, $warn);
-
-@include angular-material-theme($theme);
-@include covalent-theme($theme);
-
-html .mat-card {
-  margin: 0;
-}
-
-.spread-spacer {
-  flex: 1 1 auto;
-}
+// Import Fuse main library
+@import "app/core/scss/core";

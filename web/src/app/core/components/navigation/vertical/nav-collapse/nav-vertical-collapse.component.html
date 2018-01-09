@@ -1,0 +1,17 @@
+<a class="nav-link" matRipple (click)="toggleOpen($event)">
+    <mat-icon class="nav-link-icon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+    <span class="nav-link-title" [translate]="item.translate">{{item.title}}</span>
+    <span class="nav-link-badge" *ngIf="item.badge" [translate]="item.badge.translate"
+          [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
+        {{item.badge.title}}
+    </span>
+    <mat-icon class="collapse-arrow">keyboard_arrow_right</mat-icon>
+</a>
+
+<div class="children" [@slideInOut]="isOpen">
+    <ng-container *ngFor="let item of item.children">
+        <fuse-nav-vertical-item *ngIf="item.type=='item'" [item]="item"></fuse-nav-vertical-item>
+        <fuse-nav-vertical-collapse *ngIf="item.type=='collapse'" [item]="item"></fuse-nav-vertical-collapse>
+        <fuse-nav-vertical-group *ngIf="item.type=='group'" [item]="item"></fuse-nav-vertical-group>
+    </ng-container>
+</div>
