@@ -77,12 +77,10 @@
           </div>
         </mat-form-field>
         <mat-form-field>
-          <textarea matInput placeholder="Logo of the environment (e.g. DashboardHub Logo)"
-                    matTextareaAutosize
-                    minlength="5" maxlength="1024"
-                    name="logo" [(ngModel)]="environment.logo"
-                    #logo="ngModel">
-          </textarea>
+          <input matInput class="form-control" placeholder="Logo of the environment (e.g. DashboardHub Logo)"
+                 minlength="5" maxlength="1024"
+                 name="logo" [(ngModel)]="environment.logo"
+                 #logo="ngModel">
           <div *ngIf="logo.errors && (logo.dirty || logo.touched)">
             <mat-error *ngIf="logo.errors.minlength">
               Logo must be at least 5 characters long.
