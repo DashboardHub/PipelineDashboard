@@ -50,7 +50,7 @@ export class EnvironmentsService {
   }
 
   saveEnvironment(environment: Environment): void {
-    const updateProperties: Array<string> = ['title', 'description', 'link', 'type'];
+    const updateProperties: Array<string> = ['title', 'description', 'link', 'type', 'logo'];
 
     let patch: Array<any> = updateProperties.map((item) => {
       return {

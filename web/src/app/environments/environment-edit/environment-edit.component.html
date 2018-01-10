@@ -76,6 +76,20 @@
             </mat-error>
           </div>
         </mat-form-field>
+        <mat-form-field>
+          <input matInput class="form-control" placeholder="Logo of the environment (e.g. DashboardHub Logo)"
+                    minlength="5" maxlength="1024"
+                    name="logo" [(ngModel)]="environment.logo"
+                    #logo="ngModel">
+          <div *ngIf="logo.errors && (logo.dirty || logo.touched)">
+            <mat-error *ngIf="logo.errors.minlength">
+              Logo must be at least 5 characters long.
+            </mat-error>
+            <mat-error *ngIf="logo.errors.maxlength">
+              Logo cannot be more than 1024 characters long.
+            </mat-error>
+          </div>
+        </mat-form-field>
         <mat-checkbox [disabled]="true" value="false">Is private
           <mat-icon matTooltip="During ALPHA private is not allowed">info</mat-icon>
         </mat-checkbox>

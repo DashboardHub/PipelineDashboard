@@ -31,13 +31,14 @@ module.exports.update = (event, context, callback) => {
                 case '/title':
                 case '/description':
                 case '/link':
+                case '/logo':
                 case '/type':
                     environment[item.path.substr(1)] = item.value;
                     break;
             }
         });
 
-        environmentModel.model.update({ id }, { title: environment.title, description: environment.description, link: environment.link, type: environment.type }, function (err) {
+        environmentModel.model.update({ id }, { title: environment.title, description: environment.description, link: environment.link, logo: environment.logo, type: environment.type }, function (err) {
             if (err) {
                 console.log(err);
                 switch(err.name) {
