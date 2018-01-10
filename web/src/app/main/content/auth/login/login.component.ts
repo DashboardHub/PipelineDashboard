@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FuseConfigService } from './../../../core/services/config.service';
-import { fuseAnimations } from './../../../core/animations';
-// import { AuthService } from "../auth.service";
+import { Component } from '@angular/core';
+import { FuseConfigService } from './../../../../core/services/config.service';
+import { fuseAnimations } from './../../../../core/animations';
+import { AuthService } from "./../auth.service";
 
 @Component({
   selector   : 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent
 
   constructor(
     private fuseConfig: FuseConfigService,
-    // public auth: AuthService
+    public auth: AuthService
   )
   {
     this.fuseConfig.setSettings({
