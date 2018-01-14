@@ -19,6 +19,8 @@ import { AuthService } from "./content/auth/auth.service";
 import { PricingComponent } from "./content/pricing/pricing.component";
 import { CallbackComponent } from "./content/auth/callback/callback.component";
 import { ProfileResolver } from "./content/auth/profile.resolver";
+import { ProfileComponent } from "./content/auth/profile/profile.component";
+import { AuthGuard } from "./content/auth/auth.guard";
 
 const routes: Routes = [
   // {
@@ -31,7 +33,7 @@ const routes: Routes = [
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
-  // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
   // {
   //   path: 'environments',
   //   canActivate: [AuthGuard],
@@ -69,7 +71,8 @@ const routes: Routes = [
         FuseQuickPanelComponent,
         CallbackComponent,
         LoginComponent,
-        PricingComponent
+        PricingComponent,
+        ProfileComponent
     ],
     imports     : [
         RouterModule.forRoot(
@@ -86,6 +89,7 @@ const routes: Routes = [
         FuseMainComponent
     ],
     providers: [
+      AuthGuard,
       AuthService,
       ProfileResolver
     ]
