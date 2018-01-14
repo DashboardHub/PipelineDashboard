@@ -16,6 +16,7 @@
             <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNav">
                 <div class="logo ml-16">
                     <img class="logo-icon" src="assets/images/logos/fuse.svg">
+                    Pipeline::DashboardHub
                 </div>
             </div>
 
@@ -27,31 +28,35 @@
 
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button mat-button [matMenuTriggerFor]="userMenu"
-                    class="user-button">
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="avatar" src="assets/images/avatars/profile.jpg">
-                    <span class="username mr-12" fxHide fxShow.gt-sm>John Doe</span>
-                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
-                </div>
-            </button>
+          <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!auth.isAuthenticated()">
+              <img class="avatar" src="assets/images/avatars/profile.jpg">
+              <span class="username mr-12" fxHide fxShow.gt-sm>Not logged in</span>
+              <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" *ngIf="auth.isAuthenticated()">
+              <img src="{{ profile?.picture }}" class="avatar" alt="{{ profile?.name }}">
+              <span class="username mr-12" fxHide fxShow.gt-sm>{{ profile?.name }}</span>
+              <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+            </div>
+          </button>
 
             <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
 
-                <button mat-menu-item>
-                    <mat-icon>account_circle</mat-icon>
-                    <span>My Profile</span>
-                </button>
+              <button mat-menu-item [routerLink]="['login']" *ngIf="!auth.isAuthenticated()">
+                <mat-icon>account_circle</mat-icon>
+                <span>Login</span>
+              </button>
 
-                <button mat-menu-item class="">
-                    <mat-icon>mail</mat-icon>
-                    <span>Inbox</span>
-                </button>
+              <button mat-menu-item *ngIf="auth.isAuthenticated()" [routerLink]="['/profile']">
+                <mat-icon>account_circle</mat-icon>
+                <span>My Profile</span>
+              </button>
 
-                <button mat-menu-item class="">
-                    <mat-icon>exit_to_app</mat-icon>
-                    <span>Logout</span>
-                </button>
+              <button mat-menu-item *ngIf="auth.isAuthenticated()" (click)="auth.logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+              </button>
 
             </mat-menu>
 
