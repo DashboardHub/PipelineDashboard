@@ -33,7 +33,7 @@ const routes: Routes = [
     path: 'public',
     pathMatch: 'full',
     component: EnvironmentListComponent,
-    resolve: { environments: PublicEnvironmentsResolver }
+    resolve: { environments: PublicEnvironmentsResolver, profile: ProfileResolver }
     // resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
