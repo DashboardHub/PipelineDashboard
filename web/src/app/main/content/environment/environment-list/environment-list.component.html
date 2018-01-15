@@ -1,0 +1,71 @@
+<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+
+  <!-- TOP BACKGROUND -->
+  <div class="top-bg mat-accent-bg"></div>
+  <!-- / TOP BACKGROUND -->
+
+  <!-- CENTER -->
+  <div class="center">
+
+    <!-- CONTENT HEADER -->
+    <div class="header white-fg p-24" fxLayout="row" fxLayoutAlign="start center">
+      <h2>Public Environments</h2>
+    </div>
+    <!-- / CONTENT HEADER -->
+
+    <!-- CONTENT CARD -->
+    <div class="content-card mat-white-bg">
+
+      <!-- CONTENT TOOLBAR -->
+      <div class="toolbar px-24 py-8">
+        <span>{{ environments.total }} Environments</span>
+      </div>
+      <!-- / CONTENT TOOLBAR -->
+
+      <!-- CONTENT -->
+      <div class="content p-24" fusePerfectScrollbar>
+
+        <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-between">
+          <div class="fuse-card" *ngFor="let environment of environments.list" fxFlex="32%">
+
+            <div class="p-16" fxLayout="row" fxLayoutAlign="start center">
+              <img class="w-40 h-40 border-radius-100" src="{{ environment.logo }}">
+
+              <div class="ml-16">
+                <div class="text-bold">{{ environment.title }}</div>
+                <div class="h5 text-bold secondary-text">Last updated {{ environment.updatedAt }}</div>
+              </div>
+            </div>
+
+            <div class="card-divider"></div>
+
+            <div class="p-16">
+              <div class="h1" *ngIf="!environment.latestRelease || !environment.latestRelease.release">{{ 'v???' }}</div>
+              <div class="h1" *ngIf="environment.latestRelease && environment.latestRelease.release">{{ environment.latestRelease.release }}</div>
+              <div class="h4" *ngIf="!environment.latestRelease || !environment.latestRelease.state">Waiting for data</div>
+              <div class="h4" *ngIf="environment.latestRelease && environment.latestRelease.state">{{ environment.latestRelease.state }}</div>
+            </div>
+
+            <div class="p-16 pt-0 line-height-1.75">{{ environment.description || '-' }}</div>
+
+            <div class="card-divider"></div>
+
+            <button mat-button color="accent">DETAILS</button>
+            <button mat-button color="accent" [disabled]="!environment.link">WEBSITE</button>
+
+            <!--<mat-progress-bar mode="buffer" [value]="environment.progress.current" [bufferValue]="environment.progress.next"></mat-progress-bar>-->
+            <mat-progress-bar mode="buffer" [value]="50" [bufferValue]="75"></mat-progress-bar>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CONTENT CARD -->
+
+  </div>
+  <!-- / CENTER -->
+
+</div>

@@ -21,42 +21,48 @@ import { CallbackComponent } from "./content/auth/callback/callback.component";
 import { ProfileResolver } from "./content/auth/profile.resolver";
 import { ProfileComponent } from "./content/auth/profile/profile.component";
 import { AuthGuard } from "./content/auth/auth.guard";
+import { EnvironmentAddComponent } from "./content/environment/environment-add/environment-add.component";
+import { EnvironmentService } from "./content/environment/environment.service";
+import { HttpClientModule } from "@angular/common/http";
+import { EnvironmentListComponent } from "./content/environment/environment-list/environment-list.component";
+import { PublicEnvironmentsResolver } from "./content/environment/public.environments.resolver";
+import { JwtModule } from "@auth0/angular-jwt";
 
 const routes: Routes = [
-  // {
-  //   path: 'environments',
-  //   pathMatch: 'full',
-  //   component: EnvironmentListComponent,
-  //   resolve: { environments: EnvironmentsResolver }
-  //   // resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
-  // },
+  {
+    path: 'public',
+    pathMatch: 'full',
+    component: EnvironmentListComponent,
+    resolve: { environments: PublicEnvironmentsResolver }
+    // resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
+  },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
-  // {
-  //   path: 'environments',
-  //   canActivate: [AuthGuard],
-  //   resolve: { profile: ProfileResolver },
-  //   children: [
-  //     {
-  //       path: '',
-  //       pathMatch: 'full',
-  //       component: EnvironmentListComponent,
-  //       resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
-  //     },
-  //     {
-  //       path: 'list',
-  //       pathMatch: 'full',
-  //       component: EnvironmentListComponent,
-  //       resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
-  //     },
-  //     { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
-  //     { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
-  //     { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
-  //   ]
-  // },
-  { path: '**', redirectTo: '/' }
+  {
+    path: 'environments',
+    canActivate: [AuthGuard],
+    resolve: { profile: ProfileResolver },
+    children: [
+      // {
+      //   path: '',
+      //   pathMatch: 'full',
+      //   component: EnvironmentListComponent,
+      //   resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
+      // },
+      // {
+      //   path: 'list',
+      //   pathMatch: 'full',
+      //   component: EnvironmentListComponent,
+      //   resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
+      // },
+      { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
+      // { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
+      // { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
+    ]
+  },
+  { path: '**', redirectTo: '/public' }
 ];
 
 @NgModule({
@@ -72,7 +78,9 @@ const routes: Routes = [
         CallbackComponent,
         LoginComponent,
         PricingComponent,
-        ProfileComponent
+        ProfileComponent,
+        EnvironmentAddComponent,
+        EnvironmentListComponent
     ],
     imports     : [
         RouterModule.forRoot(
@@ -83,7 +91,16 @@ const routes: Routes = [
         RouterModule,
         FuseNavigationModule,
         FuseShortcutsModule,
-        FuseSearchBarModule
+        FuseSearchBarModule,
+        HttpClientModule,
+        JwtModule.forRoot({
+          config: {
+            tokenGetter: () => {
+              return localStorage.getItem('access_token');
+            },
+            whitelistedDomains: ['localhost:3000']
+          }
+        })
     ],
     exports     : [
         FuseMainComponent
@@ -91,7 +108,9 @@ const routes: Routes = [
     providers: [
       AuthGuard,
       AuthService,
-      ProfileResolver
+      EnvironmentService,
+      ProfileResolver,
+      PublicEnvironmentsResolver
     ]
 })
 

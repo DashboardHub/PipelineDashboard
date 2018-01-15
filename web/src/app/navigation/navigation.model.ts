@@ -19,7 +19,7 @@ export class FuseNavigationModel implements FuseNavigationModelInterface
               // 'translate': 'NAV.PUBLICENVIRONMENTS.TITLE',
               'type' : 'item',
               'icon' : 'lock_open',
-              'url'  : '/environments',
+              'url'  : '/public',
               // 'badge': {
               //     'title': 16,
               //     // 'translate': 'NAV.PUBLICENVIRONMENTS.BADGE',
