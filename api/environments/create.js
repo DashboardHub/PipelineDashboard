@@ -21,7 +21,8 @@ module.exports.create = (event, context, callback) => {
                 id: uuidv1(),
                 name: 'Continuous Integration Server'
             }
-        ]
+        ],
+        logo: data.logo
     };
 
     let environmentModel = new environment.model(params);

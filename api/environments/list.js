@@ -4,7 +4,7 @@ const environment = require('./../models/environment');
 
 module.exports.public = (event, context, callback) => {
 
-    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'createdAt', 'updatedAt'];
+    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'logo', 'createdAt', 'updatedAt'];
     environment.model.scan('isPrivate').eq(false).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
@@ -28,7 +28,7 @@ module.exports.public = (event, context, callback) => {
 
 module.exports.private = (event, context, callback) => {
 
-    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'tokens', 'monitors', 'createdAt', 'updatedAt'];
+    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'tokens', 'monitors', 'logo', 'createdAt', 'updatedAt'];
     environment.model.scan('owner').eq(event.principalId).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);

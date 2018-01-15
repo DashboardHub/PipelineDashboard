@@ -69,6 +69,12 @@ const schema = new Schema({
             required: true,
             trim: true,
             validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'build', 'deploy', 'build-deploy' ]))
+        },
+        logo: {
+            type: String,
+            default: '',
+            trim: true,
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 5, max: 1024}))
         }
     },
     {
