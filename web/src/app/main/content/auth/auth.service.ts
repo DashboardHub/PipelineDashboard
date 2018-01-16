@@ -6,6 +6,7 @@ import { Profile } from "./profile";
 
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
+import { NavigationService } from "../../../navigation/navigation.service";
 
 @Injectable()
 export class AuthService {
@@ -23,7 +24,7 @@ export class AuthService {
 
   private subject = new Subject<Profile>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private navService: NavigationService) {}
 
   public login(): void {
     this.auth0.authorize();
@@ -55,6 +56,7 @@ export class AuthService {
   }
 
   public logout(): void {
+    this.navService.removePrivate();
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
@@ -84,6 +86,7 @@ export class AuthService {
           self.userProfile = profile;
           resolve(profile);
           this.subject.next(profile);
+          this.navService.addPrivate();
         }
         cb(err);
       });

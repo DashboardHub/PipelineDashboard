@@ -27,6 +27,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { EnvironmentListComponent } from "./content/environment/environment-list/environment-list.component";
 import { PublicEnvironmentsResolver } from "./content/environment/public.environments.resolver";
 import { JwtModule } from "@auth0/angular-jwt";
+import { NavigationService } from "../navigation/navigation.service";
+import { FuseNavigationModel } from "../navigation/navigation.model";
 
 const routes: Routes = [
   {
@@ -110,7 +112,9 @@ const routes: Routes = [
       AuthService,
       EnvironmentService,
       ProfileResolver,
-      PublicEnvironmentsResolver
+      PublicEnvironmentsResolver,
+      FuseNavigationModel,
+      NavigationService
     ]
 })
 
