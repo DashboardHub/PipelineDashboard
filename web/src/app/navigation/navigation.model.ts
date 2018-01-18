@@ -24,7 +24,7 @@ export class FuseNavigationModel implements FuseNavigationModelInterface {
       },
       {
         id: 'pricing',
-        title: 'Pricing',
+        title: 'Features',
         // translate: 'NAV.PUBLICENVIRONMENTS.TITLE',
         type: 'item',
         icon: 'attach_money',

@@ -69,10 +69,9 @@ export class EnvironmentService {
   //     );
   // }
   //
-  // deleteEnvironment(id: string): Observable<Environment> {
-  //   return this.authHttp.delete(this.url + '/environments' + '/' + id)
-  //     .map(response => response.json());
-  // }
+  deleteEnvironment(id: string): Observable<Environment> {
+    return this.http.delete<Environment>(this.url + '/environments' + '/' + id);
+  }
   //
   // getPublicEnvironmentSummary(): Observable<Summary> {
   //   return this.http.get(this.url + '/summary')

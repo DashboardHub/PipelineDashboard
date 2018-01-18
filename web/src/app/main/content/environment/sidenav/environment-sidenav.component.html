@@ -5,7 +5,8 @@
     <div class="header p-24" fxLayout="row" fxLayoutAlign="start center">
 
       <!-- USER -->
-      <img [src]="environment.logo" class="avatar mr-16" [alt]="environment.title"/>
+      <i class="material-icons w-40 h-40" *ngIf="!environment.logo">developer_board</i>
+      <img *ngIf="environment.logo" [src]="environment.logo" class="avatar mr-16" [alt]="environment.title"/>
       <span class="h5">{{ environment.title }}</span>
       <!-- / USER -->
 
@@ -62,7 +63,7 @@
         </div>
 
         <div class="nav-item" aria-label="Delete">
-          <a class="nav-link" matRipple>
+          <a class="nav-link" matRipple [routerLink]="['/environment', environment.id, 'delete']">
             <mat-icon class="logo-icon mr-16 red-A700-fg">delete</mat-icon>
             <div class="title red-A700-fg">Delete</div>
           </a>

@@ -36,6 +36,7 @@ import { EnvironmentSidenavComponent } from "./content/environment/sidenav/envir
 import { FuseWidgetComponent } from "../core/components/widget/widget.component";
 import { TokenComponent } from "./content/environment/token/token.component";
 import { TokenService } from "./content/environment/token/token.service";
+import { EnvironmentDeleteComponent } from "./content/environment/environment-delete/environment-delete.component";
 
 const routes: Routes = [
   {
@@ -60,15 +61,16 @@ const routes: Routes = [
       //   component: EnvironmentListComponent,
       //   resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
       // },
-      // {
-      //   path: 'list',
-      //   pathMatch: 'full',
-      //   component: EnvironmentListComponent,
-      //   resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
-      // },
+      {
+        path: 'list',
+        pathMatch: 'full',
+        component: EnvironmentListComponent,
+        resolve: { environments: PublicEnvironmentsResolver }
+      },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
       // { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
@@ -94,6 +96,7 @@ const routes: Routes = [
         EnvironmentListComponent,
         EnvironmentViewComponent,
         EnvironmentSidenavComponent,
+        EnvironmentDeleteComponent,
         TokenComponent
     ],
     imports     : [
