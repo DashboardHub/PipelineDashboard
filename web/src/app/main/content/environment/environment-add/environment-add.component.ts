@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Environment } from "../environment";
 import { EnvironmentService } from "../environment.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector   : 'app-environment-add',
@@ -12,7 +13,7 @@ export class EnvironmentAddComponent
 
   environment: Environment = new Environment('');
 
-  constructor(private environmentService: EnvironmentService) {
+  constructor(private environmentService: EnvironmentService, private router: Router) {
 
   }
 
@@ -20,8 +21,7 @@ export class EnvironmentAddComponent
     this.environmentService
       .addEnvironment(this.environment)
       .subscribe(
-        // data => this.router.navigate(['/environments/' + data.id]),
-        data => console.log(data),
+        data => this.router.navigate(['/environment/' + data.id]),
         error => console.log(error)
       );
   }

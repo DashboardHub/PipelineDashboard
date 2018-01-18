@@ -1,5 +1,5 @@
-// import { Deployed } from "./deployed/deployed";
-// import { Token } from "./tokens/token";
+import { Deployed } from "./deployed/deployed";
+import { Token } from "./token/token";
 // import { Monitor } from "./monitors/monitor";
 
 export class Environment {
@@ -10,12 +10,12 @@ export class Environment {
   logo: string;
   description: string;
   link: string;
-  // latestRelease: Deployed;
+  latestRelease: Deployed;
   releases: number;
-  progress: number;
+  progress: {current: number, next: number};
   isPrivate: boolean;
   tags: Array<string>;
-  // tokens: Array<Token>;
+  tokens: Array<Token>;
   // monitors: Array<Monitor>;
   updatedAt: string;
   createdAt: string;

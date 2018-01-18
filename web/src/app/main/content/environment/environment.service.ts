@@ -7,15 +7,12 @@ import 'rxjs/add/operator/map';
 import { Router } from "@angular/router";
 import { Observable } from "rxjs/Observable";
 // import { Summary } from "./summary/summary";
-import { Subject } from "rxjs/Subject";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class EnvironmentService {
 
   private url: string = environment.api;
-
-  private environment: Subject<Environment> = new Subject<Environment>();
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -59,10 +56,9 @@ export class EnvironmentService {
   //     );
   // }
   //
-  // getEnvironment(id: string): Observable<Environment> {
-  //   return this.authHttp.get(this.url + '/environments' + '/' + id)
-  //     .map(response => response.json() as Environment);
-  // }
+  getEnvironment(id: string): Observable<Environment> {
+    return this.http.get<Environment>(this.url + '/environments' + '/' + id);
+  }
   //
   // refreshEnvironment(id: string): void {
   //   this.authHttp.get(this.url + '/environments' + '/' + id)
@@ -91,10 +87,5 @@ export class EnvironmentService {
   // subscribeEnvironment(): Observable<any> {
   //   return this.environment.asObservable();
   // }
-
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
 
 }

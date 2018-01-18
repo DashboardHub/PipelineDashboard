@@ -29,6 +29,13 @@ import { PublicEnvironmentsResolver } from "./content/environment/public.environ
 import { JwtModule } from "@auth0/angular-jwt";
 import { NavigationService } from "../navigation/navigation.service";
 import { FuseNavigationModel } from "../navigation/navigation.model";
+import { MomentModule } from "angular2-moment";
+import { EnvironmentViewComponent } from "./content/environment/environment-view/environment-view.component";
+import { EnvironmentViewResolver } from "./content/environment/environment-view/environment-view.resolver";
+import { EnvironmentSidenavComponent } from "./content/environment/sidenav/environment-sidenav.component";
+import { FuseWidgetComponent } from "../core/components/widget/widget.component";
+import { TokenComponent } from "./content/environment/token/token.component";
+import { TokenService } from "./content/environment/token/token.service";
 
 const routes: Routes = [
   {
@@ -43,7 +50,7 @@ const routes: Routes = [
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
   {
-    path: 'environments',
+    path: 'environment',
     canActivate: [AuthGuard],
     resolve: { profile: ProfileResolver },
     children: [
@@ -61,7 +68,8 @@ const routes: Routes = [
       // },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
       // { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
-      // { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
+      { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
   { path: '**', redirectTo: '/public' }
@@ -77,12 +85,16 @@ const routes: Routes = [
         FuseToolbarComponent,
         FuseNavbarVerticalToggleDirective,
         FuseQuickPanelComponent,
+        FuseWidgetComponent,
         CallbackComponent,
         LoginComponent,
         PricingComponent,
         ProfileComponent,
         EnvironmentAddComponent,
-        EnvironmentListComponent
+        EnvironmentListComponent,
+        EnvironmentViewComponent,
+        EnvironmentSidenavComponent,
+        TokenComponent
     ],
     imports     : [
         RouterModule.forRoot(
@@ -102,7 +114,8 @@ const routes: Routes = [
             },
             whitelistedDomains: ['localhost:3000']
           }
-        })
+        }),
+        MomentModule
     ],
     exports     : [
         FuseMainComponent
@@ -113,8 +126,10 @@ const routes: Routes = [
       EnvironmentService,
       ProfileResolver,
       PublicEnvironmentsResolver,
+      EnvironmentViewResolver,
       FuseNavigationModel,
-      NavigationService
+      NavigationService,
+      TokenService
     ]
 })
 

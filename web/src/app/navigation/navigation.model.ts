@@ -45,7 +45,7 @@ export class FuseNavigationModel implements FuseNavigationModelInterface {
       // translate: 'NAV.MYENVIRONMENTS.TITLE',
       type: 'item',
       icon: 'lock',
-      url: '/environments/list',
+      url: '/environment/list',
       // 'badge': {
       //     'title': 3,
       //     // 'translate': 'NAV.MYENVIRONMENTS.BADGE',
@@ -59,7 +59,7 @@ export class FuseNavigationModel implements FuseNavigationModelInterface {
       // 'translate': 'NAV.MYENVIRONMENTS.TITLE',
       type: 'item',
       icon: 'add_circle',
-      url: '/environments/add'
+      url: '/environment/add'
     }
   ];
   public account: Array<any> = [

@@ -3,7 +3,7 @@ export class List<T> {
   list: Array<T> = [];
 
   constructor(list: Array<T> = []) {
-    list.forEach((item) => this.list.push(item));
+    list.forEach((item) => this.add(item));
   }
 
   add(item: T): void {

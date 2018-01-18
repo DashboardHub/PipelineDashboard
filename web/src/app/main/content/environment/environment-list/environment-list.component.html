@@ -25,20 +25,19 @@
       <!-- CONTENT -->
       <div class="content p-24" fusePerfectScrollbar>
 
-        <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-between">
-          <div class="fuse-card" *ngFor="let environment of environments.list" fxFlex="32%">
+        <div class="card-row" fxLayout="row" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="start start" fxLayoutWrap>
+          <div class="fuse-card" *ngFor="let environment of environments.list">
 
             <div class="p-16" fxLayout="row" fxLayoutAlign="start center">
-              <i class="material-icons" *ngIf="!environment.logo">developer_board</i>
+              <i class="material-icons w-40 h-40" *ngIf="!environment.logo">developer_board</i>
               <img class="w-40 h-40 border-radius-100" src="{{ environment.logo }}" *ngIf="environment.logo">
 
               <div class="ml-16">
                 <div class="text-bold">{{ environment.title }}</div>
-                <div class="h5 text-bold secondary-text">Last updated {{ environment.updatedAt }}</div>
+                <div class="h5 text-bold secondary-text">Last updated {{ environment.updatedAt | amTimeAgo }}</div>
               </div>
             </div>
-
-            <div class="card-divider"></div>
+            <mat-progress-bar mode="buffer" [value]="environment.progress.current" [bufferValue]="environment.progress.next"></mat-progress-bar>
 
             <div class="p-16" *ngIf="!environment.latestRelease || !environment.latestRelease.state">
               <div class="h4">Waiting for data</div>
@@ -51,14 +50,12 @@
 
             <div class="card-divider"></div>
 
-            <div class="p-16 pt-0 line-height-1.75">{{ environment.description || '-' }}</div>
+            <div class="p-16 pt-0 line-height-1.75">{{ environment.description || 'No description' }}</div>
 
             <div class="card-divider"></div>
 
-            <button mat-button color="accent" [routerLink]="['/environment', environment.id]">DETAILS</button>
-            <button mat-button color="accent" [disabled]="!environment.link">WEBSITE</button>
-
-            <mat-progress-bar mode="buffer" [value]="environment.progress.current" [bufferValue]="environment.progress.next"></mat-progress-bar>
+            <a mat-button color="accent" [routerLink]="['/environment', environment.id]">DETAILS</a>
+            <a mat-button color="accent" [disabled]="!environment.link">WEBSITE</a>
           </div>
         </div>
 
