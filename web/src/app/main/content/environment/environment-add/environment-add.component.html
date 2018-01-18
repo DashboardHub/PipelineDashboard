@@ -31,7 +31,7 @@
                       <!--color="accent" icon="info"></td-message>-->
             <div fxLayout="column">
               <mat-radio-group #type="ngModel" name="type" [(ngModel)]="environment.type" [required]="true" fxLayout="column"
-                               fxLayoutGap="10px" class="pad-bottom-md">
+                               fxLayoutGap="10px" class="mb-36">
                 <p>Select your type of environment: <mat-hint>(this can be changed at any time)</mat-hint></p>
                 <mat-radio-button value="build">1. Build Only
                   <mat-hint>(this will only have 2 steps, 'start' and 'finish' build.
@@ -116,11 +116,13 @@
                 <mat-icon matTooltip="During ALPHA private is not allowed">info</mat-icon>
               </mat-checkbox>
             </div>
-            <a mat-button routerLink="/environments">CANCEL</a>
-            <button mat-button color="primary"
-                    [disabled]="!form.valid"
-                    (click)="add()">SAVE
-            </button>
+            <div class="mt-36">
+              <a mat-button routerLink="/environments">CANCEL</a>
+              <button mat-button color="primary"
+                      [disabled]="!form.valid"
+                      (click)="add()">SAVE
+              </button>
+            </div>
         </form>
 
       </div>

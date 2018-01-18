@@ -5,8 +5,7 @@ import { Router } from "@angular/router";
 
 @Component({
   selector   : 'app-environment-add',
-  templateUrl: './environment-add.component.html',
-  styleUrls  : ['./environment-add.component.scss']
+  templateUrl: './environment-add.component.html'
 })
 export class EnvironmentAddComponent
 {

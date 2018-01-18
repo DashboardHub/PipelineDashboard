@@ -36,25 +36,20 @@ export class EnvironmentService {
   addEnvironment(environment: Environment): Observable<Environment> {
     return this.http.post<Environment>(this.url + '/environments', environment);
   }
-  //
-  // saveEnvironment(environment: Environment): void {
-  //   const updateProperties: Array<string> = ['title', 'description', 'link', 'type'];
-  //
-  //   let patch: Array<any> = updateProperties.map((item) => {
-  //     return {
-  //       op: 'replace',
-  //       path: '/' + item,
-  //       value: environment[item] || ''
-  //     };
-  //   });
-  //
-  //   this.authHttp.patch(this.url + '/environments' + '/' + environment.id, patch)
-  //     .map(response => response.json())
-  //     .subscribe(
-  //       data => this.router.navigate(['/environments/' + data.id]),
-  //       error => console.log(error)
-  //     );
-  // }
+
+  saveEnvironment(environment: Environment): Observable<Environment> {
+    const updateProperties: Array<string> = ['title', 'description', 'link', 'type', 'logo'];
+
+    let patch: Array<any> = updateProperties.map((item) => {
+      return {
+        op: 'replace',
+        path: '/' + item,
+        value: environment[item] || ''
+      };
+    });
+
+    return this.http.patch<Environment>(this.url + '/environments' + '/' + environment.id, patch);
+  }
   //
   getEnvironment(id: string): Observable<Environment> {
     return this.http.get<Environment>(this.url + '/environments' + '/' + id);

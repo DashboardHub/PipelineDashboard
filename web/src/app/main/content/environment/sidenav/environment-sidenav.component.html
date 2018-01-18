@@ -18,12 +18,12 @@
 
       <div class="nav">
 
-        <!--<div class="nav-item" aria-label="Overview">-->
-          <!--<a class="nav-link" matRipple>-->
-            <!--<mat-icon class="logo-icon mr-16">subject</mat-icon>-->
-            <!--<span class="title">Overview</span>-->
-          <!--</a>-->
-        <!--</div>-->
+        <div class="nav-item" aria-label="Overview">
+          <a class="nav-link" matRipple [routerLink]="['/environment', environment.id]">
+            <mat-icon class="logo-icon mr-16">subject</mat-icon>
+            <span class="title">Overview</span>
+          </a>
+        </div>
 
         <div class="nav-item" aria-label="Releases">
           <a class="nav-link" matRipple>
@@ -56,7 +56,7 @@
         <mat-divider></mat-divider>
 
         <div class="nav-item" aria-label="Edit">
-          <a class="nav-link" matRipple>
+          <a class="nav-link" matRipple [routerLink]="['/environment', environment.id, 'edit']">
             <mat-icon class="logo-icon mr-16">mode_edit</mat-icon>
             <div class="title">Edit</div>
           </a>

@@ -37,6 +37,7 @@ import { FuseWidgetComponent } from "../core/components/widget/widget.component"
 import { TokenComponent } from "./content/environment/token/token.component";
 import { TokenService } from "./content/environment/token/token.service";
 import { EnvironmentDeleteComponent } from "./content/environment/environment-delete/environment-delete.component";
+import { EnvironmentEditComponent } from "./content/environment/environment-edit/environment-edit.component";
 
 const routes: Routes = [
   {
@@ -68,10 +69,10 @@ const routes: Routes = [
         resolve: { environments: PublicEnvironmentsResolver }
       },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
-      // { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
-      { path: ':id', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } }
+      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
   { path: '**', redirectTo: '/public' }
@@ -97,6 +98,7 @@ const routes: Routes = [
         EnvironmentViewComponent,
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
+        EnvironmentEditComponent,
         TokenComponent
     ],
     imports     : [
