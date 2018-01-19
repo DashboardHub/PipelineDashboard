@@ -27,12 +27,11 @@ export class EnvironmentService {
   //     .then(response => response.json() as Environment)
   //     .catch(this.handleError);
   // }
-  //
-  // getEnvironments(): Observable<List<Environment>> {
-  //   return this.authHttp.get(this.url + '/environments/list')
-  //     .map(response => response.json() as List<Environment>)
-  // }
-  //
+
+  getEnvironments(): Observable<List<Environment>> {
+    return this.http.get<List<Environment>>(this.url + '/environments/list');
+  }
+
   addEnvironment(environment: Environment): Observable<Environment> {
     return this.http.post<Environment>(this.url + '/environments', environment);
   }
@@ -50,11 +49,11 @@ export class EnvironmentService {
 
     return this.http.patch<Environment>(this.url + '/environments' + '/' + environment.id, patch);
   }
-  //
+
   getEnvironment(id: string): Observable<Environment> {
     return this.http.get<Environment>(this.url + '/environments' + '/' + id);
   }
-  //
+
   // refreshEnvironment(id: string): void {
   //   this.authHttp.get(this.url + '/environments' + '/' + id)
   //     .map(response => response.json() as Environment)
@@ -63,11 +62,11 @@ export class EnvironmentService {
   //       error => console.log(error)
   //     );
   // }
-  //
+
   deleteEnvironment(id: string): Observable<Environment> {
     return this.http.delete<Environment>(this.url + '/environments' + '/' + id);
   }
-  //
+
   // getPublicEnvironmentSummary(): Observable<Summary> {
   //   return this.http.get(this.url + '/summary')
   //     .map(response => response.json() as Summary)

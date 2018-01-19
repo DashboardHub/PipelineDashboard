@@ -38,6 +38,7 @@ import { TokenComponent } from "./content/environment/token/token.component";
 import { TokenService } from "./content/environment/token/token.service";
 import { EnvironmentDeleteComponent } from "./content/environment/environment-delete/environment-delete.component";
 import { EnvironmentEditComponent } from "./content/environment/environment-edit/environment-edit.component";
+import { PrivateEnvironmentsResolver } from "./content/environment/private.environments.resolver";
 
 const routes: Routes = [
   {
@@ -66,7 +67,7 @@ const routes: Routes = [
         path: 'list',
         pathMatch: 'full',
         component: EnvironmentListComponent,
-        resolve: { environments: PublicEnvironmentsResolver }
+        resolve: { environments: PrivateEnvironmentsResolver }
       },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
       { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
@@ -131,6 +132,7 @@ const routes: Routes = [
       EnvironmentService,
       ProfileResolver,
       PublicEnvironmentsResolver,
+      PrivateEnvironmentsResolver,
       EnvironmentViewResolver,
       FuseNavigationModel,
       NavigationService,
