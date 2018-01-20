@@ -26,7 +26,7 @@
         </div>
 
         <div class="nav-item" aria-label="Releases">
-          <a class="nav-link" matRipple>
+          <a class="nav-link" matRipple [routerLink]="['/environment', environment.id, 'releases']">
             <mat-icon class="logo-icon mr-16">new_releases</mat-icon>
             <span class="title">Releases</span>
           </a>

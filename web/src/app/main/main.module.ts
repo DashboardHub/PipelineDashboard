@@ -43,6 +43,8 @@ import { DeployedComponent } from "./content/environment/deployed/deployed.compo
 import { DeploysResolver } from "./content/environment/deployed/deploys.resolver";
 import { DeployedService } from "./content/environment/deployed/deployed.service";
 import { ErrorHttpInterceptor } from "./error.http.interceptor";
+import { ReleaseComponent } from "./content/environment/deployed/release/release.component";
+import { ReleasesResolver } from "./content/environment/deployed/release/releases.resolver";
 
 const routes: Routes = [
   {
@@ -77,6 +79,7 @@ const routes: Routes = [
       { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
+      { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, deploys: ReleasesResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
@@ -104,6 +107,7 @@ const routes: Routes = [
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
         EnvironmentEditComponent,
+        ReleaseComponent,
         TokenComponent,
         DeployedComponent
     ],
@@ -141,6 +145,7 @@ const routes: Routes = [
       ProfileResolver,
       PublicEnvironmentsResolver,
       PrivateEnvironmentsResolver,
+      ReleasesResolver,
       EnvironmentViewResolver,
       FuseNavigationModel,
       NavigationService,

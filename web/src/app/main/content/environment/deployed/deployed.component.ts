@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Environment } from "../environment";
 import { ActivatedRoute } from "@angular/router";
 import { fuseAnimations } from "../../../../core/animations";
 import { List } from "../../list";
 import { Deployed } from "./deployed";
-import { MatPaginator, MatTableDataSource } from "@angular/material";
+import { MatTableDataSource } from "@angular/material";
 
 @Component({
   selector   : 'app-deployed',
@@ -12,8 +12,6 @@ import { MatPaginator, MatTableDataSource } from "@angular/material";
   animations : fuseAnimations
 })
 export class DeployedComponent implements OnInit {
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   environment: Environment = new Environment('');
   deploys: List<Deployed>;

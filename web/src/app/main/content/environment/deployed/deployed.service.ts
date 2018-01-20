@@ -5,14 +5,12 @@ import { List } from "./../../list";
 import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
 import { Deployed } from "./deployed";
 import { Release } from "./release";
 import { State } from "./state";
 import { MatSnackBar } from "@angular/material";
 import { HttpClient } from "@angular/common/http";
 import { EnvironmentService } from "../environment.service";
-import { Environment } from "../environment";
 
 @Injectable()
 export class DeployedService {
@@ -41,14 +39,9 @@ export class DeployedService {
     return this.http.get<List<Deployed>>(`${this.url}/environments/${environmentId}/deployed`);
   }
 
-  // getReleases(environmentId: string): void {
-  //   this.http.get(`${this.url}/environments/${environmentId}/releases`)
-  //     .map(response => response.json() as List<Release>)
-  //     .subscribe(
-  //       data => this.releases.next(data),
-  //       error => console.log(error)
-  //     );
-  // }
+  findAllReleases(environmentId: string): Observable<List<Release>> {
+    return this.http.get<List<Release>>(`${this.url}/environments/${environmentId}/releases`);
+  }
 
   // addDeployed(deployed: Deployed): void {
   //   this.http.post(`${this.url}/environments/${deployed.environmentId}/deployed/${deployed.token.id}/${deployed.state}`, deployed)
