@@ -23,7 +23,7 @@ import { ProfileComponent } from "./content/auth/profile/profile.component";
 import { AuthGuard } from "./content/auth/auth.guard";
 import { EnvironmentAddComponent } from "./content/environment/environment-add/environment-add.component";
 import { EnvironmentService } from "./content/environment/environment.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { EnvironmentListComponent } from "./content/environment/environment-list/environment-list.component";
 import { PublicEnvironmentsResolver } from "./content/environment/public.environments.resolver";
 import { JwtModule } from "@auth0/angular-jwt";
@@ -39,6 +39,10 @@ import { TokenService } from "./content/environment/token/token.service";
 import { EnvironmentDeleteComponent } from "./content/environment/environment-delete/environment-delete.component";
 import { EnvironmentEditComponent } from "./content/environment/environment-edit/environment-edit.component";
 import { PrivateEnvironmentsResolver } from "./content/environment/private.environments.resolver";
+import { DeployedComponent } from "./content/environment/deployed/deployed.component";
+import { DeploysResolver } from "./content/environment/deployed/deploys.resolver";
+import { DeployedService } from "./content/environment/deployed/deployed.service";
+import { ErrorHttpInterceptor } from "./error.http.interceptor";
 
 const routes: Routes = [
   {
@@ -46,7 +50,6 @@ const routes: Routes = [
     pathMatch: 'full',
     component: EnvironmentListComponent,
     resolve: { environments: PublicEnvironmentsResolver, profile: ProfileResolver }
-    // resolve: { summary: EnvironmentsSummaryPublicResolver, environments: EnvironmentsResolver, profile: ProfileResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
   { path: 'login', component: LoginComponent },
@@ -73,6 +76,7 @@ const routes: Routes = [
       { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
@@ -100,7 +104,8 @@ const routes: Routes = [
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
         EnvironmentEditComponent,
-        TokenComponent
+        TokenComponent,
+        DeployedComponent
     ],
     imports     : [
         RouterModule.forRoot(
@@ -127,8 +132,11 @@ const routes: Routes = [
         FuseMainComponent
     ],
     providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorHttpInterceptor, multi: true },
       AuthGuard,
       AuthService,
+      DeploysResolver,
+      DeployedService,
       EnvironmentService,
       ProfileResolver,
       PublicEnvironmentsResolver,
@@ -139,7 +147,6 @@ const routes: Routes = [
       TokenService
     ]
 })
-
 export class FuseMainModule
 {
 }
