@@ -1,6 +1,6 @@
 {
-  "name": "fuse2",
-  "version": "1.3.2",
+  "name": "pipeline-dashboard",
+  "version": "0.8.0",
   "license": "https://themeforest.net/licenses/terms/regular",
   "scripts": {
     "ng": "ng",

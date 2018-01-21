@@ -1,5 +1,5 @@
 {
-  "name": "pipelinedashboard",
+  "name": "pipeline-dashboard",
   "version": "0.8.0",
   "description": "Pipeline Dashboard to display your deployed versions",
   "repository": {
