@@ -54,7 +54,7 @@ Then visit `http://localhost:4200/`
 * Web UI, read the [UI](web/README.md) docs 
 * Alexa Skill, read the [Alexa Skill](alexa/README.md) docs 
 
-## Collaboration
+## COLLABORATION
 
 Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) to do realtime coding collaboration.
 
