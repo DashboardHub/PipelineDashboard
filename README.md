@@ -60,3 +60,8 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 
 ---
 
+## FAQs
+
+| OS | Question | Answer |
+| :--- | :--- | :--- |
+| Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed` |
