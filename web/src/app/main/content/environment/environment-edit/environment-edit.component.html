@@ -92,10 +92,10 @@
                      name="logo" [(ngModel)]="environment.logo"
                      #logo="ngModel">
               <div *ngIf="logo.errors && (logo.dirty || title.touched)">
-                <mat-error *ngIf="title.errors.minlength">
+                <mat-error *ngIf="logo.errors.minlength">
                   Title must be at least 3 characters long.
                 </mat-error>
-                <mat-error *ngIf="title.errors.maxlength">
+                <mat-error *ngIf="logo.errors.maxlength">
                   Title cannot be more than 1024 characters long.
                 </mat-error>
               </div>
