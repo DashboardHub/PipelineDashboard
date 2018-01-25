@@ -23,7 +23,7 @@ export class ReleaseComponent implements OnInit {
 
   ngOnInit() {
     this.environment = this.route.snapshot.data['environment'];
-    this.releases = this.route.snapshot.data['releases'];
+    this.releases = this.route.snapshot.data['releases'] || new List();
     this.dataSource = new MatTableDataSource<Release>(this.releases.list);
   }
 

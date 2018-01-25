@@ -42,34 +42,30 @@
       <!-- CONTENT -->
       <div class="content mat-white-bg mat-elevation-z4">
 
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="release">
+            <mat-header-cell *matHeaderCellDef>Release</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.version }}</mat-cell>
+          </ng-container>
 
+          <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef>Latest State</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.latest.state }}</mat-cell>
+          </ng-container>
 
-            <mat-table #table [dataSource]="dataSource">
-              <ng-container matColumnDef="release">
-                <mat-header-cell *matHeaderCellDef>Release</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.version }}</mat-cell>
-              </ng-container>
+          <ng-container matColumnDef="token">
+            <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.token.name }}</mat-cell>
+          </ng-container>
 
-              <ng-container matColumnDef="state">
-                <mat-header-cell *matHeaderCellDef>Latest State</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.latest.state }}</mat-cell>
-              </ng-container>
+          <ng-container matColumnDef="when">
+            <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{ element.latest.createdAt | amTimeAgo }}</mat-cell>
+          </ng-container>
 
-              <ng-container matColumnDef="token">
-                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.token.name }}</mat-cell>
-              </ng-container>
-
-              <ng-container matColumnDef="when">
-                <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.latest.createdAt | amTimeAgo }}</mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
-
-
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
 
       </div>
       <!-- / CONTENT -->
