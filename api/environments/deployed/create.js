@@ -66,7 +66,7 @@ module.exports.create = (event, context, callback) => {
 
             environmentModel.model.update({ id }, {
                 releases: environment.releases + 1,
-                latestRelease: item,
+                latestRelease: deploy,
                 tokens: environment.tokens.map((t) => {
                     if (t.id === token[0].id) {
                         t.lastUsed = new Date();
