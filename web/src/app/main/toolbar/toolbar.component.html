@@ -15,8 +15,8 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNav">
                 <div class="logo ml-16">
-                    <img class="logo-icon" src="assets/images/logos/fuse.svg">
-                    Pipeline::DashboardHub
+                    <!--<img class="logo-icon" src="assets/images/logos/fuse.svg">-->
+                    DashboardHub
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
 
         </div>
 
-        <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
           <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
             <div fxLayout="row" fxLayoutAlign="center center" *ngIf="!auth.isAuthenticated()">
