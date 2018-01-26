@@ -45,18 +45,21 @@ import { DeployedService } from "./content/environment/deployed/deployed.service
 import { ErrorHttpInterceptor } from "./error.http.interceptor";
 import { ReleaseComponent } from "./content/environment/deployed/release/release.component";
 import { ReleasesResolver } from "./content/environment/deployed/release/releases.resolver";
+import {PrivateSummaryResolver} from "./content/summary/private.summary.resolver";
+import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
+import {SummaryService} from "./content/summary/summary.service";
 
 const routes: Routes = [
   {
     path: 'public',
     pathMatch: 'full',
     component: EnvironmentListComponent,
-    resolve: { environments: PublicEnvironmentsResolver, profile: ProfileResolver }
+    resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver, summary: PublicSummaryResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, summary: PrivateSummaryResolver } },
   {
     path: 'environment',
     canActivate: [AuthGuard],
@@ -145,10 +148,13 @@ const routes: Routes = [
       ProfileResolver,
       PublicEnvironmentsResolver,
       PrivateEnvironmentsResolver,
+      PrivateSummaryResolver,
+      PublicSummaryResolver,
       ReleasesResolver,
       EnvironmentViewResolver,
       FuseNavigationModel,
       NavigationService,
+      SummaryService,
       TokenService
     ]
 })
