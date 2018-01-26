@@ -6,7 +6,7 @@
 
 Display your **deployed versions** and **monitor** it.
 
-## WHAT TO GET INVOLVED? Dont know how? What to learn...
+## WHAT TO GET INVOLVED? Don't know how? ...
 
 All contributions are welcome, not only from code, but also blogs, content, documentation etc.
 
