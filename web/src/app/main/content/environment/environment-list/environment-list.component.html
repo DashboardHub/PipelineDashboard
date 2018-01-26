@@ -50,11 +50,7 @@
 
             <div class="card-divider"></div>
 
-            <div class="p-16 pt-0 line-height-1.75">{{ environment.description || 'No description' }}</div>
-
-            <div class="card-divider"></div>
-
-            <a mat-button color="accent" [routerLink]="['/environment', environment.id]">DETAILS</a>
+            <a mat-button color="accent" [routerLink]="['/environment', environment.id]" *ngIf="profile && environment.owner === profile.sub">DETAILS</a>
             <a mat-button color="accent" [disabled]="!environment.link">WEBSITE</a>
           </div>
         </div>
