@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import {fuseAnimations} from "../../../../core/animations";
 import {Summary} from "../../summary/summary";
 
 @Component({
   selector: 'app-auth-profile',
   templateUrl: './profile.component.html',
-  styleUrls  : ['./profile.component.scss'],
-  animations : fuseAnimations
+  styleUrls  : ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
 

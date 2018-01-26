@@ -48,13 +48,14 @@ import { ReleasesResolver } from "./content/environment/deployed/release/release
 import {PrivateSummaryResolver} from "./content/summary/private.summary.resolver";
 import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
 import {SummaryService} from "./content/summary/summary.service";
+import {SummaryComponent} from "./content/summary/summary.component";
 
 const routes: Routes = [
   {
     path: 'public',
     pathMatch: 'full',
     component: EnvironmentListComponent,
-    resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver, summary: PublicSummaryResolver }
+    resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
   { path: 'login', component: LoginComponent },
@@ -112,7 +113,8 @@ const routes: Routes = [
         EnvironmentEditComponent,
         ReleaseComponent,
         TokenComponent,
-        DeployedComponent
+        DeployedComponent,
+        SummaryComponent
     ],
     imports     : [
         RouterModule.forRoot(
