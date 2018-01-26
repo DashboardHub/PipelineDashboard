@@ -43,6 +43,18 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 ![nodejs](https://user-images.githubusercontent.com/624760/34513224-17d6ff74-f05f-11e7-8080-18f09f63a3f4.png)
 ![aws](https://user-images.githubusercontent.com/624760/35319340-4cb8b7b8-00d7-11e8-95f6-83c815d9138c.jpg)
 
+## ROADMAP
+
+We have an aggressive plan for our prototype, so we can get feedback ASAP.
+
+| Milestone | Status | ETA |
+| :--- | :--- | :-- |
+| Simple Monitoring & New Design | In progress | Feb 2018 | 
+| Notifications | Pending | March 2018 | 
+| Projects that group Environments | Pending | May 2018 | 
+
+For more information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
+
 ## QUICK START
 
 Using `make` to build and run the project(s):
