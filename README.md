@@ -6,6 +6,14 @@
 
 Display your **deployed versions** and **monitor** it.
 
+## WHAT TO GET INVOLVED? Dont know how? What to learn...
+
+All contributions are welcome, not only from code, but also blogs, content, documentation etc.
+
+**Pair with out team remotely over Google Hangout!**
+
+Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and let us know, we are happy to chat and more than happy to pair on the technologies we use listed below.
+
 ---
 
 ![Screenshot](https://user-images.githubusercontent.com/624760/33978327-0ee1e370-e097-11e7-924c-670f76b562d3.png)
