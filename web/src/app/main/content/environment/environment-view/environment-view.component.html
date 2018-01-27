@@ -54,6 +54,8 @@
             </mat-card-content>
           </mat-card>
 
+          <mat-progress-bar mode="buffer" [value]="environment.progress.current" [bufferValue]="environment.progress.next"></mat-progress-bar>
+
           <mat-card *ngIf="['build', 'build-deploy'].includes(environment.type)">
             <mat-card-header>
               <!--<div mat-card-avatar></div>-->
