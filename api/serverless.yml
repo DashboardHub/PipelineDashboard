@@ -417,6 +417,16 @@ custom:
       port: 8000
       inMemory: true
       migrate: true
+      seed: true
+    seed:
+      test:
+        sources:
+          - table: pipelinedashboard-environments-test
+            sources: [../data/environments.json]
+          - table: pipelinedashboard-deployed-test
+            sources: [../data/deployed.json]
+#          - table: pipelinedashboard-pinged-test
+#            sources: [../data/pinged.json]
   customDomain:
     certificateName: dashboardhub.io
     domainName: ${file(./config.json):domain.${opt:stage}}

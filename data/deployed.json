@@ -1,0 +1,65 @@
+[
+  {
+    "id":"1",
+    "environmentId":"2",
+    "release":"v0.0.1",
+    "state":"startBuild",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044450932,
+    "updatedAt":1517044450932
+  },
+  {
+    "id":"2",
+    "environmentId":"2",
+    "release":"v0.0.1",
+    "state":"finishBuild",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044450932,
+    "updatedAt":1517044450932
+  },
+  {
+    "id":"3",
+    "environmentId":"3",
+    "release":"v0.1.1",
+    "state":"startDeploy",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044450932,
+    "updatedAt":1517044450932
+  },
+  {
+    "id":"4",
+    "environmentId":"4",
+    "release":"v1.0.1",
+    "state":"startBuild",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044450932,
+    "updatedAt":1517044450932
+  },
+  {
+    "id":"5",
+    "environmentId":"4",
+    "release":"v1.0.1",
+    "state":"finishBuild",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044451932,
+    "updatedAt":1517044451932
+  },
+  {
+    "id":"6",
+    "environmentId":"4",
+    "release":"v1.0.1",
+    "state":"startDeploy",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044452932,
+    "updatedAt":1517044452932
+  },
+  {
+    "id":"7",
+    "environmentId":"4",
+    "release":"v1.0.1",
+    "state":"finishDeploy",
+    "token":"{\"name\":\"Continuous Integration Server\"}",
+    "createdAt":1517044453932,
+    "updatedAt":1517044453932
+  }
+]
