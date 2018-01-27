@@ -83,7 +83,7 @@ const routes: Routes = [
       { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
-      { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, deploys: ReleasesResolver } },
+      { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, releases: ReleasesResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
