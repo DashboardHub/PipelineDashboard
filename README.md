@@ -10,7 +10,7 @@ Display your **deployed versions** and **monitor** it.
 
 All contributions are welcome, not only from code, but also blogs, content, documentation etc.
 
-**Pair with out team remotely over Google Hangout!**
+**Pair with our team remotely over Google Hangout!**
 
 Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and let us know, we are happy to chat and more than happy to pair on the technologies we use:
 
