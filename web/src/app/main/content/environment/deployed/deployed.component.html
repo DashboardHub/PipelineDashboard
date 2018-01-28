@@ -39,10 +39,12 @@
     <!-- CENTER -->
     <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
 
+      <mat-toolbar class="mat-elevation-z24">
+        <a mat-button (click)="refresh()"><mat-icon class="example-icon">refresh</mat-icon></a>
+      </mat-toolbar>
+
       <!-- CONTENT -->
       <div class="content mat-white-bg mat-elevation-z4">
-
-
 
             <mat-table #table [dataSource]="dataSource">
               <ng-container matColumnDef="release">
