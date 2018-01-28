@@ -49,6 +49,7 @@ import {PrivateSummaryResolver} from "./content/summary/private.summary.resolver
 import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
 import {SummaryService} from "./content/summary/summary.service";
 import {SummaryComponent} from "./content/summary/summary.component";
+import {OrderModule} from "ngx-order-pipe";
 
 const routes: Routes = [
   {
@@ -135,7 +136,8 @@ const routes: Routes = [
             whitelistedDomains: ['localhost:3000']
           }
         }),
-        MomentModule
+        MomentModule,
+        OrderModule
     ],
     exports     : [
         FuseMainComponent
