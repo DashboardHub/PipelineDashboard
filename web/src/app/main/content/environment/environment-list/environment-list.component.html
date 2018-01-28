@@ -25,36 +25,42 @@
       <!-- CONTENT -->
       <div class="content p-24" fusePerfectScrollbar>
 
-        <div class="card-row" fxLayout="row" fxLayoutAlign="center start" fxLayoutAlign.gt-sm="start start" fxLayoutWrap>
-          <div class="fuse-card" *ngFor="let environment of environments.list">
+        <div class="widget-group p-12" fxLayout="row" fxFlex="100" fxLayoutWrap *fuseIfOnDom [@animateStagger]="{value:'50'}">
 
-            <div class="p-16" fxLayout="row" fxLayoutAlign="start center">
-              <i class="material-icons w-40 h-40" *ngIf="!environment.logo">developer_board</i>
-              <img class="w-40 h-40 border-radius-100" [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-
-              <div class="ml-16">
-                <div class="text-bold">{{ environment.title }}</div>
-                <div class="h5 text-bold secondary-text">Last updated {{ environment.updatedAt | amTimeAgo }}</div>
+          <fuse-widget
+            [@animate]="{value:'*',params:{y:'100%'}}" class="widget"
+            fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
+            *ngFor="let environment of environments.list">
+            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+                <div class="light-blue-fg font-size-72 line-height-72">{{ environment.latestRelease.release || '-.-.-' }}</div>
+                <div class="h3 secondary-text font-weight-500">{{ environment.latestRelease.state || 'Waiting for data' }}</div>
               </div>
+
+              <mat-progress-bar mode="buffer" [value]="environment.progress.current" [bufferValue]="environment.progress.next"></mat-progress-bar>
+
+              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+                <span class="h4 secondary-text text-truncate">
+                  <i class="material-icons w-40 h-40" *ngIf="!environment.logo">developer_board</i>
+                  <img class="w-40 h-40 border-radius-100" [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
+                </span>
+                <span class="h4 ml-8">{{ environment.title }}</span>
+              </div>
+              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+                <span class="h4 secondary-text text-truncate">Releases</span>
+                <span class="h4 ml-8">{{ environment.releases }}</span>
+              </div>
+              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+                <span class="h4 secondary-text text-truncate">Last updated</span>
+                <span class="h4 ml-8">{{ environment.updatedAt | amTimeAgo }}</span>
+              </div>
+
+              <a mat-button color="accent" [routerLink]="['/environment', environment.id]" *ngIf="profile && environment.owner === profile.sub">DETAILS</a>
+              <a mat-button color="accent" [disabled]="!environment.link">WEBSITE</a>
             </div>
-            <mat-progress-bar mode="buffer" [value]="environment.progress.current" [bufferValue]="environment.progress.next"></mat-progress-bar>
+          </fuse-widget>
 
-            <div class="p-16" *ngIf="!environment.latestRelease || !environment.latestRelease.state">
-              <div class="h4">Waiting for data</div>
-            </div>
-
-            <div class="p-16" *ngIf="environment.latestRelease || environment.latestRelease.state">
-              <div class="h1">{{ environment.latestRelease.release }}</div>
-              <div class="h4">{{ environment.latestRelease.state }}</div>
-            </div>
-
-            <div class="card-divider"></div>
-
-            <a mat-button color="accent" [routerLink]="['/environment', environment.id]" *ngIf="profile && environment.owner === profile.sub">DETAILS</a>
-            <a mat-button color="accent" [disabled]="!environment.link">WEBSITE</a>
-          </div>
         </div>
-
 
       </div>
       <!-- / CONTENT -->
