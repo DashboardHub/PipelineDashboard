@@ -1,3 +1,26 @@
 [
-
+  {
+    "id": "1",
+    "environmentId": "4",
+    "monitorId": "1",
+    "url": "/",
+    "statusCode": 200,
+    "codeMatched": true,
+    "textMatched": true,
+    "duration": 1,
+    "createdAt": 1517044450932,
+    "updatedAt": 1517044450932
+  },
+  {
+    "id": "2",
+    "environmentId": "4",
+    "monitorId": "1",
+    "url": "/",
+    "statusCode": 500,
+    "codeMatched": false,
+    "textMatched": false,
+    "duration": 10,
+    "createdAt": 1517044451932,
+    "updatedAt": 1517044451932
+  }
 ]

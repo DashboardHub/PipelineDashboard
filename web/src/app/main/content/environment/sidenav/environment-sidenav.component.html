@@ -40,7 +40,7 @@
         </div>
 
         <div class="nav-item" aria-label="Monitors">
-          <a class="nav-link" matRipple>
+          <a class="nav-link" matRipple [routerLink]="['/environment', environment.id, 'monitors']">
             <mat-icon class="logo-icon mr-16">timelapse</mat-icon>
             <div class="title">Monitors</div>
           </a>

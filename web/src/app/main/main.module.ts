@@ -50,6 +50,9 @@ import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
 import {SummaryService} from "./content/summary/summary.service";
 import {SummaryComponent} from "./content/summary/summary.component";
 import {OrderModule} from "ngx-order-pipe";
+import {MonitorComponent} from "./content/environment/monitor/monitor.component";
+import {PingsResolver} from "./content/environment/monitor/pinged/pings.resolver";
+import {PingedService} from "./content/environment/monitor/pinged/pinged.service";
 
 const routes: Routes = [
   {
@@ -67,12 +70,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     resolve: { profile: ProfileResolver },
     children: [
-      // {
-      //   path: '',
-      //   pathMatch: 'full',
-      //   component: EnvironmentListComponent,
-      //   resolve: { summary: EnvironmentsSummaryPrivateResolver, environments: EnvironmentsListResolver }
-      // },
       {
         path: 'list',
         pathMatch: 'full',
@@ -85,6 +82,7 @@ const routes: Routes = [
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
       { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, releases: ReleasesResolver } },
+      { path: ':id/monitors', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
@@ -112,6 +110,7 @@ const routes: Routes = [
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
         EnvironmentEditComponent,
+        MonitorComponent,
         ReleaseComponent,
         TokenComponent,
         DeployedComponent,
@@ -149,6 +148,8 @@ const routes: Routes = [
       DeploysResolver,
       DeployedService,
       EnvironmentService,
+      PingsResolver,
+      PingedService,
       ProfileResolver,
       PublicEnvironmentsResolver,
       PrivateEnvironmentsResolver,

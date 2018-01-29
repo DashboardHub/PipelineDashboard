@@ -1,6 +1,6 @@
 import { Deployed } from "./deployed/deployed";
 import { Token } from "./token/token";
-// import { Monitor } from "./monitors/monitor";
+import {Monitor} from "./monitor/monitor";
 
 export class Environment {
   id: string;
@@ -16,7 +16,7 @@ export class Environment {
   isPrivate: boolean;
   tags: Array<string>;
   tokens: Array<Token>;
-  // monitors: Array<Monitor>;
+  monitors: Array<Monitor>;
   updatedAt: string;
   createdAt: string;
 
