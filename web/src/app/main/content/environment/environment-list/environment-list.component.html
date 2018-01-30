@@ -33,7 +33,7 @@
             *ngFor="let environment of environments.list | orderBy: '-updatedAt'">
             <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
               <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
-                <div class="light-blue-fg font-size-72 line-height-72">{{ environment.latestRelease.release || '-.-.-' }}</div>
+                <div class="light-blue-fg font-size-36 line-height-72">{{ environment.latestRelease.release || '-.-.-' }}</div>
                 <div class="h3 secondary-text font-weight-500">{{ environment.latestRelease.state || 'Waiting for data' }}</div>
               </div>
 
