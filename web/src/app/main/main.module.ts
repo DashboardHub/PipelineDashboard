@@ -49,10 +49,10 @@ import {PrivateSummaryResolver} from "./content/summary/private.summary.resolver
 import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
 import {SummaryService} from "./content/summary/summary.service";
 import {SummaryComponent} from "./content/summary/summary.component";
-import {OrderModule} from "ngx-order-pipe";
 import {MonitorComponent} from "./content/environment/monitor/monitor.component";
 import {PingsResolver} from "./content/environment/monitor/pinged/pings.resolver";
 import {PingedService} from "./content/environment/monitor/pinged/pinged.service";
+import {NgPipesModule} from "ngx-pipes";
 
 const routes: Routes = [
   {
@@ -136,7 +136,7 @@ const routes: Routes = [
           }
         }),
         MomentModule,
-        OrderModule
+        NgPipesModule
     ],
     exports     : [
         FuseMainComponent
