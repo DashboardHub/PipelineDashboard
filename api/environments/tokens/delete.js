@@ -20,7 +20,10 @@ module.exports.delete = (event, context, callback) => {
 
         environmentModel.model.update({ id }, { tokens }, { allowEmptyArray:true }, function (err) {
             if(err) { return console.log(err); }
-            callback(null, environment.tokens);
+            callback(null, JSON.stringify({
+                total: tokens.length,
+                list: tokens
+            }));
         });
     });
 

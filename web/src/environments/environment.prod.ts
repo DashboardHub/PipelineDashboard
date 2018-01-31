@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  hmr: false,
   api: 'https://api-pipeline.dashboardhub.io',
   version: 'x.x.x',
 

@@ -1,0 +1,92 @@
+<div id="contacts" class="page-layout simple left-sidenav inner-sidenav">
+
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start start"
+       fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+    <!-- APP TITLE -->
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+      <button mat-button class="mat-icon-button sidenav-toggle mr-12"
+              fuseMatSidenavToggler="contacts-main-sidenav"
+              fxHide.gt-md>
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon mr-16" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">timelapse</mat-icon>
+        <span class="logo-text h1" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Monitors</span>
+      </div>
+
+    </div>
+    <!-- / APP TITLE -->
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- SELECTED BAR -->
+  <!--<fuse-selected-bar class="mat-accent-600-bg" *ngIf="hasSelectedContacts" [@slideInTop]></fuse-selected-bar>-->
+  <!-- / SELECTED BAR -->
+
+  <mat-sidenav-container>
+
+    <!-- SIDENAV -->
+    <mat-sidenav class="sidenav" align="start" opened="true" mode="side" fuseMatSidenavHelper="contacts-main-sidenav" mat-is-locked-open="gt-sm">
+      <environment-sidenav [environment]="environment"></environment-sidenav>
+    </mat-sidenav>
+    <!-- / SIDENAV -->
+
+    <!-- CENTER -->
+    <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+
+      <mat-toolbar class="mat-elevation-z24">
+        <a mat-button (click)="refresh()"><mat-icon class="example-icon">refresh</mat-icon></a>
+      </mat-toolbar>
+
+      <!-- CONTENT -->
+      <div class="content mat-white-bg mat-elevation-z4">
+
+            <mat-table #table [dataSource]="dataSource">
+              <ng-container matColumnDef="url">
+                <mat-header-cell *matHeaderCellDef>Release</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.url }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="statusCode">
+                <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.statusCode }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="codeMatched">
+                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.codeMatched }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="textMatched">
+                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.textMatched }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="duration">
+                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.duration }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="createdAt">
+                <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.createdAt | amTimeAgo }}</mat-cell>
+              </ng-container>
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+
+  </mat-sidenav-container>
+
+</div>

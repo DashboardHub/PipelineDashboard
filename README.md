@@ -6,6 +6,20 @@
 
 Display your **deployed versions** and **monitor** it.
 
+## WHAT TO GET INVOLVED? Don't know how? ...
+
+All contributions are welcome, not only from code, but also blogs, content, documentation etc.
+
+**Pair with our team remotely over Google Hangout!**
+
+Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and let us know, we are happy to chat and more than happy to pair on the technologies we use:
+
+- Angular (v5+)
+- Material design
+- Node
+- Serverless
+- AWS Lambda & DynamoDB
+
 ---
 
 ![Screenshot](https://user-images.githubusercontent.com/624760/33978327-0ee1e370-e097-11e7-924c-670f76b562d3.png)
@@ -26,6 +40,19 @@ Display your **deployed versions** and **monitor** it.
 
 ![angular](https://user-images.githubusercontent.com/624760/34513230-1e2ba5be-f05f-11e7-8cbf-c1b93415f4e5.png)
 ![nodejs](https://user-images.githubusercontent.com/624760/34513224-17d6ff74-f05f-11e7-8080-18f09f63a3f4.png)
+![aws](https://user-images.githubusercontent.com/624760/35319340-4cb8b7b8-00d7-11e8-95f6-83c815d9138c.jpg)
+
+## ROADMAP
+
+We have an aggressive plan for our prototype, so we can get feedback ASAP.
+
+| Milestone | Status | ETA |
+| :--- | :--- | :-- |
+| Simple Monitoring & New Design | In progress | Feb 2018 | 
+| Notifications | Pending | March 2018 | 
+| Projects that group Environments | Pending | May 2018 | 
+
+For more information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
 
 ![serverless](https://user-images.githubusercontent.com/624760/34513225-1b46a506-f05f-11e7-9fa3-a6b6bc740d1a.png)
 ![aws](https://user-images.githubusercontent.com/624760/35319340-4cb8b7b8-00d7-11e8-95f6-83c815d9138c.jpg)
@@ -56,8 +83,14 @@ Then visit `http://localhost:4200/`
 * Web UI, read the [UI](web/README.md) docs 
 * Alexa Skill, read the [Alexa Skill](alexa/README.md) docs 
 
-## Collaboration
+## COLLABORATION
 
 Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) to do realtime coding collaboration.
 
 ---
+
+## FAQs
+
+| OS | Question | Answer |
+| :--- | :--- | :--- |
+| Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed --with-default-names` |
