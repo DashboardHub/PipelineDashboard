@@ -33,7 +33,6 @@ import { MomentModule } from "angular2-moment";
 import { EnvironmentViewComponent } from "./content/environment/environment-view/environment-view.component";
 import { EnvironmentViewResolver } from "./content/environment/environment-view/environment-view.resolver";
 import { EnvironmentSidenavComponent } from "./content/environment/sidenav/environment-sidenav.component";
-import { FuseWidgetComponent } from "../core/components/widget/widget.component";
 import { TokenComponent } from "./content/environment/token/token.component";
 import { TokenService } from "./content/environment/token/token.service";
 import { EnvironmentDeleteComponent } from "./content/environment/environment-delete/environment-delete.component";
@@ -53,6 +52,8 @@ import {MonitorComponent} from "./content/environment/monitor/monitor.component"
 import {PingsResolver} from "./content/environment/monitor/pinged/pings.resolver";
 import {PingedService} from "./content/environment/monitor/pinged/pinged.service";
 import {NgPipesModule} from "ngx-pipes";
+import {FuseWidgetModule} from "../core/components/widget/widget.module";
+import {FuseThemeOptionsComponent} from "../core/components/theme-options/theme-options.component";
 
 const routes: Routes = [
   {
@@ -103,7 +104,7 @@ export function tokenGetter() {
         FuseToolbarComponent,
         FuseNavbarVerticalToggleDirective,
         FuseQuickPanelComponent,
-        FuseWidgetComponent,
+        FuseThemeOptionsComponent,
         CallbackComponent,
         LoginComponent,
         PricingComponent,
@@ -130,6 +131,7 @@ export function tokenGetter() {
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule,
+        FuseWidgetModule,
         HttpClientModule,
         JwtModule.forRoot({
           config: {
