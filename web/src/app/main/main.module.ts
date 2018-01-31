@@ -89,6 +89,10 @@ const routes: Routes = [
   { path: '**', redirectTo: '/public' }
 ];
 
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
+
 @NgModule({
     declarations: [
         FuseContentComponent,
@@ -129,9 +133,7 @@ const routes: Routes = [
         HttpClientModule,
         JwtModule.forRoot({
           config: {
-            tokenGetter: () => {
-              return localStorage.getItem('access_token');
-            },
+            tokenGetter: tokenGetter,
             whitelistedDomains: ['localhost:3000']
           }
         }),
