@@ -20,7 +20,7 @@ export class EnvironmentService {
   }
 
   getEnvironments(): Observable<List<Environment>> {
-    return this.http.get<List<Environment>>(this.url + '/environments/list');
+    return this.http.get<List<Environment>>(this.url + '/environments/list', { withCredentials: true });
   }
 
   addEnvironment(environment: Environment): Observable<Environment> {
