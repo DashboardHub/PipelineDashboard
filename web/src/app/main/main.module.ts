@@ -137,7 +137,7 @@ export function tokenGetter() {
         JwtModule.forRoot({
           config: {
             tokenGetter: tokenGetter,
-            whitelistedDomains: [environment.api.split('//')[1]]
+            whitelistedDomains: [environment.whitelist]
           }
         }),
         MomentModule,
