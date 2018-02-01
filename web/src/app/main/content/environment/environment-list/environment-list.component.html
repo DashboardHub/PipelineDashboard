@@ -32,13 +32,9 @@
             fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
             *ngFor="let environment of environments.list | orderBy: '-updatedAt'">
             <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
-              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center" *ngIf="environment.latestRelease.release">
+              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
                 <div class="light-blue-fg font-size-36 line-height-72">{{ environment.latestRelease.release || '-.-.-' }}</div>
                 <div class="h3 secondary-text font-weight-500">{{ environment.latestRelease.state || 'Waiting for data' }}</div>
-              </div>
-              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center" *ngIf="!environment.latestRelease.release">
-                <div class="light-blue-fg font-size-36 line-height-72">-.-.-</div>
-                <div class="h3 secondary-text font-weight-500">'Waiting for data'</div>
               </div>
 
               <mat-progress-bar mode="buffer" [value]="environment.progress ? environment.progress.current : 0" [bufferValue]="environment.progress ? environment.progress.next : 0"></mat-progress-bar>

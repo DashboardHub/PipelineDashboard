@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../core/modules/shared.module';
 
+import { environment } from '../../environments/environment';
 import { FuseMainComponent } from './main.component';
 import { FuseContentComponent } from './content/content.component';
 import { FuseFooterComponent } from './footer/footer.component';
@@ -136,7 +137,7 @@ export function tokenGetter() {
         JwtModule.forRoot({
           config: {
             tokenGetter: tokenGetter,
-            whitelistedDomains: ['localhost:3000']
+            whitelistedDomains: [environment.api.split('//')[1]]
           }
         }),
         MomentModule,
