@@ -39,6 +39,7 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 ## Built with love using...
 
 ![angular](https://user-images.githubusercontent.com/624760/34513230-1e2ba5be-f05f-11e7-8cbf-c1b93415f4e5.png)
+![serverless](https://user-images.githubusercontent.com/624760/34513225-1b46a506-f05f-11e7-9fa3-a6b6bc740d1a.png)
 ![nodejs](https://user-images.githubusercontent.com/624760/34513224-17d6ff74-f05f-11e7-8080-18f09f63a3f4.png)
 ![aws](https://user-images.githubusercontent.com/624760/35319340-4cb8b7b8-00d7-11e8-95f6-83c815d9138c.jpg)
 
@@ -53,9 +54,6 @@ We have an aggressive plan for our prototype, so we can get feedback ASAP.
 | Projects that group Environments | Pending | May 2018 | 
 
 For more information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
-
-![serverless](https://user-images.githubusercontent.com/624760/34513225-1b46a506-f05f-11e7-9fa3-a6b6bc740d1a.png)
-![aws](https://user-images.githubusercontent.com/624760/35319340-4cb8b7b8-00d7-11e8-95f6-83c815d9138c.jpg)
 
 ## QUICK START
 
