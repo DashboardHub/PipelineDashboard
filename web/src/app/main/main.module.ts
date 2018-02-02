@@ -27,7 +27,7 @@ import { EnvironmentService } from "./content/environment/environment.service";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { EnvironmentListComponent } from "./content/environment/environment-list/environment-list.component";
 import { PublicEnvironmentsResolver } from "./content/environment/public.environments.resolver";
-import { JwtModule } from "@auth0/angular-jwt";
+import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import { NavigationService } from "../navigation/navigation.service";
 import { FuseNavigationModel } from "../navigation/navigation.model";
 import { MomentModule } from "angular2-moment";
@@ -91,8 +91,13 @@ const routes: Routes = [
   { path: '**', redirectTo: '/public' }
 ];
 
-export function tokenGetter() {
-  return localStorage.getItem('access_token');
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => {
+      return localStorage.getItem('access_token');
+    },
+    whitelistedDomains: environment.whitelist
+  }
 }
 
 @NgModule({
@@ -135,9 +140,9 @@ export function tokenGetter() {
         FuseWidgetModule,
         HttpClientModule,
         JwtModule.forRoot({
-          config: {
-            tokenGetter: tokenGetter,
-            whitelistedDomains: [environment.whitelist]
+          jwtOptionsProvider: {
+            provide: JWT_OPTIONS,
+            useFactory: jwtOptionsFactory
           }
         }),
         MomentModule,

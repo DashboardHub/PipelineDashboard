@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   hmr: false,
   api: 'http://localhost:3000',
-  whitelist: 'localhost:3000',
+  whitelist: ['localhost:3000'],
   version: 'x.x.x',
 
   auth: {
