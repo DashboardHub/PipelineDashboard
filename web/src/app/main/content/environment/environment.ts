@@ -1,6 +1,7 @@
 import { Deployed } from "./deployed/deployed";
 import { Token } from "./token/token";
 import {Monitor} from "./monitor/monitor";
+import {Pinged} from "./monitor/pinged/pinged";
 
 export class Environment {
   id: string;
@@ -10,8 +11,10 @@ export class Environment {
   logo: string;
   description: string;
   link: string;
-  latestRelease: Deployed;
   releases: number;
+  latestRelease: Deployed;
+  pings: number;
+  latestPing: Pinged;
   progress: {current: number, next: number};
   isPrivate: boolean;
   tags: Array<string>;

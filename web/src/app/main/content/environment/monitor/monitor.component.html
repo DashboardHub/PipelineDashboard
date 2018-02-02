@@ -41,6 +41,7 @@
 
       <mat-toolbar class="mat-elevation-z24 h-48">
         <a mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></a>
+        <a mat-button (click)="ping()"><mat-icon>play_for_work</mat-icon></a>
         {{ pings.total }} Pings
       </mat-toolbar>
 
@@ -49,27 +50,27 @@
 
             <mat-table #table [dataSource]="dataSource">
               <ng-container matColumnDef="url">
-                <mat-header-cell *matHeaderCellDef>Release</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>URL</mat-header-cell>
                 <mat-cell *matCellDef="let element">{{ element.url }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="statusCode">
-                <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Status Code</mat-header-cell>
                 <mat-cell *matCellDef="let element">{{ element.statusCode }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="codeMatched">
-                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Code Matched</mat-header-cell>
                 <mat-cell *matCellDef="let element">{{ element.codeMatched }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="textMatched">
-                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Text Matched</mat-header-cell>
                 <mat-cell *matCellDef="let element">{{ element.textMatched }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="duration">
-                <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
                 <mat-cell *matCellDef="let element">{{ element.duration }}</mat-cell>
               </ng-container>
 

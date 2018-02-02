@@ -372,13 +372,10 @@ POST /environments/{id}/monitors/{monitorId}/ping
 
 {
   "environment": {
-    "link": "http://pipeline.dashboardhub.io",
     "id": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f"
   },
   "monitor": {
     "id": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
-    "path": "/",
-    "expectedCode": "200"
   }
 }
 ```

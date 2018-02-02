@@ -47,9 +47,10 @@ module.exports.monitors = (event, context, callback) => {
 
 module.exports.ping = (event, context, callback) => {
     const body = event.body;
+    const id = body.environment.id;
     const start = new Date();
 
-    environmentModel.model.get({ id: body.environment.id }, function (err, environment) {
+    environmentModel.model.get({ id }, function (err, environment) {
         if (err) {
             console.error(err);
             return callback(new Error('Couldn\'t fetch the item.'));
@@ -92,7 +93,21 @@ module.exports.ping = (event, context, callback) => {
                         return callback(new Error(`[500] ${err.message}`));
                     }
 
-                    return callback(null, item);
+                    environmentModel.model.update({ id }, {
+                        pings: environment.pings + 1,
+                        latestPing: pinged
+                    }, function (err) {
+                        if (err) {
+                            console.log(err);
+                            switch(err.name) {
+                                case 'ValidationError':
+                                    return callback(new Error(`[400] ${err.message}`));
+                                default:
+                                    return callback(new Error(`[500] ${err.message}`));
+                            }
+                        }
+                        callback(null, item);
+                    });
                 });
             });
 

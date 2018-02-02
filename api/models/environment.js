@@ -44,6 +44,15 @@ const schema = new Schema({
             type: Object,
             default: {}
         },
+        pings: {
+            type: Number,
+            default: 0,
+            trim: true
+        },
+        latestPing: {
+            type: Object,
+            default: {}
+        },
         isPrivate: {
             type: Boolean,
             required: true,

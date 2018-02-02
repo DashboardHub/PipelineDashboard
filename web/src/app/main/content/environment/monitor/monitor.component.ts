@@ -42,4 +42,12 @@ export class MonitorComponent implements OnInit {
     }
   }
 
+  ping() {
+    this.pingedService
+      .ping(this.environment.id, this.environment.monitors[0].id)
+      .subscribe((ping) => {
+        this.refresh();
+      });
+  }
+
 }

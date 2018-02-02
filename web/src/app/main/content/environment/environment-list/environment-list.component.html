@@ -48,7 +48,11 @@
               </div>
               <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
                 <span class="h4 secondary-text text-truncate">Releases</span>
-                <span class="h4 ml-8">{{ environment.releases }}</span>
+                <span class="h4 ml-8">{{ environment.releases || 0 }}</span>
+              </div>
+              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+                <span class="h4 secondary-text text-truncate">Pings</span>
+                <span class="h4 ml-8">{{ environment.pings || 0 }} <span *ngIf="environment.latestPing">({{ environment.latestPing.duration }}s)</span></span>
               </div>
               <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
                 <span class="h4 secondary-text text-truncate">Last updated</span>
