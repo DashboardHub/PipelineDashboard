@@ -84,7 +84,7 @@ const routes: Routes = [
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
       { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, releases: ReleasesResolver } },
-      { path: ':id/monitors', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver } },
+      { path: ':id/monitors/:monitorId', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver, pings: PingsResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },

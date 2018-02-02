@@ -34,7 +34,10 @@ export class ReleaseComponent implements OnInit {
   refresh() {
     this.deployedService
       .findAllReleases(this.environment.id)
-      .subscribe((releases) => this.dataSource = new MatTableDataSource<Release>(this.pipe.transform(releases.list, '-latest.createdAt')));
+      .subscribe((releases) => {
+        this.releases = releases;
+        this.dataSource = new MatTableDataSource<Release>(this.pipe.transform(releases.list, '-latest.createdAt'));
+      });
   }
 
 }

@@ -31,7 +31,10 @@ export class DeployedComponent implements OnInit {
   }
 
   refresh() {
-    this.deployedService.findAll(this.environment.id).subscribe((deploys) => this.dataSource = new MatTableDataSource<Deployed>(this.pipe.transform(deploys.list, '-createdAt')));
+    this.deployedService.findAll(this.environment.id).subscribe((deploys) => {
+      this.deploys = deploys;
+      this.dataSource = new MatTableDataSource<Deployed>(this.pipe.transform(deploys.list, '-createdAt'));
+    });
   }
 
 }
