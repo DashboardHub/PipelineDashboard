@@ -49,22 +49,22 @@
             <mat-table #table [dataSource]="dataSource">
               <ng-container matColumnDef="release">
                 <mat-header-cell *matHeaderCellDef>Release</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.release }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.state) ? 'red-A700-fg' : ''">{{ element.release }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="state">
                 <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.state }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.state) ? 'red-A700-fg' : ''">{{ element.state }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="token">
                 <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.token.name }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.state) ? 'red-A700-fg' : ''">{{ element.token.name }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="when">
                 <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.createdAt | amTimeAgo }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.state) ? 'red-A700-fg' : ''">{{ element.createdAt | amTimeAgo }}</mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
