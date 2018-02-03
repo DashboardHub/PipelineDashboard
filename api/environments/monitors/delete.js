@@ -34,7 +34,12 @@ module.exports.delete = (event, context, callback) => {
                             return console.log(err);
                         }
 
-                        callback(null, environment.monitors);
+                        callback(null, JSON.stringify(
+                            {
+                                total: environment.monitors.length,
+                                list: environment.monitors
+                            }
+                        ));
                     });
                 });
             } else {
@@ -43,7 +48,12 @@ module.exports.delete = (event, context, callback) => {
                         return console.log(err);
                     }
 
-                    callback(null, environment.monitors);
+                    callback(null, JSON.stringify(
+                        {
+                            total: environment.monitors.length,
+                            list: environment.monitors
+                        }
+                    ));
                 });
             }
         });

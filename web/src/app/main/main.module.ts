@@ -55,6 +55,7 @@ import {PingedService} from "./content/environment/monitor/pinged/pinged.service
 import {NgPipesModule} from "ngx-pipes";
 import {FuseWidgetModule} from "../core/components/widget/widget.module";
 import {FuseThemeOptionsComponent} from "../core/components/theme-options/theme-options.component";
+import {MonitorService} from "./content/environment/monitor/monitor.service";
 
 const routes: Routes = [
   {
@@ -84,7 +85,7 @@ const routes: Routes = [
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
       { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, releases: ReleasesResolver } },
-      { path: ':id/monitors/:monitorId', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver, pings: PingsResolver } },
+      { path: ':id/monitors', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
@@ -158,6 +159,7 @@ export function jwtOptionsFactory() {
       DeploysResolver,
       DeployedService,
       EnvironmentService,
+      MonitorService,
       PingsResolver,
       PingedService,
       ProfileResolver,
