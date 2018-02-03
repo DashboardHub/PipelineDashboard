@@ -1,0 +1,83 @@
+<div id="contacts" class="page-layout simple left-sidenav inner-sidenav">
+
+  <!-- HEADER -->
+  <div class="header mat-accent-bg p-16 p-sm-24" fxLayout="column" fxLayoutAlign="start start"
+       fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+    <!-- APP TITLE -->
+    <div fxLayout="row" fxLayoutAlign="start center">
+
+      <button mat-button class="mat-icon-button sidenav-toggle mr-12"
+              fuseMatSidenavToggler="contacts-main-sidenav"
+              fxHide.gt-md>
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="logo" fxLayout="row" fxLayoutAlign="start center">
+        <mat-icon class="logo-icon mr-16" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">new_releases</mat-icon>
+        <span class="logo-text h1" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Releases</span>
+      </div>
+
+    </div>
+    <!-- / APP TITLE -->
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- SELECTED BAR -->
+  <!--<fuse-selected-bar class="mat-accent-600-bg" *ngIf="hasSelectedContacts" [@slideInTop]></fuse-selected-bar>-->
+  <!-- / SELECTED BAR -->
+
+  <mat-sidenav-container>
+
+    <!-- SIDENAV -->
+    <mat-sidenav class="sidenav" align="start" opened="true" mode="side" fuseMatSidenavHelper="contacts-main-sidenav" mat-is-locked-open="gt-sm">
+      <environment-sidenav [environment]="environment"></environment-sidenav>
+    </mat-sidenav>
+    <!-- / SIDENAV -->
+
+    <!-- CENTER -->
+    <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
+
+      <mat-toolbar class="mat-elevation-z24 h-48">
+        <a mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></a>
+        {{ releases.total }} Releases
+      </mat-toolbar>
+
+      <!-- CONTENT -->
+      <div class="content mat-white-bg mat-elevation-z4">
+
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="release">
+            <mat-header-cell *matHeaderCellDef>Release</mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.latest.state) ? 'red-A700-fg' : ''">{{ element.version }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <mat-header-cell *matHeaderCellDef>Latest State</mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.latest.state) ? 'red-A700-fg' : ''">{{ element.latest.state }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="token">
+            <mat-header-cell *matHeaderCellDef>Token</mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.latest.state) ? 'red-A700-fg' : ''">{{ element.token.name }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="when">
+            <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="['failBuild', 'failDeploy'].includes(element.latest.state) ? 'red-A700-fg' : ''">{{ element.latest.createdAt | amTimeAgo }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+      </div>
+      <!-- / CONTENT -->
+
+    </div>
+    <!-- / CENTER -->
+
+  </mat-sidenav-container>
+
+</div>

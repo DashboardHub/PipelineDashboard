@@ -1,27 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { environment } from '../environments/environment';
+import { Component } from '@angular/core';
+import { FuseSplashScreenService } from './core/services/splash-screen.service';
+import { TranslateService } from '@ngx-translate/core';
+import { FuseTranslationLoaderService } from './core/services/translation-loader.service';
 
-import { AuthService } from './auth/auth.service';
-import { Profile } from "./auth/profile";
-import { EnvironmentsService } from "./environments/environments.service";
-import { ActivatedRoute } from "@angular/router";
+import { FuseNavigationService } from './core/components/navigation/navigation.service';
+import { FuseNavigationModel } from './navigation/navigation.model';
+import { locale as navigationEnglish } from './navigation/i18n/en';
+import { locale as navigationTurkish } from './navigation/i18n/tr';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector   : 'fuse-root',
+    templateUrl: './app.component.html',
+    styleUrls  : ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  version: string = environment.version;
+export class AppComponent
+{
+    constructor(
+        private fuseNavigationService: FuseNavigationService,
+        private fuseSplashScreen: FuseSplashScreenService,
+        private translate: TranslateService,
+        private translationLoader: FuseTranslationLoaderService
+    )
+    {
+        // Add languages
+        this.translate.addLangs(['en', 'tr']);
 
-  profile: Profile;
+        // Set the default language
+        this.translate.setDefaultLang('en');
 
-  constructor(public auth: AuthService, private route: ActivatedRoute) {
-    auth.handleAuthentication();
-  }
+        // Use a language
+        this.translate.use('en');
 
-  ngOnInit(): void {
-    this.auth.subscribeProfile()
-      .subscribe(profile => this.profile = profile);
-  }
+        // Set the navigation model
+        this.fuseNavigationService.setNavigationModel(new FuseNavigationModel());
+
+        // Set the navigation translations
+        this.translationLoader.loadTranslations(navigationEnglish, navigationTurkish);
+    }
 }

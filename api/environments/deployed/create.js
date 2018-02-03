@@ -47,7 +47,9 @@ module.exports.create = (event, context, callback) => {
             environmentId: environment.id,
             release: data.release,
             state: state,
-            token: token[0]
+            token: {
+                name: token[0].name
+            }
         };
         let deploy = new deployedModel.model(item);
 
@@ -64,7 +66,13 @@ module.exports.create = (event, context, callback) => {
 
             environmentModel.model.update({ id }, {
                 releases: environment.releases + 1,
-                latestRelease: item
+                latestRelease: deploy,
+                tokens: environment.tokens.map((t) => {
+                    if (t.id === token[0].id) {
+                        t.lastUsed = new Date();
+                    }
+                    return t;
+                })
             }, function (err) {
                 if (err) {
                     console.log(err);

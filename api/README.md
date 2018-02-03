@@ -6,6 +6,19 @@ Using Serverless framework on AWS Lambda
 
 ### Environments
 
+#### Summary
+
+Public list `GET /summary`
+Private list `GET /environments/summary`
+
+```json
+{
+    "envrionments": 123,
+    "deploys": 456,
+    "pings": 789
+}
+```
+
 #### List
 
 Public list `GET /environments`
@@ -163,6 +176,30 @@ POST /environments/{id}/deployed/{token}/{state}
 }
 ```
 
+#### List
+
+```
+GET /environments/{id}/deployed
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "createdAt": "2017-12-13T07:26:26.754Z",
+      "environmentId": "b4d0b870-c9e9-11e7-aeea-eb4cced29ed2",
+      "id": "ee074a20-dfd6-11e7-bee3-55f883682be0",
+      "release": "0.7.767",
+      "state": "startDeploy",
+      "token": {
+        "name": "TravisCI"
+      }
+    }
+  ]
+}
+```
+
 ### Tokens
 
 #### List
@@ -179,8 +216,7 @@ GET /environments/{id}/tokens
       "name": "CI server",
       "createdAt": "2017-11-06T06:38:27.024Z",
       "id": "184a9d00-c2bd-11e7-829d-851258883d74",
-      "environmentId": "14c9dab0-c2bd-11e7-829d-851258883d74",
-      "token": "184ac410-c2bd-11e7-829d-851258883d74"
+      "environmentId": "14c9dab0-c2bd-11e7-829d-851258883d74"
     }
   ]
 }
@@ -192,8 +228,7 @@ GET /environments/{id}/tokens
 POST /environments/{id}/tokens
 
 {
-  "name": "aaaaa",
-  "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8"
+  "name": "aaaaa"
 }
 ```
 
@@ -202,5 +237,158 @@ POST /environments/{id}/tokens
   "id": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
   "environmentId": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
   "name": "aaaaa"
+}
+```
+
+#### Delete
+
+```
+DELETE /environments/{id}/tokens/{tokenId}
+```
+
+```json
+
+```
+
+### Releases
+
+#### List
+
+```
+GET /environments/{id}/releases
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "version": "0.7.736",
+      "token": {
+        "name": "TravisCI"
+      },
+      "failDeploy": null,
+      "finishDeploy": "2017-12-10T16:30:35.042Z",
+      "startDeploy": "2017-12-10T16:22:46.464Z",
+      "failBuild": null,
+      "finishBuild": "2017-12-10T16:22:45.379Z",
+      "startBuild": "2017-12-10T16:22:14.141Z",
+      "latest": {
+        "createdAt": "2017-12-10T16:30:35.042Z",
+        "state": "finishDeploy"
+      }
+    }
+  ]
+}
+```
+
+### Monitors
+
+#### Create
+
+```
+POST /environments/{id}/monitors
+
+{
+  "path": "/",
+  "method": "GET",
+  "expectedCode": 200,
+  "expectedText": ""
+}
+```
+
+```json
+{
+  "id": "8e081a80-c2be-11e7-8d8e-939a2e2af2d8",
+  "path": "/",
+  "method": "GET",
+  "expectedCode": 200,
+  "expectedText": ""
+}
+```
+
+#### Delete
+
+```
+DELETE /environments/{id}/monitors/{monitorId}
+```
+
+```json
+
+```
+
+#### List
+
+```
+GET /environments/{id}/monitors
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "id": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+      "path": "/",
+      "method": "GET",
+      "expectedCode": "200"
+    }
+  ]
+}
+```
+
+### Pings
+
+#### List
+
+```
+GET /environments/{id}/pings
+```
+
+```json
+{
+  "total": 1,
+  "list": [
+    {
+      "duration": 128,
+      "createdAt": "2017-12-31T08:43:08.160Z",
+      "environmentId": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f",
+      "monitorId": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+      "codeMatched": false,
+      "textMatched": true,
+      "id": "a01da000-ee06-11e7-9016-9b9d57f7d18f",
+      "url": "http://pipeline.dashboardhub.io/",
+      "statusCode": 301,
+      "updatedAt": "2017-12-31T08:43:08.160Z"
+    }
+  ]
+}
+```
+
+### Ping
+
+```
+POST /environments/{id}/monitors/{monitorId}/ping
+
+{
+  "environment": {
+    "id": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f"
+  },
+  "monitor": {
+    "id": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+  }
+}
+```
+
+```json
+{
+  "id": "f230b6b0-ee07-11e7-9016-9b9d57f7d18f",
+  "environmentId": "ccaee6e0-edfe-11e7-9016-9b9d57f7d18f",
+  "monitorId": "481aca30-ee02-11e7-9016-9b9d57f7d18f",
+  "url": "http://pipeline.dashboardhub.io/",
+  "statusCode": 301,
+  "codeMatched": false,
+  "textMatched": true,
+  "duration": 303
 }
 ```

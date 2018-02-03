@@ -1,7 +1,8 @@
 'use strict';
 
-const deployed = require('./../models/deployed');
+const deployedModel = require('./../models/deployed');
 const environmentModel = require('./../models/environment');
+const pingedModel = require('./../models/pinged');
 
 module.exports.delete = (event, context, callback) => {
     const id = event.path.id;
@@ -16,36 +17,43 @@ module.exports.delete = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        deployed.model.scan('environmentId').contains(id).exec(function (err, results) {
+        deployedModel.model.scan('environmentId').contains(id).exec(function (err, results) {
             if (err) {
                 console.log(err);
                 return callback(new Error('Couldn\'t fetch the items.'));
             }
 
-            let deletes = results.map((item) => ({ id: item.id}));
-            console.log(deletes);
+            let deployedDeletes = results.map((item) => ({ id: item.id }));
 
-            if (deletes.length > 0) {
-                deployed.model.batchDelete(deletes, function (err) {
+            deployedModel.model.batchDelete(deployedDeletes, function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+
+                pingedModel.model.scan('environmentId').contains(id).exec(function (err, results) {
                     if (err) {
-                        return console.log(err);
+                        console.log(err);
+                        return callback(new Error('Couldn\'t fetch the items.'));
                     }
 
-                    environment.delete(function (err) {
+                    let pingedDeletes = results.map((item) => ({ id: item.id }));
+
+                    pingedModel.model.batchDelete(pingedDeletes, function (err) {
                         if (err) {
                             return console.log(err);
                         }
-                        callback(null, {});
+
+                        environment.delete(function (err) {
+                            if (err) {
+                                return console.log(err);
+                            }
+                            callback(null, {});
+                        });
                     });
+
                 });
-            } else {
-                environment.delete(function (err) {
-                    if (err) {
-                        return console.log(err);
-                    }
-                    callback(null, {});
-                });
-            }
+            });
+
         });
     });
 };

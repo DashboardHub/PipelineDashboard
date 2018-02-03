@@ -5,9 +5,8 @@ const environment = require('./../models/environment');
 
 module.exports.create = (event, context, callback) => {
     const data = event.body;
-    const id = uuidv1();
     const params = {
-        id: id,
+        id: uuidv1(),
         type: data.type,
         owner: event.principalId,
         title: data.title,
@@ -20,11 +19,10 @@ module.exports.create = (event, context, callback) => {
         tokens: [
             {
                 id: uuidv1(),
-                environmentId: id,
-                name: 'Continuous Integration Server',
-                token: uuidv1()
+                name: 'Continuous Integration Server'
             }
-        ]
+        ],
+        logo: data.logo
     };
 
     let environmentModel = new environment.model(params);

@@ -1,0 +1,95 @@
+@import "./../../../core/scss/fuse";
+
+:host {
+
+  #price-tables {
+
+    .header {
+      padding: 24px;
+      height: 600px;
+      min-height: 600px;
+      background: #1A237E;
+      background: linear-gradient(to right, #0E2A3B 0%, #34306B 100%);
+
+      @include media-breakpoint-down('xs') {
+        height: 400px;
+        min-height: 400px;
+      }
+
+      .hero-text {
+        margin: 128px 24px;
+
+        @include media-breakpoint-down('xs') {
+          margin: 64px 24px;
+        }
+
+        .h1 {
+          color: white;
+          font-size: 48px;
+          font-weight: 300;
+          letter-spacing: 0.01em;
+          text-align: center;
+
+          @include media-breakpoint-down('xs') {
+            font-size: 32px;
+          }
+        }
+
+        .h3 {
+          color: rgba(255, 255, 255, 0.75);
+          max-width: 480px;
+          text-align: center;
+          margin-top: 16px;
+          font-weight: 300;
+          letter-spacing: 0.03em;
+
+          @include media-breakpoint-down('xs') {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+
+    .price-tables {
+      flex: 1 0 auto;
+      margin-top: -192px;
+
+      @include media-breakpoint-down('xs') {
+        margin-top: -128px;
+      }
+
+      .price-table {
+        margin: 12px;
+      }
+    }
+
+    .faq {
+      flex: 1 0 auto;
+      margin: 96px auto;
+      max-width: 840px;
+
+      .title {
+        font-size: 32px;
+        font-weight: 300;
+        text-align: center;
+        margin-bottom: 64px;
+        padding: 0 16px;
+      }
+
+      .item {
+        padding: 24px;
+
+        .question {
+          font-size: 18px;
+          margin-bottom: 8px;
+        }
+
+        .answer {
+          font-size: 16px;
+          line-height: 1.5;
+          color: rgba(0, 0, 0, 0.54);
+        }
+      }
+    }
+  }
+}

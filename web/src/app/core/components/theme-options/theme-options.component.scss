@@ -1,0 +1,115 @@
+@import "src/app/core/scss/fuse";
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+:host {
+    position: fixed;
+    display: block;
+    right: 0;
+    top: 160px;
+    z-index: 998;
+
+    &.bar-closed .theme-options-panel {
+        display: none;
+    }
+
+    .theme-options-panel {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 360px;
+        transform: translate3d(100%, 0, 0);
+        z-index: 999;
+        max-height: calc(100vh - 200px);
+        padding: 24px;
+        overflow: auto;
+
+        @include media-breakpoint-down('xs') {
+            top: -120px;
+            max-height: calc(100vh - 100px);
+            width: 90vw;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.54);
+        }
+
+        .mat-divider {
+            display: block !important;
+            width: 100%;
+            margin: 24px 0 16px 0;
+        }
+
+        .colors {
+            display: block !important;
+            width: 100%;
+        }
+    }
+
+    .theme-options-panel-overlay {
+        position: fixed;
+        display: block;
+        background: rgba(0, 0, 0, 0);
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 998;
+
+        @include media-breakpoint-down('sm') {
+            background: rgba(0, 0, 0, 0.37);
+        }
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .mat-list .mat-list-item {
+        font-size: 15px;
+    }
+
+    .mat-divider {
+        margin: 16px;
+    }
+
+    .open-button {
+        position: absolute;
+        top: 0;
+        left: -48px;
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 0;
+        margin: 0;
+        pointer-events: auto;
+        opacity: .75;
+        z-index: 998;
+
+        mat-icon {
+            animation: rotating 3s linear infinite;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+}

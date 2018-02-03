@@ -10,6 +10,9 @@
     },
     "deployed": {
       "table": "pipelinedashboard-deployed"
+    },
+    "pinged": {
+      "table": "pipelinedashboard-pinged"
     }
   },
   "offline": {

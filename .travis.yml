@@ -2,17 +2,14 @@ language: node_js
 node_js:
   - "8"
 
-branches:
-  only:
-  - prototype-v0.7.0
-  - master
-
 before_install:
   - sudo apt-get install python3
   - sudo pip install awscli
   - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar)
 
 script:
+  - npm cache --force clean
+  - make ui.install ui.build
   - echo 'No tests, this is a PROTOTYPE only'
 
 deploy:
@@ -20,7 +17,7 @@ deploy:
     skip_cleanup: true
     script: make install.test deploy.test
     on:
-      branch: prototype-v0.7.0
+      branch: prototype-v0.8.0
   - provider: script
     skip_cleanup: true
     script: make install deploy

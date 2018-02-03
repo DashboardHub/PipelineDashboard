@@ -1,6 +1,7 @@
 'use strict';
 
 const environmentModel = require('./../models/environment');
+const progress = require('./../environments/_helpers/progress');
 
 module.exports.get = (event, context, callback) => {
     const id = event.path.id;
@@ -11,6 +12,6 @@ module.exports.get = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        return callback(null, environment);
+        return callback(null, progress.calculate(environment));
     });
 };

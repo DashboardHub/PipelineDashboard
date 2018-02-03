@@ -1,10 +1,11 @@
 'use strict';
 
 const environment = require('./../models/environment');
+const progress = require('./../environments/_helpers/progress');
 
 module.exports.public = (event, context, callback) => {
 
-    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'createdAt', 'updatedAt'];
+    let attributes = ['id', 'owner', 'title', 'releases', 'latestRelease', 'pings', 'latestPing', 'progress', 'type', 'description', 'link', 'logo', 'createdAt', 'updatedAt'];
     environment.model.scan('isPrivate').eq(false).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
@@ -18,7 +19,7 @@ module.exports.public = (event, context, callback) => {
             statusCode: 200,
             body: JSON.stringify({
                 total: results.length,
-                list: calculateProgress(results)
+                list: progress.calculateAll(results)
             })
         });
 
@@ -28,7 +29,7 @@ module.exports.public = (event, context, callback) => {
 
 module.exports.private = (event, context, callback) => {
 
-    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'progress', 'type', 'description', 'link', 'createdAt', 'updatedAt'];
+    let attributes = ['id', 'isPrivate', 'owner', 'title', 'releases', 'latestRelease', 'pings', 'latestPing', 'progress', 'type', 'description', 'link', 'tokens', 'monitors', 'logo', 'createdAt', 'updatedAt'];
     environment.model.scan('owner').eq(event.principalId).attributes(attributes).exec(function (err, results) {
         if (err) {
             console.log(err);
@@ -37,67 +38,8 @@ module.exports.private = (event, context, callback) => {
 
         return callback(null, {
             total: results.length,
-            list: calculateProgress(results)
+            list: progress.calculateAll(results)
         });
     });
 
-};
-
-let calculateProgress = (environments) => {
-    return environments.map((environment) => {
-            if (environment.latestRelease) {
-                switch (environment.type) {
-                    case 'build':
-                        switch (environment.latestRelease.state) {
-                            case 'startBuild':
-                                environment.progress = 50;
-                                break;
-                            case 'finishBuild':
-                            case 'failBuild':
-                                environment.progress = 100;
-                                break;
-                            default:
-                                environment.progress = 0;
-                        }
-                        break;
-                    case 'deploy':
-                        switch (environment.latestRelease.state) {
-                            case 'startDeploy':
-                                environment.progress = 50;
-                                break;
-                            case 'finishDeploy':
-                            case 'failDeploy':
-                                environment.progress = 100;
-                                break;
-                            default:
-                                environment.progress = 0;
-                        }
-                        break;
-                    case 'build-deploy':
-                    default:
-                        switch (environment.latestRelease.state) {
-                            case 'startBuild':
-                                environment.progress = 25;
-                                break;
-                            case 'finishBuild':
-                                environment.progress = 50;
-                                break;
-                            case 'startDeploy':
-                                environment.progress = 75;
-                                break;
-                            case 'finishDeploy':
-                            case 'failBuild':
-                            case 'failDeploy':
-                                environment.progress = 100;
-                                break;
-                            default:
-                                environment.progress = 0;
-                        }
-                        break;
-                }
-            }
-
-            return environment;
-        }
-    );
 };

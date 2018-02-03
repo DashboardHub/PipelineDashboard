@@ -1,0 +1,58 @@
+<div class="widget-group p-12" fxLayout="row" fxFlex="100" fxLayoutWrap *fuseIfOnDom [@animateStagger]="{value:'50'}">
+
+  <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+    <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+      <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+        <div class="light-blue-fg font-size-72 line-height-72">{{ summary.environments }}</div>
+        <div class="h3 secondary-text font-weight-500">Environments</div>
+      </div>
+
+      <!--<div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">-->
+      <!--<span class="h4 ml-8">bbbb</span>-->
+      <!--</div>-->
+    </div>
+  </fuse-widget>
+
+  <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+    <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+      <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+        <div class="light-blue-fg font-size-72 line-height-72">{{ summary.deploys }}</div>
+        <div class="h3 secondary-text font-weight-500">Deploys</div>
+      </div>
+
+      <!--<div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">-->
+      <!--<span class="h4 secondary-text text-truncate">aaaa</span>-->
+      <!--<span class="h4 ml-8">bbbb</span>-->
+      <!--</div>-->
+    </div>
+  </fuse-widget>
+
+  <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+    <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+      <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+        <div class="light-blue-fg font-size-72 line-height-72">{{ summary.pings }}</div>
+        <div class="h3 secondary-text font-weight-500">Pings</div>
+      </div>
+
+      <!--<div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">-->
+      <!--<span class="h4 secondary-text text-truncate">aaaa</span>-->
+      <!--<span class="h4 ml-8">bbbb</span>-->
+      <!--</div>-->
+    </div>
+  </fuse-widget>
+
+  <fuse-widget [@animate]="{value:'*',params:{y:'100%'}}" class="widget" fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25">
+    <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+      <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+        <div class="light-blue-fg font-size-72 line-height-72">...</div>
+        <div class="h3 secondary-text font-weight-500">More to follow</div>
+      </div>
+
+      <!--<div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">-->
+      <!--<span class="h4 secondary-text text-truncate">aaaa</span>-->
+      <!--<span class="h4 ml-8">bbbb</span>-->
+      <!--</div>-->
+    </div>
+  </fuse-widget>
+
+</div>

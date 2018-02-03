@@ -1,0 +1,35 @@
+// ngx-datatable
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css';
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+// Perfect scrollbar
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+// Fuse
+@import "fuse";
+
+// Theming
+@include mat-core();
+
+// Include theme styles for core and each component used in your app.
+@include angular-material-theme($theme);
+
+// Partials
+@import "partials/reset";
+@import "partials/normalize";
+@import "partials/scrollbars";
+@import "partials/helpers";
+@import "partials/global";
+@import "partials/icons";
+@import "partials/colors";
+@import "partials/material";
+@import "partials/angular-material-fix";
+@import "partials/typography";
+@import "partials/page-layouts";
+@import "partials/cards";
+@import "partials/navigation";
+@import "partials/forms";
+@import "partials/toolbar";
+@import "partials/print";
+
+// Plugins
+@import "partials/plugins/plugins";

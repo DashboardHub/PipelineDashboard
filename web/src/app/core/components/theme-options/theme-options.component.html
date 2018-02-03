@@ -1,0 +1,105 @@
+<button #openButton mat-icon-button class="open-button mat-primary-bg mat-elevation-z2" (click)="openBar()">
+    <mat-icon>settings</mat-icon>
+</button>
+
+<div class="theme-options-panel-overlay" #overlay [fxHide]="barClosed" [@fadeInOut]="!barClosed"></div>
+
+<div #panel class="theme-options-panel mat-white-bg mat-elevation-z8">
+
+    <button mat-icon-button class="close-button" (click)="closeBar()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div class="theme-options-panel-inner" fxLayout="column" fxLayoutAlign="start start">
+
+        <h3>Navigation:</h3>
+        <mat-radio-group [(ngModel)]="fuseSettings.layout.navigation" (ngModelChange)="onSettingsChange()"
+                         fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutWrap>
+            <mat-radio-button class="mr-8 mb-8" value="top">Top</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="left">Left</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="right">Right</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="none">None</mat-radio-button>
+        </mat-radio-group>
+
+        <h3>Navigation Fold (for vertical navigation):</h3>
+        <mat-slide-toggle [(ngModel)]="fuseSettings.layout.navigationFolded"
+                          (change)="onSettingsChange()">
+            Folded
+        </mat-slide-toggle>
+
+        <h3 class="mt-24">Toolbar:</h3>
+        <mat-radio-group [(ngModel)]="fuseSettings.layout.toolbar" (ngModelChange)="onSettingsChange()"
+                         fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutWrap>
+            <mat-radio-button class="mr-8 mb-8" value="below">Below</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="above">Above</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="none">None</mat-radio-button>
+        </mat-radio-group>
+
+        <h3 class="mt-24">Footer:</h3>
+        <mat-radio-group [(ngModel)]="fuseSettings.layout.footer" (ngModelChange)="onSettingsChange()"
+                         fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutWrap>
+            <mat-radio-button class="mr-8 mb-8" value="below">Below</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="above">Above</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="none">None</mat-radio-button>
+        </mat-radio-group>
+
+        <h3 class="mt-24">Layout Mode:</h3>
+        <mat-radio-group [(ngModel)]="fuseSettings.layout.mode" (ngModelChange)="onSettingsChange()"
+                         fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutWrap>
+            <mat-radio-button class="mr-8 mb-8" value="boxed">Boxed</mat-radio-button>
+            <mat-radio-button class="mr-8 mb-8" value="fullwidth">Fullwidth</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-divider></mat-divider>
+
+        <h3>Colors:</h3>
+        <div class="colors">
+
+            <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+                <h4 class="mr-8">Toolbar Color</h4>
+                <fuse-material-color-picker [(selectedClass)]="fuseSettings.colorClasses.toolbar"
+                                            (onValueChange)="onSettingsChange()"></fuse-material-color-picker>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+                <h4 class="mr-8">Navigation Bar Color</h4>
+                <fuse-material-color-picker [(selectedClass)]="fuseSettings.colorClasses.navbar"
+                                            (onValueChange)="onSettingsChange()"></fuse-material-color-picker>
+            </div>
+
+            <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+                <h4 class="mr-8">Footer Color</h4>
+                <fuse-material-color-picker [(selectedClass)]="fuseSettings.colorClasses.footer"
+                                            (onValueChange)="onSettingsChange()"></fuse-material-color-picker>
+            </div>
+
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <h3>Router Animation:</h3>
+        <mat-form-field class="w-100-p">
+            <mat-select class="p-0" [(ngModel)]="fuseSettings.routerAnimation">
+                <mat-option value="none">
+                    None
+                </mat-option>
+                <mat-option value="slideUp">
+                    Slide up
+                </mat-option>
+                <mat-option value="slideDown">
+                    Slide down
+                </mat-option>
+                <mat-option value="slideRight">
+                    Slide right
+                </mat-option>
+                <mat-option value="slideLeft">
+                    Slide left
+                </mat-option>
+                <mat-option value="fadeIn">
+                    Fade in
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+</div>

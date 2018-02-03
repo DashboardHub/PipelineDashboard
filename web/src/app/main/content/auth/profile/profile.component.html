@@ -1,0 +1,30 @@
+<div id="profile" class="page-layout simple tabbed" fusePerfectScrollbar>
+
+  <!-- HEADER -->
+  <div class="header p-24" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+       fxLayoutAlign.gt-sm="space-between end">
+
+    <div class="user-info" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+         fxLayoutAlign.gt-sm="start center">
+      <img class="profile-image avatar huge" src="{{ profile?.picture }}"
+           *fuseIfOnDom>
+      <div class="name" *fuseIfOnDom>
+        {{ profile?.name }} ({{ profile?.name }})
+      </div>
+    </div>
+
+    <div class="actions" fxLayout="row" fxLayoutAlign="end center" *fuseIfOnDom>
+    </div>
+
+  </div>
+  <!-- / HEADER -->
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <app-summary [summary]="summary"></app-summary>
+
+  </div>
+  <!-- / CONTENT -->
+
+</div>

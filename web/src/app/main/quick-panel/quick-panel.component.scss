@@ -1,0 +1,12 @@
+fuse-quick-panel {
+    display: flex;
+    width: 330px;
+    min-width: 330px;
+    max-width: 330px;
+    z-index: 99;
+    flex-direction: column;
+
+    .mat-slide-toggle-content {
+        flex: 1;
+    }
+}

@@ -41,7 +41,17 @@ const schema = new Schema({
             trim: true
         },
         latestRelease: {
-            type: Object
+            type: Object,
+            default: {}
+        },
+        pings: {
+            type: Number,
+            default: 0,
+            trim: true
+        },
+        latestPing: {
+            type: Object,
+            default: {}
         },
         isPrivate: {
             type: Boolean,
@@ -58,11 +68,22 @@ const schema = new Schema({
             default: [],
             validate: ((v) => v.map((item) => (typeof item.name === 'string' && validator.isLength(item.name, {min: 3, max: 32}))))
         },
+        monitors: {
+            type: Array,
+            default: [],
+            validate: ((v) => v.map((item) => (typeof item.uri === 'string' && validator.isLength(item.uri, {min: 0, max: 64}))))
+        },
         type: {
             type: String,
             required: true,
             trim: true,
             validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'build', 'deploy', 'build-deploy' ]))
+        },
+        logo: {
+            type: String,
+            default: '',
+            trim: true,
+            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 5, max: 1024}))
         }
     },
     {
