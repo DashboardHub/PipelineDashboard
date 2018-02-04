@@ -90,7 +90,7 @@ const schema = new Schema({
         timestamps: true,
         useDocumentTypes: true,
         useNativeBooleans: true,
-        throughput: { read: 1, write: 1 }
+        throughput: { read: 5, write: 5 }
     });
 
 let model = client.dynamoose.model(config.dynamodb.environments.table, schema, {

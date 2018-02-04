@@ -1,0 +1,77 @@
+@import "./../../../core/scss/fuse";
+
+#help {
+
+  .header {
+    flex: 1 0 auto;
+    height: 280px;
+    max-height: 280px;
+    background: #1A237E;
+    background: linear-gradient(to right, #0E2A3B 0%, #34306B 100%);
+
+    @include media-breakpoint('xs') {
+      height: 240px;
+      padding: 16px;
+    }
+
+    .hero-text {
+
+      h1 {
+        color: white;
+        font-size: 48px;
+        font-weight: 300;
+        letter-spacing: 0.01em;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 16px;
+
+        @include media-breakpoint-down('xs') {
+          font-size: 24px;
+        }
+      }
+
+      h3 {
+        color: rgba(255, 255, 255, 0.75);
+        max-width: 480px;
+        text-align: center;
+        font-weight: 300;
+        letter-spacing: 0.03em;
+        margin: 0;
+
+        @include media-breakpoint-down('xs') {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .content {
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+
+    .articles-list {
+      width: 400px;
+      min-width: 400px;
+      margin: 16px;
+      padding: 16px;
+
+      @include media-breakpoint-down('xs') {
+        min-width: 300px;
+        margin: 16px 0;
+      }
+
+      .mat-list-item {
+        text-decoration: none !important;
+
+        .mat-list-item-content {
+
+        }
+      }
+
+      .see-all-link {
+        font-size: 14px;
+      }
+    }
+  }
+}

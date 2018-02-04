@@ -55,6 +55,10 @@ import {PingedService} from "./content/environment/monitor/pinged/pinged.service
 import {NgPipesModule} from "ngx-pipes";
 import {FuseWidgetModule} from "../core/components/widget/widget.module";
 import {FuseThemeOptionsComponent} from "../core/components/theme-options/theme-options.component";
+import {MonitorService} from "./content/environment/monitor/monitor.service";
+import {HelpComponent} from "./content/help/help.component";
+import {HelpArticleComponent} from "./content/help/dialogs/article/article.component";
+import {MarkdownModule} from "angular2-markdown";
 
 const routes: Routes = [
   {
@@ -64,6 +68,7 @@ const routes: Routes = [
     resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
+  { path: 'help', component: HelpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, summary: PrivateSummaryResolver } },
@@ -84,7 +89,7 @@ const routes: Routes = [
       { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
       { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, releases: ReleasesResolver } },
-      { path: ':id/monitors/:monitorId', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver, pings: PingsResolver } },
+      { path: ':id/monitors', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver } },
       { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
     ]
   },
@@ -113,6 +118,8 @@ export function jwtOptionsFactory() {
         FuseThemeOptionsComponent,
         CallbackComponent,
         LoginComponent,
+        HelpComponent,
+        HelpArticleComponent,
         PricingComponent,
         ProfileComponent,
         EnvironmentAddComponent,
@@ -145,6 +152,7 @@ export function jwtOptionsFactory() {
             useFactory: jwtOptionsFactory
           }
         }),
+        MarkdownModule.forRoot(),
         MomentModule,
         NgPipesModule
     ],
@@ -158,6 +166,7 @@ export function jwtOptionsFactory() {
       DeploysResolver,
       DeployedService,
       EnvironmentService,
+      MonitorService,
       PingsResolver,
       PingedService,
       ProfileResolver,
@@ -171,6 +180,9 @@ export function jwtOptionsFactory() {
       NavigationService,
       SummaryService,
       TokenService
+    ],
+    entryComponents: [
+      HelpArticleComponent
     ]
 })
 export class FuseMainModule
