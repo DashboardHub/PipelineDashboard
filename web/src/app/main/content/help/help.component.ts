@@ -23,11 +23,11 @@ export class HelpComponent
           path: 'quickstart'
         },
         {
-          title: 'Create',
-          path: 'coming-soon'
+          title: 'Types of Environments',
+          path: 'environment-types'
         },
         {
-          title: 'Types of Environments',
+          title: 'Create',
           path: 'coming-soon'
         },
         {

@@ -25,7 +25,11 @@ The **Overview** page will show the information you have just used to create the
 
 ## 3. Beacon deploy / release data
 
-No need to install anything on your computer or server, beacon data with a `POST` request. Our examples are using `curl`.
+No need to install anything on your computer or server, beacon data with a `POST` request. 
+
+Our examples are using `curl`. Here is the template command, however, on your overview page you will have the exact commands pre-populated with the relevant IDs and tokens. 
+
+*Note: Use your release version. For example can append the TravisCI build number*
 
 ```bash
 curl -XPOST -H "Content-Type: application/json" -d '{ "release":"{RELEASE-VERSION}" }' \
