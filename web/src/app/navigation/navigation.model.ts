@@ -35,6 +35,20 @@ export class FuseNavigationModel implements FuseNavigationModelInterface {
         //     'bg'   : 'green',
         //     'fg'   : '#FFFFFF'
         // }
+      },
+      {
+        id: 'help',
+        title: 'Help',
+        // translate: 'NAV.PUBLICENVIRONMENTS.TITLE',
+        type: 'item',
+        icon: 'help',
+        url: '/help',
+        // 'badge': {
+        //     'title': 3,
+        //     // 'translate': 'NAV.PUBLICENVIRONMENTS.BADGE',
+        //     'bg'   : 'green',
+        //     'fg'   : '#FFFFFF'
+        // }
       }
     ]
   };

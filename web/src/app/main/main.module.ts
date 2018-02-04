@@ -56,6 +56,9 @@ import {NgPipesModule} from "ngx-pipes";
 import {FuseWidgetModule} from "../core/components/widget/widget.module";
 import {FuseThemeOptionsComponent} from "../core/components/theme-options/theme-options.component";
 import {MonitorService} from "./content/environment/monitor/monitor.service";
+import {HelpComponent} from "./content/help/help.component";
+import {HelpArticleComponent} from "./content/help/dialogs/article/article.component";
+import {MarkdownModule} from "angular2-markdown";
 
 const routes: Routes = [
   {
@@ -65,6 +68,7 @@ const routes: Routes = [
     resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
+  { path: 'help', component: HelpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, summary: PrivateSummaryResolver } },
@@ -114,6 +118,8 @@ export function jwtOptionsFactory() {
         FuseThemeOptionsComponent,
         CallbackComponent,
         LoginComponent,
+        HelpComponent,
+        HelpArticleComponent,
         PricingComponent,
         ProfileComponent,
         EnvironmentAddComponent,
@@ -146,6 +152,7 @@ export function jwtOptionsFactory() {
             useFactory: jwtOptionsFactory
           }
         }),
+        MarkdownModule.forRoot(),
         MomentModule,
         NgPipesModule
     ],
@@ -173,6 +180,9 @@ export function jwtOptionsFactory() {
       NavigationService,
       SummaryService,
       TokenService
+    ],
+    entryComponents: [
+      HelpArticleComponent
     ]
 })
 export class FuseMainModule
