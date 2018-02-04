@@ -1,6 +1,6 @@
+# The **environment** `type` configures the Pipeline flow.
 
-
-*You can update the `type` at anytime*.
+*Note: You can update the environment `type` at anytime*.
 
 ## Environment types
 
