@@ -83,7 +83,11 @@ const schema = new Schema({
             type: String,
             default: '',
             trim: true,
-            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 5, max: 1024}))
+            validate: ((v) =>
+                    typeof v === 'string' &&
+                    validator.isLength(v, {min: 5, max: 1024}) &&
+                    validator.isURL(v, { protocols: ['https'], require_protocol: true })
+            )
         }
     },
     {
