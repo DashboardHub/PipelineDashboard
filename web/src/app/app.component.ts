@@ -7,6 +7,7 @@ import { FuseNavigationService } from './core/components/navigation/navigation.s
 import { FuseNavigationModel } from './navigation/navigation.model';
 import { locale as navigationEnglish } from './navigation/i18n/en';
 import { locale as navigationTurkish } from './navigation/i18n/tr';
+import {Angulartics2GoogleAnalytics} from "angulartics2/ga";
 
 @Component({
     selector   : 'fuse-root',
@@ -19,7 +20,8 @@ export class AppComponent
         private fuseNavigationService: FuseNavigationService,
         private fuseSplashScreen: FuseSplashScreenService,
         private translate: TranslateService,
-        private translationLoader: FuseTranslationLoaderService
+        private translationLoader: FuseTranslationLoaderService,
+        private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
     )
     {
         // Add languages
