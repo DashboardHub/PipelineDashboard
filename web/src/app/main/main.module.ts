@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../core/modules/shared.module';
 
-import { environment } from '../../environments/environment';
 import { FuseMainComponent } from './main.component';
 import { FuseContentComponent } from './content/content.component';
 import { FuseFooterComponent } from './footer/footer.component';
@@ -27,7 +26,6 @@ import { EnvironmentService } from "./content/environment/environment.service";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { EnvironmentListComponent } from "./content/environment/environment-list/environment-list.component";
 import { PublicEnvironmentsResolver } from "./content/environment/public.environments.resolver";
-import {JWT_OPTIONS, JwtModule} from "@auth0/angular-jwt";
 import { NavigationService } from "../navigation/navigation.service";
 import { FuseNavigationModel } from "../navigation/navigation.model";
 import { MomentModule } from "angular2-moment";
@@ -59,6 +57,9 @@ import {MonitorService} from "./content/environment/monitor/monitor.service";
 import {HelpComponent} from "./content/help/help.component";
 import {HelpArticleComponent} from "./content/help/dialogs/article/article.component";
 import {MarkdownModule} from "angular2-markdown";
+
+import {Http, HttpModule, RequestOptions} from '@angular/http';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
 
 const routes: Routes = [
   {
@@ -96,13 +97,11 @@ const routes: Routes = [
   { path: '**', redirectTo: '/public' }
 ];
 
-export function jwtOptionsFactory() {
-  return {
-    tokenGetter: () => {
-      return localStorage.getItem('access_token');
-    },
-    whitelistedDomains: environment.whitelist
-  }
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenGetter: (() => localStorage.getItem('access_token')),
+    globalHeaders: [{'Content-Type':'application/json'}]
+  }), http, options);
 }
 
 @NgModule({
@@ -135,6 +134,7 @@ export function jwtOptionsFactory() {
         SummaryComponent
     ],
     imports     : [
+        HttpModule,
         RouterModule.forRoot(
           routes,
           { enableTracing: true } // <-- debugging purposes only
@@ -146,12 +146,6 @@ export function jwtOptionsFactory() {
         FuseSearchBarModule,
         FuseWidgetModule,
         HttpClientModule,
-        JwtModule.forRoot({
-          jwtOptionsProvider: {
-            provide: JWT_OPTIONS,
-            useFactory: jwtOptionsFactory
-          }
-        }),
         MarkdownModule.forRoot(),
         MomentModule,
         NgPipesModule
@@ -161,6 +155,11 @@ export function jwtOptionsFactory() {
     ],
     providers: [
       { provide: HTTP_INTERCEPTORS, useClass: ErrorHttpInterceptor, multi: true },
+      {
+        provide: AuthHttp,
+        useFactory: authHttpServiceFactory,
+        deps: [Http, RequestOptions]
+      },
       AuthGuard,
       AuthService,
       DeploysResolver,

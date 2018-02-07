@@ -3,22 +3,24 @@ import 'rxjs/add/operator/toPromise';
 import { environment } from './../../../../environments/environment';
 import 'rxjs/add/operator/map';
 import { Observable } from "rxjs/Observable";
-import { HttpClient } from "@angular/common/http";
 import {Summary} from "../summary/summary";
+import {AuthHttp} from "angular2-jwt";
 
 @Injectable()
 export class SummaryService {
 
   private url: string = environment.api;
 
-  constructor(private http: HttpClient) {
+  constructor(private authHttp: AuthHttp) {
   }
 
   getPublicEnvironmentSummary(): Observable<Summary> {
-    return this.http.get<Summary>(this.url + '/summary');
+    return this.authHttp.get(this.url + '/summary')
+      .map(response => response.json() as Summary);
   }
 
   getPrivateEnvironmentSummary(): Observable<Summary> {
-    return this.http.get<Summary>(this.url + '/environments/summary');
+    return this.authHttp.get(this.url + '/environments/summary')
+      .map(response => response.json() as Summary);
   }
 }
