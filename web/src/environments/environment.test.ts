@@ -3,7 +3,7 @@ export const environment = {
   hmr: false,
   api: 'https://api-pipeline-test.dashboardhub.io',
   web: 'http://pipeline-test.dashboardhub.io',
-  whitelist: ['api-pipeline-test.dashboardhub.io', 'https://api-pipeline-test.dashboardhub.io', 'api-pipeline-test.dashboardhub.io:443'],
+  whitelist: ['api-pipeline-test.dashboardhub.io:443'],
   version: 'x.x.x',
 
   auth: {

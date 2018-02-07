@@ -9,8 +9,8 @@ import { Deployed } from "./deployed";
 import { Release } from "./release";
 import { State } from "./state";
 import { MatSnackBar } from "@angular/material";
-import { HttpClient } from "@angular/common/http";
 import { EnvironmentService } from "../environment.service";
+import {AuthHttp} from "angular2-jwt";
 
 @Injectable()
 export class DeployedService {
@@ -29,18 +29,20 @@ export class DeployedService {
   // private releases: Subject<List<Release>> = new Subject<List<Release>>();
 
   constructor(
-    private http: HttpClient,
+    private authHttp: AuthHttp,
     private environmentService: EnvironmentService,
     private snackBar: MatSnackBar
   ) {
   }
 
   findAll(environmentId: string): Observable<List<Deployed>> {
-    return this.http.get<List<Deployed>>(`${this.url}/environments/${environmentId}/deployed`);
+    return this.authHttp.get(`${this.url}/environments/${environmentId}/deployed`)
+      .map(response => response.json() as List<Deployed>);
   }
 
   findAllReleases(environmentId: string): Observable<List<Release>> {
-    return this.http.get<List<Release>>(`${this.url}/environments/${environmentId}/releases`);
+    return this.authHttp.get(`${this.url}/environments/${environmentId}/releases`)
+      .map(response => response.json() as List<Release>);
   }
 
   // addDeployed(deployed: Deployed): void {
