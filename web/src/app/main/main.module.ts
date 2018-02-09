@@ -30,7 +30,6 @@ import { NavigationService } from "../navigation/navigation.service";
 import { FuseNavigationModel } from "../navigation/navigation.model";
 import { MomentModule } from "angular2-moment";
 import { EnvironmentViewComponent } from "./content/environment/environment-view/environment-view.component";
-import { EnvironmentViewResolver } from "./content/environment/environment-view/environment-view.resolver";
 import { EnvironmentSidenavComponent } from "./content/environment/sidenav/environment-sidenav.component";
 import { TokenComponent } from "./content/environment/token/token.component";
 import { TokenService } from "./content/environment/token/token.service";
@@ -60,6 +59,10 @@ import {MarkdownModule} from "angular2-markdown";
 
 import {Http, HttpModule, RequestOptions} from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import {EnvironmentDetailsComponent} from "./content/environment/environment-view/environment-details/environment-details.component";
+import {OverviewComponent} from "./content/environment/overview/overview.component";
+import {PrivateEnvironmentResolver} from "./content/environment/environment-view/private.environment.resolver";
+import {PublicEnvironmentResolver} from "./content/environment/overview/public.environment.resolver";
 
 const routes: Routes = [
   {
@@ -85,15 +88,16 @@ const routes: Routes = [
         resolve: { environments: PrivateEnvironmentsResolver }
       },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
-      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: EnvironmentViewResolver } },
-      { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: EnvironmentViewResolver } },
-      { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: EnvironmentViewResolver } },
-      { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: EnvironmentViewResolver, deploys: DeploysResolver } },
-      { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: EnvironmentViewResolver, releases: ReleasesResolver } },
-      { path: ':id/monitors', pathMatch: 'full', component: MonitorComponent, resolve: { environment: EnvironmentViewResolver } },
-      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: EnvironmentViewResolver } }
+      { path: ':id/edit', pathMatch: 'full', component: EnvironmentEditComponent, resolve: { environment: PrivateEnvironmentResolver } },
+      { path: ':id/token', pathMatch: 'full', component: TokenComponent, resolve: { environment: PrivateEnvironmentResolver } },
+      { path: ':id/delete', pathMatch: 'full', component: EnvironmentDeleteComponent, resolve: { environment: PrivateEnvironmentResolver } },
+      { path: ':id/deploys', pathMatch: 'full', component: DeployedComponent, resolve: { environment: PrivateEnvironmentResolver, deploys: DeploysResolver } },
+      { path: ':id/releases', pathMatch: 'full', component: ReleaseComponent, resolve: { environment: PrivateEnvironmentResolver, releases: ReleasesResolver } },
+      { path: ':id/monitors', pathMatch: 'full', component: MonitorComponent, resolve: { environment: PrivateEnvironmentResolver } },
+      { path: ':id', pathMatch: 'full', component: EnvironmentViewComponent, resolve: { environment: PrivateEnvironmentResolver } },
     ]
   },
+  { path: ':id/view', pathMatch: 'full', component: OverviewComponent, resolve: { environment: PublicEnvironmentResolver } },
   { path: '**', redirectTo: '/public' }
 ];
 
@@ -127,7 +131,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
         EnvironmentEditComponent,
+        EnvironmentDetailsComponent,
         MonitorComponent,
+        OverviewComponent,
         ReleaseComponent,
         TokenComponent,
         DeployedComponent,
@@ -174,7 +180,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       PrivateSummaryResolver,
       PublicSummaryResolver,
       ReleasesResolver,
-      EnvironmentViewResolver,
+      PrivateEnvironmentResolver,
+      PublicEnvironmentResolver,
       FuseNavigationModel,
       NavigationService,
       SummaryService,
