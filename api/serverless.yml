@@ -66,6 +66,14 @@ functions:
           method: get
           integration: lambda-proxy
           cors: true
+  publicEnvironmentGet:
+    handler: environments/get.public
+    events:
+      - http:
+          path: environments/{id}/view
+          method: get
+          integration: lambda-proxy
+          cors: true
   environmentList:
       handler: environments/list.private
       events:
@@ -101,7 +109,7 @@ functions:
                 - X-Api-Key
                 - X-Amz-Security-Token
   environmentGet:
-    handler: environments/get.get
+    handler: environments/get.private
     events:
       - http:
           path: environments/{id}

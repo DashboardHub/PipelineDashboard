@@ -60,6 +60,7 @@
               </div>
 
               <a mat-button color="accent" [routerLink]="['/environment', environment.id]" *ngIf="profile && environment.owner === profile.sub">DETAILS</a>
+              <a mat-button color="accent" [routerLink]="['/', environment.id, 'view']" *ngIf="!profile || environment.owner !== profile.sub">VIEW</a>
               <a mat-button color="accent" [disabled]="!environment.link" [href]="environment.link" target="_blank">WEBSITE</a>
             </div>
           </fuse-widget>

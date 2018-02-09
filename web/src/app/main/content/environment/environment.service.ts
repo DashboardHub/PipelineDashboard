@@ -46,6 +46,10 @@ export class EnvironmentService {
       .map(response => response.json() as Environment);
   }
 
+  getPublicEnvironment(id: string): Observable<Environment> {
+    return this.http.get<Environment>(this.url + '/environments' + '/' + id + '/view')
+  }
+
   getEnvironment(id: string): Observable<Environment> {
     return this.authHttp.get(this.url + '/environments' + '/' + id)
       .map(response => response.json() as Environment);

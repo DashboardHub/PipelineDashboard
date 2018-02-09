@@ -51,6 +51,7 @@
     "type": "build-deploy",
     "title": "Environment D",
     "link": "https://dashboardhub.io",
+    "logo": "https://cdn.dashboardhub.io/icon-only-orange-120x120.png",
     "description": "Description for Environment D",
     "latestRelease": "{\"id\":\"721fe0a0-0332-11e8-94a3-8b807373e11e\",\"environmentId\":\"2\",\"release\":\"v1.0.1\",\"state\":\"finishDeploy\",\"token\":{\"name\":\"Continuous Integration Server\"},\"createdAt\":\"2018-01-27T07:19:43.274Z\",\"updatedAt\":\"2018-01-27T07:19:43.274Z\"}",
     "releases": 33,
