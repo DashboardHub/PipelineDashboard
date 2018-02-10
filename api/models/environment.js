@@ -88,6 +88,11 @@ const schema = new Schema({
                     validator.isLength(v, {min: 5, max: 1024}) &&
                     validator.isURL(v, { protocols: ['https'], require_protocol: true })
             )
+        },
+        views: {
+            type: Number,
+            default: 0,
+            trim: true
         }
     },
     {

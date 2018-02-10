@@ -14,17 +14,23 @@ module.exports.public = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        // remove private data
-        delete environment.isPrivate;
-        delete environment.tokens;
-        delete environment.monitors;
+        environmentModel.model.update({ id }, {
+            views: environment.views + 1
+        }, function (err) {
+            if (err) { console.log(err); }
 
-        return callback(null, {
-            headers: {
-                "Access-Control-Allow-Origin": "*"
-            },
-            statusCode: 200,
-            body: JSON.stringify(progress.calculate(environment))
+            // remove private data
+            delete environment.isPrivate;
+            delete environment.tokens;
+            delete environment.monitors;
+
+            return callback(null, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+                statusCode: 200,
+                body: JSON.stringify(progress.calculate(environment))
+            });
         });
     });
 };

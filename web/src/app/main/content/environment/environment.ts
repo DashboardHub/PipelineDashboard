@@ -20,6 +20,7 @@ export class Environment {
   tags: Array<string>;
   tokens: Array<Token>;
   monitors: Array<Monitor>;
+  views: number;
   updatedAt: string;
   createdAt: string;
 
