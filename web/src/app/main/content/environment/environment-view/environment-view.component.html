@@ -45,7 +45,18 @@
         <div fxLayout="column">
           <app-environment-details></app-environment-details>
 
-          <p class="p-24 pb-24">Here are the commands available to you to update your <b>DashboardHub</b> environment from your local machine or from your Continuous Integration environment.</p>
+          <mat-divider></mat-divider>
+
+          <div class="p-24">
+            <p>Your badge to the public view of your environment.</p>
+
+            <p><img src="https://img.shields.io/badge/DashboardHub-{{ environment.title }}-orange.svg" /></p>
+            <markdown>`[![DashboardHub Badge](https://img.shields.io/badge/DashboardHub-{{ environment.title.replace(' ', '%20') }}-orange.svg)]({{ web }}/{{ environment.id }}/view)`</markdown>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <p class="p-24">Here are the commands available to you to update your <b>DashboardHub</b> environment from your local machine or from your Continuous Integration environment.</p>
 
           <mat-card *ngIf="['build', 'build-deploy'].includes(environment.type)">
             <mat-card-header>
