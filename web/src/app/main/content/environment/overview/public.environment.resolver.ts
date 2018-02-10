@@ -5,12 +5,12 @@ import { EnvironmentService } from "../environment.service";
 import { Environment } from "../environment";
 
 @Injectable()
-export class EnvironmentViewResolver implements Resolve<any> {
+export class PublicEnvironmentResolver implements Resolve<any> {
 
   constructor(private environmentService: EnvironmentService) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Environment> {
     return this.environmentService
-      .getEnvironment(route.params['id']);
+      .getPublicEnvironment(route.params['id']);
   }
 }

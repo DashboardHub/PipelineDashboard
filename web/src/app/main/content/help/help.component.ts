@@ -37,6 +37,10 @@ export class HelpComponent
         {
           title: 'Delete environment',
           path: 'coming-soon'
+        },
+        {
+          title: 'Badges',
+          path: 'coming-soon'
         }
       ]
     },

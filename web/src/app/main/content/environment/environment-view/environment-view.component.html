@@ -43,18 +43,20 @@
       <div class="content mat-white-bg mat-elevation-z4">
 
         <div fxLayout="column">
-          <mat-card class="mat-elevation-z18">
-            <mat-card-header>
-              <mat-card-title>{{ environment.type }} ({{ environment.releases }})</mat-card-title>
-              <mat-card-subtitle *ngIf="environment.link">{{ environment.link }}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <p *ngIf="environment.latestRelease.id"><b>{{ environment.latestRelease.release }}</b> in <b>{{ environment.latestRelease.state }}</b> using <b>{{ environment.latestRelease.token.name }}</b> at <b>{{ environment.latestRelease.createdAt | amTimeAgo }}</b></p>
-              <p *ngIf="environment.description">{{ environment.description }}</p>
-            </mat-card-content>
-          </mat-card>
+          <app-environment-details></app-environment-details>
 
-          <mat-progress-bar mode="buffer" [value]="environment.progress ? environment.progress.current : 0" [bufferValue]="environment.progress ? environment.progress.next : 0"></mat-progress-bar>
+          <mat-divider></mat-divider>
+
+          <div class="p-24">
+            <p>Your badge to the public view of your environment.</p>
+
+            <p><img src="https://img.shields.io/badge/DashboardHub-{{ environment.title }}-orange.svg" /></p>
+            <markdown>`[![DashboardHub Badge](https://img.shields.io/badge/DashboardHub-{{ environment.title.replace(' ', '%20') }}-orange.svg)]({{ web }}/{{ environment.id }}/view)`</markdown>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <p class="p-24">Here are the commands available to you to update your <b>DashboardHub</b> environment from your local machine or from your Continuous Integration environment.</p>
 
           <mat-card *ngIf="['build', 'build-deploy'].includes(environment.type)">
             <mat-card-header>
