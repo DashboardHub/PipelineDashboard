@@ -1,3 +1,13 @@
-<div class="loading">
-  <mat-icon>restore</mat-icon>
+<div id="error-500" fxLayout="column" fxLayoutAlign="center center">
+
+  <div class="content" fxLayout="column" fxLayoutAlign="center center">
+
+    <div class="error-code">OOPS</div>
+    <div class="message">Well, you broke the internet!</div>
+    <div class="sub-message">Just kidding, looks like we have an internal issue, please try again</div>
+
+    <a class="report-link" [routerLink]="'/'">Homepage</a>
+
+  </div>
+
 </div>
