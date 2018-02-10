@@ -11,6 +11,7 @@
     "latestPing": "{}",
     "pings": 0,
     "isPrivate": false,
+    "views": 0,
     "createdAt": 1517044450932,
     "updatedAt": 1517044450932
   },
@@ -25,6 +26,7 @@
     "pings": 0,
     "tokens": "[{\"id\":\"c4703951-0331-11e8-94a3-8b807373e11e\",\"name\":\"Continuous Integration Server\",\"lastUsed\":\"2018-01-27T07:19:43.278Z\"}]",
     "isPrivate": false,
+    "views": 0,
     "createdAt": 1517044450932,
     "updatedAt": 1517044450932
   },
@@ -42,6 +44,7 @@
     "tokens": "[{\"id\":\"c4703951-0331-11e8-94a3-8b807373e11e\",\"name\":\"Continuous Integration Server\",\"lastUsed\":\"2018-01-27T07:19:43.278Z\"}]",
     "monitors": "[{\"id\": \"c4703950-0331-11e8-94a3-8b807373e11f\",\"path\": \"/\",\"method\": \"GET\",\"expectedCode\": \"200\",\"expectedText\": \"Environment C\"}]",
     "isPrivate": false,
+    "views": 0,
     "createdAt": 1517044450932,
     "updatedAt": 1517044450932
   },
@@ -60,6 +63,7 @@
     "tokens": "[{\"id\":\"c4703951-0331-11e8-94a3-8b807373e11e\",\"name\":\"Continuous Integration Server\",\"lastUsed\":\"2018-01-27T07:19:43.278Z\"},{\"id\":\"c4703951-0331-11e8-94a3-8b807373e11f\",\"name\":\"Test Token\",\"lastUsed\":\"2018-01-27T07:19:43.278Z\"}]",
     "monitors": "[{\"id\": \"1\",\"path\": \"/\",\"method\": \"GET\",\"expectedCode\": \"200\",\"expectedText\": \"DashboardHub\"}]",
     "isPrivate": false,
+    "views": 10324,
     "createdAt": 1517044450932,
     "updatedAt": 1517044450932
   }
