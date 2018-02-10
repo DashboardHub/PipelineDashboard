@@ -13,6 +13,7 @@ export class EnvironmentViewComponent implements OnInit {
 
   environment: Environment = new Environment('');
   private url: string = environment.api;
+  public web: string = environment.web;
 
   constructor(private route: ActivatedRoute) {
   }
