@@ -1,0 +1,40 @@
+@import "./../../../../core/scss/fuse";
+
+:host {
+
+  #error-500 {
+    width: 100%;
+    overflow: auto;
+
+    .content {
+      width: 90%;
+      max-width: 512px !important;
+
+      .error-code {
+        font-size: 112px;
+        line-height: 1;
+        text-align: center;
+        margin-bottom: 16px;
+        font-weight: 500;
+      }
+
+      .message {
+        font-size: 24px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.54);
+      }
+
+      .sub-message {
+        font-size: 17px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.54);
+        margin: 16px auto 48px auto;
+      }
+
+      .report-link {
+        text-align: center;
+        font-size: 15px;
+      }
+    }
+  }
+}
