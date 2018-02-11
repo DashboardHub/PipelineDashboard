@@ -63,12 +63,14 @@ import {EnvironmentDetailsComponent} from "./content/environment/environment-vie
 import {OverviewComponent} from "./content/environment/overview/overview.component";
 import {PrivateEnvironmentResolver} from "./content/environment/environment-view/private.environment.resolver";
 import {PublicEnvironmentResolver} from "./content/environment/overview/public.environment.resolver";
+import { EnvironmentPublicListComponent } from './content/environment/environment-public-list/environment-public-list.component';
+import { EnvironmentPrivateListComponent } from './content/environment/environment-private-list/environment-private-list.component';
 
 const routes: Routes = [
   {
     path: 'public',
     pathMatch: 'full',
-    component: EnvironmentListComponent,
+    component: EnvironmentPublicListComponent,
     resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
@@ -84,7 +86,7 @@ const routes: Routes = [
       {
         path: 'list',
         pathMatch: 'full',
-        component: EnvironmentListComponent,
+        component: EnvironmentPrivateListComponent,
         resolve: { environments: PrivateEnvironmentsResolver }
       },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
@@ -127,6 +129,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         ProfileComponent,
         EnvironmentAddComponent,
         EnvironmentListComponent,
+        EnvironmentPrivateListComponent,
+        EnvironmentPublicListComponent,
         EnvironmentViewComponent,
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
