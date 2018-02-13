@@ -8,4 +8,46 @@ Please read the [CODE of CONDUCT](/CODE_OF_CONDUCT.md).
 
 ---
 
-All contributions are welcome from typos in documentation to coding new features. If you require any help or have any questions please do not hesitate to ask, we are friendly and aim to reply within 48hours.
+## All contributions are welcome 
+
+...from typos in documentation to coding new features. If you require any help or have any questions please do not hesitate to ask, we are friendly and aim to reply within 48hours.
+
+---
+
+## Commit messages
+
+We are now using []Conventional Commits specification](https://github.com/conventional-changelog/standard-version#commit-message-convention-at-a-glance)
+
+### Commit Message Convention, at a Glance
+
+_patches:_
+
+```sh
+git commit -a -m "fix(parsing): fixed a bug in our parser"
+```
+
+_features:_
+
+```sh
+git commit -a -m "feat(parser): we now have a parser \o/"
+```
+
+_breaking changes:_
+
+```sh
+git commit -a -m "feat(new-parser): introduces a new parsing library
+BREAKING CHANGE: new library does not support foo-construct"
+```
+
+_other changes:_
+
+You decide, e.g., docs, chore, etc.
+
+```sh
+git commit -a -m "docs: fixed up the docs a bit"
+```
+
+_but wait, there's more!_
+
+Github usernames (`@bcoe`) and issue references (#133) will be swapped out for the
+appropriate URLs in your CHANGELOG.

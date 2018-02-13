@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=prototype-v0.8.0)](https://travis-ci.org/DashboardHub/PipelineDashboard)
 [![DashboardHub Badge](https://img.shields.io/badge/DashboardHub-DashboardHub-orange.svg)](https://pipeline.dashboardhub.io/1fd1da50-ca3a-11e7-8e89-ddd24d528194/view)
 [![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg)](https://gitter.im/DashboardHub/PipelineDashboard)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![Help Contribute to Open Source](https://www.codetriage.com/dashboardhub/pipelinedashboard/badges/users.svg)](https://www.codetriage.com/dashboardhub/pipelinedashboard)
 
 # PipelineDashboard
