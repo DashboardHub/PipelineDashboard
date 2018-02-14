@@ -71,8 +71,8 @@ export class MonitorComponent implements OnInit {
   delete(): void {
     this.monitorService
       .delete(this.monitor)
-      .subscribe((monitor) => {
-        this.environment.monitors.pop();
+      .subscribe((monitors) => {
+        this.environment.monitors = monitors.list;
         this.pings = new List<Pinged>();
         this.dataSource = new MatTableDataSource<Pinged>(this.pings.list);
       });
