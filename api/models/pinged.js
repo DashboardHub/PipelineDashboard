@@ -42,9 +42,17 @@ const schema = new Schema({
         duration: {
             type: Number,
             required: true
+        },
+        ttl: {
+            type: Number,
+            required: true
         }
     },
     {
+        expires: {
+            ttl: 1*24*60*60, // 1 day in seconds
+            attribute: 'ttl' // ttl will be used as the attribute name
+        },
         timestamps: true,
         useDocumentTypes: true,
         useNativeBooleans: true,
