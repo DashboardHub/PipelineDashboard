@@ -16,26 +16,28 @@ Please read the [CODE of CONDUCT](/CODE_OF_CONDUCT.md).
 
 ## Commit messages
 
-We are now using []Conventional Commits specification](https://github.com/conventional-changelog/standard-version#commit-message-convention-at-a-glance)
+We are now using [Conventional Commits specification](https://conventionalcommits.org)
 
 ### Commit Message Convention, at a Glance
+
+Dont forget to include the **Issue Number**... 
 
 _patches:_
 
 ```sh
-git commit -a -m "fix(parsing): fixed a bug in our parser"
+git commit -a -m "fix(parsing): #123 fixed a bug in our parser"
 ```
 
 _features:_
 
 ```sh
-git commit -a -m "feat(parser): we now have a parser \o/"
+git commit -a -m "feat(parser): #123 we now have a parser \o/"
 ```
 
 _breaking changes:_
 
 ```sh
-git commit -a -m "feat(new-parser): introduces a new parsing library
+git commit -a -m "feat(new-parser): #123 introduces a new parsing library
 BREAKING CHANGE: new library does not support foo-construct"
 ```
 
@@ -44,7 +46,7 @@ _other changes:_
 You decide, e.g., docs, chore, etc.
 
 ```sh
-git commit -a -m "docs: fixed up the docs a bit"
+git commit -a -m "docs: #123 fixed up the docs a bit"
 ```
 
 _but wait, there's more!_
