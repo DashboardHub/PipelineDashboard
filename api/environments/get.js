@@ -14,9 +14,7 @@ module.exports.public = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        environmentModel.model.update({ id }, {
-            views: environment.views + 1
-        }, function (err) {
+        environmentModel.model.update({ id }, { views: environment.views + 1 }, { updateTimestamps: false }, function (err) {
             if (err) { console.log(err); }
 
             // remove private data
