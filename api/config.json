@@ -13,7 +13,7 @@
     },
     "pinged": {
       "table": "pipelinedashboard-pinged",
-      "ttl": 86400
+      "ttl": 7200
 
     }
   },
