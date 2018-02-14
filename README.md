@@ -36,7 +36,7 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 - `node` (minimum `v8`)
 - `npm` (minimum `v5`)
-- `java` (minimum `v8`)
+- `java` (minimum `v8`) - *note: this is only to simulate aws services, you do not need to know any java)
 
 ## Built with love using...
 
