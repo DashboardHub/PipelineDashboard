@@ -42,13 +42,10 @@ const schema = new Schema({
         duration: {
             type: Number,
             required: true
-        },
-        ttl: {
-            type: Number,
-            required: true
         }
     },
     {
+        expires: config.dynamodb.pinged.ttl,
         timestamps: true,
         useDocumentTypes: true,
         useNativeBooleans: true,
