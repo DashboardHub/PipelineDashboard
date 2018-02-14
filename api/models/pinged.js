@@ -49,10 +49,6 @@ const schema = new Schema({
         }
     },
     {
-        expires: {
-            ttl: config.dynamodb.pinged.ttl,
-            attribute: 'ttl'
-        },
         timestamps: true,
         useDocumentTypes: true,
         useNativeBooleans: true,
