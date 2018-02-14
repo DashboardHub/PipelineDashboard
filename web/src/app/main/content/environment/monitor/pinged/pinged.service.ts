@@ -5,9 +5,8 @@ import { List } from "./../../../list";
 import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs';
-import { HttpClient } from "@angular/common/http";
 import {Pinged} from "./pinged";
-import {Environment} from "../../environment";
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class PingedService {
@@ -15,22 +14,24 @@ export class PingedService {
   private url: string = environment.api;
 
   constructor(
-    private http: HttpClient
+    private authHttp: AuthHttp
   ) {
   }
 
   findAll(environmentId: string, monitorId: string): Observable<List<Pinged>> {
-    return this.http.get<List<Pinged>>(`${this.url}/environments/${environmentId}/monitors/${monitorId}/pings`);
+    return this.authHttp.get(`${this.url}/environments/${environmentId}/monitors/${monitorId}/pings`)
+      .map(response => response.json() as List<Pinged>);
   }
 
   ping(environmentId: string, monitorId: string): Observable<Pinged> {
-    return this.http.post<Pinged>(`${this.url}/environments/${environmentId}/monitors/${monitorId}/ping`, {
+    return this.authHttp.post(`${this.url}/environments/${environmentId}/monitors/${monitorId}/ping`, {
       environment: {
         id: environmentId
       },
       monitor: {
         id: monitorId
       }
-    });
+    })
+      .map(response => response.json() as Pinged);
   }
 }

@@ -50,8 +50,8 @@ const schema = new Schema({
     },
     {
         expires: {
-            ttl: 1*24*60*60, // 1 day in seconds
-            attribute: 'ttl' // ttl will be used as the attribute name
+            ttl: config.dynamodb.pinged.ttl,
+            attribute: 'ttl'
         },
         timestamps: true,
         useDocumentTypes: true,
