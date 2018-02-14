@@ -82,7 +82,8 @@ module.exports.ping = (event, context, callback) => {
                     statusCode: statusCode,
                     codeMatched: statusCode === monitor.expectedCode,
                     textMatched: monitor.expectedText ? data.includes(monitor.expectedText) : true,
-                    duration: end
+                    duration: end,
+                    ttl: Date.now() / 1000 | 0
                 };
 
                 let pinged = new pingedModel.model(item);
