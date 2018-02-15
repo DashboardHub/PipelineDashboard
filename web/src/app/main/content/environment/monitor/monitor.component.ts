@@ -38,7 +38,6 @@ export class MonitorComponent implements OnInit {
       this.monitor = this.environment.monitors[0];
     }
     this.monitor.environmentId = this.environment.id;
-    // this.pings = this.route.snapshot.data['pings'];
 
     this.refresh();
   }
@@ -65,13 +64,19 @@ export class MonitorComponent implements OnInit {
   add(): void {
     this.monitorService
       .add(this.monitor)
-      .subscribe((monitor) => this.environment.monitors.push(monitor));
+      .subscribe((monitor) => {
+        this.environment.monitors.push(monitor);
+        this.monitor = monitor;
+        this.monitor.environmentId = this.environment.id;
+      });
   }
 
   delete(): void {
     this.monitorService
       .delete(this.monitor)
       .subscribe((monitors) => {
+        this.monitor = new Monitor('');
+        this.monitor.environmentId = this.environment.id;
         this.environment.monitors = monitors.list;
         this.pings = new List<Pinged>();
         this.dataSource = new MatTableDataSource<Pinged>(this.pings.list);
