@@ -72,8 +72,14 @@
                   </div>
                 </mat-form-field>
                 <mat-form-field fxFlex="10%">
-                  <mat-select placeholder="Expected Code" name="expectedCode" [(ngModel)]="monitor.expectedCode" [disabled]="true">
-                    <mat-option value="200">200</mat-option>
+                  <mat-select placeholder="Expected Code" name="expectedCode"
+                              [(ngModel)]="monitor.expectedCode">
+                    <mat-option [value]="200">200</mat-option>
+                    <mat-option [value]="201">201</mat-option>
+                    <mat-option [value]="301">301</mat-option>
+                    <mat-option [value]="400">400</mat-option>
+                    <mat-option [value]="404">404</mat-option>
+                    <mat-option [value]="500">500</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field fxFlex>
@@ -97,7 +103,7 @@
                   </mat-select>
                 </mat-form-field>
                 <button mat-button fxFlex="10%" color="primary"
-                        [disabled]="!form.valid && environment.monitors.length > 0"
+                        [disabled]="!form.valid && environment.monitors.length"
                         (click)="add()">SAVE
                 </button>
                 <button mat-button fxFlex="10%" color="accent"
@@ -110,32 +116,32 @@
             <mat-table #table [dataSource]="dataSource">
               <ng-container matColumnDef="url">
                 <mat-header-cell *matHeaderCellDef>URL</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.url }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.url }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="statusCode">
                 <mat-header-cell *matHeaderCellDef>Status Code</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.statusCode }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.statusCode }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="codeMatched">
                 <mat-header-cell *matHeaderCellDef>Code Matched</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.codeMatched }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.codeMatched }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="textMatched">
                 <mat-header-cell *matHeaderCellDef>Text Matched</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.textMatched }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.textMatched }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="duration">
                 <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.duration }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.duration }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="createdAt">
                 <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.createdAt | amTimeAgo }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.createdAt | amTimeAgo }}</mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
