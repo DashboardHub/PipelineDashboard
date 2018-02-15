@@ -103,7 +103,7 @@
                   </mat-select>
                 </mat-form-field>
                 <button mat-button fxFlex="10%" color="primary"
-                        [disabled]="!form.valid && environment.monitors.length"
+                        [disabled]="!form.valid && environment.monitors.length > 0"
                         (click)="add()">SAVE
                 </button>
                 <button mat-button fxFlex="10%" color="accent"
