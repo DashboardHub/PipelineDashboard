@@ -14,7 +14,7 @@ api: api.run
 
 ui: ui.run
 
-install.local: alexa.install api.install ui.install
+install.local: alexa.install api.clean api.install ui.install
 	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev)
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild alexa.install api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
@@ -38,7 +38,7 @@ alexa.remove:
 
 # API
 api.clean:
-	(cd api; git checkout ./config.json)
+	(cd api; cp config.json.tpl config.json)
 
 api.install:
 	(cd api; rm -fr node_modules || echo "Nothing to delete")
