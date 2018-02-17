@@ -37,7 +37,8 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 - `node` (minimum `v8`)
 - `npm` (minimum `v5`)
-- `java` (minimum `v8`) - *note: this is only to simulate aws services, you do not need to know any java)
+- `java` (minimum `v8`) - *note: this is only to simulate aws services, you do not need to know any java
+- `sed` - *note: available on linux by default, mac osx has a slightly different version that wont work, install linux version with **brew** `brew install gnu-sed --with-default-names`, more info in the **FAQ** section below.*
 
 ## Built with love using...
 
@@ -76,7 +77,7 @@ Then visit `http://localhost:4200/`
 
 ## Additional useful commands
 
-- `make api.clean` resets the config files (do not use if you have made manual changes to the `api/config.json file)
+- `make api.clean` resets the config files
 
 ## SUB PROJECTS
 
@@ -95,3 +96,4 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | OS | Question | Answer |
 | :--- | :--- | :--- |
 | Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed --with-default-names` |
+| - | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
