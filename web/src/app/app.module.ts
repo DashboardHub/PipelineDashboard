@@ -12,8 +12,9 @@ import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
 import { FuseSampleModule } from './main/content/sample/sample.module';
 import { TranslateModule } from '@ngx-translate/core';
-import {Angulartics2Module} from "angulartics2";
-import {Angulartics2GoogleAnalytics} from "angulartics2/ga";
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+
 const appRoutes: Routes = [
     {
         path      : '**',
