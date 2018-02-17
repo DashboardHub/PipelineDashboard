@@ -89,6 +89,15 @@ Then visit `http://localhost:4200/`
 
 Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) to do realtime coding collaboration.
 
+## CHANGELOG GENERATION
+
+Using [Conventional changelog](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli)
+
+From inside the project:
+
+- `npm install -g conventional-changelog-cli`
+- `conventional-changelog -p angular -i CHANGELOG.md -s`
+
 ---
 
 ## FAQs
