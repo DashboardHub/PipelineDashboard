@@ -31,10 +31,11 @@ module.exports.list = (event, context, callback) => {
             }, {});
 
             let releases = [];
+            let release = {};
 
             Object.values = obj => Object.keys(obj).map(key => obj[key]); // @TODO: temporary fix for older lambda
             Object.values(states).forEach((release) => {
-                releases.push({
+                release = {
                     version: release.version,
                     token: release.token,
                     failDeploy: release.failDeploy || null,
@@ -47,7 +48,11 @@ module.exports.list = (event, context, callback) => {
                         createdAt: release.failDeploy || release.failBuild || release.finishDeploy || release.startDeploy || release.finishBuild || release.startBuild,
                         state: release.failDeploy ? 'failDeploy' : release.failBuild ? 'failBuild' : release.finishDeploy ? 'finishDeploy' : release.startDeploy ? 'startDeploy' : release.finishBuild ? 'finishBuild' : release.startBuild ? 'startBuild' : null
                     }
-                });
+                };
+
+                release.duration = (new Date(release.finishDeploy || release.failDeploy || release.finishBuild || release.failBuild).getTime() - new Date(release.startBuild || release.startDeploy).getTime()) / 1000;
+
+                releases.push(release);
             });
 
             callback(null, {

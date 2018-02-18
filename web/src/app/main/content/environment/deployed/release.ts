@@ -6,6 +6,9 @@ export class Release {
   token: Token;
   startBuild: string;
   finishBuild: string;
+  failBuild: string;
   startDeploy: string;
   finishDeploy: string;
+  failDeploy: string;
+  duration: number;
 }
