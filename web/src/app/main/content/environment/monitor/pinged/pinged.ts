@@ -7,4 +7,5 @@ export class Pinged {
   codeMatched: boolean;
   textMatched: boolean;
   duration: number;
+  createdAt: string;
 }

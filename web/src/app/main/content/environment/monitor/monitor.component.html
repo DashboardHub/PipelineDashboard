@@ -39,6 +39,27 @@
     <!-- CENTER -->
     <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
 
+      <div class="main-widget">
+        <div class="position-relative p-24 mat-blue-600-bg"
+             fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <span class="h2">Monitors</span>
+            <span class="h5 secondary-text">Last 7 days of ping duration</span>
+          </div>
+        </div>
+
+        <div class="position-relative h-256 pb-16 mat-blue-600-bg">
+          <canvas baseChart
+                  [datasets]="graph.datasets.duration"
+                  [labels]="graph.labels"
+                  [colors]="graph.colors"
+                  [options]="graph.options"
+                  [chartType]="graph.chartType">
+          </canvas>
+        </div>
+      </div>
+
+
       <mat-toolbar class="mat-elevation-z24 h-48">
         <a mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></a>
         <a mat-button (click)="ping()" *ngIf="environment.monitors.length"><mat-icon>play_for_work</mat-icon></a>
