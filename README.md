@@ -9,7 +9,7 @@
 
 Display your **deployed versions** and **monitor** it.
 
-## WHAT TO GET INVOLVED? Don't know how? ...
+## WANT TO GET INVOLVED? Don't know how? ...
 
 All contributions are welcome, not only from code, but also blogs, content, documentation etc. Read more on our [contributions guidelines](.github/CONTRIBUTING.md).
 
