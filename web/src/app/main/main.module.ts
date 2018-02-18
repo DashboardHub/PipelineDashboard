@@ -65,6 +65,7 @@ import {PrivateEnvironmentResolver} from "./content/environment/environment-view
 import {PublicEnvironmentResolver} from "./content/environment/overview/public.environment.resolver";
 import { EnvironmentPublicListComponent } from './content/environment/environment-public-list/environment-public-list.component';
 import { EnvironmentPrivateListComponent } from './content/environment/environment-private-list/environment-private-list.component';
+import { DatePipe } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -173,6 +174,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       },
       AuthGuard,
       AuthService,
+      DatePipe,
       DeploysResolver,
       DeployedService,
       EnvironmentService,
