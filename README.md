@@ -31,6 +31,8 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 ![Application Platform](https://user-images.githubusercontent.com/624760/35721596-a96e186c-07ea-11e8-9c63-037802281ebb.png)
 
+![Releases](https://user-images.githubusercontent.com/624760/36366927-42811710-1548-11e8-9cf8-6382714cd435.png)
+
 ---
 
 ### REQUIREMENTS
