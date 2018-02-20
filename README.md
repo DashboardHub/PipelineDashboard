@@ -55,7 +55,7 @@ We have an aggressive plan for our prototype, so we can get feedback ASAP.
 
 | Milestone | Status | ETA |
 | :--- | :--- | :-- |
-| Simple Monitoring & New Design | In progress | Feb 2018 | 
+| Simple Monitoring & New Design | In Testing | Feb 2018 | 
 | Notifications | Pending | March 2018 | 
 | Projects that group Environments | Pending | May 2018 | 
 
