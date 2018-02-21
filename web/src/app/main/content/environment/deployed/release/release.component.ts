@@ -25,7 +25,7 @@ export class ReleaseComponent implements OnInit {
     datasets : {
       duration: [
         {
-          label: 'Duration (ms)',
+          label: 'Duration (s)',
           data: [],
           fill: 'start'
         }
