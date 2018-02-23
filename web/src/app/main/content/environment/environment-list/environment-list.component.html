@@ -6,7 +6,7 @@
     *ngFor="let environment of environments.list | orderBy: '-updatedAt'">
     <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
       <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
-        <div [ngClass]="[['failBuild', 'failDeploy'].includes(environment.latestRelease.state) || (environment.latestPing.id && (!environment.latestPing.codeMatched || !environment.latestPing.textMatched)) ? 'red-A700-fg' : 'light-blue-fg', 'font-size-36', 'line-height-72']">{{ environment.latestRelease.release || '-.-.-' }}</div>
+        <div [ngClass]="[['failBuild', 'failDeploy'].includes(environment.latestRelease.state) || (environment.latestPing.id && (!environment.latestPing.isValid)) ? 'red-A700-fg' : 'light-blue-fg', 'font-size-36', 'line-height-72']">{{ environment.latestRelease.release || '-.-.-' }}</div>
         <div class="h3 secondary-text font-weight-500">{{ environment.latestRelease.state || 'Waiting for data' }}</div>
       </div>
 
@@ -24,7 +24,7 @@
       </div>
       <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
         <span class="h4 secondary-text text-truncate">Pings</span>
-        <span class="h4 ml-8">{{ environment.pings || 0 }} <span *ngIf="environment.latestPing.duration">({{ environment.latestPing.duration }}ms)</span></span>
+        <span class="h4 ml-8">{{ environment.pings.valid }} / {{ environment.pings.invalid }} <span *ngIf="environment.latestPing.duration">({{ environment.latestPing.duration }}ms)</span></span>
       </div>
       <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
         <span class="h4 secondary-text text-truncate">Last updated</span>

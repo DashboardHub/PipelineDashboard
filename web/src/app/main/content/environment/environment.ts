@@ -13,7 +13,7 @@ export class Environment {
   link: string;
   releases: number;
   latestRelease: Deployed;
-  pings: number;
+  pings: { valid: number, invalid: number };
   latestPing: Pinged;
   progress: {current: number, next: number};
   isPrivate: boolean;

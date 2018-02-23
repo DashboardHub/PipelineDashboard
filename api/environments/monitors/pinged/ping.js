@@ -84,6 +84,7 @@ module.exports.ping = (event, context, callback) => {
                     textMatched: monitor.expectedText ? data.includes(monitor.expectedText) : true,
                     duration: end
                 };
+                item.isValid = !!(item.codeMatched && item.textMatched);
 
                 let pinged = new pingedModel.model(item);
 
@@ -94,7 +95,7 @@ module.exports.ping = (event, context, callback) => {
                     }
 
                     environmentModel.model.update({ id }, {
-                        pings: environment.pings + 1,
+                        pings: { valid: item.isValid ? environment.pings.valid + 1 : environment.pings.valid, invalid: !item.isValid ? environment.pings.invalid + 1 : environment.pings.invalid },
                         latestPing: pinged
                     }, function (err) {
                         if (err) {
