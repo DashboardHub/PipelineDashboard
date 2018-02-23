@@ -42,6 +42,10 @@ const schema = new Schema({
         duration: {
             type: Number,
             required: true
+        },
+        isValid: {
+            type: Boolean,
+            required: true
         }
     },
     {
