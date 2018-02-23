@@ -97,7 +97,7 @@ module.exports.ping = (event, context, callback) => {
                     environmentModel.model.update({ id }, {
                         pings: { valid: item.isValid ? environment.pings.valid + 1 : environment.pings.valid, invalid: !item.isValid ? environment.pings.invalid + 1 : environment.pings.invalid },
                         latestPing: pinged
-                    }, function (err) {
+                    }, { updateTimestamps: false }, function (err) {
                         if (err) {
                             console.log(err);
                             switch(err.name) {
