@@ -29,7 +29,7 @@ export class MonitorComponent implements OnInit {
     datasets : {
       duration: [
         {
-          label: 'Duration (s)',
+          label: 'Duration (ms)',
           data: [],
           fill: 'start'
         }
