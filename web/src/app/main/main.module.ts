@@ -42,9 +42,6 @@ import { DeployedService } from "./content/environment/deployed/deployed.service
 import { ErrorHttpInterceptor } from "./error.http.interceptor";
 import { ReleaseComponent } from "./content/environment/deployed/release/release.component";
 import { ReleasesResolver } from "./content/environment/deployed/release/releases.resolver";
-import {PrivateSummaryResolver} from "./content/summary/private.summary.resolver";
-import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
-import {SummaryService} from "./content/summary/summary.service";
 import {SummaryComponent} from "./content/summary/summary.component";
 import {MonitorComponent} from "./content/environment/monitor/monitor.component";
 import {PingsResolver} from "./content/environment/monitor/pinged/pings.resolver";
@@ -78,7 +75,7 @@ const routes: Routes = [
   { path: 'help', component: HelpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, summary: PrivateSummaryResolver } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, environments: PrivateEnvironmentsResolver } },
   {
     path: 'environment',
     canActivate: [AuthGuard],
@@ -184,14 +181,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       ProfileResolver,
       PublicEnvironmentsResolver,
       PrivateEnvironmentsResolver,
-      PrivateSummaryResolver,
-      PublicSummaryResolver,
       ReleasesResolver,
       PrivateEnvironmentResolver,
       PublicEnvironmentResolver,
       FuseNavigationModel,
       NavigationService,
-      SummaryService,
       TokenService
     ],
     entryComponents: [
