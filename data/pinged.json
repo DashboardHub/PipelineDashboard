@@ -8,6 +8,8 @@
     "codeMatched": true,
     "textMatched": true,
     "duration": 1,
+    "isValid": true,
+    "ttl": 1518599151,
     "createdAt": 1517044450932,
     "updatedAt": 1517044450932
   },
@@ -20,6 +22,8 @@
     "codeMatched": false,
     "textMatched": false,
     "duration": 10,
+    "isValid": false,
+    "ttl": 1518599151,
     "createdAt": 1517044451932,
     "updatedAt": 1517044451932
   }

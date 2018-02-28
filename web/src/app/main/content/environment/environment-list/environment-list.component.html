@@ -1,79 +1,40 @@
-<div class="page-layout carded fullwidth" fusePerfectScrollbar>
+<div class="widget-group p-12" fxLayout="row" fxFlex="100" fxLayoutWrap *fuseIfOnDom [@animateStagger]="{value:'50'}">
 
-  <!-- TOP BACKGROUND -->
-  <div class="top-bg mat-accent-bg"></div>
-  <!-- / TOP BACKGROUND -->
-
-  <!-- CENTER -->
-  <div class="center">
-
-    <!-- CONTENT HEADER -->
-    <div class="header white-fg p-24" fxLayout="row" fxLayoutAlign="start center">
-      <h2>Public Environments</h2>
-    </div>
-    <!-- / CONTENT HEADER -->
-
-    <!-- CONTENT CARD -->
-    <div class="content-card mat-white-bg">
-
-      <!-- CONTENT TOOLBAR -->
-      <div class="toolbar px-24 py-8">
-        <span>{{ environments.total }} Environments</span>
+  <fuse-widget
+    [@animate]="{value:'*',params:{y:'100%'}}" class="widget"
+    fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
+    *ngFor="let environment of environments.list | orderBy: '-updatedAt'">
+    <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
+      <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
+        <div [ngClass]="[['failBuild', 'failDeploy'].includes(environment.latestRelease.state) || (environment.latestPing.id && (!environment.latestPing.isValid)) ? 'red-A700-fg' : 'light-blue-fg', 'font-size-36', 'line-height-72']">{{ environment.latestRelease.release || '-.-.-' }}</div>
+        <div class="h3 secondary-text font-weight-500">{{ environment.latestRelease.state || 'Waiting for data' }}</div>
       </div>
-      <!-- / CONTENT TOOLBAR -->
 
-      <!-- CONTENT -->
-      <div class="content p-24" fusePerfectScrollbar>
+      <mat-progress-bar mode="buffer" [value]="environment.progress ? environment.progress.current : 0" [bufferValue]="environment.progress ? environment.progress.next : 0"></mat-progress-bar>
 
-        <div class="widget-group p-12" fxLayout="row" fxFlex="100" fxLayoutWrap *fuseIfOnDom [@animateStagger]="{value:'50'}">
-
-          <fuse-widget
-            [@animate]="{value:'*',params:{y:'100%'}}" class="widget"
-            fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
-            *ngFor="let environment of environments.list | orderBy: '-updatedAt'">
-            <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
-              <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
-                <div [ngClass]="[['failBuild', 'failDeploy'].includes(environment.latestRelease.state) ? 'red-A700-fg' : 'light-blue-fg', 'font-size-36', 'line-height-72']">{{ environment.latestRelease.release || '-.-.-' }}</div>
-                <div class="h3 secondary-text font-weight-500">{{ environment.latestRelease.state || 'Waiting for data' }}</div>
-              </div>
-
-              <mat-progress-bar mode="buffer" [value]="environment.progress ? environment.progress.current : 0" [bufferValue]="environment.progress ? environment.progress.next : 0"></mat-progress-bar>
-
-              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+      <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
                 <span class="h4 secondary-text text-truncate">
                   <i class="material-icons w-40 h-40" *ngIf="!environment.logo">developer_board</i>
                   <img class="w-40 h-40 border-radius-100" [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-                </span>
-                <span class="h4 ml-8">{{ environment.title }}</span>
-              </div>
-              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
-                <span class="h4 secondary-text text-truncate">Releases</span>
-                <span class="h4 ml-8">{{ environment.releases || 0 }}</span>
-              </div>
-              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
-                <span class="h4 secondary-text text-truncate">Pings</span>
-                <span class="h4 ml-8">{{ environment.pings || 0 }} <span *ngIf="environment.latestPing.duration">({{ environment.latestPing.duration }}s)</span></span>
-              </div>
-              <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
-                <span class="h4 secondary-text text-truncate">Last updated</span>
-                <span class="h4 ml-8">{{ environment.updatedAt | amTimeAgo }}</span>
-              </div>
-
-              <a mat-button color="accent" [routerLink]="['/environment', environment.id]" *ngIf="profile && environment.owner === profile.sub">DETAILS</a>
-              <a mat-button color="accent" [routerLink]="['/', environment.id, 'view']" *ngIf="!profile || environment.owner !== profile.sub">VIEW</a>
-              <a mat-button color="accent" [disabled]="!environment.link" [href]="environment.link" target="_blank">WEBSITE</a>
-            </div>
-          </fuse-widget>
-
-        </div>
-
+                </span> <span class="h4 ml-8">{{ environment.title }}</span>
       </div>
-      <!-- / CONTENT -->
+      <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+        <span class="h4 secondary-text text-truncate">Releases</span>
+        <span class="h4 ml-8">{{ environment.releases || 0 }}</span>
+      </div>
+      <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+        <span class="h4 secondary-text text-truncate">Pings</span>
+        <span class="h4 ml-8">{{ environment.pings.valid }} / {{ environment.pings.invalid }} <span *ngIf="environment.latestPing.duration">({{ environment.latestPing.duration }}ms)</span></span>
+      </div>
+      <div class="p-16 grey-50-bg border-top" fxLayout="row" fxLayoutAlign="start center">
+        <span class="h4 secondary-text text-truncate">Last updated</span>
+        <span class="h4 ml-8">{{ environment.updatedAt | amTimeAgo }}</span>
+      </div>
 
+      <a mat-button color="accent" [routerLink]="['/environment', environment.id]" *ngIf="profile && environment.owner === profile.sub">DETAILS</a>
+      <a mat-button color="accent" [routerLink]="['/', environment.id, 'view']" *ngIf="!profile || environment.owner !== profile.sub">VIEW</a>
+      <a mat-button color="accent" [disabled]="!environment.link" [href]="environment.link" target="_blank">WEBSITE</a>
     </div>
-    <!-- / CONTENT CARD -->
-
-  </div>
-  <!-- / CENTER -->
+  </fuse-widget>
 
 </div>

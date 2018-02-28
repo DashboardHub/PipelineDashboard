@@ -15,18 +15,27 @@ export class FuseSplashScreenService
         private router: Router
     )
     {
+        // Get the splash screen element
         this.splashScreenEl = this.document.body.querySelector('#fuse-splash-screen');
 
-        const hideOnLoad = this.router.events.subscribe((event) => {
-                if ( event instanceof NavigationEnd )
-                {
-                    setTimeout(() => {
-                        this.hide();
-                        hideOnLoad.unsubscribe();
-                    }, 0);
+        // If the splash screen element exists...
+        if ( this.splashScreenEl )
+        {
+            // Hide it on the first NavigationEnd event
+            const hideOnLoad = this.router.events.subscribe((event) => {
+                    if ( event instanceof NavigationEnd )
+                    {
+                        setTimeout(() => {
+                            this.hide();
+
+                            // Unsubscribe from this event so it
+                            // won't get triggered again
+                            hideOnLoad.unsubscribe();
+                        }, 0);
+                    }
                 }
-            }
-        );
+            );
+        }
     }
 
     show()

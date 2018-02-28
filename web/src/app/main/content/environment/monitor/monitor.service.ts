@@ -4,9 +4,9 @@ import { environment } from '../../../../../environments/environment';
 import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs';
-import { HttpClient } from "@angular/common/http";
 import {Monitor} from "./monitor";
 import {List} from "../../list";
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class MonitorService {
@@ -14,15 +14,17 @@ export class MonitorService {
   private url: string = environment.api;
 
   constructor(
-    private http: HttpClient
+    private authHttp: AuthHttp
   ) {
   }
 
   add(monitor: Monitor): Observable<Monitor> {
-    return this.http.post<Monitor>(`${this.url}/environments/${monitor.environmentId}/monitors`, monitor);
+    return this.authHttp.post(`${this.url}/environments/${monitor.environmentId}/monitors`, monitor)
+      .map(response => response.json() as Monitor);
   }
 
   delete(monitor: Monitor): Observable<List<Monitor>> {
-    return this.http.delete<List<Monitor>>(`${this.url}/environments/${monitor.environmentId}/monitors/${monitor.id}`);
+    return this.authHttp.delete(`${this.url}/environments/${monitor.environmentId}/monitors/${monitor.id}`)
+      .map(response => response.json() as List<Monitor>);
   }
 }

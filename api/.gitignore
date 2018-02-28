@@ -8,3 +8,6 @@ jspm_packages
 # keys
 *.pem
 !*.pem.ec
+
+# config
+config.json

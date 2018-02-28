@@ -42,9 +42,6 @@ import { DeployedService } from "./content/environment/deployed/deployed.service
 import { ErrorHttpInterceptor } from "./error.http.interceptor";
 import { ReleaseComponent } from "./content/environment/deployed/release/release.component";
 import { ReleasesResolver } from "./content/environment/deployed/release/releases.resolver";
-import {PrivateSummaryResolver} from "./content/summary/private.summary.resolver";
-import {PublicSummaryResolver} from "./content/summary/public.summary.resolver";
-import {SummaryService} from "./content/summary/summary.service";
 import {SummaryComponent} from "./content/summary/summary.component";
 import {MonitorComponent} from "./content/environment/monitor/monitor.component";
 import {PingsResolver} from "./content/environment/monitor/pinged/pings.resolver";
@@ -63,19 +60,22 @@ import {EnvironmentDetailsComponent} from "./content/environment/environment-vie
 import {OverviewComponent} from "./content/environment/overview/overview.component";
 import {PrivateEnvironmentResolver} from "./content/environment/environment-view/private.environment.resolver";
 import {PublicEnvironmentResolver} from "./content/environment/overview/public.environment.resolver";
+import { EnvironmentPublicListComponent } from './content/environment/environment-public-list/environment-public-list.component';
+import { EnvironmentPrivateListComponent } from './content/environment/environment-private-list/environment-private-list.component';
+import { DatePipe } from '@angular/common';
 
 const routes: Routes = [
   {
     path: 'public',
     pathMatch: 'full',
-    component: EnvironmentListComponent,
+    component: EnvironmentPublicListComponent,
     resolve: { profile: ProfileResolver, environments: PublicEnvironmentsResolver }
   },
   { path: 'pricing', component: PricingComponent, resolve: { profile: ProfileResolver } },
   { path: 'help', component: HelpComponent },
   { path: 'login', component: LoginComponent },
   { path: 'callback', component: CallbackComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, summary: PrivateSummaryResolver } },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], resolve: { profile: ProfileResolver, environments: PrivateEnvironmentsResolver } },
   {
     path: 'environment',
     canActivate: [AuthGuard],
@@ -84,7 +84,7 @@ const routes: Routes = [
       {
         path: 'list',
         pathMatch: 'full',
-        component: EnvironmentListComponent,
+        component: EnvironmentPrivateListComponent,
         resolve: { environments: PrivateEnvironmentsResolver }
       },
       { path: 'add', pathMatch: 'full', component: EnvironmentAddComponent },
@@ -104,7 +104,8 @@ const routes: Routes = [
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp(new AuthConfig({
     tokenGetter: (() => localStorage.getItem('access_token')),
-    globalHeaders: [{'Content-Type':'application/json'}]
+    globalHeaders: [{'Content-Type':'application/json'}],
+    noJwtError: true
   }), http, options);
 }
 
@@ -127,6 +128,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         ProfileComponent,
         EnvironmentAddComponent,
         EnvironmentListComponent,
+        EnvironmentPrivateListComponent,
+        EnvironmentPublicListComponent,
         EnvironmentViewComponent,
         EnvironmentSidenavComponent,
         EnvironmentDeleteComponent,
@@ -168,6 +171,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       },
       AuthGuard,
       AuthService,
+      DatePipe,
       DeploysResolver,
       DeployedService,
       EnvironmentService,
@@ -177,14 +181,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
       ProfileResolver,
       PublicEnvironmentsResolver,
       PrivateEnvironmentsResolver,
-      PrivateSummaryResolver,
-      PublicSummaryResolver,
       ReleasesResolver,
       PrivateEnvironmentResolver,
       PublicEnvironmentResolver,
       FuseNavigationModel,
       NavigationService,
-      SummaryService,
       TokenService
     ],
     entryComponents: [

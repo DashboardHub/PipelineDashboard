@@ -9,10 +9,13 @@
       "table": "pipelinedashboard-environments"
     },
     "deployed": {
-      "table": "pipelinedashboard-deployed"
+      "table": "pipelinedashboard-deployed",
+      "ttl": 2678400
     },
     "pinged": {
-      "table": "pipelinedashboard-pinged"
+      "table": "pipelinedashboard-pinged",
+      "ttl": 604800
+
     }
   },
   "offline": {

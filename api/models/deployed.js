@@ -35,6 +35,7 @@ const schema = new Schema({
         }
     },
     {
+        expires: config.dynamodb.deployed.ttl,
         timestamps: true,
         useDocumentTypes: true,
         useNativeBooleans: true,

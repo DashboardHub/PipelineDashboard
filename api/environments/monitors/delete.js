@@ -36,8 +36,8 @@ module.exports.delete = (event, context, callback) => {
 
                         callback(null, JSON.stringify(
                             {
-                                total: environment.monitors.length,
-                                list: environment.monitors
+                                total: monitors.length,
+                                list: monitors
                             }
                         ));
                     });
@@ -50,8 +50,8 @@ module.exports.delete = (event, context, callback) => {
 
                     callback(null, JSON.stringify(
                         {
-                            total: environment.monitors.length,
-                            list: environment.monitors
+                            total: monitors.length,
+                            list: monitors
                         }
                     ));
                 });

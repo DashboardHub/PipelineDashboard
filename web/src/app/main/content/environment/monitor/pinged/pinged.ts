@@ -7,4 +7,6 @@ export class Pinged {
   codeMatched: boolean;
   textMatched: boolean;
   duration: number;
+  isValid: boolean;
+  createdAt: string;
 }

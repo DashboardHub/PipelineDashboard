@@ -22,6 +22,7 @@ import { FuseMaterialColorPickerComponent } from '../components/material-color-p
 import { FuseTranslationLoaderService } from '../services/translation-loader.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateModule } from '@ngx-translate/core';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     declarations   : [
@@ -43,7 +44,8 @@ import { TranslateModule } from '@ngx-translate/core';
         ReactiveFormsModule,
         ColorPickerModule,
         NgxDnDModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        ChartsModule
     ],
     exports        : [
         FlexLayoutModule,
@@ -62,7 +64,8 @@ import { TranslateModule } from '@ngx-translate/core';
         NgxDatatableModule,
         FuseIfOnDomDirective,
         FuseMaterialColorPickerComponent,
-        TranslateModule
+        TranslateModule,
+        ChartsModule
     ],
     entryComponents: [
         FuseConfirmDialogComponent

@@ -39,6 +39,27 @@
     <!-- CENTER -->
     <div class="center p-24 pb-56 pr-sm-92" fusePerfectScrollbar>
 
+      <div class="main-widget">
+        <div class="position-relative p-24 mat-blue-600-bg"
+             fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="column" fxLayoutAlign="start start">
+            <span class="h2">Monitors</span>
+            <span class="h5 secondary-text">Last 7 days of ping duration</span>
+          </div>
+        </div>
+
+        <div class="position-relative h-256 pb-16 mat-blue-600-bg">
+          <canvas baseChart
+                  [datasets]="graph.datasets.duration"
+                  [labels]="graph.labels"
+                  [colors]="graph.colors"
+                  [options]="graph.options"
+                  [chartType]="graph.chartType">
+          </canvas>
+        </div>
+      </div>
+
+
       <mat-toolbar class="mat-elevation-z24 h-48">
         <a mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></a>
         <a mat-button (click)="ping()" *ngIf="environment.monitors.length"><mat-icon>play_for_work</mat-icon></a>
@@ -72,8 +93,14 @@
                   </div>
                 </mat-form-field>
                 <mat-form-field fxFlex="10%">
-                  <mat-select placeholder="Expected Code" name="expectedCode" [(ngModel)]="monitor.expectedCode" [disabled]="true">
-                    <mat-option value="200">200</mat-option>
+                  <mat-select placeholder="Expected Code" name="expectedCode"
+                              [(ngModel)]="monitor.expectedCode">
+                    <mat-option [value]="200">200</mat-option>
+                    <mat-option [value]="201">201</mat-option>
+                    <mat-option [value]="301">301</mat-option>
+                    <mat-option [value]="400">400</mat-option>
+                    <mat-option [value]="404">404</mat-option>
+                    <mat-option [value]="500">500</mat-option>
                   </mat-select>
                 </mat-form-field>
                 <mat-form-field fxFlex>
@@ -110,32 +137,32 @@
             <mat-table #table [dataSource]="dataSource">
               <ng-container matColumnDef="url">
                 <mat-header-cell *matHeaderCellDef>URL</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.url }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.url }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="statusCode">
                 <mat-header-cell *matHeaderCellDef>Status Code</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.statusCode }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.statusCode }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="codeMatched">
                 <mat-header-cell *matHeaderCellDef>Code Matched</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.codeMatched }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.codeMatched }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="textMatched">
                 <mat-header-cell *matHeaderCellDef>Text Matched</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.textMatched }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.textMatched }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="duration">
                 <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.duration }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.duration }}</mat-cell>
               </ng-container>
 
               <ng-container matColumnDef="createdAt">
                 <mat-header-cell *matHeaderCellDef>When</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{ element.createdAt | amTimeAgo }}</mat-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="!element.codeMatched || !element.textMatched ? 'red-A700-fg' : ''">{{ element.createdAt | amTimeAgo }}</mat-cell>
               </ng-container>
 
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -73,7 +73,7 @@
                 <input matInput class="form-control" placeholder="Logo URL(e.g. https://cdn.dashboardhub.io/icon-only-orange-120x120.png)"
                        minlength="3" maxlength="1024"
                        name="logo" [(ngModel)]="environment.logo"
-                       pattern="^https:\/\/[a-zA-Z0-9.]*"
+                       pattern="^https:\/\/.*"
                        #logo="ngModel">
                 <div *ngIf="logo.errors && (logo.dirty || title.touched)">
                   <mat-error *ngIf="logo.errors.minlength">

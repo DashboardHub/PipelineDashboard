@@ -9,6 +9,11 @@
         min-width: 0;
     }
 
+    &.auto-width {
+        min-width: 0;
+        max-width: none;
+    }
+
     // Buttons
     .mat-button {
         min-width: 0 !important;

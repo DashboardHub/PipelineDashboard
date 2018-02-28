@@ -1,8 +1,8 @@
-import { AfterViewInit, Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import PerfectScrollbar from 'perfect-scrollbar';
+import { AfterViewInit, Directive, ElementRef, HostListener, OnDestroy } from '@angular/core';
 import { FuseConfigService } from '../../services/config.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Platform } from '@angular/cdk/platform';
+import PerfectScrollbar from 'perfect-scrollbar';
 
 @Directive({
     selector: '[fusePerfectScrollbar]'
@@ -13,7 +13,7 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
     isDisableCustomScrollbars = false;
     isMobile = false;
     isInitialized = true;
-    ps;
+    ps: PerfectScrollbar;
 
     constructor(
         public element: ElementRef,
@@ -60,6 +60,21 @@ export class FusePerfectScrollbarDirective implements AfterViewInit, OnDestroy
 
         // Destroy the perfect-scrollbar
         this.ps.destroy();
+    }
+
+    @HostListener('document:click', ['$event'])
+    documentClick(event: Event): void
+    {
+        if ( !this.isInitialized || !this.ps )
+        {
+            return;
+        }
+
+        // Update the scrollbar on document click..
+        // This isn't the most elegant solution but there is no other way
+        // of knowing when the contents of the scrollable container changes.
+        // Therefore, we update scrollbars on every document click.
+        this.ps.update();
     }
 
     update()

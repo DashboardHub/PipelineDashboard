@@ -7,7 +7,7 @@ import { FuseNavigationService } from './core/components/navigation/navigation.s
 import { FuseNavigationModel } from './navigation/navigation.model';
 import { locale as navigationEnglish } from './navigation/i18n/en';
 import { locale as navigationTurkish } from './navigation/i18n/tr';
-import {Angulartics2GoogleAnalytics} from "angulartics2/ga";
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 @Component({
     selector   : 'fuse-root',
