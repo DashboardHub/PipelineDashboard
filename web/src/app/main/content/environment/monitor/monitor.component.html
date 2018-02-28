@@ -85,23 +85,30 @@
                       Path is required
                     </mat-error>
                     <mat-error *ngIf="path.errors.minlength">
-                      Path must be at least 3 characters long.
+                      Path must be at least 0 characters long.
                     </mat-error>
                     <mat-error *ngIf="path.errors.maxlength">
-                      Path cannot be more than 32 characters long.
+                      Path cannot be more than 64 characters long.
                     </mat-error>
                   </div>
                 </mat-form-field>
                 <mat-form-field fxFlex="10%">
-                  <mat-select placeholder="Expected Code" name="expectedCode"
-                              [(ngModel)]="monitor.expectedCode">
-                    <mat-option [value]="200">200</mat-option>
-                    <mat-option [value]="201">201</mat-option>
-                    <mat-option [value]="301">301</mat-option>
-                    <mat-option [value]="400">400</mat-option>
-                    <mat-option [value]="404">404</mat-option>
-                    <mat-option [value]="500">500</mat-option>
-                  </mat-select>
+                  <input matInput class="form-control" placeholder="Status Code"
+                         minlength="3" maxlength="3" required type="number"
+                         name="expectedCode" [(ngModel)]="monitor.expectedCode"
+                         [disabled]="environment.monitors.length"
+                         #expectedCode="ngModel">
+                  <div *ngIf="expectedCode.errors && (expectedCode.dirty || expectedCode.touched)">
+                    <mat-error *ngIf="expectedCode.errors.required">
+                      Status Code is required
+                    </mat-error>
+                    <mat-error *ngIf="expectedCode.errors.minlength">
+                      Status Code must be at least 3 characters long.
+                    </mat-error>
+                    <mat-error *ngIf="expectedCode.errors.maxlength">
+                      Status Code cannot be more than 3 characters long.
+                    </mat-error>
+                  </div>
                 </mat-form-field>
                 <mat-form-field fxFlex>
                   <input matInput class="form-control" placeholder="Expected Text"
