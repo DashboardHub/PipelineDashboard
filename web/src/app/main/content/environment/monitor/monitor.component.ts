@@ -154,6 +154,7 @@ export class MonitorComponent implements OnInit {
         this.environment.monitors.push(monitor);
         this.monitor = monitor;
         this.monitor.environmentId = this.environment.id;
+        this.ping();
       });
   }
 
