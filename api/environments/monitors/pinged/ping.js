@@ -1,9 +1,7 @@
 'use strict';
 
 const aws = require('aws-sdk');
-const url = require('url');
-const http = require('http');
-const https = require('https');
+const request = require('request');
 const uuidv1 = require('uuid/v1');
 const environmentModel = require('./../../../models/environment');
 const pingedModel = require('./../../../models/pinged');
@@ -61,59 +59,48 @@ module.exports.ping = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
-        const parts = url.parse(`${environment.link}${monitor.path}`);
+        request(environment.link + monitor.path, (error, response, body) => {
+            if (error) { console.log(error); }
 
-        (parts.protocol === 'https' ? https : http).get({ hostname: parts.hostname, path: parts.path, port: parts.port }, (resp) => {
-            const { statusCode } = resp;
-            let data = '';
+            const end = new Date() - start;
 
-            resp.on('data', (chunk) => {
-                data += chunk;
-            });
+            let item = {
+                id: uuidv1(),
+                environmentId: environment.id,
+                monitorId: monitor.id,
+                url: environment.link + monitor.path,
+                statusCode: response.statusCode,
+                codeMatched: response.statusCode === monitor.expectedCode,
+                textMatched: monitor.expectedText ? body.includes(monitor.expectedText) : true,
+                duration: end
+            };
+            item.isValid = !!(item.codeMatched && item.textMatched);
 
-            resp.on('end', () => {
-                const end = new Date() - start;
+            let pinged = new pingedModel.model(item);
 
-                let item = {
-                    id: uuidv1(),
-                    environmentId: environment.id,
-                    monitorId: monitor.id,
-                    url: parts.href,
-                    statusCode: statusCode,
-                    codeMatched: statusCode === monitor.expectedCode,
-                    textMatched: monitor.expectedText ? data.includes(monitor.expectedText) : true,
-                    duration: end
-                };
-                item.isValid = !!(item.codeMatched && item.textMatched);
+            pinged.save(function (err) {
+                if (err) {
+                    console.log(err);
+                    return callback(new Error(`[500] ${err.message}`));
+                }
 
-                let pinged = new pingedModel.model(item);
-
-                pinged.save(function (err) {
+                environmentModel.model.update({ id }, {
+                    pings: { valid: item.isValid ? environment.pings.valid + 1 : environment.pings.valid, invalid: !item.isValid ? environment.pings.invalid + 1 : environment.pings.invalid },
+                    latestPing: pinged
+                }, { updateTimestamps: false }, function (err) {
                     if (err) {
                         console.log(err);
-                        return callback(new Error(`[500] ${err.message}`));
-                    }
-
-                    environmentModel.model.update({ id }, {
-                        pings: { valid: item.isValid ? environment.pings.valid + 1 : environment.pings.valid, invalid: !item.isValid ? environment.pings.invalid + 1 : environment.pings.invalid },
-                        latestPing: pinged
-                    }, { updateTimestamps: false }, function (err) {
-                        if (err) {
-                            console.log(err);
-                            switch(err.name) {
-                                case 'ValidationError':
-                                    return callback(new Error(`[400] ${err.message}`));
-                                default:
-                                    return callback(new Error(`[500] ${err.message}`));
-                            }
+                        switch(err.name) {
+                            case 'ValidationError':
+                                return callback(new Error(`[400] ${err.message}`));
+                            default:
+                                return callback(new Error(`[500] ${err.message}`));
                         }
-                        callback(null, item);
-                    });
+                    }
+                    callback(null, item);
                 });
             });
 
-        }).on("error", (err) => {
-            console.log("Error: " + err.message);
         });
 
     });
