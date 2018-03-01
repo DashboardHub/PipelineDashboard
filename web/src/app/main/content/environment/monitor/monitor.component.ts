@@ -142,9 +142,7 @@ export class MonitorComponent implements OnInit {
   ping() {
     this.pingedService
       .ping(this.environment.id, this.environment.monitors[0].id)
-      .subscribe((ping) => {
-        this.refresh();
-      });
+      .subscribe((ping) => this.refresh());
   }
 
   add(): void {
@@ -161,7 +159,12 @@ export class MonitorComponent implements OnInit {
   delete(): void {
     this.monitorService
       .delete(this.monitor)
-      .subscribe(() => this.refresh());
+      .subscribe(() => {
+        this.refresh();
+        this.monitor = new Monitor('');
+        this.monitor.environmentId = this.environment.id;
+        this.environment.monitors = [];
+      });
   }
 
 }
