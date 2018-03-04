@@ -247,7 +247,17 @@ DELETE /environments/{id}/tokens/{tokenId}
 ```
 
 ```json
-
+{
+  "total": 1,
+  "list": [
+    {
+      "name": "Another token",
+      "createdAt": "2017-11-06T06:38:27.024Z",
+      "id": "184a9d00-c2bd-11e7-829d-851258883d74",
+      "environmentId": "14c9dab0-c2bd-11e7-829d-851258883d74"
+    }
+  ]
+}
 ```
 
 ### Releases
