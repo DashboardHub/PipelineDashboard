@@ -36,7 +36,7 @@ export class TokenComponent implements OnInit {
     this.tokenService
       .delete(token)
       .subscribe(data => {
-        this.environment.tokens = data ? data.list || [];
+        this.environment.tokens = data ? data.list : [];
       });
   }
 
