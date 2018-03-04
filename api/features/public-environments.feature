@@ -9,11 +9,11 @@ Feature: Public environments list
     And should have a field "total" with value 4
     And should have a field "list" with length 4
     And should have a field "list" and in row 1 with:
-    | field           | value               |
-    | id              | 1                   |
-    | owner           | github\|11989248    |
-    | type            | build               |
-    | title           | Environment A       |
+      | field | value            |
+      | id    | 1                |
+      | owner | github\|11989248 |
+      | type  | build            |
+      | title | Environment A    |
     #| latestRelease   | {}                  |
     #| releases        | 0                   |
     #| tokens          | []                  |
