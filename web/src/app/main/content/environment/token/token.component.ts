@@ -31,12 +31,12 @@ export class TokenComponent implements OnInit {
       });
   }
 
-  delete(token): void {
+  delete(token: Token): void {
     token.environmentId = this.environment.id;
     this.tokenService
       .delete(token)
       .subscribe(data => {
-        this.environment.tokens = data ? data.list : [];
+        this.environment.tokens = this.environment.tokens.filter((item) => item.id !== token.id);
       });
   }
 
