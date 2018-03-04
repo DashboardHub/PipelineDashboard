@@ -77,6 +77,11 @@ Open 2 terminals and run each of these commands in its own terminal:
 
 Then visit `http://localhost:4200/`
 
+## RUNNING AUTOMATED TESTS
+
+- 1. Start the API (step 2 from previous section)
+- 2. Run `make api.test`
+
 ## Additional useful commands
 
 - `make api.clean` resets the config files
@@ -98,4 +103,4 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | OS | Question | Answer |
 | :--- | :--- | :--- |
 | Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed --with-default-names` |
-| - | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
+| ALL | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |

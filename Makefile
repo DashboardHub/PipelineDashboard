@@ -10,6 +10,8 @@ guard-%:
 	fi
 
 # ALIAS
+test: api.test
+
 api: api.run
 
 ui: ui.run

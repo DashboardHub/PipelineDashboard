@@ -1,6 +1,16 @@
 const { Given, When, Then } = require('cucumber');
 const { expect } = require('chai');
 
+
+Given('I am logged in', function(callback) {
+  this.login()
+    .then((response) => {
+      this.jwt = response.body.access_token;
+      callback();
+    })
+    .catch((err) => console.log(err));
+});
+
 When('I make a {string} request to {string}', function(method, path) {
   this.sendRequest(method, path);
 });
@@ -21,10 +31,9 @@ Then('should have a field {string} with length {int}', function(field, value) {
 });
 
 Then('should have a field {string} and in row {int} with:', function(field, row, table) {
-  console.log(table.hashes());
   this.request
     .then((response) => {
       expect(response.body[field]).to.be.an('array');
-      table.hashes().forEach((item) => expect(response.body[field][row - 1][item.field]).to.eql(item.value))
+      this.cleanTable(table).forEach((item) => expect(response.body[field][row - 1][item.field]).to.eql(item.value));
     });
 });
