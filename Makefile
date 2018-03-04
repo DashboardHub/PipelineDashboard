@@ -58,6 +58,9 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-deployed|pipelinedashboard-deployed-test|g' ./config.json)
 	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-test|g' ./config.json)
 
+api.test:
+	(cd api; ./node_modules/.bin/cucumber-js)
+
 api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
 

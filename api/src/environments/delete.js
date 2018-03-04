@@ -1,8 +1,8 @@
 'use strict';
 
-const deployedModel = require('./../models/deployed');
-const environmentModel = require('./../models/environment');
-const pingedModel = require('./../models/pinged');
+const deployedModel = require('../models/deployed');
+const environmentModel = require('../models/environment');
+const pingedModel = require('../models/pinged');
 
 module.exports.delete = (event, context, callback) => {
     const id = event.path.id;

@@ -20,9 +20,12 @@
   "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
   "dependencies": {
     "aws-sdk": "^2.185.0",
+    "chai": "^4.1.2",
+    "cucumber": "^4.0.0",
     "dynamoose": "^0.8.6",
     "jsonwebtoken": "^8.1.0",
     "request": "^2.83.0",
+    "request-promise": "^4.2.2",
     "uuid": "^3.2.1",
     "validator": "^9.2.0"
   },

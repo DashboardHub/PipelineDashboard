@@ -1,7 +1,7 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-const CERT = fs.readFileSync('./dashboardhub.pem');
+const CERT = fs.readFileSync('../dashboardhub.pem');
 
 const generatePolicy = (principalId, effect, resource) => {
     const authResponse = {};
@@ -21,6 +21,7 @@ const generatePolicy = (principalId, effect, resource) => {
 };
 
 module.exports.auth = (event, context, cb) => {
+  console.log('======== AUTH ===========');
     if (event.authorizationToken) {
         const token = event.authorizationToken.substring(7);
         const options = { algorithms: ['RS256'] };
