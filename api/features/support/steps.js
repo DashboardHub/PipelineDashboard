@@ -1,5 +1,5 @@
 const { Given, When, Then } = require('cucumber');
-const { expect } = require('chai');
+const { expect, should } = require('chai');
 
 
 Given('I am logged in', function(callback) {
@@ -25,9 +25,32 @@ Then('should have a field {string} with value {int}', function(field, value) {
     .then((response) => expect(response.body[field]).to.eql(value));
 });
 
+Then('should have a field {string} with value {string}', function(field, value) {
+  this.request
+    .then((response) => expect(response.body[field]).to.eql(value));
+});
+
+Then('should have a field {string} with value (true|false)', function(field, value) {
+  this.request
+    .then((response) => expect(response.body[field]).to.eql(value));
+});
+
 Then('should have a field {string} with length {int}', function(field, value) {
   this.request
     .then((response) => expect(response.body[field].length).to.eql(value));
+});
+
+Then('should not have a field {string}', function(field) {
+  this.request
+    .then((response) => should(response.body[field]).not.exist);
+});
+
+Then('should have a field {string} with object:', function(field, table) {
+  this.request
+    .then((response) => {
+      expect(response.body[field]).to.be.an('object');
+      this.cleanTable(table).forEach((item) => expect(response.body[field][item.field]).to.eql(item.value));
+    });
 });
 
 Then('should have a field {string} and in row {int} with:', function(field, row, table) {
@@ -35,5 +58,13 @@ Then('should have a field {string} and in row {int} with:', function(field, row,
     .then((response) => {
       expect(response.body[field]).to.be.an('array');
       this.cleanTable(table).forEach((item) => expect(response.body[field][row - 1][item.field]).to.eql(item.value));
+    });
+});
+
+Then('should have a field {string} and in row {int} on field {string} has:', function(field, row, field2, table) {
+  this.request
+    .then((response) => {
+      expect(response.body[field][row]).to.be.an('object');
+      this.cleanTable(table).forEach((item) => expect(response.body[field][row - 1][field2][item.field]).to.eql(item.value));
     });
 });
