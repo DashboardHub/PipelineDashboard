@@ -30,6 +30,7 @@
     "validator": "^9.2.0"
   },
   "devDependencies": {
+    "cucumber-pretty": "^1.4.0",
     "serverless": "^1.25.0",
     "serverless-domain-manager": "^1.1.25",
     "serverless-dynamodb-local": "^0.2.27",
