@@ -22,6 +22,6 @@ Feature: Private environments list
       | latestPing    | {}                                         |
       | pings         | { "valid": 0, "invalid": 0 }               |
       | isPrivate     | false                                      |
-#      | views         | 0                                          |
+      | views         | 0                                          |
       | createdAt     | 2018-01-27T09:14:10.932Z                   |
       | updatedAt     | 2018-01-27T09:14:10.932Z                   |

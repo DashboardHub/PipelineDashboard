@@ -3,7 +3,7 @@ Feature: Public environments list
   As a public user
   I want to see the public environments
 
-  Scenario: Public environments list
+  Scenario: Public environments list as guest user
     When I make a "GET" request to "/environments"
     Then the status code should be 200
     And should have a field "total" with integer 4
@@ -15,17 +15,13 @@ Feature: Public environments list
       | type          | "build"                                    |
       | title         | "Environment A"                            |
       | latestRelease | {}                                         |
-    #| releases        | 0                   |
-    #| tokens          | []                  |
-    #| monitors        | []                  |
-    #| latestPing      | {}                  |
+      | releases      | 0                                          |
+      | latestPing    | {}                                         |
       | pings         | { "valid": 0, "invalid": 0 }               |
-    #| isPrivate       | false               |
-    #| views           | 0                   |
-    #| createdAt       | DATETIME            |
-    #| updatedAt       | DATETIME            |
+      | createdAt     | "2018-01-27T09:14:10.932Z"                                   |
+      | updatedAt     | "2018-01-27T09:14:10.932Z"                                   |
 
-  Scenario: Public environments list
+  Scenario: Public environments list when logged in
     Given I am logged in
     When I make a "GET" request to "/environments"
     Then the status code should be 200
@@ -38,12 +34,8 @@ Feature: Public environments list
       | type          | "build"                                    |
       | title         | "Environment A"                            |
       | latestRelease | {}                                         |
-    #| releases        | 0                   |
-    #| tokens          | []                  |
-    #| monitors        | []                  |
-    #| latestPing      | {}                  |
-    | pings         | { "valid": 0, "invalid": 0 }               |
-    #| isPrivate       | false               |
-    #| views           | 0                   |
-    #| createdAt       | DATETIME            |
-    #| updatedAt       | DATETIME            |
+      | releases      | 0                                          |
+      | latestPing    | {}                                         |
+      | pings         | { "valid": 0, "invalid": 0 }               |
+      | createdAt     | "2018-01-27T09:14:10.932Z"                                   |
+      | updatedAt     | "2018-01-27T09:14:10.932Z"                                   |

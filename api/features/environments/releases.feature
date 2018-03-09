@@ -11,7 +11,6 @@ Feature: Releases
     And should have a field "list" with length 4
     And should have an "array" field "list" and in row 1 with:
       | field        | value                      |
-#      | id           | "1"                        |
       | version      | "v1.0.2"                   |
       | failDeploy   | null                       |
       | finishDeploy | "2018-01-27T09:14:23.932Z" |
