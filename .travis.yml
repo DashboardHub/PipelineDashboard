@@ -7,7 +7,7 @@ branches:
   - prototype-v0.8.0
   - /issue-*/
 env:
-  - NODE_ENV=TEST
+  - NODE_ENV=test
 
 before_install:
   - sudo apt-get install python3
