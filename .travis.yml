@@ -18,8 +18,8 @@ before_install:
 script:
   - make install.local
   - NODE_ENV=development make api &
-  - make ui.build
   - make test
+  - make ui.build
 
 deploy:
   - provider: script
