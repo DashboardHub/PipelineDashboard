@@ -1,6 +1,13 @@
 language: node_js
 node_js:
   - "8"
+branches:
+  only:
+  - master
+  - prototype-v0.8.0
+  - issue-*
+env:
+  - NODE_ENV=TEST
 
 before_install:
   - sudo apt-get install python3

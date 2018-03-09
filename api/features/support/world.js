@@ -11,7 +11,7 @@ class CustomWorld {
   login() {
     if (!this.jwt) {
         return request({
-            uri: 'https://dashboardhub-dev.eu.auth0.com/oauth/token',
+            uri: `https://dashboardhub-${process.env.NODE_ENV || 'dev'}.eu.auth0.com/oauth/token`,
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
