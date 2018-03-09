@@ -5,7 +5,7 @@ branches:
   only:
   - master
   - prototype-v0.8.0
-  - issue-*
+  - /issue-*/
 env:
   - NODE_ENV=TEST
 
