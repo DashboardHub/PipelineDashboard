@@ -13,7 +13,7 @@ before_install:
   - sudo apt-get install python3
   - sudo pip install awscli
   - npm cache --force clean
-  - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar)
+  - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar; cp dashboardhub.test.pem dashboardhub.pem)
 
 script:
   - make install.local
