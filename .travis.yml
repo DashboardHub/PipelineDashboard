@@ -7,17 +7,17 @@ branches:
   - prototype-v0.8.0
   - /issue-*/
 env:
-  - NODE_ENV=test
+  - NODE_ENV=development
 
 before_install:
   - sudo apt-get install python3
   - sudo pip install awscli
   - npm cache --force clean
-  - (cd api; openssl aes-256-cbc -K $encrypted_11dfe2bc5063_key -iv $encrypted_11dfe2bc5063_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar; cp dashboardhub.test.pem dashboardhub.pem)
+  - (cd api; openssl aes-256-cbc -K $encrypted_00024d39c332_key -iv $encrypted_00024d39c332_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar; cp auth.dev.pem auth.pem)
 
 script:
   - make install.local
-  - NODE_ENV=development make api &
+  - AUTH0_CLIENT_ID_TEST="${AUTH0_CLIENT_ID_DEV}" AUTH0_CLIENT_SECRET_TEST="${AUTH0_CLIENT_SECRET_DEV}" make api &
   - make test
   - make ui.build
 
