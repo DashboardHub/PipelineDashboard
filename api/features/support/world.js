@@ -9,7 +9,7 @@ class CustomWorld {
   }
 
   login() {
-    if (!this.jwt) { // @TODO: Only call once
+    if (!this.jwt) {
         return request({
             uri: 'https://dashboardhub-dev.eu.auth0.com/oauth/token',
             method: 'POST',
@@ -24,12 +24,12 @@ class CustomWorld {
                 audience: 'http://localhost:3000',
                 grant_type: 'client_credentials'
             }
-        });
+        })
     }
   }
 
   sendRequest(method, path) {
-    this.request = request({
+    return request({
       uri: this.api + path,
       method: 'GET',
       headers: {
@@ -38,7 +38,8 @@ class CustomWorld {
       },
       resolveWithFullResponse: true,
       json: true
-    });
+    })
+        .then((response) => this.response = response);
   }
 
   cleanTable(table) {

@@ -6,9 +6,9 @@ Feature: Public environments list
   Scenario: Public environments list
     When I make a "GET" request to "/environments"
     Then the status code should be 200
-    And should have a field "total" with value 4
+    And should have a field "total" with integer 4
     And should have a field "list" with length 4
-    And should have a field "list" and in row 1 with:
+    And should have an "array" field "list" and in row 1 with:
       | field         | value                                      |
       | id            | "1"                                        |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |
@@ -29,9 +29,9 @@ Feature: Public environments list
     Given I am logged in
     When I make a "GET" request to "/environments"
     Then the status code should be 200
-    And should have a field "total" with value 4
+    And should have a field "total" with integer 4
     And should have a field "list" with length 4
-    And should have a field "list" and in row 1 with:
+    And should have an "array" field "list" and in row 1 with:
       | field         | value                                      |
       | id            | "1"                                        |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |

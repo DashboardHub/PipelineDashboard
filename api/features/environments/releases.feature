@@ -7,9 +7,9 @@ Feature: Releases
     Given I am logged in
     When I make a "GET" request to "/environments/4/releases"
     Then the status code should be 200
-    And should have a field "total" with value 4
+    And should have a field "total" with integer 4
     And should have a field "list" with length 4
-    And should have a field "list" and in row 1 with:
+    And should have an "array" field "list" and in row 1 with:
       | field        | value                      |
 #      | id           | "1"                        |
       | version      | "v1.0.2"                   |
@@ -19,10 +19,10 @@ Feature: Releases
       | failBuild    | null                       |
       | finishBuild  | "2018-01-27T09:14:21.932Z" |
       | startBuild   | "2018-01-27T09:14:20.932Z" |
-    And should have a field "list" and in row 1 on field "token" has:
+    And should have an "array" field "list" and in row 1 on "object" field "token" has:
       | field | value                           |
       | name  | "Continuous Integration Server" |
-    And should have a field "list" and in row 1 on field "latest" has:
+    And should have an "array" field "list" and in row 1 on "object" field "latest" has:
       | field     | value                      |
       | createdAt | "2018-01-27T09:14:23.932Z" |
       | state     | "finishDeploy"             |
