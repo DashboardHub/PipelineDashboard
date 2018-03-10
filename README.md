@@ -71,7 +71,7 @@ Open 2 terminals and run each of these commands in its own terminal:
 
 - 2. API `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make api`
 
-*NOTE: You will need a `pem` file for local development*
+*NOTE: You will need a `pem` file for local development, and needs to be in the directory `api` call `auth.pem` (`api/auth.pem`)*
 
 - 3. UI `make ui`
 

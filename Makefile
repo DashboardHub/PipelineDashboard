@@ -57,11 +57,11 @@ api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
 
 api.deploy: api.env
-	(cd api; mv dashboardhub.prod.pem dashboardhub.pem)
+	(cd api; mv auth.prod.pem auth.pem)
 	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage production)
 
 api.deploy.test: api.env.test
-	(cd api; mv dashboardhub.test.pem dashboardhub.pem)
+	(cd api; mv auth.test.pem auth.pem)
 	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage test)
 
 api.remove:
