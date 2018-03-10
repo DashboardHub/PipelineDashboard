@@ -10,31 +10,22 @@ guard-%:
 	fi
 
 # ALIAS
+test: api.test
+
 api: api.run
 
 ui: ui.run
 
-install.local: alexa.install api.clean api.install ui.install
+install.local: api.clean api.install ui.install
 	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev)
 
-install: pipeline.version.startBuild pipeline.version.prod.startBuild alexa.install api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
+install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
-install.test: pipeline.version.test.startBuild pipeline.version.prod.test.startBuild alexa.install api.install ui.install pipeline.version.test.finishBuild pipeline.version.prod.test.finishBuild
+install.test: pipeline.version.test.startBuild pipeline.version.prod.test.startBuild api.install ui.install pipeline.version.test.finishBuild pipeline.version.prod.test.finishBuild
 
-deploy: pipeline.version.startDeploy pipeline.version.prod.startDeploy alexa.deploy api.deploy ui.deploy pipeline.version.finishDeploy pipeline.version.prod.finishDeploy
+deploy: pipeline.version.startDeploy pipeline.version.prod.startDeploy api.deploy ui.deploy pipeline.version.finishDeploy pipeline.version.prod.finishDeploy
 
-deploy.test: pipeline.version.test.startDeploy pipeline.version.prod.test.startDeploy alexa.deploy api.deploy.test ui.deploy.test pipeline.version.test.finishDeploy pipeline.version.prod.test.finishDeploy
-
-# ALEXA
-alexa.install:
-	(cd alexa; rm -fr node_modules || echo "Nothing to delete")
-	(cd alexa; npm install)
-
-alexa.deploy:
-	(cd alexa; ./node_modules/serverless/bin/serverless deploy -v)
-
-alexa.remove:
-	(cd alexa; ./node_modules/serverless/bin/serverless remove -v)
+deploy.test: pipeline.version.test.startDeploy pipeline.version.prod.test.startDeploy api.deploy.test ui.deploy.test pipeline.version.test.finishDeploy pipeline.version.prod.test.finishDeploy
 
 # API
 api.clean:
@@ -57,6 +48,10 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-environments|pipelinedashboard-environments-test|g' ./config.json)
 	(cd api; sed -i 's|pipelinedashboard-deployed|pipelinedashboard-deployed-test|g' ./config.json)
 	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-test|g' ./config.json)
+
+api.test:
+	(cd api; ./node_modules/serverless/bin/serverless dynamodb seed --seed=test --stage=dev)
+	(cd api; ./node_modules/.bin/cucumber-js --format ./node_modules/cucumber-pretty)
 
 api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-const CERT = fs.readFileSync('./dashboardhub.pem');
+const CERT = fs.readFileSync('./auth.pem');
 
 const generatePolicy = (principalId, effect, resource) => {
     const authResponse = {};

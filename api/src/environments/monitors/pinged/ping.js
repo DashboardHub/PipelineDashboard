@@ -3,8 +3,8 @@
 const aws = require('aws-sdk');
 const request = require('request');
 const uuidv1 = require('uuid/v1');
-const environmentModel = require('./../../../models/environment');
-const pingedModel = require('./../../../models/pinged');
+const environmentModel = require('../../../models/environment');
+const pingedModel = require('../../../models/pinged');
 
 let lambda = new aws.Lambda();
 

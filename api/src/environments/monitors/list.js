@@ -1,6 +1,6 @@
 'use strict';
 
-const environmentModel = require('./../../models/environment');
+const environmentModel = require('../../models/environment');
 
 module.exports.list = (event, context, callback) => {
     const id = event.path.id;

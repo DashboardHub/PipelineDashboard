@@ -1,9 +1,9 @@
 'use strict';
 
-const client = require('./../dynamoose');
+const client = require('../dynamoose');
 const validator = require('validator');
 
-const config = require('../config');
+const config = require('../../config');
 
 const Schema = client.dynamoose.Schema;
 

@@ -1,7 +1,7 @@
 'use strict';
 
 const uuidv1 = require('uuid/v1');
-const environment = require('./../models/environment');
+const environment = require('../models/environment');
 
 module.exports.create = (event, context, callback) => {
     const data = event.body;

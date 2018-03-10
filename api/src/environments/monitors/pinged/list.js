@@ -1,7 +1,7 @@
 'use strict';
 
-const environmentModel = require('./../../../models/environment');
-const pingedModel = require('./../../../models/pinged');
+const environmentModel = require('../../../models/environment');
+const pingedModel = require('../../../models/pinged');
 
 module.exports.list = (event, context, callback) => {
     const id = event.path.id;
