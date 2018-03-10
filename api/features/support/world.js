@@ -28,17 +28,25 @@ class CustomWorld {
     }
   }
 
-  sendRequest(method, path) {
-    return request({
+  sendRequest(method, path, data) {
+    let params = {
       uri: this.api + path,
-      method: 'GET',
+      method: method,
       headers: {
         'content-type': 'application/json',
         'authorization': `Bearer ${this.jwt}`
       },
       resolveWithFullResponse: true,
       json: true
-    })
+    };
+
+    if (data) {
+      let body = {};
+      data.forEach((item) => body[item.field] = item.value);
+      params.body = body;
+    }
+
+    return request(params)
         .then((response) => this.response = response);
   }
 

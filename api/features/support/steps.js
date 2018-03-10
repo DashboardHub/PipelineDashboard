@@ -9,6 +9,10 @@ When('I make a {string} request to {string}', function(method, path) {
   return this.sendRequest(method, path);
 });
 
+When('I make a {string} request to {string} with:', function(method, path, table) {
+  return this.sendRequest(method, path, this.cleanTable(table));
+});
+
 Then('the status code should be {int}', function(statusCode) {
   return expect(this.response.statusCode).to.eql(statusCode);
 });

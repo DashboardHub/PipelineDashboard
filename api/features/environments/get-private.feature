@@ -17,6 +17,7 @@ Feature: Get my environment
     And should have an "array" field "tokens" and in row 1 with:
       | field | value                                  |
       | id    | "c4703951-0331-11e8-94a3-8b807373e11e" |
+      | name  | "Continuous Integration Server"        |
     And should have a field "latestRelease" with "object":
       | field         | value                                       |
       | id            | "721fe0a0-0332-11e8-94a3-8b807373e11e"      |
