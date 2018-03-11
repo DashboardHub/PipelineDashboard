@@ -11,10 +11,10 @@ Feature: Private environments list
     And should have a field "list" with length 4
     And should have an "array" field "list" and in row 1 with:
       | field         | value                                      |
-      | id            | "1"                                        |
+      | id            | "UUID"                                     |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |
-      | type          | "build"                                    |
-      | title         | "Environment A"                            |
+      | type          | "STRING"                                   |
+      | title         | "STRING"                                   |
       | latestRelease | {}                                         |
       | releases      | 0                                          |
       | tokens        | []                                         |
@@ -23,5 +23,5 @@ Feature: Private environments list
       | pings         | { "valid": 0, "invalid": 0 }               |
       | isPrivate     | false                                      |
       | views         | 0                                          |
-      | createdAt     | 2018-01-27T09:14:10.932Z                   |
-      | updatedAt     | 2018-01-27T09:14:10.932Z                   |
+      | createdAt     | "DATETIME"                                 |
+      | updatedAt     | "DATETIME"                                 |

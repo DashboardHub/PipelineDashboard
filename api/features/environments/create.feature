@@ -10,6 +10,7 @@ Feature: Create Environment
       | title | "CreateEnvironment A" |
       | type  | "build-deploy"        |
 #    Then the status code should be 201 # @TODO: Do not return 200
+    Then the status code should be 200
     And should have a field "id" with string "UUID"
     And should have a field "owner" with string "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients"
     And should have a field "type" with string "build-deploy"
