@@ -6,8 +6,8 @@ Feature: Public environments list
   Scenario: Public environments list as guest user
     When I make a "GET" request to "/environments"
     Then the status code should be 200
-    And should have a field "total" with integer 4
-    And should have a field "list" with length 4
+    And should have a field "total" with integer 5
+    And should have a field "list" with length 5
     And should have an "array" field "list" and in row 1 with:
       | field         | value                                      |
       | id            | "1"                                        |
@@ -25,8 +25,8 @@ Feature: Public environments list
     Given I am logged in
     When I make a "GET" request to "/environments"
     Then the status code should be 200
-    And should have a field "total" with integer 4
-    And should have a field "list" with length 4
+    And should have a field "total" with integer 5
+    And should have a field "list" with length 5
     And should have an "array" field "list" and in row 1 with:
       | field         | value                                      |
       | id            | "1"                                        |
