@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const environment = require('./../models/environment');
 const progress = require('./../environments/_helpers/progress');
 
@@ -19,7 +21,7 @@ module.exports.public = (event, context, callback) => {
             statusCode: 200,
             body: JSON.stringify({
                 total: results.length,
-                list: progress.calculateAll(results)
+                list: _.orderBy(progress.calculateAll(results), ['updatedAt'], ['desc'])
             })
         });
 
@@ -38,7 +40,7 @@ module.exports.private = (event, context, callback) => {
 
         return callback(null, {
             total: results.length,
-            list: progress.calculateAll(results)
+            list: _.orderBy(progress.calculateAll(results), ['updatedAt'], ['desc'])
         });
     });
 

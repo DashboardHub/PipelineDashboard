@@ -67,8 +67,17 @@ Then('should have an {string} field {string} and in row {int} with:', function(t
 Then('should have an {string} field {string} and in row {int} on {string} field {string} has:', function(type, field, row, type2, field2, table) {
   let resolves = [];
   resolves.push(Promise.resolve(expect(this.response.body[field]).to.be.an(type)));
-  resolves.push(Promise.resolve(expect(this.response.body[field][row]).to.be.an(type2)));
+  resolves.push(Promise.resolve(expect(this.response.body[field][row - 1]).to.be.an(type2)));
   this.cleanTable(table).forEach((item) => resolves.push(Promise.resolve(this.validate(this.response.body[field][row - 1][field2][item.field], item.value))));
+
+  return Promise.all(resolves);
+});
+
+
+Then('should have an {string} field {string} and in row {int} no field {string}', function(type, field, row, field2) {
+  let resolves = [];
+  resolves.push(Promise.resolve(expect(this.response.body[field]).to.be.an(type)));
+  resolves.push(Promise.resolve(should(this.response.body[field][row - 1][field2]).not.exist));
 
   return Promise.all(resolves);
 });

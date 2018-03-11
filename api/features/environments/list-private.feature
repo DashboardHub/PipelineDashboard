@@ -13,15 +13,16 @@ Feature: Private environments list
       | field         | value                                      |
       | id            | "UUID"                                     |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |
-      | type          | "STRING"                                   |
-      | title         | "STRING"                                   |
-      | latestRelease | {}                                         |
+      | type          | "build-deploy"                             |
+      | title         | "CreateEnvironment A"                      |
+      | latestRelease | "OBJECT"                                   |
       | releases      | 0                                          |
-      | tokens        | []                                         |
-      | monitors      | []                                         |
-      | latestPing    | {}                                         |
+      | tokens        | "ARRAY[1]"                                 |
+      | monitors      | "ARRAY[0]"                                 |
+      | latestPing    | "OBJECT"                                   |
       | pings         | { "valid": 0, "invalid": 0 }               |
       | isPrivate     | false                                      |
       | views         | 0                                          |
+      | progress      | { "current": 0, "next": 0 }                |
       | createdAt     | "DATETIME"                                 |
       | updatedAt     | "DATETIME"                                 |

@@ -8,10 +8,15 @@ module.exports.public = (event, context, callback) => {
     const isPrivate = false;
 
     environmentModel.model.get({ id, isPrivate }, function(err, environment) {
-
-        if(err) { return console.log(err); }
+        if(err) { console.log(err); }
         if (!environment) {
-            return callback(new Error('[404] Not found'));
+            return callback(null, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*"
+                },
+                statusCode: 404,
+                body: JSON.stringify({ message: 'Not found' })
+            });
         }
 
         environmentModel.model.update({ id }, { views: environment.views + 1 }, { updateTimestamps: false }, function (err) {
@@ -37,7 +42,7 @@ module.exports.private = (event, context, callback) => {
     const id = event.path.id;
 
     environmentModel.model.get({ id }, function(err, environment) {
-        if(err) { return console.log(err); }
+        if(err) { console.log(err); }
         if (!environment || environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }

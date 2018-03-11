@@ -66,6 +66,33 @@ class CustomWorld {
   }
 
   validate(actual, expected) {
+    let special = '';
+
+    if (typeof expected === 'string' && expected.startsWith('ARRAY')) {
+        special = expected.match(/ARRAY\[(\d+)\]/)[1];
+        expected = 'ARRAY';
+    }
+
+    if (typeof expected === 'string' && expected.startsWith('APPROXIMATELY')) {
+        special = expected.match(/APPROXIMATELY\((\d+)\)/)[1];
+        expected = 'APPROXIMATELY';
+    }
+
+    if (typeof expected === 'string' && expected.startsWith('BOOLEAN')) {
+        special = expected.match(/BOOLEAN\[(\S+)\]/)[1] === 'TRUE';
+        expected = 'BOOLEAN';
+    }
+
+    if (typeof expected === 'string' && expected.startsWith('NOW')) {
+        let match = expected.match(/NOW\[(\+|-)(\d*)(mins|secs)\]/) || [];
+        special = {
+            operator: match[1] || '+',
+            expected: parseFloat(match[2]) || 0,
+            units: match[3] || 'secs'
+        };
+        expected = 'NOW';
+    }
+
     switch (expected) {
         case 'NULL':
             expect(actual).to.be.null;
