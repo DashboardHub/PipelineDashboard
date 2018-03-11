@@ -71,7 +71,7 @@
 
         <div fxLayout="column" fxFlex>
 
-          <form #form="ngForm" class="form-full p-24 pb-56 pr-sm-92">
+          <form #form="ngForm" class="form-full p-24 pb-56 pr-sm-92" *ngIf="environment.link">
               <div fxLayout="row" fxLayoutGap="10px">
                 <mat-form-field fxFlex>
                   <input matInput class="form-control" placeholder="Path to append to URL (e.g. /pricing)"
@@ -176,6 +176,10 @@
               <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
 
+            <div *ngIf="!environment.link">
+              <p class="text-center red-A700-fg h2">Environment URL needed before monitoring is available.</p>
+              <p class="text-center red-A700-fg mat-subheading-1">Go to <b>Edit</b> on the left and add a link to your Environment, then the monitoring form will appear here.</p>
+            </div>
         </div>
 
       </div>

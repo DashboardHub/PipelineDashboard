@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const environmentModel = require('../../models/environment');
 
 module.exports.list = (event, context, callback) => {
@@ -17,7 +19,7 @@ module.exports.list = (event, context, callback) => {
 
         return callback(null, {
             total: environment.tokens.length,
-            list: environment.tokens
+            list: _.orderBy(environment.tokens, ['lastUsed'], ['desc'])
         });
     });
 

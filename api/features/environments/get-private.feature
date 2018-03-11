@@ -27,7 +27,7 @@ Feature: Get my environment
       | field         | value                                       |
       | id            | "e0000004-0000-0000-0000-r00000000001"      |
       | environmentId | "e0000004-0000-0000-0000-000000000000"      |
-      | release       | "v1.0.1"                                    |
+      | release       | "v2.0.0"                                    |
       | state         | "finishDeploy"                              |
       | token         | { "name": "Continuous Integration Server" } |
       | createdAt     | "2018-01-27T07:19:43.274Z"                  |

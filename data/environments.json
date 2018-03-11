@@ -56,7 +56,7 @@
     "link": "https://dashboardhub.io",
     "logo": "https://cdn.dashboardhub.io/icon-only-orange-120x120.png",
     "description": "Description for Environment D",
-    "latestRelease": "{\"id\":\"e0000004-0000-0000-0000-r00000000001\",\"environmentId\":\"e0000004-0000-0000-0000-000000000000\",\"release\":\"v1.0.1\",\"state\":\"finishDeploy\",\"token\":{\"name\":\"Continuous Integration Server\"},\"createdAt\":\"2018-01-27T07:19:43.274Z\",\"updatedAt\":\"2018-01-27T07:19:43.274Z\"}",
+    "latestRelease": "{\"id\":\"e0000004-0000-0000-0000-r00000000001\",\"environmentId\":\"e0000004-0000-0000-0000-000000000000\",\"release\":\"v2.0.0\",\"state\":\"finishDeploy\",\"token\":{\"name\":\"Continuous Integration Server\"},\"createdAt\":\"2018-01-27T07:19:43.274Z\",\"updatedAt\":\"2018-01-27T07:19:43.274Z\"}",
     "releases": 800,
     "latestPing": "{\"duration\":1,\"createdAt\":\"2018-01-27T09:14:10.932Z\",\"environmentId\":\"e0000004-0000-0000-0000-000000000000\",\"monitorId\":\"e0000004-0000-0000-0000-m00000000001\",\"codeMatched\":true,\"textMatched\":true,\"id\":\"e0000004-0000-0000-0000-p00000000001\",\"url\":\"http://example.com/\",\"statusCode\":200,\"updatedAt\":\"2018-01-27T09:14:10.932Z\",\"isValid\":true}",
     "pings": "{\"valid\":123,\"invalid\":32}",

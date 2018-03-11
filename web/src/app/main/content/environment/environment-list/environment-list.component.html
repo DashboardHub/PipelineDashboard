@@ -3,7 +3,7 @@
   <fuse-widget
     [@animate]="{value:'*',params:{y:'100%'}}" class="widget"
     fxLayout="column" fxFlex="100" fxFlex.gt-xs="50" fxFlex.gt-md="25"
-    *ngFor="let environment of environments.list | orderBy: '-updatedAt'">
+    *ngFor="let environment of environments.list">
     <div class="fuse-widget-front mat-white-bg mat-elevation-z2">
       <div class="pt-8 pb-32" fxLayout="column" fxLayoutAlign="center center">
         <div [ngClass]="[['failBuild', 'failDeploy'].includes(environment.latestRelease.state) || (environment.latestPing.id && (!environment.latestPing.isValid)) ? 'red-A700-fg' : 'light-blue-fg', 'font-size-36', 'line-height-72']">{{ environment.latestRelease.release || '-.-.-' }}</div>

@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const environmentModel = require('../../../models/environment');
 const pingedModel = require('../../../models/pinged');
 
@@ -25,7 +27,7 @@ module.exports.list = (event, context, callback) => {
 
             callback(null, {
                 total: pings.length,
-                list: pings
+                list: _.orderBy(pings, ['createdAt'], ['desc'])
             });
         });
     });

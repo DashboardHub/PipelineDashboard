@@ -42,17 +42,16 @@ import { DeployedService } from "./content/environment/deployed/deployed.service
 import { ErrorHttpInterceptor } from "./error.http.interceptor";
 import { ReleaseComponent } from "./content/environment/deployed/release/release.component";
 import { ReleasesResolver } from "./content/environment/deployed/release/releases.resolver";
-import {SummaryComponent} from "./content/summary/summary.component";
-import {MonitorComponent} from "./content/environment/monitor/monitor.component";
-import {PingsResolver} from "./content/environment/monitor/pinged/pings.resolver";
-import {PingedService} from "./content/environment/monitor/pinged/pinged.service";
-import {NgPipesModule} from "ngx-pipes";
-import {FuseWidgetModule} from "../core/components/widget/widget.module";
-import {FuseThemeOptionsComponent} from "../core/components/theme-options/theme-options.component";
-import {MonitorService} from "./content/environment/monitor/monitor.service";
-import {HelpComponent} from "./content/help/help.component";
-import {HelpArticleComponent} from "./content/help/dialogs/article/article.component";
-import {MarkdownModule} from "angular2-markdown";
+import { SummaryComponent } from "./content/summary/summary.component";
+import { MonitorComponent } from "./content/environment/monitor/monitor.component";
+import { PingsResolver } from "./content/environment/monitor/pinged/pings.resolver";
+import { PingedService } from "./content/environment/monitor/pinged/pinged.service";
+import { FuseWidgetModule } from "../core/components/widget/widget.module";
+import { FuseThemeOptionsComponent } from "../core/components/theme-options/theme-options.component";
+import { MonitorService } from "./content/environment/monitor/monitor.service";
+import { HelpComponent } from "./content/help/help.component";
+import { HelpArticleComponent } from "./content/help/dialogs/article/article.component";
+import { MarkdownModule } from "angular2-markdown";
 
 import {Http, HttpModule, RequestOptions} from '@angular/http';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
@@ -156,8 +155,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
         FuseWidgetModule,
         HttpClientModule,
         MarkdownModule.forRoot(),
-        MomentModule,
-        NgPipesModule
+        MomentModule
     ],
     exports     : [
         FuseMainComponent

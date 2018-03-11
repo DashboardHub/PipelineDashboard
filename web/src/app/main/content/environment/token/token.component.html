@@ -72,7 +72,7 @@
 
           <mat-list>
             <h3 mat-subheader>Keep your private tokens safe and treat them like passwords. If you think they have been compromised, please delete and recreate (deleted tokens can not be recovered).</h3>
-            <mat-list-item *ngFor="let token of environment.tokens | orderByImpure: '-lastUsed'">
+            <mat-list-item *ngFor="let token of environment.tokens">
               <h3 mat-line>{{ token.name }}</h3>
               <p mat-line>{{ token.id }} (<span *ngIf="token.lastUsed">{{ token.lastUsed | amTimeAgo }}</span><span *ngIf="!token.lastUsed">not used</span>)</p>
 
