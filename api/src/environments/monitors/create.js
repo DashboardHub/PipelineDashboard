@@ -21,6 +21,10 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('[400] Monitor limit reached'));
         }
 
+        if (!environment.link) {
+            return callback(new Error('[400] No Environment url available'));
+        }
+
         let monitor = {
             id: uuidv1(),
             path: data.path,

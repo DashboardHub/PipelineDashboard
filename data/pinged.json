@@ -1,8 +1,8 @@
 [
   {
-    "id": "1",
-    "environmentId": "4",
-    "monitorId": "1",
+    "id": "e0000004-0000-0000-0000-p00000000001",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
+    "monitorId": "e0000004-0000-0000-0000-m00000000001",
     "url": "http://example.com/",
     "statusCode": 200,
     "codeMatched": true,
@@ -14,9 +14,9 @@
     "updatedAt": 1517044450932
   },
   {
-    "id": "2",
-    "environmentId": "4",
-    "monitorId": "1",
+    "id": "e0000004-0000-0000-0000-p00000000002",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
+    "monitorId": "e0000004-0000-0000-0000-m00000000001",
     "url": "http://example.com/",
     "statusCode": 500,
     "codeMatched": false,

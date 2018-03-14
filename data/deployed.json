@@ -1,7 +1,7 @@
 [
   {
-    "id": "1",
-    "environmentId": "2",
+    "id": "e0000002-0000-0000-0000-r00000000001",
+    "environmentId": "e0000002-0000-0000-0000-000000000000",
     "release": "v0.0.1",
     "state": "startBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -9,8 +9,8 @@
     "updatedAt": 1517044450932
   },
   {
-    "id": "2",
-    "environmentId": "2",
+    "id": "e0000002-0000-0000-0000-r00000000002",
+    "environmentId": "e0000002-0000-0000-0000-000000000000",
     "release": "v0.0.1",
     "state": "finishBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -18,8 +18,8 @@
     "updatedAt": 1517044450932
   },
   {
-    "id": "3",
-    "environmentId": "3",
+    "id": "e0000004-0000-0000-0000-r00000000003",
+    "environmentId": "e0000003-0000-0000-0000-000000000000",
     "release": "v0.1.1",
     "state": "startDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -27,8 +27,8 @@
     "updatedAt": 1517044450932
   },
   {
-    "id": "4",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000004",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.1",
     "state": "startBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -36,8 +36,8 @@
     "updatedAt": 1517044450932
   },
   {
-    "id": "5",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000005",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.1",
     "state": "finishBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -45,8 +45,8 @@
     "updatedAt": 1517044451932
   },
   {
-    "id": "6",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000006",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.1",
     "state": "startDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -54,8 +54,8 @@
     "updatedAt": 1517044452932
   },
   {
-    "id": "7",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000007",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.1",
     "state": "finishDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -63,8 +63,8 @@
     "updatedAt": 1517044453932
   },
   {
-    "id": "8",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000008",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.2",
     "state": "startBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -72,8 +72,8 @@
     "updatedAt": 1517044460932
   },
   {
-    "id": "9",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000009",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.2",
     "state": "finishBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -81,8 +81,8 @@
     "updatedAt": 1517044461932
   },
   {
-    "id": "10",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000010",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.2",
     "state": "startDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -90,8 +90,8 @@
     "updatedAt": 1517044462932
   },
   {
-    "id": "11",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000011",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.2",
     "state": "finishDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -99,8 +99,8 @@
     "updatedAt": 1517044463932
   },
   {
-    "id": "12",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000012",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.3",
     "state": "startBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -108,8 +108,8 @@
     "updatedAt": 1517044470932
   },
   {
-    "id": "13",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000013",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.3",
     "state": "finishBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -117,8 +117,8 @@
     "updatedAt": 1517044482932
   },
   {
-    "id": "14",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000014",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.3",
     "state": "startDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -126,8 +126,8 @@
     "updatedAt": 1517044494932
   },
   {
-    "id": "15",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000015",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v1.0.3",
     "state": "finishDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -135,8 +135,8 @@
     "updatedAt": 1517044496932
   },
   {
-    "id": "16",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000016",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v2.0.0",
     "state": "startBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -144,8 +144,8 @@
     "updatedAt": 1517044470932
   },
   {
-    "id": "17",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000017",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v2.0.0",
     "state": "finishBuild",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -153,8 +153,8 @@
     "updatedAt": 1517044582932
   },
   {
-    "id": "18",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000018",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v2.0.0",
     "state": "startDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",
@@ -162,8 +162,8 @@
     "updatedAt": 1517044694932
   },
   {
-    "id": "19",
-    "environmentId": "4",
+    "id": "e0000004-0000-0000-0000-r00000000019",
+    "environmentId": "e0000004-0000-0000-0000-000000000000",
     "release": "v2.0.0",
     "state": "finishDeploy",
     "token": "{\"name\":\"Continuous Integration Server\"}",

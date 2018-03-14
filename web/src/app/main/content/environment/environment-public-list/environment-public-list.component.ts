@@ -3,14 +3,12 @@ import { fuseAnimations } from '../../../../core/animations';
 import { Environment } from "../environment";
 import { ActivatedRoute } from "@angular/router";
 import { List } from "../../list";
-import {Profile} from "../../auth/profile";
+import { Profile } from "../../auth/profile";
 import { EnvironmentService } from '../environment.service';
-import { OrderByPipe } from 'ngx-pipes';
 
 @Component({
     selector   : 'app-environment-public-list',
     templateUrl: './environment-public-list.component.html',
-    providers: [OrderByPipe],
     animations : fuseAnimations
 })
 export class EnvironmentPublicListComponent implements OnInit {
@@ -98,15 +96,15 @@ export class EnvironmentPublicListComponent implements OnInit {
     }
   };
 
-  constructor(private route: ActivatedRoute, private environmentService: EnvironmentService, private pipe: OrderByPipe) {
+  constructor(private route: ActivatedRoute, private environmentService: EnvironmentService) {
   }
 
   ngOnInit() {
     this.environments = this.route.snapshot.data['environments'];
     this.profile = this.route.snapshot.data['profile'];
 
-    this.graph.labels = this.pipe.transform(this.environments.list, '+updatedAt').map((environment) => environment.title);
-    this.graph.datasets.releases[0].data = this.pipe.transform(this.environments.list, '+updatedAt').map((environment) => environment.releases);
+    this.graph.labels = this.environments.list.map((environment) => environment.title);
+    this.graph.datasets.releases[0].data = this.environments.list.map((environment) => environment.releases);
     this.graph.options.scales.yAxes[0].ticks.max = Math.max(...this.graph.datasets.releases[0].data);
     this.graph.options.scales.yAxes[0].ticks.stepSize = Math.ceil(this.graph.options.scales.yAxes[0].ticks.max / 5);
   }

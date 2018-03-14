@@ -1,5 +1,7 @@
 'use strict';
 
+const _ = require('lodash');
+
 const deployedModel = require('../../models/deployed');
 const environmentModel = require('../../models/environment');
 
@@ -20,7 +22,7 @@ module.exports.list = (event, context, callback) => {
 
             callback(null, {
                 total: deploys.length,
-                list: deploys
+                list: _.orderBy(deploys, ['createdAt'], ['desc'])
             });
         });
     });

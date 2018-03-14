@@ -55,9 +55,9 @@ We have an aggressive plan for our prototype, so we can get feedback ASAP.
 
 | Milestone | Status | ETA |
 | :--- | :--- | :-- |
-| Simple Monitoring & New Design | In Testing | Feb 2018 | 
-| Notifications | Pending | March 2018 | 
-| Projects that group Environments | Pending | May 2018 | 
+| Simple Monitoring & New Design | In Testing | Feb 2018 |
+| Notifications | Pending | March 2018 |
+| Projects that group Environments | Pending | May 2018 |
 
 For more information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
 
@@ -88,8 +88,8 @@ Then visit `http://localhost:4200/`
 
 ## SUB PROJECTS
 
-* API, read the [API](api/README.md) docs 
-* Web UI, read the [UI](web/README.md) docs 
+* API, read the [API](api/README.md) docs
+* Web UI, read the [UI](web/README.md) docs
 
 ## COLLABORATION
 
@@ -103,3 +103,5 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | :--- | :--- | :--- |
 | Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed --with-default-names` |
 | ALL | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
+| ALL | First time setup **login failure** | Check you have the `auth.pem` file in the API directory |
+| ALL | Worked before but now **login failure** | The API `pem` file was renamed from `dashboardhub.pem` to `auth.pem` |

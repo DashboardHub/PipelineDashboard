@@ -24,6 +24,7 @@
     "cucumber": "^4.0.0",
     "dynamoose": "^0.8.6",
     "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.5",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "uuid": "^3.2.1",

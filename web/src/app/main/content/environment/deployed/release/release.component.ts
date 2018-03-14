@@ -5,13 +5,11 @@ import { fuseAnimations } from "./../../../../../core/animations";
 import { List } from "./../../../list";
 import { MatTableDataSource } from "@angular/material";
 import { Release } from "../release";
-import {DeployedService} from "../deployed.service";
-import {OrderByPipe} from "ngx-pipes";
+import { DeployedService } from "../deployed.service";
 
 @Component({
   selector   : 'app-release',
   templateUrl: './release.component.html',
-  providers: [OrderByPipe],
   animations : fuseAnimations
 })
 export class ReleaseComponent implements OnInit {
@@ -101,7 +99,7 @@ export class ReleaseComponent implements OnInit {
     }
   };
 
-  constructor(private route: ActivatedRoute, private deployedService: DeployedService, private pipe: OrderByPipe) {
+  constructor(private route: ActivatedRoute, private deployedService: DeployedService) {
   }
 
   ngOnInit() {
@@ -116,9 +114,9 @@ export class ReleaseComponent implements OnInit {
       .findAllReleases(this.environment.id)
       .subscribe((releases) => {
         this.releases = releases;
-        this.dataSource = new MatTableDataSource<Release>(this.pipe.transform(releases.list, '-latest.createdAt'));
-        this.graph.labels = this.pipe.transform(releases.list, '+latest.createdAt').map((release) => release.version);
-        this.graph.datasets.duration[0].data = this.pipe.transform(releases.list, '+latest.createdAt').map((release) => release.duration);
+        this.dataSource = new MatTableDataSource<Release>(releases.list);
+        this.graph.labels = releases.list.map((release) => release.version);
+        this.graph.datasets.duration[0].data = releases.list.map((release) => release.duration);
         this.graph.options.scales.yAxes[0].ticks.max = Math.max(...this.graph.datasets.duration[0].data);
         this.graph.options.scales.yAxes[0].ticks.stepSize = Math.ceil(this.graph.options.scales.yAxes[0].ticks.max / 5);
       });

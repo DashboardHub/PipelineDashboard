@@ -13,8 +13,9 @@ module.exports.create = (event, context, callback) => {
         description: data.description,
         link: data.link,
         tags: data.tags,
-        latestRelease: null,
+        latestRelease: {},
         releases: 0,
+        views: 0,
         isPrivate: false,
         tokens: [
             {
@@ -37,6 +38,6 @@ module.exports.create = (event, context, callback) => {
             }
         }
 
-        callback(null, JSON.stringify(params));
+        callback(null, JSON.stringify(environmentModel));
     });
 };
