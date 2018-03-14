@@ -4,7 +4,7 @@ node_js:
 branches:
   only:
   - master
-  - prototype-v0.8.0
+  - v0.9-alpha
   - /issue-*/
 env:
   - NODE_ENV=development
@@ -26,7 +26,7 @@ deploy:
     skip_cleanup: true
     script: make install.test deploy.test
     on:
-      branch: prototype-v0.8.0
+      branch: v0.9-alpha
   - provider: script
     skip_cleanup: true
     script: make install deploy
