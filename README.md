@@ -51,15 +51,15 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 ## ROADMAP
 
-We have an aggressive plan for our prototype, so we can get feedback ASAP.
+We have an aggressive plan for our ALPHA, so we can get feedback ASAP.
 
 | Milestone | Status | ETA |
 | :--- | :--- | :-- |
-| Simple Monitoring & New Design | In Testing | Feb 2018 |
-| Notifications | Pending | March 2018 |
-| Projects that group Environments | Pending | May 2018 |
+| Notifications | Pending | May 2018 |
+| Social Deployment | Pending | June 2018 |
+| Projects that group Environments | Pending | August 2018 |
 
-For more information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
+For more up to date information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
 
 ## QUICK START
 
