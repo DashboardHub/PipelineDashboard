@@ -13,7 +13,7 @@ module.exports.create = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (environment.owner !== event.principalId) {
+        if (!environment || environment.owner !== event.principalId) {
             return callback(new Error('[404] Not found'));
         }
 
