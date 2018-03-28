@@ -105,3 +105,12 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | ALL | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
 | ALL | First time setup **login failure** | Check you have the `auth.pem` file in the API directory |
 | ALL | Worked before but now **login failure** | The API `pem` file was renamed from `dashboardhub.pem` to `auth.pem` |
+
+## Social media
+
+| media | link
+| :-- | :-- |
+| LinkedIn | https://www.linkedin.com/showcase/dashboardhub/ |
+| Facebook | https://www.facebook.com/dashboardhub/ |
+
+
