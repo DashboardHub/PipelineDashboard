@@ -35,6 +35,7 @@
     "serverless": "^1.25.0",
     "serverless-domain-manager": "^1.1.25",
     "serverless-dynamodb-local": "^0.2.27",
-    "serverless-offline": "^3.16.0"
+    "serverless-offline": "^3.16.0",
+    "shelljs": "^0.8.1"
   }
 }

@@ -19,3 +19,5 @@ Feature: Delete my environment
     When I make a "DELETE" request to "/environments/e0000001-0000-0000-0000-000000000000"
 #    Then the status code should be 204 # @TODO: Do not return 200
     Then the status code should be 200
+#    When I make a "GET" request to "/environments/e0000004-0000-0000-0000-000000000000/view"
+#    Then the status code should be 404 # @TODO: check async

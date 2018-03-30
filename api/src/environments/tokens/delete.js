@@ -12,7 +12,7 @@ module.exports.delete = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (!environment || environment.owner !== event.principalId) {
+        if (!environment || environment.owner !== event.principalId || !environment.tokens.find((token) => token.id === tokenId)) {
             return callback(new Error('[404] Not found'));
         }
 

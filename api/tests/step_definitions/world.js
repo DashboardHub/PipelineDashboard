@@ -29,7 +29,7 @@ class CustomWorld {
     }
   }
 
-  sendRequest(method, path, data) {
+  sendRequest(method, path, data = []) {
     let params = {
       uri: this.api + path,
       method: method,
@@ -41,10 +41,17 @@ class CustomWorld {
       json: true
     };
 
-    if (data) {
-      let body = {};
-      data.forEach((item) => body[item.field] = item.value);
-      params.body = body;
+    switch(method) {
+        case 'POST':
+          let post = {};
+          data.forEach((item) => post[item.field] = item.value);
+          params.body = post;
+          break;
+        case 'PATCH':
+          let patch = [];
+          data.forEach((item) => patch.push({ op: 'replace', 'path': `/${item.field}`, 'value': item.value }));
+          params.body = patch;
+          break;
     }
 
     return request(params)

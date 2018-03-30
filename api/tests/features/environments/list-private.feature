@@ -7,8 +7,7 @@ Feature: Private environments list
     Given I am logged in
     When I make a "GET" request to "/environments/list"
     Then the status code should be 200
-    And should have a field "total" with integer 4
-    And should have a field "list" with length 4
+    And should have a field "total" with "NUMBER"
     And should have an "array" field "list" and in row 1 with:
       | field         | value                                      |
       | id            | "UUID"                                     |

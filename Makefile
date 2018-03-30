@@ -50,8 +50,7 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-test|g' ./config.json)
 
 api.test:
-	(cd api; ./node_modules/serverless/bin/serverless dynamodb seed --seed=test --stage=dev)
-	(cd api; ./node_modules/.bin/cucumber-js --format ./node_modules/cucumber-pretty)
+	(cd api; ./node_modules/.bin/cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty)
 
 api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
