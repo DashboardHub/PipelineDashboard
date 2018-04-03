@@ -49,9 +49,9 @@ provider:
 
 functions:
   auth:
-    handler: auth/handler.auth
+    handler: src/auth/handler.auth
   publicEnvironmentList:
-    handler: environments/list.public
+    handler: src/environments/list.public
     events:
       - http:
           path: environments
@@ -59,7 +59,7 @@ functions:
           integration: lambda-proxy
           cors: true
   publicEnvironmentGet:
-    handler: environments/get.public
+    handler: src/environments/get.public
     events:
       - http:
           path: environments/{id}/view
@@ -67,7 +67,7 @@ functions:
           integration: lambda-proxy
           cors: true
   environmentList:
-      handler: environments/list.private
+      handler: src/environments/list.private
       events:
         - http:
             path: environments/list
@@ -84,7 +84,7 @@ functions:
                 - X-Api-Key
                 - X-Amz-Security-Token
   environmentGet:
-    handler: environments/get.private
+    handler: src/environments/get.private
     events:
       - http:
           path: environments/{id}
@@ -105,7 +105,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   environmentCreate:
-    handler: environments/create.create
+    handler: src/environments/create.create
     events:
       - http:
           path: environments
@@ -129,7 +129,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   environmentUpdate:
-    handler: environments/update.update
+    handler: src/environments/update.update
     events:
       - http:
           path: environments/{id}
@@ -150,7 +150,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   environmentDelete:
-    handler: environments/delete.delete
+    handler: src/environments/delete.delete
     events:
       - http:
           path: environments/{id}
@@ -161,6 +161,13 @@ functions:
             parameters:
               paths:
                 id: true
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              204:
+                pattern: ''
           cors:
             origins:
               - '*'
@@ -171,7 +178,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   tokenCreate:
-    handler: environments/tokens/create.create
+    handler: src/environments/tokens/create.create
     events:
       - http:
           path: environments/{id}/tokens
@@ -195,7 +202,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   tokenDelete:
-    handler: environments/tokens/delete.delete
+    handler: src/environments/tokens/delete.delete
     events:
       - http:
           path: environments/{id}/tokens/{tokenId}
@@ -219,7 +226,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   tokenList:
-    handler: environments/tokens/list.list
+    handler: src/environments/tokens/list.list
     events:
       - http:
           path: environments/{id}/tokens
@@ -236,7 +243,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   deployedList:
-    handler: environments/deployed/list.list
+    handler: src/environments/deployed/list.list
     events:
       - http:
           path: environments/{id}/deployed
@@ -253,12 +260,19 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   deployedCreate:
-    handler: environments/deployed/create.create
+    handler: src/environments/deployed/create.create
     events:
       - http:
           path: environments/{id}/deployed/{tokenId}/{state}
           method: post
           integration: lambda
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              201:
+                pattern: ''
           cors:
             origins:
               - '*'
@@ -269,7 +283,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   releaseList:
-    handler: environments/releases/list.list
+    handler: src/environments/releases/list.list
     events:
       - http:
           path: environments/{id}/releases
@@ -286,7 +300,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   monitorCreate:
-    handler: environments/monitors/create.create
+    handler: src/environments/monitors/create.create
     events:
       - http:
           path: environments/{id}/monitors
@@ -310,7 +324,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   monitorDelete:
-    handler: environments/monitors/delete.delete
+    handler: src/environments/monitors/delete.delete
     events:
       - http:
           path: environments/{id}/monitors/{monitorId}
@@ -334,7 +348,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   monitorList:
-    handler: environments/monitors/list.list
+    handler: src/environments/monitors/list.list
     events:
       - http:
           path: environments/{id}/monitors
@@ -351,7 +365,7 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   pingedList:
-    handler: environments/monitors/pinged/list.list
+    handler: src/environments/monitors/pinged/list.list
     events:
       - http:
           path: environments/{id}/monitors/{monitorId}/pings
@@ -368,17 +382,24 @@ functions:
               - X-Api-Key
               - X-Amz-Security-Token
   monitors:
-    handler: environments/monitors/pinged/ping.monitors
+    handler: src/environments/monitors/pinged/ping.monitors
     events:
       - schedule: rate(30 minutes)
   ping:
-    handler: environments/monitors/pinged/ping.ping
+    handler: src/environments/monitors/pinged/ping.ping
     events:
       - http:
           path: environments/{id}/monitors/{monitorId}/ping
           authorizer: auth
           method: post
           integration: lambda
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              204:
+                pattern: ''
           cors:
             origins:
               - '*'

@@ -51,19 +51,21 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 ## ROADMAP
 
-We have an aggressive plan for our prototype, so we can get feedback ASAP.
+We have an aggressive plan for our ALPHA, so we can get feedback ASAP.
 
 | Milestone | Status | ETA |
 | :--- | :--- | :-- |
-| Simple Monitoring & New Design | In Testing | Feb 2018 | 
-| Notifications | Pending | March 2018 | 
-| Projects that group Environments | Pending | May 2018 | 
+| Notifications | Pending | May 2018 |
+| Social Deployment | Pending | June 2018 |
+| Projects that group Environments | Pending | August 2018 |
 
-For more information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
+For more up to date information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
 
 ## QUICK START
 
 Using `make` to build and run the project(s):
+
+*Note: You need AW configured, although it will not be used, the AWS CLI requires it*
 
 - 1. Install the `npm` dependencies for all projects, use `make install.local`
 
@@ -71,11 +73,18 @@ Open 2 terminals and run each of these commands in its own terminal:
 
 - 2. API `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make api`
 
-*NOTE: You will need a `pem` file for local development*
+*NOTE: You will need a `pem` file for local development, and needs to be in the directory `api` call `auth.pem` (`api/auth.pem`)*
 
 - 3. UI `make ui`
 
 Then visit `http://localhost:4200/`
+
+## RUNNING AUTOMATED TESTS
+
+- 1. Start the API (step 2 from previous section)
+- 2. Run `make test`
+
+*Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
 
 ## Additional useful commands
 
@@ -83,9 +92,8 @@ Then visit `http://localhost:4200/`
 
 ## SUB PROJECTS
 
-* API, read the [API](api/README.md) docs 
-* Web UI, read the [UI](web/README.md) docs 
-* Alexa Skill, read the [Alexa Skill](alexa/README.md) docs 
+* API, read the [API](api/README.md) docs
+* Web UI, read the [UI](web/README.md) docs
 
 ## COLLABORATION
 
@@ -98,4 +106,15 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | OS | Question | Answer |
 | :--- | :--- | :--- |
 | Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed --with-default-names` |
-| - | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
+| ALL | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
+| ALL | First time setup **login failure** | Check you have the `auth.pem` file in the API directory |
+| ALL | Worked before but now **login failure** | The API `pem` file was renamed from `dashboardhub.pem` to `auth.pem` |
+
+## Social media
+
+| media | link
+| :-- | :-- |
+| LinkedIn | https://www.linkedin.com/showcase/dashboardhub/ |
+| Facebook | https://www.facebook.com/dashboardhub/ |
+
+

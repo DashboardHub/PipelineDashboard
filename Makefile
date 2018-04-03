@@ -1,4 +1,9 @@
+# DEFAULTS
+
 .DEFAULT_GOAL := help
+TEST_TAGS ?= @All
+
+# HELPERS
 
 help:
 	@echo 'Please read the documentation in "https://github.com/DashboardHub/PipelineDashboard"'
@@ -10,31 +15,22 @@ guard-%:
 	fi
 
 # ALIAS
+test: api.test
+
 api: api.run
 
 ui: ui.run
 
-install.local: alexa.install api.clean api.install ui.install
-	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev)
+install.local: api.clean api.install ui.install
+	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev > /dev/null)
 
-install: pipeline.version.startBuild pipeline.version.prod.startBuild alexa.install api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
+install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
-install.test: pipeline.version.test.startBuild pipeline.version.prod.test.startBuild alexa.install api.install ui.install pipeline.version.test.finishBuild pipeline.version.prod.test.finishBuild
+install.test: pipeline.version.test.startBuild pipeline.version.prod.test.startBuild api.install ui.install pipeline.version.test.finishBuild pipeline.version.prod.test.finishBuild
 
-deploy: pipeline.version.startDeploy pipeline.version.prod.startDeploy alexa.deploy api.deploy ui.deploy pipeline.version.finishDeploy pipeline.version.prod.finishDeploy
+deploy: pipeline.version.startDeploy pipeline.version.prod.startDeploy api.deploy ui.deploy pipeline.version.finishDeploy pipeline.version.prod.finishDeploy
 
-deploy.test: pipeline.version.test.startDeploy pipeline.version.prod.test.startDeploy alexa.deploy api.deploy.test ui.deploy.test pipeline.version.test.finishDeploy pipeline.version.prod.test.finishDeploy
-
-# ALEXA
-alexa.install:
-	(cd alexa; rm -fr node_modules || echo "Nothing to delete")
-	(cd alexa; npm install)
-
-alexa.deploy:
-	(cd alexa; ./node_modules/serverless/bin/serverless deploy -v)
-
-alexa.remove:
-	(cd alexa; ./node_modules/serverless/bin/serverless remove -v)
+deploy.test: pipeline.version.test.startDeploy pipeline.version.prod.test.startDeploy api.deploy.test ui.deploy.test pipeline.version.test.finishDeploy pipeline.version.prod.test.finishDeploy
 
 # API
 api.clean:
@@ -58,15 +54,18 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-deployed|pipelinedashboard-deployed-test|g' ./config.json)
 	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-test|g' ./config.json)
 
+api.test:
+	(cd api; ./node_modules/.bin/cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --tags ${TEST_TAGS})
+
 api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
 
 api.deploy: api.env
-	(cd api; mv dashboardhub.prod.pem dashboardhub.pem)
+	(cd api; mv auth.prod.pem auth.pem)
 	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage production)
 
 api.deploy.test: api.env.test
-	(cd api; mv dashboardhub.test.pem dashboardhub.pem)
+	(cd api; mv auth.test.pem auth.pem)
 	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage test)
 
 api.remove:
@@ -94,8 +93,8 @@ ui.build.test:
 	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --env=test)
 
 ui.version:
-	(cd web/src/environments; sed -i 's/x\.x\.x/0.8.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
-	(cd web/src/environments; sed -i 's/x\.x\.x/0.8.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.test.ts)
+	(cd web/src/environments; sed -i 's/x\.x\.x/v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
+	(cd web/src/environments; sed -i 's/x\.x\.x/v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.test.ts)
 
 ui.sync: guard-AWS_CLOUDFRONT_ID
 	(cd web; aws s3 sync dist s3://pipeline.dashboardhub.io --delete --region eu-west-2)
@@ -107,75 +106,75 @@ ui.sync.test:
 # DASHBOARDHUB PIPELINE TEST
 
 pipeline.version.startBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/startBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/startBuild
 
 pipeline.version.finishBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/finishBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/finishBuild
 
 pipeline.version.failBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/failBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/failBuild
 
 pipeline.version.startDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/startDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/startDeploy
 
 pipeline.version.finishDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/finishDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/finishDeploy
 
 pipeline.version.failDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/failDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/284d3180-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN}/failDeploy
 
 pipeline.version.test.startBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/startBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/startBuild
 
 pipeline.version.test.finishBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/finishBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/finishBuild
 
 pipeline.version.test.failBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/failBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/failBuild
 
 pipeline.version.test.startDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/startDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/startDeploy
 
 pipeline.version.test.finishDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/finishDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/finishDeploy
 
 pipeline.version.test.failDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/failDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://dj2hjusr1g.execute-api.eu-west-2.amazonaws.com/test/environments/b4d0b870-c9e9-11e7-aeea-eb4cced29ed2/deployed/${DH_TOKEN_TEST}/failDeploy
 
 # DASHBOARDHUB PIPELINE PROD
 
 pipeline.version.prod.startBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/startBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/startBuild
 
 pipeline.version.prod.finishBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/finishBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/finishBuild
 
 pipeline.version.prod.failBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/failBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/failBuild
 
 pipeline.version.prod.startDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/startDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/startDeploy
 
 pipeline.version.prod.finishDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/finishDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/finishDeploy
 
 pipeline.version.prod.failDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/failDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1fd1da50-ca3a-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD}/failDeploy
 
 pipeline.version.prod.test.startBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/startBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/startBuild
 
 pipeline.version.prod.test.finishBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/finishBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/finishBuild
 
 pipeline.version.prod.test.failBuild:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/failBuild
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/failBuild
 
 pipeline.version.prod.test.startDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/startDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/startDeploy
 
 pipeline.version.prod.test.finishDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/finishDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/finishDeploy
 
 pipeline.version.prod.test.failDeploy:
-	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.8.${TRAVIS_BUILD_NUMBER}"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/failDeploy
+	curl -XPOST -H "Content-Type: application/json"  -d '{"release":"v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA"}' https://wxhly2j3oc.execute-api.eu-west-2.amazonaws.com/production/environments/1012de50-ca3c-11e7-8e89-ddd24d528194/deployed/${DH_TOKEN_PROD_TEST}/failDeploy

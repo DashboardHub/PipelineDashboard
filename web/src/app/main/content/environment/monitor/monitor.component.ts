@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Environment } from "../environment";
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { fuseAnimations } from "../../../../core/animations";
 import { MatTableDataSource } from "@angular/material";
-import {Pinged} from "./pinged/pinged";
-import {PingedService} from "./pinged/pinged.service";
-import {OrderByPipe} from "ngx-pipes";
-import {List} from "../../list";
-import {Monitor} from "./monitor";
-import {MonitorService} from "./monitor.service";
+import { Pinged } from "./pinged/pinged";
+import { PingedService } from "./pinged/pinged.service";
+import { List } from "../../list";
+import { Monitor } from "./monitor";
+import { MonitorService } from "./monitor.service";
 import { DatePipe } from '@angular/common';
 
 @Component({
   selector   : 'app-monitor',
   templateUrl: './monitor.component.html',
-  providers: [OrderByPipe],
   animations : fuseAnimations
 })
 export class MonitorComponent implements OnInit {
@@ -108,7 +106,6 @@ export class MonitorComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private pingedService: PingedService,
-    private pipe: OrderByPipe,
     private monitorService: MonitorService,
     private datePipe: DatePipe
   ) {
@@ -130,9 +127,9 @@ export class MonitorComponent implements OnInit {
         .findAll(this.environment.id, this.environment.monitors[0].id)
         .subscribe((pings) => {
           this.pings = pings;
-          this.dataSource = new MatTableDataSource<Pinged>(this.pipe.transform(pings.list, '-createdAt'));
-          this.graph.labels = this.pipe.transform(pings.list, '+createdAt').map((ping) => this.datePipe.transform(new Date(ping.createdAt), 'MMM d, H:mm:ss'));
-          this.graph.datasets.duration[0].data = this.pipe.transform(pings.list, '+createdAt').map((ping) => ping.duration);
+          this.dataSource = new MatTableDataSource<Pinged>(pings.list);
+          this.graph.labels = pings.list.map((ping) => this.datePipe.transform(new Date(ping.createdAt), 'MMM d, H:mm:ss'));
+          this.graph.datasets.duration[0].data = pings.list.map((ping) => ping.duration);
           this.graph.options.scales.yAxes[0].ticks.max = Math.max(...this.graph.datasets.duration[0].data);
           this.graph.options.scales.yAxes[0].ticks.stepSize = Math.ceil(this.graph.options.scales.yAxes[0].ticks.max / 5);
         });
