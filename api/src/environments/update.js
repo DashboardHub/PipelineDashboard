@@ -6,7 +6,7 @@ module.exports.update = (event, context, callback) => {
     const id = event.path.id;
     const data = event.body;
 
-    environmentModel.model.get({ id }, function (err, environment) {
+    environmentModel.model.get({ id }, function(err, environment) {
         if (err) {
             console.error(err);
             return callback(new Error('Couldn\'t fetch the item.'));
@@ -38,18 +38,20 @@ module.exports.update = (event, context, callback) => {
             }
         });
 
-        environmentModel.model.update({ id }, { title: environment.title, description: environment.description, link: environment.link, logo: environment.logo, type: environment.type }, function (err) {
-            if (err) {
-                console.log(err);
-                switch(err.name) {
-                    case 'ValidationError':
-                        return callback(new Error(`[400] ${err.message}`));
-                    default:
-                        return callback(new Error(`[500] ${err.message}`));
-                }
-            }
+        environmentModel.model.update({ id },
+                { title: environment.title, description: environment.description, link: environment.link, logo: environment.logo, type: environment.type },
+                function(err) {
+                    if (err) {
+                        console.log(err);
+                        switch (err.name) {
+                            case 'ValidationError':
+                                return callback(new Error(`[400] ${err.message}`));
+                            default:
+                                return callback(new Error('Couldn\'t update the item.'));
+                        }
+                    }
 
-            callback(null, environment);
-        });
+                    callback(null, environment);
+                });
     });
 };

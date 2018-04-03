@@ -15,7 +15,7 @@ module.exports.list = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        if (!environment || environment.owner !== event.principalId || !environment.monitors.filter((monitor) => monitor.id === monitorId)) {
+        if (!environment || environment.owner !== event.principalId || !environment.monitors.find((monitor) => monitor.id === monitorId)) {
             return callback(new Error('[404] Not found'));
         }
 

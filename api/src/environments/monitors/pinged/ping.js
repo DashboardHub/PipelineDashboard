@@ -45,7 +45,8 @@ module.exports.monitors = (event, context, callback) => {
 
 module.exports.ping = (event, context, callback) => {
     const body = event.body;
-    const id = body.environment.id;
+    const id = event.path.id || body.environment.id;
+    const monitorId = event.path.monitorId || body.monitor.id;
     const start = new Date();
 
     environmentModel.model.get({ id }, function (err, environment) {
@@ -54,8 +55,12 @@ module.exports.ping = (event, context, callback) => {
             return callback(new Error('Couldn\'t fetch the item.'));
         }
 
-        let monitor = environment.monitors.filter((monitor) => monitor.id === body.monitor.id)[0];
-        if (!environment || !monitor || !environment.link) {
+        if (!environment || !environment.link) {
+            return callback(new Error('[404] Not found'));
+        }
+
+        let monitor = environment.monitors.filter((monitor) => monitor.id === monitorId)[0];
+        if (!monitor) {
             return callback(new Error('[404] Not found'));
         }
 
@@ -97,7 +102,7 @@ module.exports.ping = (event, context, callback) => {
                                 return callback(new Error(`[500] ${err.message}`));
                         }
                     }
-                    callback(null, item);
+                    callback(null, JSON.stringify(item));
                 });
             });
 

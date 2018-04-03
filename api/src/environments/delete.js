@@ -27,7 +27,8 @@ module.exports.delete = (event, context, callback) => {
 
             deployedModel.model.batchDelete(deployedDeletes, function (err) {
                 if (err) {
-                    return console.log(err);
+                    console.log(err);
+                    return callback(new Error('Couldn\'t delete the items.'));
                 }
 
                 pingedModel.model.scan('environmentId').contains(id).exec(function (err, results) {
@@ -40,12 +41,14 @@ module.exports.delete = (event, context, callback) => {
 
                     pingedModel.model.batchDelete(pingedDeletes, function (err) {
                         if (err) {
-                            return console.log(err);
+                            console.log(err);
+                            return callback(new Error('Couldn\'t delete the items.'));
                         }
 
                         environment.delete(function (err) {
                             if (err) {
-                                return console.log(err);
+                                console.log(err);
+                                return callback(new Error('Couldn\'t delete the item.'));
                             }
                             callback(null, {});
                         });

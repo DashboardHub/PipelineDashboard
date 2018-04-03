@@ -161,6 +161,13 @@ functions:
             parameters:
               paths:
                 id: true
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              204:
+                pattern: ''
           cors:
             origins:
               - '*'
@@ -259,6 +266,13 @@ functions:
           path: environments/{id}/deployed/{tokenId}/{state}
           method: post
           integration: lambda
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              201:
+                pattern: ''
           cors:
             origins:
               - '*'
@@ -379,6 +393,13 @@ functions:
           authorizer: auth
           method: post
           integration: lambda
+          response:
+            template: $input.path('$')
+            headers:
+              Content-Type: "'application/json'"
+            statusCodes:
+              204:
+                pattern: ''
           cors:
             origins:
               - '*'

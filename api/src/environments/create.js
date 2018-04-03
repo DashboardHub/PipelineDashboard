@@ -16,25 +16,25 @@ module.exports.create = (event, context, callback) => {
         latestRelease: {},
         releases: 0,
         views: 0,
-        isPrivate: false,
+        isPrivate: data.isPrivate,
         tokens: [
             {
                 id: uuidv1(),
-                name: 'Continuous Integration Server'
-            }
+                name: 'Continuous Integration Server',
+            },
         ],
-        logo: data.logo
+        logo: data.logo,
     };
 
     let environmentModel = new environment.model(params);
-    environmentModel.save(function (err) {
+    environmentModel.save(function(err) {
         if (err) {
             console.log(err);
-            switch(err.name) {
+            switch (err.name) {
                 case 'ValidationError':
                     return callback(new Error(`[400] ${err.message}`));
                 default:
-                    return callback(new Error(`[500] ${err.message}`));
+                    return callback(new Error('Couldn\'t save the item.'));
             }
         }
 

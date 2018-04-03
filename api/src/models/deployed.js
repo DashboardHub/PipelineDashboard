@@ -8,39 +8,39 @@ const config = require('../../config');
 const Schema = client.dynamoose.Schema;
 
 const schema = new Schema({
-        id: {
-            type: String,
-            hashKey: true,
-            required: true
+            id: {
+                type: String,
+                hashKey: true,
+                required: true,
+            },
+            environmentId: {
+                type: String,
+                required: true,
+            },
+            release: {
+                type: String,
+                required: true,
+                trim: true,
+                validate: ((v) => typeof v === 'string' && validator.isLength(v, { min: 1, max: 64 })),
+            },
+            state: {
+                type: String,
+                required: true,
+                trim: true,
+                validate: ((v) => typeof v === 'string' && validator.isIn(v, ['startBuild', 'finishBuild', 'startDeploy', 'finishDeploy', 'failBuild', 'failDeploy'])),
+            },
+            token: {
+                type: Object,
+                required: true,
+            },
         },
-        environmentId: {
-            type: String,
-            required: true
-        },
-        release: {
-            type: String,
-            required: true,
-            trim: true,
-            validate: ((v) => typeof v === 'string' && validator.isLength(v, {min: 1, max: 64}))
-        },
-        state: {
-            type: String,
-            required: true,
-            trim: true,
-            validate: ((v) => typeof v === 'string' && validator.isIn(v, [ 'startBuild', 'finishBuild', 'startDeploy', 'finishDeploy', 'failBuild', 'failDeploy' ]))
-        },
-        token: {
-            type: Object,
-            required: true
-        }
-    },
-    {
-        expires: config.dynamodb.deployed.ttl,
-        timestamps: true,
-        useDocumentTypes: true,
-        useNativeBooleans: true,
-        throughput: { read: 5, write: 5 }
-    });
+        {
+            expires: config.dynamodb.deployed.ttl,
+            timestamps: true,
+            useDocumentTypes: true,
+            useNativeBooleans: true,
+            throughput: { read: 5, write: 5 },
+        });
 
 let model = client.dynamoose.model(config.dynamodb.deployed.table, schema, {
     create: true, // Create table in DB, if it does not exist,
