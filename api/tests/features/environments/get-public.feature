@@ -7,7 +7,7 @@ Feature: Get public environment
   @Seed
   Scenario: Run in seed data
 
-  Scenario: Get my environment
+  Scenario: Get a non existing environment
     When I make a "GET" request to "/environments/e0000004-0000-0000-0000-999999999999/view"
     Then the status code should be 404
 
