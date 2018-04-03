@@ -10,7 +10,8 @@ defineSupportCode(function ({ BeforeAll, Before }) {
 
         Object.entries(config.dynamodb).forEach((item) => {
             shell.echo(`Dropping table ${item[1].table}...`);
-            if (shell.exec(`AWS_PROFILE=${process.env.AWS_PROFILE} aws dynamodb delete-table --table-name ${item[1].table} --endpoint-url http://localhost:8000 --region localhost > /dev/null`).code !== 0) {
+            let awsProfile = process.env.AWS_PROFILE ? `AWS_PROFILE=${process.env.AWS_PROFILE}` : '';
+            if (shell.exec(`${awsProfile} aws dynamodb delete-table --table-name ${item[1].table} --endpoint-url http://localhost:8000 --region localhost > /dev/null`).code !== 0) {
                 shell.echo(`Warning: dropping table ${item[1].table}`);
             }
         });
