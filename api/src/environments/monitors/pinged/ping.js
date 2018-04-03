@@ -45,8 +45,8 @@ module.exports.monitors = (event, context, callback) => {
 
 module.exports.ping = (event, context, callback) => {
     const body = event.body;
-    const id = event.path.id || body.environment.id;
-    const monitorId = event.path.monitorId || body.monitor.id;
+    const id = event.path ? event.path.id : body.environment.id;
+    const monitorId = event.path ? event.path.monitorId : body.monitor.id;
     const start = new Date();
 
     environmentModel.model.get({ id }, function (err, environment) {
