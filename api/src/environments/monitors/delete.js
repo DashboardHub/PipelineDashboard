@@ -17,6 +17,12 @@ module.exports.delete = (event, context, callback) => {
             return callback(new Error('[404] Not found'));
         }
 
+        let monitor = environment.monitors.find((monitor) => monitor.id === monitorId);
+
+        if (!monitor) {
+            return callback(new Error('[404] Not found'));
+        }
+
         let monitors = environment.monitors.filter((monitor) => monitor.id !== monitorId);
 
         pingedModel.model.scan('monitorId').contains(monitorId).exec(function (err, results) {

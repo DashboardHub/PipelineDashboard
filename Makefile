@@ -1,4 +1,9 @@
+# DEFAULTS
+
 .DEFAULT_GOAL := help
+TEST_TAGS ?= @All
+
+# HELPERS
 
 help:
 	@echo 'Please read the documentation in "https://github.com/DashboardHub/PipelineDashboard"'
@@ -50,7 +55,7 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-test|g' ./config.json)
 
 api.test:
-	(cd api; ./node_modules/.bin/cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty)
+	(cd api; ./node_modules/.bin/cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --tags ${TEST_TAGS})
 
 api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)

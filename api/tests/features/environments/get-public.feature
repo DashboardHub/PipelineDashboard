@@ -1,7 +1,11 @@
+@All @Environments @EnvironmentGet @EnvironmentGetPublic
 Feature: Get public environment
   In order to view the an environment
   As a logged in user
   I want to see the my environment
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Get my environment
     When I make a "GET" request to "/environments/e0000004-0000-0000-0000-999999999999/view"
@@ -42,5 +46,5 @@ Feature: Get public environment
       | field   | value |
       | current | 100   |
       | next    | 100   |
-    And should have a field "createdAt" with "2018-01-27T09:14:10.932Z"
-    And should have a field "updatedAt" with "2018-01-27T09:14:10.932Z"
+    And should have a field "createdAt" with "2018-01-27T09:14:10.962Z"
+    And should have a field "updatedAt" with "2018-01-27T09:14:10.962Z"

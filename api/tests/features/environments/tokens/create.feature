@@ -1,7 +1,11 @@
+@All @Tokens @TokenCreate
 Feature: Create Token
   In order to create a Token
   As a logged in user
   I want to post token data
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Create Token successfully
     Given I am logged in

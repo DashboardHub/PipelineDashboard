@@ -1,7 +1,11 @@
+@All @Environments @EnvironmentUpdate
 Feature: Update my environment
   In order to update my environment
   As a logged in user
   I want to update my environment
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Can not update an environment when not logged in
     When I make a "PATCH" request to "/environments/e0000001-0000-0000-0000-000000000000"

@@ -83,7 +83,7 @@ module.exports.create = (event, context, callback) => {
                             return callback(new Error(`[500] ${err.message}`));
                     }
                 }
-                callback(null, item);
+                return callback(null, JSON.stringify(item));
             });
         });
     });

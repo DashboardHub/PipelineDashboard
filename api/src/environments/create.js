@@ -16,7 +16,7 @@ module.exports.create = (event, context, callback) => {
         latestRelease: {},
         releases: 0,
         views: 0,
-        isPrivate: false,
+        isPrivate: data.isPrivate,
         tokens: [
             {
                 id: uuidv1(),

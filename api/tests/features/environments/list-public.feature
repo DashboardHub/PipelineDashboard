@@ -1,7 +1,11 @@
+@All @Environments @EnvironmentList @EnvironmentListPublic
 Feature: Public environments list
   In order to view the public environments
   As a public user
   I want to see the public environments
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Public environments list as guest user
     When I make a "GET" request to "/environments"
@@ -14,13 +18,13 @@ Feature: Public environments list
       | field         | value                                      |
       | id            | "UUID"                                     |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |
+      | title         | "Environment D"                            |
       | type          | "build-deploy"                             |
-      | title         | "CreateEnvironment A"                      |
       | latestRelease | "OBJECT"                                   |
-      | releases      | 0                                          |
+      | releases      | 800                                        |
       | latestPing    | "OBJECT"                                   |
-      | pings         | { "valid": 0, "invalid": 0 }               |
-      | progress      | { "current": 0, "next": 0 }                |
+      | pings         | { "valid": 123, "invalid": 32 }            |
+      | progress      | { "current": 100, "next": 100 }            |
       | createdAt     | "DATETIME"                                 |
       | updatedAt     | "DATETIME"                                 |
 
@@ -36,12 +40,12 @@ Feature: Public environments list
       | field         | value                                      |
       | id            | "UUID"                                     |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |
+      | title         | "Environment D"                            |
       | type          | "build-deploy"                             |
-      | title         | "CreateEnvironment A"                      |
       | latestRelease | "OBJECT"                                   |
-      | releases      | 0                                          |
+      | releases      | 800                                        |
       | latestPing    | "OBJECT"                                   |
-      | pings         | { "valid": 0, "invalid": 0 }               |
-      | progress      | { "current": 0, "next": 0 }                |
+      | pings         | { "valid": 123, "invalid": 32 }            |
+      | progress      | { "current": 100, "next": 100 }            |
       | createdAt     | "DATETIME"                                 |
       | updatedAt     | "DATETIME"                                 |

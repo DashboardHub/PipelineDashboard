@@ -1,7 +1,11 @@
+@All @Environments @EnvironmentDelete
 Feature: Delete my environment
   In order to delete my environment
   As a logged in user
   I want to delete my environment
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Can not delete a environment when not logged in
     When I make a "DELETE" request to "/environments/e0000001-0000-0000-0000-000000000000"

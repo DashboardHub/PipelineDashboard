@@ -1,11 +1,15 @@
+@All @Environments @EnvironmentGet @EnvironmentGetPrivate
 Feature: Get my environment
   In order to view the my environment
   As a logged in user
   I want to see the my environment
 
-  Scenario: Get my environment
+  @Seed
+  Scenario: Run in seed data
+
+  Scenario: Get non existent environment
     Given I am logged in
-    When I make a "GET" request to "/environments/e0000004-0000-0000-0000-99999999999"
+    When I make a "GET" request to "/environments/e0000004-0000-0000-0000-999999999999"
     Then the status code should be 404
 
   Scenario: Get my environment
@@ -47,5 +51,5 @@ Feature: Get my environment
       | field   | value |
       | current | 100   |
       | next    | 100   |
-    And should have a field "createdAt" with "2018-01-27T09:14:10.932Z"
-    And should have a field "updatedAt" with "2018-01-27T09:14:10.932Z"
+    And should have a field "createdAt" with "2018-01-27T09:14:10.962Z"
+    And should have a field "updatedAt" with "2018-01-27T09:14:10.962Z"

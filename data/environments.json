@@ -4,6 +4,7 @@
     "owner": "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients",
     "type": "build",
     "title": "Environment A",
+    "link": "http://example.io",
     "latestRelease": "{}",
     "releases": 0,
     "tokens": "[]",
@@ -27,8 +28,8 @@
     "tokens": "[{\"id\":\"e0000002-0000-0000-0000-t00000000001\",\"name\":\"Continuous Integration Server\",\"lastUsed\":\"2018-01-27T07:19:43.278Z\"}]",
     "isPrivate": false,
     "views": 0,
-    "createdAt": 1517044450932,
-    "updatedAt": 1517044450932
+    "createdAt": 1517044450942,
+    "updatedAt": 1517044450942
   },
   {
     "id": "e0000003-0000-0000-0000-000000000000",
@@ -45,8 +46,8 @@
     "monitors": "[{\"id\": \"e0000003-0000-0000-0000-m00000000001\",\"path\": \"/\",\"method\": \"GET\",\"expectedCode\": 200,\"expectedText\": \"Environment C\"}]",
     "isPrivate": false,
     "views": 0,
-    "createdAt": 1517044450932,
-    "updatedAt": 1517044450932
+    "createdAt": 1517044450952,
+    "updatedAt": 1517044450952
   },
   {
     "id": "e0000004-0000-0000-0000-000000000000",
@@ -64,7 +65,7 @@
     "monitors": "[{\"id\": \"e0000004-0000-0000-0000-m00000000001\",\"path\": \"/\",\"method\": \"GET\",\"expectedCode\": 200,\"expectedText\": \"DashboardHub\"}]",
     "isPrivate": false,
     "views": 10324,
-    "createdAt": 1517044450932,
-    "updatedAt": 1517044450932
+    "createdAt": 1517044450962,
+    "updatedAt": 1517044450962
   }
 ]

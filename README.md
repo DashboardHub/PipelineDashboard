@@ -65,6 +65,8 @@ For more up to date information and more details please visit our [milestone lis
 
 Using `make` to build and run the project(s):
 
+*Note: You need AW configured, although it will not be used, the AWS CLI requires it*
+
 - 1. Install the `npm` dependencies for all projects, use `make install.local`
 
 Open 2 terminals and run each of these commands in its own terminal:
@@ -80,7 +82,9 @@ Then visit `http://localhost:4200/`
 ## RUNNING AUTOMATED TESTS
 
 - 1. Start the API (step 2 from previous section)
-- 2. Run `make api.test`
+- 2. Run `make test`
+
+*Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
 
 ## Additional useful commands
 

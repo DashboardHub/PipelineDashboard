@@ -1,7 +1,11 @@
+@All @Tokens @TokenDelete
 Feature: Delete token from my environment
   In order to delete a token from my environment
   As a logged in user
   I want to delete a token from my environment
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Can not delete a token from my environment when not logged in
     When I make a "DELETE" request to "/environments/e0000001-0000-0000-0000-000000000000/tokens/e0000002-0000-0000-0000-t00000000001"

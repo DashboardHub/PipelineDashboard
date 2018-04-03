@@ -1,7 +1,11 @@
+@All @Environments @EnvironmentList @EnvironmentListPrivate
 Feature: Private environments list
   In order to view the my environments
   As a logged in user
   I want to see the my environments
+
+  @Seed
+  Scenario: Run in seed data
 
   Scenario: Private environments list
     Given I am logged in
@@ -12,16 +16,16 @@ Feature: Private environments list
       | field         | value                                      |
       | id            | "UUID"                                     |
       | owner         | "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients" |
+      | title         | "Environment D"                            |
       | type          | "build-deploy"                             |
-      | title         | "CreateEnvironment A"                      |
       | latestRelease | "OBJECT"                                   |
-      | releases      | 0                                          |
-      | tokens        | "ARRAY[1]"                                 |
-      | monitors      | "ARRAY[0]"                                 |
+      | releases      | 800                                        |
+      | tokens        | "ARRAY[2]"                                 |
+      | monitors      | "ARRAY[1]"                                 |
       | latestPing    | "OBJECT"                                   |
-      | pings         | { "valid": 0, "invalid": 0 }               |
+      | pings         | { "valid": 123, "invalid": 32 }            |
       | isPrivate     | false                                      |
-      | views         | 0                                          |
-      | progress      | { "current": 0, "next": 0 }                |
+      | views         | 10324                                      |
+      | progress      | { "current": 100, "next": 100 }            |
       | createdAt     | "DATETIME"                                 |
       | updatedAt     | "DATETIME"                                 |
