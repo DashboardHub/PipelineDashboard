@@ -48,8 +48,8 @@ export class HelpComponent
       title: 'Deploy / Release',
       featured: [
         {
-          title: 'How to Beacon deploy',
-          path: 'coming-soon'
+          title: 'How to Beacon your version',
+          path: 'ci-usage'
         },
         {
           title: 'Using CI to Beacon deploy',
