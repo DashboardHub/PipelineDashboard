@@ -18,7 +18,7 @@ Feature: Update my environment
   Scenario: Can not update a non-existent environment
     Given I am logged in
     When I make a "PATCH" request to "/environments/e0000001-0000-0000-0000-99999999999"
-    Then the status code should be 403
+    Then the status code should be 404
 
   Scenario: Can not update an environment if not mine
     Given I am logged in
