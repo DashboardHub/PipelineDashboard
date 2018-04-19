@@ -7,6 +7,10 @@ Feature: Private environments list
   @Seed
   Scenario: Run in seed data
 
+  Scenario: Can not view my environments if not logged in
+    When I make a "GET" request to "/environments/list"
+    Then the status code should be 403
+
   Scenario: Private environments list
     Given I am logged in
     When I make a "GET" request to "/environments/list"
