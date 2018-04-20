@@ -1,0 +1,124 @@
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div layout-gt-xs="row" flex>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ '2341'| digits }}
+            <mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>
+          </div>
+          <mat-icon class="icon tc-cyan-900">perm_contact_calendar</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Users</div>
+            <div class="mat-caption tc-grey-600">updated {{ '2016-06-17 12:59:59' | timeAgo }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ '72452903343' | bytes }}
+            <mat-icon class="tc-red-500 text-sm">arrow_downward</mat-icon>
+          </div>
+          <mat-icon class="icon tc-cyan-700">featured_play_list</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Environments</div>
+            <div class="mat-caption tc-grey-600">updated {{ '2016-07-18 11:02:59' | timeAgo }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ '324523' | digits}}
+            <mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>
+          </div>
+          <mat-icon class="icon tc-cyan-500">receipt</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Deploys</div>
+            <div class="mat-caption tc-grey-600">updated {{ '2016-07-13 09:59:59' | timeAgo }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ '324523' | digits}}
+            <mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>
+          </div>
+          <mat-icon class="icon tc-cyan-300">new_releases</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Releases</div>
+            <div class="mat-caption tc-grey-600">updated {{ '2016-07-13 09:59:59' | timeAgo }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>±
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ '324523' | digits}}
+            <mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>
+          </div>
+          <mat-icon class="icon tc-cyan-100">record_voice_over</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Pings</div>
+            <div class="mat-caption tc-grey-600">updated {{ '2016-07-13 09:59:59' | timeAgo }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div layout-gt-xs="row" flex>
+    <div flex-gt-xs="100">
+      <mat-card>
+        <mat-card-title>Activity</mat-card-title>
+        <mat-card-subtitle>Recent activity from environments</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <div class="chart-height push-top push-right-sm">
+          <ngx-charts-area-chart-stacked
+            [scheme]="colorScheme"
+            [results]="multi"
+            [gradient]="false"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [xAxisLabel]="''"
+            [yAxisLabel]="'Deploys'"
+            [yAxisTickFormatting]="axisDigits">
+          </ngx-charts-area-chart-stacked>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div flex-gt-xs="100" flex>
+    <mat-card>
+      <mat-card-title>Environments</mat-card-title>
+      <mat-card-subtitle>Recent activity from environments</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-nav-list class="will-load item-list">
+        <ng-template tdLoading="items.load">
+          <ng-template let-environment let-last="last" ngFor [ngForOf]="environments">
+            <a mat-list-item layout-align="row" [routerLink]="['/environments']">
+              <mat-icon matListAvatar>{{ environment.logo }}</mat-icon>
+              <h3 matLine>{{ environment.title }}</h3>
+              <p matLine>{{ environment.description | truncate:50 }}</p>
+              <span flex></span>
+              <span class="mat-caption text-right" flex="20">{{ environment.updatedAt | timeAgo }}</span>
+            </a>
+            <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
+          </ng-template>
+        </ng-template>
+      </mat-nav-list>
+    </mat-card>
+  </div>
+</div>
