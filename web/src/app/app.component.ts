@@ -1,42 +1,41 @@
 import { Component } from '@angular/core';
-import { FuseSplashScreenService } from './core/services/splash-screen.service';
-import { TranslateService } from '@ngx-translate/core';
-import { FuseTranslationLoaderService } from './core/services/translation-loader.service';
-
-import { FuseNavigationService } from './core/components/navigation/navigation.service';
-import { FuseNavigationModel } from './navigation/navigation.model';
-import { locale as navigationEnglish } from './navigation/i18n/en';
-import { locale as navigationTurkish } from './navigation/i18n/tr';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
-    selector   : 'fuse-root',
-    templateUrl: './app.component.html',
-    styleUrls  : ['./app.component.scss']
+  selector: 'qs-app',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent
-{
-    constructor(
-        private fuseNavigationService: FuseNavigationService,
-        private fuseSplashScreen: FuseSplashScreenService,
-        private translate: TranslateService,
-        private translationLoader: FuseTranslationLoaderService,
-        private angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics
-    )
-    {
-        // Add languages
-        this.translate.addLangs(['en', 'tr']);
+export class AppComponent {
 
-        // Set the default language
-        this.translate.setDefaultLang('en');
+  constructor(
+    private _iconRegistry: MatIconRegistry,
+    private _domSanitizer: DomSanitizer,
+  ) {
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'dashboardhub',
+        this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo-horizontal-std.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'dashboardhub_white',
+        this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo-horizontal-white.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'dashboardhub_icon',
+        this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/icon-only-orange.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'github', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'covalent', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/covalent.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'covalent-mark', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/covalent-mark.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'teradata-ux', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/teradata-ux.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'appcenter', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/appcenter.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'listener', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/listener.svg'));
+    this._iconRegistry
+      .addSvgIconInNamespace('assets', 'querygrid', this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/querygrid.svg'));
+  }
 
-        // Use a language
-        this.translate.use('en');
-
-        // Set the navigation model
-        this.fuseNavigationService.setNavigationModel(new FuseNavigationModel());
-
-        // Set the navigation translations
-        this.translationLoader.loadTranslations(navigationEnglish, navigationTurkish);
-    }
 }

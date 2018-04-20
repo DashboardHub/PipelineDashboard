@@ -1,0 +1,17 @@
+<div class="mat-content" layout-padding flex>
+  <div layout-gt-xs="row" layout-align-gt-xs="center start" class="margin">
+    <div flex-gt-xs="50">
+      <mat-card tdMediaToggle="gt-xs" [mediaClasses]="['push-top-lg']">
+        <mat-card-title>Login</mat-card-title>
+        <mat-card-subtitle>Sign in using your GitHub account</mat-card-subtitle>
+        <mat-divider></mat-divider>
+        <mat-card-actions layout="row">
+          <button flex mat-raised-button color="accent" (click)="login()">
+            <mat-icon svgIcon="assets:github"></mat-icon>
+            GitHub
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
