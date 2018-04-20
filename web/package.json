@@ -1,6 +1,6 @@
 {
   "name": "dashboardhub-pipelinedashboard",
-  "version": "v0.9",
+  "version": "0.9.0",
   "private": true,
   "description": "Your Delivery Pipeline overview in One Place",
   "keywords": [
