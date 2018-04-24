@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule, Title }  from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -36,6 +36,17 @@ import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentSearchModule } from '@covalent/core';
 import { HelpDialogComponent } from './help/dialog/help-dialog.component';
 import { MatDialogModule } from '@angular/material';
+import { ProjectsListComponent } from "./projects/list/projects-list.component";
+import { ProfileComponent } from "./profile/profile.component";
+import { EnvironmentsListComponent } from "./environments/list/environments-list.component";
+import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
+import { EnvironmentsEditComponent } from "./environments/edit/environments-edit.component";
+import { EnvironmentsReleasesComponent } from "./environments/releases/environments-releases.component";
+import { EnvironmentsTokensComponent } from "./environments/tokens/environments-tokens.component";
+import { MonitorsListComponent } from "./environments/monitors/list/monitors-list.component";
+import { MonitorsViewComponent } from "./environments/monitors/view/monitors-view.component";
+import { EnvironmentsViewComponent } from "./environments/view/environments-view.component";
+import { ProjectsAddComponent } from "./projects/add/projects-add.component";
 
 @NgModule({
   declarations: [
@@ -43,9 +54,20 @@ import { MatDialogModule } from '@angular/material';
     MainComponent,
     LoginComponent,
     DashboardComponent,
+    EnvironmentsListComponent,
+    EnvironmentsAddComponent,
+    EnvironmentsEditComponent,
+    EnvironmentsReleasesComponent,
+    EnvironmentsTokensComponent,
+    EnvironmentsViewComponent,
+    MonitorsListComponent,
+    MonitorsViewComponent,
+    ProjectsAddComponent,
     FeaturesComponent,
     HelpComponent,
     HelpDialogComponent,
+    ProjectsListComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
@@ -78,6 +100,7 @@ import { MatDialogModule } from '@angular/material';
   entryComponents: [
     HelpDialogComponent,
   ],
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
