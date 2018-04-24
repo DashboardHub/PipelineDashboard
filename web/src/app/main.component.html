@@ -1,7 +1,19 @@
 <td-layout #layout>
   <td-navigation-drawer logo="assets:dashboardhub" name="Firstname Lastname" email="firstname.lastname@company.com">
     <mat-nav-list>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="routes">
+      <ng-template let-item let-last="last" ngFor [ngForOf]="publicRoutes">
+        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
+          <mat-icon>{{item.icon}}</mat-icon>
+          {{item.title}}</a>
+      </ng-template>
+      <mat-divider></mat-divider>
+      <ng-template let-item let-last="last" ngFor [ngForOf]="privateRoutes">
+        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
+          <mat-icon>{{item.icon}}</mat-icon>
+          {{item.title}}</a>
+      </ng-template>
+      <mat-divider></mat-divider>
+      <ng-template let-item let-last="last" ngFor [ngForOf]="generalRoutes">
         <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
           <mat-icon>{{item.icon}}</mat-icon>
           {{item.title}}</a>
