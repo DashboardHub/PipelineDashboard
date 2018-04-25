@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,16 +18,17 @@ import { CovalentLayoutModule } from '@covalent/core/layout';
 import { CovalentMediaModule } from '@covalent/core/media';
 import { CovalentLoadingModule } from '@covalent/core/loading';
 
-import { CovalentHttpModule } from '@covalent/http';
-
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { appRoutes } from './app.routes';
 
 import { AppComponent } from './app.component';
 
+import { JwtModule } from '@auth0/angular-jwt';
+
+import { environment } from "../environments/environment";
+
 import { MainComponent } from './main.component';
-import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
@@ -37,7 +37,6 @@ import { CovalentSearchModule } from '@covalent/core';
 import { HelpDialogComponent } from './help/dialog/help-dialog.component';
 import { MatDialogModule } from '@angular/material';
 import { ProjectsListComponent } from "./projects/list/projects-list.component";
-import { ProfileComponent } from "./profile/profile.component";
 import { EnvironmentsListComponent } from "./environments/list/environments-list.component";
 import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
 import { EnvironmentsEditComponent } from "./environments/edit/environments-edit.component";
@@ -47,14 +46,29 @@ import { MonitorsListComponent } from "./environments/monitors/list/monitors-lis
 import { MonitorsViewComponent } from "./environments/monitors/view/monitors-view.component";
 import { EnvironmentsViewComponent } from "./environments/view/environments-view.component";
 import { ProjectsAddComponent } from "./projects/add/projects-add.component";
+import { EnvironmentService } from "./environments/environment.service";
+import { ApiHttpInterceptor } from "./interceptors/api.http.interceptor";
+import { EnvironmentsListPublicComponent } from "./environments/list-public/environments-list-public.component";
+import { EnvironmentsListPrivateComponent } from "./environments/list-private/environments-list-private.component";
+import { LoginComponent } from "./auth/login/login.component";
+import { AuthService } from "./auth/auth.service";
+import { CallbackComponent } from "./auth/callback/callback.component";
+import { ProfileComponent } from "./auth/profile/profile.component";
+
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
+    CallbackComponent,
     LoginComponent,
     DashboardComponent,
     EnvironmentsListComponent,
+    EnvironmentsListPrivateComponent,
+    EnvironmentsListPublicComponent,
     EnvironmentsAddComponent,
     EnvironmentsEditComponent,
     EnvironmentsReleasesComponent,
@@ -74,8 +88,6 @@ import { ProjectsAddComponent } from "./projects/add/projects-add.component";
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
-    HttpModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -88,13 +100,26 @@ import { ProjectsAddComponent } from "./projects/add/projects-add.component";
     CovalentLayoutModule,
     CovalentMediaModule,
     CovalentLoadingModule,
-    CovalentHttpModule.forRoot(),
     CovalentMarkdownModule,
     CovalentSearchModule,
     NgxChartsModule,
     appRoutes,
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: environment.whitelist
+      }
+    }),
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiHttpInterceptor,
+      multi: true
+    },
+    AuthService,
+    EnvironmentService,
     Title,
   ],
   entryComponents: [

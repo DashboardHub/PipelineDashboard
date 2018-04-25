@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
+import { AuthService } from "../auth.service";
 
 @Component({
-  selector: 'qs-login',
+  selector: 'qs-auth-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
 
+  constructor(private authService: AuthService) {
+  }
+
   login(): void {
-    console.log('login');
+    this.authService.login();
   }
 }
