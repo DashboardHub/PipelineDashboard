@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Navigation } from "./navigation.model";
+import { AuthService } from "./auth/auth.service";
+import { Profile } from "./auth/profile";
 
 @Component({
   selector: 'qs-main',
@@ -9,7 +11,8 @@ import { Navigation } from "./navigation.model";
 })
 export class MainComponent {
 
-  publicRoutes: Array<Navigation> = [
+  public profile: Profile = new Profile('');
+  public publicRoutes: Array<Navigation> = [
     {
       title: 'Dashboard',
       route: '/',
@@ -26,11 +29,11 @@ export class MainComponent {
       icon: 'group_work',
     },
   ];
-  privateRoutes: Array<Navigation> = [
+  public privateRoutes: Array<Navigation> = [
     {
       title: 'My Environments',
-      route: '/',
-      icon: 'dashboard',
+      route: '/environments/list',
+      icon: 'computer',
     },
     {
       title: 'My Projects',
@@ -53,7 +56,7 @@ export class MainComponent {
       icon: 'security',
     },
   ];
-  generalRoutes: Array<Navigation> = [
+  public generalRoutes: Array<Navigation> = [
     {
       title: 'Features',
       route: '/features',
@@ -64,17 +67,24 @@ export class MainComponent {
       route: '/help',
       icon: 'live_help',
     },
-    {
-      title: 'Login',
-      route: '/login',
-      icon: 'vpn_key',
-    },
+    // {
+    //   title: 'Login',
+    //   route: '/login',
+    //   icon: 'vpn_key',
+    // },
   ];
 
-  constructor(private _router: Router) {
+  constructor(private _router: Router, private authService: AuthService) {
+    this.authService.subscribeProfile()
+      .subscribe(profile => this.profile = profile);
+
+    if (this.authService.isAuthenticated()) {
+      this.authService
+        .getProfile((err) => err ? console.log(err) : null);
+    }
   }
 
   logout(): void {
-    this._router.navigate(['/login']);
+    this.authService.logout();
   }
 }
