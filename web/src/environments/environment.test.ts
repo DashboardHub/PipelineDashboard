@@ -4,7 +4,7 @@ export const environment: Config = {
   production: true,
   api: 'https://api-pipeline-test.dashboardhub.io',
   web: 'http://pipeline-test.dashboardhub.io',
-  whitelist: ['api-pipeline-test.dashboardhub.io:443'],
+  whitelist: [/^null$/],
   version: 'x.x.x',
 
   auth: {
