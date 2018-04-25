@@ -37,7 +37,6 @@ import { CovalentSearchModule } from '@covalent/core';
 import { HelpDialogComponent } from './help/dialog/help-dialog.component';
 import { MatDialogModule } from '@angular/material';
 import { ProjectsListComponent } from "./projects/list/projects-list.component";
-import { ProfileComponent } from "./profile/profile.component";
 import { EnvironmentsListComponent } from "./environments/list/environments-list.component";
 import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
 import { EnvironmentsEditComponent } from "./environments/edit/environments-edit.component";
@@ -54,7 +53,7 @@ import { EnvironmentsListPrivateComponent } from "./environments/list-private/en
 import { LoginComponent } from "./auth/login/login.component";
 import { AuthService } from "./auth/auth.service";
 import { CallbackComponent } from "./auth/callback/callback.component";
-import { ProfileResolver } from "./profile/profile.resolver";
+import { ProfileComponent } from "./auth/profile/profile.component";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -121,7 +120,6 @@ export function tokenGetter() {
     },
     AuthService,
     EnvironmentService,
-    ProfileResolver,
     Title,
   ],
   entryComponents: [

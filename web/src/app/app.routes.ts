@@ -5,7 +5,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
 import { ProjectsListComponent } from "./projects/list/projects-list.component";
-import { ProfileComponent } from "./profile/profile.component";
 import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
 import { EnvironmentsEditComponent } from "./environments/edit/environments-edit.component";
 import { EnvironmentsReleasesComponent } from "./environments/releases/environments-releases.component";
@@ -18,6 +17,7 @@ import { EnvironmentsListPublicComponent } from "./environments/list-public/envi
 import { EnvironmentsListPrivateComponent } from "./environments/list-private/environments-list-private.component";
 import { LoginComponent } from "./auth/login/login.component";
 import { CallbackComponent } from "./auth/callback/callback.component";
+import { ProfileComponent } from "./auth/profile/profile.component";
 
 const routes: Routes = [
   {
