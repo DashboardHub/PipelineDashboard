@@ -4,7 +4,7 @@ export const environment: Config = {
   production: true,
   api: 'https://api-pipeline.dashboardhub.io',
   web: 'https://pipeline.dashboardhub.io',
-  whitelist: [/^null$/],
+  whitelist: new Array(new RegExp('^null$')),
   version: 'x.x.x',
 
   auth: {
