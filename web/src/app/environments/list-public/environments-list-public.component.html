@@ -7,12 +7,27 @@
       <ng-template tdLoading="items.load">
         <ng-template let-environment let-last="last" ngFor [ngForOf]="environments.list">
           <a mat-list-item layout-align="row" [routerLink]="['/environments']">
-            <mat-icon matListAvatar>{{ environment.logo }}</mat-icon>
+            <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
+            <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
             <h3 matLine>{{ environment.title }}</h3>
             <p matLine>{{ environment.description | truncate:50 }}</p>
             <span flex></span>
-            <span class="mat-caption text-right" flex="20">{{ environment.updatedAt | timeAgo }}</span>
+            <span class="mat-caption text-right" flex="20" layout-align="row">
+              <p>{{ environment.type }}</p>
+            </span>
+            <span class="mat-caption text-right" flex="20" layout-align="row" *ngIf="environment.latestRelease.release">
+              <h3>{{ environment.latestRelease.release }}</h3>
+              <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
+            </span>
+            <span class="mat-caption text-right" flex="20" layout-align="row" *ngIf="!environment.latestRelease.release">
+              <p>No releases</p>
+            </span>
+            <span class="mat-caption text-right" flex="20" layout-align="row">
+              <p>{{ environment.releases }} releases</p>
+              <p>{{ environment.pings.valid + environment.pings.invalid }} pings</p>
+            </span>
           </a>
+          <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
           <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
         </ng-template>
       </ng-template>

@@ -19,10 +19,10 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
           case 403:
           case 404:
             this.router.navigate(['/'])
-              .then(() => this.snackBar.open('An ERROR occured please try again', '', { duration: 5000 }));
+              .then(() => this.snackBar.open('An ERROR occured please try again', null, { duration: 5000 }));
             break;
           default:
-            this.snackBar.open(err.message, '', { duration: 5000 });
+            this.snackBar.open(err.message, null, { duration: 5000 });
             break;
         }
       }

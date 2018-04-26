@@ -35,7 +35,7 @@ import { HelpComponent } from './help/help.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentSearchModule } from '@covalent/core';
 import { HelpDialogComponent } from './help/dialog/help-dialog.component';
-import { MatDialogModule, MatSnackBarModule } from '@angular/material';
+import { MatDialogModule, MatProgressBarModule, MatSnackBarModule } from '@angular/material';
 import { ProjectsListComponent } from "./projects/list/projects-list.component";
 import { EnvironmentsListComponent } from "./environments/list/environments-list.component";
 import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
@@ -97,6 +97,7 @@ export function tokenGetter() {
     MatListModule,
     MatDividerModule,
     MatInputModule,
+    MatProgressBarModule,
     MatSnackBarModule,
     MatToolbarModule,
     CovalentCommonModule,
