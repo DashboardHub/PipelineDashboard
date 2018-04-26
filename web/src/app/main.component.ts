@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment'
 import { Navigation } from "./navigation.model";
 import { AuthService } from "./auth/auth.service";
 import { Profile } from "./auth/profile";
@@ -11,6 +12,7 @@ import { Profile } from "./auth/profile";
 })
 export class MainComponent {
 
+  public version: string;
   public profile: Profile = new Profile('');
   public publicRoutes: Array<Navigation> = [
     {
@@ -75,6 +77,7 @@ export class MainComponent {
   ];
 
   constructor(private _router: Router, private authService: AuthService) {
+    this.version = environment.version;
     this.authService.subscribeProfile()
       .subscribe(profile => this.profile = profile);
 
