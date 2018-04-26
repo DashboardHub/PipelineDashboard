@@ -35,7 +35,7 @@ import { HelpComponent } from './help/help.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentSearchModule } from '@covalent/core';
 import { HelpDialogComponent } from './help/dialog/help-dialog.component';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatSnackBarModule } from '@angular/material';
 import { ProjectsListComponent } from "./projects/list/projects-list.component";
 import { EnvironmentsListComponent } from "./environments/list/environments-list.component";
 import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
@@ -54,6 +54,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { AuthService } from "./auth/auth.service";
 import { CallbackComponent } from "./auth/callback/callback.component";
 import { ProfileComponent } from "./auth/profile/profile.component";
+import { ErrorHttpInterceptor } from "./interceptors/error.http.interceptor";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -95,6 +96,7 @@ export function tokenGetter() {
     MatListModule,
     MatDividerModule,
     MatInputModule,
+    MatSnackBarModule,
     MatToolbarModule,
     CovalentCommonModule,
     CovalentLayoutModule,
@@ -116,6 +118,11 @@ export function tokenGetter() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiHttpInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHttpInterceptor,
       multi: true
     },
     AuthService,
