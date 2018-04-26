@@ -12,6 +12,6 @@ export class EnvironmentsListPrivateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.environmentService.getEnvironments().subscribe((environments) => console.log(environments));
+    this.environmentService.findAllByOwner().subscribe((environments) => console.log(environments));
   }
 }

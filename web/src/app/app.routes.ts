@@ -18,6 +18,7 @@ import { EnvironmentsListPrivateComponent } from "./environments/list-private/en
 import { LoginComponent } from "./auth/login/login.component";
 import { CallbackComponent } from "./auth/callback/callback.component";
 import { ProfileComponent } from "./auth/profile/profile.component";
+import { PublicEnvironmentsResolver } from "./environments/public.environments.resolver";
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
         path: 'environments',
         pathMatch: 'full',
         component: EnvironmentsListPublicComponent,
+        resolve: { environments: PublicEnvironmentsResolver }
       },
       {
         path: 'environments',

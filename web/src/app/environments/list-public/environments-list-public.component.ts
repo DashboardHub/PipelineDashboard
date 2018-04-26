@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EnvironmentService } from "../environment.service";
+import { EnvironmentService } from '../environment.service';
+import { Environment } from '../environment.model';
+import { List } from '../../list';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'qs-environments-list-public',
@@ -7,12 +10,21 @@ import { EnvironmentService } from "../environment.service";
 })
 export class EnvironmentsListPublicComponent implements OnInit {
 
-  constructor(private environmentService: EnvironmentService) {
+  public environments: List<Environment> = new List<Environment>();
+
+  constructor(
+    private route: ActivatedRoute,
+    private environmentService: EnvironmentService
+  ) {
 
   }
 
   ngOnInit() {
-    this.environmentService.getPublicEnvironments().subscribe((environments) => console.log(environments));
+    this.environments = this.route.snapshot.data['environments'];
+  }
+
+  refresh() {
+    this.environmentService.findAll().subscribe((environments) => console.log(environments));
   }
 
 }
