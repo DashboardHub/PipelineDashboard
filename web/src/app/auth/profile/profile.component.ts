@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { List } from '../../list';
-import { Environment } from "../../environments/environment.model";
+import { Environment } from '../../environments/environment.model';
 
 @Component({
   selector: 'qs-auth-profile',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EnvironmentService } from "../environment.service";
+import { EnvironmentService } from '../environment.service';
 
 @Component({
   selector: 'qs-environments-list-private',
@@ -12,6 +12,6 @@ export class EnvironmentsListPrivateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.environmentService.getEnvironments().subscribe((environments) => console.log(environments));
+    this.environmentService.findAllByOwner().subscribe((environments) => console.log(environments));
   }
 }

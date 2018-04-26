@@ -8,7 +8,7 @@
  *   2. Application imports. Files imported after ZoneJS that should be loaded before your main
  *      file.
  *
- * The current setup is for so-called "evergreen" browsers; the last versions of browsers that
+ * The current setup is for so-called 'evergreen' browsers; the last versions of browsers that
  * automatically update themselves. This includes Safari >= 10, Chrome >= 55 (including Opera),
  * Edge >= 13 on the desktop, and iOS 10 and Chrome on mobile.
  *
