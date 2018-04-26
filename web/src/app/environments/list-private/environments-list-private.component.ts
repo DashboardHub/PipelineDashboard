@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EnvironmentService } from "../environment.service";
+import { EnvironmentService } from '../environment.service';
 
 @Component({
   selector: 'qs-environments-list-private',

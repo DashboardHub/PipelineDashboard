@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment'
-import { Navigation } from "./navigation.model";
-import { AuthService } from "./auth/auth.service";
-import { Profile } from "./auth/profile";
+import { Navigation } from './navigation.model';
+import { AuthService } from './auth/auth.service';
+import { Profile } from './auth/profile';
 
 @Component({
   selector: 'qs-main',

@@ -1,6 +1,6 @@
 import { Injectable }     from '@angular/core';
 import { CanActivate }    from '@angular/router';
-import { AuthService } from "./auth.service";
+import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
 

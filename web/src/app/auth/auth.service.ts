@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import * as auth0 from 'auth0-js';
-import { Profile } from "./profile";
+import { Profile } from './profile';
 
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
-import { environment } from "../../environments/environment";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {

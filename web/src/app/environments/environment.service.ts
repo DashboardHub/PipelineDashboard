@@ -1,8 +1,8 @@
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Rx";
-import { List } from "../list";
-import { Environment } from "./environment.model";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Rx';
+import { List } from '../list';
+import { Environment } from './environment.model';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EnvironmentService {
@@ -45,6 +45,6 @@ export class EnvironmentService {
   }
 
   deleteById(id: string): Observable<Environment> {
-    return this.http.delete<Environment>(`/environments/${id});
+    return this.http.delete<Environment>(`/environments/${id}`);
   }
 }

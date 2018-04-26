@@ -4,21 +4,21 @@ import { MainComponent } from './main.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
-import { ProjectsListComponent } from "./projects/list/projects-list.component";
-import { EnvironmentsAddComponent } from "./environments/add/environments-add.component";
-import { EnvironmentsEditComponent } from "./environments/edit/environments-edit.component";
-import { EnvironmentsReleasesComponent } from "./environments/releases/environments-releases.component";
-import { EnvironmentsTokensComponent } from "./environments/tokens/environments-tokens.component";
-import { MonitorsListComponent } from "./environments/monitors/list/monitors-list.component";
-import { MonitorsViewComponent } from "./environments/monitors/view/monitors-view.component";
-import { EnvironmentsViewComponent } from "./environments/view/environments-view.component";
-import { ProjectsAddComponent } from "./projects/add/projects-add.component";
-import { EnvironmentsListPublicComponent } from "./environments/list-public/environments-list-public.component";
-import { EnvironmentsListPrivateComponent } from "./environments/list-private/environments-list-private.component";
-import { LoginComponent } from "./auth/login/login.component";
-import { CallbackComponent } from "./auth/callback/callback.component";
-import { ProfileComponent } from "./auth/profile/profile.component";
-import { PublicEnvironmentsResolver } from "./environments/public.environments.resolver";
+import { ProjectsListComponent } from './projects/list/projects-list.component';
+import { EnvironmentsAddComponent } from './environments/add/environments-add.component';
+import { EnvironmentsEditComponent } from './environments/edit/environments-edit.component';
+import { EnvironmentsReleasesComponent } from './environments/releases/environments-releases.component';
+import { EnvironmentsTokensComponent } from './environments/tokens/environments-tokens.component';
+import { MonitorsListComponent } from './environments/monitors/list/monitors-list.component';
+import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
+import { EnvironmentsViewComponent } from './environments/view/environments-view.component';
+import { ProjectsAddComponent } from './projects/add/projects-add.component';
+import { EnvironmentsListPublicComponent } from './environments/list-public/environments-list-public.component';
+import { EnvironmentsListPrivateComponent } from './environments/list-private/environments-list-private.component';
+import { LoginComponent } from './auth/login/login.component';
+import { CallbackComponent } from './auth/callback/callback.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { PublicEnvironmentsResolver } from './environments/public.environments.resolver';
 
 const routes: Routes = [
   {
