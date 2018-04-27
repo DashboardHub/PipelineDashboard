@@ -100,12 +100,9 @@
       <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
       <mat-list-item layout-align="row">
         <mat-icon matListAvatar>new_releases</mat-icon>
-        <h3 matLine>Latest Release</h3>
-        <p matLine>For more information go to the Releases section</p>
+        <h3 matLine>{{ environment.latestRelease.release }}</h3>
+        <p matLine>Latest Release</p>
         <span flex></span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
-          <h3>{{ environment.latestRelease.release }}</h3>
-        </span>
         <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
           <p>{{ environment.latestRelease.state }}</p>
           <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
@@ -116,14 +113,11 @@
       </mat-list-item>
       <mat-list-item layout-align="row">
         <mat-icon matListAvatar>receipt</mat-icon>
-        <h3 matLine>Latest Ping</h3>
-        <p matLine>A monitoring ping is sent every 30mins</p>
+        <h3 matLine>{{ environment.latestPing.url }}</h3>
+        <p matLine>Latest Ping</p>
         <span flex></span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.isValid">
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.createdAt">
           <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
-        </span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.isValid">
-          <h3>{{ environment.latestPing.url }}</h3>
           <p>{{ environment.latestPing.statusCode }}</p>
         </span>
         <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestPing.isValid">
