@@ -56,6 +56,7 @@ import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ErrorHttpInterceptor } from './interceptors/error.http.interceptor';
 import { PublicEnvironmentsResolver } from './environments/public.environments.resolver';
+import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -130,6 +131,7 @@ export function tokenGetter() {
     AuthService,
     EnvironmentService,
     PublicEnvironmentsResolver,
+    PublicEnvironmentResolver,
     Title,
   ],
   entryComponents: [

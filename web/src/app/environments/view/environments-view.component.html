@@ -1,3 +1,129 @@
-<div class="mat-content" layout-padding flex>
-  Environment View
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div layout-gt-xs="row" flex>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ environment.progress.current }}%
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">developer_board</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">{{ environment.type }}</div>
+            <div class="mat-caption tc-grey-600">{{ environment.latestRelease.release || '-' }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ environment.releases | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">new_releases</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Releases</div>
+            <div class="mat-caption tc-grey-600">
+              <span *ngIf="environment.latestRelease.createdAt">updated {{ environment.latestRelease.updatedAt | timeAgo }}</span>
+              <span *ngIf="!environment.latestRelease.createdAt">No Date</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">
+            <span *ngIf="environment.monitors">{{ environment.monitors.length }}</span>
+            <span *ngIf="!environment.monitors">0</span>
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">timelapse</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Monitors</div>
+            <div class="mat-caption tc-grey-600">
+              <span *ngIf="environment.latestPing.createdAt">updated {{ environment.latestPing.updatedAt | timeAgo }}</span>
+              <span *ngIf="!environment.latestPing.createdAt">No Date</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ environment.views | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">record_voice_over</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Views</div>
+            <div class="mat-caption tc-grey-600">updated {{ environment.updatedAt | timeAgo }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ environment.pings.valid + environment.pings.invalid | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">receipt</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Pings</div>
+            <div class="mat-caption tc-grey-600">{{ environment.pings.valid }} / {{ environment.pings.invalid }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
 </div>
+
+<div class="mat-content" layout-padding flex>
+  <mat-card>
+    <mat-card-header>
+      <mat-icon matCardAvatar *ngIf="!environment.logo">developer_board</mat-icon>
+      <img matCardAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
+      <mat-card-title>{{ environment.title }}</mat-card-title>
+      <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-nav-list class="will-load item-list">
+      <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
+      <mat-list-item layout-align="row">
+        <mat-icon matListAvatar>new_releases</mat-icon>
+        <h3 matLine>Latest Release</h3>
+        <p matLine>For more information go to the Releases section</p>
+        <span flex></span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
+          <h3>{{ environment.latestRelease.release }}</h3>
+        </span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
+          <p>{{ environment.latestRelease.state }}</p>
+          <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
+        </span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestRelease.release">
+          <p>No releases</p>
+        </span>
+      </mat-list-item>
+      <mat-list-item layout-align="row">
+        <mat-icon matListAvatar>receipt</mat-icon>
+        <h3 matLine>Latest Ping</h3>
+        <p matLine>A monitoring ping is sent every 30mins</p>
+        <span flex></span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.isValid">
+          <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
+        </span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.isValid">
+          <h3>{{ environment.latestPing.url }}</h3>
+          <p>{{ environment.latestPing.statusCode }}</p>
+        </span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestPing.isValid">
+          <p>No pings</p>
+        </span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-card>
+</div>
+
