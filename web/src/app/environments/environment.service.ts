@@ -3,11 +3,12 @@ import { Observable } from 'rxjs/Rx';
 import { List } from '../list';
 import { Environment } from './environment.model';
 import { Injectable } from '@angular/core';
+import { AuthService } from "../auth/auth.service";
 
 @Injectable()
 export class EnvironmentService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   findAll(): Observable<List<Environment>> {
@@ -40,7 +41,7 @@ export class EnvironmentService {
     return this.http.get<Environment>(`/environments/${id}/view`)
   }
 
-  findById(id: string): Observable<Environment> {
+  findPrivateById(id: string): Observable<Environment> {
     return this.http.get<Environment>(`/environments/${id}`);
   }
 

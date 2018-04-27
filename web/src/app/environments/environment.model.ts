@@ -1,7 +1,25 @@
+import { Monitor } from "./monitors/monitor.model";
+import { Deployed } from "./releases/deployed.model";
+import { Pinged } from "./monitors/pinged.model";
+
 export class Environment {
   id: string;
+  owner: string;
+  type: string;
   title: string;
+  logo: string;
   description: string;
+  link: string;
+  releases: number;
+  latestRelease: Deployed;
+  pings: { valid: number, invalid: number };
+  latestPing: Pinged;
+  progress: {current: number, next: number};
+  isPrivate: boolean;
+  // tags: Array<string> = [];
+  // tokens: Array<Token> = [];
+  monitors: Array<Monitor> = [];
+  views: number;
+  updatedAt: string;
   createdAt: string;
-  updateAt: string;
 }

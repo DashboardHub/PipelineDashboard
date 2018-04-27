@@ -1,3 +1,10 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span flex></span>
+    <button mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <div class="mat-content" layout-padding flex>
   <mat-card>
     <mat-card-title>Public Environments</mat-card-title>
@@ -6,7 +13,7 @@
     <mat-nav-list class="will-load item-list">
       <ng-template tdLoading="items.load">
         <ng-template let-environment let-last="last" ngFor [ngForOf]="environments.list">
-          <a mat-list-item layout-align="row" [routerLink]="['/environments']">
+          <a mat-list-item layout-align="row" [routerLink]="['/environments', environment.id]">
             <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
             <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
             <h3 matLine>{{ environment.title }}</h3>

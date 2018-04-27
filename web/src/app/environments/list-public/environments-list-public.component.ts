@@ -24,7 +24,7 @@ export class EnvironmentsListPublicComponent implements OnInit {
   }
 
   refresh() {
-    this.environmentService.findAll().subscribe((environments) => console.log(environments));
+    this.environmentService.findAll().subscribe((environments) => this.environments = environments);
   }
 
 }

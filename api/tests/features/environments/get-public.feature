@@ -32,7 +32,7 @@ Feature: Get public environment
       | createdAt     | "2018-01-27T07:19:43.274Z"                  |
       | updatedAt     | "2018-01-27T07:19:43.274Z"                  |
     And should have a field "latestPing" with "object":
-      | field         | value                      |
+      | field         | value                                  |
       | id            | "e0000004-0000-0000-0000-p00000000001" |
       | environmentId | "e0000004-0000-0000-0000-000000000000" |
       | monitorId     | "e0000004-0000-0000-0000-m00000000001" |
@@ -46,5 +46,12 @@ Feature: Get public environment
       | field   | value |
       | current | 100   |
       | next    | 100   |
+    And should have an "array" field "monitors" and in row 1 with:
+      | field        | value                                  |
+      | id           | "e0000004-0000-0000-0000-m00000000001" |
+      | path         | "/"                                    |
+      | method       | "GET"                                  |
+      | expectedCode | 200                                    |
+      | expectedText | "DashboardHub"                         |
     And should have a field "createdAt" with "2018-01-27T09:14:10.962Z"
     And should have a field "updatedAt" with "2018-01-27T09:14:10.962Z"
