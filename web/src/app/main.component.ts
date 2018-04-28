@@ -16,11 +16,6 @@ export class MainComponent {
   public profile: Profile = new Profile('');
   public publicRoutes: Array<Navigation> = [
     {
-      title: 'Dashboard',
-      route: '/',
-      icon: 'dashboard',
-    },
-    {
       title: 'Public Environments',
       route: '/environments',
       icon: 'computer',
