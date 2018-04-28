@@ -115,7 +115,8 @@ const routes: Routes = [
       },
       {
         path: '',
-        component: DashboardComponent,
+        component: EnvironmentsListPublicComponent,
+        resolve: { environments: PublicEnvironmentsResolver }
       },
       { path: '**', redirectTo: '/' }
     ],

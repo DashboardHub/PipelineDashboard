@@ -6,19 +6,6 @@ Using Serverless framework on AWS Lambda
 
 ### Environments
 
-#### Summary
-
-Public list `GET /summary`
-Private list `GET /environments/summary`
-
-```json
-{
-    "envrionments": 123,
-    "deploys": 456,
-    "pings": 789
-}
-```
-
 #### List
 
 Public list `GET /environments`

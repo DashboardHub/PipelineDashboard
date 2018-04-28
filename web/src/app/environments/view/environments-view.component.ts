@@ -21,7 +21,7 @@ export class EnvironmentsViewComponent {
     this.environment = this.route.snapshot.data['environment'];
   }
 
-  refresh() {
+  refresh(): void {
     this.environmentService.findPublicById(this.route.snapshot.params['id']).subscribe((environment) => this.environment = environment);
   }
 }
