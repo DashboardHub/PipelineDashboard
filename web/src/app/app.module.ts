@@ -29,7 +29,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 
 import { MainComponent } from './main.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
@@ -68,7 +67,6 @@ export function tokenGetter() {
     MainComponent,
     CallbackComponent,
     LoginComponent,
-    DashboardComponent,
     EnvironmentsListComponent,
     EnvironmentsListPrivateComponent,
     EnvironmentsListPublicComponent,

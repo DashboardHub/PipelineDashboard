@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { MainComponent } from './main.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
 import { ProjectsListComponent } from './projects/list/projects-list.component';
@@ -115,7 +114,8 @@ const routes: Routes = [
       },
       {
         path: '',
-        component: DashboardComponent,
+        component: EnvironmentsListPublicComponent,
+        resolve: { environments: PublicEnvironmentsResolver }
       },
       { path: '**', redirectTo: '/' }
     ],

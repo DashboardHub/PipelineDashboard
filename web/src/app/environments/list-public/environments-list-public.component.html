@@ -1,3 +1,78 @@
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div layout-gt-xs="row" flex>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ summary.environments | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">developer_board</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Environments</div>
+            <div class="mat-caption tc-grey-600">Public</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ summary.releases | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">new_releases</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Releases</div>
+            <div class="mat-caption tc-grey-600">Public</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ summary.monitors | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">timelapse</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Monitors</div>
+            <div class="mat-caption tc-grey-600">Public</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ summary.pings | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">receipt</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Pings</div>
+            <div class="mat-caption tc-grey-600">Public</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ summary.views | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">record_voice_over</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">Views</div>
+            <div class="mat-caption tc-grey-600">Public</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
 <mat-toolbar>
   <mat-toolbar-row>
     <span flex></span>
