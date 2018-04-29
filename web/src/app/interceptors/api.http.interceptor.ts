@@ -12,9 +12,9 @@ export class ApiHttpInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    if (req.url.substr(0, 4) !== 'http') {
+    if (req.url.substr(0, 5) === '{api}') {
       req = req.clone({
-        url: environment.api + req.url
+        url: environment.api + req.url.substr(5)
       });
     }
 
