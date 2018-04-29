@@ -63,12 +63,7 @@ export class MainComponent {
       title: 'Help',
       route: '/help',
       icon: 'live_help',
-    },
-    // {
-    //   title: 'Login',
-    //   route: '/login',
-    //   icon: 'vpn_key',
-    // },
+    }
   ];
 
   constructor(private _router: Router, private authService: AuthService) {

@@ -7,7 +7,7 @@
           {{item.title}}</a>
       </ng-template>
       <mat-divider></mat-divider>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="privateRoutes">
+      <ng-template let-item let-last="last" ngFor [ngForOf]="privateRoutes" *ngIf="isAuthenticated()">
         <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
           <mat-icon>{{item.icon}}</mat-icon>
           {{item.title}}</a>
