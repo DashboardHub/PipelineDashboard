@@ -12,14 +12,15 @@ import { MonitorsListComponent } from './environments/monitors/list/monitors-lis
 import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
 import { EnvironmentsViewComponent } from './environments/view/environments-view.component';
 import { ProjectsAddComponent } from './projects/add/projects-add.component';
-import { EnvironmentsListPublicComponent } from './environments/list-public/environments-list-public.component';
-import { EnvironmentsListPrivateComponent } from './environments/list-private/environments-list-private.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
-import { PublicEnvironmentsResolver } from './environments/public.environments.resolver';
 import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
 import { AuthGuard } from "./auth/auth.guard";
+import { EnvironmentsListPrivateComponent } from "./environments/list/private/environments-list-private.component";
+import { EnvironmentsListPublicComponent } from "./environments/list/public/environments-list-public.component";
+import { PublicEnvironmentsResolver } from "./environments/list/public/public.environments.resolver";
+import { PrivateEnvironmentsResolver } from "./environments/list/private/private.environments.resolver";
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
             path: 'list',
             pathMatch: 'full',
             component: EnvironmentsListPrivateComponent,
+            resolve: { environments: PrivateEnvironmentsResolver }
           },
           {
             path: 'add',

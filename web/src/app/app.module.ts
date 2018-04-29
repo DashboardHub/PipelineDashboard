@@ -47,16 +47,17 @@ import { EnvironmentsViewComponent } from './environments/view/environments-view
 import { ProjectsAddComponent } from './projects/add/projects-add.component';
 import { EnvironmentService } from './environments/environment.service';
 import { ApiHttpInterceptor } from './interceptors/api.http.interceptor';
-import { EnvironmentsListPublicComponent } from './environments/list-public/environments-list-public.component';
-import { EnvironmentsListPrivateComponent } from './environments/list-private/environments-list-private.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ErrorHttpInterceptor } from './interceptors/error.http.interceptor';
-import { PublicEnvironmentsResolver } from './environments/public.environments.resolver';
 import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
 import { AuthGuard } from "./auth/auth.guard";
+import { PublicEnvironmentsResolver } from "./environments/list/public/public.environments.resolver";
+import { EnvironmentsListPrivateComponent } from "./environments/list/private/environments-list-private.component";
+import { EnvironmentsListPublicComponent } from "./environments/list/public/environments-list-public.component";
+import { PrivateEnvironmentsResolver } from "./environments/list/private/private.environments.resolver";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -130,6 +131,7 @@ export function tokenGetter() {
     AuthGuard,
     AuthService,
     EnvironmentService,
+    PrivateEnvironmentsResolver,
     PublicEnvironmentsResolver,
     PublicEnvironmentResolver,
     Title,
