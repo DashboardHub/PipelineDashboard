@@ -19,6 +19,7 @@ import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { PublicEnvironmentsResolver } from './environments/public.environments.resolver';
 import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
+import { AuthGuard } from "./auth/auth.guard";
 
 const routes: Routes = [
   {
@@ -47,18 +48,7 @@ const routes: Routes = [
       },
       {
         path: 'environments',
-        pathMatch: 'full',
-        component: EnvironmentsListPublicComponent,
-        resolve: { environments: PublicEnvironmentsResolver }
-      },
-      {
-        path: 'environments/:id',
-        pathMatch: 'full',
-        component: EnvironmentsViewComponent,
-        resolve: { environment: PublicEnvironmentResolver }
-      },
-      {
-        path: 'environments',
+        canActivate: [AuthGuard],
         children: [
           {
             path: 'list',
@@ -69,6 +59,12 @@ const routes: Routes = [
             path: 'add',
             pathMatch: 'full',
             component: EnvironmentsAddComponent,
+          },
+          {
+            path: ':id',
+            pathMatch: 'full',
+            component: EnvironmentsViewComponent,
+            resolve: { environment: PublicEnvironmentResolver }
           },
           {
             path: ':id/edit',
@@ -96,6 +92,12 @@ const routes: Routes = [
             component: MonitorsViewComponent,
           },
         ]
+      },
+      {
+        path: 'environments/:id/view',
+        pathMatch: 'full',
+        component: EnvironmentsViewComponent,
+        resolve: { environment: PublicEnvironmentResolver }
       },
       {
         path: 'projects',

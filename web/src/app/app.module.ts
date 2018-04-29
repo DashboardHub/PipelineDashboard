@@ -56,6 +56,7 @@ import { ProfileComponent } from './auth/profile/profile.component';
 import { ErrorHttpInterceptor } from './interceptors/error.http.interceptor';
 import { PublicEnvironmentsResolver } from './environments/public.environments.resolver';
 import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
+import { AuthGuard } from "./auth/auth.guard";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -126,6 +127,7 @@ export function tokenGetter() {
       useClass: ErrorHttpInterceptor,
       multi: true
     },
+    AuthGuard,
     AuthService,
     EnvironmentService,
     PublicEnvironmentsResolver,

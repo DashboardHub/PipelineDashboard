@@ -3,12 +3,11 @@ import { Observable } from 'rxjs/Rx';
 import { List } from '../list';
 import { Environment } from './environment.model';
 import { Injectable } from '@angular/core';
-import { AuthService } from "../auth/auth.service";
 
 @Injectable()
 export class EnvironmentService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
   }
 
   findAll(): Observable<List<Environment>> {
