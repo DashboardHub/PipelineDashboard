@@ -1,3 +1,11 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <a mat-button routerLink="/"><mat-icon>arrow_back</mat-icon></a>
+    <span flex></span>
+    <button mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
   <div layout-gt-xs="row" flex>
     <div flex-gt-xs="20">
@@ -80,13 +88,6 @@
     </div>
   </div>
 </div>
-
-<mat-toolbar>
-  <mat-toolbar-row>
-    <span flex></span>
-    <button mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
-  </mat-toolbar-row>
-</mat-toolbar>
 
 <div class="mat-content" layout-padding flex>
   <mat-card>
