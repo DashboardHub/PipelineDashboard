@@ -1,13 +1,18 @@
-import { Injectable }     from '@angular/core';
-import { CanActivate }    from '@angular/router';
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-  constructor(private auth: AuthService, public router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    public router: Router,
+    private auth: AuthService,
+    private snackBar: MatSnackBar
+  ) {
+  }
 
   canActivate() {
     if (this.auth.isAuthenticated()) {

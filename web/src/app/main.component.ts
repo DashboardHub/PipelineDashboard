@@ -17,7 +17,7 @@ export class MainComponent {
   public publicRoutes: Array<Navigation> = [
     {
       title: 'Public Environments',
-      route: '/environments',
+      route: '/',
       icon: 'computer',
     },
     {
