@@ -12,9 +12,9 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req).do(null, (err) => {
-      if (err instanceof HttpErrorResponse) {
-        switch (err.status) {
+    return next.handle(req).do(null, (error) => {
+      if (error instanceof HttpErrorResponse) {
+        switch (error.status) {
           case 401:
           case 403:
           case 404:
@@ -22,7 +22,7 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
               .then(() => this.snackBar.open('An ERROR occured please try again', null, { duration: 5000 }));
             break;
           default:
-            this.snackBar.open(err.message, null, { duration: 5000 });
+            this.snackBar.open(error.message, null, { duration: 5000 });
             break;
         }
       }

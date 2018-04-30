@@ -58,6 +58,7 @@ import { PublicEnvironmentsResolver } from "./environments/list/public/public.en
 import { EnvironmentsListPrivateComponent } from "./environments/list/private/environments-list-private.component";
 import { EnvironmentsListPublicComponent } from "./environments/list/public/environments-list-public.component";
 import { PrivateEnvironmentsResolver } from "./environments/list/private/private.environments.resolver";
+import { CovalentDynamicFormsModule } from "@covalent/dynamic-forms";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -102,6 +103,7 @@ export function tokenGetter() {
     MatSnackBarModule,
     MatToolbarModule,
     CovalentCommonModule,
+    CovalentDynamicFormsModule,
     CovalentLayoutModule,
     CovalentMediaModule,
     CovalentLoadingModule,
