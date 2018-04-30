@@ -90,11 +90,11 @@
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
               <p>{{ environment.type }}</p>
             </span>
-            <span class="mat-caption text-right" flex="30" layout-align="row" flex-gt-sm="20" *ngIf="environment.latestRelease.release">
+            <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="environment.latestRelease.release">
               <h3>{{ environment.latestRelease.release | digits }}</h3>
               <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
             </span>
-            <span class="mat-caption text-right" flex="30" layout-align="row" flex-gt-sm="20" *ngIf="!environment.latestRelease.release">
+            <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="!environment.latestRelease.release">
               <p>No releases</p>
             </span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
