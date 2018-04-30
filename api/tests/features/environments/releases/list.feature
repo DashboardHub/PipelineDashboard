@@ -14,7 +14,7 @@ Feature: Releases
     And should have a field "total" with "NUMBER"
     And should have an "array" field "list" and in row 1 with:
       | field        | value                      |
-      | version      | "v2.0.0"                   |
+      | version      | "v2.0.1312-ALPHA"          |
       | failDeploy   | null                       |
       | finishDeploy | "2018-01-27T09:19:56.932Z" |
       | startDeploy  | "2018-01-27T09:18:14.932Z" |
