@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { EnvironmentsAddForm } from "./environments-add.form";
-import { EnvironmentService } from "../environment.service";
-import { AbstractControl } from "@angular/forms";
-import { Environment } from "../environment.model";
-import { Router } from "@angular/router";
-import { MatSnackBar } from "@angular/material";
+import { EnvironmentsAddForm } from './environments-add.form';
+import { EnvironmentService } from '../environment.service';
+import { AbstractControl } from '@angular/forms';
+import { Environment } from '../environment.model';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'qs-environments-add',
@@ -17,7 +17,8 @@ export class EnvironmentsAddComponent {
     private router: Router,
     private snackBar: MatSnackBar,
     private environmentService: EnvironmentService
-  ) {
+  )
+  {
   }
 
   submit(form: AbstractControl): void {

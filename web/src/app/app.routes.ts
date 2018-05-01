@@ -13,16 +13,16 @@ import { MonitorsViewComponent } from './environments/monitors/view/monitors-vie
 import { LoginComponent } from './auth/login/login.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
-import { AuthGuard } from "./auth/auth.guard";
-import { EnvironmentsListPrivateComponent } from "./environments/list/private/environments-list-private.component";
-import { EnvironmentsListPublicComponent } from "./environments/list/public/environments-list-public.component";
-import { PublicEnvironmentsResolver } from "./environments/list/public/public.environments.resolver";
-import { PrivateEnvironmentsResolver } from "./environments/list/private/private.environments.resolver";
-import { ProfileResolver } from "./auth/profile/profile.resolver";
-import { EnvironmentsViewPrivateComponent } from "./environments/view/private/environments-view-private.component";
-import { PrivateEnvironmentResolver } from "./environments/view/private/private.environment.resolver";
-import { PublicEnvironmentResolver } from "./environments/view/public/public.environment.resolver";
-import { EnvironmentsViewPublicComponent } from "./environments/view/public/environments-view-public.component";
+import { AuthGuard } from './auth/auth.guard';
+import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
+import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
+import { PublicEnvironmentsResolver } from './environments/list/public/public.environments.resolver';
+import { PrivateEnvironmentsResolver } from './environments/list/private/private.environments.resolver';
+import { ProfileResolver } from './auth/profile/profile.resolver';
+import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
+import { PrivateEnvironmentResolver } from './environments/view/private/private.environment.resolver';
+import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
+import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 
 const routes: Routes = [
   {

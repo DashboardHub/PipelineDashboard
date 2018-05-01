@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Environment } from "../../environment.model";
-import { Profile } from "../../../auth/profile";
-import { EnvironmentService } from "../../environment.service";
-import { ActivatedRoute } from "@angular/router";
+import { Environment } from '../../environment.model';
+import { Profile } from '../../../auth/profile';
+import { EnvironmentService } from '../../environment.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'qs-environments-view-private',

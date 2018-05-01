@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Environment } from '../environment.model';
 import { List } from '../../list';
-import { Summary } from "../summary.model";
-import { Profile } from "../../auth/profile";
+import { Summary } from '../summary.model';
+import { Profile } from '../../auth/profile';
 
 @Component({
   selector: 'qs-environments-list',

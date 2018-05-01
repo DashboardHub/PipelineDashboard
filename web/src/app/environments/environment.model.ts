@@ -1,7 +1,7 @@
-import { Monitor } from "./monitors/monitor.model";
-import { Deployed } from "./releases/deployed.model";
-import { Pinged } from "./monitors/pinged.model";
-import { Token } from "./tokens/token.model";
+import { Monitor } from './monitors/monitor.model';
+import { Deployed } from './releases/deployed.model';
+import { Pinged } from './monitors/pinged.model';
+import { Token } from './tokens/token.model';
 
 export class Environment {
   id: string;

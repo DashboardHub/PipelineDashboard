@@ -1,4 +1,4 @@
-import { Token } from "../tokens/token.model";
+import { Token } from '../tokens/token.model';
 
 export class Deployed {
   id: string;
