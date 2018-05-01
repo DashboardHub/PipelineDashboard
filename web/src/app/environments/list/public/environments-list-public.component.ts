@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Environment } from "../../environment.model";
 import { List } from "../../../list";
 import { EnvironmentService } from "../../environment.service";
+import { Profile } from "../../../auth/profile";
 
 @Component({
   selector: 'qs-environments-list-public',
@@ -11,12 +12,12 @@ import { EnvironmentService } from "../../environment.service";
 export class EnvironmentsListPublicComponent implements OnInit {
 
   public environments: List<Environment> = new List<Environment>();
+  public profile: Profile = new Profile();
 
   constructor(
     private route: ActivatedRoute,
     private environmentService: EnvironmentService
   ) {
-
   }
 
   ngOnInit() {

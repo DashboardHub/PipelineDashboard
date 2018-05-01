@@ -1,11 +1,3 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <a mat-button routerLink="/"><mat-icon>arrow_back</mat-icon></a>
-    <span flex></span>
-    <button mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
-  </mat-toolbar-row>
-</mat-toolbar>
-
 <div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
   <div layout-gt-xs="row" flex>
     <div flex-gt-xs="20">
@@ -99,6 +91,19 @@
     </mat-card-header>
     <mat-nav-list class="will-load item-list">
       <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
+
+      <mat-list-item layout-align="row" *ngIf="environment.tokens">
+        <mat-icon matListAvatar>vpn_key</mat-icon>
+        <h3 matLine>Tokens</h3>
+        <p matLine>Treat these like your passwords</p>
+        <span flex></span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.tokens">
+          <p>You have <b>{{ environment.tokens.length }}</b> token(s)</p>
+        </span>
+        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.tokens">
+          <p>No tokens</p>
+        </span>
+      </mat-list-item>
       <mat-list-item layout-align="row">
         <mat-icon matListAvatar>new_releases</mat-icon>
         <h3 matLine>{{ environment.latestRelease.release }}</h3>

@@ -1,0 +1,12 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <a mat-button routerLink="/environments/list"><mat-icon>arrow_back</mat-icon></a>
+    <span flex></span>
+    <button mat-button [disabled]="true"><mat-icon>delete</mat-icon></button>
+    <button mat-button [disabled]="true"><mat-icon>edit</mat-icon></button>
+    <button mat-button [disabled]="true"><mat-icon>timelapse</mat-icon></button>
+    <button mat-button (click)="refresh()"><mat-icon>refresh</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<qs-environments-view [environment]="environment"></qs-environments-view>

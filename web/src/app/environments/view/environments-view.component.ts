@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Environment } from "../environment.model";
-import { EnvironmentService } from "../environment.service";
-import { ActivatedRoute } from "@angular/router";
+import { Profile } from "../../auth/profile";
 
 @Component({
   selector: 'qs-environments-view',
@@ -9,19 +8,7 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class EnvironmentsViewComponent {
 
-  public environment: Environment;
+  @Input() public environment: Environment = new Environment();
+  @Input() public profile: Profile = new Profile();
 
-  constructor(
-    private route: ActivatedRoute,
-    private environmentService: EnvironmentService
-  ) {
-  }
-
-  ngOnInit() {
-    this.environment = this.route.snapshot.data['environment'];
-  }
-
-  refresh(): void {
-    this.environmentService.findPublicById(this.route.snapshot.params['id']).subscribe((environment) => this.environment = environment);
-  }
 }

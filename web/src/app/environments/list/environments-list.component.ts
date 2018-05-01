@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Environment } from '../environment.model';
 import { List } from '../../list';
 import { Summary } from "../summary.model";
+import { Profile } from "../../auth/profile";
 
 @Component({
   selector: 'qs-environments-list',
@@ -10,6 +11,7 @@ import { Summary } from "../summary.model";
 export class EnvironmentsListComponent implements OnInit {
 
   @Input() public environments: List<Environment> = new List<Environment>();
+  @Input() public profile: Profile = new Profile();
   public summary: Summary;
 
   ngOnInit() {

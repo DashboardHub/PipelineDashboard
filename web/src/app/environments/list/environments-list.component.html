@@ -81,7 +81,7 @@
     <mat-nav-list class="will-load item-list">
       <ng-template tdLoading="items.load">
         <ng-template let-environment let-last="last" ngFor [ngForOf]="environments.list">
-          <a mat-list-item layout-align="row" [routerLink]="['/environments', environment.id, 'view']">
+          <a mat-list-item layout-align="row" [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
             <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
             <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
             <h3 matLine>{{ environment.title }}</h3>
