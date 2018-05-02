@@ -24,6 +24,7 @@ export class EnvironmentsViewPrivateComponent implements OnInit {
     this.environment = this.route.snapshot.data['environment'];
     this.profile = this.route.snapshot.data['profile'];
   }
+
   refresh(): void {
     this.environmentService.findPrivateById(this.route.snapshot.params['id']).subscribe((environment) => this.environment = environment);
   }

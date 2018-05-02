@@ -75,6 +75,7 @@ const routes: Routes = [
             path: ':id/edit',
             pathMatch: 'full',
             component: EnvironmentsEditComponent,
+            resolve: { environment: PrivateEnvironmentResolver }
           },
           {
             path: ':id/releases',
