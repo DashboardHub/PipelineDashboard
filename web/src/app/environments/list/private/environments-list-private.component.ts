@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EnvironmentService } from "../../environment.service";
-import { List } from "../../../list";
-import { Environment } from "../../environment.model";
-import { ActivatedRoute } from "@angular/router";
+import { EnvironmentService } from '../../environment.service';
+import { List } from '../../../list';
+import { Environment } from '../../environment.model';
+import { ActivatedRoute } from '@angular/router';
+import { Profile } from '../../../auth/profile';
 
 @Component({
   selector: 'qs-environments-list-private',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 export class EnvironmentsListPrivateComponent implements OnInit {
 
   public environments: List<Environment> = new List<Environment>();
+  public profile: Profile = new Profile();
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +23,7 @@ export class EnvironmentsListPrivateComponent implements OnInit {
 
   ngOnInit() {
     this.environments = this.route.snapshot.data['environments'];
+    this.profile = this.route.snapshot.data['profile'];
   }
 
   refresh(): void {

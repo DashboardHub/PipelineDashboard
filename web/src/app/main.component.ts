@@ -13,7 +13,7 @@ import { Profile } from './auth/profile';
 export class MainComponent {
 
   public version: string;
-  public profile: Profile = new Profile('');
+  public profile: Profile = new Profile();
   public publicRoutes: Array<Navigation> = [
     {
       title: 'Public Environments',

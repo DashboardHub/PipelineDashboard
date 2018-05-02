@@ -61,7 +61,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
 
-    this.subject.next(new Profile(''));
+    this.subject.next(new Profile());
 
     this.router.navigate(['/']);
   }

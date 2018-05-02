@@ -52,13 +52,17 @@ import { AuthService } from './auth/auth.service';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ErrorHttpInterceptor } from './interceptors/error.http.interceptor';
-import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
-import { AuthGuard } from "./auth/auth.guard";
-import { PublicEnvironmentsResolver } from "./environments/list/public/public.environments.resolver";
-import { EnvironmentsListPrivateComponent } from "./environments/list/private/environments-list-private.component";
-import { EnvironmentsListPublicComponent } from "./environments/list/public/environments-list-public.component";
-import { PrivateEnvironmentsResolver } from "./environments/list/private/private.environments.resolver";
-import { CovalentDynamicFormsModule } from "@covalent/dynamic-forms";
+import { AuthGuard } from './auth/auth.guard';
+import { PublicEnvironmentsResolver } from './environments/list/public/public.environments.resolver';
+import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
+import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
+import { PrivateEnvironmentsResolver } from './environments/list/private/private.environments.resolver';
+import { CovalentDynamicFormsModule } from '@covalent/dynamic-forms';
+import { ProfileResolver } from './auth/profile/profile.resolver';
+import { PrivateEnvironmentResolver } from './environments/view/private/private.environment.resolver';
+import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
+import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
+import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -78,6 +82,8 @@ export function tokenGetter() {
     EnvironmentsReleasesComponent,
     EnvironmentsTokensComponent,
     EnvironmentsViewComponent,
+    EnvironmentsViewPrivateComponent,
+    EnvironmentsViewPublicComponent,
     MonitorsListComponent,
     MonitorsViewComponent,
     ProjectsAddComponent,
@@ -133,8 +139,10 @@ export function tokenGetter() {
     AuthGuard,
     AuthService,
     EnvironmentService,
+    ProfileResolver,
     PrivateEnvironmentsResolver,
     PublicEnvironmentsResolver,
+    PrivateEnvironmentResolver,
     PublicEnvironmentResolver,
     Title,
   ],

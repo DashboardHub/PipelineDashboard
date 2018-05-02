@@ -10,17 +10,19 @@ import { EnvironmentsReleasesComponent } from './environments/releases/environme
 import { EnvironmentsTokensComponent } from './environments/tokens/environments-tokens.component';
 import { MonitorsListComponent } from './environments/monitors/list/monitors-list.component';
 import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
-import { EnvironmentsViewComponent } from './environments/view/environments-view.component';
-import { ProjectsAddComponent } from './projects/add/projects-add.component';
 import { LoginComponent } from './auth/login/login.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { ProfileComponent } from './auth/profile/profile.component';
-import { PublicEnvironmentResolver } from "./environments/view/public.environment.resolver";
-import { AuthGuard } from "./auth/auth.guard";
-import { EnvironmentsListPrivateComponent } from "./environments/list/private/environments-list-private.component";
-import { EnvironmentsListPublicComponent } from "./environments/list/public/environments-list-public.component";
-import { PublicEnvironmentsResolver } from "./environments/list/public/public.environments.resolver";
-import { PrivateEnvironmentsResolver } from "./environments/list/private/private.environments.resolver";
+import { AuthGuard } from './auth/auth.guard';
+import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
+import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
+import { PublicEnvironmentsResolver } from './environments/list/public/public.environments.resolver';
+import { PrivateEnvironmentsResolver } from './environments/list/private/private.environments.resolver';
+import { ProfileResolver } from './auth/profile/profile.resolver';
+import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
+import { PrivateEnvironmentResolver } from './environments/view/private/private.environment.resolver';
+import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
+import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 
 const routes: Routes = [
   {
@@ -50,6 +52,7 @@ const routes: Routes = [
       {
         path: 'environments',
         canActivate: [AuthGuard],
+        resolve: { profile: ProfileResolver },
         children: [
           {
             path: 'list',
@@ -65,8 +68,8 @@ const routes: Routes = [
           {
             path: ':id',
             pathMatch: 'full',
-            component: EnvironmentsViewComponent,
-            resolve: { environment: PublicEnvironmentResolver }
+            component: EnvironmentsViewPrivateComponent,
+            resolve: { environment: PrivateEnvironmentResolver }
           },
           {
             path: ':id/edit',
@@ -98,23 +101,20 @@ const routes: Routes = [
       {
         path: 'environments/:id/view',
         pathMatch: 'full',
-        component: EnvironmentsViewComponent,
+        component: EnvironmentsViewPublicComponent,
         resolve: { environment: PublicEnvironmentResolver }
       },
       {
         path: 'projects',
         pathMatch: 'full',
         component: ProjectsListComponent,
-      },
-      {
-        path: 'projects/add',
-        pathMatch: 'full',
-        component: ProjectsAddComponent,
+        resolve: { profile: ProfileResolver },
       },
       {
         path: 'profile',
         pathMatch: 'full',
         component: ProfileComponent,
+        resolve: { profile: ProfileResolver },
       },
       {
         path: '',
