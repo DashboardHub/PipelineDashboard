@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EnvironmentsAddForm } from './environments-add.form';
+import { EnvironmentForm } from '../environment.form';
 import { EnvironmentService } from '../environment.service';
 import { AbstractControl } from '@angular/forms';
 import { Environment } from '../environment.model';
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './environments-add.component.html',
 })
 export class EnvironmentsAddComponent {
-  public form: EnvironmentsAddForm = new EnvironmentsAddForm();
+  public form: EnvironmentForm = new EnvironmentForm();
 
   constructor(
     private router: Router,
@@ -25,7 +25,7 @@ export class EnvironmentsAddComponent {
     this.environmentService
       .add(form.value)
       .subscribe(
-        (environment: Environment) => this.router.navigate(['/environments', environment.id, 'view']),
+        (environment: Environment) => this.router.navigate(['/environments', environment.id]),
         (error) => this.snackBar.open(error.message, null, { duration: 5000 })
       );
   }

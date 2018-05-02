@@ -1,3 +1,33 @@
-<div class="mat-content" layout-padding flex>
-  Environment Edit
-</div>
+<form (ngSubmit)="submit(dynamicForm)">
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <a mat-button [routerLink]="['/environments', environment.id]">Cancel</a>
+      <span flex></span>
+      <button mat-button color="accent">Submit</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="mat-content" layout-padding flex>
+
+    <mat-card>
+      <mat-card-title>Create Environments</mat-card-title>
+      <mat-card-subtitle>This can be 'dev', 'test', 'prod' and everything in between</mat-card-subtitle>
+      <mat-divider></mat-divider>
+
+      <td-dynamic-forms [elements]="form.elements" #dynamicForm>
+        <ng-template let-element ngFor [ngForOf]="form.elements">
+          <ng-template let-control="control" [tdDynamicFormsError]="element.name">
+            <span *ngIf="control.touched || !control.pristine">
+              <span *ngIf="control.hasError('required')">Required</span>
+              <span *ngIf="control.hasError('min')">Min value: {{element.min}}</span>
+              <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
+              <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
+              <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
+            </span>
+          </ng-template>
+        </ng-template>
+      </td-dynamic-forms>
+    </mat-card>
+
+  </div>
+</form>

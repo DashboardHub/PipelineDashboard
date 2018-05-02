@@ -1,6 +1,14 @@
 import { ITdDynamicElementConfig, TdDynamicElement, TdDynamicType } from '@covalent/dynamic-forms';
+import { Environment } from './environment.model';
 
-export class EnvironmentsAddForm {
+export class EnvironmentForm {
+
+  constructor(data?: Environment) {
+    if (data) {
+      this.elements.forEach((element, key) => this.elements[key].default = data[element.name]);
+    }
+  }
+
   elements: Array<ITdDynamicElementConfig> = [
     {
       name: 'type',

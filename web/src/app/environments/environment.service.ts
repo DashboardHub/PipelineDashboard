@@ -22,7 +22,7 @@ export class EnvironmentService {
     return this.http.post<Environment>('{api}/environments', environment)
   }
 
-  update(environment: Environment): Observable<Environment> {
+  update(id: string, environment: Environment): Observable<Environment> {
     const updateProperties: Array<string> = ['title', 'description', 'link', 'type', 'logo'];
 
     let patch: Array<any> = updateProperties.map((item) => {
@@ -33,7 +33,7 @@ export class EnvironmentService {
       };
     });
 
-    return this.http.patch<Environment>(`{api}/environments/${environment.id}`, patch)
+    return this.http.patch<Environment>(`{api}/environments/${id}`, patch)
   }
 
   findPublicById(id: string): Observable<Environment> {
