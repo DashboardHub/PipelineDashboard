@@ -23,7 +23,7 @@ module.exports.create = (event, context, callback) => {
         };
 
         environment.tokens.push(token);
-        environmentModel.model.update({ id }, { tokens: environment.tokens }, function (err) {
+        environment.save(function (err) {
             if (err) {
                 console.log(err);
                 switch (err.name) {
