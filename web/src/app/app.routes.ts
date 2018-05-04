@@ -1,4 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
+import { TokensResolver } from './environments/tokens/tokens.resolver';
 
 import { MainComponent } from './main.component';
 import { FeaturesComponent } from './features/features.component';
@@ -86,6 +87,7 @@ const routes: Routes = [
             path: ':id/tokens',
             pathMatch: 'full',
             component: EnvironmentsTokensComponent,
+            resolve: { tokens: TokensResolver }
           },
           {
             path: ':id/monitors',

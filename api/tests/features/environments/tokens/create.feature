@@ -24,3 +24,10 @@ Feature: Create Token
       | field | value     |
       | name  | "Invalid" |
     Then the status code should be 404
+
+  Scenario: Token name length validation
+    Given I am logged in
+    When I make a "POST" request to "/environments/e0000004-0000-0000-0000-000000000000/tokens" with:
+      | field | value     |
+      | name  | "A" |
+    Then the status code should be 400
