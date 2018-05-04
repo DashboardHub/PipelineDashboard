@@ -43,7 +43,8 @@
           <div>
             <div class="mat-subheading-2 push-bottom-none">Monitors</div>
             <div class="mat-caption tc-grey-600">
-              <span *ngIf="environment.latestPing.createdAt">updated {{ environment.latestPing.updatedAt | timeAgo }}</span>
+              <span
+                *ngIf="environment.latestPing.createdAt">updated {{ environment.latestPing.updatedAt | timeAgo }}</span>
               <span *ngIf="!environment.latestPing.createdAt">No Date</span>
             </div>
           </div>
@@ -89,48 +90,48 @@
       <mat-card-title>{{ environment.title }}</mat-card-title>
       <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-nav-list class="will-load item-list">
-      <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
+      <mat-list class="will-load item-list">
+        <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
 
-      <mat-list-item layout-align="row" *ngIf="environment.tokens">
-        <mat-icon matListAvatar>vpn_key</mat-icon>
-        <h3 matLine>Tokens</h3>
-        <p matLine>Treat these like your passwords</p>
-        <span flex></span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.tokens">
-          <p>You have <b>{{ environment.tokens.length }}</b> token(s)</p>
-        </span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.tokens">
-          <p>No tokens</p>
-        </span>
-      </mat-list-item>
-      <mat-list-item layout-align="row">
-        <mat-icon matListAvatar>new_releases</mat-icon>
-        <h3 matLine>{{ environment.latestRelease.release }}</h3>
-        <p matLine>Latest Release</p>
-        <span flex></span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
-          <p>{{ environment.latestRelease.state }}</p>
-          <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
-        </span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestRelease.release">
-          <p>No releases</p>
-        </span>
-      </mat-list-item>
-      <mat-list-item layout-align="row">
-        <mat-icon matListAvatar>receipt</mat-icon>
-        <h3 matLine>{{ environment.latestPing.url }}</h3>
-        <p matLine>Latest Ping</p>
-        <span flex></span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.createdAt">
-          <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
-          <p>{{ environment.latestPing.statusCode }}</p>
-        </span>
-        <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestPing.isValid">
-          <p>No pings</p>
-        </span>
-      </mat-list-item>
-    </mat-nav-list>
+        <mat-list-item layout-align="row" *ngIf="environment.tokens">
+          <mat-icon matListAvatar>vpn_key</mat-icon>
+          <h3 matLine>Tokens</h3>
+          <p matLine>Treat these like your passwords</p>
+          <span flex></span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.tokens">
+            <p>You have <b>{{ environment.tokens.length }}</b> token(s)</p>
+          </span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.tokens">
+            <p>No tokens</p>
+          </span>
+        </mat-list-item>
+        <mat-list-item layout-align="row">
+          <mat-icon matListAvatar>new_releases</mat-icon>
+          <h3 matLine>{{ environment.latestRelease.release }}</h3>
+          <p matLine>Latest Release</p>
+          <span flex></span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
+            <p>{{ environment.latestRelease.state }}</p>
+            <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
+          </span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestRelease.release">
+            <p>No releases</p>
+          </span>
+        </mat-list-item>
+        <mat-list-item layout-align="row">
+          <mat-icon matListAvatar>receipt</mat-icon>
+          <h3 matLine>{{ environment.latestPing.url }}</h3>
+          <p matLine>Latest Ping</p>
+          <span flex></span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.createdAt">
+            <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
+            <p>{{ environment.latestPing.statusCode }}</p>
+          </span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestPing.isValid">
+            <p>No pings</p>
+          </span>
+        </mat-list-item>
+      </mat-list>
   </mat-card>
 </div>
 

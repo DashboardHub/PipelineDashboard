@@ -23,8 +23,17 @@ module.exports.create = (event, context, callback) => {
         };
 
         environment.tokens.push(token);
-        environmentModel.model.update({ id }, { tokens: environment.tokens }, function (err) {
-            if(err) { return console.log(err); }
+        environment.save(function (err) {
+            if (err) {
+                console.log(err);
+                switch (err.name) {
+                    case 'ValidationError':
+                        return callback(new Error(`[400] ${err.message}`));
+                    default:
+                        return callback(new Error('Couldn\'t save the item.'));
+                }
+            }
+
             callback(null, JSON.stringify(token));
         });
     });

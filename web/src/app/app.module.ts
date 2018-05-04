@@ -27,6 +27,8 @@ import { AppComponent } from './app.component';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { environment } from '../environments/environment';
+import { TokenService } from './environments/tokens/token.service';
+import { TokensResolver } from './environments/tokens/tokens.resolver';
 
 import { MainComponent } from './main.component';
 import { FeaturesComponent } from './features/features.component';
@@ -145,6 +147,8 @@ export function tokenGetter() {
     PublicEnvironmentsResolver,
     PrivateEnvironmentResolver,
     PublicEnvironmentResolver,
+    TokensResolver,
+    TokenService,
     Title,
   ],
   entryComponents: [
