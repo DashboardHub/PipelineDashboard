@@ -52,12 +52,13 @@ export class EnvironmentsListComponent implements OnInit {
   }
 
   calculateReleases(): { name: string, value: number }[] {
-    return this.environments.list.map((environment: Environment) => ({ name: environment.title, value: environment.releases }));
+    return this.environments.list
+      .map((environment: Environment) => ({ name: environment.title, value: (environment.pings.valid / (environment.pings.valid + environment.pings.invalid)) * 100 || 0 }));
   }
 
   calculatePings(): { name: string, value: number }[] {
     return this.environments.list.map((environment: Environment) => {
-      return { name: environment.title, value: environment.pings.valid + environment.pings.invalid };
+      return { name: environment.title, value: environment.latestPing.duration ? environment.latestPing.duration : 0 };
     });
   }
 
