@@ -11,6 +11,6 @@ export class PrivateEnvironmentResolver implements Resolve<Environment> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Environment> {
     return this.environmentService
-      .findPrivateById(route.params['id']);
+      .findPrivateById(route.params.id);
   }
 }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import * as auth0 from 'auth0-js';
 import { Profile } from './profile';
 
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
 
@@ -22,7 +22,7 @@ export class AuthService {
 
   public userProfile: Profile;
 
-  private subject = new Subject<Profile>();
+  private subject = new ReplaySubject<Profile>();
 
   constructor(private router: Router) {}
 

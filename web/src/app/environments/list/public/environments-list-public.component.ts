@@ -16,16 +16,16 @@ export class EnvironmentsListPublicComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
   ) {
   }
 
-  ngOnInit() {
-    this.environments = this.route.snapshot.data['environments'];
+  ngOnInit(): void {
+    this.environments = this.route.snapshot.data.environments;
   }
 
   refresh(): void {
-    this.environmentService.findAll().subscribe((environments) => this.environments = environments);
+    this.environmentService.findAll().subscribe((environments: List<Environment>) => this.environments = environments);
   }
 
 }

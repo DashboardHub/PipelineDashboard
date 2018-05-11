@@ -9,6 +9,5 @@ import { Profile } from '../../auth/profile';
 export class EnvironmentsViewComponent {
 
   @Input() public environment: Environment = new Environment();
-  @Input() public profile: Profile = new Profile();
 
 }

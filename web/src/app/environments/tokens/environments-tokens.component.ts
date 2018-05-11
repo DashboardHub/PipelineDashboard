@@ -26,13 +26,13 @@ export class EnvironmentsTokensComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.environmentId = this.route.snapshot.params['id'];
-    this.tokens = this.maskAll(this.route.snapshot.data['tokens']);
+  ngOnInit(): void {
+    this.environmentId = this.route.snapshot.params.id;
+    this.tokens = this.maskAll(this.route.snapshot.data.tokens);
   }
 
   unMask(selectedToken: Token): void {
-    this.tokens.list.map((token) => {
+    this.tokens.list.map((token: Token) => {
       if (token.id === selectedToken.id) {
         token.idMasked = token.id;
       }
@@ -42,7 +42,7 @@ export class EnvironmentsTokensComponent implements OnInit {
   }
 
   maskAll(tokens: List<Token>): List<Token> {
-    tokens.list.map((token) => {
+    tokens.list.map((token: Token) => {
       token.idMasked = this.mask + token.id.substr(24);
       return token;
     });
@@ -56,7 +56,7 @@ export class EnvironmentsTokensComponent implements OnInit {
       .delete(deleteToken)
       .subscribe(
         () => this.refresh(),
-        (error) => this.snackBar.open(error.message, null, { duration: 5000 })
+        (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }),
       );
   }
 
@@ -68,13 +68,13 @@ export class EnvironmentsTokensComponent implements OnInit {
       .add(newToken)
       .subscribe(
         () => this.refresh(),
-        (error) => this.snackBar.open(error.message, null, { duration: 5000 })
+        (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }),
       );
   }
 
   refresh(): void {
     this.tokenService
       .findAllByEnvironmentId(this.environmentId)
-      .subscribe((tokens) => this.tokens = this.maskAll(tokens));
+      .subscribe((tokens: List<Token>) => this.tokens = this.maskAll(tokens));
   }
 }

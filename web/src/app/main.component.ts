@@ -14,7 +14,7 @@ export class MainComponent {
 
   public version: string;
   public profile: Profile = new Profile();
-  public publicRoutes: Array<Navigation> = [
+  public publicRoutes: Navigation[] = [
     {
       title: 'Public Environments',
       route: '/',
@@ -26,7 +26,7 @@ export class MainComponent {
       icon: 'group_work',
     },
   ];
-  public privateRoutes: Array<Navigation> = [
+  public privateRoutes: Navigation[] = [
     {
       title: 'My Environments',
       route: '/environments/list',
@@ -53,7 +53,7 @@ export class MainComponent {
       icon: 'security',
     },
   ];
-  public generalRoutes: Array<Navigation> = [
+  public generalRoutes: Navigation[] = [
     {
       title: 'Features',
       route: '/features',
@@ -63,22 +63,23 @@ export class MainComponent {
       title: 'Help',
       route: '/help',
       icon: 'live_help',
-    }
+    },
   ];
 
-  constructor(private _router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
     this.version = environment.version;
     this.authService.subscribeProfile()
-      .subscribe(profile => this.profile = profile);
+      .subscribe((profile: Profile) => this.profile = profile);
 
     if (this.authService.isAuthenticated()) {
       this.authService
-        .getProfile((err) => err ? console.log(err) : null);
+        .getProfile((err: any) => err ? console.log(err) : undefined);
     }
   }
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate(['/logout']);
   }
 
   isAuthenticated(): boolean {

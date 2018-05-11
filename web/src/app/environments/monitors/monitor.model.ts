@@ -5,5 +5,4 @@ export class Monitor {
   method: string = 'GET';
   expectedCode: number = 200;
   expectedText: string;
-  updatedAt: string;
 }

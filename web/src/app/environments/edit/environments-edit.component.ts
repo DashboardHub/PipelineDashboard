@@ -14,17 +14,14 @@ export class EnvironmentsEditComponent implements OnInit {
   public environment: Environment = new Environment();
   public form: EnvironmentForm;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private environmentService: EnvironmentService
-  )
-  {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private environmentService: EnvironmentService) {
   }
 
-  ngOnInit() {
-    this.environment = this.route.snapshot.data['environment'];
+  ngOnInit(): void {
+    this.environment = this.route.snapshot.data.environment;
     this.form = new EnvironmentForm(this.environment);
   }
 
@@ -33,7 +30,7 @@ export class EnvironmentsEditComponent implements OnInit {
       .update(this.environment.id, form.value)
       .subscribe(
         (environment: Environment) => this.router.navigate(['/environments', environment.id]),
-        (error) => this.snackBar.open(error.message, null, { duration: 5000 })
+        (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }),
       );
   }
 }

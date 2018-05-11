@@ -10,7 +10,7 @@ export class ProfileResolver implements Resolve<any> {
   resolve(): Promise<any> {
     if (this.authService.isAuthenticated()) {
       return this.authService
-        .getProfile((err) => err ? console.log(err) : null);
+        .getProfile((err: any) => err ? console.log(err) : undefined);
     }
   }
 }

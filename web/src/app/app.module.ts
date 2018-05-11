@@ -65,8 +65,15 @@ import { PrivateEnvironmentResolver } from './environments/view/private/private.
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
 import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
+import { MonitorsResolver } from './environments/monitors/monitors.resolve';
+import { MonitorService } from './environments/monitors/monitor.service';
+import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.component';
+import { CovalentMessageModule } from '@covalent/core';
+import { PingedService } from './environments/monitors/pinged.service';
+import { PingsResolver } from './environments/monitors/pings.resolve';
+import { LogoutComponent } from './auth/logout/logout.component';
 
-export function tokenGetter() {
+export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
 }
 
@@ -76,6 +83,7 @@ export function tokenGetter() {
     MainComponent,
     CallbackComponent,
     LoginComponent,
+    LogoutComponent,
     EnvironmentsListComponent,
     EnvironmentsListPrivateComponent,
     EnvironmentsListPublicComponent,
@@ -86,6 +94,7 @@ export function tokenGetter() {
     EnvironmentsViewComponent,
     EnvironmentsViewPrivateComponent,
     EnvironmentsViewPublicComponent,
+    MonitorsAddComponent,
     MonitorsListComponent,
     MonitorsViewComponent,
     ProjectsAddComponent,
@@ -93,7 +102,7 @@ export function tokenGetter() {
     HelpComponent,
     HelpDialogComponent,
     ProjectsListComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -117,6 +126,7 @@ export function tokenGetter() {
     CovalentMediaModule,
     CovalentLoadingModule,
     CovalentMarkdownModule,
+    CovalentMessageModule,
     CovalentSearchModule,
     NgxChartsModule,
     appRoutes,
@@ -124,24 +134,28 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: environment.whitelist
-      }
+        whitelistedDomains: environment.whitelist,
+      },
     }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiHttpInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHttpInterceptor,
-      multi: true
+      multi: true,
     },
     AuthGuard,
     AuthService,
     EnvironmentService,
+    MonitorsResolver,
+    MonitorService,
+    PingedService,
+    PingsResolver,
     ProfileResolver,
     PrivateEnvironmentsResolver,
     PublicEnvironmentsResolver,
