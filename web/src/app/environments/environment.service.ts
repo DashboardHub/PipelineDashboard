@@ -50,7 +50,7 @@ export class EnvironmentService {
     return this.http.get<Environment>(`{api}/environments/${id}`);
   }
 
-  deleteById(id: string): Observable<Environment> {
-    return this.http.delete<Environment>(`{api}/environments/${id}`);
+  deleteById(id: string): Observable<void> {
+    return this.http.delete<void>(`{api}/environments/${id}`);
   }
 }

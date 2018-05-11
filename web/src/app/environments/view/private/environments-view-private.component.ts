@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Environment } from '../../environment.model';
 import { Profile } from '../../../auth/profile';
 import { EnvironmentService } from '../../environment.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'qs-environments-view-private',
@@ -15,6 +15,7 @@ export class EnvironmentsViewPrivateComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private environmentService: EnvironmentService,
   ) {
   }
@@ -24,6 +25,14 @@ export class EnvironmentsViewPrivateComponent implements OnInit {
   }
 
   refresh(): void {
-    this.environmentService.findPrivateById(this.route.snapshot.params.id).subscribe((environment: Environment) => this.environment = environment);
+    this.environmentService
+      .findPrivateById(this.route.snapshot.params.id)
+      .subscribe((environment: Environment) => this.environment = environment);
+  }
+
+  delete(): void {
+    this.environmentService
+      .deleteById(this.environment.id)
+      .subscribe(() => this.router.navigate(['/environments/list']));
   }
 }
