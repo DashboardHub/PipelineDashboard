@@ -11,6 +11,6 @@ export class PublicEnvironmentResolver implements Resolve<Environment> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<Environment> {
     return this.environmentService
-      .findPublicById(route.params['id']);
+      .findPublicById(route.params.id);
   }
 }

@@ -14,7 +14,7 @@ export class ApiHttpInterceptor implements HttpInterceptor {
 
     if (req.url.substr(0, 5) === '{api}') {
       req = req.clone({
-        url: environment.api + req.url.substr(5)
+        url: environment.api + req.url.substr(5),
       });
     }
 

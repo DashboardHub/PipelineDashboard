@@ -1,15 +1,10 @@
 import { ITdDynamicElementConfig, TdDynamicElement, TdDynamicType } from '@covalent/dynamic-forms';
 import { Environment } from './environment.model';
+import { AbstractControl } from '@angular/forms';
 
 export class EnvironmentForm {
 
-  constructor(data?: Environment) {
-    if (data) {
-      this.elements.forEach((element, key) => this.elements[key].default = data[element.name]);
-    }
-  }
-
-  elements: Array<ITdDynamicElementConfig> = [
+  elements: ITdDynamicElementConfig[] = [
     {
       name: 'type',
       label: 'Environment Type',
@@ -53,12 +48,25 @@ export class EnvironmentForm {
       required: false,
       minLength: 3,
       maxLength: 1024,
+      validators: [
+        {
+          validator: (control: AbstractControl) => {
+            return control.value && control.value.substr(0, 8) !== 'https://' ? { ssl: true } : undefined;
+          },
+        },
+      ],
     },
-    {
-      name: 'isPrivate',
-      label: 'Is Private',
-      type: TdDynamicType.Boolean,
-      default: false,
-    },
-  ]
+    // {
+    //   name: 'isPrivate',
+    //   label: 'Is Private',
+    //   type: TdDynamicType.Boolean,
+    //   default: false,
+    // },
+  ];
+
+  constructor(data?: Environment) {
+    if (data) {
+      this.elements.forEach((element: ITdDynamicElementConfig, key: number) => this.elements[key].default = data[element.name]);
+    }
+  }
 }

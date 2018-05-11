@@ -12,6 +12,6 @@ export class TokensResolver implements Resolve<List<Token>> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<List<Token>> {
     return this.tokenService
-      .findAllByEnvironmentId(route.params['id']);
+      .findAllByEnvironmentId(route.params.id);
   }
 }

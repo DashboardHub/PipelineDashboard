@@ -3,6 +3,7 @@ import { Environment } from '../environment.model';
 import { List } from '../../list';
 import { Summary } from '../summary.model';
 import { Profile } from '../../auth/profile';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'qs-environments-list',
@@ -11,10 +12,15 @@ import { Profile } from '../../auth/profile';
 export class EnvironmentsListComponent implements OnInit {
 
   @Input() public environments: List<Environment> = new List<Environment>();
-  @Input() public profile: Profile = new Profile();
+  public profile: Profile = new Profile();
   public summary: Summary;
 
-  ngOnInit() {
+  constructor(private authService: AuthService) {
+    this.authService.subscribeProfile()
+      .subscribe((profile: Profile) => this.profile = profile);
+  }
+
+  ngOnInit(): void {
     this.calculateSummary();
   }
 

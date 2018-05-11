@@ -1,16 +1,22 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <a mat-button routerLink="/environments/list">Cancel</a>
+    <a mat-button [routerLink]="['/environments', environment.id, 'monitors']">Cancel</a>
     <span flex></span>
-    <button mat-button color="accent" (click)="submit(dynamicForm)">Submit</button>
+    <button mat-button color="accent" (click)="submit(dynamicForm)" [disabled]="!environment.link">Submit</button>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<td-message label="Error!" sublabel="You can not add a Monitor without the Environment having a URL"
+            color="warn" icon="error" *ngIf="!environment.link"></td-message>
+
+<td-message label="Info" sublabel="Your path will be appended to {{ environment.link }}"
+            color="accent" icon="info" *ngIf="environment.link"></td-message>
 
 <div class="mat-content" layout-padding flex>
 
   <mat-card>
-    <mat-card-title>Create Environments</mat-card-title>
-    <mat-card-subtitle>This can be 'dev', 'test', 'prod' and everything in between</mat-card-subtitle>
+    <mat-card-title>Create Monitor</mat-card-title>
+    <mat-card-subtitle>Monitor your environment every 30mins</mat-card-subtitle>
     <mat-divider></mat-divider>
 
     <td-dynamic-forms [elements]="form.elements" #dynamicForm>
@@ -22,7 +28,6 @@
             <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
             <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
             <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
-            <span *ngIf="control.hasError('ssl')">Must have be on https (ssl)</span>
           </span>
         </ng-template>
       </ng-template>

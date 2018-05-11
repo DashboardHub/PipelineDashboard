@@ -12,21 +12,19 @@ import { Profile } from '../../../auth/profile';
 export class EnvironmentsListPrivateComponent implements OnInit {
 
   public environments: List<Environment> = new List<Environment>();
-  public profile: Profile = new Profile();
 
   constructor(
     private route: ActivatedRoute,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
   ) {
 
   }
 
-  ngOnInit() {
-    this.environments = this.route.snapshot.data['environments'];
-    this.profile = this.route.snapshot.data['profile'];
+  ngOnInit(): void {
+    this.environments = this.route.snapshot.data.environments;
   }
 
   refresh(): void {
-    this.environmentService.findAllByOwner().subscribe((environments) => this.environments = environments);
+    this.environmentService.findAllByOwner().subscribe((environments: List<Environment>) => this.environments = environments);
   }
 }

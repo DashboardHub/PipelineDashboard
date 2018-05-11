@@ -15,16 +15,15 @@ export class EnvironmentsViewPublicComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
   ) {
 
   }
 
-  ngOnInit() {
-    this.environment = this.route.snapshot.data['environment'];
-    this.profile = this.route.snapshot.data['profile'];
+  ngOnInit(): void {
+    this.environment = this.route.snapshot.data.environment;
   }
   refresh(): void {
-    this.environmentService.findPublicById(this.route.snapshot.params['id']).subscribe((environment) => this.environment = environment);
+    this.environmentService.findPublicById(this.route.snapshot.params.id).subscribe((environment: Environment) => this.environment = environment);
   }
 }

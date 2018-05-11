@@ -5,7 +5,7 @@
     <button mat-button class="tc-red-A400" [disabled]="true" matTooltip="Delete environment"><mat-icon>delete</mat-icon></button>
     <a mat-button class="tc-orange-A700" [routerLink]="['/environments', environment.id, 'edit']" matTooltip="Edit"><mat-icon>edit</mat-icon></a>
     <a mat-button [routerLink]="['/environments', environment.id, 'tokens']" matTooltip="Manage tokens"><mat-icon>vpn_key</mat-icon></a>
-    <button mat-button [disabled]="true"><mat-icon>timelapse</mat-icon></button>
+    <a mat-button [routerLink]="['/environments', environment.id, 'monitors']" matTooltip="Monitors"><mat-icon>timelapse</mat-icon></a>
     <button mat-button class="tc-green-A700" (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>

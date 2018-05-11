@@ -19,11 +19,14 @@ import { EnvironmentsListPrivateComponent } from './environments/list/private/en
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { PublicEnvironmentsResolver } from './environments/list/public/public.environments.resolver';
 import { PrivateEnvironmentsResolver } from './environments/list/private/private.environments.resolver';
-import { ProfileResolver } from './auth/profile/profile.resolver';
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
 import { PrivateEnvironmentResolver } from './environments/view/private/private.environment.resolver';
 import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
+import { MonitorsResolver } from './environments/monitors/monitors.resolve';
+import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.component';
+import { PingsResolver } from './environments/monitors/pings.resolve';
+import { LogoutComponent } from './auth/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -53,13 +56,12 @@ const routes: Routes = [
       {
         path: 'environments',
         canActivate: [AuthGuard],
-        resolve: { profile: ProfileResolver },
         children: [
           {
             path: 'list',
             pathMatch: 'full',
             component: EnvironmentsListPrivateComponent,
-            resolve: { environments: PrivateEnvironmentsResolver }
+            resolve: { environments: PrivateEnvironmentsResolver },
           },
           {
             path: 'add',
@@ -70,13 +72,13 @@ const routes: Routes = [
             path: ':id',
             pathMatch: 'full',
             component: EnvironmentsViewPrivateComponent,
-            resolve: { environment: PrivateEnvironmentResolver }
+            resolve: { environment: PrivateEnvironmentResolver },
           },
           {
             path: ':id/edit',
             pathMatch: 'full',
             component: EnvironmentsEditComponent,
-            resolve: { environment: PrivateEnvironmentResolver }
+            resolve: { environment: PrivateEnvironmentResolver },
           },
           {
             path: ':id/releases',
@@ -87,44 +89,54 @@ const routes: Routes = [
             path: ':id/tokens',
             pathMatch: 'full',
             component: EnvironmentsTokensComponent,
-            resolve: { tokens: TokensResolver }
+            resolve: { tokens: TokensResolver },
           },
           {
             path: ':id/monitors',
             pathMatch: 'full',
             component: MonitorsListComponent,
+            resolve: { monitors: MonitorsResolver, environment: PrivateEnvironmentResolver },
+          },
+          {
+            path: ':id/monitors/add',
+            pathMatch: 'full',
+            component: MonitorsAddComponent,
+            resolve: { environment: PrivateEnvironmentResolver },
           },
           {
             path: ':id/monitors/:monitorId',
             pathMatch: 'full',
             component: MonitorsViewComponent,
+            resolve: { environment: PrivateEnvironmentResolver, pings: PingsResolver },
           },
-        ]
+        ],
       },
       {
         path: 'environments/:id/view',
         pathMatch: 'full',
         component: EnvironmentsViewPublicComponent,
-        resolve: { environment: PublicEnvironmentResolver }
+        resolve: { environment: PublicEnvironmentResolver },
       },
       {
         path: 'projects',
         pathMatch: 'full',
         component: ProjectsListComponent,
-        resolve: { profile: ProfileResolver },
       },
       {
         path: 'profile',
         pathMatch: 'full',
         component: ProfileComponent,
-        resolve: { profile: ProfileResolver },
+      },
+      {
+        path: 'logout',
+        component: LogoutComponent,
       },
       {
         path: '',
         component: EnvironmentsListPublicComponent,
-        resolve: { environments: PublicEnvironmentsResolver }
+        resolve: { environments: PublicEnvironmentsResolver },
       },
-      { path: '**', redirectTo: '/' }
+      { path: '**', redirectTo: '/' },
     ],
   },
 ];
