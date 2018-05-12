@@ -72,6 +72,8 @@ import { CovalentMessageModule } from '@covalent/core';
 import { PingedService } from './environments/monitors/pinged.service';
 import { PingsResolver } from './environments/monitors/pings.resolve';
 import { LogoutComponent } from './auth/logout/logout.component';
+import { EnvironmentTypePipe } from './environments/type.pipe';
+import { ReleaseStatePipe } from './environments/releases/state.pipe';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -90,6 +92,7 @@ export function tokenGetter(): string | null {
     EnvironmentsAddComponent,
     EnvironmentsEditComponent,
     EnvironmentsReleasesComponent,
+    EnvironmentTypePipe,
     EnvironmentsTokensComponent,
     EnvironmentsViewComponent,
     EnvironmentsViewPrivateComponent,
@@ -103,6 +106,7 @@ export function tokenGetter(): string | null {
     HelpDialogComponent,
     ProjectsListComponent,
     ProfileComponent,
+    ReleaseStatePipe,
   ],
   imports: [
     CommonModule,
