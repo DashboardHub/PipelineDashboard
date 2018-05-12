@@ -18,8 +18,8 @@ export class Environment {
   progress: {current: number, next: number};
   isPrivate: boolean;
   // tags: Array<string> = [];
-  tokens: Array<Token> = [];
-  monitors: Array<Monitor> = [];
+  tokens: Token[] = [];
+  monitors: Monitor[] = [];
   views: number;
   updatedAt: string;
   createdAt: string;
