@@ -88,14 +88,15 @@
             <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
             <span flex></span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
-              <h3>{{ environment.latestRelease.state | releaseState }}</h3>
               <p>{{ environment.type | environmentType }}</p>
+              <p>{{ environment.updatedAt | timeAgo }}</p>
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="environment.latestRelease.release">
               <h3>{{ environment.latestRelease.release | digits }}</h3>
-              <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
+              <p>{{ environment.latestRelease.state | releaseState }}</p>
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="!environment.latestRelease.release">
+              <p>No version</p>
               <p>No releases</p>
             </span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
