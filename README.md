@@ -113,7 +113,7 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 
 | media | link
 | :-- | :-- |
-| Twitter | http://twitter.com/dashboardhub |
+| Twitter | https://twitter.com/dashboardhub |
 | LinkedIn | https://www.linkedin.com/showcase/dashboardhub/ |
 | Facebook | https://www.facebook.com/dashboardhub/ |
 
