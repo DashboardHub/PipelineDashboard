@@ -27,6 +27,7 @@ import { MonitorsResolver } from './environments/monitors/monitors.resolve';
 import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.component';
 import { PingsResolver } from './environments/monitors/pings.resolve';
 import { LogoutComponent } from './auth/logout/logout.component';
+import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,11 @@ const routes: Routes = [
         path: 'help',
         pathMatch: 'full',
         component: HelpComponent,
+      },
+      {
+        path: 'terms-and-conditions',
+        pathMatch: 'full',
+        component: TermsConditionsComponent,
       },
       {
         path: 'login',

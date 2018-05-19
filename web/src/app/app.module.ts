@@ -74,6 +74,7 @@ import { PingsResolver } from './environments/monitors/pings.resolve';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { EnvironmentTypePipe } from './environments/type.pipe';
 import { ReleaseStatePipe } from './environments/releases/state.pipe';
+import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -84,8 +85,6 @@ export function tokenGetter(): string | null {
     AppComponent,
     MainComponent,
     CallbackComponent,
-    LoginComponent,
-    LogoutComponent,
     EnvironmentsListComponent,
     EnvironmentsListPrivateComponent,
     EnvironmentsListPublicComponent,
@@ -97,16 +96,19 @@ export function tokenGetter(): string | null {
     EnvironmentsViewComponent,
     EnvironmentsViewPrivateComponent,
     EnvironmentsViewPublicComponent,
+    FeaturesComponent,
+    HelpComponent,
+    HelpDialogComponent,
+    LoginComponent,
+    LogoutComponent,
     MonitorsAddComponent,
     MonitorsListComponent,
     MonitorsViewComponent,
     ProjectsAddComponent,
-    FeaturesComponent,
-    HelpComponent,
-    HelpDialogComponent,
     ProjectsListComponent,
     ProfileComponent,
     ReleaseStatePipe,
+    TermsConditionsComponent,
   ],
   imports: [
     CommonModule,
