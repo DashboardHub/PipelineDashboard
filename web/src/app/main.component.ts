@@ -30,6 +30,11 @@ export class MainComponent {
       route: '/terms-and-conditions',
       icon: 'copyright',
     },
+    {
+      title: 'Privacy',
+      route: '/privacy',
+      icon: 'gavel',
+    },
   ];
   public privateRoutes: Navigation[] = [
     {

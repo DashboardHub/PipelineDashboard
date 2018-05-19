@@ -75,6 +75,7 @@ import { LogoutComponent } from './auth/logout/logout.component';
 import { EnvironmentTypePipe } from './environments/type.pipe';
 import { ReleaseStatePipe } from './environments/releases/state.pipe';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
+import { PrivacyComponent } from './legal/privacy/privacy.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -104,6 +105,7 @@ export function tokenGetter(): string | null {
     MonitorsAddComponent,
     MonitorsListComponent,
     MonitorsViewComponent,
+    PrivacyComponent,
     ProjectsAddComponent,
     ProjectsListComponent,
     ProfileComponent,
