@@ -25,6 +25,16 @@ export class MainComponent {
       route: '/projects',
       icon: 'group_work',
     },
+    {
+      title: 'Terms & Conditions',
+      route: '/terms-and-conditions',
+      icon: 'copyright',
+    },
+    {
+      title: 'Privacy',
+      route: '/privacy',
+      icon: 'gavel',
+    },
   ];
   public privateRoutes: Navigation[] = [
     {
