@@ -1,8 +1,12 @@
 'use strict';
 
+const aws = require('aws-sdk');
+
 const uuidv1 = require('uuid/v1');
 const environmentModel = require('../../models/environment');
 const deployedModel = require('../../models/deployed');
+
+let lambda = new aws.Lambda();
 
 module.exports.create = (event, context, callback) => {
     const id = event.path.id;
@@ -62,6 +66,25 @@ module.exports.create = (event, context, callback) => {
                     default:
                         return callback(new Error(`[500] ${err.message}`));
                 }
+            }
+
+            if (state === 'finishDeploy') {
+                (environment.monitors || []).forEach((monitor) => {
+                    let params = {
+                        FunctionName: `PipelineDashboardApi-${process.env.STAGE}-ping`,
+                        InvocationType: 'Event',
+                        Payload: JSON.stringify({ body: { environment, monitor } }),
+                    };
+
+                    lambda.invoke(params, function(err, data) {
+                        if (err) {
+                            console.log(err);
+                            return callback(new Error('Couldn\'t fetch the items.'));
+                        } else {
+                            console.log(data);
+                        }
+                    });
+                });
             }
 
             environmentModel.model.update({ id }, {
