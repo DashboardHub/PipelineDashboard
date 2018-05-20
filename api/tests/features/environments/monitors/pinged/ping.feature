@@ -21,8 +21,13 @@ Feature: Create a Ping
     When I make a "POST" request to "/environments/e0000004-0000-0000-0000-000000000000/monitors/e0000004-0000-0000-0000-999999999999/ping"
     Then the status code should be 404
 
-  Scenario: Create Environment successfully
+  Scenario: Create ping successfully
     Given I am logged in
+    When I make a "GET" request to "/environments/e0000004-0000-0000-0000-000000000000/monitors"
+    Then the status code should be 200
+    And should have an "array" field "list" and in row 1 with:
+    | field        | value                     |
+    | pings        | {"valid": 0, "invalid": 0}|
     When I make a "POST" request to "/environments/e0000004-0000-0000-0000-000000000000/monitors/e0000004-0000-0000-0000-m00000000001/ping"
     Then the status code should be 200
     And should have a field "id" with "UUID"
@@ -34,3 +39,8 @@ Feature: Create a Ping
     And should have a field "textMatched" with true
     And should have a field "duration" with "NUMBER"
     And should have a field "isValid" with true
+    When I make a "GET" request to "/environments/e0000004-0000-0000-0000-000000000000/monitors"
+    Then the status code should be 200
+    And should have an "array" field "list" and in row 1 with:
+    | field        | value                     |
+    | pings        | {"valid": 1, "invalid": 0}|

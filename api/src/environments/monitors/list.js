@@ -20,6 +20,16 @@ module.exports.list = (event, context, callback) => {
             environment.monitors = [];
         }
 
+        environment.monitors = environment.monitors.map((monitor) => {
+          if (!monitor.pings) {
+            monitor.pings = {
+              valid: 0,
+              invalid: 0
+            };
+          }
+          return monitor;
+        });
+
         return callback(null, {
             total: environment.monitors.length,
             list: environment.monitors
