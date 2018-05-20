@@ -90,8 +90,27 @@ module.exports.ping = (event, context, callback) => {
                 }
 
                 environmentModel.model.update({ id }, {
-                    pings: { valid: item.isValid ? environment.pings.valid + 1 : environment.pings.valid, invalid: !item.isValid ? environment.pings.invalid + 1 : environment.pings.invalid },
-                    latestPing: pinged
+                    pings: {
+                      valid: item.isValid ? environment.pings.valid + 1 : environment.pings.valid,
+                      invalid: !item.isValid ? environment.pings.invalid + 1 : environment.pings.invalid
+                    },
+                    latestPing: pinged,
+                    monitors: environment.monitors.map((monitor) => {
+                      if (!monitor.pings) {
+                        monitor.pings = {
+                          valid: 0,
+                          invalid: 0
+                        };
+                      }
+                      if (monitorId === monitor.id) {
+                        monitor.pings = {
+                          valid: item.isValid ? monitor.pings.valid + 1 : monitor.pings.valid,
+                          invalid: !item.isValid ? monitor.pings.invalid + 1 : monitor.pings.invalid
+                        };
+                      }
+                      return monitor;
+                    })
+
                 }, { updateTimestamps: false }, function (err) {
                     if (err) {
                         console.log(err);
