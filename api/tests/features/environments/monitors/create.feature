@@ -11,20 +11,6 @@ Feature: Create Monitor
     When I make a "POST" request to "/environments/e0000001-0000-0000-0000-000000000000/monitors"
     Then the status code should be 403
 
-  Scenario: Checking URL format conforms when creating an environment
-    Given I am logged in
-    When I make a "POST" request to "/environments" with:
-        | field   | value                |
-        | link    | "http://example.com" |
-    Then the status code should be 200
-    And should have a field "link" with "http://example.com"
-
-    Then(/^should have a field "([^"]*)" with "([^"]*)"$/, function(field, value) {
-      return this.validate(this.response.body[field], value);
-    });
-    And should have a field "id" with "UUID"
-
-
   Scenario: Create Monitor successfully
     Given I am logged in
     When I make a "POST" request to "/environments/e0000001-0000-0000-0000-000000000000/monitors" with:

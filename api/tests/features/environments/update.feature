@@ -37,8 +37,8 @@ Feature: Update my environment
 
   Scenario: Checking URL format conforms when updating an environment
     Given I am logged in
-    When I make a "POST" request to "/environments" with:
-    | field   | value                |
-    | link    | "http://example.com" |
+    When I make a "PATCH" request to "/environments/e0000001-0000-0000-0000-000000000000" with:
+    | field   | value                 |
+    | link    | "http://example.com/" |
     Then the status code should be 200
     And should have a field "link" with "http://example.com"

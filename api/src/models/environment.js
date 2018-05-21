@@ -102,11 +102,11 @@ const schema = new Schema({
         });
 
 schema.methods.setLink = function(link) {
-  console.log(link);
   if (link.endsWith('/')) {
-    link = link.slice (0, -1);
+    link = link.slice(0, -1);
   }
-  console.log(link);
+
+  this.link = link;
 };
 
 let model = client.dynamoose.model(config.dynamodb.environments.table, schema, {
