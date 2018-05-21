@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { List } from '../../list';
 import { TokenForm } from './token.form';
 import { Token } from './token.model';
 import { TokenService } from './token.service';
+import { DialogMarkdownComponent } from '../../dialog/markdown/dialog-markdown.component';
 
 @Component({
   selector: 'qs-environments-tokens',
@@ -20,6 +21,7 @@ export class EnvironmentsTokensComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private tokenService: TokenService,
   ) {
@@ -76,5 +78,42 @@ export class EnvironmentsTokensComponent implements OnInit {
     this.tokenService
       .findAllByEnvironmentId(this.environmentId)
       .subscribe((tokens: List<Token>) => this.tokens = this.maskAll(tokens));
+  }
+
+  openDialog(token: Token): void {
+    let curl: any = (state: string): string => `
+        \`\`\`bash
+        curl -XPOST \\
+           -H "Content-Type: application/json" \\
+           -d '{ "release":"vX.Y.Z" }' \\
+           /environments/${this.environmentId}/deployed/${token.id}/${state}
+        \`\`\`
+        `;
+
+    this.dialog.open(DialogMarkdownComponent, {
+      width: '800px',
+      data: {
+        title: `${token.name} token`,
+        content: `
+        Example usage of \`curl\` commands to send data to **DashboardHub**
+
+        ### Build Status
+
+        *Note: if **environment** \`type\` is \`build\` or \`build and deploy\`*
+
+        ${curl('startBuild')}
+        ${curl('finishBuild')}
+        ${curl('failBuild')}
+
+        ### Deploy Status
+
+        *Note: if **environment** \`type\` is \`deploy\` or \`build and deploy\`*
+
+        ${curl('startDeploy')}
+        ${curl('finishDeploy')}
+        ${curl('failDeploy')}
+        `,
+      },
+    });
   }
 }

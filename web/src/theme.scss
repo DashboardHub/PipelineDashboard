@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 // Plus imports for other components in your app.
+@import '~@covalent/markdown/markdown-theme';
 
 // Custom typography
 $custom-typography: mat-typography-config(
@@ -52,6 +53,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 // that you are using.
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
+@include covalent-markdown-theme($theme);
 
 // Active icon color in list nav
 mat-nav-list {
