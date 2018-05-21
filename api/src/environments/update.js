@@ -30,10 +30,12 @@ module.exports.update = (event, context, callback) => {
             switch (item.path) {
                 case '/title':
                 case '/description':
-                case '/link':
                 case '/logo':
                 case '/type':
                     environment[item.path.substr(1)] = item.value;
+                    break;
+                case '/link':
+                    environment.setLink(item.value);
                     break;
             }
         });

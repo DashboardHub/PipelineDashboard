@@ -34,3 +34,11 @@ Feature: Update my environment
     And should have a field "id" with "e0000001-0000-0000-0000-000000000000"
     And should have a field "owner" with "RwbFXSyjZ6F3HJ3Qc5CGUNMdSX8f3m79@clients"
     And should have a field "title" with "UpdateEnvironment A"
+
+  Scenario: Checking URL format conforms when updating an environment
+    Given I am logged in
+    When I make a "POST" request to "/environments" with:
+    | field   | value                |
+    | link    | "http://example.com" |
+    Then the status code should be 200
+    And should have a field "link" with "http://example.com"
