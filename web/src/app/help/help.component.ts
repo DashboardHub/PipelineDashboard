@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Help } from './help';
 import { MatDialog } from '@angular/material';
-import { HelpDialogComponent } from './dialog/help-dialog.component';
+import { DialogMarkdownComponent } from '../dialog/markdown/dialog-markdown.component';
 
 @Component({
   selector: 'qs-help',
@@ -107,9 +107,12 @@ export class HelpComponent {
   }
 
   openDialog(help: Help): void {
-    this.dialog.open(HelpDialogComponent, {
+    this.dialog.open(DialogMarkdownComponent, {
       width: '800px',
-      data: { help: help },
+      data: {
+        title: help.title,
+        content: help.content,
+      },
     });
   }
 }

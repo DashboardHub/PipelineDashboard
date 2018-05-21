@@ -35,7 +35,6 @@ import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentSearchModule } from '@covalent/core';
-import { HelpDialogComponent } from './help/dialog/help-dialog.component';
 import { MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { ProjectsListComponent } from './projects/list/projects-list.component';
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
@@ -76,6 +75,7 @@ import { EnvironmentTypePipe } from './environments/type.pipe';
 import { ReleaseStatePipe } from './environments/releases/state.pipe';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -86,6 +86,7 @@ export function tokenGetter(): string | null {
     AppComponent,
     MainComponent,
     CallbackComponent,
+    DialogMarkdownComponent,
     EnvironmentsListComponent,
     EnvironmentsListPrivateComponent,
     EnvironmentsListPublicComponent,
@@ -99,7 +100,6 @@ export function tokenGetter(): string | null {
     EnvironmentsViewPublicComponent,
     FeaturesComponent,
     HelpComponent,
-    HelpDialogComponent,
     LoginComponent,
     LogoutComponent,
     MonitorsAddComponent,
@@ -174,7 +174,7 @@ export function tokenGetter(): string | null {
     Title,
   ],
   entryComponents: [
-    HelpDialogComponent,
+    DialogMarkdownComponent,
   ],
   bootstrap: [AppComponent],
 })
