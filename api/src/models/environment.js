@@ -101,6 +101,14 @@ const schema = new Schema({
             throughput: { read: 5, write: 5 },
         });
 
+schema.methods.setLink = function(link) {
+  if (link && link.endsWith('/')) {
+    link = link.slice(0, -1);
+  }
+
+  this.link = link;
+};
+
 let model = client.dynamoose.model(config.dynamodb.environments.table, schema, {
     create: true, // Create table in DB, if it does not exist,
     update: true, // Update remote indexes if they do not match local index structure

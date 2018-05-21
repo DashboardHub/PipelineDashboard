@@ -59,6 +59,16 @@ Feature: Create Environment
       | id    | UUID                          |
       | name  | Continuous Integration Server |
 
+  Scenario: Checking URL format conforms when creating an environment
+    Given I am logged in
+    When I make a "POST" request to "/environments" with:
+      | field | value                 |
+      | title | "CreateEnvironment C" |
+      | type  | "build-deploy"        |
+      | link  | "http://example.com/" |
+    Then the status code should be 200
+    And should have a field "link" with "http://example.com"
+
   Scenario: Field TITLE validation length
     Given I am logged in
     When I make a "POST" request to "/environments" with:
