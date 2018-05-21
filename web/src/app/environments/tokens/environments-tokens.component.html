@@ -39,11 +39,9 @@
             <h3 matLine>{{ token.name }}</h3>
             <p matLine>{{ token.idMasked }}</p>
             <span flex></span>
-            <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="token.notUsed">
-              <h3>{{ token.lastUsed | timeAgo }}</h3>
-            </span>
-            <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!token.notUsed">
-              <p>Not used</p>
+            <span class="mat-caption text-right" flex="30" layout-align="row">
+              <h3 *ngIf="token.lastUsed">{{ token.lastUsed | timeAgo }}</h3>
+              <p *ngIf="!token.lastUsed">Not used</p>
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row">
               <button mat-button (click)="openDialog(token)" matTooltip="Example usage"><mat-icon class="tc-green-A700">touch_app</mat-icon></button>
