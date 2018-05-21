@@ -9,10 +9,5 @@ export class HelpDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<HelpDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
+    @Inject(MAT_DIALOG_DATA) public data: { help: { title: string, content: string } }) { }
 }
