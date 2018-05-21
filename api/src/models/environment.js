@@ -102,7 +102,7 @@ const schema = new Schema({
         });
 
 schema.methods.setLink = function(link) {
-  if (link.endsWith('/')) {
+  if (link && link.endsWith('/')) {
     link = link.slice(0, -1);
   }
 
