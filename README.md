@@ -80,8 +80,12 @@ Then visit `http://localhost:4200/`
 
 ## RUNNING AUTOMATED TESTS
 
+This is done using `CumcumberJS`, with the `Given`, `When`, `Then` format in English, in the `api/tests/features` directory.
+
+Internet is needed when running the automated API tests, because a real `jwt` is used from `Auth0` service.
+
 - 1. Start the API (step 2 from previous section)
-- 2. Run `make test`
+- 2. Run `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make test`
 
 *Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
 
