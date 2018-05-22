@@ -34,7 +34,7 @@ curl -XPOST -H "Content-Type: application/json" -d '{ "release":"{RELEASE-VERSIO
 ```
 *Note: Use your release version. For example can append the TravisCI build number*
 
-However, DashboardHub generates the exact `curl` commands pre-populated with the relevant IDs and tokens to *beacon* the data to **DashboardHub**. To access them, follow these steps:
+However, **DashboardHub** generates the exact `curl` commands pre-populated with the relevant IDs and tokens to *beacon* the data to **DashboardHub**. Treat tokens as passwords. To access these commands, follow the steps below:
 
 1) Click the key icon on the top left of the page.
 
@@ -42,7 +42,7 @@ However, DashboardHub generates the exact `curl` commands pre-populated with the
 
 2) Click the green "example usage" button
 
-![example usage](https://user-images.githubusercontent.com/21239137/40326924-eae12cbe-5d38-11e8-92e2-4d6ed5cc14c9.png)
+![example usage](https://user-images.githubusercontent.com/21239137/40327566-5b745292-5d3b-11e8-9490-84f88251716b.png)
 
 
 You will then see the exact commands, as below:
