@@ -78,7 +78,7 @@ Open 2 terminals and run each of these commands in its own terminal:
 
 Then visit `http://localhost:4200/`
 
-## RUNNING AUTOMATED TESTS
+### RUNNING AUTOMATED TESTS
 
 This is done using `CumcumberJS`, with the `Given`, `When`, `Then` format in English, in the `api/tests/features` directory.
 
@@ -89,9 +89,43 @@ Internet is needed when running the automated API tests, because a real `jwt` is
 
 *Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
 
-## Additional useful commands
+### Additional useful commands
 
 - `make api.clean` resets the config files
+
+### Commit message standards
+
+We use the Angular standards...
+
+> We have very precise rules over how our git commit messages can be formatted. This leads to more readable messages that are easy to follow when looking through the project history. But also, we use the git commit messages to generate the Angular change log https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit
+
+The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
+
+- feat(environments): #123 delete environment
+- docs(commits): #456 example commit messages
+- chore(dependencies): #789 updated UI dependencies
+
+| key | value | notes |
+| :--- | :--- | :--- |
+| type | build | Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm) |
+| type | ci | Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs) |
+| type | docs | Documentation only changes |
+| type | feat | A new feature |
+| type | fix | A bug fix |
+| type | perf | A code change that improves performance |
+| type | refactor | A code change that neither fixes a bug nor adds a feature |
+| type | style | Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) |
+| type | test | Adding missing tests or correcting existing tests |
+| scope | auth | Authentication module |
+| scope | core | Application wide, for example interceptors |
+| scope | environments | Environment module changes (not sub modules) |
+| scope | help | Help module |
+| scope | legal | Legal module |
+| scope | monitors | Monitors module |
+| scope | projects | Projects module |
+| scope | releases | Releases module |
+| scope | tokens | Tokens module |
+
 
 ## SUB PROJECTS
 
