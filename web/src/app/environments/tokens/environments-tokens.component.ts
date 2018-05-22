@@ -8,6 +8,8 @@ import { Token } from './token.model';
 import { TokenService } from './token.service';
 import { DialogMarkdownComponent } from '../../dialog/markdown/dialog-markdown.component';
 
+import { environment } from '../../../environments/environment';
+
 @Component({
   selector: 'qs-environments-tokens',
   templateUrl: './environments-tokens.component.html',
@@ -86,7 +88,7 @@ export class EnvironmentsTokensComponent implements OnInit {
         curl -XPOST \\
            -H "Content-Type: application/json" \\
            -d '{ "release":"vX.Y.Z" }' \\
-           /environments/${this.environmentId}/deployed/${token.id}/${state}
+           ${environment.api}/environments/${this.environmentId}/deployed/${token.id}/${state}
         \`\`\`
         `;
 
