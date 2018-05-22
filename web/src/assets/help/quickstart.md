@@ -30,7 +30,7 @@ Our examples are using `curl`. Here is the template command:
 
 ```bash
 curl -XPOST -H "Content-Type: application/json" -d '{ "release":"{RELEASE-VERSION}" }' \
-  https://api-pipeline-test.dashboardhub.io/environments/{ENVIRONMENT-ID}/deployed/{TOKEN-ID}/{PIPELINE-STATE}
+  https://api-pipeline.dashboardhub.io/environments/{ENVIRONMENT-ID}/deployed/{TOKEN-ID}/{PIPELINE-STATE}
 ```
 *Note: Use your release version. For example can append the TravisCI build number*
 
