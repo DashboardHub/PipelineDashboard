@@ -8,8 +8,6 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class ApiHttpInterceptor implements HttpInterceptor {
 
-  constructor() { }
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (req.url.substr(0, 5) === '{api}') {
