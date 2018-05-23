@@ -6,16 +6,22 @@
     </mat-toolbar-row>
   </mat-toolbar>
 
-  <div mat-dialog-content class="p-24 m-0">
-    <td-markdown>{{ data.content }}</td-markdown>
+  <div mat-dialog-content class="p-24 m-0" *ngIf="data.content">
+    {{ data.content }}
   </div>
 
   <div mat-dialog-actions class="m-0 p-16" layout="row" layout-align="end center">
     <button mat-button
-            (click)="dialogRef.close()"
+            (click)="dialogRef.close(false)"
             class="mat-accent"
-            aria-label="Close">
-      CLOSE
+            aria-label="Cancel">
+      CANCEL
+    </button>
+    <button mat-button
+            (click)="dialogRef.close(true)"
+            class="mat-accent tc-red-A400"
+            aria-label="Confirm">
+      CONFIRM
     </button>
   </div>
 
