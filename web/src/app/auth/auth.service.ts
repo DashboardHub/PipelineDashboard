@@ -1,42 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Resolve, Router } from '@angular/router';
 
 import * as auth0 from 'auth0-js';
 import { Profile } from './profile';
 
 import { Observable, ReplaySubject } from 'rxjs';
-import { Subject } from 'rxjs/Subject';
 import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
 
-  private auth0 = new auth0.WebAuth({
+  private auth0: auth0 = new auth0.WebAuth({
     clientID: environment.auth.clientID,
     domain: environment.auth.domain,
     responseType: 'token id_token',
     audience: `https://${environment.auth.domain}/api/v2/`,
     redirectUri: environment.auth.callbackURL,
-    scope: 'openid profile write:environments'
+    scope: 'openid profile write:environments',
   });
+
+  private subject: ReplaySubject<Profile> = new ReplaySubject<Profile>();
 
   public userProfile: Profile;
 
-  private subject = new ReplaySubject<Profile>();
-
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   public login(): void {
     this.auth0.authorize();
   }
 
   public handleAuthentication(): void {
-    this.auth0.parseHash((err, authResult) => {
+    this.auth0.parseHash((err: any, authResult: any) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.getProfile((err) => {
-          if (err) {
+        this.getProfile((profileErr: any) => {
+          if (profileErr) {
             throw new Error('Failed to fetch profile');
           }
           this.router.navigate(['/']);
@@ -47,42 +47,33 @@ export class AuthService {
     });
   }
 
-  private setSession(authResult): void {
-    // Set the time that the access token will expire at
-    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-  }
-
   public logout(): void {
-    // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
 
-    this.subject.next(new Profile());
+    let profile: Profile = new Profile();
+    this.userProfile = profile;
+    this.subject.next(profile);
 
     this.router.navigate(['/']);
   }
 
   public isAuthenticated(): boolean {
-    // Check whether the current time is past the
-    // access token's expiry time
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    const expiresAt: number = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
 
-  public getProfile(cb): Promise<void> {
-    const accessToken = localStorage.getItem('access_token');
+  public getProfile(cb: any): Promise<void> {
+    const accessToken: string = localStorage.getItem('access_token');
     if (!accessToken) {
       throw new Error('Access token must exist to fetch profile');
     }
 
-    const self = this;
+    const self: AuthService = this;
 
-    return new Promise<void>(resolve => {
-      this.auth0.client.userInfo(accessToken, (err, profile) => {
+    return new Promise<void>((resolve: any) => {
+      this.auth0.client.userInfo(accessToken, (err: any, profile: Profile) => {
         if (profile) {
           self.userProfile = profile;
           resolve(profile);
@@ -93,7 +84,14 @@ export class AuthService {
     });
   }
 
-  subscribeProfile(): Observable<any> {
+  public subscribeProfile(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  private setSession(authResult: any): void {
+    const expiresAt: string = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    localStorage.setItem('access_token', authResult.accessToken);
+    localStorage.setItem('id_token', authResult.idToken);
+    localStorage.setItem('expires_at', expiresAt);
   }
 }
