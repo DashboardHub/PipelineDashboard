@@ -41,7 +41,7 @@ module.exports.update = (event, context, callback) => {
         });
 
         environmentModel.model.update({ id },
-                { title: environment.title, description: environment.description, logo: environment.logo, type: environment.type },
+                { title: environment.title, description: environment.description, logo: environment.logo, type: environment.type, link: environment.link },
                 function(err) {
                     if (err) {
                         console.log(err);
