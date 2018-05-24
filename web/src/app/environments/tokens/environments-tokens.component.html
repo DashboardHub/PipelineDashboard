@@ -44,9 +44,9 @@
               <p *ngIf="!token.lastUsed">Not used</p>
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row">
-              <button mat-button (click)="openDialog(token)" matTooltip="Example usage"><mat-icon class="tc-green-A700">touch_app</mat-icon></button>
+              <button mat-button (click)="curlDialog(token)" matTooltip="Example usage"><mat-icon class="tc-green-A700">touch_app</mat-icon></button>
               <button mat-button (click)="unMask(token)" matTooltip="Show token key"><mat-icon class="tc-orange-A700">remove_red_eye</mat-icon></button>
-              <button mat-button (click)="delete(token)" matTooltip="Delete token"><mat-icon class="tc-red-A400">delete</mat-icon></button>
+              <button mat-button (click)="deleteDialog(token)" matTooltip="Delete token"><mat-icon class="tc-red-A400">delete</mat-icon></button>
             </span>
           </mat-list-item>
           <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
