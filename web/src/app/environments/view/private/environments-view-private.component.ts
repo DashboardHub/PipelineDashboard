@@ -18,8 +18,8 @@ export class EnvironmentsViewPrivateComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private environmentService: EnvironmentService,
     private dialog: MatDialog,
+    private environmentService: EnvironmentService,
   ) {
   }
 
