@@ -127,12 +127,12 @@
             <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
             <p>{{ environment.latestPing.statusCode }}</p>
           </span>
-          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestPing.isValid">
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.pings">
             <p>No pings</p>
           </span>
-          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestPing.isValid">
-            <p>{{ monitor.pings.valid }} valid pings</p>
-            <p>{{ monitor.pings.invalid }} invalid pings</p>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.pings">
+            <p>{{ environment.pings.valid }} valid pings</p>
+            <p>{{ environment.pings.invalid }} invalid pings</p>
           </span>
         </mat-list-item>
       </mat-list>
