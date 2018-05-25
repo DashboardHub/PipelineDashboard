@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { List } from '../../list';
 import { TokenForm } from './token.form';
@@ -9,6 +9,7 @@ import { TokenService } from './token.service';
 import { DialogMarkdownComponent } from '../../dialog/markdown/dialog-markdown.component';
 
 import { environment } from '../../../environments/environment';
+import { DialogConfirmationComponent } from '../../dialog/confirmation/dialog-confirmation.component';
 
 @Component({
   selector: 'qs-environments-tokens',
@@ -82,7 +83,7 @@ export class EnvironmentsTokensComponent implements OnInit {
       .subscribe((tokens: List<Token>) => this.tokens = this.maskAll(tokens));
   }
 
-  openDialog(token: Token): void {
+  curlDialog(token: Token): void {
     let curl: any = (state: string): string => `
         \`\`\`bash
         curl -XPOST \\
@@ -116,6 +117,20 @@ export class EnvironmentsTokensComponent implements OnInit {
         ${curl('failDeploy')}
         `,
       },
+    });
+  }
+
+  deleteDialog(token: Token): void {
+    let dialogRef: MatDialogRef<DialogConfirmationComponent, boolean> = this.dialog.open(DialogConfirmationComponent, {
+      data: {
+        title: `Are you sure you want to delete the token "${token.name}"`,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.delete(token);
+      }
     });
   }
 }

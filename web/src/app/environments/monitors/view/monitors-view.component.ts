@@ -6,6 +6,8 @@ import { Pinged } from '../pinged.model';
 import { List } from '../../../list';
 import { PingedService } from '../pinged.service';
 import { Monitor } from '../monitor.model';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DialogConfirmationComponent } from '../../../dialog/confirmation/dialog-confirmation.component';
 
 @Component({
   selector: 'qs-monitors-view',
@@ -20,6 +22,7 @@ export class MonitorsViewComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private monitorService: MonitorService,
     private pingedService: PingedService,
   ) {
@@ -43,5 +46,19 @@ export class MonitorsViewComponent {
     this.monitorService
       .delete(this.environment.id, this.monitor.id)
       .subscribe(() => this.router.navigate(['/environments', this.environment.id, 'monitors']));
+  }
+
+  deleteDialog(): void {
+    let dialogRef: MatDialogRef<DialogConfirmationComponent, boolean> = this.dialog.open(DialogConfirmationComponent, {
+      data: {
+        title: `Are you sure you want to delete the monitor "${this.monitor.path}"`,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.delete();
+      }
+    });
   }
 }

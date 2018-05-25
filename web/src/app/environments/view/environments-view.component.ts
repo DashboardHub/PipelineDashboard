@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Environment } from '../environment.model';
-import { Profile } from '../../auth/profile';
 
 @Component({
   selector: 'qs-environments-view',

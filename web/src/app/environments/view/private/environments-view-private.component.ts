@@ -3,6 +3,8 @@ import { Environment } from '../../environment.model';
 import { Profile } from '../../../auth/profile';
 import { EnvironmentService } from '../../environment.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { DialogConfirmationComponent } from '../../../dialog/confirmation/dialog-confirmation.component';
 
 @Component({
   selector: 'qs-environments-view-private',
@@ -16,6 +18,7 @@ export class EnvironmentsViewPrivateComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private dialog: MatDialog,
     private environmentService: EnvironmentService,
   ) {
   }
@@ -34,5 +37,19 @@ export class EnvironmentsViewPrivateComponent implements OnInit {
     this.environmentService
       .deleteById(this.environment.id)
       .subscribe(() => this.router.navigate(['/environments/list']));
+  }
+
+  deleteDialog(): void {
+    let dialogRef: MatDialogRef<DialogConfirmationComponent, boolean> = this.dialog.open(DialogConfirmationComponent, {
+      data: {
+        title: `Are you sure you want to delete the environment "${this.environment.title}"`,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirm: boolean) => {
+      if (confirm) {
+        this.delete();
+      }
+    });
   }
 }

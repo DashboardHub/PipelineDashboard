@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class ErrorHttpInterceptor implements HttpInterceptor {
@@ -18,17 +17,22 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).do(undefined, (error: any) => {
       if (error instanceof HttpErrorResponse) {
+        let message: string = '';
         switch (error.status) {
           case 401:
           case 403:
+            message = 'Permission denied. Please try again.';
+            break;
           case 404:
-            this.router.navigate(['/'])
-              .then(() => this.snackBar.open('An ERROR occured please try again', undefined, { duration: 5000 }));
+            message = 'Not found. Please try again.';
             break;
           default:
             this.snackBar.open(error.message, undefined, { duration: 5000 });
             break;
         }
+
+        this.router.navigate(['/'])
+          .then(() => this.snackBar.open(message, undefined, { duration: 5000 }));
       }
     });
   }
