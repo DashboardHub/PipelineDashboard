@@ -56,16 +56,16 @@ export class HelpComponent {
     },
     {
       title: 'Badges',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'How do I use a DashboardHub badge?',
+      icon: 'stars',
+      path: 'badges',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
       title: 'Using CI to Beacon deploy',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'How do I use CI to beacon deploy?',
+      icon: 'arrow-upward',
+      path: 'beacon-deploy',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
