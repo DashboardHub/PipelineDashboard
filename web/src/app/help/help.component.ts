@@ -64,8 +64,8 @@ export class HelpComponent {
     {
       title: 'Using CI to Beacon deploy',
       description: 'How do I use CI to beacon deploy?',
-      icon: 'arrow-upward',
-      path: 'beacon-deploy',
+      icon: 'arrow_upward',
+      path: 'use-ci-beacon-deploy',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
