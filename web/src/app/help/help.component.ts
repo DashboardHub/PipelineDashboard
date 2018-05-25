@@ -37,7 +37,7 @@ export class HelpComponent {
       title: 'Create Environment',
       description: 'What is an environment and how do I create one?',
       icon: 'computer',
-      path: 'create-environment',
+      path: 'coming-soon',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
@@ -49,9 +49,9 @@ export class HelpComponent {
     },
     {
       title: 'Delete Environment',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'How do I delete an environment?',
+      icon: 'delete',
+      path: 'delete-environment',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
