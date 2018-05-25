@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Environment } from '../../environment.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MonitorService } from '../monitor.service';
@@ -8,12 +8,16 @@ import { PingedService } from '../pinged.service';
 import { Monitor } from '../monitor.model';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { DialogConfirmationComponent } from '../../../dialog/confirmation/dialog-confirmation.component';
+import { Subscription } from 'rxjs/index';
+import { Observable } from '../../../../../node_modules/rxjs/Rx';
 
 @Component({
   selector: 'qs-monitors-view',
   templateUrl: './monitors-view.component.html',
 })
-export class MonitorsViewComponent {
+export class MonitorsViewComponent implements OnDestroy {
+
+  private subscription: Subscription;
 
   public environment: Environment;
   public monitor: Monitor;
@@ -30,6 +34,7 @@ export class MonitorsViewComponent {
     this.pings = this.route.snapshot.data.pings;
     this.monitor = this.environment.monitors
       .find((monitor: Monitor) => monitor.id === this.route.snapshot.params.monitorId);
+    this.subscription = Observable.interval(30000).takeWhile(() => true).subscribe(() =>  this.refresh());
   }
 
   ping(): void {
@@ -60,5 +65,9 @@ export class MonitorsViewComponent {
         this.delete();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
