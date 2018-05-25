@@ -76,6 +76,7 @@ import { ReleaseStatePipe } from './environments/releases/state.pipe';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
+import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -86,6 +87,7 @@ export function tokenGetter(): string | null {
     AppComponent,
     MainComponent,
     CallbackComponent,
+    DialogConfirmationComponent,
     DialogMarkdownComponent,
     EnvironmentsListComponent,
     EnvironmentsListPrivateComponent,
@@ -174,6 +176,7 @@ export function tokenGetter(): string | null {
     Title,
   ],
   entryComponents: [
+    DialogConfirmationComponent,
     DialogMarkdownComponent,
   ],
   bootstrap: [AppComponent],

@@ -1,5 +1,5 @@
 <td-layout #layout>
-  <td-navigation-drawer [name]="profile.name" [email]="profile.nickname">
+  <td-navigation-drawer [name]="isAuthenticated() ? profile.name : 'Guest'" [email]="isAuthenticated() ? profile.nickname : 'Not logged in'">
     <mat-nav-list>
       <ng-template let-item let-last="last" ngFor [ngForOf]="publicRoutes">
         <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
@@ -37,7 +37,8 @@
     <div td-toolbar-content layout="row" layout-align="center center" flex>
       <span>PipelineDashboard</span>
       <span flex></span>
-      <span>{{ profile.name }}</span>
+      <span *ngIf="!isAuthenticated()">Welcome Guest</span>
+      <span *ngIf="isAuthenticated()">{{ profile.name }}</span>
       <a mat-icon-button matTooltip="Login" routerLink="/login" *ngIf="!isAuthenticated()">
         <mat-icon>vpn_key</mat-icon>
       </a>
