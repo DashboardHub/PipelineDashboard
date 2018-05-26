@@ -32,6 +32,10 @@ export class AuthService {
 
   public handleAuthentication(): void {
     this.auth0.parseHash((err: any, authResult: any) => {
+      if (err) {
+        this.router.navigate(['/']);
+      }
+
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
@@ -41,9 +45,9 @@ export class AuthService {
           }
           this.router.navigate(['/']);
         });
-      } else if (err) {
-        this.router.navigate(['/']);
       }
+
+      this.router.navigate(['/']);
     });
   }
 
