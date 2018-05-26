@@ -38,7 +38,7 @@ export class HelpComponent {
       description: 'What is an environment and how do I create one?',
       icon: 'computer',
       path: 'create-environment',
-      updatedAt: '03/01/2018 11:05 AM',
+      updatedAt: '26/05/2018 18:00 AM',
     },
     {
       title: 'Edit Environment',
