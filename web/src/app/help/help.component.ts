@@ -35,9 +35,9 @@ export class HelpComponent {
     },
     {
       title: 'Create Environment',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'What is an environment and how do I create one?',
+      icon: 'computer',
+      path: 'create-environment',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {

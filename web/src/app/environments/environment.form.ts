@@ -38,8 +38,13 @@ export class EnvironmentForm {
       label: 'Link',
       type: TdDynamicElement.Input,
       required: false,
-      minLength: 3,
-      maxLength: 1024,
+      validators: [
+        {
+          validator: (control: AbstractControl) => {
+            return control.value && !(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/).test(control.value) ? { invalidUrl: true } : undefined;
+          },
+        },
+      ],
     },
     {
       name: 'logo',
@@ -51,7 +56,7 @@ export class EnvironmentForm {
       validators: [
         {
           validator: (control: AbstractControl) => {
-            return control.value && control.value.substr(0, 8) !== 'https://' ? { ssl: true } : undefined;
+            return control.value && control.value.substr(0, 8) !== 'https://' ? { invalidSsl: true } : undefined;
           },
         },
       ],

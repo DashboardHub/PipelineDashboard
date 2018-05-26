@@ -22,7 +22,8 @@
             <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
             <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
             <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
-            <span *ngIf="control.hasError('ssl')">Must have be on https (ssl)</span>
+            <span *ngIf="control.hasError('invalidSsl')">Must be on https (ssl)</span>
+            <span *ngIf="control.hasError('invalidUrl')">Must be a valid URL</span>
           </span>
         </ng-template>
       </ng-template>
