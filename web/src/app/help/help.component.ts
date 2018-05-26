@@ -42,9 +42,9 @@ export class HelpComponent {
     },
     {
       title: 'Edit Environment',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'How can I edit an environment?',
+      icon: 'edit',
+      path: 'edit-environment',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
