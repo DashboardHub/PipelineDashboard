@@ -21,13 +21,14 @@
           <a mat-list-item layout-align="row" [routerLink]="'/environments/' + environment.id + '/monitors/' + monitor.id">
             <mat-icon matListAvatar>timelapse</mat-icon>
             <h3 matLine>{{ monitor.path }}</h3>
-            <p matLine hide-xs>{{ monitor.expectedCode }} {{ monitor.expectedText | truncate:50 }}</p>
+            <p matLine hide-xs>{{ environment.link }}{{ monitor.path }}</p>
             <span flex></span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
               <p>{{ monitor.pings.valid }} valid pings</p>
               <p>{{ monitor.pings.invalid }} invalid pings</p>
             </span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
+              <p>{{ monitor.expectedCode }} {{ monitor.expectedText | truncate:50 }}</p>
               <p>{{ monitor.method }}</p>
             </span>
           </a>

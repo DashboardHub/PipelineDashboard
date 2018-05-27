@@ -11,7 +11,11 @@
 <div class="mat-content" layout-padding flex>
   <mat-card>
     <mat-card-title>Tokens</mat-card-title>
-    <mat-card-subtitle>You have <b>{{ tokens.total }}</b> tokens. Treat these like passwords</mat-card-subtitle>
+    <mat-card-subtitle>
+      You have <b>{{ tokens.total }}</b> tokens. Treat these like passwords.
+      Tokens allow you to link your Continuous Integration service with DashboardHub to communicate your build / deploy status.
+      To view an example usage of the token, click the green icon <mat-icon class="tc-green-A700">touch_app</mat-icon> within the list below.
+    </mat-card-subtitle>
     <mat-divider></mat-divider>
     <mat-list class="pad-bottom-lg">
       <mat-list-item layout-align="row">
@@ -44,9 +48,9 @@
               <p *ngIf="!token.lastUsed">Not used</p>
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row">
-              <button mat-button (click)="openDialog(token)" matTooltip="Example usage"><mat-icon class="tc-green-A700">touch_app</mat-icon></button>
+              <button mat-button (click)="curlDialog(token)" matTooltip="Example usage"><mat-icon class="tc-green-A700">touch_app</mat-icon></button>
               <button mat-button (click)="unMask(token)" matTooltip="Show token key"><mat-icon class="tc-orange-A700">remove_red_eye</mat-icon></button>
-              <button mat-button (click)="delete(token)" matTooltip="Delete token"><mat-icon class="tc-red-A400">delete</mat-icon></button>
+              <button mat-button (click)="deleteDialog(token)" matTooltip="Delete token"><mat-icon class="tc-red-A400">delete</mat-icon></button>
             </span>
           </mat-list-item>
           <mat-divider *ngIf="!last" [inset]="true"></mat-divider>

@@ -93,6 +93,18 @@
       <mat-list class="will-load item-list">
         <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
 
+        <mat-list-item layout-align="row" *ngIf="environment.monitors && environment.link">
+          <mat-icon matListAvatar>timelapse</mat-icon>
+          <h3 matLine>Monitors</h3>
+          <p matLine>{{ environment.link }}</p>
+          <span flex></span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.monitors">
+            <p>You have <b>{{ environment.monitors.length }}</b> monitors(s)</p>
+          </span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.monitors">
+            <p>No monitors</p>
+          </span>
+        </mat-list-item>
         <mat-list-item layout-align="row" *ngIf="environment.tokens">
           <mat-icon matListAvatar>vpn_key</mat-icon>
           <h3 matLine>Tokens</h3>
