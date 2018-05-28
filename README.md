@@ -123,6 +123,7 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 | scope | help | Help module |
 | scope | legal | Legal module |
 | scope | monitors | Monitors module |
+| scope | navigation | Main navigation |
 | scope | projects | Projects module |
 | scope | releases | Releases module |
 | scope | tokens | Tokens module |
