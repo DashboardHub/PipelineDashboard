@@ -11,3 +11,6 @@ jspm_packages
 
 # config
 config.json
+
+# tmp
+coverage

@@ -22,7 +22,7 @@ api: api.run
 ui: ui.run
 
 install.local: api.clean api.install ui.install
-	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev > /dev/null)
+	(cd api; npm run install:local > /dev/null)
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
@@ -56,24 +56,25 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 	(cd api; sed -i 's|pipelinedashboard-projects|pipelinedashboard-projects-test|g' ./config.json)
 
 api.test:
-	(cd api; ./node_modules/.bin/cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --tags ${TEST_TAGS})
+	(cd api; rm -fr coverage)
+	(cd api; npm test)
 
 api.run: api.env.test
-	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
+	(cd api; npm start)
 
 api.deploy: api.env
 	(cd api; mv auth.prod.pem auth.pem)
-	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage production)
+	(cd api; npm run deploy:prod)
 
 api.deploy.test: api.env.test
 	(cd api; mv auth.test.pem auth.pem)
-	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage test)
+	(cd api; npm run deploy:test)
 
 api.remove:
-	(cd api; ./node_modules/serverless/bin/serverless remove -v --stage production)
+	(cd api; npm run remove:prod)
 
 api.remove.test:
-	(cd api; ./node_modules/serverless/bin/serverless remove -v --stage test)
+	(cd api; npm run remove:test)
 
 # UI
 ui.install:
@@ -81,17 +82,17 @@ ui.install:
 	(cd web; npm install)
 
 ui.run:
-	(cd web; ./node_modules/@angular/cli/bin/ng serve)
+	(cd web; npm start)
 
 ui.deploy: ui.version ui.build ui.sync
 
 ui.deploy.test: ui.version ui.build.test ui.sync.test
 
 ui.build:
-	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --env=prod)
+	(cd web; npm build:prod)
 
 ui.build.test:
-	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --env=test)
+	(cd web; npm build:test)
 
 ui.version:
 	(cd web/src/environments; sed -i 's/x\.x\.x/v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
