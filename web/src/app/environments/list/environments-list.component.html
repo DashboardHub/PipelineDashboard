@@ -84,7 +84,7 @@
           <a mat-list-item layout-align="row" [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
             <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
             <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-            <h3 matLine [ngClass]="!environment.latestPing.isValid ? 'tc-red-A700' : 'tc-black'">{{ environment.title }}</h3>
+            <h3 matLine [class.tc-red-A700]="!environment.latestPing.isValid">{{ environment.title }}</h3>
             <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
             <span flex></span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
