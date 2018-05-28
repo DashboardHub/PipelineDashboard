@@ -57,7 +57,7 @@ api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clea
 
 api.test:
 	(cd api; rm -fr coverage)
-	(cd api; npm test)
+	(cd api; npm run test)
 
 api.run: api.env.test
 	(cd api; npm start)
