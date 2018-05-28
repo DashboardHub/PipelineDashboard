@@ -87,7 +87,7 @@
     <mat-card-header>
       <mat-icon matCardAvatar *ngIf="!environment.logo">developer_board</mat-icon>
       <img matCardAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-      <mat-card-title>{{ environment.title }}</mat-card-title>
+      <mat-card-title [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">{{ environment.title }}</mat-card-title>
       <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
     </mat-card-header>
       <mat-list class="will-load item-list">
