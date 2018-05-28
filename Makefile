@@ -22,7 +22,7 @@ api: api.run
 ui: ui.run
 
 install.local: api.clean api.install ui.install
-	(cd api; npm run install:local > /dev/null)
+	(cd api; npm run install:local)
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
