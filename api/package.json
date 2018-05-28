@@ -18,13 +18,13 @@
     "url": "https://github.com/DashboardHub/PipelineDashboard/issues"
   },
   "scripts": {
-    "install:local": "npx serverless dynamodb install --stage dev",
-    "start": "npx serverless offline start --stage dev",
-    "deploy:test": "npx serverless deploy -v --stage test",
-    "deploy:prod": "npx serverless deploy -v --stage production",
-    "remove:test": "npx serverless remove -v --stage test",
-    "remove:prod": "npx serverless remove -v --stage production",
-    "test": "npx nyc npx serverless offline start --stage dev --exec \"npx cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty\""
+    "install:local": "serverless dynamodb install --stage dev",
+    "start": "serverless offline start --stage dev",
+    "deploy:test": "serverless deploy -v --stage test",
+    "deploy:prod": "serverless deploy -v --stage production",
+    "remove:test": "serverless remove -v --stage test",
+    "remove:prod": "serverless remove -v --stage production",
+    "test": "nyc serverless offline start --stage dev --exec \"cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty\""
   },
   "homepage": "https://github.com/DashboardHub/PipelineDashboard#readme",
   "dependencies": {
