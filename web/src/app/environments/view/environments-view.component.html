@@ -39,7 +39,7 @@
             <span *ngIf="!environment.monitors">0</span>
             <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
           </div>
-          <mat-icon class="icon tc-cyan-900">timelapse</mat-icon>
+          <mat-icon matListAvatar [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">timelapse</mat-icon>
           <div>
             <div class="mat-subheading-2 push-bottom-none">Monitors</div>
             <div class="mat-caption tc-grey-600">
@@ -87,19 +87,23 @@
     <mat-card-header>
       <mat-icon matCardAvatar *ngIf="!environment.logo">developer_board</mat-icon>
       <img matCardAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-      <mat-card-title>{{ environment.title }}</mat-card-title>
+      <mat-card-title [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">{{ environment.title }}</mat-card-title>
       <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
     </mat-card-header>
       <mat-list class="will-load item-list">
         <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
 
         <mat-list-item layout-align="row" *ngIf="environment.monitors && environment.link">
-          <mat-icon matListAvatar>timelapse</mat-icon>
+          <mat-icon matListAvatar [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">timelapse</mat-icon>
           <h3 matLine>Monitors</h3>
           <p matLine>{{ environment.link }}</p>
           <span flex></span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.monitors">
-            <p>You have <b>{{ environment.monitors.length }}</b> monitors(s)</p>
+              <p *ngIf="environment.latestPing.isValid" class="tc-green-A700">Your latest ping is valid</p>
+              <p *ngIf="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0" class="tc-red-A700">
+                Your latest ping is not valid
+              </p>
+              <p *ngIf="(environment.pings.valid + environment.pings.invalid) === 0">No pings</p>
           </span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.monitors">
             <p>No monitors</p>
@@ -139,11 +143,14 @@
             <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
             <p>{{ environment.latestPing.statusCode }}</p>
           </span>
-          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestPing.isValid">
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.pings">
             <p>No pings</p>
+          </span>
+          <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.pings">
+            <p>{{ environment.pings.valid }} valid pings</p>
+            <p>{{ environment.pings.invalid }} invalid pings</p>
           </span>
         </mat-list-item>
       </mat-list>
   </mat-card>
 </div>
-
