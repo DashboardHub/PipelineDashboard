@@ -89,10 +89,10 @@ ui.deploy: ui.version ui.build ui.sync
 ui.deploy.test: ui.version ui.build.test ui.sync.test
 
 ui.build:
-	(cd web; npm build:prod)
+	(cd web; npm run build:prod)
 
 ui.build.test:
-	(cd web; npm build:test)
+	(cd web; npm run build:test)
 
 ui.version:
 	(cd web/src/environments; sed -i 's/x\.x\.x/v0.9.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
