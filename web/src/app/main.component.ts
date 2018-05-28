@@ -52,16 +52,16 @@ export class MainComponent {
       route: '/environments/add',
       icon: 'note_add',
     },
-    {
+//    {
 //      title: 'Add Project',
 //      route: '/projects/add',
 //      icon: 'playlist_add',
 //    },
-    // {
-    //   title: 'Profile',
-    //   route: '/profile',
-    //   icon: 'security',
-    // },
+//    {
+//      title: 'Profile',
+//      route: '/profile',
+//      icon: 'security',
+//    },
   ];
   public generalRoutes: Navigation[] = [
     {
