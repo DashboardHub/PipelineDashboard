@@ -38,7 +38,7 @@ export class HelpComponent {
       description: 'What is an environment and how do I create one?',
       icon: 'computer',
       path: 'create-environment',
-      updatedAt: '03/01/2018 11:05 AM',
+      updatedAt: '26/05/2018 18:00 AM',
     },
     {
       title: 'Edit Environment',
@@ -56,16 +56,16 @@ export class HelpComponent {
     },
     {
       title: 'Badges',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'How do I use a DashboardHub badge?',
+      icon: 'stars',
+      path: 'badges',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {
       title: 'Using CI to Beacon deploy',
-      description: 'Coming Soon',
-      icon: 'help_outline',
-      path: 'coming-soon',
+      description: 'How do I use CI to beacon deploy?',
+      icon: 'arrow_upward',
+      path: 'use-ci-beacon-deploy',
       updatedAt: '03/01/2018 11:05 AM',
     },
     {

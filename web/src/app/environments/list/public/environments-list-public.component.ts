@@ -6,6 +6,7 @@ import { EnvironmentService } from '../../environment.service';
 import { Profile } from '../../../auth/profile';
 import { Observable } from '../../../../../node_modules/rxjs/Rx';
 import { Subscription } from 'rxjs/index';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'qs-environments-list-public',
@@ -20,6 +21,7 @@ export class EnvironmentsListPublicComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private authService: AuthService,
     private environmentService: EnvironmentService,
   ) {
     this.subscription = Observable.interval(30000).takeWhile(() => true).subscribe(() =>  this.refresh());
@@ -27,6 +29,10 @@ export class EnvironmentsListPublicComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.environments = this.route.snapshot.data.environments;
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
   refresh(): void {
