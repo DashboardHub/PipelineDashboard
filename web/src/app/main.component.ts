@@ -20,11 +20,11 @@ export class MainComponent {
       route: '/',
       icon: 'computer',
     },
-    {
-      title: 'Public Projects',
-      route: '/projects',
-      icon: 'group_work',
-    },
+//    {
+//      title: 'Public Projects',
+//      route: '/projects',
+//      icon: 'group_work',
+//    },
     {
       title: 'Terms & Conditions',
       route: '/terms-and-conditions',
@@ -42,26 +42,26 @@ export class MainComponent {
       route: '/environments/list',
       icon: 'computer',
     },
-    {
-      title: 'My Projects',
-      route: '/projects',
-      icon: 'group_work',
-    },
+//    {
+//      title: 'My Projects',
+//      route: '/projects',
+//      icon: 'group_work',
+//    },
     {
       title: 'Add Environment',
       route: '/environments/add',
       icon: 'note_add',
     },
-    {
-      title: 'Add Project',
-      route: '/projects/add',
-      icon: 'playlist_add',
-    },
-    // {
-    //   title: 'Profile',
-    //   route: '/profile',
-    //   icon: 'security',
-    // },
+//    {
+//      title: 'Add Project',
+//      route: '/projects/add',
+//      icon: 'playlist_add',
+//    },
+//    {
+//      title: 'Profile',
+//      route: '/profile',
+//      icon: 'security',
+//    },
   ];
   public generalRoutes: Navigation[] = [
     {
