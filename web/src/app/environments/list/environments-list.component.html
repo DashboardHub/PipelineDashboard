@@ -88,7 +88,7 @@
                 [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
                 [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">
               {{ environment.title }}
-              <mat-icon *ngIf="!environment.latestPing.isValid" matTooltip="Your latest ping was invalid" class="material-icons md-18, tc-red-A700">warning</mat-icon>
+              <mat-icon *ngIf="!environment.latestPing.isValid" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
           </h3>
             <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
             <span flex></span>
