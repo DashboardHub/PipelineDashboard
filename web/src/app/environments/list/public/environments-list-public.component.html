@@ -8,8 +8,8 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="mat-content" layout-padding flex layout="row">
-  <mat-card flex>
+<div class="mat-content" layout-gt-xs="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <mat-card flex-gt-xs="75">
     <mat-card-title>Welcome to DashboardHub!</mat-card-title>
     <mat-card-subtitle>To get you started...</mat-card-subtitle>
     <mat-divider></mat-divider>
@@ -30,7 +30,7 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card flex="30" class="text-center" *ngIf="!isAuthenticated()">
+  <mat-card flex-gt-xs="25" class="text-center" *ngIf="!isAuthenticated()">
     <mat-card-title>Login</mat-card-title>
     <mat-card-subtitle>No need to register</mat-card-subtitle>
     <mat-divider></mat-divider>
@@ -46,7 +46,7 @@
     </div>
   </mat-card>
 
-  <mat-card flex="30" class="text-center" *ngIf="isAuthenticated()">
+  <mat-card flex-gt-xs="25" class="text-center" *ngIf="isAuthenticated()">
     <mat-card-title>Step 1</mat-card-title>
     <mat-card-subtitle>Create an Environment</mat-card-subtitle>
     <mat-divider></mat-divider>
