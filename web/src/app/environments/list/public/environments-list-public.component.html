@@ -8,11 +8,13 @@
   </mat-toolbar-row>
 </mat-toolbar>
 
-<div class="mat-content" layout-padding flex>
-  <mat-card>
-    <mat-card-title>Welcome to DashboardHub! To get you started...</mat-card-title>
+<div class="mat-content" layout-padding flex layout="row">
+  <mat-card flex>
+    <mat-card-title>Welcome to DashboardHub!</mat-card-title>
+    <mat-card-subtitle>To get you started...</mat-card-subtitle>
+    <mat-divider></mat-divider>
     <mat-card-content>
-      <p layout-padding flex>Welcome to DashboardHub, the no-setup, open-source
+      <p>Welcome to DashboardHub, the no-setup, open-source
         platform that makes your deployment pipeline more transparent by ensuring
         everybody on your team is on the same page. DashboardHub does this by
         gathering the most relevant, up-to-date information (like what version is
@@ -20,15 +22,44 @@
         your deployments every 30 minutes and after each deployment to ensure
         everything is still up and running.</p>
 
-      <p>Please click the key icon on the top right to log in
-        using your GitHub account.</p>
-
       <p>For more detailed <a routerLink="/help">help & FAQs</a>.</p>
 
       <p>The current page is showing you the full list of
         public environments; to access your private environments, please log in, then click the
         menu button on the top left and select "My Environments".</p>
     </mat-card-content>
+  </mat-card>
+
+  <mat-card flex="30" class="text-center" *ngIf="!isAuthenticated()">
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-subtitle>No need to register</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-icon color="accent" class="text-super">vpn_key</mat-icon>
+    <div>
+      <div class="mat-subheading-2 push-bottom-none">
+        <button flex mat-raised-button color="accent" routerLink="/login">
+          <mat-icon svgIcon="assets:github"></mat-icon>
+          GitHub
+        </button>
+      </div>
+      <div class="mat-caption tc-grey-600">Simple & Secure</div>
+    </div>
+  </mat-card>
+
+  <mat-card flex="30" class="text-center" *ngIf="isAuthenticated()">
+    <mat-card-title>Step 1</mat-card-title>
+    <mat-card-subtitle>Create an Environment</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-icon color="accent" class="text-super">developer_board</mat-icon>
+    <div>
+      <div class="mat-subheading-2 push-bottom-none">
+        <button flex mat-raised-button color="accent" routerLink="/environments/add">
+          <mat-icon>add</mat-icon>
+          Environment
+        </button>
+      </div>
+      <div class="mat-caption tc-grey-600">Simple & Secure</div>
+    </div>
   </mat-card>
 </div>
 
