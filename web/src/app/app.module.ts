@@ -77,6 +77,8 @@ import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditi
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
+import { ReleaseService } from './environments/releases/release.service';
+import { ReleasesResolver } from './environments/releases/releases.resolve';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -171,6 +173,8 @@ export function tokenGetter(): string | null {
     PublicEnvironmentsResolver,
     PrivateEnvironmentResolver,
     PublicEnvironmentResolver,
+    ReleasesResolver,
+    ReleaseService,
     TokensResolver,
     TokenService,
     Title,
