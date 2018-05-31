@@ -77,6 +77,8 @@ import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditi
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -141,6 +143,7 @@ export function tokenGetter(): string | null {
     CovalentSearchModule,
     NgxChartsModule,
     appRoutes,
+    Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
     HttpClientModule,
     JwtModule.forRoot({
       config: {
