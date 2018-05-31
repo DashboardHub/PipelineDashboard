@@ -27,8 +27,14 @@ export class MonitorForm {
       label: 'Expected Code',
       type: TdDynamicElement.Select,
       required: true,
-      selections: ['200', '201', '202', '204', '400', '404'],
-      default: '200',
+      selections: [
+        { label: '200', value: 200 },
+        { label: '201', value: 201 },
+        { label: '204', value: 204 },
+        { label: '400', value: 400 },
+        { label: '404', value: 404 },
+      ],
+      default: 200,
     },
     {
       name: 'expectedText',

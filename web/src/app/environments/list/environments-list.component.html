@@ -84,7 +84,11 @@
           <a mat-list-item layout-align="row" [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
             <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
             <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-            <h3 matLine [class.tc-red-A700]="!environment.latestPing.isValid">{{ environment.title }}</h3>
+            <h3 matLine
+                [class.tc-red-A700]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">
+              {{ environment.title }}
+          </h3>
             <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
             <span flex></span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
@@ -93,7 +97,14 @@
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="environment.latestRelease.release">
               <h3>{{ environment.latestRelease.release | digits }}</h3>
-              <p>{{ environment.latestRelease.state | releaseState }}</p>
+              <p layout="row" layout-align="end center"
+                 [class.tc-green-A700]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                 [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
+                 [class.tc-red-A700]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
+                {{ environment.latestRelease.state | releaseState }}
+                <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
+                <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+              </p>
             </span>
             <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="!environment.latestRelease.release">
               <p>No version</p>
@@ -101,7 +112,12 @@
             </span>
             <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
               <p>{{ environment.releases }} releases</p>
-              <p [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">{{ environment.pings.valid + environment.pings.invalid | digits }} pings</p>
+              <p layout="row" layout-align="end center"
+                [class.tc-green-A700]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
+                [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">
+                <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
+                <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+              </p>
             </span>
           </a>
           <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
