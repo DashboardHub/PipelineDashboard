@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { List } from '../../list';
 import { Release } from './release.model';
 import { ActivatedRoute } from '@angular/router';
+import { ReleaseService } from './release.service';
+
 
 @Component({
   selector: 'qs-environments-releases',
@@ -9,8 +11,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EnvironmentsReleasesComponent implements OnInit {
   public releases: List<Release> = new List<Release>();
+  public environmentId: string;
 
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private releaseService: ReleaseService,
+  ) {
+    this.environmentId = this.route.snapshot.params.id;
+  }
+
+  refresh(): void {
+    this.releaseService
+      .findAllByEnvironmentId(this.environmentId).subscribe((releases: List<Release>) => this.releases = releases);
   }
 
   ngOnInit(): void {

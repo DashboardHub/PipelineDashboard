@@ -124,7 +124,7 @@
           <p matLine>Latest Release</p>
           <span flex></span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
-            <p>{{ environment.latestRelease.state }}</p>
+            <p>{{ environment.latestRelease.state | releaseState }}</p>
             <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
           </span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestRelease.release">
