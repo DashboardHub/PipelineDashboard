@@ -17,7 +17,7 @@
       <ng-template tdLoading="items.load">
         <ng-template let-ping let-last="last" ngFor [ngForOf]="pings.list">
           <mat-list-item layout-align="row">
-            <mat-icon matListAvatar [ngClass]="isValid ? 'tc-green-A700' : 'tc-red-A400'">check_circle</mat-icon>
+            <mat-icon matListAvatar [ngClass]="ping.isValid ? 'tc-green-A700' : 'tc-red-A400'">check_circle</mat-icon>
             <h3 matLine>{{ ping.duration }}ms</h3>
             <p matLine hide-xs>{{ ping.statusCode }} {{ ping.url }}</p>
             <span flex></span>

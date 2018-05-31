@@ -35,7 +35,7 @@ import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
 import { CovalentMarkdownModule } from '@covalent/markdown';
 import { CovalentSearchModule } from '@covalent/core';
-import { MatDialogModule, MatProgressBarModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
+import { MatDialogModule, MatProgressBarModule, MatProgressSpinnerModule, MatSnackBarModule, MatTooltipModule } from '@angular/material';
 import { ProjectsListComponent } from './projects/list/projects-list.component';
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
 import { EnvironmentsAddComponent } from './environments/add/environments-add.component';
@@ -77,6 +77,8 @@ import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditi
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
+import { ReleaseService } from './environments/releases/release.service';
+import { ReleasesResolver } from './environments/releases/releases.resolve';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -128,6 +130,7 @@ export function tokenGetter(): string | null {
     MatInputModule,
     MatProgressBarModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     MatToolbarModule,
     MatTooltipModule,
     CovalentCommonModule,
@@ -171,6 +174,8 @@ export function tokenGetter(): string | null {
     PublicEnvironmentsResolver,
     PrivateEnvironmentResolver,
     PublicEnvironmentResolver,
+    ReleasesResolver,
+    ReleaseService,
     TokensResolver,
     TokenService,
     Title,

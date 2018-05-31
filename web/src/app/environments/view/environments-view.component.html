@@ -39,7 +39,7 @@
             <span *ngIf="!environment.monitors">0</span>
             <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
           </div>
-          <mat-icon matListAvatar [ngClass]="environment.latestPing.isValid ? 'tc-green-A700' : 'tc-red-A400'">timelapse</mat-icon>
+          <mat-icon matListAvatar [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">timelapse</mat-icon>
           <div>
             <div class="mat-subheading-2 push-bottom-none">Monitors</div>
             <div class="mat-caption tc-grey-600">
@@ -87,27 +87,26 @@
     <mat-card-header>
       <mat-icon matCardAvatar *ngIf="!environment.logo">developer_board</mat-icon>
       <img matCardAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-      <mat-card-title>{{ environment.title }}</mat-card-title>
+      <mat-card-title [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">{{ environment.title }}</mat-card-title>
       <mat-card-subtitle>{{ environment.description }}</mat-card-subtitle>
     </mat-card-header>
       <mat-list class="will-load item-list">
         <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
 
         <mat-list-item layout-align="row" *ngIf="environment.monitors && environment.link">
-          <mat-icon matListAvatar [ngClass]="environment.latestPing.isValid ? 'tc-green-A700' : 'tc-red-A400'">timelapse</mat-icon>
+          <mat-icon matListAvatar [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">timelapse</mat-icon>
           <h3 matLine>Monitors</h3>
           <p matLine>{{ environment.link }}</p>
           <span flex></span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.monitors">
-              <p *ngIf="environment.latestPing.isValid" class="tc-green-A700">Your latest ping is valid</p>
-              <p *ngIf="!environment.latestPing.isValid" class="tc-red-A700">Your latest ping is not valid</p>
+            <p>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</p>
           </span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.monitors">
             <p>No monitors</p>
           </span>
         </mat-list-item>
         <mat-list-item layout-align="row" *ngIf="environment.tokens">
-          <mat-icon matListAvatar>vpn_key</mat-icon>
+          <mat-icon matListAvatar [class.tc-red-A700]="environment.tokens.length === 0">vpn_key</mat-icon>
           <h3 matLine>Tokens</h3>
           <p matLine>Treat these like your passwords</p>
           <span flex></span>
@@ -119,20 +118,36 @@
           </span>
         </mat-list-item>
         <mat-list-item layout-align="row">
-          <mat-icon matListAvatar>new_releases</mat-icon>
+          <mat-icon matListAvatar
+                    [class.tc-green-A700]="environment.latestRelease.state && !['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                    [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
+                    [class.tc-red-A700]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
+            new_releases
+          </mat-icon>
           <h3 matLine>{{ environment.latestRelease.release }}</h3>
           <p matLine>Latest Release</p>
           <span flex></span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
-            <p>{{ environment.latestRelease.state }}</p>
-            <p>{{ environment.latestRelease.updatedAt | timeAgo }}</p>
+            <p layout="row" layout-align="end center"
+               [class.tc-green-A700]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+               [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
+               [class.tc-red-A700]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
+                {{ environment.latestRelease.state | releaseState }}
+              <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
+              <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+            </p>
+            <p>{{ environment.latestRelease.createdAt | timeAgo }}</p>
           </span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="!environment.latestRelease.release">
             <p>No releases</p>
           </span>
         </mat-list-item>
         <mat-list-item layout-align="row">
-          <mat-icon matListAvatar>receipt</mat-icon>
+          <mat-icon matListAvatar
+              [class.tc-green-A700]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
+              [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">
+            receipt
+          </mat-icon>
           <h3 matLine>{{ environment.latestPing.url }}</h3>
           <p matLine>Latest Ping</p>
           <span flex></span>
