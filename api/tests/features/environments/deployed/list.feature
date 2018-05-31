@@ -15,7 +15,7 @@ Feature: Deployed
     And should have an "array" field "list" and in row 1 with:
       | id            | "e0000004-0000-0000-0000-r00000000019" |
       | environmentId | "e0000004-0000-0000-0000-000000000000" |
-      | release       | "v2.0.0"                               |
+      | release       | "v2.0.1312-ALPHA"                      |
       | state         | "finishDeploy"                         |
       | createdAt     | 1517044796932                          |
       | updatedAt     | 1517044796932                          |

@@ -11,7 +11,6 @@ module.exports.create = (event, context, callback) => {
         owner: event.principalId,
         title: data.title,
         description: data.description,
-        link: data.link,
         tags: data.tags,
         latestRelease: {},
         releases: 0,
@@ -27,6 +26,7 @@ module.exports.create = (event, context, callback) => {
     };
 
     let environmentModel = new environment.model(params);
+    environmentModel.setLink(data.link);
     environmentModel.save(function(err) {
         if (err) {
             console.log(err);

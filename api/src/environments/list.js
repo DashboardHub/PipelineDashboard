@@ -19,7 +19,9 @@ module.exports.public = (event, context, callback) => {
         'type',
         'description',
         'link',
+        'monitors',
         'logo',
+        'views',
         'createdAt',
         'updatedAt',
     ];

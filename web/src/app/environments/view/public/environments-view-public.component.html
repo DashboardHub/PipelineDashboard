@@ -1,0 +1,9 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <a mat-button routerLink="/"><mat-icon>arrow_back</mat-icon></a>
+    <span flex></span>
+    <button mat-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<qs-environments-view [environment]="environment"></qs-environments-view>

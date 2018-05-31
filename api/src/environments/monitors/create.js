@@ -30,7 +30,11 @@ module.exports.create = (event, context, callback) => {
             path: data.path,
             method: data.method,
             expectedCode: data.expectedCode,
-            expectedText: data.expectedText
+            expectedText: data.expectedText,
+            pings: {
+              valid: 0,
+              invalid: 0
+            }
         };
 
         environment.monitors.push(monitor);

@@ -29,7 +29,6 @@ module.exports.public = (event, context, callback) => {
             // remove private data
             delete environment.isPrivate;
             delete environment.tokens;
-            delete environment.monitors;
 
             return callback(null, {
                 headers: {

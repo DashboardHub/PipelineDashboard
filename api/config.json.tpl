@@ -10,12 +10,14 @@
     },
     "deployed": {
       "table": "pipelinedashboard-deployed",
-      "ttl": 2678400
+      "ttl": 8035200
     },
     "pinged": {
       "table": "pipelinedashboard-pinged",
       "ttl": 604800
-
+    },
+    "projects": {
+      "table": "pipelinedashboard-projects"
     }
   },
   "offline": {

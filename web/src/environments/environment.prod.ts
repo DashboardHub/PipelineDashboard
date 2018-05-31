@@ -1,9 +1,10 @@
-export const environment = {
+import { Config } from './config.model';
+
+export const environment: Config = {
   production: true,
-  hmr: false,
   api: 'https://api-pipeline.dashboardhub.io',
   web: 'https://pipeline.dashboardhub.io',
-  whitelist: ['api-pipeline.dashboardhub.io:443'],
+  whitelist: new Array(new RegExp('^null$')),
   version: 'x.x.x',
 
   auth: {

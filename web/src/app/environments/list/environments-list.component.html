@@ -1,0 +1,127 @@
+<div layout-gt-xs="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div flex-gt-xs="20">
+    <mat-card>
+      <mat-card-content class="text-center">
+        <div class="mat-headline push-bottom-none">{{ summary.environments | digits }}
+          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+        </div>
+        <mat-icon class="icon tc-cyan-900">developer_board</mat-icon>
+        <div>
+          <div class="mat-subheading-2 push-bottom-none">Environments</div>
+          <div class="mat-caption tc-grey-600">Public</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div flex-gt-xs="20">
+    <mat-card>
+      <mat-card-content class="text-center">
+        <div class="mat-headline push-bottom-none">{{ summary.releases | digits }}
+          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+        </div>
+        <mat-icon class="icon tc-cyan-900">new_releases</mat-icon>
+        <div>
+          <div class="mat-subheading-2 push-bottom-none">Releases</div>
+          <div class="mat-caption tc-grey-600">Public</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div flex-gt-xs="20">
+    <mat-card>
+      <mat-card-content class="text-center">
+        <div class="mat-headline push-bottom-none">{{ summary.monitors | digits }}
+          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+        </div>
+        <mat-icon class="icon tc-cyan-900">timelapse</mat-icon>
+        <div>
+          <div class="mat-subheading-2 push-bottom-none">Monitors</div>
+          <div class="mat-caption tc-grey-600">Public</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div flex-gt-xs="20">
+    <mat-card>
+      <mat-card-content class="text-center">
+        <div class="mat-headline push-bottom-none">{{ summary.pings | digits }}
+          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+        </div>
+        <mat-icon class="icon tc-cyan-900">receipt</mat-icon>
+        <div>
+          <div class="mat-subheading-2 push-bottom-none">Pings</div>
+          <div class="mat-caption tc-grey-600">Public</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div flex-gt-xs="20">
+    <mat-card>
+      <mat-card-content class="text-center">
+        <div class="mat-headline push-bottom-none">{{ summary.views | digits }}
+          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+        </div>
+        <mat-icon class="icon tc-cyan-900">record_voice_over</mat-icon>
+        <div>
+          <div class="mat-subheading-2 push-bottom-none">Views</div>
+          <div class="mat-caption tc-grey-600">Public</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<div class="mat-content" flex>
+  <mat-card>
+    <mat-card-title>Environments</mat-card-title>
+    <mat-card-subtitle>Recent activity</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <mat-nav-list class="will-load item-list">
+      <ng-template tdLoading="items.load">
+        <ng-template let-environment let-last="last" ngFor [ngForOf]="environments.list">
+          <a mat-list-item layout-align="row" [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
+            <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
+            <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
+            <h3 matLine
+                [class.tc-red-A700]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">
+              {{ environment.title }}
+          </h3>
+            <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
+            <span flex></span>
+            <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
+              <p>{{ environment.type | environmentType }}</p>
+              <p>{{ environment.updatedAt | timeAgo }}</p>
+            </span>
+            <span class="mat-caption text-right" flex="50" layout-align="row" flex-gt-sm="30" *ngIf="environment.latestRelease.release">
+              <h3>{{ environment.latestRelease.release | digits }}</h3>
+              <p layout="row" layout-align="end center"
+                 [class.tc-green-A700]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                 [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
+                 [class.tc-red-A700]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
+                {{ environment.latestRelease.state | releaseState }}
+                <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
+                <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+              </p>
+            </span>
+            <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="!environment.latestRelease.release">
+              <p>No version</p>
+              <p>No releases</p>
+            </span>
+            <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
+              <p>{{ environment.releases }} releases</p>
+              <p layout="row" layout-align="end center"
+                [class.tc-green-A700]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
+                [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">
+                <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
+                <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+              </p>
+            </span>
+          </a>
+          <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
+          <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
+        </ng-template>
+      </ng-template>
+    </mat-nav-list>
+  </mat-card>
+</div>
