@@ -45,6 +45,7 @@
     "@covalent/http": "^2.0.0-beta.1",
     "@covalent/markdown": "^2.0.0-beta.1",
     "@swimlane/ngx-charts": "^7.3.0",
+    "angulartics2": "^6.1.0",
     "auth0-js": "^9.5.0",
     "core-js": "^2.4.1",
     "d3": "^4.9.0",

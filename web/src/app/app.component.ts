@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 @Component({
   selector: 'qs-app',
@@ -12,6 +13,7 @@ export class AppComponent {
   constructor(
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
+    public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
   ) {
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',
