@@ -79,6 +79,8 @@ import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.compo
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import { ReleaseService } from './environments/releases/release.service';
+import { ReleasesResolver } from './environments/releases/releases.resolve';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -175,6 +177,8 @@ export function tokenGetter(): string | null {
     PublicEnvironmentsResolver,
     PrivateEnvironmentResolver,
     PublicEnvironmentResolver,
+    ReleasesResolver,
+    ReleaseService,
     TokensResolver,
     TokenService,
     Title,

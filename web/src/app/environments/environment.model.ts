@@ -15,7 +15,7 @@ export class Environment {
   latestRelease: Deployed;
   pings: { valid: number, invalid: number };
   latestPing: Pinged;
-  progress: {current: number, next: number};
+  progress: { current: number, next: number };
   isPrivate: boolean;
   // tags: Array<string> = [];
   tokens: Token[] = [];

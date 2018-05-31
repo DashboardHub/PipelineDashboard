@@ -29,6 +29,7 @@ import { PingsResolver } from './environments/monitors/pings.resolve';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { ReleasesResolver } from './environments/releases/releases.resolve';
 
 const routes: Routes = [
   {
@@ -96,6 +97,7 @@ const routes: Routes = [
             path: ':id/releases',
             pathMatch: 'full',
             component: EnvironmentsReleasesComponent,
+            resolve: { releases: ReleasesResolver },
           },
           {
             path: ':id/tokens',
