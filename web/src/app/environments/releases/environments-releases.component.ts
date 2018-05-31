@@ -7,7 +7,7 @@ import { ReleaseService } from './release.service';
 
 @Component({
   selector: 'qs-environments-releases',
-  templateUrl: './environments-releases.component.html'
+  templateUrl: './environments-releases.component.html',
 })
 export class EnvironmentsReleasesComponent implements OnInit {
   public releases: List<Release> = new List<Release>();
