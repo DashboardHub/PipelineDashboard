@@ -94,7 +94,7 @@
               <p>{{ environment.updatedAt | timeAgo }}</p>
             </span>
             <span class="mat-caption text-right" flex="50" layout-align="row" flex-gt-sm="30" *ngIf="environment.latestRelease.release">
-              <h3>{{ environment.latestRelease.release | digits }}</h3>
+              <h3>{{ environment.latestRelease.release }}</h3>
               <p layout="row" layout-align="end center"
                  [class.tc-green-A700]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
                  [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
