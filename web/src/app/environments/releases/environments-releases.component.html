@@ -1,15 +1,37 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <a mat-button [routerLink]="['/environments', environmentId]"><mat-icon>arrow_back</mat-icon></a>
+    <a mat-button [routerLink]="['/environments', environment.id]"><mat-icon>arrow_back</mat-icon></a>
     <span flex></span>
     <button mat-button class="tc-green-A700" (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
 
+<td-message label="Error!"  color="warn" icon="error" *ngIf="tokens.list.length === 0" sublabel="You cannot create a release entry (either with a curl command or with this form) without a token. To create a token click the token icon on the right.">
+  <button td-message-actions mat-icon-button [routerLink]="['/environments', environment.id, 'tokens']" matTooltip="Click here to go to create a token.">
+    <mat-icon>vpn_key</mat-icon>
+  </button>
+</td-message>
+
+
+
 <div class="mat-content" layout-padding flex>
   <mat-card>
     <mat-card-title>Releases</mat-card-title>
     <mat-card-subtitle>Recent activity</mat-card-subtitle>
+    <mat-divider></mat-divider>
+    <td-dynamic-forms [elements]="form.elements" #dynamicForm flex="80">
+      <ng-template let-element ngFor [ngForOf]="form.elements">
+        <ng-template let-control="control" [tdDynamicFormsError]="element.name">
+            <span *ngIf="control.touched || !control.pristine">
+              <span *ngIf="control.hasError('required')">Required</span>
+              <span *ngIf="control.hasError('min')">Min value: {{element.min}}</span>
+              <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
+              <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
+              <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
+            </span>
+        </ng-template>
+      </ng-template>
+    </td-dynamic-forms>
     <mat-divider></mat-divider>
     <mat-list class="will-load item-list">
       <ng-template tdLoading="items.load">

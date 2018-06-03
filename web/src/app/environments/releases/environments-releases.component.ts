@@ -3,6 +3,9 @@ import { List } from '../../list';
 import { Release } from './release.model';
 import { ActivatedRoute } from '@angular/router';
 import { ReleaseService } from './release.service';
+import { ReleasesForm } from './releases.form';
+import { Token } from '../tokens/token.model';
+import { Environment } from '../environment.model';
 
 
 @Component({
@@ -11,21 +14,25 @@ import { ReleaseService } from './release.service';
 })
 export class EnvironmentsReleasesComponent implements OnInit {
   public releases: List<Release> = new List<Release>();
-  public environmentId: string;
+  public environment: Environment;
+  public form: ReleasesForm;
+  public tokens: List<Token>;
 
   constructor(
     private route: ActivatedRoute,
     private releaseService: ReleaseService,
   ) {
-    this.environmentId = this.route.snapshot.params.id;
   }
 
   refresh(): void {
     this.releaseService
-      .findAllByEnvironmentId(this.environmentId).subscribe((releases: List<Release>) => this.releases = releases);
+      .findAllByEnvironmentId(this.environment.id).subscribe((releases: List<Release>) => this.releases = releases);
   }
 
   ngOnInit(): void {
     this.releases = this.route.snapshot.data.releases;
+    this.environment = this.route.snapshot.data.environment;
+    this.form = new ReleasesForm(this.route.snapshot.data.tokens, this.environment);
+    this.tokens = this.route.snapshot.data.tokens;
   }
 }
