@@ -85,7 +85,7 @@
             <h3 matLine
                 [class.tc-red-A700]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
                 [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
-                [class.tc-green-A700]="environment.type === 'build' && environment.latestRelease.state === 'finishBuild' || environment.type === 'build-deploy' && environment.latestRelease.state === 'finishDeploy'"
+                [class.tc-green-A700]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
             >
               {{ environment.title }}
           </h3>
