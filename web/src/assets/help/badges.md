@@ -7,5 +7,7 @@ DashboardHub auto-generates the markdown code you can directly copy & paste into
 For example
 
 ```
-[![DashboardHub Badge](https://user-images.githubusercontent.com/21239137/40886576-70fd8fc4-6732-11e8-9648-9ef0ee33a89e.png)](https://pipeline.dashboardhub.io/c6631f90-de59-11e7-baca-539d2ad633e4/view)
+[![DashboardHub Badge](https://img.shields.io/badge/DashboardHub-Venzra%20Website-orange.svg)](https://pipeline.dashboardhub.io/c6631f90-de59-11e7-baca-539d2ad633e4/view)
 ```
+
+![DashboardHub badge](https://user-images.githubusercontent.com/21239137/40886576-70fd8fc4-6732-11e8-9648-9ef0ee33a89e.png)
