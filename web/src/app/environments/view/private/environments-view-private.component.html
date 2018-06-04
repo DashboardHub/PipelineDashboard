@@ -12,3 +12,19 @@
 </mat-toolbar>
 
 <qs-environments-view [environment]="environment"></qs-environments-view>
+
+<div class="mat-content" layout-padding flex>
+  <mat-card>
+    <mat-card-title>Badge</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <p>To give quick access to your DashboardHub, copy and paste the below markdown and add it to your README.md.</p>
+
+      <td-markdown>
+        ```
+        [![DashboardHub Badge](https://img.shields.io/badge/DashboardHub-{{ environment.title }}-orange.svg)](https://pipeline.dashboardhub.io/{{ environment.id }}/view)
+        ```
+      </td-markdown>
+    </mat-card-content>
+  </mat-card>
+</div>
