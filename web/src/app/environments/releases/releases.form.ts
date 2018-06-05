@@ -6,17 +6,18 @@ import { Environment } from '../environment.model';
 export class ReleasesForm {
 
   private tokens: { label: string, value: string }[];
-  public elements: Array<ITdDynamicElementConfig>;
+  public elements: ITdDynamicElementConfig[];
 
   constructor(tokens: List<Token>, environment: Environment) {
-    this.tokens = tokens.list.map((token) => {
+    this.tokens = tokens.list.map((token: Token) => {
       return {
         label: token.name,
-        value: token.id
+        value: token.id,
       };
     });
 
     let states: { label: string, value: string }[];
+
     switch (environment.type) {
       case 'build':
         states = [{ label: 'Start Build', value: 'startBuild' }, { label: 'Finish Build', value: 'finishBuild' }];
@@ -25,9 +26,15 @@ export class ReleasesForm {
         states = [{ label: 'Start Deploy', value: 'startDeploy' }, { label: 'Finish Deploy', value: 'finishDeploy' }];
         break;
       case 'build-deploy':
-        states = [{ label: 'Start Build', value: 'startBuild' }, { label: 'Finish Build', value: 'finishBuild' }, { label: 'Start Deploy', value: 'startDeploy' }, { label: 'Finish Deploy', value: 'finishDeploy' }];
+      default:
+        states = [
+          { label: 'Start Build', value: 'startBuild' },
+          { label: 'Finish Build', value: 'finishBuild' },
+          { label: 'Start Deploy', value: 'startDeploy' },
+          { label: 'Finish Deploy', value: 'finishDeploy' },
+        ];
         break;
-    };
+    }
 
     this.elements = [
       {
@@ -37,7 +44,7 @@ export class ReleasesForm {
         required: true,
         minLength: 3,
         maxLength: 32,
-        flex: 30
+        flex: 30,
       },
       {
         name: 'token',
@@ -46,7 +53,7 @@ export class ReleasesForm {
         required: true,
         selections: this.tokens,
         default: 'Please select',
-        flex: 30
+        flex: 40,
       },
       {
         name: 'state',
@@ -55,9 +62,8 @@ export class ReleasesForm {
         required: true,
         selections: states,
         default: 'Please select',
-        flex: 30
-      }
+        flex: 30,
+      },
     ];
   }
 }
-
