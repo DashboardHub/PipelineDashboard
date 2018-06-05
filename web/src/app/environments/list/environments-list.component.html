@@ -84,7 +84,9 @@
             <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
             <h3 matLine
                 [class.tc-red-A700]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
-                [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)">
+                [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
+                [class.tc-green-A700]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
+            >
               {{ environment.title }}
           </h3>
             <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
