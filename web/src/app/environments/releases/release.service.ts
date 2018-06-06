@@ -11,4 +11,8 @@ export class ReleaseService {
   findAllByEnvironmentId(environmentId: string): Observable<List<Release>> {
     return this.http.get<List<Release>>(`{api}/environments/${environmentId}/releases`);
   }
+
+  add(release: Release, state: string) {
+    console.log(release, state);
+  }
 }

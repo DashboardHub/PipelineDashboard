@@ -6,6 +6,7 @@ import { ReleaseService } from './release.service';
 import { ReleasesForm } from './releases.form';
 import { Token } from '../tokens/token.model';
 import { Environment } from '../environment.model';
+import { AbstractControl } from '@angular/forms';
 
 
 @Component({
@@ -34,5 +35,12 @@ export class EnvironmentsReleasesComponent implements OnInit {
     this.environment = this.route.snapshot.data.environment;
     this.form = new ReleasesForm(this.route.snapshot.data.tokens, this.environment);
     this.tokens = this.route.snapshot.data.tokens;
+  }
+
+  submit(form: AbstractControl): void {
+    let release: Release = new Release();
+    release.version = form.value.version;
+    release.token = this.tokens.list.find((token: Token) => token.id === form.value.token);
+    this.releaseService.add(release, form.value.state);
   }
 }
