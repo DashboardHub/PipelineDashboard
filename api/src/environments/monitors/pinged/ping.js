@@ -66,6 +66,7 @@ module.exports.ping = (event, context, callback) => {
 
         request(environment.link + monitor.path, (error, response, body) => {
             if (error) { console.log(error); }
+            const statusCode = response ? response.statusCode : 404;
 
             const end = new Date() - start;
 
@@ -74,8 +75,8 @@ module.exports.ping = (event, context, callback) => {
                 environmentId: environment.id,
                 monitorId: monitor.id,
                 url: environment.link + monitor.path,
-                statusCode: response.statusCode,
-                codeMatched: response.statusCode === monitor.expectedCode,
+                statusCode: statusCode,
+                codeMatched: statusCode === monitor.expectedCode,
                 textMatched: monitor.expectedText ? body.includes(monitor.expectedText) : true,
                 duration: end
             };
