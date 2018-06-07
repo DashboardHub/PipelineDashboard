@@ -1,19 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Environment } from '../environment.model';
 import { List } from '../../list';
-import { Summary } from '../summary.model';
 import { Profile } from '../../auth/profile';
 import { AuthService } from '../../auth/auth.service';
+import { TdDigitsPipe } from '@covalent/core';
 
 @Component({
   selector: 'qs-environments-list',
   templateUrl: './environments-list.component.html',
+  styleUrls: ['./environments-list.component.scss'],
 })
 export class EnvironmentsListComponent implements OnInit {
 
   @Input() public environments: List<Environment> = new List<Environment>();
   public profile: Profile = new Profile();
-  public summary: Summary;
+  public summary: any;
+  public releases: { name: string, value: number }[];
+  public pings: { name: string, value: number }[];
 
   constructor(private authService: AuthService) {
     this.authService.subscribeProfile()
@@ -22,22 +25,43 @@ export class EnvironmentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.calculateSummary();
+    this.releases = this.calculateReleases();
+    this.pings = this.calculatePings();
   }
 
   calculateSummary(): void {
-    this.summary = {
-      environments: 0,
-      releases: 0,
-      monitors: 0,
-      views: 0,
-      pings: 0,
-    };
+    let environments: number = 0;
+    let releases: number = 0;
+    let monitors: number = 0;
+    let views: number = 0;
+    let pings: number = 0;
     this.environments.list.forEach((environment: Environment) => {
-      this.summary.environments++;
-      this.summary.releases += environment.releases;
-      this.summary.monitors += environment.monitors ? environment.monitors.length : 0;
-      this.summary.views += environment.views ? environment.views : 0;
-      this.summary.pings += environment.pings.valid + environment.pings.invalid;
+      environments++;
+      releases += environment.releases;
+      monitors += environment.monitors ? environment.monitors.length : 0;
+      views += environment.views ? environment.views : 0;
+      pings += environment.pings.valid + environment.pings.invalid;
     });
+    this.summary = [
+      { name: 'Environments', value: environments, icon: 'developer_board' },
+      { name: 'Releases', value: releases, icon: 'new_releases' },
+      { name: 'Monitors', value: monitors, icon: 'timelapse' },
+      { name: 'Pings', value: pings, icon: 'receipt' },
+      { name: 'Views', value: views, icon: 'record_voice_over' },
+    ];
+  }
+
+  calculateReleases(): { name: string, value: number }[] {
+    return this.environments.list.map((environment: Environment) => ({ name: environment.title, value: environment.releases }));
+  }
+
+  calculatePings(): { name: string, value: number }[] {
+    return this.environments.list.map((environment: Environment) => {
+      return { name: environment.title, value: environment.pings.valid + environment.pings.invalid };
+    });
+  }
+
+  axisDigits(val: any): any {
+    return new TdDigitsPipe().transform(val);
   }
 }
