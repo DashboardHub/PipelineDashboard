@@ -129,7 +129,7 @@
           <span flex></span>
           <span class="mat-caption text-right" flex="30" layout-align="row" *ngIf="environment.latestRelease.release">
             <p layout="row" layout-align="end center"
-               [class.tc-green-A700]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+               [class.tc-green-A700]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
                [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
                [class.tc-red-A700]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
                 {{ environment.latestRelease.state | releaseState }}
