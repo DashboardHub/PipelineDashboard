@@ -15,7 +15,7 @@ export class EnvironmentsListComponent implements OnInit {
   @Input() public environments: List<Environment> = new List<Environment>();
   public profile: Profile = new Profile();
   public summary: any;
-  public releases: { name: string, value: number }[];
+  public uptime: { name: string, value: number }[];
   public pings: { name: string, value: number }[];
 
   constructor(private authService: AuthService) {
@@ -25,8 +25,8 @@ export class EnvironmentsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.calculateSummary();
-    this.releases = this.calculateReleases();
-    this.pings = this.calculatePings();
+    this.uptime = this.calculateUptime();
+    this.pings = this.calculateLatestPing();
   }
 
   calculateSummary(): void {
@@ -51,12 +51,12 @@ export class EnvironmentsListComponent implements OnInit {
     ];
   }
 
-  calculateReleases(): { name: string, value: number }[] {
+  calculateUptime(): { name: string, value: number }[] {
     return this.environments.list
       .map((environment: Environment) => ({ name: environment.title, value: (environment.pings.valid / (environment.pings.valid + environment.pings.invalid)) * 100 || 0 }));
   }
 
-  calculatePings(): { name: string, value: number }[] {
+  calculateLatestPing(): { name: string, value: number }[] {
     return this.environments.list.map((environment: Environment) => {
       return { name: environment.title, value: environment.latestPing.duration ? environment.latestPing.duration : 0 };
     });
