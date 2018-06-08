@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Environment } from '../environment.model';
 import { List } from '../../list';
 import { Profile } from '../../auth/profile';
@@ -10,23 +10,25 @@ import { TdDigitsPipe } from '@covalent/core';
   templateUrl: './environments-list.component.html',
   styleUrls: ['./environments-list.component.scss'],
 })
-export class EnvironmentsListComponent implements OnInit {
+export class EnvironmentsListComponent {
 
-  @Input() public environments: List<Environment> = new List<Environment>();
+  public _environments: List<Environment> = new List<Environment>();
+  @Input()
+  public set environments(environments: List<Environment>) {
+    this._environments = environments;
+    this.calculateSummary();
+    this.calculateUptime();
+    this.calculateLatestPing();
+  }
+  public get environments(): List<Environment> { return this._environments; }
+
   public profile: Profile = new Profile();
   public summary: any;
   public uptime: { name: string, value: number }[];
   public pings: { name: string, value: number }[];
 
   constructor(private authService: AuthService) {
-    this.authService.subscribeProfile()
-      .subscribe((profile: Profile) => this.profile = profile);
-  }
-
-  ngOnInit(): void {
-    this.calculateSummary();
-    this.uptime = this.calculateUptime();
-    this.pings = this.calculateLatestPing();
+    this.authService.subscribeProfile().subscribe((profile: Profile) => this.profile = profile);
   }
 
   calculateSummary(): void {
@@ -51,13 +53,15 @@ export class EnvironmentsListComponent implements OnInit {
     ];
   }
 
-  calculateUptime(): { name: string, value: number }[] {
-    return this.environments.list
-      .map((environment: Environment) => ({ name: environment.title, value: (environment.pings.valid / (environment.pings.valid + environment.pings.invalid)) * 100 || 0 }));
+  calculateUptime(): void {
+    this.uptime = this.environments.list
+      .map((environment: Environment) => (
+        { name: environment.title, value: (environment.pings.valid / (environment.pings.valid + environment.pings.invalid)) * 100 || 0 }
+      ));
   }
 
-  calculateLatestPing(): { name: string, value: number }[] {
-    return this.environments.list.map((environment: Environment) => {
+  calculateLatestPing(): void {
+    this.pings = this.environments.list.map((environment: Environment) => {
       return { name: environment.title, value: environment.latestPing.duration ? environment.latestPing.duration : 0 };
     });
   }
