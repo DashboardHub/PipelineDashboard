@@ -29,9 +29,9 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 ![Features](https://user-images.githubusercontent.com/624760/34434721-ef3fb3fe-ec7f-11e7-8c53-73263fb75c97.png)
 
-![Application Platform](https://user-images.githubusercontent.com/624760/35721596-a96e186c-07ea-11e8-9c63-037802281ebb.png)
+![Application Platform](https://user-images.githubusercontent.com/21239137/41191244-6e6e38f6-6be4-11e8-8b7b-1691dfeeb183.png)
 
-![Releases](https://user-images.githubusercontent.com/624760/36366927-42811710-1548-11e8-9cf8-6382714cd435.png)
+![Releases](https://user-images.githubusercontent.com/21239137/41191254-8542894c-6be4-11e8-9ce2-bf9df67fa985.png)
 
 ---
 
