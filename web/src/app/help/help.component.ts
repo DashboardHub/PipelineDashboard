@@ -20,6 +20,13 @@ export class HelpComponent {
       updatedAt: '05/16/2018 11:05 AM',
     },
     {
+      title: 'Glossary',
+      description: 'Explanation of key terms',
+      icon: 'assignment',
+      path: 'glossary',
+      updatedAt: '06/10/2018 03:48 PM',
+    },
+    {
       title: 'Types of Environments',
       description: 'What are the different types available and what do they mean',
       icon: 'merge_type',
