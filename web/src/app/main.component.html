@@ -18,8 +18,7 @@
           <mat-icon>{{item.icon}}</mat-icon>
           {{item.title}}</a>
       </ng-template>
-    </mat-nav-list>
-    <mat-nav-list td-navigation-drawer-menu>
+      <mat-divider></mat-divider>
       <a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">
         <mat-icon>vpn_key</mat-icon>
         Login
@@ -29,6 +28,16 @@
         Sign out
       </a>
     </mat-nav-list>
+    <!--<mat-nav-list td-navigation-drawer-menu>-->
+      <!--<a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">-->
+        <!--<mat-icon>vpn_key</mat-icon>-->
+        <!--Login-->
+      <!--</a>-->
+      <!--<a mat-list-item (click)="logout(); layout.close()" *ngIf="isAuthenticated()">-->
+        <!--<mat-icon>exit_to_app</mat-icon>-->
+        <!--Sign out-->
+      <!--</a>-->
+    <!--</mat-nav-list>-->
   </td-navigation-drawer>
   <td-layout-nav navigationRoute="/" color="accent">
     <button mat-icon-button td-menu-button tdLayoutToggle>

@@ -1,77 +1,50 @@
 <div layout-gt-xs="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-  <div flex-gt-xs="20">
-    <mat-card>
-      <mat-card-content class="text-center">
-        <div class="mat-headline push-bottom-none">{{ summary.environments | digits }}
-          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
-        </div>
-        <mat-icon class="icon tc-cyan-900">developer_board</mat-icon>
-        <div>
-          <div class="mat-subheading-2 push-bottom-none">Environments</div>
-          <div class="mat-caption tc-grey-600">Public</div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div flex-gt-xs="20">
-    <mat-card>
-      <mat-card-content class="text-center">
-        <div class="mat-headline push-bottom-none">{{ summary.releases | digits }}
-          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
-        </div>
-        <mat-icon class="icon tc-cyan-900">new_releases</mat-icon>
-        <div>
-          <div class="mat-subheading-2 push-bottom-none">Releases</div>
-          <div class="mat-caption tc-grey-600">Public</div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div flex-gt-xs="20">
-    <mat-card>
-      <mat-card-content class="text-center">
-        <div class="mat-headline push-bottom-none">{{ summary.monitors | digits }}
-          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
-        </div>
-        <mat-icon class="icon tc-cyan-900">timelapse</mat-icon>
-        <div>
-          <div class="mat-subheading-2 push-bottom-none">Monitors</div>
-          <div class="mat-caption tc-grey-600">Public</div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div flex-gt-xs="20">
-    <mat-card>
-      <mat-card-content class="text-center">
-        <div class="mat-headline push-bottom-none">{{ summary.pings | digits }}
-          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
-        </div>
-        <mat-icon class="icon tc-cyan-900">receipt</mat-icon>
-        <div>
-          <div class="mat-subheading-2 push-bottom-none">Pings</div>
-          <div class="mat-caption tc-grey-600">Public</div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <div flex-gt-xs="20">
-    <mat-card>
-      <mat-card-content class="text-center">
-        <div class="mat-headline push-bottom-none">{{ summary.views | digits }}
-          <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
-        </div>
-        <mat-icon class="icon tc-cyan-900">record_voice_over</mat-icon>
-        <div>
-          <div class="mat-subheading-2 push-bottom-none">Views</div>
-          <div class="mat-caption tc-grey-600">Public</div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <ng-template let-item ngFor [ngForOf]="summary">
+    <div flex-gt-xs="20">
+      <mat-card>
+        <mat-card-content class="text-center">
+          <div class="mat-headline push-bottom-none">{{ item.value | digits }}
+            <!--<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>-->
+          </div>
+          <mat-icon class="icon tc-cyan-900">{{ item.icon }}</mat-icon>
+          <div>
+            <div class="mat-subheading-2 push-bottom-none">{{ item.name }}</div>
+            <!--<div class="mat-caption tc-grey-600">Public</div>-->
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ng-template>
 </div>
 
-<div class="mat-content" flex>
+<div class="mat-content" layout-padding flex>
+  <mat-card>
+    <div layout-gt-xs="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+      <div class="graph-gauge" flex-gt-xs="50">
+        <ngx-charts-gauge
+          [results]="uptime"
+          [animations]="true"
+          [units]="'Uptime'"
+          [bigSegments]="10"
+          [smallSegments]="5"
+          [valueFormatting]="axisDigits">
+        </ngx-charts-gauge>
+      </div>
+      <div class="graph-gauge" flex-gt-xs="50">
+        <ngx-charts-gauge
+          [results]="pings"
+          [animations]="true"
+          [units]="'Monitors'"
+          [bigSegments]="10"
+          [smallSegments]="5"
+          [valueFormatting]="axisDigits">
+        </ngx-charts-gauge>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<div class="mat-content" layout-padding flex>
   <mat-card>
     <mat-card-title>Environments</mat-card-title>
     <mat-card-subtitle>Recent activity</mat-card-subtitle>
