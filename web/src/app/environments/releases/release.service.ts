@@ -12,7 +12,9 @@ export class ReleaseService {
     return this.http.get<List<Release>>(`{api}/environments/${environmentId}/releases`);
   }
 
-  add(release: Release, state: string) {
-    console.log(release, state);
+  add(environmentId: string, release: Release, state: string): Observable<Release> {
+    return this.http.post<Release>(`{api}/environments/${environmentId}/deployed/${release.token.id}/${state}`, {
+      release: release.version
+    });
   }
 }

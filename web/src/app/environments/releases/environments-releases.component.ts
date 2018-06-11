@@ -41,6 +41,6 @@ export class EnvironmentsReleasesComponent implements OnInit {
     let release: Release = new Release();
     release.version = form.value.version;
     release.token = this.tokens.list.find((token: Token) => token.id === form.value.token);
-    this.releaseService.add(release, form.value.state);
+    this.releaseService.add(this.environment.id, release, form.value.state).subscribe(() => this.refresh());
   }
 }
