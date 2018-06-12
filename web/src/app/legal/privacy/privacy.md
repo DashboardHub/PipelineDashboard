@@ -18,7 +18,7 @@ This privacy policy should be read alongside, and in addition to, our Terms and 
 | **Jaoude Studios Ltd,** or **us** | Jaoude Studios Ltd, a company incorporated in England and Wales with registered number 14 whose registered office is at Victoria Road, Knaphill, Woking, Surrey, Knaphill, Woking, Surrey, GU21 2AH; |
 | **UK and EU Cookie Law** | the Privacy and Electronic Communications (EC Directive) Regulations 2003 as amended by the Privacy and Electronxic Communications (EC Directive) (Amendment) Regulations 2011; |
 | **User** or **you** | any third party that accesses the Website and is not either (i) employed by Jaoude Studios Ltd and acting in the course of their employment or (ii) engaged as a consultant or otherwise providing services to Jaoude Studios Ltd and accessing the Website in connection with the provision of such services; and |
-| **Website** | the website that you are currently using, http://www.dashboardhub.io/, and any sub-domains of this site unless expressly excluded by their own terms and conditions. |
+| **Website** | the website that you are currently using, http://dashboardhub.io/, and any sub-domains of this site unless expressly excluded by their own terms and conditions. |
 
 1. 2.In this privacy policy, unless the context requires a different interpretation:
   1. a.the singular includes the plural and vice versa;
