@@ -7,7 +7,7 @@ import { ReleasesForm } from './releases.form';
 import { Token } from '../tokens/token.model';
 import { Environment } from '../environment.model';
 import { AbstractControl } from '@angular/forms';
-
+import { Deployed } from './deployed.model';
 
 @Component({
   selector: 'qs-environments-releases',
@@ -38,9 +38,11 @@ export class EnvironmentsReleasesComponent implements OnInit {
   }
 
   submit(form: AbstractControl): void {
-    let release: Release = new Release();
-    release.version = form.value.version;
-    release.token = this.tokens.list.find((token: Token) => token.id === form.value.token);
-    this.releaseService.add(this.environment.id, release, form.value.state).subscribe(() => this.refresh());
+    let deployed: Deployed = new Deployed();
+    deployed.environmentId = this.environment.id;
+    deployed.release = form.value.version;
+    deployed.state = form.value.state;
+    deployed.token = this.tokens.list.find((token: Token) => token.id === form.value.token);
+    this.releaseService.add(deployed).subscribe(() => this.refresh());
   }
 }
