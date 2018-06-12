@@ -81,6 +81,7 @@ import { Angulartics2Module } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { ReleaseService } from './environments/releases/release.service';
 import { ReleasesResolver } from './environments/releases/releases.resolve';
+import { EncodeUriPipe } from './pipes/urlencode.pipe';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('access_token');
@@ -104,6 +105,7 @@ export function tokenGetter(): string | null {
     EnvironmentsViewComponent,
     EnvironmentsViewPrivateComponent,
     EnvironmentsViewPublicComponent,
+    EncodeUriPipe,
     FeaturesComponent,
     HelpComponent,
     LoginComponent,
