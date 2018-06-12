@@ -55,7 +55,9 @@ module.exports.list = (event, context, callback) => {
                     }
                 };
 
-                release.duration = (new Date(release.finishDeploy || release.failDeploy || release.finishBuild || release.failBuild).getTime() - new Date(release.startBuild || release.startDeploy).getTime()) / 1000;
+                let start = release.startBuild || release.startDeploy;
+                let end = release.finishDeploy || release.failDeploy || release.startDeploy || release.finishBuild || release.failBuild;
+                release.duration = end ? (new Date(end).getTime() - new Date(start).getTime()) / 1000 : 0;
 
                 releases.push(release);
             });
