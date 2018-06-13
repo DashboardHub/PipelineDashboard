@@ -97,7 +97,7 @@ const routes: Routes = [
             path: ':id/releases',
             pathMatch: 'full',
             component: EnvironmentsReleasesComponent,
-            resolve: { releases: ReleasesResolver },
+            resolve: { releases: ReleasesResolver, tokens: TokensResolver, environment: PrivateEnvironmentResolver },
           },
           {
             path: ':id/tokens',

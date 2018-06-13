@@ -1,35 +1,62 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <a mat-button [routerLink]="['/environments', environmentId]"><mat-icon>arrow_back</mat-icon></a>
+    <a mat-button [routerLink]="['/environments', environment.id]"><mat-icon>arrow_back</mat-icon></a>
     <span flex></span>
     <button mat-button class="tc-green-A700" (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
   </mat-toolbar-row>
 </mat-toolbar>
 
+<td-message label="Error!"  color="warn" icon="error" *ngIf="tokens.list.length === 0" sublabel="You cannot create a release entry (either with a curl command or with this form) without a token. To create a token click the token icon on the right.">
+  <button td-message-actions mat-icon-button [routerLink]="['/environments', environment.id, 'tokens']" matTooltip="Click here to go to create a token.">
+    <mat-icon>vpn_key</mat-icon>
+  </button>
+</td-message>
+
 <div class="mat-content" layout-padding flex>
   <mat-card>
-    <mat-card-title>Releases</mat-card-title>
-    <mat-card-subtitle>Recent activity</mat-card-subtitle>
+    <mat-card-header>
+      <mat-card-title>Releases</mat-card-title>
+      <mat-card-subtitle>Recent activity</mat-card-subtitle>
+    </mat-card-header>
     <mat-divider></mat-divider>
-    <mat-list class="will-load item-list">
-      <ng-template tdLoading="items.load">
-        <ng-template let-release let-last="last" ngFor [ngForOf]="releases.list">
-          <mat-list-item layout-align="row">
-            <mat-icon matListAvatar>new_releases</mat-icon>
-            <h3 matLine>{{ release.version }}</h3>
-            <p matLine hide-xs>{{ release.token.name }}</p>
-            <span flex></span>
-            <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
-              <p>{{ release.latest.state | releaseState }}</p>
-              <p>{{ release.duration | digits }}s</p>
-            </span>
-            <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30">
-              <p>{{ release.latest.createdAt | timeAgo }}</p>
-            </span>
-          </mat-list-item>
-          <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
+    <mat-card-content>
+      <span layout="row">
+        <td-dynamic-forms [elements]="form.elements" #dynamicForm flex="80">
+          <ng-template let-element ngFor [ngForOf]="form.elements">
+            <ng-template let-control="control" [tdDynamicFormsError]="element.name">
+                <span *ngIf="control.touched || !control.pristine">
+                  <span *ngIf="control.hasError('required')">Required</span>
+                  <span *ngIf="control.hasError('min')">Min value: {{element.min}}</span>
+                  <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
+                  <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
+                  <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
+                </span>
+            </ng-template>
+          </ng-template>
+        </td-dynamic-forms>
+        <button mat-button color="accent" flex="20" [disabled]="!dynamicForm.valid || tokens.list.length === 0" (click)="submit(dynamicForm)">Submit</button>
+      </span>
+      <mat-divider></mat-divider>
+      <mat-list class="will-load item-list">
+        <ng-template tdLoading="items.load">
+          <ng-template let-release let-last="last" ngFor [ngForOf]="releases.list">
+            <mat-list-item layout-align="row">
+              <mat-icon matListAvatar>new_releases</mat-icon>
+              <h3 matLine>{{ release.version }}</h3>
+              <p matLine hide-xs>{{ release.token.name }}</p>
+              <span flex></span>
+              <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
+                <p>{{ release.latest.state | releaseState }}</p>
+                <p>{{ release.duration | digits }}s</p>
+              </span>
+              <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30">
+                <p>{{ release.latest.createdAt | timeAgo }}</p>
+              </span>
+            </mat-list-item>
+            <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
+          </ng-template>
         </ng-template>
-      </ng-template>
-    </mat-list>
+      </mat-list>
+    </mat-card-content>
   </mat-card>
 </div>
