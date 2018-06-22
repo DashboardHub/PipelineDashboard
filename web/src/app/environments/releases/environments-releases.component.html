@@ -19,6 +19,23 @@
       <mat-card-subtitle>Recent activity</mat-card-subtitle>
     </mat-card-header>
     <mat-divider></mat-divider>
+      <div style="height:250px;">
+        <ngx-charts-bar-vertical-2d
+          [results]="graph"
+          [gradient]="true"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          [xAxisLabel]="Versions"
+          [yAxisLabel]="Duration"
+          [yAxisTickFormatting]="axisDigits"
+          [barPadding]="2"
+          [groupPadding]="8">
+        </ngx-charts-bar-vertical-2d>
+      </div>
+    <mat-divider></mat-divider>
     <mat-card-content>
       <span layout="row">
         <td-dynamic-forms [elements]="form.elements" #dynamicForm flex="80">
