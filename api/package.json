@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "tslint src/** && tsc --outDir dist src/** && node dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tslint src/** && tsc --outDir dist src/** && cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,10 @@
   "devDependencies": {
     "@types/express": "^4.16.0",
     "@types/node": "^10.5.0",
+    "chai": "^4.1.2",
+    "cucumber": "^4.2.1",
+    "cucumber-pretty": "^1.4.4",
+    "supertest": "^3.1.0",
     "tslint": "^5.10.0",
     "typescript": "^2.9.2"
   }

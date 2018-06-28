@@ -9,3 +9,5 @@ environments.listen(port, (err) => {
 
     return console.log(`server is listening on ${port}`); // tslint:disable-line
 });
+
+export = environments;

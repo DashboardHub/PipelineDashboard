@@ -2,10 +2,11 @@
 
 ## Hello world
 phase 1
-- lint strict
-- auto reload api
 - cucumber
+- coverage
 - serverless
+- auto reload api
+- lint strict
 
 phase 2
 - authentication
