@@ -1,0 +1,21 @@
+{
+  "name": "pipeline-api",
+  "version": "0.10.0",
+  "description": "phase 1 - express - typescript - cucumber - serverless",
+  "main": "server.js",
+  "scripts": {
+    "start": "tslint src/** && tsc --outDir dist src/** && node dist/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/node": "^10.5.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
+  }
+}

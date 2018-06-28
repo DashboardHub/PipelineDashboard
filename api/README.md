@@ -2,8 +2,8 @@
 
 ## Hello world
 phase 1
-- express
-- typescript
+- lint strict
+- auto reload api
 - cucumber
 - serverless
 
