@@ -1,7 +1,8 @@
 import * as express from 'express';
+import { Application, Request, Response} from 'express';
 
 class Environments {
-    public express;
+    public express: Application;
 
     constructor() {
         this.express = express();
@@ -10,7 +11,8 @@ class Environments {
 
     private mountHomeRoute(): void {
         const router = express.Router();
-        router.get('/', (req, res) => {
+
+        router.get('/', (req: Request, res: Response) => {
             res.json({
                 message: 'Hello World!',
             });

@@ -5,7 +5,7 @@ const supertest = require('supertest');
 class CustomWorld {
 
   constructor() {
-    this.agent = supertest(require(`../../dist/server.js`));
+    this.agent = supertest(require(`../../src/server.js`));
   }
 
   sendRequest(method, path, data = []) {

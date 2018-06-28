@@ -2,7 +2,7 @@ import environments from './environments';
 
 const port = process.env.PORT || 3000;
 
-environments.listen(port, (err) => {
+environments.listen(port, (err: Error) => {
     if (err) {
         return console.log(err) // tslint:disable-line
     }

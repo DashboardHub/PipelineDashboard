@@ -2,11 +2,10 @@
 
 ## Hello world
 phase 1
-- cucumber
-- coverage
-- serverless
 - auto reload api
+- serverless
 - lint strict
+- tsconfig
 
 phase 2
 - authentication
