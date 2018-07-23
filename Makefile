@@ -22,7 +22,6 @@ api: api.run
 ui: ui.run
 
 install.local: api.clean api.install ui.install
-	(cd api; ./node_modules/serverless/bin/serverless dynamodb install --stage dev > /dev/null)
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
