@@ -1,10 +1,10 @@
 {
   "name": "pipeline-api",
   "version": "0.10.0",
-  "description": "phase 1 - express - typescript - cucumber - serverless",
+  "description": "express - typescript - cucumber - serverless",
   "main": "server.js",
   "scripts": {
-    "start": "tslint src/**/*.ts && tsc && node dist/server.js",
+    "start": "tslint src/**/*.ts && tsc && node src/server.js",
     "test": "tslint src/**/*.ts && tsc && nyc cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --exit"
   },
   "author": "",
