@@ -1,13 +1,52 @@
-import environments from './environments';
+import * as express from 'express';
+import * as cors from 'cors';
+import * as helmet from 'helmet';
+import * as http from 'http';
 
-const port = process.env.PORT || 3000;
+import { AddressInfo } from 'net';
+import { CorsOptions } from 'cors';
 
-environments.listen(port, (err: Error) => {
-    if (err) {
-        return console.log(err) // tslint:disable-line
-    }
+import Environments from './environments';
 
-    return console.log(`server is listening on ${port}`); // tslint:disable-line
-});
+/*
+ * Load up the App
+ */
+const app: express.Application = express();
 
-export = environments;
+/*
+ * Configure security elements
+ */
+const corsOpts: CorsOptions = {
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'HEAD'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+    optionsSuccessStatus: 200
+};
+
+app.enable('trust proxy');
+app.use(helmet());
+app.options('*', cors(corsOpts));
+app.use(cors(corsOpts));
+
+
+/*
+ * Routes
+ */
+app.use('/', Environments);
+
+/*
+ * Create the server
+ */
+const server = http.createServer(app);
+const port = process.env['PORT'];
+
+server.listen(port);
+server.on('listening', listening);
+
+function listening() {
+    const addr = <AddressInfo>server.address();
+    console.log(`Listening on ${addr.address}:${addr.port}`);
+}
+
+module.exports = app;

@@ -9,7 +9,7 @@
 
 ### Run API
 
-- `npm start`
+- `npm start` run full stack with serverless wrapping express
 
 ### Run tests
 
@@ -49,10 +49,9 @@ Lines        : 93.33% ( 14/15 )
 
 phase 1
 - auto reload api
-- serverless
 - lint strict
 - tsconfig
 
 phase 2
+- elasticsearch
 - authentication
-- environments

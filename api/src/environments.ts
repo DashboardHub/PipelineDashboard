@@ -1,24 +1,21 @@
-import * as express from 'express';
-import { Application, Request, Response} from 'express';
+import { Router } from 'express';
 
-class Environments {
-    public express: Application;
+export class Environments {
+
+    public router: Router;
 
     constructor() {
-        this.express = express();
-        this.mountHomeRoute();
+        this.router = Router();
+        this.registerRoutes();
     }
 
-    private mountHomeRoute(): void {
-        const router = express.Router();
+    registerRoutes() {
+        this.router.get('/', this.test.bind(this));
+    }
 
-        router.get('/', (req: Request, res: Response) => {
-            res.json({
-                message: 'Hello World!',
-            });
-        });
-        this.express.use('/', router);
+    test(req: any, res: any, next: any) {
+        res.status(200).send({ message: 'hello world!' });
     }
 }
 
-export default new Environments().express;
+export default new Environments().router;

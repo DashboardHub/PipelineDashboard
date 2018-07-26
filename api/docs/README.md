@@ -1,1 +1,7 @@
 # Documentation
+
+## Environments
+
+- `/environments`
+
+

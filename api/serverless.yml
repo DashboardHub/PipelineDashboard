@@ -1,0 +1,43 @@
+service: dashboardhub-api
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-2
+  memorySize: 128
+  timeout: 5
+  environment:
+    STAGE: ${opt:stage}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ses:SendEmail"
+      Resource: '*'
+
+package:
+  exclude:
+    - "**/*.ts"
+    - "*"
+  include:
+    - "src/**/*.js"
+
+plugins:
+  - serverless-domain-manager
+  - serverless-plugin-typescript
+  - serverless-offline
+
+functions:
+  environments:
+    description: 'DashboardHub API'
+    handler: src/lambda.api
+    events:
+      - http: ANY /
+      - http: ANY /{proxy+}
+
+custom:
+  customDomain:
+    certificateName: dashboardhub.io
+    domainName: ${file(./config.json):domain.${opt:stage}}
+    basePath: ''
+    stage: ${opt:stage}
+    createRoute53Record: true
