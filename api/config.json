@@ -1,18 +1,23 @@
 {
-  "domain": {
-    "dev": "localhost:3000",
-    "test": "api-pipeline-test.dashboardhub.io",
-    "production": "api-pipeline.dashboardhub.io"
-  },
-  "database": {
-    "environments": {
-      "table": "pipelinedashboard-environments"
+    "development": {
+        "username": "root",
+        "password": "root",
+        "database": "dashboardhub",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
     },
-    "deploys": {
-      "table": "pipelinedashboard-deploys"
+    "test": {
+        "username": "root",
+        "password": "root",
+        "database": "dashboardhub-test",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
     },
-    "pings": {
-      "table": "pipelinedashboard-pings"
+    "production": {
+        "username": "root",
+        "password": "root",
+        "database": "dashboardhub-prod",
+        "host": "127.0.0.1",
+        "dialect": "mysql"
     }
-  }
 }

@@ -107,7 +107,7 @@
     // "rootDirs": [],
 
     // List of folders to include type definitions from.
-     "typeRoots": ["node_modules/@types"]
+     "typeRoots": ["node_modules/@types"],
 
     // Type declaration files to be included in compilation.
     // "types": [],
@@ -142,13 +142,12 @@
      ***** */
 
     // Enables experimental support for ES7 decorators.
-    // "experimentalDecorators": true,
+     "experimentalDecorators": true,
 
     // Enables experimental support for emitting type metadata for decorators.
-    // "emitDecoratorMetadata": true,
+     "emitDecoratorMetadata": true
   },
   "exclude": [
-    "tests",
     "node_modules"
   ]
 }

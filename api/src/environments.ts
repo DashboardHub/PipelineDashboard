@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { Environment } from './db/models/environment';
 
 export class Environments {
 
@@ -14,7 +15,10 @@ export class Environments {
     }
 
     test(req: any, res: any, next: any) {
-        res.status(200).send({ message: 'hello world!' });
+        Environment.findAll().then((data) => {
+            res.status(200).send({ data });
+        });
+
     }
 }
 

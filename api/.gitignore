@@ -2,5 +2,7 @@ dist/
 node_modules/
 src/**/*.js
 src/**/*.js.*
+tests/**/*.js
+tests/**/*.js.*
 .coverage/
 .build/

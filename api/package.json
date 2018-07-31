@@ -4,9 +4,11 @@
   "description": "express - typescript - cucumber - serverless",
   "main": "server.js",
   "scripts": {
-    "start": "npx serverless offline start --stage dev",
-    "start:express": "node src/server.js",
-    "test": "tslint src/**/*.ts && tsc && nyc cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --exit"
+    "start": "npx tsc && npx sequelize db:migrate && npx sequelize db:seed:all && npx serverless offline start --stage dev",
+    "db:all": "npx tsc && npx sequelize db:create && npm run db:migrate && npm run db:seed",
+    "db:migrate": "npx tsc && npx sequelize db:migrate",
+    "db:seed": "npx tsc && npx sequelize db:seed:all",
+    "test": "tslint src/**/*.ts && npx tsc && npx sequelize db:migrate && npx sequelize db:seed:all && nyc cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --exit"
   },
   "repository": "git@github.com:DashboardHub/PipelineDashboard.git",
   "license": "MIT",
@@ -16,8 +18,11 @@
     "cors": "^2.8.4",
     "express": "^4.16.3",
     "helmet": "^3.13.0",
-    "mysql": "^2.16.0",
+    "mysql2": "^1.5.3",
+    "reflect-metadata": "^0.1.12",
     "sequelize": "^4.38.0",
+    "sequelize-cli": "^4.0.0",
+    "sequelize-typescript": "^0.6.6-beta.1",
     "uuid": "^3.3.2",
     "winston": "^3.0.0"
   },

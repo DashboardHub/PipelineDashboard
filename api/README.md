@@ -3,7 +3,7 @@
 ## Dependencies
 
 - NodeJS v8+
-- ElasticSearch (Elastic)
+- MySQL v5.6
 
 ## Quickstart
 
@@ -45,13 +45,9 @@ Lines        : 93.33% ( 14/15 )
 ================================================================================
 ```
 
-## Hello world
+## Migrations & Seed
 
-phase 1
-- auto reload api
-- lint strict
-- tsconfig
+This will happen as part of running the application or tests.
 
-phase 2
-- elasticsearch
-- authentication
+- `npm run db:migrate`
+- `npm run db:seed`

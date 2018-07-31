@@ -19,6 +19,7 @@ package:
     - "**/*.ts"
     - "*"
   include:
+    - "config.json"
     - "src/**/*.js"
 
 plugins:
@@ -37,7 +38,7 @@ functions:
 custom:
   customDomain:
     certificateName: dashboardhub.io
-    domainName: ${file(./config.json):domain.${opt:stage}}
+    domainName: ${file(./serverless.json):domain.${opt:stage}}
     basePath: ''
     stage: ${opt:stage}
     createRoute53Record: true

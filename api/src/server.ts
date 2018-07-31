@@ -6,6 +6,8 @@ import * as http from 'http';
 import { AddressInfo } from 'net';
 import { CorsOptions } from 'cors';
 
+import { db } from './db';
+
 import Environments from './environments';
 
 /*
@@ -44,7 +46,9 @@ const port = process.env['PORT'];
 server.listen(port);
 server.on('listening', listening);
 
-function listening() {
+async function listening() {
+    await db.sync();
+
     const addr = <AddressInfo>server.address();
     console.log(`Listening on ${addr.address}:${addr.port}`);
 }

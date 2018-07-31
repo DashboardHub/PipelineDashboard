@@ -39,17 +39,15 @@ api.install:
 	(cd api; rm -fr node_modules || echo "Nothing to delete")
 	(cd api; npm install)
 
-api.env: guard-AUTH0_CLIENT_ID guard-AUTH0_CLIENT_SECRET api.clean
+api.env: api.clean
 	(cd api; sed -i 's|pipelinedashboard-environments|pipelinedashboard-environments-prod|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-deployed|pipelinedashboard-deployed-prod|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-prod|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-projects|pipelinedashboard-projects-test|g' ./config.json)
+	(cd api; sed -i 's|pipelinedashboard-deploys|pipelinedashboard-deploys-prod|g' ./config.json)
+	(cd api; sed -i 's|pipelinedashboard-pings|pipelinedashboard-pings-prod|g' ./config.json)
 
-api.env.test: guard-AUTH0_CLIENT_ID_TEST guard-AUTH0_CLIENT_SECRET_TEST api.clean
+api.env.test: api.clean
 	(cd api; sed -i 's|pipelinedashboard-environments|pipelinedashboard-environments-test|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-deployed|pipelinedashboard-deployed-test|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-pinged|pipelinedashboard-pinged-test|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-projects|pipelinedashboard-projects-test|g' ./config.json)
+	(cd api; sed -i 's|pipelinedashboard-deploys|pipelinedashboard-deploys-test|g' ./config.json)
+	(cd api; sed -i 's|pipelinedashboard-pings|pipelinedashboard-pings-test|g' ./config.json)
 
 api.test:
 	(cd api; npm test)
@@ -58,7 +56,6 @@ api.run: api.env.test
 	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
 
 api.deploy: api.env
-	(cd api; mv auth.prod.pem auth.pem)
 	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage production)
 
 api.deploy.test: api.env.test
