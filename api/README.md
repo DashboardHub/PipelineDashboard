@@ -51,3 +51,19 @@ This will happen as part of running the application or tests.
 
 - `npm run db:migrate`
 - `npm run db:seed`
+
+## Debugging
+
+Prepend command with `DEBUG=*`
+
+For example `DEBUG=* npm start`, then with a validation error example output...
+
+```bash
+sequelize:pool connection acquired +9ms
+sequelize:sql:mysql executing(default) : INSERT INTO `environments` (`name`) VALUES ('Environment 1'),('Environment 2'); +9ms
+sequelize:sql:mysql executed(default) : INSERT INTO `environments` (`name`) VALUES ('Environment 1'),('Environment 2'); +4ms
+sequelize:pool connection released +5ms
+retry-as-promised:error SequelizeUniqueConstraintError: Validation error +0ms
+
+ERROR: Validation error
+```

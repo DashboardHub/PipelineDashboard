@@ -1,8 +1,17 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import {Table, Column, Model, Sequelize, Length} from 'sequelize-typescript';
 
-@Table
+@Table({
+    tableName: 'environments'
+})
 export class Environment extends Model<Environment> {
 
+    @Column({
+        primaryKey: true,
+        defaultValue: Sequelize.UUIDV4
+    })
+    id: string = '';
+
+    @Length({min: 3, max: 32})
     @Column
     name: string = '';
 

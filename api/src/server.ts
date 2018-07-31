@@ -47,7 +47,7 @@ server.listen(port);
 server.on('listening', listening);
 
 async function listening() {
-    await db.sync();
+    await db;
 
     const addr = <AddressInfo>server.address();
     console.log(`Listening on ${addr.address}:${addr.port}`);
