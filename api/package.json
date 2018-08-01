@@ -8,7 +8,8 @@
     "db:all": "npx tsc && npx sequelize db:create && npm run db:migrate && npm run db:seed",
     "db:migrate": "npx tsc && npx sequelize db:migrate",
     "db:seed": "npx tsc && npx sequelize db:seed:all",
-    "test": "tslint src/**/*.ts && npx tsc && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && nyc cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --exit"
+    "test:ci": "tslint src/**/*.ts && npx tsc && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && nyc cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --exit",
+    "test:local": "tslint src/**/*.ts && npx tsc && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && nyc cucumber-js ./tests/features --require ./tests --format ./node_modules/cucumber-pretty --exit"
   },
   "repository": "git@github.com:DashboardHub/PipelineDashboard.git",
   "license": "MIT",

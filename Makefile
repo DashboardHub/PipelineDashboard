@@ -15,7 +15,8 @@ guard-%:
 	fi
 
 # ALIAS
-test: api.test
+test.local: api.test.local
+test.ci: api.test.ci
 
 api: api.run
 
@@ -36,8 +37,11 @@ api.install:
 	(cd api; rm -fr node_modules || echo "Nothing to delete")
 	(cd api; npm install)
 
-api.test:
-	(cd api; npm test)
+api.test.local:
+	(cd api; npm test:local)
+
+api.test.ci:
+	(cd api; npm test:ci)
 
 api.run:
 	(cd api; npx serverless offline start --stage dev)
