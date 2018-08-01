@@ -21,7 +21,7 @@ api: api.run
 
 ui: ui.run
 
-install.local: api.clean api.install ui.install
+install.local: api.install ui.install
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
 
@@ -32,41 +32,27 @@ deploy: pipeline.version.startDeploy pipeline.version.prod.startDeploy api.deplo
 deploy.test: pipeline.version.test.startDeploy pipeline.version.prod.test.startDeploy api.deploy.test ui.deploy.test pipeline.version.test.finishDeploy pipeline.version.prod.test.finishDeploy
 
 # API
-api.clean:
-	(cd api; cp config.json.tpl config.json)
-
 api.install:
 	(cd api; rm -fr node_modules || echo "Nothing to delete")
 	(cd api; npm install)
 
-api.env: api.clean
-	(cd api; sed -i 's|pipelinedashboard-environments|pipelinedashboard-environments-prod|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-deploys|pipelinedashboard-deploys-prod|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-pings|pipelinedashboard-pings-prod|g' ./config.json)
-
-api.env.test: api.clean
-	(cd api; sed -i 's|pipelinedashboard-environments|pipelinedashboard-environments-test|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-deploys|pipelinedashboard-deploys-test|g' ./config.json)
-	(cd api; sed -i 's|pipelinedashboard-pings|pipelinedashboard-pings-test|g' ./config.json)
-
 api.test:
 	(cd api; npm test)
 
-api.run: api.env.test
-	(cd api; ./node_modules/serverless/bin/serverless offline start --stage dev)
+api.run:
+	(cd api; npx serverless offline start --stage dev)
 
-api.deploy: api.env
-	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage production)
+api.deploy:
+	(cd api; npx serverless deploy -v --stage production)
 
-api.deploy.test: api.env.test
-	(cd api; mv auth.test.pem auth.pem)
-	(cd api; ./node_modules/serverless/bin/serverless deploy -v --stage test)
+api.deploy.test:
+	(cd api; npx serverless deploy -v --stage test)
 
 api.remove:
-	(cd api; ./node_modules/serverless/bin/serverless remove -v --stage production)
+	(cd api; npx serverless remove -v --stage production)
 
 api.remove.test:
-	(cd api; ./node_modules/serverless/bin/serverless remove -v --stage test)
+	(cd api; npx serverless remove -v --stage test)
 
 # UI
 ui.install:
@@ -74,7 +60,7 @@ ui.install:
 	(cd web; npm install)
 
 ui.run:
-	(cd web; ./node_modules/@angular/cli/bin/ng serve)
+	(cd web; npx ng serve)
 
 ui.deploy: ui.version ui.build ui.sync
 
