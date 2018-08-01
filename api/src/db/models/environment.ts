@@ -9,11 +9,11 @@ export class Environment extends Model<Environment> {
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4
     })
-    id: string = '';
+    id?: string;
 
     @Length({min: 3, max: 32})
     @Column
-    name: string = '';
+    name?: string;
 
     // @CreatedAt
     // @Column
@@ -22,7 +22,6 @@ export class Environment extends Model<Environment> {
     // @UpdatedAt
     // @Column
     // updatedAt: Date = new Date();
-
 }
 
 export default Environment;
