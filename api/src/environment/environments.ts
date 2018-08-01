@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { Environment } from './db/models/environment';
+import { Environment } from '../db/models/environment';
 
 export class Environments {
 
@@ -10,11 +10,11 @@ export class Environments {
         this.registerRoutes();
     }
 
-    registerRoutes() {
+    private registerRoutes() {
         this.router.get('/', this.test.bind(this));
     }
 
-    test(req: any, res: any, next: any) {
+    private test(req: any, res: any, next: any) {
         Environment.findAll<Environment>().then((data) => {
             res.status(200).send({ data });
         });

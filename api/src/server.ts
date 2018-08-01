@@ -8,7 +8,7 @@ import { CorsOptions } from 'cors';
 
 import { db } from './db';
 
-import Environments from './environments';
+import Environments from './environment/environments';
 
 /*
  * Load up the App
