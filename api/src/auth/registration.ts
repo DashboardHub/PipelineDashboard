@@ -1,7 +1,8 @@
 import * as bcrypt from 'bcrypt';
-import {NextFunction, Request, Response, Router} from 'express';
+import { NextFunction, Request, Response, Router } from 'express';
 
 import User from '../db/models/user';
+import AuditService from './auditService';
 
 export class Registration {
 
@@ -23,7 +24,7 @@ export class Registration {
         if (!email || !password) {
             return res
                 .status(400)
-                .json({error: 'Registration failed'});
+                .json({ error: 'Registration failed' });
         }
 
         if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(password)) {
@@ -39,9 +40,14 @@ export class Registration {
         User.findOne<User>({ where: { email: email.toLowerCase() }, raw: true })
             .then((user: User | null) => {
                 if (user) {
-                    return res
+                    return AuditService.create(req, {
+                        details: `User "${user.email}" already exists`,
+                        namespace: 'auth',
+                        type: 'registration',
+                        userId: user.id,
+                    }).then(() => res
                         .status(400)
-                        .json({error: 'Registration failed'});
+                        .json({ error: 'Registration failed' }));
                 }
 
                 const data = {
@@ -50,13 +56,21 @@ export class Registration {
                 };
 
                 return User.create(data)
-                    .then((newUser: User) => res
-                        .status(200)
-                        .json({ id: newUser.id, email: newUser.email }));
+                           .then((newUser: User) => AuditService
+                               .create(req, {
+                                   details: `User "${newUser.email}" registered`,
+                                   namespace: 'auth',
+                                   type: 'registration',
+                                   userId: newUser.id,
+                               })
+                               .then(() => newUser))
+                           .then((newUser: User) => res
+                               .status(200)
+                               .json({ id: newUser.id, email: newUser.email }));
             })
             .catch(() => res
                 .status(400)
-                .json({error: 'Registration failed'}));
+                .json({ error: 'Registration failed' }));
     }
 }
 

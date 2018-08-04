@@ -1,12 +1,12 @@
 import * as bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
 import * as passport from 'passport';
 import * as passportJWT from 'passport-jwt';
 import * as passportLocal from 'passport-local';
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy  = passportJWT.Strategy;
 
-import { NextFunction, Request, Response } from 'express';
-import { User } from '../db/models/user';
+import User from '../db/models/user';
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -33,8 +33,12 @@ passport.deserializeUser((id: string, done) => {
 passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, (email, password, done) => {
     User.findOne<User>({ where: { email: email.toLowerCase() }, raw: true })
         .then((user: User | null) => {
-            if (!user || !bcrypt.compareSync(password, user.hash || '')) {
-                return done(undefined, undefined, { message: 'Login failed' });
+            if (!user) {
+                return done(undefined, undefined, { message: 'User not found' });
+            }
+
+            if (!bcrypt.compareSync(password, user.hash || '')) {
+                return done(undefined, undefined, { message: `Invalid password for user "${user.id}"` });
             }
 
             return done(undefined, user);

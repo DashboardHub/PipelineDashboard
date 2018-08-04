@@ -1,4 +1,4 @@
-import { Table, Column, Model, Sequelize, Length, IsEmail } from 'sequelize-typescript';
+import {Table, Column, Model, Sequelize, Length, IsEmail, CreatedAt, UpdatedAt} from 'sequelize-typescript';
 
 @Table({
     tableName: 'users'
@@ -20,13 +20,13 @@ export class User extends Model<User> {
     @Column
     hash?: string;
 
-    // @CreatedAt
-    // @Column
-    // createdAt: Date = new Date();
-    //
-    // @UpdatedAt
-    // @Column
-    // updatedAt: Date = new Date();
+    @CreatedAt
+    @Column
+    creationDate: Date = new Date();
+
+    @UpdatedAt
+    @Column
+    updatedOn: Date = new Date();
 }
 
 export default User;
