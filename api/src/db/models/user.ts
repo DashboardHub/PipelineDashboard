@@ -1,9 +1,9 @@
 import { Table, Column, Model, Sequelize, Length } from 'sequelize-typescript';
 
 @Table({
-    tableName: 'environments'
+    tableName: 'users'
 })
-export class Environment extends Model<Environment> {
+export class User extends Model<User> {
 
     @Column({
         primaryKey: true,
@@ -13,7 +13,11 @@ export class Environment extends Model<Environment> {
 
     @Length({min: 3, max: 32})
     @Column
-    name?: string;
+    email?: string;
+
+    @Length({min: 5, max: 32})
+    @Column
+    password?: string;
 
     // @CreatedAt
     // @Column
@@ -24,4 +28,4 @@ export class Environment extends Model<Environment> {
     // updatedAt: Date = new Date();
 }
 
-export default Environment;
+export default User;

@@ -16,7 +16,9 @@ export class Environments {
 
     private test(req: any, res: any, next: any) {
         Environment.findAll<Environment>().then((data) => {
-            res.status(200).send({ data });
+            res
+                .status(200)
+                .json({ data });
         });
 
     }

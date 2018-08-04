@@ -1,5 +1,5 @@
 const { setWorldConstructor } = require('cucumber');
-const {expect, should} = require('chai');
+const { expect, should } = require('chai');
 const supertest = require('supertest');
 
 class CustomWorld {
@@ -9,34 +9,28 @@ class CustomWorld {
   }
 
   sendRequest(method, path, data = []) {
-    // let params = {
-    //   uri: this.api + path,
-    //   method: method,
-    //   headers: {
-    //     'content-type': 'application/json'
-    //   },
-    //   resolveWithFullResponse: true,
-    //   json: true
-    // };
+    let body = {};
 
-    // switch(method) {
-    //     case 'POST':
-    //       let post = {};
-    //       data.forEach((item) => post[item.field] = item.value);
-    //       params.body = post;
-    //       break;
-    //     case 'PATCH':
-    //       let patch = [];
-    //       data.forEach((item) => patch.push({ op: 'replace', 'path': `/${item.field}`, 'value': item.value }));
-    //       params.body = patch;
-    //       break;
-    // }
+    switch(method) {
+        case 'POST':
+          let post = {};
+          data.forEach((item) => post[item.field] = item.value);
+          body = post;
+          break;
+        case 'PATCH':
+          let patch = [];
+          data.forEach((item) => patch.push({ op: 'replace', 'path': `/${item.field}`, 'value': item.value }));
+          body = patch;
+          break;
+    }
 
     return this.agent[method.toLowerCase()](path)
         .set('Accept', 'application/json')
+        .send(body)
         .then((response) => {
             this.statusCode = response.statusCode;
             this.response = response;
+            console.log(body)
         })
         .catch((error) => this.response = error);
   }

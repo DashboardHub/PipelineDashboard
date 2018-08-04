@@ -15,7 +15,7 @@
 
 Automated tests are done using CucumberJS and a code coverage report is generated with NYC.
 
-- `npm test`
+- `npm run test:local`
 
 Example output:
 

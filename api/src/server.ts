@@ -2,13 +2,17 @@ import * as express from 'express';
 import * as cors from 'cors';
 import * as helmet from 'helmet';
 import * as http from 'http';
+import * as passport from "passport";
 
 import { AddressInfo } from 'net';
 import { CorsOptions } from 'cors';
 
 import { db } from './db';
+import * as strategy from './auth/strategy';
 
 import Environments from './environment/environments';
+import Login from "./auth/login";
+import * as bodyParser from "body-parser";
 
 /*
  * Load up the App
@@ -31,11 +35,21 @@ app.use(helmet());
 app.options('*', cors(corsOpts));
 app.use(cors(corsOpts));
 
+/*
+ * Auth
+ */
+app.use(passport.initialize());
+app.use(passport.session());
 
 /*
  * Routes
  */
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use('/auth', Login);
 app.use('/', Environments);
+app.use('/environments', passport.authenticate('jwt', { session: false }), strategy.isAuthenticated, Environments);
 
 /*
  * Create the server
