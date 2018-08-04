@@ -1,18 +1,18 @@
-import * as express from 'express';
+import * as bodyParser from "body-parser";
 import * as cors from 'cors';
+import { CorsOptions } from 'cors';
+import * as express from 'express';
 import * as helmet from 'helmet';
 import * as http from 'http';
 import * as passport from "passport";
-
 import { AddressInfo } from 'net';
-import { CorsOptions } from 'cors';
 
-import { db } from './db';
 import * as strategy from './auth/strategy';
+import { db } from './db';
 
 import Environments from './environment/environments';
 import Login from "./auth/login";
-import * as bodyParser from "body-parser";
+import Registration from "./auth/registration";
 
 /*
  * Load up the App
@@ -48,6 +48,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/auth', Login);
+app.use('/auth', Registration);
 app.use('/', Environments);
 app.use('/environments', passport.authenticate('jwt', { session: false }), strategy.isAuthenticated, Environments);
 

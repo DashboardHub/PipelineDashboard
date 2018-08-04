@@ -7,12 +7,12 @@ module.exports = {
         {
             id: uuid(),
             email: 'test1@test.com',
-            password: 'test1test'
+            hash: '$2b$08$3GCXpPyjjgXE4RRYvIg12OHMXws0CRxPjbuDid/QRF.s0hEzCoNn2'
         },
         {
             id: uuid(),
             email: 'test2@test.com',
-            password: 'test2test'
+            hash: '$2b$08$U6dOmdUVBhD/CXE6nnj8k.2AeSrpFlxGSPK3nkWwU7FiQP1Nqgwe6'
         }
     ], {});
   }

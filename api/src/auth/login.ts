@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import {NextFunction, Request, Response, Router} from 'express';
 import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { IVerifyOptions } from 'passport-local';
@@ -18,18 +18,18 @@ export class Login {
         this.router.post('/login', this.action.bind(this));
     }
 
-    private action(req: any, res: any, next: any) {
-        passport.authenticate('local', { session: false },  (authErr: Error, user: User, info: IVerifyOptions) => {
-            if (authErr || !user) {
-                res
+    private action(req: Request, res: Response, next: NextFunction): void {
+        passport.authenticate('local', { session: false },  (authError: Error, user: User, info: IVerifyOptions) => {
+            if (authError || !user) {
+                return res
                     .status(400)
-                    .json({ error: 'Authentication failed', info: info.message.toString() });
+                    .json({ error: 'Authentication failed' });
             }
 
-            req.login(user, { session: false }, (loginErr: Error) => {
-                if (loginErr) { return next(loginErr); }
+            return req.login(user, { session: false }, (loginError: Error) => {
+                if (loginError) { return next(loginError); }
                 const token = jwt.sign(user, 'your_jwt_secret');
-                return res.json({ user, token });
+                return res.json({ token });
             });
 
         })(req, res, next);

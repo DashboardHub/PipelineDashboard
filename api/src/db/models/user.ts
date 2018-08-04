@@ -1,4 +1,4 @@
-import { Table, Column, Model, Sequelize, Length } from 'sequelize-typescript';
+import { Table, Column, Model, Sequelize, Length, IsEmail } from 'sequelize-typescript';
 
 @Table({
     tableName: 'users'
@@ -11,13 +11,14 @@ export class User extends Model<User> {
     })
     id?: string;
 
-    @Length({min: 3, max: 32})
+    @Length({ min: 3, max: 32 })
+    @IsEmail
     @Column
     email?: string;
 
-    @Length({min: 5, max: 32})
+    @Length({ min: 5, max: 64 })
     @Column
-    password?: string;
+    hash?: string;
 
     // @CreatedAt
     // @Column

@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import * as passport from 'passport';
 import * as passportJWT from 'passport-jwt';
 import * as passportLocal from 'passport-local';
@@ -30,9 +31,9 @@ passport.deserializeUser((id: string, done) => {
  * Sign in using Email and Password.
  */
 passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'password' }, (email, password, done) => {
-    User.findOne<User>({ where: { email: email.toLowerCase(), password }, raw: true })
+    User.findOne<User>({ where: { email: email.toLowerCase() }, raw: true })
         .then((user: User | null) => {
-            if (!user) {
+            if (!user || !bcrypt.compareSync(password, user.hash || '')) {
                 return done(undefined, undefined, { message: 'Login failed' });
             }
 
@@ -51,7 +52,7 @@ passport.use(new JWTStrategy({
 
         return User.findOne<User>({ where: { id: jwtPayload.id }})
             .then((user: User | null) => cb(null, user))
-            .catch((err: Error) => cb(err));
+            .catch((error: Error) => cb(error));
     },
 ));
 
@@ -64,5 +65,4 @@ export let isAuthenticated = (req: Request, res: Response, next: NextFunction) =
     }
 
     return next('Not authenticated');
-    // res.status(400).send({ error: 'Authentication failed' });
 };

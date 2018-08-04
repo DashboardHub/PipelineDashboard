@@ -1,6 +1,5 @@
 Feature: Login
 
-
   Scenario: Private environments list as guest user fails
     When I make a "GET" request to "/environments"
     Then the status code should be 401
@@ -9,14 +8,14 @@ Feature: Login
     When I make a "POST" request to "/auth/login"
     Then the status code should be 400
 
-  Scenario: Login successful with invalid email
+  Scenario: Login fail with invalid email
     When I make a "POST" request to "/auth/login" with:
       | field    | value              |
       | email    | "invalid@test.com" |
       | password | "test1test"        |
     Then the status code should be 400
 
-  Scenario: Login successful with invalid password
+  Scenario: Login fail with invalid password
     When I make a "POST" request to "/auth/login" with:
       | field    | value            |
       | email    | "test1@test.com" |

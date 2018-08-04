@@ -9,6 +9,12 @@
 
 ### Run API
 
+Locally
+
+- `npm run start:local` run full stack with serverless wrapping express, will create the DB
+
+Production
+
 - `npm start` run full stack with serverless wrapping express
 
 ### Run tests
