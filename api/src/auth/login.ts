@@ -46,7 +46,7 @@ export class Login {
                     userId: user.id,
                 });
 
-                const token = jwt.sign(user, 'your_jwt_secret');
+                const token = jwt.sign(user, 'your_jwt_secret'); // @TODO move to config
                 return res.json({ token });
             });
 

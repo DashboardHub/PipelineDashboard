@@ -1,4 +1,5 @@
-import {Table, Column, Model, Sequelize, Length, IsEmail, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import { Table, Column, Model, Sequelize, Length, IsEmail, CreatedAt, UpdatedAt, HasMany } from 'sequelize-typescript';
+import Environment from "./environment";
 
 @Table({
     tableName: 'users'
@@ -27,6 +28,9 @@ export class User extends Model<User> {
     @UpdatedAt
     @Column
     updatedOn: Date = new Date();
+
+    @HasMany(() => Environment)
+    environments?: Environment[];
 }
 
 export default User;

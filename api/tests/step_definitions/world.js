@@ -26,6 +26,7 @@ class CustomWorld {
 
     return this.agent[method.toLowerCase()](path)
         .set('Accept', 'application/json')
+        // .set('Authorization', 'bearer ')
         .send(body)
         .then((response) => {
             this.statusCode = response.statusCode;

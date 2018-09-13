@@ -1,7 +1,13 @@
-import { Table, Column, Model, Sequelize, Length } from 'sequelize-typescript';
+import { Table, Column, Model, Sequelize, Length, Scopes, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import User from "./user";
 
+@Scopes({
+    full: {
+        include: [() => User]
+    },
+})
 @Table({
-    tableName: 'environments'
+    tableName: 'environments',
 })
 export class Environment extends Model<Environment> {
 
@@ -10,6 +16,7 @@ export class Environment extends Model<Environment> {
         defaultValue: Sequelize.UUIDV4
     })
     id?: string;
+
 
     @Length({min: 3, max: 32})
     @Column
@@ -22,6 +29,13 @@ export class Environment extends Model<Environment> {
     // @UpdatedAt
     // @Column
     // updatedAt: Date = new Date();
+
+    @ForeignKey(() => User)
+    @Column
+    ownerId?: string;
+
+    @BelongsTo(() => User)
+    owner?: User;
 }
 
 export default Environment;

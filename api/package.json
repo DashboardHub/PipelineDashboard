@@ -4,8 +4,7 @@
   "description": "express - typescript - cucumber - serverless",
   "main": "server.js",
   "scripts": {
-    "start": "npx tsc && npx sequelize db:migrate && npx sequelize db:seed:all && npx serverless offline start --stage dev",
-    "start:local": "npx tsc && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && npx serverless offline start --stage dev",
+    "start": "npx tsc && (npx sequelize db:drop || echo 'skip drop db') && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && npx serverless offline start --stage dev",
     "db:all": "npx tsc && npx sequelize db:create && npm run db:migrate && npm run db:seed",
     "db:migrate": "npx tsc && npx sequelize db:migrate",
     "db:seed": "npx tsc && npx sequelize db:seed:all",

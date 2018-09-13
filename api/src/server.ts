@@ -44,13 +44,13 @@ app.use(passport.session());
 /*
  * Routes
  */
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use('/auth', Login);
 app.use('/auth', Registration);
-app.use('/', Environments);
 app.use('/environments', passport.authenticate('jwt', { session: false }), strategy.isAuthenticated, Environments);
+app.use('/', Environments);
 
 /*
  * Create the server
