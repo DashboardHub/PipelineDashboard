@@ -2,8 +2,8 @@ import { Config } from './config.model';
 
 export const environment: Config = {
   production: false,
-  api: 'http://localhost:3000',
-  web: 'http://localhost:4200',
+  api: 'https://api-pipeline.dashboardhub.io',
+  web: 'https://pipeline.dashboardhub.io',
   whitelist: new Array(new RegExp('^null$')),
   version: 'x.x.x',
 
