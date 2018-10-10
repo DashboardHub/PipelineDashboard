@@ -87,6 +87,10 @@ export class MainComponent {
     }
   }
 
+  showDoorbell() {
+    (<any>window).doorbell.show();
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/logout']);
