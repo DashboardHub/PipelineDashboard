@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "covalent-quickstart": {
+    "pipeline-dashboard": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -22,8 +22,7 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/theme.scss"
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/hammerjs/hammer.min.js",
@@ -70,23 +69,23 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "covalent-quickstart:build",
+            "browserTarget": "pipeline-dashboard:build",
             "port": 4200,
             "host": "localhost"
           },
           "configurations": {
             "test": {
-              "browserTarget": "covalent-quickstart:build:test"
+              "browserTarget": "pipeline-dashboard:build:test"
             },
             "production": {
-              "browserTarget": "covalent-quickstart:build:production"
+              "browserTarget": "pipeline-dashboard:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "covalent-quickstart:build"
+            "browserTarget": "pipeline-dashboard:build"
           }
         },
         "test": {
@@ -101,8 +100,7 @@
               "node_modules/showdown/dist/showdown.js"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/theme.scss"
+              "src/styles.scss"
             ],
             "assets": [
               "src/assets",
@@ -123,7 +121,7 @@
         }
       }
     },
-    "covalent-quickstart-e2e": {
+    "pipeline-dashboard-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -132,7 +130,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "covalent-quickstart:serve"
+            "devServerTarget": "pipeline-dashboard:serve"
           }
         },
         "lint": {
@@ -147,7 +145,7 @@
       }
     }
   },
-  "defaultProject": "covalent-quickstart",
+  "defaultProject": "pipeline-dashboard",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

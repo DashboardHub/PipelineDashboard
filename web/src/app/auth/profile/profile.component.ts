@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { List } from '../../list';
-import { Environment } from '../../environments/environment.model';
-import { Profile } from '../profile';
+import { Component } from '@angular/core';
+
+import { List } from '../../../models/list.model';
+import { Environment } from '../../../models/environment.model';
+import { Profile } from '../../../models/profile.model';
+
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'qs-auth-profile',
-  templateUrl: './profile.component.html',
+    selector: 'dashboard-auth-profile',
+    templateUrl: './profile.component.html'
 })
 export class ProfileComponent {
 
-  profile: Profile;
-  environments: List<Environment>;
+    profile: Profile;
+    environments: List<Environment>;
 
-  constructor(private authService: AuthService) {
-    this.authService.subscribeProfile()
-      .subscribe((profile: Profile) => this.profile = profile);
-  }
+    constructor(private authService: AuthService) {
+        this.authService.subscribeProfile()
+            .subscribe((profile: Profile) => this.profile = profile);
+    }
 
 }

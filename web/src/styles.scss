@@ -1,7 +1,38 @@
 @import '~@angular/material/theming';
-@import './theme';
 
 @include mat-core();
+
+/* Setup site theme */
+$dashboard-primary: mat-palette($mat-blue, 700);
+$dashboard-accent: mat-palette($mat-orange, 800, A100, A400);
+$dashboard-warn: mat-palette($mat-red, 600);
+$dashboard-theme: mat-light-theme($dashboard-primary, $dashboard-accent, $dashboard-warn);
+
+@include angular-material-theme($dashboard-theme);
+
+/* Setup Angular Material typography */
+
+$dashboard-global-typography: mat-typography-config(
+  $font-family: 'Roboto',
+  $body-1: mat-typography-level(0.9rem, 1.5em, 400),
+  $body-2: mat-typography-level(0.9rem, 1.5em, 700)
+);
+
+@include angular-material-typography($dashboard-global-typography);
+
+$dashboard-base-typography: mat-typography-config(
+  $font-family: 'Roboto',
+  $headline: mat-typography-level(2.4rem, 1.5em, 100),
+  $title: mat-typography-level(1.7rem, 1.5em, 300),
+  $subheading-2: mat-typography-level(1.4rem, 1.5em, 300),
+  $subheading-1: mat-typography-level(1.1rem, 1.5em, 400),
+  $body-1: mat-typography-level(0.9rem, 1.5em, 400),
+  $body-2: mat-typography-level(0.9rem, 1.5em, 700),
+  $caption: mat-typography-level(0.7rem, 1.5em, 400)
+);
+
+@include mat-base-typography($dashboard-base-typography);
+
 
 // Custom style for loading elements without height
 .will-load {
@@ -13,10 +44,10 @@ a[mat-icon-button] {
 }
 
 a {
-  color: mat-color($accent, 900);
+  color: mat-color($dashboard-accent, 900);
   text-decoration: none;
 
   &:hover, &:active, &:focus {
-    color: mat-color($accent, 700);
+    color: mat-color($dashboard-accent, 700);
   }
 }

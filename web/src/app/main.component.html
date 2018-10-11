@@ -1,23 +1,30 @@
+hello world
+<!--
 <td-layout #layout>
   <td-navigation-drawer [name]="isAuthenticated() ? profile.name : 'Guest'" [email]="isAuthenticated() ? profile.nickname : 'Not logged in'">
     <mat-nav-list>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="publicRoutes">
+      <ng-container *ngFor="let item of publicRoutes">
         <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
-          <mat-icon>{{item.icon}}</mat-icon>
-          {{item.title}}</a>
-      </ng-template>
+          <mat-icon>{{ item.icon }}</mat-icon>
+          {{ item.title }}
+        </a>
+      </ng-container>
       <mat-divider></mat-divider>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="privateRoutes" *ngIf="isAuthenticated()">
-        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
-          <mat-icon>{{item.icon}}</mat-icon>
-          {{item.title}}</a>
-      </ng-template>
+      <ng-container *ngIf="isAuthenticated()">
+        <ng-container *ngFor="let item of privateRoutes">
+          <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
+            <mat-icon>{{ item.icon }}</mat-icon>
+            {{ item.title }}
+          </a>
+        </ng-container>
+      </ng-container>
       <mat-divider></mat-divider>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="generalRoutes">
+      <ng-container *ngFor="let item of generalRoutes">
         <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
-          <mat-icon>{{item.icon}}</mat-icon>
-          {{item.title}}</a>
-      </ng-template>
+          <mat-icon>{{ item.icon }}</mat-icon>
+          {{ item.title }}
+        </a>
+      </ng-container>
       <mat-divider></mat-divider>
       <a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">
         <mat-icon>vpn_key</mat-icon>
@@ -28,16 +35,16 @@
         Sign out
       </a>
     </mat-nav-list>
-    <!--<mat-nav-list td-navigation-drawer-menu>-->
-      <!--<a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">-->
-        <!--<mat-icon>vpn_key</mat-icon>-->
-        <!--Login-->
-      <!--</a>-->
-      <!--<a mat-list-item (click)="logout(); layout.close()" *ngIf="isAuthenticated()">-->
-        <!--<mat-icon>exit_to_app</mat-icon>-->
-        <!--Sign out-->
-      <!--</a>-->
-    <!--</mat-nav-list>-->
+    &lt;!&ndash;<mat-nav-list td-navigation-drawer-menu>&ndash;&gt;
+      &lt;!&ndash;<a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">&ndash;&gt;
+        &lt;!&ndash;<mat-icon>vpn_key</mat-icon>&ndash;&gt;
+        &lt;!&ndash;Login&ndash;&gt;
+      &lt;!&ndash;</a>&ndash;&gt;
+      &lt;!&ndash;<a mat-list-item (click)="logout(); layout.close()" *ngIf="isAuthenticated()">&ndash;&gt;
+        &lt;!&ndash;<mat-icon>exit_to_app</mat-icon>&ndash;&gt;
+        &lt;!&ndash;Sign out&ndash;&gt;
+      &lt;!&ndash;</a>&ndash;&gt;
+    &lt;!&ndash;</mat-nav-list>&ndash;&gt;
   </td-navigation-drawer>
   <td-layout-nav navigationRoute="/" color="accent">
     <button mat-icon-button td-menu-button tdLayoutToggle>
@@ -69,3 +76,4 @@
     </td-layout-footer>
   </td-layout-nav>
 </td-layout>
+-->
