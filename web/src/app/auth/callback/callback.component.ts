@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs/Rx';
+import { interval } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { AuthService } from '../auth.service';
 
@@ -14,6 +15,6 @@ export class CallbackComponent {
 
     constructor(private router: Router, private auth: AuthService) {
         auth.handleAuthentication();
-        Observable.interval(1000).take(1).subscribe(() => this.router.navigate(['/']));
+        interval(1000).pipe(take(1)).subscribe(() => this.router.navigate(['/']));
     }
 }

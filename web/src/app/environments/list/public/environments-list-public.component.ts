@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Subscription } from 'rxjs';
-import { Observable } from 'rxjs/Rx';
+import { interval, Subscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 import { List } from '../../../../models/list.model';
 import { Environment } from '../../../../models/environment.model';
@@ -26,7 +26,7 @@ export class EnvironmentsListPublicComponent implements OnInit, OnDestroy {
         private authService: AuthService,
         private environmentService: EnvironmentService
     ) {
-        this.subscription = Observable.interval(30000).takeWhile(() => true).subscribe(() => this.refresh());
+        this.subscription = interval(30 * 1000).pipe(takeWhile(() => true)).subscribe(() => this.refresh());
     }
 
     ngOnInit(): void {

@@ -1,24 +1,27 @@
 import { NgModule } from '@angular/core';
 
 import { DigitsPipe } from './digits.pipe';
+import { EnvironmentTypePipe } from './type.pipe';
 import { ReleaseStatePipe } from './state.pipe';
 import { TimeAgoPipe } from './time-ago.pipe';
-import { EnvironmentTypePipe } from './type.pipe';
+import { TruncatePipe } from './truncate.pipe';
 import { UrlencodePipe } from './urlencode.pipe';
 
 @NgModule({
     declarations: [
         DigitsPipe,
+        EnvironmentTypePipe,
         ReleaseStatePipe,
         TimeAgoPipe,
-        EnvironmentTypePipe,
+        TruncatePipe,
         UrlencodePipe
     ],
     exports: [
         DigitsPipe,
+        EnvironmentTypePipe,
         ReleaseStatePipe,
         TimeAgoPipe,
-        EnvironmentTypePipe,
+        TruncatePipe,
         UrlencodePipe
     ]
 })

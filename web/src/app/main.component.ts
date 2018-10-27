@@ -77,7 +77,10 @@ export class MainComponent {
         }
     ];
 
-    constructor(private router: Router, private authService: AuthService) {
+    constructor(
+        private router: Router,
+        private authService: AuthService
+    ) {
         this.version = environment.version;
         this.authService.subscribeProfile()
             .subscribe((profile: Profile) => this.profile = profile);

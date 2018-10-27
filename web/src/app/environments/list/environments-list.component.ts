@@ -21,7 +21,9 @@ export class EnvironmentsListComponent {
         this.calculateLatestPing();
     }
 
-    public get environments(): List<Environment> { return this._environments; }
+    public get environments(): List<Environment> {
+        return this._environments;
+    }
 
     public profile: Profile = new Profile();
     public summary: any;
@@ -56,15 +58,26 @@ export class EnvironmentsListComponent {
 
     calculateUptime(): void {
         this.uptime = this.environments.list
+            .filter((environment: Environment) => environment.pings && (environment.pings.valid || environment.pings.invalid))
+            .slice(0, 12)
             .map((environment: Environment) => (
-                { name: environment.title, value: (environment.pings.valid / (environment.pings.valid + environment.pings.invalid)) * 100 || 0 }
+                {
+                    name: environment.title,
+                    value: (environment.pings.valid / (environment.pings.valid + environment.pings.invalid)) * 100 || 0
+                }
             ));
     }
 
     calculateLatestPing(): void {
-        this.pings = this.environments.list.map((environment: Environment) => {
-            return { name: environment.title, value: environment.latestPing.duration ? environment.latestPing.duration : 0 };
-        });
+        this.pings = this.environments.list
+            .filter((environment: Environment) => environment.latestPing && environment.latestPing.duration)
+            .slice(0, 12)
+            .map((environment: Environment) => (
+                {
+                    name: environment.title,
+                    value: environment.latestPing.duration ? environment.latestPing.duration : 0
+                }
+            ));
     }
 
     // axisDigits(val: any): any {

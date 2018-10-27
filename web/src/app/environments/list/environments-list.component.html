@@ -1,104 +1,97 @@
-<!--
-<div layout-gt-xs="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-  <ng-template let-item ngFor [ngForOf]="summary">
-    <div flex-gt-xs="20">
-      <mat-card>
-        <mat-card-content class="text-center">
-          <div class="mat-headline push-bottom-none">{{ item.value | digits }}
-            &lt;!&ndash;<mat-icon class="tc-green-500 text-sm">arrow_upward</mat-icon>&ndash;&gt;
-          </div>
-          <mat-icon class="icon tc-cyan-900">{{ item.icon }}</mat-icon>
-          <div>
-            <div class="mat-subheading-2 push-bottom-none">{{ item.name }}</div>
-            &lt;!&ndash;<div class="mat-caption tc-grey-600">Public</div>&ndash;&gt;
-          </div>
+<div fxLayout="column" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="20px">
+        <div fxFlex="20%" *ngFor="let item of summary">
+            <mat-card>
+                <mat-card-content fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start center">
+                    <div class="mat-title">{{ item.value | digits }}</div>
+                    <mat-icon class="mat-icon-2x" color="primary">{{ item.icon }}</mat-icon>
+                    <div class="mat-subheading-1">{{ item.name }}</div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <mat-card>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="20px">
+            <div class="graph-gauge" fxFlex="50%">
+                <ngx-charts-gauge
+                    [results]="uptime"
+                    [animations]="true"
+                    [units]="'Uptime'"
+                    [bigSegments]="10"
+                    [smallSegments]="5"
+                    [valueFormatting]="axisDigits">
+                </ngx-charts-gauge>
+            </div>
+            <div class="graph-gauge" fxFlex="50%">
+                <ngx-charts-gauge
+                    [results]="pings"
+                    [animations]="true"
+                    [units]="'Monitors'"
+                    [bigSegments]="10"
+                    [smallSegments]="5"
+                    [valueFormatting]="axisDigits">
+                </ngx-charts-gauge>
+            </div>
+        </div>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-title>Environments</mat-card-title>
+        <mat-card-subtitle>Recent activity</mat-card-subtitle>
+        <mat-card-content>
+            <mat-nav-list>
+                <ng-container *ngFor="let environment of environments.list.slice(0, 12)">
+                    <a mat-list-item [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
+                        <mat-icon matListIcon *ngIf="!environment.logo">developer_board</mat-icon>
+                        <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
+                        <h3 matLine
+                            [class.env-red]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                            [class.env-orange]="![0, 100].includes(environment.progress.current)"
+                            [class.env-green]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
+                        >
+                            {{ environment.title }}
+                        </h3>
+                        <p matLine fxHide.xs>{{ environment.description | truncate:50 }}</p>
+
+                        <span fxFlex></span>
+
+                        <span class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                            <div>{{ environment.type | environmentType }}</div>
+                            <div>{{ environment.updatedAt | timeAgo }}</div>
+                        </span>
+
+                        <span *ngIf="environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
+                            <strong>{{ environment.latestRelease.release }}</strong>
+                            <div
+                                [class.env-red]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                                [class.env-orange]="![0, 100].includes(environment.progress.current)"
+                                [class.env-green]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                            >
+                                {{ environment.latestRelease.state | releaseState }}
+                                <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
+                                <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+                            </div>
+                        </span>
+
+                        <span *ngIf="!environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
+                            <div>No version</div>
+                            <div>No releases</div>
+                        </span>
+
+                        <span class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                            <div>{{ environment.releases }} releases</div>
+                            <div
+                                [class.env-green]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
+                                [class.env-red]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">
+                                <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
+                                <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
+                            </div>
+                        </span>
+                    </a>
+                    <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
+                </ng-container>
+            </mat-nav-list>
         </mat-card-content>
-      </mat-card>
-    </div>
-  </ng-template>
+    </mat-card>
 </div>
-
-<div class="mat-content" layout-padding flex>
-  <mat-card>
-    <div layout-gt-xs="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-      <div class="graph-gauge" flex-gt-xs="50">
-        <ngx-charts-gauge
-          [results]="uptime"
-          [animations]="true"
-          [units]="'Uptime'"
-          [bigSegments]="10"
-          [smallSegments]="5"
-          [valueFormatting]="axisDigits">
-        </ngx-charts-gauge>
-      </div>
-      <div class="graph-gauge" flex-gt-xs="50">
-        <ngx-charts-gauge
-          [results]="pings"
-          [animations]="true"
-          [units]="'Monitors'"
-          [bigSegments]="10"
-          [smallSegments]="5"
-          [valueFormatting]="axisDigits">
-        </ngx-charts-gauge>
-      </div>
-    </div>
-  </mat-card>
-</div>
-
-<div class="mat-content" layout-padding flex>
-  <mat-card>
-    <mat-card-title>Environments</mat-card-title>
-    <mat-card-subtitle>Recent activity</mat-card-subtitle>
-    <mat-divider></mat-divider>
-    <mat-nav-list class="will-load item-list">
-      <ng-template tdLoading="items.load">
-        <ng-template let-environment let-last="last" ngFor [ngForOf]="environments.list">
-          <a mat-list-item layout-align="row" [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
-            <mat-icon matListAvatar *ngIf="!environment.logo">developer_board</mat-icon>
-            <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-            <h3 matLine
-                [class.tc-red-A700]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
-                [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
-                [class.tc-green-A700]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
-            >
-              {{ environment.title }}
-          </h3>
-            <p matLine hide-xs>{{ environment.description | truncate:50 }}</p>
-            <span flex></span>
-            <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
-              <p>{{ environment.type | environmentType }}</p>
-              <p>{{ environment.updatedAt | timeAgo }}</p>
-            </span>
-            <span class="mat-caption text-right" flex="50" layout-align="row" flex-gt-sm="30" *ngIf="environment.latestRelease.release">
-              <h3>{{ environment.latestRelease.release }}</h3>
-              <p layout="row" layout-align="end center"
-                 [class.tc-green-A700]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
-                 [class.tc-orange-A700]="![0, 100].includes(environment.progress.current)"
-                 [class.tc-red-A700]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
-                {{ environment.latestRelease.state | releaseState }}
-                <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
-                <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
-              </p>
-            </span>
-            <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30" *ngIf="!environment.latestRelease.release">
-              <p>No version</p>
-              <p>No releases</p>
-            </span>
-            <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
-              <p>{{ environment.releases }} releases</p>
-              <p layout="row" layout-align="end center"
-                [class.tc-green-A700]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
-                [class.tc-red-A700]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">
-                <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
-                <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
-              </p>
-            </span>
-          </a>
-          <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
-          <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
-        </ng-template>
-      </ng-template>
-    </mat-nav-list>
-  </mat-card>
-</div>
--->
