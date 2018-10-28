@@ -4,7 +4,7 @@ export const environment: Config = {
     production: false,
     api: 'http://localhost:3000',
     web: 'http://localhost:4200',
-    whitelist: new Array(new RegExp('^null$')),
+    whitelist: ['localhost:3000'],
     version: 'x.x.x',
 
     auth: {
