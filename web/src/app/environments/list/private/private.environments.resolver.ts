@@ -7,7 +7,9 @@ import { List } from '../../../../models/list.model';
 import { Environment } from '../../../../models/environment.model';
 import { EnvironmentService } from '../../../../services/environment.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class PrivateEnvironmentsResolver implements Resolve<List<Environment>> {
 
     constructor(private environmentService: EnvironmentService) { }

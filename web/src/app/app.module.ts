@@ -16,6 +16,7 @@ import { CallbackComponent } from './auth/callback/callback.component';
 import { EnvironmentsAddComponent } from './environments/add/environments-add.component';
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
+import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
 
 import { ApiHttpInterceptorModule } from '../interceptors/api.http.interceptor';
 import { ErrorHttpInterceptorModule } from '../interceptors/error.http.interceptor';
@@ -38,7 +39,8 @@ export function tokenGetter(): string | null {
         LoginDirective,
         EnvironmentsAddComponent,
         EnvironmentsListComponent,
-        EnvironmentsListPublicComponent
+        EnvironmentsListPublicComponent,
+        EnvironmentsListPrivateComponent
     ],
     imports: [
         CommonModule,
