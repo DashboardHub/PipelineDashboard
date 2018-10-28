@@ -6,10 +6,7 @@
                     <div class="mat-title">{{ environment.progress.current }}%</div>
                     <mat-icon class="mat-icon-2x" color="primary">developer_board</mat-icon>
                     <div class="mat-subheading-1">{{ environment.type }}</div>
-                    <div class="mat-caption">
-                        <span *ngIf="environment.latestRelease.createdAt">updated {{ environment.latestRelease.updatedAt | timeAgo }}</span>
-                        <span *ngIf="!environment.latestRelease.createdAt">No Date</span>
-                    </div>
+                    <div class="mat-caption">{{ environment.latestRelease.release || '-' }}</div>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -20,7 +17,10 @@
                     <div class="mat-title">{{ environment.releases | digits }}</div>
                     <mat-icon class="mat-icon-2x" color="primary">new_releases</mat-icon>
                     <div class="mat-subheading-1">Releases</div>
-                    <div class="mat-caption">{{ environment.latestRelease.release || '-' }}</div>
+                    <div class="mat-caption">
+                        <span *ngIf="environment.latestRelease.createdAt">updated {{ environment.latestRelease.updatedAt | timeAgo }}</span>
+                        <span *ngIf="!environment.latestRelease.createdAt">No Date</span>
+                    </div>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -81,22 +81,22 @@
                     <mat-icon matListIcon [color]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0 ? 'red' : ''">timelapse</mat-icon>
                     <h3 matLine>Monitors</h3>
                     <p matLine>{{ environment.link }}</p>
-                    <span fxFlex></span>
-                    <span class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p *ngIf="environment.monitors">{{ environment.pings.valid + environment.pings.invalid | digits }} pings</p>
-                        <p *ngIf="!environment.monitors">No monitors</p>
-                    </span>
+                    <div fxFlex></div>
+                    <div class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
+                        <div *ngIf="environment.monitors">{{ environment.pings.valid + environment.pings.invalid | digits }} pings</div>
+                        <div *ngIf="!environment.monitors">No monitors</div>
+                    </div>
                 </mat-list-item>
 
                 <mat-list-item *ngIf="environment.tokens">
                     <mat-icon matListIcon [color]="environment.tokens.length === 0 ? 'red' : ''">vpn_key</mat-icon>
                     <h3 matLine>Tokens</h3>
                     <p matLine>Treat these like your passwords</p>
-                    <span fxFlex></span>
-                    <span class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p *ngIf="environment.tokens">You have <b>{{ environment.tokens.length }}</b> token(s)</p>
-                        <p *ngIf="!environment.tokens">No tokens</p>
-                    </span>
+                    <div fxFlex></div>
+                    <div class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
+                        <div *ngIf="environment.tokens">You have <b>{{ environment.tokens.length }}</b> token(s)</div>
+                        <div *ngIf="!environment.tokens">No tokens</div>
+                    </div>
                 </mat-list-item>
 
                 <mat-list-item>
@@ -108,21 +108,21 @@
                     </mat-icon>
                     <h3 matLine>{{ environment.latestRelease.release || '-' }}</h3>
                     <p matLine>Latest Release</p>
-                    <span fxFlex></span>
-                    <span *ngIf="environment.latestRelease.release" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p layout="row" layout-align="end center"
+                    <div fxFlex></div>
+                    <div *ngIf="environment.latestRelease.release" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
+                        <div layout="row" layout-align="end center"
                             [class.text-primary]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
                             [class.text-accent]="![0, 100].includes(environment.progress.current)"
                             [class.text-warn]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
                             {{ environment.latestRelease.state | releaseState }}
                             <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
                             <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed">warning</mat-icon>
-                        </p>
-                        <p>{{ environment.latestRelease.createdAt | timeAgo }}</p>
-                    </span>
-                    <span *ngIf="!environment.latestRelease.release" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p>No releases</p>
-                    </span>
+                        </div>
+                        <div>{{ environment.latestRelease.createdAt | timeAgo }}</div>
+                    </div>
+                    <div *ngIf="!environment.latestRelease.release" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
+                        <div>No releases</div>
+                    </div>
                 </mat-list-item>
 
                 <mat-list-item>
@@ -133,20 +133,19 @@
                     </mat-icon>
                     <h3 matLine>{{ environment.latestPing.url || '-' }}</h3>
                     <p matLine>Latest Ping</p>
-                    <span fxFlex></span>
-                    <span *ngIf="environment.latestPing.createdAt" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</p>
-                        <p>{{ environment.latestPing.statusCode }}</p>
-                    </span>
-                    <span *ngIf="!environment.pings" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p>No pings</p>
-                    </span>
-                    <span *ngIf="environment.pings" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <p>{{ environment.pings.valid }} valid pings</p>
-                        <p>{{ environment.pings.invalid }} invalid pings</p>
-                    </span>
+                    <div fxFlex></div>
+                    <div *ngIf="environment.latestPing.createdAt" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
+                        <div>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</div>
+                        <div>{{ environment.latestPing.statusCode }}</div>
+                    </div>
+                    <div *ngIf="!environment.pings" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
+                        <div>No pings</div>
+                    </div>
+                    <div *ngIf="environment.pings" class="mat-caption" fxLayout="column" fxFlex="30%" fxLayoutAlign="center end">
+                        <div>{{ environment.pings.valid }} valid pings</div>
+                        <div>{{ environment.pings.invalid }} invalid pings</div>
+                    </div>
                 </mat-list-item>
-
             </mat-list>
         </mat-card-content>
     </mat-card>
