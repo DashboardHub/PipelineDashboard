@@ -20,6 +20,8 @@ import { EnvironmentsListPrivateComponent } from './environments/list/private/en
 import { EnvironmentsViewComponent } from './environments/view/environments-view.component';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
+import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
+import { PrivacyComponent } from './legal/privacy/privacy.component';
 
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
@@ -49,6 +51,8 @@ export function tokenGetter(): string | null {
         EnvironmentsViewComponent,
         EnvironmentsViewPublicComponent,
         EnvironmentsViewPrivateComponent,
+        TermsConditionsComponent,
+        PrivacyComponent,
         DialogConfirmationComponent,
         DialogMarkdownComponent
     ],
