@@ -9,6 +9,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 
 import { LoginDirective } from './directives/login.directive';
+import { MarkdownDirective } from './directives/markdown.directive';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
@@ -21,6 +22,7 @@ import { EnvironmentsViewComponent } from './environments/view/environments-view
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
 import { FeaturesComponent } from './features/features.component';
+import { HelpComponent } from './help/help.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 
@@ -45,6 +47,7 @@ export function tokenGetter(): string | null {
         MainComponent,
         CallbackComponent,
         LoginDirective,
+        MarkdownDirective,
         EnvironmentsAddComponent,
         EnvironmentsListComponent,
         EnvironmentsListPublicComponent,
@@ -53,6 +56,7 @@ export function tokenGetter(): string | null {
         EnvironmentsViewPublicComponent,
         EnvironmentsViewPrivateComponent,
         FeaturesComponent,
+        HelpComponent,
         TermsConditionsComponent,
         PrivacyComponent,
         DialogConfirmationComponent,

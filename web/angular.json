@@ -27,7 +27,7 @@
                         ],
                         "scripts": [
                             "node_modules/hammerjs/hammer.min.js",
-                            "node_modules/showdown/dist/showdown.js"
+                            "node_modules/marked/lib/marked.js"
                         ]
                     },
                     "configurations": {

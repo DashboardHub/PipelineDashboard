@@ -36,10 +36,8 @@ export class EnvironmentsAddComponent implements OnInit {
     }
 
     createEnvironment(): void {
-        const form: AbstractControl = this.environmentForm.controls;
-
         this.environmentService
-            .add(form.value)
+            .add(this.environmentForm.getRawValue())
             .subscribe(
                 (environment: Environment) => this.router.navigate(['/environments', environment.id]),
                 (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }),

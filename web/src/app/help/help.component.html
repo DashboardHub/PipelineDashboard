@@ -1,0 +1,27 @@
+<div class="mat-content">
+    <mat-card>
+        <form [formGroup]="searchForm" fxLayout="row">
+            <mat-form-field fxFlex>
+                <input matInput placeholder="Search" formControlName="search">
+            </mat-form-field>
+        </form>
+        <mat-divider></mat-divider>
+
+        <mat-nav-list *ngFor="let help of filteredTopics; let last = last">
+            <a mat-list-item (click)="openDialog(help)">
+                <mat-icon matListIcon>{{ help.icon }}</mat-icon>
+                <h3 matLine> {{ help.title }} </h3>
+                <p matLine> {{ help.description }} </p>
+                <p matLine class="mat-caption" fxHide.gt-sm>{{ help.updatedAt | timeAgo }} </p>
+                <span fxFlex></span>
+                <span fxHide.xs fxHide.sm fxFlex="40%" fxFlex.gt-sm="30%" fxLayoutAlign="end center">
+                    <div class="mat-caption"> {{ help.updatedAt | timeAgo }} </div>
+                </span>
+            </a>
+        </mat-nav-list>
+
+        <div *ngIf="filteredTopics?.length === 0">
+            <h3>No topics to display.</h3>
+        </div>
+    </mat-card>
+</div>
