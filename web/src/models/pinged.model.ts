@@ -9,4 +9,5 @@ export class Pinged {
     duration: number;
     isValid: boolean;
     createdAt: string;
+    updatedAt: string;
 }

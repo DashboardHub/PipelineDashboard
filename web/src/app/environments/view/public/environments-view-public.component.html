@@ -1,0 +1,9 @@
+<mat-toolbar class="mat-elevation-z2" fxLayout="row" fxLayoutGap="10px">
+    <a mat-icon-button routerLink="/"><mat-icon>arrow_back</mat-icon></a>
+    <span fxFlex></span>
+    <button mat-icon-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
+</mat-toolbar>
+
+<div class="mat-content" fxLayout="column" fxLayoutGap="20px">
+    <dashboard-environments-view [environment]="environment"></dashboard-environments-view>
+</div>

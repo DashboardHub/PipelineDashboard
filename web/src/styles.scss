@@ -61,6 +61,24 @@ a {
     }
 }
 
+code {
+    width: 100%;
+    padding: 0.5em;
+    background-color: #eeeeee;
+}
+
+.text-primary {
+    color: mat-color($dashboard-primary, 900);
+}
+
+.text-accent {
+    color: mat-color($dashboard-accent, 700);
+}
+
+.text-warn {
+    color: mat-color($dashboard-warn, 700);
+}
+
 .mat-content {
     padding: 20px;
 

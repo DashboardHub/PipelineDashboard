@@ -36,7 +36,7 @@ export class EnvironmentsAddComponent implements OnInit {
     }
 
     createEnvironment(): void {
-        const form: AbstractControl = this.environmentForm;
+        const form: AbstractControl = this.environmentForm.controls;
 
         this.environmentService
             .add(form.value)

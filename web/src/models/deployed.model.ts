@@ -7,4 +7,5 @@ export class Deployed {
     state: string;
     token: Token;
     createdAt: string;
+    updatedAt: string;
 }

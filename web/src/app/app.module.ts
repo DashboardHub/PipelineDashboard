@@ -17,6 +17,12 @@ import { EnvironmentsAddComponent } from './environments/add/environments-add.co
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
+import { EnvironmentsViewComponent } from './environments/view/environments-view.component';
+import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
+import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
+
+import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
+import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 
 import { ApiHttpInterceptorModule } from '../interceptors/api.http.interceptor';
 import { ErrorHttpInterceptorModule } from '../interceptors/error.http.interceptor';
@@ -27,7 +33,6 @@ import { MaterialModule } from './material.module';
 import { AppRoutesModule } from './routes.module';
 
 export function tokenGetter(): string | null {
-    console.log('hit');
     return localStorage.getItem('access_token');
 }
 
@@ -40,7 +45,12 @@ export function tokenGetter(): string | null {
         EnvironmentsAddComponent,
         EnvironmentsListComponent,
         EnvironmentsListPublicComponent,
-        EnvironmentsListPrivateComponent
+        EnvironmentsListPrivateComponent,
+        EnvironmentsViewComponent,
+        EnvironmentsViewPublicComponent,
+        EnvironmentsViewPrivateComponent,
+        DialogConfirmationComponent,
+        DialogMarkdownComponent
     ],
     imports: [
         CommonModule,
@@ -62,7 +72,10 @@ export function tokenGetter(): string | null {
         })
     ],
     providers: [],
-    entryComponents: [],
+    entryComponents: [
+        DialogConfirmationComponent,
+        DialogMarkdownComponent
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
