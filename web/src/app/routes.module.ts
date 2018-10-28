@@ -14,6 +14,7 @@ import { PublicEnvironmentsResolver } from './environments/list/public/public.en
 import { PrivateEnvironmentResolver } from './environments/view/private/private.environment.resolver';
 import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
 import { PrivateEnvironmentsResolver } from './environments/list/private/private.environments.resolver';
+import { FeaturesComponent } from './features/features.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 
@@ -60,6 +61,11 @@ const routes: Routes = [
                 pathMatch: 'full',
                 component: EnvironmentsViewPublicComponent,
                 resolve: { environment: PublicEnvironmentResolver },
+            },
+            {
+                path: 'features',
+                pathMatch: 'full',
+                component: FeaturesComponent,
             },
             {
                 path: 'terms-and-conditions',
