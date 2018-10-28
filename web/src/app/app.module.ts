@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { LoginDirective } from './directives/login.directive';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
+import { CallbackComponent } from './auth/callback/callback.component';
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 
@@ -24,12 +28,15 @@ export function tokenGetter(): string | null {
     declarations: [
         AppComponent,
         MainComponent,
+        CallbackComponent,
+        LoginDirective,
         EnvironmentsListComponent,
         EnvironmentsListPublicComponent
     ],
     imports: [
         CommonModule,
         HttpClientModule,
+        RouterModule,
         BrowserAnimationsModule,
         ChartsModule,
         MaterialModule,
