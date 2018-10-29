@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
@@ -7,20 +7,20 @@ import { Environment } from '../../../models/environment.model';
 import { EnvironmentService } from '../../../services/environment.service';
 
 @Component({
-    selector: 'dashboard-environments-add',
-    templateUrl: './environments-add.component.html',
+    selector: 'dashboard-environments-edit',
+    templateUrl: './environments-edit.component.html'
 })
-export class EnvironmentsAddComponent implements OnInit {
+export class EnvironmentsEditComponent implements OnInit {
 
-    public environment: Environment;
+    public environment: Environment = new Environment();
     public environmentForm: FormGroup;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
+        private router: Router,
         private form: FormBuilder,
         private snackBar: MatSnackBar,
-        private environmentService: EnvironmentService,
+        private environmentService: EnvironmentService
     ) { }
 
     ngOnInit(): void {
@@ -33,15 +33,16 @@ export class EnvironmentsAddComponent implements OnInit {
             link: [undefined, [Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)]],
             logo: [undefined, [Validators.maxLength(1024), Validators.pattern(/^https:\/\//)]]
         });
+
+        this.environmentForm.reset(this.environment);
     }
 
-    createEnvironment(): void {
+    updateEnvironment(): void {
         this.environmentService
-            .add(this.environmentForm.getRawValue())
+            .update(this.environment.id, this.environmentForm.getRawValue())
             .subscribe(
                 (environment: Environment) => this.router.navigate(['/environments', environment.id]),
-                (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }),
+                (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 })
             );
     }
-
 }

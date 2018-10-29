@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { EnvironmentsAddComponent } from './environments/add/environments-add.component';
+import { EnvironmentsEditComponent } from './environments/edit/environments-edit.component';
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
@@ -49,6 +50,7 @@ export function tokenGetter(): string | null {
         LoginDirective,
         MarkdownDirective,
         EnvironmentsAddComponent,
+        EnvironmentsEditComponent,
         EnvironmentsListComponent,
         EnvironmentsListPublicComponent,
         EnvironmentsListPrivateComponent,

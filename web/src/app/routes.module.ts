@@ -6,6 +6,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { MainComponent } from './main.component';
 import { CallbackComponent } from './auth/callback/callback.component';
 import { EnvironmentsAddComponent } from './environments/add/environments-add.component';
+import { EnvironmentsEditComponent } from './environments/edit/environments-edit.component';
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
@@ -53,6 +54,12 @@ const routes: Routes = [
                         path: ':id',
                         pathMatch: 'full',
                         component: EnvironmentsViewPrivateComponent,
+                        resolve: { environment: PrivateEnvironmentResolver },
+                    },
+                    {
+                        path: ':id/edit',
+                        pathMatch: 'full',
+                        component: EnvironmentsEditComponent,
                         resolve: { environment: PrivateEnvironmentResolver },
                     }
                 ]
