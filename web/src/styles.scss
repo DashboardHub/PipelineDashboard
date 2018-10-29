@@ -61,9 +61,29 @@ a {
     }
 }
 
+table {
+    border-collapse: collapse;
+    word-break: keep-all;
+
+    th {
+        text-align: center;
+    }
+
+    th, td {
+        padding: 0.5em;
+        border: 1px #cacaca solid;
+    }
+
+    tbody {
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+    }
+}
+
 code {
     width: 100%;
-    padding: 0.5em;
+    padding: 0.2em 0.5em;
     background-color: #eeeeee;
 }
 
