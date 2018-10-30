@@ -50,7 +50,8 @@ export class EnvironmentsViewPrivateComponent implements OnInit, OnDestroy {
     deleteDialog(): void {
         let dialogRef: MatDialogRef<DialogConfirmationComponent, boolean> = this.dialog.open(DialogConfirmationComponent, {
             data: {
-                title: `Are you sure you want to delete the environment "${this.environment.title}"`,
+                title: 'Confirm deletion',
+                content: `Are you sure you want to delete the environment "${this.environment.title}"`,
             },
         });
 

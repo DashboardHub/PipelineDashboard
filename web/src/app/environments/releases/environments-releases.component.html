@@ -20,7 +20,7 @@
 
         <mat-card>
             <mat-card-title>Releases</mat-card-title>
-            <mat-card-subtitle>Recent activity</mat-card-subtitle>
+            <mat-card-subtitle>Submit recent activity</mat-card-subtitle>
 
             <mat-card-content fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
                 <mat-form-field fxFlex fxFlex.gt-sm="20%">
@@ -45,12 +45,14 @@
                 </mat-form-field>
 
                 <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" fxFlex="initial" fxFlex.gt-sm="20%">
-                    <button mat-raised-button type="submit" color="accent" [disabled]="releasesForm.invalid" fxFlex="initial" fxFlex.gt-sm="100%">Submit</button>
+                    <button mat-raised-button type="submit" color="accent" [disabled]="releasesForm.invalid" fxFlex="initial" fxFlex.gt-sm="100%">Send</button>
                 </div>
             </mat-card-content>
         </mat-card>
 
         <mat-card *ngIf="releases.list.length">
+            <mat-card-title>Releases</mat-card-title>
+            <mat-card-subtitle>Recent activity</mat-card-subtitle>
             <mat-card-content>
                 <mat-list>
                     <mat-list-item *ngFor="let release of releases.list">

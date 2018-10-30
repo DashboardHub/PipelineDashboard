@@ -71,8 +71,6 @@ export class EnvironmentsReleasesComponent implements OnInit {
             token: [undefined, [Validators.required]],
             state: [undefined, [Validators.required]]
         });
-
-        this.releasesForm.reset({ ...this.tokens, ...this.environment });
     }
 
     submitRelease(): void {

@@ -10,6 +10,7 @@ import { EnvironmentsEditComponent } from './environments/edit/environments-edit
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
 import { EnvironmentsReleasesComponent } from './environments/releases/environments-releases.component';
+import { EnvironmentsTokensComponent } from './environments/tokens/environments-tokens.component';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
 import { FeaturesComponent } from './features/features.component';
@@ -75,6 +76,12 @@ const routes: Routes = [
                             tokens: TokensResolver,
                             environment: PrivateEnvironmentResolver
                         }
+                    },
+                    {
+                        path: ':id/tokens',
+                        pathMatch: 'full',
+                        component: EnvironmentsTokensComponent,
+                        resolve: { tokens: TokensResolver },
                     }
                 ]
             },

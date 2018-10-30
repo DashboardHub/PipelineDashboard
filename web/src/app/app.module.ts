@@ -20,6 +20,7 @@ import { EnvironmentsListComponent } from './environments/list/environments-list
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
 import { EnvironmentsReleasesComponent } from './environments/releases/environments-releases.component';
+import { EnvironmentsTokensComponent } from './environments/tokens/environments-tokens.component';
 import { EnvironmentsViewComponent } from './environments/view/environments-view.component';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
@@ -56,6 +57,7 @@ export function tokenGetter(): string | null {
         EnvironmentsListPublicComponent,
         EnvironmentsListPrivateComponent,
         EnvironmentsReleasesComponent,
+        EnvironmentsTokensComponent,
         EnvironmentsViewComponent,
         EnvironmentsViewPublicComponent,
         EnvironmentsViewPrivateComponent,
