@@ -9,16 +9,20 @@ import { EnvironmentsAddComponent } from './environments/add/environments-add.co
 import { EnvironmentsEditComponent } from './environments/edit/environments-edit.component';
 import { EnvironmentsListPublicComponent } from './environments/list/public/environments-list-public.component';
 import { EnvironmentsListPrivateComponent } from './environments/list/private/environments-list-private.component';
+import { EnvironmentsReleasesComponent } from './environments/releases/environments-releases.component';
 import { EnvironmentsViewPublicComponent } from './environments/view/public/environments-view-public.component';
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
-import { PublicEnvironmentsResolver } from './environments/list/public/public.environments.resolver';
-import { PrivateEnvironmentResolver } from './environments/view/private/private.environment.resolver';
-import { PublicEnvironmentResolver } from './environments/view/public/public.environment.resolver';
-import { PrivateEnvironmentsResolver } from './environments/list/private/private.environments.resolver';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
+
+import { PublicEnvironmentsResolver } from '../services/public.environments.resolver';
+import { PrivateEnvironmentResolver } from '../services/private.environment.resolver';
+import { PublicEnvironmentResolver } from '../services/public.environment.resolver';
+import { PrivateEnvironmentsResolver } from '../services/private.environments.resolver';
+import { ReleasesResolver } from '../services/releases.resolve';
+import { TokensResolver } from '../services/tokens.resolver';
 
 const routes: Routes = [
     {
@@ -33,7 +37,7 @@ const routes: Routes = [
             {
                 path: 'callback',
                 pathMatch: 'full',
-                component: CallbackComponent,
+                component: CallbackComponent
             },
             {
                 path: 'environments',
@@ -43,24 +47,34 @@ const routes: Routes = [
                         path: 'list',
                         pathMatch: 'full',
                         component: EnvironmentsListPrivateComponent,
-                        resolve: { environments: PrivateEnvironmentsResolver },
+                        resolve: { environments: PrivateEnvironmentsResolver }
                     },
                     {
                         path: 'add',
                         pathMatch: 'full',
-                        component: EnvironmentsAddComponent,
+                        component: EnvironmentsAddComponent
                     },
                     {
                         path: ':id',
                         pathMatch: 'full',
                         component: EnvironmentsViewPrivateComponent,
-                        resolve: { environment: PrivateEnvironmentResolver },
+                        resolve: { environment: PrivateEnvironmentResolver }
                     },
                     {
                         path: ':id/edit',
                         pathMatch: 'full',
                         component: EnvironmentsEditComponent,
-                        resolve: { environment: PrivateEnvironmentResolver },
+                        resolve: { environment: PrivateEnvironmentResolver }
+                    },
+                    {
+                        path: ':id/releases',
+                        pathMatch: 'full',
+                        component: EnvironmentsReleasesComponent,
+                        resolve: {
+                            releases: ReleasesResolver,
+                            tokens: TokensResolver,
+                            environment: PrivateEnvironmentResolver
+                        }
                     }
                 ]
             },
@@ -68,27 +82,27 @@ const routes: Routes = [
                 path: 'environments/:id/view',
                 pathMatch: 'full',
                 component: EnvironmentsViewPublicComponent,
-                resolve: { environment: PublicEnvironmentResolver },
+                resolve: { environment: PublicEnvironmentResolver }
             },
             {
                 path: 'features',
                 pathMatch: 'full',
-                component: FeaturesComponent,
+                component: FeaturesComponent
             },
             {
                 path: 'help',
                 pathMatch: 'full',
-                component: HelpComponent,
+                component: HelpComponent
             },
             {
                 path: 'terms-and-conditions',
                 pathMatch: 'full',
-                component: TermsConditionsComponent,
+                component: TermsConditionsComponent
             },
             {
                 path: 'privacy',
                 pathMatch: 'full',
-                component: PrivacyComponent,
+                component: PrivacyComponent
             },
             { path: '**', redirectTo: '/' }
         ]

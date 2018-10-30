@@ -3,9 +3,9 @@ import { Resolve } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { List } from '../../../../models/list.model';
-import { Environment } from '../../../../models/environment.model';
-import { EnvironmentService } from '../../../../services/environment.service';
+import { List } from '../models/list.model';
+import { Environment } from '../models/environment.model';
+import { EnvironmentService } from './environment.service';
 
 @Injectable({
     providedIn: 'root'

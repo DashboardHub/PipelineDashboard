@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
-import { Environment } from '../../../../models/environment.model';
-import { EnvironmentService } from '../../../../services/environment.service';
+import { Environment } from '../models/environment.model';
+import { EnvironmentService } from './environment.service';
 
 @Injectable({
     providedIn: 'root'

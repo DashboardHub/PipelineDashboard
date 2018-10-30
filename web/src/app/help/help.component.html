@@ -7,7 +7,7 @@
         </form>
         <mat-divider></mat-divider>
 
-        <mat-nav-list *ngFor="let help of filteredTopics; let last = last">
+        <mat-nav-list *ngFor="let help of filteredTopics">
             <a mat-list-item (click)="openDialog(help)">
                 <mat-icon matListIcon>{{ help.icon }}</mat-icon>
                 <h3 matLine> {{ help.title }} </h3>
