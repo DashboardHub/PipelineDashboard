@@ -1,3 +1,5 @@
+@import '~@angular/material/theming';
+
 .sidenav-container {
     height: 100%;
     background-color: #eaeaea;
@@ -32,4 +34,9 @@
 .content-container {
     min-height: calc(100% - 128px);
     margin-top: 64px;
+
+    @media ($mat-xsmall) {
+        min-height: calc(100% - 112px);
+        margin-top: 56px;
+    }
 }
