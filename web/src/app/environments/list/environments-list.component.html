@@ -63,12 +63,12 @@
 
                         <span *ngIf="environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
                             <strong>{{ environment.latestRelease.release }}</strong>
-                            <div
+                            <div fxLayout="row" fxLayoutGap="5px"
                                 [class.env-red]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
                                 [class.env-orange]="![0, 100].includes(environment.progress.current)"
                                 [class.env-green]="!['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
                             >
-                                {{ environment.latestRelease.state | releaseState }}
+                                <span>{{ environment.latestRelease.state | releaseState }}</span>
                                 <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
                                 <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
                             </div>

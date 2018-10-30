@@ -110,11 +110,11 @@
                     <p matLine>Latest Release</p>
                     <div fxFlex></div>
                     <div *ngIf="environment.latestRelease.release" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <div fxLayout="row" fxLayoutAlign="end center"
+                        <div fxLayout="row" fxLayoutGap="5px"
                             [class.text-primary]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
                             [class.text-accent]="![0, 100].includes(environment.progress.current)"
                             [class.text-warn]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
-                            {{ environment.latestRelease.state | releaseState }}
+                            <span>{{ environment.latestRelease.state | releaseState }}</span>
                             <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
                             <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed">warning</mat-icon>
                         </div>
