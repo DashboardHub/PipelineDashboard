@@ -26,6 +26,9 @@ import { EnvironmentsViewPublicComponent } from './environments/view/public/envi
 import { EnvironmentsViewPrivateComponent } from './environments/view/private/environments-view-private.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
+import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.component';
+import { MonitorsListComponent } from './environments/monitors/list/monitors-list.component';
+import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 
@@ -63,6 +66,9 @@ export function tokenGetter(): string | null {
         EnvironmentsViewPrivateComponent,
         FeaturesComponent,
         HelpComponent,
+        MonitorsAddComponent,
+        MonitorsListComponent,
+        MonitorsViewComponent,
         TermsConditionsComponent,
         PrivacyComponent,
         DialogConfirmationComponent,

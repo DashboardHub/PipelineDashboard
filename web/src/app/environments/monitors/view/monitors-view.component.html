@@ -1,0 +1,28 @@
+<mat-toolbar class="mat-elevation-z2" fxLayout="row" fxLayoutGap="10px">
+    <a mat-icon-button [routerLink]="['/environments', environment.id, 'monitors']"><mat-icon>arrow_back</mat-icon></a>
+    <span fxFlex></span>
+    <button mat-button (click)="deleteDialog()" matTooltip="Delete monitor"><mat-icon color="warn">delete</mat-icon></button>
+    <button mat-button (click)="ping()" matTooltip="Ping"><mat-icon>play_for_work</mat-icon></button>
+    <button mat-icon-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
+</mat-toolbar>
+
+<div class="mat-content">
+    <mat-card>
+        <mat-card-title>Pings</mat-card-title>
+        <mat-card-subtitle>List of your pings</mat-card-subtitle>
+
+        <mat-list>
+            <ng-container *ngFor="let ping of pings.list">
+                <mat-list-item>
+                    <mat-icon matListIcon [color]="ping.isValid ? 'primary' : 'warn'">check_circle</mat-icon>
+                    <h3 matLine>{{ ping.duration }}ms</h3>
+                    <p matLine fxHide.xs>{{ ping.statusCode }} {{ ping.url }}</p>
+                    <span fxFlex></span>
+                    <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                        <div>{{ ping.updatedAt | timeAgo }}</div>
+                    </div>
+                </mat-list-item>
+            </ng-container>
+        </mat-list>
+    </mat-card>
+</div>

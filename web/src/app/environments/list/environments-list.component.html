@@ -56,12 +56,12 @@
 
                         <span fxFlex></span>
 
-                        <span class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                        <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
                             <div>{{ environment.type | environmentType }}</div>
                             <div>{{ environment.updatedAt | timeAgo }}</div>
-                        </span>
+                        </div>
 
-                        <span *ngIf="environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
+                        <div *ngIf="environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
                             <strong>{{ environment.latestRelease.release }}</strong>
                             <div fxLayout="row" fxLayoutGap="5px"
                                 [class.env-red]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
@@ -72,14 +72,14 @@
                                 <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
                                 <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed" class="material-icons md-18 tc-red-A700">warning</mat-icon>
                             </div>
-                        </span>
+                        </div>
 
-                        <span *ngIf="!environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
+                        <div *ngIf="!environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
                             <div>No version</div>
                             <div>No releases</div>
-                        </span>
+                        </div>
 
-                        <span class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                        <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
                             <div>{{ environment.releases }} releases</div>
                             <div
                                 [class.env-green]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
@@ -87,7 +87,7 @@
                                 <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
                                 <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
                             </div>
-                        </span>
+                        </div>
                     </a>
                     <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
                 </ng-container>

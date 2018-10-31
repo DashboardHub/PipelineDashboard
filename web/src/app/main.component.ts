@@ -91,7 +91,7 @@ export class MainComponent {
         }
     }
 
-    showDoorbell() {
+    showDoorbell(): void {
         (<any>window).doorbell.show();
     }
 
