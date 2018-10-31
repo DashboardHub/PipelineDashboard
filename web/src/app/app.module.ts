@@ -29,8 +29,10 @@ import { HelpComponent } from './help/help.component';
 import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.component';
 import { MonitorsListComponent } from './environments/monitors/list/monitors-list.component';
 import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
-import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { ProjectsListComponent } from './projects/list/projects-list.component';
+import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
@@ -71,6 +73,8 @@ export function tokenGetter(): string | null {
         MonitorsViewComponent,
         TermsConditionsComponent,
         PrivacyComponent,
+        ProfileComponent,
+        ProjectsListComponent,
         DialogConfirmationComponent,
         DialogMarkdownComponent
     ],

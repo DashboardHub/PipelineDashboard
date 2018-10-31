@@ -19,6 +19,8 @@ import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.c
 import { MonitorsListComponent } from './environments/monitors/list/monitors-list.component';
 import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { ProjectsListComponent } from './projects/list/projects-list.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 
 import { MonitorsResolver } from '../services/monitors.resolve';
@@ -113,6 +115,17 @@ const routes: Routes = [
                 pathMatch: 'full',
                 component: EnvironmentsViewPublicComponent,
                 resolve: { environment: PublicEnvironmentResolver }
+            },
+
+            {
+                path: 'projects',
+                pathMatch: 'full',
+                component: ProjectsListComponent,
+            },
+            {
+                path: 'profile',
+                pathMatch: 'full',
+                component: ProfileComponent,
             },
             {
                 path: 'features',

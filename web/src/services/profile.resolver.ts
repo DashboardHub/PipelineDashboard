@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
-import { AuthService } from '../auth.service';
+import { AuthService } from '../app/auth/auth.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class ProfileResolver implements Resolve<any> {
 
     constructor(private authService: AuthService) { }
