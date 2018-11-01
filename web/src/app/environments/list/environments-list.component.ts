@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 
+import { DigitsPipe } from '../../../pipes/digits.pipe';
+
 import { List } from '../../../models/list.model';
 import { Environment } from '../../../models/environment.model';
 import { Profile } from '../../../models/profile.model';
@@ -80,7 +82,10 @@ export class EnvironmentsListComponent {
             ));
     }
 
-    // axisDigits(val: any): any {
-    //   return new TdDigitsPipe().transform(val);
-    // }
+    axisDigits(label: any): any {
+        if (label === 0) {
+            return '';
+        }
+        return new DigitsPipe().transform(label);
+    }
 }

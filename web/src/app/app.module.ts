@@ -31,6 +31,7 @@ import { MonitorsListComponent } from './environments/monitors/list/monitors-lis
 import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { ProfileComponent } from './auth/profile/profile.component';
+import { ProjectsAddComponent } from './projects/add/projects-add.component';
 import { ProjectsListComponent } from './projects/list/projects-list.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 
@@ -74,6 +75,7 @@ export function tokenGetter(): string | null {
         TermsConditionsComponent,
         PrivacyComponent,
         ProfileComponent,
+        ProjectsAddComponent,
         ProjectsListComponent,
         DialogConfirmationComponent,
         DialogMarkdownComponent
