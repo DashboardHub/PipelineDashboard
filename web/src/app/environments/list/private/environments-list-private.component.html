@@ -1,9 +1,9 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <span flex></span>
-    <button mat-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
-    <button mat-button routerLink="/environments/add" color="accent" matTooltip="Add Environment"><mat-icon>add</mat-icon></button>
-  </mat-toolbar-row>
+<mat-toolbar class="mat-elevation-z2" fxLayout="row" fxLayoutGap="10px">
+    <span fxFlex></span>
+    <button mat-icon-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
+    <button mat-icon-button routerLink="/environments/add" color="accent" matTooltip="Add Environment"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
 
-<qs-environments-list [environments]="environments"></qs-environments-list>
+<div class="mat-content">
+    <dashboard-environments-list [environments]="environments"></dashboard-environments-list>
+</div>

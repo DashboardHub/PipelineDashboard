@@ -1,71 +1,62 @@
-<td-layout #layout>
-  <td-navigation-drawer [name]="isAuthenticated() ? profile.name : 'Guest'" [email]="isAuthenticated() ? profile.nickname : 'Not logged in'">
-    <mat-nav-list>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="publicRoutes">
-        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
-          <mat-icon>{{item.icon}}</mat-icon>
-          {{item.title}}</a>
-      </ng-template>
-      <mat-divider></mat-divider>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="privateRoutes" *ngIf="isAuthenticated()">
-        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
-          <mat-icon>{{item.icon}}</mat-icon>
-          {{item.title}}</a>
-      </ng-template>
-      <mat-divider></mat-divider>
-      <ng-template let-item let-last="last" ngFor [ngForOf]="generalRoutes">
-        <a mat-list-item [routerLink]="[item.route]" (click)="layout.close()">
-          <mat-icon>{{item.icon}}</mat-icon>
-          {{item.title}}</a>
-      </ng-template>
-      <mat-divider></mat-divider>
-      <a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">
-        <mat-icon>vpn_key</mat-icon>
-        Login
-      </a>
-      <a mat-list-item (click)="logout(); layout.close()" *ngIf="isAuthenticated()">
-        <mat-icon>exit_to_app</mat-icon>
-        Sign out
-      </a>
-    </mat-nav-list>
-    <!--<mat-nav-list td-navigation-drawer-menu>-->
-      <!--<a mat-list-item (click)="layout.close()" *ngIf="!isAuthenticated()" routerLink="/login">-->
-        <!--<mat-icon>vpn_key</mat-icon>-->
-        <!--Login-->
-      <!--</a>-->
-      <!--<a mat-list-item (click)="logout(); layout.close()" *ngIf="isAuthenticated()">-->
-        <!--<mat-icon>exit_to_app</mat-icon>-->
-        <!--Sign out-->
-      <!--</a>-->
-    <!--</mat-nav-list>-->
-  </td-navigation-drawer>
-  <td-layout-nav navigationRoute="/" color="accent">
-    <button mat-icon-button td-menu-button tdLayoutToggle>
-      <mat-icon>menu</mat-icon>
-    </button>
-    <div td-toolbar-content layout="row" layout-align="center center" flex>
-      <span>PipelineDashboard</span>
-      <span flex></span>
-      <span *ngIf="!isAuthenticated()">Welcome Guest</span>
-      <span *ngIf="isAuthenticated()">{{ profile.name }}</span>
-      <a mat-icon-button matTooltip="Login" routerLink="/login" *ngIf="!isAuthenticated()">
-        <mat-icon>vpn_key</mat-icon>
-      </a>
-      <a mat-icon-button matTooltip="Logout" (click)="logout()" routerLink="/" *ngIf="isAuthenticated()">
-        <mat-icon>exit_to_app</mat-icon>
-      </a>
-      <a mat-icon-button matTooltip="Github" href="http://github.com/DashboardHub/PipelineDashboard" target="_blank">
-        <mat-icon svgIcon="assets:github"></mat-icon>
-      </a>
-    </div>
-    <router-outlet></router-outlet>
-    <td-layout-footer>
-      <div layout="row" layout-align="start center">
-        <span class="mat-caption">Copyright &copy; 2018 <a href="https://www.dashboardhub.io" target="_blank" rel="noopener">DashboardHub</a>. All rights reserved <i>({{ version }})</i></span>
-        <span flex></span>
-        <button mat-button (click)="showDoorbell()" color="accent">Feedback</button>
-        <mat-icon class="mat-icon-ux" svgIcon="assets:dashboardhub"></mat-icon>
-      </div>
-    </td-layout-footer>
-  </td-layout-nav>
-</td-layout>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" mode="over">
+        <div class="heading" fxLayout="column" fxLayoutGap="5px">
+            <div class="mat-subheading-2">{{ isAuthenticated() ? profile.name : 'Guest' }}</div>
+            <div class="mat-caption">{{ isAuthenticated() ? profile.nickname : 'Not logged in' }}</div>
+        </div>
+
+        <mat-nav-list>
+            <ng-container *ngFor="let item of publicRoutes">
+                <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
+                    <mat-icon>{{ item.icon }}</mat-icon>
+                    {{ item.title }}
+                </a>
+            </ng-container>
+
+            <ng-container *ngIf="isAuthenticated()">
+                <ng-container *ngFor="let item of privateRoutes">
+                    <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
+                        <mat-icon>{{ item.icon }}</mat-icon>
+                        {{ item.title }}
+                    </a>
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngFor="let item of generalRoutes">
+                <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
+                    <mat-icon>{{ item.icon }}</mat-icon>
+                    {{ item.title }}
+                </a>
+            </ng-container>
+
+            <a mat-list-item (click)="drawer.close()" *ngIf="!isAuthenticated()" dashboardLogin><mat-icon>vpn_key</mat-icon> Login</a>
+            <a mat-list-item (click)="logout(); drawer.close()" *ngIf="isAuthenticated()"><mat-icon>exit_to_app</mat-icon> Sign out</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar class="app-toolbar mat-elevation-z2" fxLayout="row" fxLayoutGap="10px" color="accent">
+            <button mat-icon-button type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>PipelineDashboard</span>
+            <span fxFlex></span>
+            <span *ngIf="!isAuthenticated()" fxHide.xs>Welcome Guest</span>
+            <span *ngIf="isAuthenticated()" fxHide.xs>{{ profile.name }}</span>
+            <button mat-icon-button matTooltip="Login" *ngIf="!isAuthenticated()" dashboardLogin><mat-icon>vpn_key</mat-icon></button>
+            <button mat-icon-button matTooltip="Logout" (click)="logout()" routerLink="/" *ngIf="isAuthenticated()"><mat-icon>exit_to_app</mat-icon></button>
+            <a mat-icon-button matTooltip="Github" href="http://github.com/DashboardHub/PipelineDashboard" target="_blank"><mat-icon svgIcon="assets:github"></mat-icon></a>
+        </mat-toolbar>
+
+        <div class="content-container">
+            <router-outlet></router-outlet>
+        </div>
+
+        <mat-toolbar fxLayout="row" fxLayoutGap="10px">
+            <span class="mat-caption">Copyright &copy; 2018 <a href="https://www.dashboardhub.io" target="_blank" rel="noopener">DashboardHub</a>. All rights reserved <i>({{ version }})</i></span>
+            <span fxFlex></span>
+            <button mat-button (click)="showDoorbell()" color="accent">Feedback</button>
+            <mat-icon [style.width.px]="120" svgIcon="assets:dashboardhub"></mat-icon>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

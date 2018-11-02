@@ -1,33 +1,28 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <a mat-button [routerLink]="['/environments', environment.id, 'monitors']"><mat-icon>arrow_back</mat-icon></a>
-    <span flex></span>
-    <button mat-button class="tc-red-A400" (click)="deleteDialog()" matTooltip="Delete monitor"><mat-icon>delete</mat-icon></button>
+<mat-toolbar class="mat-elevation-z2" fxLayout="row" fxLayoutGap="10px">
+    <a mat-icon-button [routerLink]="['/environments', environment.id, 'monitors']"><mat-icon>arrow_back</mat-icon></a>
+    <span fxFlex></span>
+    <button mat-button (click)="deleteDialog()" matTooltip="Delete monitor"><mat-icon color="warn">delete</mat-icon></button>
     <button mat-button (click)="ping()" matTooltip="Ping"><mat-icon>play_for_work</mat-icon></button>
-    <button mat-button class="tc-green-A700" (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
-  </mat-toolbar-row>
+    <button mat-icon-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
 </mat-toolbar>
 
-<div class="mat-content" layout-padding flex>
-  <mat-card>
-    <mat-card-title>Pings</mat-card-title>
-    <mat-card-subtitle>List of your pings</mat-card-subtitle>
-    <mat-divider></mat-divider>
-    <mat-list class="will-load item-list">
-      <ng-template tdLoading="items.load">
-        <ng-template let-ping let-last="last" ngFor [ngForOf]="pings.list">
-          <mat-list-item layout-align="row">
-            <mat-icon matListAvatar [ngClass]="ping.isValid ? 'tc-green-A700' : 'tc-red-A400'">check_circle</mat-icon>
-            <h3 matLine>{{ ping.duration }}ms</h3>
-            <p matLine hide-xs>{{ ping.statusCode }} {{ ping.url }}</p>
-            <span flex></span>
-            <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
-              <p>{{ ping.updatedAt | timeAgo }}</p>
-            </span>
-          </mat-list-item>
-          <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
-        </ng-template>
-      </ng-template>
-    </mat-list>
-  </mat-card>
+<div class="mat-content">
+    <mat-card>
+        <mat-card-title>Pings</mat-card-title>
+        <mat-card-subtitle>List of your pings</mat-card-subtitle>
+
+        <mat-list>
+            <ng-container *ngFor="let ping of pings.list">
+                <mat-list-item>
+                    <mat-icon matListIcon [color]="ping.isValid ? 'primary' : 'warn'">check_circle</mat-icon>
+                    <h3 matLine>{{ ping.duration }}ms</h3>
+                    <p matLine fxHide.xs>{{ ping.statusCode }} {{ ping.url }}</p>
+                    <span fxFlex></span>
+                    <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                        <div>{{ ping.updatedAt | timeAgo }}</div>
+                    </div>
+                </mat-list-item>
+            </ng-container>
+        </mat-list>
+    </mat-card>
 </div>
