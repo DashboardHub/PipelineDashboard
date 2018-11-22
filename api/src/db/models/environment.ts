@@ -1,4 +1,4 @@
-import { Table, Column, Model, Sequelize, Length, Scopes, ForeignKey, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, Sequelize, Length, Scopes, ForeignKey, BelongsTo, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 import User from "./user";
 
 @Scopes({
@@ -17,18 +17,21 @@ export class Environment extends Model<Environment> {
     })
     id?: string;
 
-
     @Length({min: 3, max: 32})
     @Column
     name?: string;
 
-    // @CreatedAt
-    // @Column
-    // createdAt: Date = new Date();
-    //
-    // @UpdatedAt
-    // @Column
-    // updatedAt: Date = new Date();
+    @Length({ min: 3, max: 1024 })
+    @Column
+    description?: string;
+
+    @CreatedAt
+    @Column
+    creationDate: Date = new Date();
+
+    @UpdatedAt
+    @Column
+    updatedOn: Date = new Date();
 
     @ForeignKey(() => User)
     @Column

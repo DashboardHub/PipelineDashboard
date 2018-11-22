@@ -17,11 +17,12 @@ All contributions are welcome, not only from code, but also blogs, content, docu
 
 Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and let us know, we are happy to chat and more than happy to pair on the technologies we use:
 
-- Angular (v5+)
+- Angular (v7+)
 - Material design
 - Node
-- Serverless
-- AWS Lambda & DynamoDB
+- Serverless + Express
+- AWS Lambda
+- MySQL (aws aurora)
 
 ---
 
@@ -39,7 +40,6 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 - `node` (minimum `v8`)
 - `npm` (minimum `v5`)
-- `java` (minimum `v8`) - *note: this is only to simulate aws services, you do not need to know any java*
 - `sed` - *note: available on linux by default, mac osx has a slightly different version that wont work, install linux version with **brew** `brew install gnu-sed --with-default-names`, more info in the [**FAQ**](https://github.com/DashboardHub/PipelineDashboard#faqs) section below.*
 
 ## Built with love using...
@@ -70,9 +70,7 @@ Using `make` to build and run the project(s):
 
 Open 2 terminals and run each of these commands in its own terminal:
 
-- 2. API `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make api`
-
-*NOTE: You will need a `pem` file for local development, and needs to be in the directory `api` call `auth.pem` (`api/auth.pem`)*
+- 2. API `make api`
 
 - 3. UI `make ui`
 
@@ -85,7 +83,7 @@ This is done using `CumcumberJS`, with the `Given`, `When`, `Then` format in Eng
 Internet is needed when running the automated API tests, because a real `jwt` is used from `Auth0` service.
 
 - 1. Start the API (step 2 from previous section)
-- 2. Run `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make test`
+- 2. Run `make test`
 
 *Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
 
@@ -154,5 +152,3 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | Twitter | https://twitter.com/dashboardhub |
 | LinkedIn | https://www.linkedin.com/showcase/dashboardhub/ |
 | Facebook | https://www.facebook.com/dashboardhub/ |
-
-

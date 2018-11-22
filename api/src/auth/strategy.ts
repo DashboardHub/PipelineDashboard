@@ -3,11 +3,11 @@ import { NextFunction, Request, Response } from 'express';
 import * as passport from 'passport';
 import * as passportJWT from 'passport-jwt';
 import * as passportLocal from 'passport-local';
+
 const ExtractJWT = passportJWT.ExtractJwt;
 const JWTStrategy  = passportJWT.Strategy;
 
 import User from '../db/models/user';
-import { VerifiedCallback } from "passport-jwt";
 
 const LocalStrategy = passportLocal.Strategy;
 
@@ -53,17 +53,15 @@ passport.use(new LocalStrategy({ usernameField: 'email', passwordField: 'passwor
  */
 passport.use(new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey   : 'your_jwt_secret', // @TODO move to config
         passReqToCallback: true,
+        secretOrKey: 'your_jwt_secret', // @TODO move to config
     },
-    (req: Request, jwtPayload: any, cb: VerifiedCallback) => {
+    (req: Request, jwtPayload: any, cb: passportJWT.VerifiedCallback) => {
 
         return User.findOne<User>({ where: { id: jwtPayload.id }})
             .then((user: User | null) => {
-                console.log('++++++++++++++');
-                console.log(user);
                 req.user = user;
-                cb(null, user)
+                cb(null, user);
             })
             .catch((error: Error) => cb(error));
     },
@@ -73,7 +71,6 @@ passport.use(new JWTStrategy({
  * Login Required middleware.
  */
 export let isAuthenticated = (req: Request, res: Response, next: NextFunction) => {
-    console.log('AUTHENTICATED: ', req.isAuthenticated());
     if (req.isAuthenticated()) {
         return next();
     }

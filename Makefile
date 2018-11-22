@@ -22,6 +22,8 @@ api: api.run
 
 ui: ui.run
 
+test: test.local
+
 install.local: api.install ui.install
 
 install: pipeline.version.startBuild pipeline.version.prod.startBuild api.install ui.install pipeline.version.finishBuild pipeline.version.prod.finishBuild
@@ -38,13 +40,13 @@ api.install:
 	(cd api; npm install)
 
 api.test.local:
-	(cd api; npm test:local)
+	(cd api; npm run test:local)
 
 api.test.ci:
-	(cd api; npm test:ci)
+	(cd api; npm run test:ci)
 
 api.run:
-	(cd api; npx serverless offline start --stage dev)
+	(cd api; npm run start:local)
 
 api.deploy:
 	(cd api; npx serverless deploy -v --stage production)

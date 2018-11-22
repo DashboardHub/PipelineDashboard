@@ -10,7 +10,8 @@ import { AddressInfo } from 'net';
 import * as strategy from './auth/strategy';
 import { db } from './db';
 
-import Environments from './environment/environments';
+import PrivateEnvironments from './environment/private';
+import PublicEnvironments from './environment/public';
 import Login from "./auth/login";
 import Registration from "./auth/registration";
 
@@ -49,8 +50,8 @@ app.use(bodyParser.json());
 
 app.use('/auth', Login);
 app.use('/auth', Registration);
-app.use('/environments', passport.authenticate('jwt', { session: false }), strategy.isAuthenticated, Environments);
-app.use('/', Environments);
+app.use('/environments', passport.authenticate('jwt', { session: false }), strategy.isAuthenticated, PrivateEnvironments);
+app.use('/', PublicEnvironments);
 
 /*
  * Create the server

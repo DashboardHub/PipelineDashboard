@@ -24,14 +24,20 @@ class CustomWorld {
           break;
     }
 
-    return this.agent[method.toLowerCase()](path)
-        .set('Accept', 'application/json')
-        // .set('Authorization', 'bearer ')
+      let request = this.agent[method.toLowerCase()](path)
+          .set('Accept', 'application/json');
+
+    if (this.bearer) {
+        request.set('Authorization', `bearer ${this.bearer}`);
+    }
+
+    return request
         .send(body)
         .then((response) => {
             this.statusCode = response.statusCode;
             this.response = response;
-            console.log(body)
+
+            return response;
         })
         .catch((error) => this.response = error);
   }

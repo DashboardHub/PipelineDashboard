@@ -1,6 +1,13 @@
 const {Given, When, Then} = require('cucumber');
 const {expect, should} = require('chai');
 
+Given(/^I am logged in with "([^"]*)" and "([^"]*)"$/, function (email, password) {
+  return this.sendRequest('POST', '/auth/login', [{ field: 'email', value: email }, { field: 'password', value: password }])
+    .then((response) => {
+      this.bearer = response.body.token;
+    });
+});
+
 When(/^I make a "([^"]*)" request to "([^"]*)"$/, function(method, path) {
   return this.sendRequest(method, path);
 });

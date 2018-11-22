@@ -1,4 +1,4 @@
-import { Table, Column, Model, Sequelize, Length, IsIn, CreatedAt, UpdatedAt, NotNull } from 'sequelize-typescript';
+import { Table, Column, Model, Sequelize, Length, IsIn, CreatedAt, UpdatedAt } from 'sequelize-typescript';
 
 @Table({
     tableName: 'auditlogs'
@@ -23,7 +23,6 @@ export class AuditLog extends Model<AuditLog> {
     type?: string;
 
     @Length({ min: 3, max: 255 })
-    @NotNull
     @Column
     details?: string;
 
