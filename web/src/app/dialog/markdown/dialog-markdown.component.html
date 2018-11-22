@@ -1,22 +1,7 @@
-<div class="dialog-content-wrapper">
+<h2 mat-dialog-title>{{ data.title }}</h2>
 
-  <mat-toolbar matDialogTitle class="mat-accent m-0">
-    <mat-toolbar-row>
-      <span class="title dialog-title">{{ data.title }}</span>
-    </mat-toolbar-row>
-  </mat-toolbar>
+<div mat-dialog-content [dashboardMarkdown]="data.content"></div>
 
-  <div mat-dialog-content class="p-24 m-0">
-    <td-markdown>{{ data.content }}</td-markdown>
-  </div>
-
-  <div mat-dialog-actions class="m-0 p-16" layout="row" layout-align="end center">
-    <button mat-button
-            (click)="dialogRef.close()"
-            class="mat-accent"
-            aria-label="Close">
-      CLOSE
-    </button>
-  </div>
-
+<div mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="dialogRef.close()" color="accent">CLOSE</button>
 </div>

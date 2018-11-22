@@ -1,8 +1,118 @@
-// Custom style for loading elements without height
-.will-load {
-    min-height: 80px;
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+/* Setup site theme */
+$dashboard-primary: mat-palette($mat-blue, 700);
+$dashboard-accent: mat-palette($mat-orange, 800, A100, A400);
+$dashboard-warn: mat-palette($mat-red, 600);
+$dashboard-theme: mat-light-theme($dashboard-primary, $dashboard-accent, $dashboard-warn);
+
+@include angular-material-theme($dashboard-theme);
+
+/* Setup Angular Material typography */
+
+$dashboard-global-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $body-1: mat-typography-level(0.9rem, 1.5em, 400),
+    $body-2: mat-typography-level(0.9rem, 1.5em, 700)
+);
+
+@include angular-material-typography($dashboard-global-typography);
+
+$dashboard-base-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $headline: mat-typography-level(2.4rem, 1.5em, 100),
+    $title: mat-typography-level(1.7rem, 1.5em, 300),
+    $subheading-2: mat-typography-level(1.4rem, 1.5em, 300),
+    $subheading-1: mat-typography-level(1.1rem, 1.5em, 400),
+    $body-1: mat-typography-level(0.9rem, 1.5em, 400),
+    $body-2: mat-typography-level(0.9rem, 1.5em, 700),
+    $caption: mat-typography-level(0.8rem, 1.5em, 400)
+);
+
+@include mat-base-typography($dashboard-base-typography);
+
+$dashboard-toolbar-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $title: mat-typography-level(1.3rem, 1.3em, 300)
+);
+
+@include mat-toolbar-typography($dashboard-toolbar-typography);
+
+$dashboard-card-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $headline: mat-typography-level(1.7rem, 1.5em, 300),
+    $title: mat-typography-level(1.7rem, 1.5em, 300)
+);
+
+@include mat-card-typography($dashboard-card-typography);
+
+html, body {
+    height: 100%;
 }
-// Href line height wasn't right for mat-icon-button
-a[mat-icon-button] {
-    line-height: 36px;
+
+a {
+    color: mat-color($dashboard-accent, 900);
+    text-decoration: none;
+
+    &:hover, &:active, &:focus {
+        color: mat-color($dashboard-accent, 700);
+    }
+}
+
+table {
+    border-collapse: collapse;
+    word-break: keep-all;
+
+    th {
+        text-align: center;
+    }
+
+    th, td {
+        padding: 0.5em;
+        border: 1px #cacaca solid;
+    }
+
+    tbody {
+        tr:nth-child(even) {
+            background-color: #eeeeee;
+        }
+    }
+}
+
+code {
+    width: 100%;
+    padding: 0.2em 0.5em;
+    background-color: #eeeeee;
+}
+
+.text-primary {
+    color: mat-color($dashboard-primary, 900);
+}
+
+.text-accent {
+    color: mat-color($dashboard-accent, 700);
+}
+
+.text-warn {
+    color: mat-color($dashboard-warn, 700);
+}
+
+.mat-content {
+    padding: 20px;
+
+    form {
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+    }
+}
+
+.mat-icon {
+    &.mat-icon-2x {
+        font-size: 48px;
+        width: 48px;
+        height: 48px;
+    }
 }

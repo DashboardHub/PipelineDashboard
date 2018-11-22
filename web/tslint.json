@@ -7,7 +7,7 @@
     ],
     "array-type": [
       true,
-      "array" 
+      "array"
     ],
     "arrow-parens": true,
     "ban": [
@@ -64,13 +64,13 @@
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": [true],
     "no-console": [
-      true, 
-      "assert", 
-      "count", 
-      "debug", 
-      "dir", 
-      "dirxml", 
-      "error", 
+      true,
+      "assert",
+      "count",
+      "debug",
+      "dir",
+      "dirxml",
+      "error",
       "group",
       "groupCollapsed",
       "groupEnd",
@@ -133,13 +133,7 @@
       "always"
     ],
     "switch-default": true,
-    "trailing-comma": [
-      true,
-      {
-        "multiline": "always",
-        "single": "always"
-      }
-    ],
+    "trailing-comma": false,
     "triple-equals": true,
     "typedef": [
       true,
@@ -184,8 +178,8 @@
       "check-type"
     ],
     // ANGULAR 2 Rules
-    "directive-selector": [true, "attribute", "qs", "camelCase"],
-    "component-selector": [true, "element", "qs", "kebab-case"],
+    "directive-selector": [true, "attribute", "dashboard", "camelCase"],
+    "component-selector": [true, "element", "dashboard", "kebab-case"],
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "use-input-property-decorator": true,

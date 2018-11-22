@@ -1,62 +1,75 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <a mat-button [routerLink]="['/environments', environment.id]"><mat-icon>arrow_back</mat-icon></a>
-    <span flex></span>
-    <button mat-button class="tc-green-A700" (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
-  </mat-toolbar-row>
+<mat-toolbar class="mat-elevation-z2" fxLayout="row" fxLayoutGap="10px">
+    <a mat-icon-button [routerLink]="['/environments', environment.id]"><mat-icon>arrow_back</mat-icon></a>
+    <span fxFlex></span>
+    <button mat-icon-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
 </mat-toolbar>
 
-<td-message label="Error!"  color="warn" icon="error" *ngIf="tokens.list.length === 0" sublabel="You cannot create a release entry (either with a curl command or with this form) without a token. To create a token click the token icon on the right.">
-  <button td-message-actions mat-icon-button [routerLink]="['/environments', environment.id, 'tokens']" matTooltip="Click here to go to create a token.">
-    <mat-icon>vpn_key</mat-icon>
-  </button>
-</td-message>
+<div class="mat-content" fxLayout="column" fxLayoutGap="20px">
 
-<div class="mat-content" layout-padding flex>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Releases</mat-card-title>
-      <mat-card-subtitle>Recent activity</mat-card-subtitle>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <span layout="row">
-        <td-dynamic-forms [elements]="form.elements" #dynamicForm flex="80">
-          <ng-template let-element ngFor [ngForOf]="form.elements">
-            <ng-template let-control="control" [tdDynamicFormsError]="element.name">
-                <span *ngIf="control.touched || !control.pristine">
-                  <span *ngIf="control.hasError('required')">Required</span>
-                  <span *ngIf="control.hasError('min')">Min value: {{element.min}}</span>
-                  <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
-                  <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
-                  <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
-                </span>
-            </ng-template>
-          </ng-template>
-        </td-dynamic-forms>
-        <button mat-button color="accent" flex="20" [disabled]="!dynamicForm.valid || tokens.list.length === 0" (click)="submit(dynamicForm)">Submit</button>
-      </span>
-      <mat-divider></mat-divider>
-      <mat-list class="will-load item-list">
-        <ng-template tdLoading="items.load">
-          <ng-template let-release let-last="last" ngFor [ngForOf]="releases.list">
-            <mat-list-item layout-align="row">
-              <mat-icon matListAvatar>new_releases</mat-icon>
-              <h3 matLine>{{ release.version }}</h3>
-              <p matLine hide-xs>{{ release.token.name }}</p>
-              <span flex></span>
-              <span class="mat-caption text-right" flex="20" layout-align="row" hide-xs hide-sm>
-                <p>{{ release.latest.state | releaseState }}</p>
-                <p>{{ release.duration | digits }}s</p>
-              </span>
-              <span class="mat-caption text-right" flex="40" layout-align="row" flex-gt-sm="30">
-                <p>{{ release.latest.createdAt | timeAgo }}</p>
-              </span>
-            </mat-list-item>
-            <mat-divider *ngIf="!last" [inset]="true"></mat-divider>
-          </ng-template>
-        </ng-template>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+    <form (submit)="submitRelease()" [formGroup]="releasesForm" fxLayout="column" fxLayoutGap="20px">
+        <mat-card *ngIf="tokens.list.length === 0">
+            <mat-card-title>Warning</mat-card-title>
+            <mat-card-subtitle>No environment tokens are available</mat-card-subtitle>
+
+            <mat-card-content>You cannot create a release entry (either with a curl command or with this form) without a token. To create a token click the token icon on the right.</mat-card-content>
+
+            <mat-card-actions align="center">
+                <button mat-mini-fab [routerLink]="['/environments', environment.id, 'tokens']" matTooltip="Click here to go to create a token."><mat-icon>vpn_key</mat-icon></button>
+            </mat-card-actions>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-title>Releases</mat-card-title>
+            <mat-card-subtitle>Submit recent activity</mat-card-subtitle>
+
+            <mat-card-content fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
+                <mat-form-field fxFlex fxFlex.gt-sm="20%">
+                    <input matInput type="text" placeholder="Version" formControlName="version" required>
+                    <mat-error *ngIf="releasesForm.get(['version']).hasError('required')">This field is required.</mat-error>
+                    <mat-error *ngIf="releasesForm.get(['version']).hasError('minlength')">Entered text is too short.</mat-error>
+                    <mat-error *ngIf="releasesForm.get(['version']).hasError('maxlength')">Entered text is too long.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex fxFlex.gt-sm="30%">
+                    <mat-select placeholder="Token" formControlName="token" required>
+                        <mat-option *ngFor="let token of tokenList" [value]="token.value">{{ token.label }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="releasesForm.get(['token']).hasError('required')">This field is required.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex fxFlex.gt-sm="30%">
+                    <mat-select placeholder="State" formControlName="state" required>
+                        <mat-option *ngFor="let state of stateList" [value]="state.value">{{ state.label }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="releasesForm.get(['state']).hasError('required')">This field is required.</mat-error>
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" fxFlex="initial" fxFlex.gt-sm="20%">
+                    <button mat-raised-button type="submit" color="accent" [disabled]="releasesForm.invalid" fxFlex="initial" fxFlex.gt-sm="100%">Send</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card *ngIf="releases.list.length">
+            <mat-card-title>Releases</mat-card-title>
+            <mat-card-subtitle>Recent activity</mat-card-subtitle>
+            <mat-card-content>
+                <mat-list>
+                    <mat-list-item *ngFor="let release of releases.list">
+                        <mat-icon matListIcon>new_releases</mat-icon>
+                        <h3 matLine>{{ release.version }}</h3>
+                        <p matLine fxHide.xs>{{ release.token.name }}</p>
+                        <span fxFlex></span>
+                        <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="end center" fxHide.xs fxHide.sm>
+                            <div>{{ release.latest.state | releaseState }}</div>
+                            <div>{{ release.duration | digits }}s</div>
+                        </div>
+                        <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="end center" fxFlex.gt.sm="30%">
+                            <div>{{ release.latest.createdAt | timeAgo }}</div>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+        </mat-card>
+    </form>
 </div>

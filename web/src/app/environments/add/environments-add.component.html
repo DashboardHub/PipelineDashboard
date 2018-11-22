@@ -1,31 +1,48 @@
-<div class="mat-content" layout-padding flex>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Create Environments</mat-card-title>
-      <mat-card-subtitle>This can be 'dev', 'test', 'prod' and everything in between</mat-card-subtitle>
-    </mat-card-header>
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <td-dynamic-forms [elements]="form.elements" #dynamicForm>
-        <ng-template let-element ngFor [ngForOf]="form.elements">
-          <ng-template let-control="control" [tdDynamicFormsError]="element.name">
-          <span *ngIf="control.touched || !control.pristine">
-            <span *ngIf="control.hasError('required')">Required</span>
-            <span *ngIf="control.hasError('min')">Min value: {{element.min}}</span>
-            <span *ngIf="control.hasError('max')">Max value: {{element.max}}</span>
-            <span *ngIf="control.hasError('minlength')">Min length value: {{element.minLength}}</span>
-            <span *ngIf="control.hasError('maxlength')">Max length value: {{element.minLength}}</span>
-            <span *ngIf="control.hasError('invalidSsl')">Must be on https (ssl)</span>
-            <span *ngIf="control.hasError('invalidUrl')">Must be a valid URL</span>
-          </span>
-          </ng-template>
-        </ng-template>
-      </td-dynamic-forms>
-    </mat-card-content>
-    <mat-divider></mat-divider>
-    <mat-card-actions>
-      <button mat-button routerLink="/environments/list">Cancel</button>
-      <button mat-button color="accent" (click)="submit(dynamicForm)" [disabled]="!dynamicForm.valid">Submit</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="mat-content" fxLayout="column" fxLayoutGap="20px">
+    <form (submit)="createEnvironment()" [formGroup]="environmentForm">
+        <mat-card>
+            <mat-card-title>Create Environment</mat-card-title>
+            <mat-card-subtitle>This can be 'dev', 'test', 'prod' and everything in between</mat-card-subtitle>
+
+            <mat-card-content fxLayout="column" fxLayoutGap="20px">
+                    <mat-form-field>
+                        <mat-select formControlName="type" placeholder="Environment Type" required>
+                            <mat-option value="build">Build Only</mat-option>
+                            <mat-option value="deploy">Deploy Only</mat-option>
+                            <mat-option value="build-deploy">Build & Deploy</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="environmentForm.get(['type']).hasError('required')">This field is required.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="Title" formControlName="title" required>
+                        <mat-error *ngIf="environmentForm.get(['title']).hasError('required')">This field is required.</mat-error>
+                        <mat-error *ngIf="environmentForm.get(['title']).hasError('minlength')">Entered text is too short.</mat-error>
+                        <mat-error *ngIf="environmentForm.get(['title']).hasError('maxlength')">Entered text is too long.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="Description" formControlName="description">
+                        <mat-error *ngIf="environmentForm.get(['description']).hasError('minlength')">Entered text is too short.</mat-error>
+                        <mat-error *ngIf="environmentForm.get(['description']).hasError('maxlength')">Entered text is too long.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="url" placeholder="Link" formControlName="link">
+                        <mat-error *ngIf="environmentForm.get(['link']).hasError('pattern')">Enter a valid URL.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <input matInput type="url" placeholder="Logo (must be https)" formControlName="logo">
+                        <mat-error *ngIf="environmentForm.get(['logo']).hasError('maxlength')">Entered text is too long.</mat-error>
+                        <mat-error *ngIf="environmentForm.get(['logo']).hasError('pattern')">Must be a URL reference, starting with https://.</mat-error>
+                    </mat-form-field>
+
+                    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+                        <button mat-stroked-button type="button" [routerLink]="['environments', 'list']" color="warn">Cancel</button>
+                        <button mat-raised-button type="submit" color="accent" [disabled]="environmentForm.invalid">Create</button>
+                    </div>
+            </mat-card-content>
+        </mat-card>
+    </form>
 </div>
