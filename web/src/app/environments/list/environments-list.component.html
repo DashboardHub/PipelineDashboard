@@ -81,9 +81,10 @@
 
                         <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
                             <div>{{ environment.releases }} releases</div>
-                            <div
+                            <div fxLayout="row" fxLayoutAlign="center center"
                                 [class.env-green]="environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
-                                [class.env-red]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0">
+                                [class.env-red]="!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0"
+                            >
                                 <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
                                 <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
                             </div>
