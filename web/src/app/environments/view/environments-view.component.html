@@ -113,12 +113,12 @@
                         <div fxLayout="row" fxLayoutGap="5px"
                             [class.text-primary]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
                             [class.text-accent]="![0, 100].includes(environment.progress.current)"
-                            [class.text-warn]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)">
-                            <span>{{ environment.latestRelease.state | releaseState }}</span>
+                            [class.text-warn]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
+                        >
+                            <span>{{ environment.latestRelease.state | releaseState }} ({{ environment.latestRelease.createdAt | timeAgo }})</span>
                             <mat-spinner *ngIf="![0, 100].includes(environment.progress.current)" matTooltip="Your release is running" color="accent" [diameter]="15"></mat-spinner>
                             <mat-icon *ngIf="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)" matTooltip="Your latest release failed">warning</mat-icon>
                         </div>
-                        <div>{{ environment.latestRelease.createdAt | timeAgo }}</div>
                     </div>
                     <div *ngIf="!environment.latestRelease.release" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
                         <div>No releases</div>
@@ -135,8 +135,7 @@
                     <p matLine>Latest Ping</p>
                     <div fxFlex></div>
                     <div *ngIf="environment.latestPing.createdAt" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
-                        <div>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }}</div>
-                        <div>{{ environment.latestPing.statusCode }}</div>
+                        <div>{{ environment.latestPing.isValid ? 'Successful' : 'Unsuccessful' }} ({{ environment.latestPing.statusCode }})</div>
                     </div>
                     <div *ngIf="!environment.pings" class="mat-caption" fxFlex="30%" fxLayoutAlign="end center">
                         <div>No pings</div>
