@@ -12,7 +12,7 @@ export class PrivateEnvironments {
 
     private registerRoutes() {
         this.router.get('/', this.findAll.bind(this));
-        this.router.get('/:id', this.findOne.bind(this));
+        this.router.get('/:id', this.findAll.bind(this));
         this.router.post('/', this.findAll.bind(this));
         this.router.patch('/:id', this.findAll.bind(this));
     }
@@ -20,20 +20,10 @@ export class PrivateEnvironments {
     private findAll(req: any, res: any, next: any) {
         Environment
             .findAll<Environment>({ where: { ownerId: req.user.id } })
-            .then((list) => {
+            .then((list: Environment[]) => {
                 res
                     .status(200)
                     .json({ list });
-            });
-    }
-
-    private findOne(req: any, res: any, next: any) {
-        Environment
-            .findOne<Environment>({ where: { id: req.params.id, ownerId: req.user.id } })
-            .then((environment) => {
-                res
-                    .status(200)
-                    .json({ environment });
             });
     }
 }
