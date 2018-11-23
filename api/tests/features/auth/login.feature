@@ -26,5 +26,5 @@ Feature: Login
     When I make a "POST" request to "/auth/login" with:
       | field    | value            |
       | email    | "test1@test.com" |
-      | password | "test1test"      |
+      | password | "Password$1"     |
     Then the status code should be 200
