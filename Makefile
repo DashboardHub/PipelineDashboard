@@ -73,10 +73,10 @@ ui.deploy: ui.version ui.build ui.sync
 ui.deploy.test: ui.version ui.build.test ui.sync.test
 
 ui.build:
-	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --configuration=production)
+	(cd web; npx ng build --prod --aot --configuration=production)
 
 ui.build.test:
-	(cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --configuration=test)
+	(cd web; npx ng build --prod --aot --configuration=test)
 
 ui.version:
 	(cd web/src/environments; sed -i 's/x\.x\.x/v0.10.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.prod.ts)
