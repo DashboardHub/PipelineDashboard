@@ -17,7 +17,7 @@ before_install:
 script:
   - make install.local
   - make ui.build
-  - make test:ci
+  - make test.ci
 
 deploy:
   - provider: script
