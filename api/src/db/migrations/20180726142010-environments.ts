@@ -1,6 +1,6 @@
 /* tslint:disable */
 import { DataTypes, QueryInterface } from 'sequelize';
-import { SIZE_LARGE, SIZE_SMALL, SIZE_XXLARGE } from '../Validation';
+import { SIZE_LARGE, SIZE_SMALL, SIZE_XXLARGE } from '../validation';
 
 module.exports = {
   up: (queryInterface: QueryInterface, sequelize: DataTypes): any => queryInterface.createTable('environments', {
