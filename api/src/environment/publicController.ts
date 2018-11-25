@@ -25,9 +25,17 @@ export class PublicEnvironments {
     private findOne(req: Request, res: Response, next: NextFunction): void {
         environmentService
             .findOnePublic(req.params.id)
-            .subscribe((environment: Environment | null) => res
-                .status(HttpStatus.OK)
-                .json({ environment }));
+            .subscribe((environment: Environment | null) => {
+                if (environment) {
+                    return res
+                        .status(HttpStatus.OK)
+                        .json({ environment });
+                }
+
+                return res
+                    .status(HttpStatus.NOT_FOUND)
+                    .json({ environment });
+            });
     }
 
     private registerRoutes(): void {

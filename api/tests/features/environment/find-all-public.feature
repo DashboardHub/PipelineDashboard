@@ -1,4 +1,4 @@
-Feature: Public environments
+Feature: List all public environments
 
   Scenario: Public environments list as guest user
     When I make a "GET" request to "/"
