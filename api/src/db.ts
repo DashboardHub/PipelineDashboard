@@ -1,13 +1,11 @@
 import { Sequelize } from 'sequelize-typescript';
-const config = require('../config.json');
+import { config, stage } from '../config';
 
-const stage: string = process.env.NODE_ENV || 'development';
-
-export const db = new Sequelize({
-    dialect: config[stage].dialect,
-    operatorsAliases: Sequelize.Op as any,
+export const db: Sequelize = new Sequelize({
     database: config[stage].database,
-    username: config[stage].username,
+    dialect: config[stage].dialect,
+    modelPaths: [`${__dirname}/db/models`],
+    operatorsAliases: Sequelize.Op as any,
     password: config[stage].password,
-    modelPaths: [__dirname + '/db/models']
+    username: config[stage].username,
 });

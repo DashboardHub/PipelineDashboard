@@ -1,21 +1,53 @@
-import { Table, Column, Model, Sequelize, Length, Scopes, ForeignKey, BelongsTo, CreatedAt, UpdatedAt, IsUrl, Is } from 'sequelize-typescript';
-import User from "./user";
+import {
+    BelongsTo, Column, CreatedAt, ForeignKey, Is, IsUrl, Length, Model, Sequelize, Table, UpdatedAt,
+} from 'sequelize-typescript';
 
-@Scopes({
-    full: {
-        include: [() => User]
-    },
-})
+import { User } from './User';
+
 @Table({
     tableName: 'environments',
 })
 export class Environment extends Model<Environment> {
 
+    @CreatedAt
+    @Column
+    public creationDate?: Date;
+
+    @Length({ min: 3, max: 1024 })
+    @Column
+    public description?: string;
+
     @Column({
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
-        defaultValue: Sequelize.UUIDV4
     })
-    id?: string;
+    public id?: string;
+
+    @Column
+    public isPrivate?: boolean;
+
+    @Is('https', (value: string) => {
+        if (!/^https/.test(value)) {
+            throw new Error(`"${value}" is not over "https".`);
+        }
+    })
+    @IsUrl
+    @Column
+    public logo?: string;
+
+    @Length({ min: 3, max: 32 })
+    @Column
+    public name?: string;
+
+    @BelongsTo(() => User)
+    public owner?: User;
+
+    @ForeignKey(() => User)
+    @Column
+    public ownerId?: string;
+
+    @Column
+    public pings?: number;
 
     @Is('type', (value: string) => {
         if (!['build', 'deploy', 'build-deploy'].includes(value)) {
@@ -23,52 +55,16 @@ export class Environment extends Model<Environment> {
         }
     })
     @Column
-    type?: string;
-
-    @Column
-    isPrivate?: boolean;
-
-    @Length({min: 3, max: 32})
-    @Column
-    name?: string;
-
-    @Length({ min: 3, max: 1024 })
-    @Column
-    description?: string;
-
-    @IsUrl
-    @Column
-    url?: string;
-
-    @Is('https', (value: string) => {
-        if (value.substr(0, 5) !== 'https') {
-            throw new Error(`"${value}" is not over "https".`);
-        }
-    })
-    @IsUrl
-    @Column
-    logo?: string;
-
-    @Column
-    pings?: number;
-
-    @Column
-    views?: number;
-
-    @CreatedAt
-    @Column
-    creationDate: Date = new Date();
+    public type?: string;
 
     @UpdatedAt
     @Column
-    updatedOn: Date = new Date();
+    public updatedOn?: Date;
 
-    @ForeignKey(() => User)
+    @IsUrl
     @Column
-    ownerId?: string;
+    public url?: string;
 
-    @BelongsTo(() => User)
-    owner?: User;
+    @Column
+    public views?: number;
 }
-
-export default Environment;

@@ -1,7 +1,7 @@
 {
     "defaultSeverity": "error",
     "extends": [
-        "tslint:recommended"
+        "tslint:all"
     ],
     "jsRules": {},
     "rules": {
@@ -9,7 +9,9 @@
             true,
             "single",
             "avoid-escape"
-        ]
+        ],
+        "prefer-function-over-method": false,
+        "no-inferrable-types": false
     },
     "rulesDirectory": []
 }

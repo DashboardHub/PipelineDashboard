@@ -1,8 +1,6 @@
 dist/
 node_modules/
-src/**/*.js
-src/**/*.js.*
-tests/**/*.js
-tests/**/*.js.*
+**/*.js
+**/*.js.*
 .coverage/
 .build/

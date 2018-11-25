@@ -1,20 +1,19 @@
 import { DataTypes, QueryInterface } from 'sequelize';
+import { SIZE_LARGE, SIZE_SMALL, SIZE_XXLARGE } from '../validation';
 
 module.exports = {
-  up: (queryInterface: QueryInterface, Sequelize: DataTypes) => {
-      return queryInterface.createTable('environments', {
-          id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
-          ownerId: { type: Sequelize.UUID, allowNull: false },
-          type: { type: Sequelize.STRING(32), allowNull: false, defaultValue: 'build-deploy' },
-          isPrivate: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: false },
-          name: { type: Sequelize.STRING(128), unique: true, allowNull: false },
-          description: { type: Sequelize.STRING(1024), allowNull: true },
-          url: { type: Sequelize.STRING(1024) },
-          logo: { type: Sequelize.STRING(1024) },
-          pings: { type: Sequelize.BIGINT, defaultValue: 0 },
-          views: { type: Sequelize.BIGINT, defaultValue: 0 },
-          creationDate: { type: Sequelize.DATE, allowNull: false },
-          updatedOn: { type: Sequelize.DATE, allowNull: false },
-      });
-  }
+  up: (queryInterface: QueryInterface, sequelize: DataTypes): any => queryInterface.createTable('environments', {
+    creationDate: { type: sequelize.DATE, allowNull: false },
+    description: { type: sequelize.STRING(SIZE_XXLARGE), allowNull: true },
+    id: { type: sequelize.UUID, primaryKey: true, defaultValue: sequelize.UUIDV4 },
+    isPrivate: { type: sequelize.BOOLEAN, allowNull: false, defaultValue: false },
+    logo: { type: sequelize.STRING(SIZE_XXLARGE) },
+    name: { type: sequelize.STRING(SIZE_LARGE), unique: true, allowNull: false },
+    ownerId: { type: sequelize.UUID, allowNull: false },
+    pings: { type: sequelize.BIGINT, defaultValue: 0 },
+    type: { type: sequelize.STRING(SIZE_SMALL), allowNull: false, defaultValue: 'build-deploy' },
+    updatedOn: { type: sequelize.DATE, allowNull: false },
+    url: { type: sequelize.STRING(SIZE_XXLARGE) },
+    views: { type: sequelize.BIGINT, defaultValue: 0 },
+  }),
 };

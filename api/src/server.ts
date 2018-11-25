@@ -1,19 +1,20 @@
-import * as bodyParser from "body-parser";
+import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import { CorsOptions } from 'cors';
 import * as express from 'express';
 import * as helmet from 'helmet';
 import * as http from 'http';
-import * as passport from "passport";
+import { Server } from 'http';
 import { AddressInfo } from 'net';
+import * as passport from 'passport';
 
 import * as strategy from './auth/strategy';
 import { db } from './db';
 
-import PrivateEnvironments from './environment/private';
-import PublicEnvironments from './environment/public';
-import Login from "./auth/login";
-import Registration from "./auth/registration";
+import { Login } from './auth/login';
+import { Registration } from './auth/registration';
+import { PrivateEnvironments } from './environment/private';
+import { PublicEnvironments } from './environment/public';
 
 /*
  * Load up the App
@@ -24,11 +25,11 @@ const app: express.Application = express();
  * Configure security elements
  */
 const corsOpts: CorsOptions = {
-    origin: '*',
-    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'HEAD'],
     allowedHeaders: ['Content-Type'],
     credentials: true,
-    optionsSuccessStatus: 200
+    methods: ['DELETE', 'GET', 'HEAD', 'PATCH', 'POST'],
+    optionsSuccessStatus: 200,
+    origin: '*',
 };
 
 app.enable('trust proxy');
@@ -48,25 +49,27 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/auth', Login);
-app.use('/auth', Registration);
-app.use('/environments', passport.authenticate('jwt', { session: false }), strategy.isAuthenticated, PrivateEnvironments);
-app.use('/', PublicEnvironments);
+app.use('/auth', new Login().router);
+app.use('/auth', new Registration().router);
+app.use(
+    '/environments',
+    passport.authenticate('jwt', { session: false }), strategy.isAuthenticated,
+    new PrivateEnvironments().router,
+);
+app.use('/', new PublicEnvironments().router);
 
 /*
  * Create the server
  */
-const server = http.createServer(app);
-const port = process.env['PORT'];
+const server: Server = http.createServer(app);
+const port: string = process.env.PORT || '3000';
 
 server.listen(port);
-server.on('listening', listening);
-
-async function listening() {
+server.on('listening', async () => {
     await db;
 
-    const addr = <AddressInfo>server.address();
+    const addr: AddressInfo = server.address() as AddressInfo;
     console.log(`Listening on ${addr.address}:${addr.port}`);
-}
+});
 
 module.exports = app;

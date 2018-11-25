@@ -1,13 +1,12 @@
 import { DataTypes, QueryInterface } from 'sequelize';
+import { SIZE_LARGE, SIZE_MEDIUM } from '../validation';
 
 module.exports = {
-  up: (queryInterface: QueryInterface, Sequelize: DataTypes) => {
-      return queryInterface.createTable('users', {
-          id: { type: Sequelize.UUID, primaryKey: true, defaultValue: Sequelize.UUIDV4 },
-          email: { type: Sequelize.STRING(128), unique: true, allowNull: false },
-          hash: { type: Sequelize.STRING(64), allowNull: false },
-          creationDate: { type: Sequelize.DATE, allowNull: false },
-          updatedOn: { type: Sequelize.DATE, allowNull: false },
-      });
-  }
+    up: (queryInterface: QueryInterface, sequelize: DataTypes): any => queryInterface.createTable('users', {
+        creationDate: { type: sequelize.DATE, allowNull: false },
+        email: { type: sequelize.STRING(SIZE_LARGE), unique: true, allowNull: false },
+        hash: { type: sequelize.STRING(SIZE_MEDIUM), allowNull: false },
+        id: { type: sequelize.UUID, primaryKey: true, defaultValue: sequelize.UUIDV4 },
+        updatedOn: { type: sequelize.DATE, allowNull: false },
+    }),
 };

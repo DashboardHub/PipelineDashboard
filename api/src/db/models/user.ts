@@ -1,36 +1,35 @@
-import { Table, Column, Model, Sequelize, Length, IsEmail, CreatedAt, UpdatedAt, HasMany } from 'sequelize-typescript';
-import Environment from "./environment";
+import { Column, CreatedAt, HasMany, IsEmail, Length, Model, Sequelize, Table, UpdatedAt } from 'sequelize-typescript';
+
+import { Environment } from './Environment';
 
 @Table({
-    tableName: 'users'
+    tableName: 'users',
 })
 export class User extends Model<User> {
 
-    @Column({
-        primaryKey: true,
-        defaultValue: Sequelize.UUIDV4
-    })
-    id?: string;
+    @CreatedAt
+    @Column
+    public creationDate?: Date;
 
     @Length({ min: 3, max: 32 })
     @IsEmail
     @Column
-    email?: string;
+    public email?: string;
+
+    @HasMany(() => Environment)
+    public environments?: Environment[];
 
     @Length({ min: 5, max: 64 })
     @Column
-    hash?: string;
+    public hash?: string;
 
-    @CreatedAt
-    @Column
-    creationDate: Date = new Date();
+    @Column({
+        defaultValue: Sequelize.UUIDV4,
+        primaryKey: true,
+    })
+    public id?: string;
 
     @UpdatedAt
     @Column
-    updatedOn: Date = new Date();
-
-    @HasMany(() => Environment)
-    environments?: Environment[];
+    public updatedOn?: Date;
 }
-
-export default User;

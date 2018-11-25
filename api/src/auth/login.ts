@@ -1,36 +1,25 @@
 import { NextFunction, Request, Response, Router } from 'express';
+import * as HttpStatus from 'http-status-codes';
 import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { IVerifyOptions } from 'passport-local';
 
-import User from '../db/models/user';
-import AuditService from './auditService';
+import { User } from '../db/models/User';
 
 export class Login {
 
     public router: Router;
 
-    constructor() {
+    public constructor() {
         this.router = Router();
         this.registerRoutes();
-    }
-
-    private registerRoutes() {
-        this.router.post('/login', this.action.bind(this));
     }
 
     private action(req: Request, res: Response, next: NextFunction): void {
         passport.authenticate('local', { session: false }, (authError: Error, user: User, info: IVerifyOptions) => {
             if (authError || !user) {
-                AuditService.create(req, {
-                    details: `Login failed: ${info.message}`,
-                    namespace: 'auth',
-                    type: 'login',
-                    userId: user.id,
-                });
-
                 return res
-                    .status(400)
+                    .status(HttpStatus.BAD_REQUEST)
                     .json({ error: 'Authentication failed' });
             }
 
@@ -39,19 +28,13 @@ export class Login {
                     return next(loginError);
                 }
 
-                AuditService.create(req, {
-                    details: 'Login successful',
-                    namespace: 'auth',
-                    type: 'login',
-                    userId: user.id,
-                });
-
-                const token = jwt.sign(user, 'your_jwt_secret'); // @TODO move to config
-                return res.json({ token });
+                return res.json({ token: jwt.sign(user, 'your_jwt_secret') }); // @TODO move to config
             });
 
         })(req, res, next);
     }
-}
 
-export default new Login().router;
+    private registerRoutes(): void {
+        this.router.post('/login', this.action.bind(this));
+    }
+}
