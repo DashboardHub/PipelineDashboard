@@ -13,8 +13,8 @@ import { db } from './db';
 
 import { Login } from './auth/login';
 import { Registration } from './auth/registration';
-import { PrivateEnvironments } from './environment/private';
-import { PublicEnvironments } from './environment/public';
+import { PrivateEnvironments } from './environment/privateController';
+import { PublicEnvironments } from './environment/publicController';
 
 /*
  * Load up the App

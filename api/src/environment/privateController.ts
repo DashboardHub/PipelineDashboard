@@ -2,6 +2,8 @@ import { NextFunction, Request, Response, Router } from 'express';
 import * as HttpStatus from 'http-status-codes';
 
 import { Environment } from '../db/models/Environment';
+import { EnvironmentService } from './environmentService';
+const environmentService: EnvironmentService = new EnvironmentService();
 
 export class PrivateEnvironments {
 
@@ -13,19 +15,19 @@ export class PrivateEnvironments {
     }
 
     private findAll(req: Request, res: Response, next: NextFunction): void {
-        Environment
-            .findAll<Environment>({ where: { ownerId: req.user.id } })
-            .then((list: Environment[]) => res
-                    .status(HttpStatus.OK)
-                    .json({ list }));
+        environmentService
+            .findAllPrivate(req.user.id)
+            .subscribe((list: Environment[]) => res
+                .status(HttpStatus.OK)
+                .json({ list }));
     }
 
     private findOne(req: Request, res: Response, next: NextFunction): void {
-        Environment
-            .findOne<Environment>({ where: { id: req.params.id, ownerId: req.user.id } })
-            .then((environment: Environment | null) => res
-                    .status(HttpStatus.OK)
-                    .json({ environment }));
+        environmentService
+            .findOnePrivate(req.params.id, req.user.id)
+            .subscribe((environment: Environment | null) => res
+                .status(HttpStatus.OK)
+                .json({ environment }));
     }
 
     private registerRoutes(): void {
