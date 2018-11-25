@@ -1,3 +1,4 @@
+/* tslint:disable */
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 import { CorsOptions } from 'cors';

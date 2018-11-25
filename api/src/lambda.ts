@@ -1,7 +1,7 @@
 import * as app from './server';
-import { createServer, proxy } from 'aws-serverless-express';
-
+/* tslint:disable */
 import { Context } from 'aws-lambda';
+import { createServer, proxy } from 'aws-serverless-express';
 
 const mimeTypes: Array<string> = [
     // 'application/javascript',

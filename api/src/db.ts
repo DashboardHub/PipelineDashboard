@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Sequelize } from 'sequelize-typescript';
 import { config, stage } from '../config';
 

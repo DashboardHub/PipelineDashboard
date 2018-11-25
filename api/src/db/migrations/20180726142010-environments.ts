@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { DataTypes, QueryInterface } from 'sequelize';
 import { SIZE_LARGE, SIZE_SMALL, SIZE_XXLARGE } from '../Validation';
 
