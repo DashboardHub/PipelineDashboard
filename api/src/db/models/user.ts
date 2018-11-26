@@ -1,6 +1,6 @@
 import { Column, CreatedAt, HasMany, IsEmail, Length, Model, Sequelize, Table, UpdatedAt } from 'sequelize-typescript';
 
-import { Environment } from './Environment';
+import { Environment } from './environment';
 
 @Table({
     tableName: 'users',

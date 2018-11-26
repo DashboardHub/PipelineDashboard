@@ -4,7 +4,7 @@ import * as passport from 'passport';
 import * as passportJWT from 'passport-jwt';
 import * as passportLocal from 'passport-local';
 
-import { User } from '../db/models/User';
+import { User } from '../db/models/user';
 
 /* tslint:disable */
 const extractJWT = passportJWT.ExtractJwt;

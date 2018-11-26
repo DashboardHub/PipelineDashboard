@@ -2,7 +2,7 @@ import {
     BelongsTo, Column, CreatedAt, ForeignKey, Is, IsUrl, Length, Model, Sequelize, Table, UpdatedAt,
 } from 'sequelize-typescript';
 
-import { User } from './User';
+import { User } from './user';
 
 @Table({
     tableName: 'environments',

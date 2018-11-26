@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import * as passport from 'passport';
 import { IVerifyOptions } from 'passport-local';
 
-import { User } from '../db/models/User';
+import { User } from '../db/models/user';
 
 export class Login {
 

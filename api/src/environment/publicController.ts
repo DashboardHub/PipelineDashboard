@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import * as HttpStatus from 'http-status-codes';
 
-import { Environment } from '../db/models/Environment';
+import { Environment } from '../db/models/environment';
 import { EnvironmentService } from './environmentService';
 const environmentService: EnvironmentService = new EnvironmentService();
 

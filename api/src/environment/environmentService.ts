@@ -1,6 +1,6 @@
 import { from, Observable } from 'rxjs';
 
-import { Environment } from '../db/models/Environment';
+import { Environment } from '../db/models/environment';
 
 export class EnvironmentService {
 

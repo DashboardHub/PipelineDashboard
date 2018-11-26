@@ -3,7 +3,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import * as HttpStatus from 'http-status-codes';
 import { config, stage } from '../../config';
 
-import { User } from '../db/models/User';
+import { User } from '../db/models/user';
 
 export class Registration {
 
