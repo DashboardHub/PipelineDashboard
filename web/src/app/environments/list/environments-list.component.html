@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutGap="20px">
-    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="20px">
+    <!-- <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="20px">
         <div fxFlex="20%" *ngFor="let item of summary">
             <mat-card>
                 <mat-card-content fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start center">
@@ -9,9 +9,9 @@
                 </mat-card-content>
             </mat-card>
         </div>
-    </div>
+    </div> -->
 
-    <mat-card>
+    <!-- <mat-card>
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="20px">
             <div class="graph-gauge" fxFlex="50%">
                 <ngx-charts-gauge
@@ -34,34 +34,31 @@
                 </ngx-charts-gauge>
             </div>
         </div>
-    </mat-card>
+    </mat-card> -->
 
     <mat-card>
         <mat-card-title>Environments</mat-card-title>
         <mat-card-subtitle>Recent activity</mat-card-subtitle>
         <mat-card-content>
             <mat-nav-list>
-                <ng-container *ngFor="let environment of environments.list.slice(0, 12)">
-                    <a mat-list-item [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')">
-                        <mat-icon matListIcon *ngIf="!environment.logo">developer_board</mat-icon>
-                        <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title">
-                        <h3 matLine
-                            [class.env-red]="(!environment.latestPing.isValid && (environment.pings.valid + environment.pings.invalid) !== 0) || ['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
-                            [class.env-orange]="![0, 100].includes(environment.progress.current)"
-                            [class.env-green]="(environment.type === 'build' && environment.latestRelease.state === 'finishBuild') || (['deploy', 'build-deploy'].includes(environment.type) && environment.latestRelease.state === 'finishDeploy')"
-                        >
+                <ng-container *ngFor="let environment of environments">
+                    <!-- <a mat-list-item [routerLink]="'/environments/' + environment.id + (profile && profile.sub === environment.owner ? '': '/view')"> -->
+                    <a mat-list-item>
+                        <!-- <mat-icon matListIcon *ngIf="!environment.logo">developer_board</mat-icon> -->
+                        <!-- <img matListAvatar [src]="environment.logo" *ngIf="environment.logo" [alt]="environment.title"> -->
+                        <h3 matLine>
                             {{ environment.title }}
                         </h3>
-                        <p matLine fxHide.xs>{{ environment.description | truncate:50 }}</p>
+                        <!-- <p matLine fxHide.xs>{{ environment.description | truncate:50 }}</p> -->
 
-                        <span fxFlex></span>
+                        <!-- <span fxFlex></span> -->
 
-                        <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
+                        <!-- <div class="mat-caption" fxLayout="column" fxFlex="20%" fxLayoutAlign="center end" fxHide.xs fxHide.sm>
                             <div>{{ environment.type | environmentType }}</div>
                             <div>{{ environment.updatedAt | timeAgo }}</div>
-                        </div>
+                        </div> -->
 
-                        <div *ngIf="environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
+                        <!-- <div *ngIf="environment.latestRelease.release" class="mat-caption" fxLayout="column" fxFlex="40%" fxFlex.gt-sm="20%" fxLayoutAlign="center end">
                             <strong>{{ environment.latestRelease.release }}</strong>
                             <div fxLayout="row" fxLayoutGap="5px"
                                 [class.env-red]="['failBuild', 'failDeploy'].includes(environment.latestRelease.state)"
@@ -88,9 +85,9 @@
                                 <span>{{ environment.pings.valid + environment.pings.invalid | digits }} pings</span>
                                 <mat-icon *ngIf="!environment.latestPing.isValid  && (environment.pings.valid + environment.pings.invalid) !== 0" matTooltip="Your latest ping was invalid" class="material-icons md-18 tc-red-A700">warning</mat-icon>
                             </div>
-                        </div>
+                        </div> -->
                     </a>
-                    <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="determinate" [value]="environment.progress.current"></mat-progress-bar> -->
                 </ng-container>
             </mat-nav-list>
         </mat-card-content>

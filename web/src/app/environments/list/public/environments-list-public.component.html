@@ -1,7 +1,7 @@
 <mat-toolbar class="mat-elevation-z2" fxLayout="row" fxLayoutGap="10px">
     <span fxFlex></span>
     <button mat-icon-button (click)="refresh()" matTooltip="Refresh data"><mat-icon>refresh</mat-icon></button>
-    <button mat-icon-button routerLink="/environments/add" color="accent" matTooltip="Add Environment" *ngIf="isAuthenticated()"><mat-icon>add</mat-icon></button>
+    <button mat-icon-button routerLink="/environments/add" color="accent" matTooltip="Add Environment"><mat-icon>add</mat-icon></button>
 </mat-toolbar>
 
 <div class="mat-content" fxLayout="column" fxLayoutGap="20px">
@@ -26,7 +26,7 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card fxFlex="25%" *ngIf="!isAuthenticated()">
+        <mat-card fxFlex="25%">
             <mat-card-title>Login</mat-card-title>
             <mat-card-subtitle>No need to register</mat-card-subtitle>
             <mat-card-content fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -38,7 +38,7 @@
             </mat-card-content>
         </mat-card>
 
-        <mat-card fxFlex="25%" class="text-center" *ngIf="isAuthenticated()">
+        <mat-card fxFlex="25%" class="text-center">
             <mat-card-title>Get started</mat-card-title>
             <mat-card-subtitle>1. Create an Environment</mat-card-subtitle>
             <mat-card-content fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">

@@ -4,7 +4,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { JwtModule } from '@auth0/angular-jwt';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { environment } from '../environments/environment';
 
@@ -13,7 +15,6 @@ import { MarkdownDirective } from './directives/markdown.directive';
 
 import { AppComponent } from './app.component';
 import { MainComponent } from './main.component';
-import { CallbackComponent } from './auth/callback/callback.component';
 import { EnvironmentsAddComponent } from './environments/add/environments-add.component';
 import { EnvironmentsEditComponent } from './environments/edit/environments-edit.component';
 import { EnvironmentsListComponent } from './environments/list/environments-list.component';
@@ -30,7 +31,6 @@ import { MonitorsAddComponent } from './environments/monitors/add/monitors-add.c
 import { MonitorsListComponent } from './environments/monitors/list/monitors-list.component';
 import { MonitorsViewComponent } from './environments/monitors/view/monitors-view.component';
 import { PrivacyComponent } from './legal/privacy/privacy.component';
-import { ProfileComponent } from './auth/profile/profile.component';
 import { ProjectsAddComponent } from './projects/add/projects-add.component';
 import { ProjectsListComponent } from './projects/list/projects-list.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
@@ -54,7 +54,6 @@ export function tokenGetter(): string | null {
     declarations: [
         AppComponent,
         MainComponent,
-        CallbackComponent,
         LoginDirective,
         MarkdownDirective,
         EnvironmentsAddComponent,
@@ -74,13 +73,15 @@ export function tokenGetter(): string | null {
         MonitorsViewComponent,
         TermsConditionsComponent,
         PrivacyComponent,
-        ProfileComponent,
         ProjectsAddComponent,
         ProjectsListComponent,
         DialogConfirmationComponent,
         DialogMarkdownComponent
     ],
     imports: [
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
         CommonModule,
         HttpClientModule,
         RouterModule,
@@ -92,12 +93,6 @@ export function tokenGetter(): string | null {
         AppRoutesModule,
         ApiHttpInterceptorModule,
         ErrorHttpInterceptorModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                whitelistedDomains: environment.whitelist,
-            },
-        })
     ],
     providers: [],
     entryComponents: [

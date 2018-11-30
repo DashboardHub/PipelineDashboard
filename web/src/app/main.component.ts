@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 import { Navigation } from '../models/navigation.model';
 import { Profile } from '../models/profile.model';
-import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
     selector: 'dashboard-main',
@@ -79,28 +79,12 @@ export class MainComponent {
 
     constructor(
         private router: Router,
-        private authService: AuthService
+        public authService: AuthenticationService,
     ) {
         this.version = environment.version;
-        this.authService.subscribeProfile()
-            .subscribe((profile: Profile) => this.profile = profile);
-
-        if (this.authService.isAuthenticated()) {
-            this.authService
-                .getProfile((err: any) => err ? console.log(err) : undefined);
-        }
     }
 
     showDoorbell(): void {
         (<any>window).doorbell.show();
-    }
-
-    logout(): void {
-        this.authService.logout();
-        this.router.navigate(['/logout']);
-    }
-
-    isAuthenticated(): boolean {
-        return this.authService.isAuthenticated();
     }
 }

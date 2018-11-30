@@ -1,17 +1,18 @@
 import { Directive, HostListener } from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+
+// import { AuthenticationService } from 'src/services/authentication.service';
 
 @Directive({
     selector: '[dashboardLogin]'
 })
 export class LoginDirective {
 
-    constructor(
-        private authService: AuthService
-    ) { }
-
-    @HostListener('click') navigateLogin() {
-        this.authService.login();
+    public constructor(
+        // public authService: AuthenticationService,
+    ) {
     }
 
+    @HostListener('click') navigateLogin(): void {
+        // this.authService.login();
+    }
 }

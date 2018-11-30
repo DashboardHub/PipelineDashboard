@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
 
@@ -17,11 +18,17 @@ export class Patch {
 })
 export class EnvironmentService {
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private firebase: AngularFirestore,
+    ) {
     }
 
-    findAll(): Observable<List<Environment>> {
-        return this.http.get<List<Environment>>('{api}/environments');
+    findAll(): Observable<Environment[]> {
+        console.log('SERVICE');
+        return this.firebase
+            .collection<Environment>('environments')
+            .valueChanges();
     }
 
     findAllByOwner(): Observable<List<Environment>> {

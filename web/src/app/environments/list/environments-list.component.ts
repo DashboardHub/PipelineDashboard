@@ -2,10 +2,8 @@ import { Component, Input } from '@angular/core';
 
 import { DigitsPipe } from '../../../pipes/digits.pipe';
 
-import { List } from '../../../models/list.model';
 import { Environment } from '../../../models/environment.model';
 import { Profile } from '../../../models/profile.model';
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
     selector: 'dashboard-environments-list',
@@ -14,16 +12,16 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class EnvironmentsListComponent {
 
-    public _environments: List<Environment> = new List<Environment>();
+    public _environments: Environment[] = [];
     @Input()
-    public set environments(environments: List<Environment>) {
+    public set environments(environments: Environment[]) {
         this._environments = environments;
-        this.calculateSummary();
-        this.calculateUptime();
-        this.calculateLatestPing();
+        // this.calculateSummary();
+        // this.calculateUptime();
+        // this.calculateLatestPing();
     }
 
-    public get environments(): List<Environment> {
+    public get environments(): Environment[] {
         return this._environments;
     }
 
@@ -32,17 +30,13 @@ export class EnvironmentsListComponent {
     public uptime: { name: string, value: number }[];
     public pings: { name: string, value: number }[];
 
-    constructor(private authService: AuthService) {
-        this.authService.subscribeProfile().subscribe((profile: Profile) => this.profile = profile);
-    }
-
     calculateSummary(): void {
         let environments: number = 0;
         let releases: number = 0;
         let monitors: number = 0;
         let views: number = 0;
         let pings: number = 0;
-        this.environments.list.forEach((environment: Environment) => {
+        this.environments.forEach((environment: Environment) => {
             environments++;
             releases += environment.releases;
             monitors += environment.monitors ? environment.monitors.length : 0;
@@ -59,7 +53,7 @@ export class EnvironmentsListComponent {
     }
 
     calculateUptime(): void {
-        this.uptime = this.environments.list
+        this.uptime = this.environments
             .filter((environment: Environment) => environment.pings && (environment.pings.valid || environment.pings.invalid))
             .slice(0, 12)
             .map((environment: Environment) => (
@@ -71,7 +65,7 @@ export class EnvironmentsListComponent {
     }
 
     calculateLatestPing(): void {
-        this.pings = this.environments.list
+        this.pings = this.environments
             .filter((environment: Environment) => environment.latestPing && environment.latestPing.duration)
             .slice(0, 12)
             .map((environment: Environment) => (

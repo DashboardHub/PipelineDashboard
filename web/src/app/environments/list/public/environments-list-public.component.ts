@@ -4,11 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
-import { List } from '../../../../models/list.model';
 import { Environment } from '../../../../models/environment.model';
 import { Profile } from '../../../../models/profile.model';
 import { EnvironmentService } from '../../../../services/environment.service';
-import { AuthService } from '../../../auth/auth.service';
 
 @Component({
     selector: 'dashboard-environments-list-public',
@@ -18,30 +16,26 @@ export class EnvironmentsListPublicComponent implements OnInit, OnDestroy {
 
     private subscription: Subscription;
 
-    public environments: List<Environment> = new List<Environment>();
+    public environments: Environment[];
     public profile: Profile = new Profile();
 
     constructor(
         private route: ActivatedRoute,
-        private authService: AuthService,
         private environmentService: EnvironmentService
     ) {
-        this.subscription = interval(30 * 1000).pipe(takeWhile(() => true)).subscribe(() => this.refresh());
     }
 
     ngOnInit(): void {
-        this.environments = this.route.snapshot.data.environments;
-    }
-
-    isAuthenticated(): boolean {
-        return this.authService.isAuthenticated();
+        this.environmentService
+            .findAll()
+            .subscribe((environments: Environment[]) => this.environments = environments);
     }
 
     refresh(): void {
-        this.environmentService.findAll().subscribe((environments: List<Environment>) => this.environments = environments);
+        this.environmentService.findAll().subscribe((environments: Environment[]) => this.environments = environments);
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        // this.subscription.unsubscribe();
     }
 }

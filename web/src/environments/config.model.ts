@@ -1,13 +1,15 @@
 export class Config {
     production: boolean;
-    api: string;
     web: string;
-    whitelist: Array<string | RegExp>;
+    api: string;
     version: string;
 
-    auth: {
-        clientID: string;
-        domain: string;
-        callbackURL: string;
+    firebase: {
+        apiKey: string,
+        authDomain: string,
+        databaseURL: string,
+        projectId: string,
+        storageBucket: string,
+        messagingSenderId: string,
     };
 }

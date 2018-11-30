@@ -1,8 +1,8 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" mode="over">
         <div class="heading" fxLayout="column" fxLayoutGap="5px">
-            <div class="mat-subheading-2">{{ isAuthenticated() ? profile.name : 'Guest' }}</div>
-            <div class="mat-caption">{{ isAuthenticated() ? profile.nickname : 'Not logged in' }}</div>
+            <div class="mat-subheading-2">{{ authService.isAuthenticated() ? profile.name : 'Guest' }}</div>
+            <div class="mat-caption">{{ authService.isAuthenticated() ? profile.nickname : 'Not logged in' }}</div>
         </div>
 
         <mat-nav-list>
@@ -13,7 +13,7 @@
                 </a>
             </ng-container>
 
-            <ng-container *ngIf="isAuthenticated()">
+            <ng-container *ngIf="authService.isAuthenticated()">
                 <ng-container *ngFor="let item of privateRoutes">
                     <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
                         <mat-icon>{{ item.icon }}</mat-icon>
@@ -29,8 +29,8 @@
                 </a>
             </ng-container>
 
-            <a mat-list-item (click)="drawer.close()" *ngIf="!isAuthenticated()" dashboardLogin><mat-icon>vpn_key</mat-icon> Login</a>
-            <a mat-list-item (click)="logout(); drawer.close()" *ngIf="isAuthenticated()"><mat-icon>exit_to_app</mat-icon> Sign out</a>
+            <a mat-list-item (click)="drawer.close()" *ngIf="!authService.isAuthenticated()" dashboardLogin><mat-icon>vpn_key</mat-icon> Login</a>
+            <a mat-list-item (click)="logout(); drawer.close()" *ngIf="authService.isAuthenticated()"><mat-icon>exit_to_app</mat-icon> Sign out</a>
         </mat-nav-list>
     </mat-sidenav>
 
@@ -41,10 +41,10 @@
             </button>
             <span>PipelineDashboard</span>
             <span fxFlex></span>
-            <span *ngIf="!isAuthenticated()" fxHide.xs>Welcome Guest</span>
-            <span *ngIf="isAuthenticated()" fxHide.xs>{{ profile.name }}</span>
-            <button mat-icon-button matTooltip="Login" *ngIf="!isAuthenticated()" dashboardLogin><mat-icon>vpn_key</mat-icon></button>
-            <button mat-icon-button matTooltip="Logout" (click)="logout()" routerLink="/" *ngIf="isAuthenticated()"><mat-icon>exit_to_app</mat-icon></button>
+            <span *ngIf="!authService.isAuthenticated()" fxHide.xs>Welcome Guest</span>
+            <span *ngIf="authService.isAuthenticated()" fxHide.xs>{{ profile.name }}</span>
+            <button mat-icon-button matTooltip="Login" *ngIf="!authService.isAuthenticated()" dashboardLogin><mat-icon>vpn_key</mat-icon></button>
+            <button mat-icon-button matTooltip="Logout" (click)="logout()" routerLink="/" *ngIf="authService.isAuthenticated()"><mat-icon>exit_to_app</mat-icon></button>
             <a mat-icon-button matTooltip="Github" href="http://github.com/DashboardHub/PipelineDashboard" target="_blank"><mat-icon svgIcon="assets:github"></mat-icon></a>
         </mat-toolbar>
 

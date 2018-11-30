@@ -2,14 +2,16 @@ import { Config } from './config.model';
 
 export const environment: Config = {
     production: false,
-    api: 'http://localhost:3000',
     web: 'http://localhost:4200',
-    whitelist: ['localhost:3000'],
+    api: 'http://localhost:4200',
     version: 'x.x.x',
 
-    auth: {
-        clientID: 'ZA6c3uT9rQk2PkE0L48CxBaqcZYQBZqu',
-        domain: 'dashboardhub-dev.eu.auth0.com',
-        callbackURL: 'http://localhost:4200/callback'
+    firebase: {
+        apiKey: 'AIzaSyC6MQqAi7rT_DGPwltaIZJUdlvy-vh73YY',
+        authDomain: 'pipelinedashboard-test.firebaseapp.com',
+        databaseURL: 'https://pipelinedashboard-test.firebaseio.com',
+        projectId: 'pipelinedashboard-test',
+        storageBucket: 'pipelinedashboard-test.appspot.com',
+        messagingSenderId: '352932205551',
     }
 };
