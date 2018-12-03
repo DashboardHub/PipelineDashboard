@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { mergeMap, catchError } from 'rxjs/operators';
 
 import { List } from '../models/list.model';
 import { Environment } from '../models/environment.model';
@@ -25,7 +26,20 @@ export class EnvironmentService {
     }
 
     findAll(): Observable<Environment[]> {
-        console.log('SERVICE');
+        // from(this.firebase
+        //     .collection<Environment>('environments')
+        //     .add({
+        //         id: '007',
+        //         title: 'Real test',
+        //         owner: 'test owner',
+        //         type: 'none',
+        //         isPrivate: false,
+        //         createdAt: '',
+        //         updatedAt: '',
+        //     }))
+        //     .pipe(catchError((error) => of(console.log(error))))
+        //     .subscribe((response) => console.log(response))
+
         return this.firebase
             .collection<Environment>('environments')
             .valueChanges();
