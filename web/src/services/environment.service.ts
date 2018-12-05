@@ -26,19 +26,25 @@ export class EnvironmentService {
     }
 
     findAll(): Observable<Environment[]> {
-        // from(this.firebase
-        //     .collection<Environment>('environments')
-        //     .add({
-        //         id: '007',
-        //         title: 'Real test',
-        //         owner: 'test owner',
-        //         type: 'none',
-        //         isPrivate: false,
-        //         createdAt: '',
-        //         updatedAt: '',
-        //     }))
-        //     .pipe(catchError((error) => of(console.log(error))))
-        //     .subscribe((response) => console.log(response))
+        from(
+            // this.firebase
+            //     .collection<Environment>('environments')
+            //     .add({
+            //         id: '007',
+            //         title: 'offline',
+            //         owner: 'test owner',
+            //         type: 'none',
+            //         isPrivate: false,
+            //         createdAt: '',
+            //         updatedAt: '',
+            //     })
+            this.firebase
+                .collection<Environment>('environments')
+                .doc('2KZxJwMAYEdKfOIeGIqZ')
+                .update({ isPrivate: true })
+            )
+            .pipe(catchError((error) => of(console.log(error))))
+            .subscribe((response) => console.log(response))
 
         return this.firebase
             .collection<Environment>('environments')

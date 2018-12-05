@@ -26,7 +26,7 @@ export class EnvironmentsListPublicComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.environmentService
+        this.subscription = this.environmentService
             .findAll()
             .subscribe((environments: Environment[]) => this.environments = environments);
     }
@@ -36,6 +36,6 @@ export class EnvironmentsListPublicComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        // this.subscription.unsubscribe();
+        this.subscription.unsubscribe();
     }
 }
