@@ -16,43 +16,28 @@ export class MainComponent {
     public version: string;
     public profile: Profile = new Profile();
     public publicRoutes: Navigation[] = [
-        {
-            title: 'Public Environments',
-            route: '/',
-            icon: 'computer'
-        }
-//    {
-//      title: 'Public Projects',
-//      route: '/projects',
-//      icon: 'group_work',
-//    },
+        //    {
+        //      title: 'Public Projects',
+        //      route: '/projects',
+        //      icon: 'group_work',
+        //    },
     ];
     public privateRoutes: Navigation[] = [
         {
-            title: 'My Environments',
-            route: '/environments/list',
-            icon: 'computer'
+            title: 'My Projects',
+            route: '/projects',
+            icon: 'group_work',
         },
-//    {
-//      title: 'My Projects',
-//      route: '/projects',
-//      icon: 'group_work',
-//    },
-        {
-            title: 'Add Environment',
-            route: '/environments/add',
-            icon: 'note_add'
-        }
-//    {
-//      title: 'Add Project',
-//      route: '/projects/add',
-//      icon: 'playlist_add',
-//    },
-//    {
-//      title: 'Profile',
-//      route: '/profile',
-//      icon: 'security',
-//    },
+        //    {
+        //      title: 'Add Project',
+        //      route: '/projects/add',
+        //      icon: 'playlist_add',
+        //    },
+        //    {
+        //      title: 'Profile',
+        //      route: '/profile',
+        //      icon: 'security',
+        //    },
     ];
     public generalRoutes: Navigation[] = [
         {

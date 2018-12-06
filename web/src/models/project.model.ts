@@ -1,3 +1,7 @@
+import { RepositoryModel } from './repository';
+
 export class ProjectModel {
-    id: string;
+    id: string = '';
+    name: string = '';
+    repositores: RepositoryModel[] = [];
 }
