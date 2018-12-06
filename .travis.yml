@@ -10,25 +10,8 @@ env:
   - NODE_ENV=development
 
 before_install:
-  - sudo apt-get install python3
-  - sudo pip install awscli
   - npm cache --force clean
-  - (cd api; openssl aes-256-cbc -K $encrypted_00024d39c332_key -iv $encrypted_00024d39c332_iv -in secrets.tar.enc -out secrets.tar -d; tar xvf secrets.tar; cp auth.dev.pem auth.pem)
 
 script:
-  - make install.local
-  - AUTH0_CLIENT_ID_TEST="${AUTH0_CLIENT_ID_DEV}" AUTH0_CLIENT_SECRET_TEST="${AUTH0_CLIENT_SECRET_DEV}" make api &
-  - make ui.build
-  - make test
-
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: make install.test deploy.test
-    on:
-      branch: v0.10-alpha
-  - provider: script
-    skip_cleanup: true
-    script: make install deploy
-    on:
-      branch: master
+  - (cd web; npm install)
+  - (cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --configuration=production)
