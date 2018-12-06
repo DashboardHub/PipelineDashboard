@@ -89,27 +89,6 @@
                         "browserTarget": "pipeline-dashboard:build"
                     }
                 },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "src/test.ts",
-                        "karmaConfig": "./karma.conf.js",
-                        "polyfills": "src/polyfills.ts",
-                        "tsConfig": "src/tsconfig.spec.json",
-                        "scripts": [
-                            "node_modules/hammerjs/hammer.min.js",
-                            "node_modules/showdown/dist/showdown.js"
-                        ],
-                        "styles": [
-                            "src/styles.scss"
-                        ],
-                        "assets": [
-                            "src/assets",
-                            "src/data",
-                            "src/favicon.ico"
-                        ]
-                    }
-                },
                 "lint": {
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
@@ -122,29 +101,6 @@
                 }
             }
         },
-        "pipeline-dashboard-e2e": {
-            "root": "e2e",
-            "sourceRoot": "e2e",
-            "projectType": "application",
-            "architect": {
-                "e2e": {
-                    "builder": "@angular-devkit/build-angular:protractor",
-                    "options": {
-                        "protractorConfig": "./protractor.conf.js",
-                        "devServerTarget": "pipeline-dashboard:serve"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "e2e/tsconfig.e2e.json"
-                        ],
-                        "exclude": []
-                    }
-                }
-            }
-        }
     },
     "defaultProject": "pipeline-dashboard",
     "schematics": {
