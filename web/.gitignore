@@ -35,8 +35,8 @@ testem.log
 yarn-error.log
 
 # e2e
-/e2e/*.js
-/e2e/*.map
+cypress/screenshots
+cypress/videos
 
 #System Files
 .DS_Store

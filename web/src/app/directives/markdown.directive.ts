@@ -8,7 +8,7 @@ export class MarkdownDirective implements OnChanges {
 
     private _original: string;
 
-    private marked = (<any>window).marked;
+    private marked: any = (<any>window).marked;
 
     @Input() dashboardMarkdown: string;
 
@@ -33,18 +33,16 @@ export class MarkdownDirective implements OnChanges {
         }
     }
 
-    materialRender() {
-        const renderer = new this.marked.Renderer();
+    materialRender(): any {
+        const renderer: any = new this.marked.Renderer();
 
-        renderer['heading'] = (text, level) => `<h3>${text}</h3>`;
-
-        renderer['image'] = (href, title, text) => `<img src="${href}" alt="${text}" title="${text}" style="max-width:100%">`;
-
-        renderer['link'] = (href, title, text) => {
-            return `<a href="${href}" target="_blank" ${title ? `title="${title}"` : ''}>${text}</a>`;
+        return {
+            heading: (text: string) => `<h3>${text}</h3>`,
+            image: (href: string, title: string, text: string) => `<img src="${href}" alt="${text}" title="${text}" style="max-width:100%">`,
+            link: (href: string, title: string, text: string) => {
+                return `<a href="${href}" target="_blank" ${title ? `title="${title}"` : ''}>${text}</a>`;
+            }
         };
-
-        return renderer;
     }
 
 }

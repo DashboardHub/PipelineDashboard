@@ -10,10 +10,15 @@
     ],
     "scripts": {
         "start": "ng serve",
-        "e2e": "ng e2e",
+        "build:dev": "ng build --prod --aot",
+        "build:test": "ng build --prod --aot --configuration=test",
+        "build:prod": "ng build --prod --aot --configuration=production",
+        "e2e": "cypress open",
+        "e2e:ci": "cypress run",
         "lint": "ng lint",
-        "reinstall": "rm -rf node_modules tmp deploy dist && yarn install && npm rebuild node-sass",
-        "reinstall:latest": "rm -rf node_modules tmp deploy dist && npm install"
+        "reinstall": "rm -rf node_modules tmp deploy dist && npm install && npm rebuild node-sass",
+        "reinstall:latest": "rm -rf node_modules tmp deploy dist && npm install",
+        "test": "npm run lint && npm run build:dev && concurrently -k -s first \"npm start\" \"sleep 15 && npm run e2e:ci\""
     },
     "engines": {
         "node": ">6.12.0",
@@ -58,6 +63,8 @@
         "@types/jasmine": "2.8.9",
         "@types/node": "10.12.0",
         "codelyzer": "4.5.0",
+        "concurrently": "^4.1.0",
+        "cypress": "^3.1.3",
         "ts-node": "7.0.1",
         "tslint": "5.11.0",
         "typescript": "3.1.3"

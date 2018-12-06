@@ -2,7 +2,7 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" mode="over">
         <div class="heading" fxLayout="column" fxLayoutGap="5px">
             <div class="mat-subheading-2">{{ authService.isAuthenticated() ? profile.name : 'Guest' }}</div>
-            <div class="mat-caption">{{ authService.isAuthenticated() ? profile.nickname : 'Not logged in' }}</div>
+            <div class="mat-caption">{{ authService.isAuthenticated() ? profile.email : 'Not logged in' }}</div>
         </div>
 
         <mat-nav-list>

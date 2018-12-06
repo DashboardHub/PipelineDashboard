@@ -11,7 +11,7 @@ export class DigitsPipe implements PipeTransform {
             return '-';
         }
 
-        const units: Array<string> = ['', 'K', 'M', 'B', 'T'];
+        const units: string[] = ['', 'K', 'M', 'B', 'T'];
         const value: number = Math.floor(Math.log(digits) / Math.log(1000));
 
         if (value === 0) {

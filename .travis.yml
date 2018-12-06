@@ -14,4 +14,4 @@ before_install:
 
 script:
   - (cd web; npm install)
-  - (cd web; ./node_modules/@angular/cli/bin/ng build --prod --aot --configuration=production)
+  - (cd web; npm test)
