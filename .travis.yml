@@ -19,7 +19,7 @@ script:
 
 before_deploy:
   - (cd functions; npm install)
-  - (cd web/src/environments; sed -i 's/x\.x\.x/v0.10.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.test.ts)
+  - (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.${TRAVIS_BUILD_NUMBER}-ALPHA/g' environment.test.ts)
   - (cd web; npm run build:test)
 
 deploy:
