@@ -11,7 +11,20 @@ env:
 
 before_install:
   - npm cache --force clean
+  - npm install -g firebase-tools
 
 script:
   - (cd web; npm install)
   - (cd web; npm test)
+
+before_deploy:
+  - (cd web/src/environments; sed -i 's/x\.x\.x/v0.10.$TRAVIS_BUILD_NUMBER-ALPHA/g' environment.test.ts)
+  - (cd web; npm run build:test)
+
+deploy:
+  - provider: firebase
+    token:
+      secure: $FIREBASE_TEST_TOKEN
+    project: "pipelinedashboard-test"
+    on:
+      branch: v0.10-alpha
