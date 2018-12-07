@@ -8,6 +8,8 @@ import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { ProjectsComponent } from './projects/projects.component';
 
+import { ProfileResolver } from '../services/profile.resolver';
+
 const routes: Routes = [
     {
         path: '',
@@ -16,7 +18,7 @@ const routes: Routes = [
             {
                 path: '',
                 component: ProjectsComponent,
-                // resolve: { environments: PublicEnvironmentsResolver }
+                // resolve: { profile: ProfileResolver }
             },
 
             // {

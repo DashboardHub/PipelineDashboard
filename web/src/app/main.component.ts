@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Navigation } from '../models/navigation.model';
-import { Profile } from '../models/profile.model';
 import { environment } from '../environments/environment';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -14,7 +13,6 @@ import { AuthenticationService } from '../services/authentication.service';
 export class MainComponent {
 
     public version: string;
-    public profile: Profile = new Profile();
     public publicRoutes: Navigation[] = [
         //    {
         //      title: 'Public Projects',
@@ -69,7 +67,7 @@ export class MainComponent {
         this.version = environment.version;
     }
 
-    showDoorbell(): void {
+    public showDoorbell(): void {
         (<any>window).doorbell.show();
     }
 }

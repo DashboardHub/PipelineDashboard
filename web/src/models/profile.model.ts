@@ -1,7 +1,16 @@
+import { Account } from './account.model';
+
 export class Profile {
-    id: string = '';
-    login: string = 'guest';
+
+    uid: string = '';
+    // login: string;
     name: string = 'Guest';
     email: string = '';
-    avatarUrl: string;
+    phone: string = '';
+    avatarUrl: string = '';
+    githubToken?: string;
+    emailVerified: boolean = false;
+    creationTime?: string;
+    lastSignInTime?: string;
+    account?: Account = new Account();
 }
