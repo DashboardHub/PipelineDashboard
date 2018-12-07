@@ -24,7 +24,7 @@ before_deploy:
 
 deploy:
   - provider: firebase
-    deploy.skip_cleanup: true
+    skip_cleanup: true
     token:
       secure: $FIREBASE_TEST_TOKEN
     project: "pipelinedashboard-test"
