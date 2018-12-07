@@ -27,4 +27,4 @@ deploy:
       secure: $FIREBASE_TEST_TOKEN
     project: "pipelinedashboard-test"
     on:
-      branch: v0.10-alpha
+      branch: issue-firebase
