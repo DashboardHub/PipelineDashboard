@@ -1,6 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" mode="over">
         <div class="heading" fxLayout="column" fxLayoutGap="5px">
+            <img *ngIf="authService.isAuthenticated" src="{{ authService.profile.avatarUrl }}" />
             <div class="mat-subheading-2">{{ authService.isAuthenticated ? authService.profile.name : 'Guest' }}</div>
             <div class="mat-caption">{{ authService.isAuthenticated ? authService.profile.email : 'Not logged in' }}</div>
         </div>

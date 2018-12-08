@@ -39,7 +39,7 @@ export class AuthenticationService {
                         };
 
                         this.isAuthenticated = true;
-console.log(this.profile)
+
                         return this.afs.collection('users').doc(user.uid).set(this.profile, { merge: true });
                     });
             });
