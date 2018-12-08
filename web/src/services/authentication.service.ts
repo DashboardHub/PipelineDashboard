@@ -21,6 +21,11 @@ export class AuthenticationService {
     ) {
         this.afAuth.user
             .subscribe((user: User) => {
+                if (!user) {
+                    this.profile = new Profile();
+                    this.isAuthenticated = false;
+                }
+
                 if (user) {
                     from(user.getIdToken())
                         .subscribe((token: string) => {
@@ -44,15 +49,11 @@ export class AuthenticationService {
             });
     }
 
-    public login(): Observable<firebase.auth.UserCredential> {
-        return from(this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider()));
+    public login(): void {
+        this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider());
     }
 
     public logout(): void {
-        from(this.afAuth.auth.signOut())
-            .subscribe(() => {
-                this.profile = new Profile();
-                this.isAuthenticated = false;
-            });
+        this.afAuth.auth.signOut();
     }
 }
