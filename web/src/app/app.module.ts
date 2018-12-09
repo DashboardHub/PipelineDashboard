@@ -31,6 +31,7 @@ import { MaterialModule } from './material.module';
 import { AppRoutesModule } from './routes.module';
 import { ProjectsComponent } from './projects/projects.component';
 import { PrivateProjectsComponent } from './projects/private/private.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -47,6 +48,7 @@ export function tokenGetter(): string | null {
         MarkdownDirective,
         PrivacyComponent,
         PrivateProjectsComponent,
+        ProfileComponent,
         ProjectsComponent,
         TermsConditionsComponent,
     ],

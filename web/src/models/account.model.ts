@@ -1,4 +1,4 @@
 export class Account {
-    type: string = 'free';
+    type: 'free'|'admin' = 'free';
     private: number = 0;
 }

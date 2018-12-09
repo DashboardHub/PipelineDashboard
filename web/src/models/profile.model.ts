@@ -1,4 +1,5 @@
 import { Account } from './account.model';
+import { LoginAudit } from './loginAudit.model';
 
 export class Profile {
 
@@ -13,4 +14,5 @@ export class Profile {
     creationTime?: string;
     lastSignInTime?: string;
     account?: Account = new Account();
+    logins?: LoginAudit[] = [];
 }

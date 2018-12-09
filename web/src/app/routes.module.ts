@@ -12,6 +12,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { PrivateProjectsComponent } from './projects/private/private.component';
 import { AuthGuard } from '../guards/authentication.guard';
 import { ProfileResolver } from '../resolvers/profile.resolver';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
     {
@@ -23,11 +24,16 @@ const routes: Routes = [
                 path: '',
                 component: ProjectsComponent,
             },
-
             {
                 path: 'projects',
                 pathMatch: 'full',
                 component: PrivateProjectsComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'profile',
+                pathMatch: 'full',
+                component: ProfileComponent,
                 canActivate: [AuthGuard],
             },
             {
