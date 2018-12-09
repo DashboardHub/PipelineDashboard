@@ -14,11 +14,11 @@ export class MainComponent {
 
     public version: string;
     public publicRoutes: Navigation[] = [
-        //    {
-        //      title: 'Public Projects',
-        //      route: '/projects',
-        //      icon: 'group_work',
-        //    },
+        {
+            title: 'Public Projects',
+            route: '/',
+            icon: 'group_work',
+        },
     ];
     public privateRoutes: Navigation[] = [
         {

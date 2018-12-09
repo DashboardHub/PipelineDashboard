@@ -8,7 +8,9 @@ import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { ProjectsComponent } from './projects/projects.component';
 
-import { ProfileResolver } from '../services/profile.resolver';
+// import { ProfileResolver } from '../services/profile.resolver';
+import { PrivateProjectsComponent } from './projects/private/private.component';
+import { AuthGuard } from '../guards/authentication.guard';
 
 const routes: Routes = [
     {
@@ -21,11 +23,12 @@ const routes: Routes = [
                 // resolve: { profile: ProfileResolver }
             },
 
-            // {
-            //     path: 'projects',
-            //     pathMatch: 'full',
-            //     component: ProjectsListComponent,
-            // },
+            {
+                path: 'projects',
+                pathMatch: 'full',
+                component: PrivateProjectsComponent,
+                canActivate: [AuthGuard],
+            },
             {
                 path: 'features',
                 pathMatch: 'full',

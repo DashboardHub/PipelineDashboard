@@ -30,7 +30,7 @@ import { ChartsModule } from './charts.module';
 import { MaterialModule } from './material.module';
 import { AppRoutesModule } from './routes.module';
 import { ProjectsComponent } from './projects/projects.component';
-import { ProfileResolver } from '../services/profile.resolver';
+import { PrivateProjectsComponent } from './projects/private/private.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -46,6 +46,7 @@ export function tokenGetter(): string | null {
         MainComponent,
         MarkdownDirective,
         PrivacyComponent,
+        PrivateProjectsComponent,
         ProjectsComponent,
         TermsConditionsComponent,
     ],
