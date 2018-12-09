@@ -3,7 +3,7 @@ import { Account } from './account.model';
 export class Profile {
 
     uid: string = '';
-    // login: string;
+    username: string;
     name: string = 'Guest';
     email: string = '';
     phone: string = '';

@@ -51,6 +51,7 @@
         "highlight.js": "9.13.1",
         "marked": "0.5.1",
         "normalize.css": "8.0.0",
+        "rxfire": "^3.2.0",
         "rxjs": "6.3.3",
         "web-animations-js": "2.3.1",
         "zone.js": "0.8.26"
