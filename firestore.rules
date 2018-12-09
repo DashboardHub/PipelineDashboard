@@ -6,7 +6,7 @@ service cloud.firestore {
       allow get, list, update, delete: if request.auth.uid != null && request.auth.uid == resource.data.uid;
 
       match /logins/{login} {
-        allow read: if request.auth.uid != null && get(/databases/$(database)/documents/users/$(user)).data.uid == request.auth.uid;
+        allow read, write: if request.auth.uid != null && get(/databases/$(database)/documents/users/$(user)).data.uid == request.auth.uid;
       }
     }
     match /projects/{project} {

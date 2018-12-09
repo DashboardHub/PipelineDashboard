@@ -81,9 +81,9 @@ export class AuthenticationService {
     }
 
     public getLogins(): Observable<LoginAudit[]> {
-        return from(this.afs.collection<Profile>('users')
+        return this.afs.collection<Profile>('users')
             .doc<Profile>(this.profile.uid)
             .collection<LoginAudit>('logins')
-            .valueChanges());
+            .valueChanges();
     }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Profile, LoginAudit } from '../../models/index.model';
 import { catchError } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'dashboard-profile',
@@ -9,8 +10,9 @@ import { catchError } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-    profile: Profile;
-    logins: LoginAudit[];
+    private loginsSubscriptions: Subscription;
+    public profile: Profile;
+    public logins: LoginAudit[];
 
     constructor(public authService: AuthenticationService) {
     }
@@ -19,9 +21,11 @@ export class ProfileComponent implements OnInit {
         this.profile = this.authService.profile;
         this.authService
             .getLogins()
-            .subscribe((logins: LoginAudit[]) => {
-                this.logins = logins;
-                console.log(logins.length);
-            });
+            .subscribe((logins: LoginAudit[]) => this.logins = logins);
+    }
+
+    ngDestroy(): void {
+        this.loginsSubscriptions
+            .unsubscribe();
     }
 }
