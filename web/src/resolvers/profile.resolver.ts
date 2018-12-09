@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase/app';
 import { from, Observable } from 'rxjs';
+import { AuthenticationService } from '../services/authentication.service';
+import { Profile } from '../models/index.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class ProfileResolver implements Resolve<User> {
+export class ProfileResolver implements Resolve<Profile> {
 
-    constructor(private afAuth: AngularFireAuth) {
+    constructor(private authService: AuthenticationService) {
     }
 
-    resolve(): Observable<User> {
-        return this.afAuth.user;
+    resolve(): Observable<Profile> {
+        return this.authService.checkAuth();
     }
 }

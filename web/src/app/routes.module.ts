@@ -11,16 +11,17 @@ import { ProjectsComponent } from './projects/projects.component';
 // import { ProfileResolver } from '../services/profile.resolver';
 import { PrivateProjectsComponent } from './projects/private/private.component';
 import { AuthGuard } from '../guards/authentication.guard';
+import { ProfileResolver } from '../resolvers/profile.resolver';
 
 const routes: Routes = [
     {
         path: '',
         component: MainComponent,
+        // resolve: { profile: ProfileResolver },
         children: [
             {
                 path: '',
                 component: ProjectsComponent,
-                // resolve: { profile: ProfileResolver }
             },
 
             {
@@ -37,7 +38,7 @@ const routes: Routes = [
             {
                 path: 'help',
                 pathMatch: 'full',
-                component: HelpComponent
+                component: HelpComponent,
             },
             {
                 path: 'terms-and-conditions',
@@ -47,9 +48,9 @@ const routes: Routes = [
             {
                 path: 'privacy',
                 pathMatch: 'full',
-                component: PrivacyComponent
+                component: PrivacyComponent,
             },
-            { path: '**', redirectTo: '/' }
+            { path: '**', redirectTo: '/' },
         ]
     }
 ];

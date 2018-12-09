@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Navigation } from '../models/navigation.model';
 import { environment } from '../environments/environment';
@@ -61,7 +60,6 @@ export class MainComponent {
     ];
 
     constructor(
-        private router: Router,
         public authService: AuthenticationService,
     ) {
         this.version = environment.version;

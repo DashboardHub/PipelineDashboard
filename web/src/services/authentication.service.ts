@@ -42,7 +42,7 @@ export class AuthenticationService {
                             emailVerified: credentials.user.emailVerified,
                             creationTime: credentials.user.metadata.creationTime,
                             lastSignInTime: credentials.user.metadata.lastSignInTime
-                        }
+                        };
 
                         this.isAuthenticated = true;
 
@@ -59,7 +59,7 @@ export class AuthenticationService {
             });
     }
 
-    private checkAuth(): Observable<Profile> {
+    public checkAuth(): Observable<Profile> {
         return this.afAuth.authState
             .pipe(
                 filter((user: User) => !!user),
