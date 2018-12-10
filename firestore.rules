@@ -10,9 +10,9 @@ service cloud.firestore {
       }
     }
     match /projects/{project} {
-      allow get, list: if resource.data.isPrivate == false || request.auth.uid == resource.data.owner;
       allow create: if request.auth.uid != null;
-      allow update, delete: if request.auth.uid != null && request.auth.uid == resource.data.owner;
+      allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.owners;
+      allow update, delete: if request.auth.uid != null && request.auth.uid in resource.data.owners;
     }
   }
 

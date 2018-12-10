@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
-import { Profile, LoginAudit } from '../../models/index.model';
-import { catchError } from 'rxjs/operators';
+import { ProfileModel, LoginAuditModel } from '../../models/index.model';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,8 +10,8 @@ import { Subscription } from 'rxjs';
 export class ProfileComponent implements OnInit {
 
     private loginsSubscriptions: Subscription;
-    public profile: Profile;
-    public logins: LoginAudit[];
+    public profile: ProfileModel;
+    public logins: LoginAuditModel[];
 
     constructor(public authService: AuthenticationService) {
     }
@@ -21,7 +20,7 @@ export class ProfileComponent implements OnInit {
         this.profile = this.authService.profile;
         this.authService
             .getLogins()
-            .subscribe((logins: LoginAudit[]) => this.logins = logins);
+            .subscribe((logins: LoginAuditModel[]) => this.logins = logins);
     }
 
     ngDestroy(): void {

@@ -15,12 +15,15 @@ import {
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatBadgeModule,
+    MatRadioModule,
 } from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     imports: [
+        MatBadgeModule,
         MatButtonModule,
         MatCardModule,
         MatDialogModule,
@@ -30,6 +33,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatListModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+        MatRadioModule,
         MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,
@@ -38,6 +42,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
     ],
     exports: [
+        MatBadgeModule,
         MatButtonModule,
         MatCardModule,
         MatDialogModule,
@@ -47,6 +52,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatListModule,
         MatProgressBarModule,
         MatProgressSpinnerModule,
+        MatRadioModule,
         MatSelectModule,
         MatSidenavModule,
         MatSnackBarModule,

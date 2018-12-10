@@ -1,4 +1,4 @@
-export class LoginAudit {
+export class LoginAuditModel {
     date: Date;
     userAgent: string;
     device: string;

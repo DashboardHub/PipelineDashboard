@@ -30,9 +30,11 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ChartsModule } from './charts.module';
 import { MaterialModule } from './material.module';
 import { AppRoutesModule } from './routes.module';
-import { ProjectsComponent } from './projects/projects.component';
 import { PrivateProjectsComponent } from './projects/private/private.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CreateProjectComponent } from './projects/create/create.component';
+import { PublicProjectsComponent } from './projects/public/public.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -41,6 +43,7 @@ export function tokenGetter(): string | null {
 @NgModule({
     declarations: [
         AppComponent,
+        CreateProjectComponent,
         DialogConfirmationComponent,
         DialogMarkdownComponent,
         FeaturesComponent,
@@ -51,6 +54,7 @@ export function tokenGetter(): string | null {
         PrivateProjectsComponent,
         ProfileComponent,
         ProjectsComponent,
+        PublicProjectsComponent,
         TermsConditionsComponent,
     ],
     imports: [

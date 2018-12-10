@@ -6,14 +6,14 @@ import { from, Observable } from 'rxjs';
 import { filter, concatMap, switchMap, tap, first, takeUntil } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-import { Profile, LoginAudit } from '../models/index.model';
+import { ProfileModel, LoginAuditModel } from '../models/index.model';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
 
-    public profile: Profile;
+    public profile: ProfileModel;
     public isAuthenticated: boolean = false;
 
     constructor(
@@ -22,7 +22,7 @@ export class AuthenticationService {
         private deviceService: DeviceDetectorService,
     ) {
         this.checkAuth()
-            .subscribe((profile: Profile) => {
+            .subscribe((profile: ProfileModel) => {
                 this.profile = profile;
                 this.isAuthenticated = true;
             });
@@ -48,15 +48,15 @@ export class AuthenticationService {
                         })
                 ),
                 concatMap(
-                    (profile: Profile) => from(this.afs.collection<Profile>('users')
-                        .doc<Profile>(profile.uid)
+                    (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
+                        .doc<ProfileModel>(profile.uid)
                         .set(profile, { merge: true })),
-                    (profile: Profile) => profile,
+                    (profile: ProfileModel) => profile,
                 ),
                 concatMap(
-                    (profile: Profile) => from(this.afs.collection<Profile>('users')
-                        .doc<Profile>(profile.uid)
-                        .collection<LoginAudit>('logins')
+                    (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
+                        .doc<ProfileModel>(profile.uid)
+                        .collection<LoginAuditModel>('logins')
                         .add(
                             {
                                 date: new Date(),
@@ -68,45 +68,46 @@ export class AuthenticationService {
                                 browserVersion: this.deviceService.getDeviceInfo().browser_version,
                             }
                         )),
-                    (profile: Profile) => this.profile = profile,
+                    (profile: ProfileModel) => this.profile = profile,
                 ),
             )
-            .subscribe((profile: Profile) => this.isAuthenticated = true);
+            .subscribe((profile: ProfileModel) => this.isAuthenticated = true);
     }
 
     public logout(): void {
         from(this.afAuth.auth.signOut())
             .pipe(first())
             .subscribe(() => {
-                this.profile = new Profile();
+                this.profile = new ProfileModel();
                 this.isAuthenticated = false;
             });
     }
 
-    public checkAuth(): Observable<Profile> {
+    public checkAuth(): Observable<ProfileModel> {
         return this.afAuth.authState
             .pipe(
                 filter((user: User) => !!user),
                 takeUntil<User>(this.getAuthState()),
                 switchMap((user: User) => this.afs
-                    .doc<Profile>(`users/${user.uid}`)
+                    .doc<ProfileModel>(`users/${user.uid}`)
                     .valueChanges()),
             );
     }
 
-    public getLogins(): Observable<LoginAudit[]> {
-        return this.afs.collection<Profile>('users')
-            .doc<Profile>(this.profile.uid)
-            .collection<LoginAudit>('logins', (ref: firebase.firestore.CollectionReference) => ref.orderBy('date', 'desc'))
+    public getLogins(): Observable<LoginAuditModel[]> {
+        return this.afs.collection<ProfileModel>('users')
+            .doc<ProfileModel>(this.profile.uid)
+            .collection<LoginAuditModel>('logins', (ref: firebase.firestore.CollectionReference) => ref.orderBy('date', 'desc'))
             .valueChanges()
             .pipe(
-                takeUntil<LoginAudit[]>(this.getAuthState()),
+                takeUntil<LoginAuditModel[]>(this.getAuthState()),
             );
     }
 
     private getAuthState(): Observable<User | null> {
-        return this.afAuth.authState.pipe(
-            filter((user: User) => !user),
-        );
+        return this.afAuth
+            .authState.pipe(
+                filter((user: User) => !user),
+            );
     }
 }

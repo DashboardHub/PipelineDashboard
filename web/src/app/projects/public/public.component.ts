@@ -3,10 +3,10 @@ import { ProjectService } from '../../../services/project.service';
 import { ProjectModel } from '../../../models/index.model';
 
 @Component({
-    selector: 'dashboard-projects-private',
-    templateUrl: './private.component.html',
+    selector: 'dashboard-projects-public',
+    templateUrl: './public.component.html',
 })
-export class PrivateProjectsComponent implements OnInit {
+export class PublicProjectsComponent implements OnInit {
 
     public projects: ProjectModel[] = [];
 
@@ -17,7 +17,7 @@ export class PrivateProjectsComponent implements OnInit {
 
     ngOnInit(): void {
         this.projectService
-            .findMyProjects()
+            .findPublicProjects()
             .subscribe((projects: ProjectModel[]) => this.projects = projects);
     }
 }

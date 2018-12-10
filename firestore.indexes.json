@@ -1,3 +1,17 @@
 {
-  "indexes": []
+  "indexes": [
+    {
+      "collectionId": "projects",
+      "fields": [
+        {
+          "fieldPath": "type",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "updatedOn",
+          "mode": "DESCENDING"
+        }
+      ]
+    }
+  ]
 }

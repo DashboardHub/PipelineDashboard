@@ -25,11 +25,11 @@ export class MainComponent {
             route: '/projects',
             icon: 'group_work',
         },
-        //    {
-        //      title: 'Add Project',
-        //      route: '/projects/add',
-        //      icon: 'playlist_add',
-        //    },
+        {
+            title: 'Add Project',
+            route: '/projects/create',
+            icon: 'playlist_add',
+        },
         {
             title: 'Profile',
             route: '/profile',
