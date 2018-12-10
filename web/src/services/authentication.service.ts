@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { auth, User } from 'firebase/app';
 import { from, Observable } from 'rxjs';
 import { filter, concatMap, switchMap, tap, first, takeUntil } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { Profile, LoginAudit } from '../models/index.model';
 
@@ -18,6 +19,7 @@ export class AuthenticationService {
     constructor(
         public afAuth: AngularFireAuth,
         private afs: AngularFirestore,
+        private deviceService: DeviceDetectorService,
     ) {
         this.checkAuth()
             .subscribe((profile: Profile) => {
@@ -55,7 +57,17 @@ export class AuthenticationService {
                     (profile: Profile) => from(this.afs.collection<Profile>('users')
                         .doc<Profile>(profile.uid)
                         .collection<LoginAudit>('logins')
-                        .add({ date: new Date() })),
+                        .add(
+                            {
+                                date: new Date(),
+                                userAgent: this.deviceService.getDeviceInfo().userAgent,
+                                os: this.deviceService.getDeviceInfo().os,
+                                browser: this.deviceService.getDeviceInfo().browser,
+                                device: this.deviceService.getDeviceInfo().device,
+                                osVersion: this.deviceService.getDeviceInfo().os_version,
+                                browserVersion: this.deviceService.getDeviceInfo().browser_version,
+                            }
+                        )),
                     (profile: Profile) => this.profile = profile,
                 ),
             )

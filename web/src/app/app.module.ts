@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 import { environment } from '../environments/environment';
 
@@ -57,6 +58,7 @@ export function tokenGetter(): string | null {
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule.enablePersistence(),
         CommonModule,
+        DeviceDetectorModule.forRoot(),
         HttpClientModule,
         RouterModule,
         ReactiveFormsModule,
