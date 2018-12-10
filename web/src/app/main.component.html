@@ -2,6 +2,7 @@
     <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" mode="over">
         <div class="heading" fxLayout="column" fxLayoutGap="5px">
             <img *ngIf="authService.isAuthenticated" src="{{ authService.profile.avatarUrl }}" />
+            <mat-icon *ngIf="!authService.isAuthenticated">person</mat-icon>
             <div class="mat-subheading-2">{{ authService.isAuthenticated ? authService.profile.name : 'Guest' }}</div>
             <div class="mat-caption">{{ authService.isAuthenticated ? authService.profile.email : 'Not logged in' }}</div>
         </div>
@@ -14,6 +15,8 @@
                 </a>
             </ng-container>
 
+            <mat-divider></mat-divider>
+
             <ng-container *ngIf="authService.isAuthenticated">
                 <ng-container *ngFor="let item of privateRoutes">
                     <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
@@ -22,6 +25,8 @@
                     </a>
                 </ng-container>
             </ng-container>
+
+            <mat-divider></mat-divider>
 
             <ng-container *ngFor="let item of generalRoutes">
                 <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">

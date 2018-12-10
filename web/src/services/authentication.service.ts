@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth, User } from 'firebase/app';
 import { from, Observable } from 'rxjs';
-import { filter, concatMap, switchMap, tap } from 'rxjs/operators';
+import { filter, concatMap, switchMap, tap, first, takeUntil } from 'rxjs/operators';
 
 import { Profile, LoginAudit } from '../models/index.model';
 
@@ -55,8 +55,8 @@ export class AuthenticationService {
                     (profile: Profile) => from(this.afs.collection<Profile>('users')
                         .doc<Profile>(profile.uid)
                         .collection<LoginAudit>('logins')
-                        .add({ date: new Date().toString() })),
-                    (profile: Profile) => profile,
+                        .add({ date: new Date() })),
+                    (profile: Profile) => this.profile = profile,
                 ),
             )
             .subscribe((profile: Profile) => this.isAuthenticated = true);
@@ -64,6 +64,7 @@ export class AuthenticationService {
 
     public logout(): void {
         from(this.afAuth.auth.signOut())
+            .pipe(first())
             .subscribe(() => {
                 this.profile = new Profile();
                 this.isAuthenticated = false;
@@ -74,6 +75,7 @@ export class AuthenticationService {
         return this.afAuth.authState
             .pipe(
                 filter((user: User) => !!user),
+                takeUntil<User>(this.getAuthState()),
                 switchMap((user: User) => this.afs
                     .doc<Profile>(`users/${user.uid}`)
                     .valueChanges()),
@@ -83,7 +85,16 @@ export class AuthenticationService {
     public getLogins(): Observable<LoginAudit[]> {
         return this.afs.collection<Profile>('users')
             .doc<Profile>(this.profile.uid)
-            .collection<LoginAudit>('logins')
-            .valueChanges();
+            .collection<LoginAudit>('logins', (ref: firebase.firestore.CollectionReference) => ref.orderBy('date', 'desc'))
+            .valueChanges()
+            .pipe(
+                takeUntil<LoginAudit[]>(this.getAuthState()),
+            );
+    }
+
+    private getAuthState(): Observable<User | null> {
+        return this.afAuth.authState.pipe(
+            filter((user: User) => !user),
+        );
     }
 }

@@ -8,10 +8,9 @@ import { PrivacyComponent } from './legal/privacy/privacy.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { ProjectsComponent } from './projects/projects.component';
 
-// import { ProfileResolver } from '../services/profile.resolver';
 import { PrivateProjectsComponent } from './projects/private/private.component';
 import { AuthGuard } from '../guards/authentication.guard';
-import { ProfileResolver } from '../resolvers/profile.resolver';
+// import { ProfileResolver } from '../resolvers/profile.resolver';
 import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [

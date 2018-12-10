@@ -11,8 +11,8 @@
                 <h3 mat-subheader>Login history</h3>
                 <mat-list-item *ngFor="let login of logins">
                     <mat-icon mat-list-icon>security</mat-icon>
-                    <h4 mat-line>{{login.date}}</h4>
-                    <!-- <p mat-line> {{folder.updated | date}} </p> -->
+                    <h4 mat-line>{{ login.date.toDate() | timeAgo }}</h4>
+                    <p mat-line> MAC OSX </p>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>

@@ -1,3 +1,3 @@
 export class LoginAudit {
-    date: string;
+    date: Date;
 }
