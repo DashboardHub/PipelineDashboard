@@ -33,7 +33,7 @@ export class CreateProjectComponent implements OnInit {
         this.projectService
             .create(this.projectForm.getRawValue())
             .pipe(
-                // catchError((error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }))
+                catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
             )
             .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));
     }

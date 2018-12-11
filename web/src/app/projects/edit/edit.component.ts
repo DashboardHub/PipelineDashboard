@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
 import { catchError } from 'rxjs/operators';
 import { ProjectModel } from '../../../models/index.model';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'dashboard-projects-edit',
@@ -41,7 +42,7 @@ export class EditProjectComponent implements OnInit {
         this.projectService
             .save({ uid: this.uid, ...this.projectForm.getRawValue() })
             .pipe(
-                // catchError((error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }))
+                catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
             )
             .subscribe(() => this.router.navigate(['/project', this.uid]));
     }
