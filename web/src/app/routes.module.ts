@@ -14,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CreateProjectComponent } from './projects/create/create.component';
 import { PublicProjectsComponent } from './projects/public/public.component';
 import { ViewProjectComponent } from './projects/view/view.component';
+import { EditProjectComponent } from './projects/edit/edit.component';
 
 const routes: Routes = [
     {
@@ -35,6 +36,12 @@ const routes: Routes = [
                 path: 'project/:uid',
                 pathMatch: 'full',
                 component: ViewProjectComponent,
+                // canActivate: [AuthGuard],
+            },
+            {
+                path: 'project/:uid/edit',
+                pathMatch: 'full',
+                component: EditProjectComponent,
                 // canActivate: [AuthGuard],
             },
             {

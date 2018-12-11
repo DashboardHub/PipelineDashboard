@@ -36,6 +36,7 @@ import { CreateProjectComponent } from './projects/create/create.component';
 import { PublicProjectsComponent } from './projects/public/public.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ViewProjectComponent } from './projects/view/view.component';
+import { EditProjectComponent } from './projects/edit/edit.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -47,6 +48,7 @@ export function tokenGetter(): string | null {
         CreateProjectComponent,
         DialogConfirmationComponent,
         DialogMarkdownComponent,
+        EditProjectComponent,
         FeaturesComponent,
         HelpComponent,
         MainComponent,

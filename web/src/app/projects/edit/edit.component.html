@@ -1,8 +1,8 @@
 <div class="mat-content" fxLayout="column" fxLayoutGap="20px">
-    <form (submit)="create()" [formGroup]="projectForm">
+    <form (submit)="save()" [formGroup]="projectForm">
         <mat-card>
             <mat-card-header>
-                <mat-card-title>Create Project</mat-card-title>
+                <mat-card-title>Edit Project</mat-card-title>
                 <mat-card-subtitle>Group your repositories into a project view</mat-card-subtitle>
             </mat-card-header>
             <mat-divider></mat-divider>
@@ -37,8 +37,8 @@
             <mat-divider></mat-divider>
             <mat-card-actions>
                 <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-                    <button mat-stroked-button type="button" [routerLink]="['projects']" color="warn">Cancel</button>
-                    <button mat-raised-button type="submit" color="accent" [disabled]="projectForm.invalid">Create</button>
+                    <button mat-stroked-button type="button" [routerLink]="['/project', uid]">Cancel</button>
+                    <button mat-raised-button type="submit" color="accent" [disabled]="projectForm.invalid">Save</button>
                 </div>
             </mat-card-actions>
         </mat-card>

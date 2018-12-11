@@ -4,9 +4,16 @@
             <mat-card-title>{{ project.title }}</mat-card-title>
             <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
         </mat-card-header>
-
+        <mat-divider></mat-divider>
         <mat-card-content>
 
         </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+                <button mat-raised-button type="submit" color="accent" [routerLink]="['/project', project.uid, 'edit']">Edit</button>
+                <button mat-raised-button type="submit" color="warn">Delete</button>
+            </div>
+        </mat-card-actions>
     </mat-card>
 </div>

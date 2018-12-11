@@ -37,8 +37,8 @@ export class ProjectService {
     }
 
     public findPublicProjects(): Observable<ProjectModel[]> {
-        return from(this.afs.
-            collection<ProjectModel>(
+        return from(this.afs
+            .collection<ProjectModel>(
                 'projects',
                 (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
                                                     .orderBy('updatedOn', 'desc')
@@ -48,8 +48,8 @@ export class ProjectService {
     }
 
     public findMyProjects(): Observable<ProjectModel[]> {
-        return from(this.afs.
-            collection<ProjectModel>(
+        return from(this.afs
+            .collection<ProjectModel>(
                 'projects',
                 (ref: firebase.firestore.Query) => ref.where('owners', 'array-contains', this.authService.profile.uid)
             )
@@ -59,5 +59,14 @@ export class ProjectService {
 
     public findOneById(uid: string): Observable<ProjectModel> {
         return from(this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges());
+    }
+
+    public save(project: ProjectModel): Observable<void> {
+        return from(
+            this.afs
+                .collection<ProjectModel>('projects')
+                .doc<ProjectModel>(project.uid)
+                .set(project, { merge: true })
+        );
     }
 }
