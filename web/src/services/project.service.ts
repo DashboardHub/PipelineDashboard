@@ -20,7 +20,7 @@ export class ProjectService {
     public create(data: ProjectModel): Observable<ProjectModel> {
         let project: ProjectModel = {
             uid: uuid(),
-            owners: [this.authService.profile.uid],
+            access: { admin: [this.authService.profile.uid] },
             ...data,
             createdOn: new Date(),
             updatedOn: new Date(),
@@ -51,7 +51,7 @@ export class ProjectService {
         return from(this.afs
             .collection<ProjectModel>(
                 'projects',
-                (ref: firebase.firestore.Query) => ref.where('owners', 'array-contains', this.authService.profile.uid)
+                (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
             )
             .valueChanges()
         );
