@@ -1,6 +1,8 @@
 <div class="mat-content">
     <mat-card>
         <mat-card-header>
+            <mat-icon mat-card-avatar matBadge="15" matBadgeColor="accent" *ngIf="project.type === 'public'">developer_board</mat-icon>
+            <mat-icon mat-card-avatar matBadge="15" matBadgeColor="accent" *ngIf="project.type === 'private'">security</mat-icon>
             <mat-card-title>{{ project.title }}</mat-card-title>
             <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
         </mat-card-header>
