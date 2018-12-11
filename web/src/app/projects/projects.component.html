@@ -2,7 +2,9 @@
     <h3 mat-subheader>Projects</h3>
     <mat-list-item *ngFor="let project of projects">
         <mat-icon mat-list-icon matBadge="15" matBadgeColor="accent">developer_board</mat-icon>
-        <h4 mat-line>{{ project.title }}</h4>
+        <h4 mat-line><a [routerLink]="['/project', project.uid]">{{ project.title }}</a></h4>
         <p mat-line>{{ project.description }}</p>
+        <span fxFlex></span>
+        <p>{{ project.updatedOn.toDate() | timeAgo }}</p>
     </mat-list-item>
 </mat-list>

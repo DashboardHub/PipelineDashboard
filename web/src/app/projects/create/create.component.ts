@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
 import { catchError } from 'rxjs/operators';
 import { ProjectModel } from '../../../models/index.model';
-import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
     selector: 'dashboard-projects-create',
@@ -36,8 +35,7 @@ export class CreateProjectComponent implements OnInit {
             .pipe(
                 // catchError((error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }))
             )
-            // .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));
-            .subscribe((document: DocumentReference) => console.log(document.id));
+            .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));
     }
 
 }

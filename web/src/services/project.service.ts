@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { ProjectModel } from '../models/index.model';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 import { AuthenticationService } from './authentication.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -15,9 +17,23 @@ export class ProjectService {
     ) {
     }
 
-    public create(project: ProjectModel): Observable<DocumentReference> {
-        return from(this.afs.collection<ProjectModel>('projects')
-            .add({ owners: [this.authService.profile.uid], ...project, createdOn: new Date(), updatedOn: new Date() }));
+    public create(data: ProjectModel): Observable<ProjectModel> {
+        let project: ProjectModel = {
+            uid: uuid(),
+            owners: [this.authService.profile.uid],
+            ...data,
+            createdOn: new Date(),
+            updatedOn: new Date(),
+        };
+
+        return from(
+                this.afs.collection<ProjectModel>('projects')
+                .doc(project.uid)
+                .set(project)
+            )
+            .pipe(
+                switchMap(() => of(project))
+            );
     }
 
     public findPublicProjects(): Observable<ProjectModel[]> {
@@ -39,5 +55,9 @@ export class ProjectService {
             )
             .valueChanges()
         );
+    }
+
+    public findOneById(uid: string): Observable<ProjectModel> {
+        return from(this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges());
     }
 }

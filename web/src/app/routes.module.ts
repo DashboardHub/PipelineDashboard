@@ -13,6 +13,7 @@ import { AuthGuard } from '../guards/authentication.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { CreateProjectComponent } from './projects/create/create.component';
 import { PublicProjectsComponent } from './projects/public/public.component';
+import { ViewProjectComponent } from './projects/view/view.component';
 
 const routes: Routes = [
     {
@@ -25,15 +26,21 @@ const routes: Routes = [
                 component: PublicProjectsComponent,
             },
             {
-                path: 'projects',
-                pathMatch: 'full',
-                component: PrivateProjectsComponent,
-                canActivate: [AuthGuard],
-            },
-            {
                 path: 'projects/create',
                 pathMatch: 'full',
                 component: CreateProjectComponent,
+                canActivate: [AuthGuard],
+            },
+            {
+                path: 'project/:uid',
+                pathMatch: 'full',
+                component: ViewProjectComponent,
+                // canActivate: [AuthGuard],
+            },
+            {
+                path: 'projects',
+                pathMatch: 'full',
+                component: PrivateProjectsComponent,
                 canActivate: [AuthGuard],
             },
             {

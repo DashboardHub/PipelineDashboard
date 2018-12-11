@@ -1,7 +1,7 @@
 import { RepositoryModel } from './repository';
 
 export class ProjectModel {
-    id?: string = '';
+    uid?: string = '';
     type: 'private'|'public' = 'public';
     title: string = '';
     description: string = '';
