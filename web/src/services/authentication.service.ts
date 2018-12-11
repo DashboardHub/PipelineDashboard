@@ -13,7 +13,7 @@ import { ProfileModel, LoginAuditModel } from '../models/index.model';
 })
 export class AuthenticationService {
 
-    public profile: ProfileModel;
+    public profile: ProfileModel = new ProfileModel();
     public isAuthenticated: boolean = false;
 
     constructor(

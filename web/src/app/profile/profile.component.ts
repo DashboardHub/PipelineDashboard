@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
 
-    private loginsSubscriptions: Subscription;
+    private loginsSubscription: Subscription;
     public profile: ProfileModel;
     public logins: LoginAuditModel[];
 
@@ -18,13 +18,13 @@ export class ProfileComponent implements OnInit {
 
     ngOnInit(): void {
         this.profile = this.authService.profile;
-        this.authService
+        this.loginsSubscription = this.authService
             .getLogins()
             .subscribe((logins: LoginAuditModel[]) => this.logins = logins);
     }
 
     ngDestroy(): void {
-        this.loginsSubscriptions
+        this.loginsSubscription
             .unsubscribe();
     }
 }

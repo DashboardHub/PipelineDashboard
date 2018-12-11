@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
 import { catchError } from 'rxjs/operators';
 import { ProjectModel } from '../../../models/index.model';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'dashboard-projects-create',
@@ -12,6 +13,7 @@ import { ProjectModel } from '../../../models/index.model';
 })
 export class CreateProjectComponent implements OnInit {
 
+    private createSubscription: Subscription;
     public projectForm: FormGroup;
 
     constructor(
@@ -30,7 +32,7 @@ export class CreateProjectComponent implements OnInit {
     }
 
     create(): void {
-        this.projectService
+        this.createSubscription = this.projectService
             .create(this.projectForm.getRawValue())
             .pipe(
                 catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
@@ -38,4 +40,8 @@ export class CreateProjectComponent implements OnInit {
             .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));
     }
 
+    ngDestroy(): void {
+        this.createSubscription
+            .unsubscribe();
+    }
 }

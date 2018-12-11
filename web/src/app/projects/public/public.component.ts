@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/project.service';
 import { ProjectModel } from '../../../models/index.model';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'dashboard-projects-public',
@@ -8,6 +9,7 @@ import { ProjectModel } from '../../../models/index.model';
 })
 export class PublicProjectsComponent implements OnInit {
 
+    private projectSubscription: Subscription;
     public projects: ProjectModel[] = [];
 
     constructor(
@@ -16,8 +18,13 @@ export class PublicProjectsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectService
+        this.projectSubscription = this.projectService
             .findPublicProjects()
             .subscribe((projects: ProjectModel[]) => this.projects = projects);
+    }
+
+    ngDestroy(): void {
+        this.projectSubscription
+            .unsubscribe();
     }
 }

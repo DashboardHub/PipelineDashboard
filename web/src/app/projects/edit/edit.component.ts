@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
 import { catchError } from 'rxjs/operators';
 import { ProjectModel } from '../../../models/index.model';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: 'dashboard-projects-edit',
@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class EditProjectComponent implements OnInit {
 
+    private projectSubscription: Subscription;
+    private saveSubscription: Subscription;
     public uid: string;
     public projectForm: FormGroup;
 
@@ -33,13 +35,13 @@ export class EditProjectComponent implements OnInit {
             description: [undefined, [Validators.minLength(3), Validators.maxLength(1024)]],
         });
 
-        this.projectService
+        this.projectSubscription = this.projectService
             .findOneById(this.uid)
             .subscribe((project: ProjectModel) => this.projectForm.reset(project));
     }
 
     save(): void {
-        this.projectService
+        this.saveSubscription = this.projectService
             .save({ uid: this.uid, ...this.projectForm.getRawValue() })
             .pipe(
                 catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
@@ -47,4 +49,10 @@ export class EditProjectComponent implements OnInit {
             .subscribe(() => this.router.navigate(['/project', this.uid]));
     }
 
+    ngDestroy(): void {
+        this.projectSubscription
+            .unsubscribe();
+        this.saveSubscription
+            .unsubscribe();
+    }
 }

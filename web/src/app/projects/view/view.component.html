@@ -12,9 +12,9 @@
         </mat-card-content>
         <mat-divider></mat-divider>
         <mat-card-actions>
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="project.owners.includes(authService.profile.uid)">
                 <button mat-raised-button type="submit" color="accent" [routerLink]="['/project', project.uid, 'edit']">Edit</button>
-                <button mat-raised-button type="submit" color="warn">Delete</button>
+                <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
             </div>
         </mat-card-actions>
     </mat-card>

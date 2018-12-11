@@ -69,4 +69,13 @@ export class ProjectService {
                 .set(project, { merge: true })
         );
     }
+
+    public delete(uid: string): Observable<void> {
+        return from(
+            this.afs
+                .collection<ProjectModel>('projects')
+                .doc<ProjectModel>(uid)
+                .delete()
+        );
+    }
 }
