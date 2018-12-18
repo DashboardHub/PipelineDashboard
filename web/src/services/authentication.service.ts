@@ -29,7 +29,7 @@ export class AuthenticationService {
     }
 
     public login(): void {
-        from(this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider()))
+        from(this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider().addScope('repo'))) // admin:repo_hook
             .pipe(
                 filter((credentials: firebase.auth.UserCredential) => !!credentials),
                 concatMap(
@@ -57,8 +57,7 @@ export class AuthenticationService {
                     (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
                         .doc<ProfileModel>(profile.uid)
                         .collection<LoginAuditModel>('logins')
-                        .add(
-                            {
+                        .add({
                                 date: new Date(),
                                 userAgent: this.deviceService.getDeviceInfo().userAgent,
                                 os: this.deviceService.getDeviceInfo().os,
@@ -66,8 +65,7 @@ export class AuthenticationService {
                                 device: this.deviceService.getDeviceInfo().device,
                                 osVersion: this.deviceService.getDeviceInfo().os_version,
                                 browserVersion: this.deviceService.getDeviceInfo().browser_version,
-                            }
-                        )),
+                        })),
                     (profile: ProfileModel) => this.profile = profile,
                 ),
             )

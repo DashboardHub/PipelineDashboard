@@ -1,7 +1,5 @@
 export class Config {
     production: boolean;
-    web: string;
-    api: string;
     version: string;
 
     firebase: {

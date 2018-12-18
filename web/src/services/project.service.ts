@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ProjectModel } from '../models/index.model';
 import { from, Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
@@ -32,7 +32,7 @@ export class ProjectService {
                 .set(project)
             )
             .pipe(
-                switchMap(() => of(project))
+                () => of(project)
             );
     }
 
@@ -66,7 +66,7 @@ export class ProjectService {
             this.afs
                 .collection<ProjectModel>('projects')
                 .doc<ProjectModel>(project.uid)
-                .set(project, { merge: true })
+                .set({ ...project, updatedOn: new Date() }, { merge: true })
         );
     }
 

@@ -4,8 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
 import { catchError } from 'rxjs/operators';
-import { ProjectModel } from '../../../models/index.model';
+import { ProjectModel, RepositoryModel } from '../../../models/index.model';
 import { Observable, Subscription } from 'rxjs';
+import { GitHubRepositoryService } from '../../../services/github/index.services';
 
 @Component({
     selector: 'dashboard-projects-edit',
@@ -15,8 +16,10 @@ export class EditProjectComponent implements OnInit {
 
     private projectSubscription: Subscription;
     private saveSubscription: Subscription;
+    private repositorySubscription: Subscription;
     public uid: string;
     public projectForm: FormGroup;
+    public repositories: RepositoryModel[] = [];
 
     constructor(
         private route: ActivatedRoute,
@@ -24,6 +27,7 @@ export class EditProjectComponent implements OnInit {
         private form: FormBuilder,
         private snackBar: MatSnackBar,
         private projectService: ProjectService,
+        private repositoryService: GitHubRepositoryService,
     ) {
         this.uid = this.route.snapshot.paramMap.get('uid');
     }

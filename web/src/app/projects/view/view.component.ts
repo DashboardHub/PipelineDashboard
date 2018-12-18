@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
-import { catchError } from 'rxjs/operators';
-import { ProjectModel } from '../../../models/index.model';
+import { catchError, mergeMap } from 'rxjs/operators';
+import { ProjectModel, RepositoriesModel } from '../../../models/index.model';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
+import { DialogListComponent } from '../../dialog/list/dialog-list.component';
+import { RepositoryService } from '../../../services/repository.service';
 
 @Component({
     selector: 'dashboard-projects-view',
@@ -15,14 +17,17 @@ export class ViewProjectComponent implements OnInit {
 
     private projectSubscription: Subscription;
     private deleteSubscription: Subscription;
+    private repositorySubscription: Subscription;
     public project: ProjectModel = new ProjectModel();
 
     constructor(
         private route: ActivatedRoute,
         private router: Router,
         private snackBar: MatSnackBar,
+        private dialog: MatDialog,
         private projectService: ProjectService,
-        public authService: AuthenticationService,
+        private repositoryService: RepositoryService,
+        private authService: AuthenticationService,
     ) {
         this.project.uid = this.route.snapshot.paramMap.get('uid');
     }
@@ -42,8 +47,29 @@ export class ViewProjectComponent implements OnInit {
             .subscribe(() => this.router.navigate(['/projects']));
     }
 
+    addRepository(): void {
+        this.repositoryService
+            .findAll()
+            .subscribe((repositories: RepositoriesModel) => this.dialog.open(DialogListComponent, {
+                    // width: '250px',
+                    data: { repositories: repositories },
+                })
+                .afterClosed().subscribe((result: any) => {
+                    console.log('The dialog was closed', result);
+                })
+            );
+    }
+
+    isAdmin(): boolean {
+        return this.project.access.admin.includes(this.authService.profile.uid);
+    }
+
     ngDestroy(): void {
         this.projectSubscription
+            .unsubscribe();
+        this.deleteSubscription
+            .unsubscribe();
+        this.repositorySubscription
             .unsubscribe();
     }
 }

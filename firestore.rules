@@ -9,10 +9,17 @@ service cloud.firestore {
         allow read, write: if request.auth.uid != null && get(/databases/$(database)/documents/users/$(user)).data.uid == request.auth.uid;
       }
     }
+
     match /projects/{project} {
       allow create: if request.auth.uid != null;
       allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
       allow update, delete: if request.auth.uid != null && request.auth.uid in resource.data.access.admin;
+    }
+
+    match /repositories/{repository} {
+      allow create: if request.auth.uid != null;
+      allow get, list: if request.data.private == false || request.auth.uid == resource.data.ownerId;
+      allow update, delete: if request.auth.uid != null && request.auth.uid == resource.data.ownerId;
     }
   }
 

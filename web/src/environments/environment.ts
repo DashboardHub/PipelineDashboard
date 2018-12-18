@@ -2,8 +2,6 @@ import { Config } from './config.model';
 
 export const environment: Config = {
     production: false,
-    web: 'http://localhost:4200',
-    api: 'http://localhost:4200',
     version: 'x.x.x',
 
     firebase: {

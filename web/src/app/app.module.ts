@@ -23,7 +23,7 @@ import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditi
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 
-import { ApiHttpInterceptorModule } from '../interceptors/api.http.interceptor';
+import { GitHubHttpInterceptorModule } from '../interceptors/github.http.interceptor';
 import { ErrorHttpInterceptorModule } from '../interceptors/error.http.interceptor';
 
 import { PipesModule } from '../pipes/pipes.module';
@@ -37,6 +37,7 @@ import { PublicProjectsComponent } from './projects/public/public.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ViewProjectComponent } from './projects/view/view.component';
 import { EditProjectComponent } from './projects/edit/edit.component';
+import { DialogListComponent } from './dialog/list/dialog-list.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -47,6 +48,7 @@ export function tokenGetter(): string | null {
         AppComponent,
         CreateProjectComponent,
         DialogConfirmationComponent,
+        DialogListComponent,
         DialogMarkdownComponent,
         EditProjectComponent,
         FeaturesComponent,
@@ -75,12 +77,13 @@ export function tokenGetter(): string | null {
         MaterialModule,
         PipesModule,
         AppRoutesModule,
-        ApiHttpInterceptorModule,
+        GitHubHttpInterceptorModule,
         ErrorHttpInterceptorModule,
     ],
     providers: [],
     entryComponents: [
         DialogConfirmationComponent,
+        DialogListComponent,
         DialogMarkdownComponent
     ],
     bootstrap: [AppComponent]
