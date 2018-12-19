@@ -22,6 +22,7 @@ export class ProjectService {
             uid: uuid(),
             access: { admin: [this.authService.profile.uid] },
             ...data,
+            repositories: [],
             createdOn: new Date(),
             updatedOn: new Date(),
         };
@@ -52,6 +53,7 @@ export class ProjectService {
             .collection<ProjectModel>(
                 'projects',
                 (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
+                                                    .orderBy('updatedOn', 'desc')
             )
             .valueChanges()
         );

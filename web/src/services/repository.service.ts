@@ -56,7 +56,7 @@ export class RepositoryService {
                                                             })),
                     ((repositories: RepositoryModel[]) => repositories)
                 ),
-                concatMap(
+                concatMap( // @TODO: move to project service after repo has been selected
                     (repositories: RepositoryModel[]) => repositories
                                                             .map((repository: RepositoryModel) => from(
                                                                 this.afs.collection<RepositoryModel>('repositories')

@@ -19,6 +19,7 @@ export class DialogListComponent {
     ) {
     }
 
+    // @TODO: move out, otherwise can not be reused
     public refresh(): void {
         this.repositoryService
             .findAll(true)
