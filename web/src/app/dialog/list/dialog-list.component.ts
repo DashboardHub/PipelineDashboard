@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { RepositoriesModel } from '../../../models/repositories.model';
 import { RepositoryService } from '../../../services/repository.service';
 import { Subscription } from 'rxjs';
+import { ProjectModel, RepositoriesModel } from 'src/models/index.model';
 
 @Component({
     selector: 'dashboard-dialog-list',
@@ -15,7 +15,7 @@ export class DialogListComponent {
     constructor(
         private repositoryService: RepositoryService,
         public dialogRef: MatDialogRef<DialogListComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { repositories: RepositoriesModel },
+        @Inject(MAT_DIALOG_DATA) public data: { project: ProjectModel, repositories: RepositoriesModel },
     ) {
     }
 

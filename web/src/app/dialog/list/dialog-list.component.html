@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>Your repositories</h2>
 
 <div mat-dialog-content>
-    <mat-selection-list>
+    <mat-selection-list #repos>
         <h3 mat-subheader>Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}</h3>
-        <mat-list-option *ngFor="let repository of data.repositories.data">
+        <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.fullName)">
             <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
             <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
             <h4 mat-line>{{ repository.fullName }}</h4>
@@ -14,6 +14,6 @@
 
 <div mat-dialog-actions align="end" fxLayout="row" fxLayoutGap="10px">
     <button mat-stroked-button type="button" (click)="refresh()">Refresh</button>
-    <button mat-stroked-button type="button" (click)="dialogRef.close(false)" color="accent">CANCEL</button>
-    <button mat-raised-button type="button" (click)="dialogRef.close(true)" color="warn">CONFIRM</button>
+    <button mat-stroked-button type="button" (click)="dialogRef.close([])" color="accent">CANCEL</button>
+    <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)" color="warn">CONFIRM</button>
 </div>

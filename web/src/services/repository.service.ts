@@ -44,12 +44,14 @@ export class RepositoryService {
                                                                 repositories: {
                                                                     lastUpdated: new Date(),
                                                                     data: repositories
-                                                                        .map((repository: RepositoryModel) => ({
-                                                                            uid: new RepositoryModel(repository.fullName).uid,
-                                                                            fullName: repository.fullName,
-                                                                            description: repository.description,
-                                                                            private: repository.private,
-                                                                            })),
+                                                                        .map((repository: RepositoryModel) => (
+                                                                            {
+                                                                                uid: new RepositoryModel(repository.fullName).uid,
+                                                                                fullName: repository.fullName,
+                                                                                description: repository.description,
+                                                                                private: repository.private,
+                                                                            }
+                                                                        )),
                                                                 }
                                                             })),
                     ((repositories: RepositoryModel[]) => repositories)

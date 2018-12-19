@@ -1,12 +1,12 @@
 export class RepositoryModel {
-    uid: string;
+    uid?: string;
     id?: string;
     name?: string;
-    description: string;
+    description?: string;
     fullName: string;
     owner?: string;
     ownerId?: string;
-    private: string;
+    private?: string;
     fork?: string;
     archived?: string;
     forks?: number;

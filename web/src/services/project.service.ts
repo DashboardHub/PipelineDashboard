@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ProjectModel } from '../models/index.model';
+import { ProjectModel, RepositoryModel } from '../models/index.model';
 import { from, Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AuthenticationService } from './authentication.service';
@@ -67,6 +67,20 @@ export class ProjectService {
                 .collection<ProjectModel>('projects')
                 .doc<ProjectModel>(project.uid)
                 .set({ ...project, updatedOn: new Date() }, { merge: true })
+        );
+    }
+
+    public saveRepositories(uid: string, repositories: RepositoryModel[]): Observable<void> {
+        return from(
+            this.afs
+                .collection<ProjectModel>('projects')
+                .doc<ProjectModel>(uid)
+                .set(
+                {
+                    repositories: repositories.map((repo: RepositoryModel) => (repo.fullName)),
+                    updatedOn: new Date(),
+                },
+                { merge: true })
         );
     }
 
