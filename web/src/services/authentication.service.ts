@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth, User } from 'firebase/app';
 import { from, Observable } from 'rxjs';
-import { filter, concatMap, switchMap, tap, first, takeUntil } from 'rxjs/operators';
+import { filter, concatMap, switchMap, first, takeUntil } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { ProfileModel, LoginAuditModel } from '../models/index.model';

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProjectModel, RepositoryModel } from '../models/index.model';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, forkJoin } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AuthenticationService } from './authentication.service';
-import { switchMap } from 'rxjs/operators';
+import { mergeMap, tap } from 'rxjs/operators';
+import { RepositoryService } from './repository.service';
 
 @Injectable({
     providedIn: 'root'
@@ -14,6 +15,7 @@ export class ProjectService {
     constructor(
         private afs: AngularFirestore,
         private authService: AuthenticationService,
+        private repositoryService: RepositoryService
     ) {
     }
 
@@ -72,18 +74,25 @@ export class ProjectService {
         );
     }
 
-    public saveRepositories(uid: string, repositories: RepositoryModel[]): Observable<void> {
+    public saveRepositories(uid: string, repositories: string[]): Observable<void> {
         return from(
             this.afs
                 .collection<ProjectModel>('projects')
                 .doc<ProjectModel>(uid)
                 .set(
                 {
-                    repositories: repositories.map((repo: RepositoryModel) => (repo.fullName)),
+                    repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
                     updatedOn: new Date(),
                 },
                 { merge: true })
-        );
+        )
+        // .pipe( // @TODO: save pull request info to repository
+        //     tap(
+        //         (repositories: string[]) => repositories
+        //                                         .map((repoUid: string) => this.repositoryService
+        //                                                                     .reloadPullRequestsByRepoName(new RepositoryModel(repoUid).uid))
+        //     )
+        // );
     }
 
     public delete(uid: string): Observable<void> {

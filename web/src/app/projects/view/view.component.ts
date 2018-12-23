@@ -12,6 +12,7 @@ import { RepositoryService } from '../../../services/repository.service';
 @Component({
     selector: 'dashboard-projects-view',
     templateUrl: './view.component.html',
+    styleUrls: ['./view.component.scss'],
 })
 export class ViewProjectComponent implements OnInit {
 
@@ -56,12 +57,14 @@ export class ViewProjectComponent implements OnInit {
                 })
                 .afterClosed()
                 .subscribe((selectedRepositories: { value: string }[]) => {
-                    if (selectedRepositories) {
+                    if (selectedRepositories && selectedRepositories.length > 0) {
                         this.projectService
                             .saveRepositories(
                                 this.project.uid,
-                                selectedRepositories.map((repo: { value: string }) => new RepositoryModel(repo.value))
+                                selectedRepositories.map((repo: { value: string }) => repo.value)
                             );
+
+                            selectedRepositories.forEach((repository: RepositoriesModel) => this.repositoryService.findPullRequestsByRepoName())
                     }
                 })
             );

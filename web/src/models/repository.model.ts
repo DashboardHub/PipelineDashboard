@@ -1,3 +1,5 @@
+import { PullRequestModel } from './pullRequest.model';
+
 export class RepositoryModel {
     uid?: string;
     id?: string;
@@ -15,6 +17,7 @@ export class RepositoryModel {
     branch?: string;
     issues?: number;
     license?: string;
+    pullRequests?: PullRequestModel[];
 
     constructor(fullName: string) {
         this.fullName = fullName;

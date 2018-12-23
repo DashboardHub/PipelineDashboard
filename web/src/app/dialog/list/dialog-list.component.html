@@ -3,7 +3,7 @@
 <div mat-dialog-content>
     <mat-selection-list #repos>
         <h3 mat-subheader>Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}</h3>
-        <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.fullName)">
+        <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.uid)">
             <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
             <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
             <h4 mat-line>{{ repository.fullName }}</h4>

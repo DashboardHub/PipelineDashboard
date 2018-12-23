@@ -1,9 +1,11 @@
+import { AuthenticationService } from './../authentication.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { GitHubCore } from './github.core';
 import { map, mergeMap, toArray } from 'rxjs/operators';
-import { RepositoryModel } from '../../models/index.model';
+import { RepositoryModel, PullRequestModel } from '../../models/index.model';
+import { GitHubPullRequestMapper } from '../../mappers/github/index.mapper';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,13 +13,16 @@ import { Observable } from 'rxjs';
 })
 export class GitHubRepositoryService extends GitHubCore {
 
-    constructor(private http: HttpClient) {
+    constructor(
+        private http: HttpClient,
+        private authService: AuthenticationService
+    ) {
         super();
     }
 
     public findAll(): Observable<RepositoryModel[]> {
         return this.http
-            .get(`${this.url}/users/grandmasterthimps/repos`) // @TODO: logged in user
+            .get(`${this.url}/users/${this.authService.profile.username}/repos`)
             .pipe(
                 mergeMap((repositories: any) => repositories),
                 map((repository: any) => ({
@@ -37,6 +42,18 @@ export class GitHubRepositoryService extends GitHubCore {
                         license: repository.license,
                     }) as RepositoryModel),
                 toArray(),
+            );
+    }
+
+    public findAllOpenPullRequests(fullName: string): Observable<PullRequestModel[]> {
+        return this.http
+            .get(`${this.url}/repos/${fullName}/pulls?state=open`)
+            .pipe(
+                mergeMap((pullrequests: any) => pullrequests),
+                map(
+                    (pullrequest: any) => GitHubPullRequestMapper.import(pullrequest)
+                ),
+                toArray()
             );
     }
 }

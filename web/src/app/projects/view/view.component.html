@@ -19,4 +19,6 @@
             </div>
         </mat-card-actions>
     </mat-card>
+
+    <dashboard-repository *ngFor="let uid of project.repositories" [uid]="uid"></dashboard-repository>
 </div>

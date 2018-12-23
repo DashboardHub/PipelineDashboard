@@ -5,3 +5,5 @@ export * from './access.model';
 export * from './repository.model';
 export * from './repositories.model';
 export * from './project.model';
+export * from './pullRequest.model';
+export * from './user.model';

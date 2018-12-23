@@ -38,6 +38,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ViewProjectComponent } from './projects/view/view.component';
 import { EditProjectComponent } from './projects/edit/edit.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
+import { RepositoryComponent } from './projects/repository/repository.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -60,6 +61,7 @@ export function tokenGetter(): string | null {
         ProfileComponent,
         ProjectsComponent,
         PublicProjectsComponent,
+        RepositoryComponent,
         TermsConditionsComponent,
         ViewProjectComponent,
     ],

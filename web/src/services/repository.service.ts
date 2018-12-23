@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { RepositoryModel, ProfileModel } from '../models/index.model';
+import { RepositoryModel, ProfileModel, ProjectModel, PullRequestModel } from '../models/index.model';
 import { from, Observable, of } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { concatMap, map, switchMap, mergeMap, toArray } from 'rxjs/operators';
+import { concatMap, filter } from 'rxjs/operators';
 import { GitHubRepositoryService } from './github/index.services';
 import { RepositoriesModel } from '../models/index.model';
 
@@ -31,6 +31,24 @@ export class RepositoryService {
         }
 
         return of(this.authService.profile.repositories);
+    }
+
+    public findOneById(uid: string): Observable<RepositoryModel> {
+        return from(this.afs.collection<RepositoryModel>('repositories').doc<RepositoryModel>(uid).valueChanges());
+    }
+
+    public reloadPullRequestsByRepoName(repository: RepositoryModel): Observable<PullRequestModel[]> {
+        return this.githubRepositoryService.findAllOpenPullRequests(repository.fullName)
+            .pipe(
+                filter((pullRequests: PullRequestModel[]) => !!pullRequests),
+                concatMap(
+                    (pullRequests: PullRequestModel[]) => from(
+                        this.afs.collection<RepositoryModel>('repositories')
+                            .doc<RepositoryModel>(new RepositoryModel(repository.fullName).uid)
+                            .update({ pullRequests })),
+                    (pullRequest: PullRequestModel[]) => pullRequest
+                ),
+            );
     }
 
     private reload(): Observable<RepositoryModel[]> {

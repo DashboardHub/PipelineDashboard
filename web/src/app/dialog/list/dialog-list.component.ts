@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { RepositoryService } from '../../../services/repository.service';
 import { Subscription } from 'rxjs';
-import { ProjectModel, RepositoriesModel } from 'src/models/index.model';
+import { ProjectModel, RepositoriesModel } from '../../../models/index.model';
 
 @Component({
     selector: 'dashboard-dialog-list',
