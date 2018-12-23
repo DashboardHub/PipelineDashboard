@@ -9,7 +9,17 @@ export class ProfileModel {
     email: string = '';
     phone: string = '';
     avatarUrl: string = '';
-    githubToken?: string;
+    oauth?: {
+        githubToken: string;
+        token: string;
+        expirationTime: string;
+        authTime: string;
+        issuedAtTime: string;
+        signInProvider: string | null;
+        claims: {
+            [key: string]: any;
+        }
+    };
     emailVerified: boolean = false;
     creationTime?: string;
     lastSignInTime?: string;

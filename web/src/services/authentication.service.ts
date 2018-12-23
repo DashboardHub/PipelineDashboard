@@ -29,23 +29,33 @@ export class AuthenticationService {
     }
 
     public login(): void {
-        from(this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider().addScope('repo'))) // admin:repo_hook
+        const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
+        provider.addScope('repo,admin:repo_hook');
+        from(this.afAuth.auth.signInWithPopup(provider))
             .pipe(
                 filter((credentials: firebase.auth.UserCredential) => !!credentials),
                 concatMap(
-                    (credentials: firebase.auth.UserCredential) => from(credentials.user.getIdToken()),
-                    (credentials: firebase.auth.UserCredential, token: string) => ({
+                    (credentials: firebase.auth.UserCredential) => from(credentials.user.getIdTokenResult()),
+                    (credentials: firebase.auth.UserCredential, oauth: firebase.auth.IdTokenResult) => ({
                             uid: credentials.user.uid,
                             username: credentials.additionalUserInfo.username,
                             name: credentials.user.displayName,
                             email: credentials.user.email,
                             phone: credentials.user.phoneNumber,
                             avatarUrl: credentials.user.photoURL,
-                            githubToken: token,
+                            oauth: {
+                                githubToken: credentials.credential.accessToken,
+                                token: oauth.token,
+                                expirationTime: oauth.expirationTime,
+                                authTime: oauth.authTime,
+                                issuedAtTime: oauth.issuedAtTime,
+                                signInProvider: oauth.signInProvider,
+                                claims: oauth.claims,
+                            },
                             emailVerified: credentials.user.emailVerified,
                             creationTime: credentials.user.metadata.creationTime,
                             lastSignInTime: credentials.user.metadata.lastSignInTime
-                        })
+                        }),
                 ),
                 concatMap(
                     (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')

@@ -14,8 +14,8 @@ export class GitHubHttpInterceptor implements HttpInterceptor {
         if (req.url.includes('github.com')) {
             req = req.clone({
                 setHeaders: {
-                    // Authorization: `token ${this.authService.profile.githubToken}`,
-                    // Accept: 'application / vnd.github.v3 + json'
+                    Authorization: `token ${this.authService.profile.oauth.githubToken}`,
+                    Accept: 'application/vnd.github.v3+json'
                 }
             });
         }
