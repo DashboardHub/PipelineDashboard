@@ -4,6 +4,8 @@
 
 Display your **deployed versions** and **monitor** it.
 
+Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/4) and epic branch `issue-firebase`
+
 ## WANT TO GET INVOLVED? Don't know how? ...
 
 All contributions are welcome, not only from code, but also blogs, content, documentation etc. Read more on our [contributions guidelines](.github/CONTRIBUTING.md).
