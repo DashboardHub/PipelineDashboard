@@ -5,8 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
 import { catchError } from 'rxjs/operators';
 import { ProjectModel, RepositoryModel } from '../../../models/index.model';
-import { Observable, Subscription } from 'rxjs';
-import { GitHubRepositoryService } from '../../../services/github/index.services';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'dashboard-projects-edit',
@@ -27,7 +26,6 @@ export class EditProjectComponent implements OnInit {
         private form: FormBuilder,
         private snackBar: MatSnackBar,
         private projectService: ProjectService,
-        private repositoryService: GitHubRepositoryService,
     ) {
         this.uid = this.route.snapshot.paramMap.get('uid');
     }

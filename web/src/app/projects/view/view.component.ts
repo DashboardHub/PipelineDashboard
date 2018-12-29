@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
-import { catchError, mergeMap, filter } from 'rxjs/operators';
-import { ProjectModel, RepositoriesModel, RepositoryModel } from '../../../models/index.model';
+import { catchError, filter } from 'rxjs/operators';
+import { ProjectModel, RepositoriesModel } from '../../../models/index.model';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { DialogListComponent } from '../../dialog/list/dialog-list.component';
@@ -67,7 +67,7 @@ export class ViewProjectComponent implements OnInit {
 
                     selectedRepositories
                         .forEach((fullName: { value: string }) => this.repositoryService
-                                                                    .loadRepository(fullName.value))
+                                                                    .loadRepository(fullName.value));
                 })
             );
     }

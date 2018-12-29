@@ -24,7 +24,7 @@ export class RepositoryService {
 
     public findAll(force: boolean = false): Observable<RepositoriesModel> {
         if (force) {
-            const callable = this.fns.httpsCallable('findAllUserRepositories');
+            const callable: any = this.fns.httpsCallable('findAllUserRepositories');
             callable({ token: this.authService.profile.oauth.githubToken })
                 .pipe(
                     concatMap(() => of(this.authService.profile.repositories))
@@ -39,7 +39,7 @@ export class RepositoryService {
     }
 
     public loadRepository(fullName: string): void {
-        const callable = this.fns.httpsCallable('getRepositoryInfo');
+        const callable: any = this.fns.httpsCallable('getRepositoryInfo');
         callable({ fullName, token: this.authService.profile.oauth.githubToken });
     }
 }
