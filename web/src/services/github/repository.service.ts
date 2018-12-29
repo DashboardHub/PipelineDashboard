@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { GitHubCore } from './github.core';
-import { map, mergeMap, toArray } from 'rxjs/operators';
+import { map, mergeMap, toArray, tap } from 'rxjs/operators';
 import { RepositoryModel, PullRequestModel } from '../../models/index.model';
-import { GitHubPullRequestMapper } from '../../mappers/github/index.mapper';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -45,15 +44,10 @@ export class GitHubRepositoryService extends GitHubCore {
             );
     }
 
-    public findAllOpenPullRequests(fullName: string): Observable<PullRequestModel[]> {
+    // @TODO: move to function after repo is added?
+    public findAllOpenPullRequests(fullName: string): Observable<any> {
+        console.log('calling to github repo', `${this.url}/repos/${fullName}/pulls?state=open`);
         return this.http
             .get(`${this.url}/repos/${fullName}/pulls?state=open`)
-            .pipe(
-                mergeMap((pullrequests: any) => pullrequests),
-                map(
-                    (pullrequest: any) => GitHubPullRequestMapper.import(pullrequest)
-                ),
-                toArray()
-            );
     }
 }

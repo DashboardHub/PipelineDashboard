@@ -1,24 +1,16 @@
 <div class="mat-content">
-    <mat-card>
-        <mat-card-header>
-            <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'public'">lock_open</mat-icon>
-            <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'private'">lock</mat-icon>
-            <mat-card-title>{{ project.title }}</mat-card-title>
-            <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-divider></mat-divider>
-        <mat-card-content>
 
-        </mat-card-content>
-        <mat-divider></mat-divider>
-        <mat-card-actions>
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="isAdmin()">
-                <button mat-raised-button type="submit" color="accent" (click)="addRepository()">Add Repository</button>
-                <button mat-raised-button type="submit" color="accent" [routerLink]="['/project', project.uid, 'edit']">Edit</button>
-                <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
-            </div>
-        </mat-card-actions>
-    </mat-card>
+    <mat-toolbar>
+        <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'public'">lock_open</mat-icon>
+        <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'private'">lock</mat-icon>
+        <span>{{ project.title }}</span>
+        <span fxFlex></span>
+        <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="isAdmin()">
+            <button mat-raised-button type="submit" color="accent" (click)="addRepository()">Add Repository</button>
+            <button mat-raised-button type="submit" color="accent" [routerLink]="['/project', project.uid, 'edit']">Edit</button>
+            <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
+        </span>
+    </mat-toolbar>
 
     <dashboard-repository *ngFor="let uid of project.repositories" [uid]="uid"></dashboard-repository>
 </div>

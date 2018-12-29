@@ -9,58 +9,27 @@
     </mat-card-header>
     <mat-divider></mat-divider>
     <mat-card-content fxLayout="row">
-        <mat-list fxFlex>
-            <h3 mat-subheader>Contributors</h3>
-            <!-- <mat-list-item *ngFor="let pullRequest of repository.pullRequests"> -->
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <!-- <h4 mat-line>{{ pullRequest.name }}</h4>
-                <p mat-line> {{ pullRequest.date }} </p> -->
-                <h4 mat-line>aaaaa</h4>
-                <p mat-line>bbbb</p>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <!-- <h4 mat-line>{{ pullRequest.name }}</h4>
-                <p mat-line> {{ pullRequest.date }} </p> -->
-                <h4 mat-line>ccccc</h4>
-                <p mat-line>ddddd</p>
+        <mat-list fxFlex dense>
+            <h3 mat-subheader>Events</h3>
+            <mat-list-item *ngFor="let event of repository.events | slice:0:5">
+                <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
+                <h4 mat-line>{{ event.payload.title }}</h4>
+                <p mat-line>{{ event.createdOn | timeAgo }}</p>
             </mat-list-item>
         </mat-list>
-        <mat-list fxFlex>
+        <mat-list fxFlex dense>
             <h3 mat-subheader>Pull Requests</h3>
-            <!-- <mat-list-item *ngFor="let pullRequest of repository.pullRequests"> -->
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <!-- <h4 mat-line>{{ pullRequest.name }}</h4>
-                <p mat-line> {{ pullRequest.date }} </p> -->
-                <h4 mat-line>aaaaa</h4>
-                <p mat-line>bbbb</p>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <!-- <h4 mat-line>{{ pullRequest.name }}</h4>
-                <p mat-line> {{ pullRequest.date }} </p> -->
-                <h4 mat-line>ccccc</h4>
-                <p mat-line>ddddd</p>
+            <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
+                <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
+                <h4 mat-line>{{ pullRequest.title }}</h4>
+                <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
             </mat-list-item>
         </mat-list>
-        <mat-list fxFlex>
-            <h3 mat-subheader>Security</h3>
-            <!-- <mat-list-item *ngFor="let pullRequest of repository.pullRequests"> -->
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <!-- <h4 mat-line>{{ pullRequest.name }}</h4>
-                <p mat-line> {{ pullRequest.date }} </p> -->
-                <h4 mat-line>aaaaa</h4>
-                <p mat-line>bbbb</p>
-            </mat-list-item>
-            <mat-list-item>
-                <mat-icon mat-list-icon>folder</mat-icon>
-                <!-- <h4 mat-line>{{ pullRequest.name }}</h4>
-                <p mat-line> {{ pullRequest.date }} </p> -->
-                <h4 mat-line>ccccc</h4>
-                <p mat-line>ddddd</p>
+        <mat-list fxFlex dense>
+            <h3 mat-subheader>Releases</h3>
+            <mat-list-item *ngFor="let release of repository.releases | slice:0:5">
+                <h4 mat-line>{{ release.title }}</h4>
+                <p mat-line>{{ release.createdOn | timeAgo }}</p>
             </mat-list-item>
         </mat-list>
     </mat-card-content>

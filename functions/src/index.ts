@@ -1,8 +1,66 @@
 import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+import axios from 'axios';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-export const helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
+import { GitHubPullRequestMapper, GitHubRepositoryMapper, GitHubEventMapper, GitHubReleaseMapper } from './mappers/github/index.mapper';
+
+admin.initializeApp();
+
+const http = (token: string) => axios.create({
+    baseURL: 'https://api.github.com',
+    timeout: 1000,
+    headers: {
+        'User-Agent': 'DashboardHub',
+        Authorization: `token ${token}`
+    }
+  });
+
+export const findAllUserRepositories = functions.https.onCall((input, context) => {
+    return http(input.token).get('/user/repos')
+        .then((response) => response.data.map((repository) => GitHubRepositoryMapper.import(repository)))
+        .then((repositories) => admin
+                                    .firestore()
+                                    .collection('users')
+                                    .doc(context.auth.uid)
+                                    .set({
+                                        repositories: {
+                                            lastUpdated: new Date(),
+                                            data: repositories,
+                                        }
+                                    }, { merge: true })
+        );
+});
+
+export const getRepositoryInfo = functions.https.onCall((input, context) => {
+    return axios.all([
+        http(input.token).get(`/repos/${input.fullName}`),
+        http(input.token).get(`/repos/${input.fullName}/pulls?state=open`),
+        http(input.token).get(`/repos/${input.fullName}/events`),
+        http(input.token).get(`/repos/${input.fullName}/releases`),
+    ])
+    .then(axios.spread((repository, pullrequests, events, releases) => {
+        admin
+            .firestore()
+            .collection('repositories')
+            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
+            .set({ ...GitHubRepositoryMapper.import(repository.data, 'all') }, { merge: true })
+
+        admin
+            .firestore()
+            .collection('repositories')
+            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
+            .set({ pullRequests: pullrequests.data.map((pullrequest) => GitHubPullRequestMapper.import(pullrequest)) }, { merge: true })
+
+        admin
+            .firestore()
+            .collection('repositories')
+            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
+            .set({ events: events.data.map((event) => GitHubEventMapper.import(event)) }, { merge: true })
+
+        admin
+            .firestore()
+            .collection('repositories')
+            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
+            .set({ releases: releases.data.map((release) => GitHubReleaseMapper.import(release)) }, { merge: true })
+    }));
 });

@@ -1,19 +1,18 @@
 import { GitHubUserMapper } from './user.mapper';
-import { PullRequestModel } from '../../models/index.model';
 
 export class GitHubPullRequestMapper {
-    static import(input: any): PullRequestModel {
+    static import(input: any) {
         return {
             uid: input.id,
             url: input.url,
             state: input.state,
             title: input.title,
-            owner: GitHubUserMapper.import(input.user),
-            assigned: GitHubUserMapper.import(input.assigned),
-            requestedReviewers: GitHubUserMapper.import(input.user),
             description: input.body,
+            owner: GitHubUserMapper.import(input.user),
+            assignees: input.assignees.map((assignee) => GitHubUserMapper.import(assignee)),
+            reviewers: input.requested_reviewers.map((reviewer) => GitHubUserMapper.import(reviewer)),
             createdOn: input.created_at,
             updatedOn: input.updated_at,
-        } as PullRequestModel;
+        };
     }
 }

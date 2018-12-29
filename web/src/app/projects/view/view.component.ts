@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { ProjectService } from '../../../services/project.service';
-import { catchError, mergeMap } from 'rxjs/operators';
+import { catchError, mergeMap, filter } from 'rxjs/operators';
 import { ProjectModel, RepositoriesModel, RepositoryModel } from '../../../models/index.model';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../../services/authentication.service';
@@ -52,20 +52,22 @@ export class ViewProjectComponent implements OnInit {
         this.repositoryService
             .findAll()
             .subscribe((repositories: RepositoriesModel) => this.dialog.open(DialogListComponent, {
-                    // width: '250px',
                     data: { project: this.project, repositories },
                 })
                 .afterClosed()
+                .pipe(
+                    filter((selectedRepositories: { value: string }[]) => !!selectedRepositories)
+                )
                 .subscribe((selectedRepositories: { value: string }[]) => {
-                    if (selectedRepositories && selectedRepositories.length > 0) {
-                        this.projectService
-                            .saveRepositories(
-                                this.project.uid,
-                                selectedRepositories.map((repo: { value: string }) => repo.value)
-                            );
+                    this.projectService
+                        .saveRepositories(
+                            this.project.uid,
+                            selectedRepositories.map((fullName: { value: string }) => fullName.value)
+                        );
 
-                            selectedRepositories.forEach((repository: RepositoriesModel) => this.repositoryService.findPullRequestsByRepoName())
-                    }
+                    selectedRepositories
+                        .forEach((fullName: { value: string }) => this.repositoryService
+                                                                    .loadRepository(fullName.value))
                 })
             );
     }

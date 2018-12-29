@@ -85,14 +85,7 @@ export class ProjectService {
                     updatedOn: new Date(),
                 },
                 { merge: true })
-        )
-        // .pipe( // @TODO: save pull request info to repository
-        //     tap(
-        //         (repositories: string[]) => repositories
-        //                                         .map((repoUid: string) => this.repositoryService
-        //                                                                     .reloadPullRequestsByRepoName(new RepositoryModel(repoUid).uid))
-        //     )
-        // );
+        );
     }
 
     public delete(uid: string): Observable<void> {

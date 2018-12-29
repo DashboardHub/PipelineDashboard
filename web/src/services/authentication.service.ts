@@ -44,6 +44,7 @@ export class AuthenticationService {
                             phone: credentials.user.phoneNumber,
                             avatarUrl: credentials.user.photoURL,
                             oauth: {
+                                // @ts-ignore
                                 githubToken: credentials.credential.accessToken,
                                 token: oauth.token,
                                 expirationTime: oauth.expirationTime,

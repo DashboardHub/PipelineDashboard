@@ -39,6 +39,7 @@ import { ViewProjectComponent } from './projects/view/view.component';
 import { EditProjectComponent } from './projects/edit/edit.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
 import { RepositoryComponent } from './projects/repository/repository.component';
+import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -69,6 +70,7 @@ export function tokenGetter(): string | null {
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule.enablePersistence(),
+        AngularFireFunctionsModule,
         CommonModule,
         DeviceDetectorModule.forRoot(),
         HttpClientModule,
@@ -82,7 +84,9 @@ export function tokenGetter(): string | null {
         GitHubHttpInterceptorModule,
         ErrorHttpInterceptorModule,
     ],
-    providers: [],
+    providers: [
+        { provide: FunctionsRegionToken, useValue: 'us-central1' }
+    ],
     entryComponents: [
         DialogConfirmationComponent,
         DialogListComponent,

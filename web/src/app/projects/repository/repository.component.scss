@@ -1,3 +1,8 @@
 mat-card {
     margin-bottom: 1rem;
 }
+
+mat-list {
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
