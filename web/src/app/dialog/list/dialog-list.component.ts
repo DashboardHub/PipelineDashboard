@@ -21,7 +21,7 @@ export class DialogListComponent {
 
     // @TODO: move out, otherwise can not be reused
     public refresh(): void {
-        this.repositoryService
+        this.repositorySubscription = this.repositoryService
             .findAll(true)
             .subscribe((repositories: RepositoriesModel) => this.data.repositories = repositories);
     }

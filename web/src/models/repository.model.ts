@@ -8,7 +8,7 @@ export class RepositoryModel {
     fullName: string;
     owner?: string;
     ownerId?: string;
-    private?: string;
+    private?: boolean;
     fork?: string;
     archived?: string;
     forks?: number;

@@ -49,27 +49,24 @@ export class ViewProjectComponent implements OnInit {
     }
 
     addRepository(): void {
-        this.repositoryService
-            .findAll()
-            .subscribe((repositories: RepositoriesModel) => this.dialog.open(DialogListComponent, {
-                    data: { project: this.project, repositories },
-                })
-                .afterClosed()
-                .pipe(
-                    filter((selectedRepositories: { value: string }[]) => !!selectedRepositories)
-                )
-                .subscribe((selectedRepositories: { value: string }[]) => {
-                    this.projectService
-                        .saveRepositories(
-                            this.project.uid,
-                            selectedRepositories.map((fullName: { value: string }) => fullName.value)
-                        );
+        this.dialog.open(DialogListComponent, {
+            data: { project: this.project, repositories: this.authService.profile.repositories },
+        })
+        .afterClosed()
+        .pipe(
+            filter((selectedRepositories: { value: string }[]) => !!selectedRepositories)
+        )
+        .subscribe((selectedRepositories: { value: string }[]) => {
+            this.projectService
+                .saveRepositories(
+                    this.project.uid,
+                    selectedRepositories.map((fullName: { value: string }) => fullName.value)
+                );
 
-                    selectedRepositories
-                        .forEach((fullName: { value: string }) => this.repositoryService
-                                                                    .loadRepository(fullName.value));
-                })
-            );
+            selectedRepositories
+                .forEach((fullName: { value: string }) => this.repositoryService
+                                                            .loadRepository(fullName.value));
+        });
     }
 
     isAdmin(): boolean {

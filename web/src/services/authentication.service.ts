@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { auth, User } from 'firebase/app';
 import { from, Observable } from 'rxjs';
-import { filter, concatMap, switchMap, first, takeUntil } from 'rxjs/operators';
+import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { ProfileModel, LoginAuditModel } from '../models/index.model';
@@ -22,9 +22,12 @@ export class AuthenticationService {
         private deviceService: DeviceDetectorService,
     ) {
         this.checkAuth()
+            .pipe(
+                switchMap((profile: ProfileModel): Observable<ProfileModel> => this.getProfile(profile.uid)),
+            )
             .subscribe((profile: ProfileModel) => {
-                this.profile = profile;
                 this.isAuthenticated = true;
+                this.profile = profile;
             });
     }
 
@@ -80,7 +83,7 @@ export class AuthenticationService {
                     (profile: ProfileModel) => this.profile = profile,
                 ),
             )
-            .subscribe((profile: ProfileModel) => this.isAuthenticated = true);
+            .subscribe(() => this.isAuthenticated = true);
     }
 
     public logout(): void {
@@ -111,6 +114,12 @@ export class AuthenticationService {
             .pipe(
                 takeUntil<LoginAuditModel[]>(this.getAuthState()),
             );
+    }
+
+    public getProfile(uid: string): Observable<ProfileModel> {
+        return this.afs.collection<ProfileModel>('users')
+            .doc<ProfileModel>(uid)
+            .valueChanges();
     }
 
     private getAuthState(): Observable<User | null> {
