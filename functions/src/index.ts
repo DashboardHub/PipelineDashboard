@@ -38,29 +38,15 @@ export const getRepositoryInfo = functions.https.onCall((input, context) => {
         http(input.token).get(`/repos/${input.fullName}/events`),
         http(input.token).get(`/repos/${input.fullName}/releases`),
     ])
-    .then(axios.spread((repository, pullrequests, events, releases) => {
-        admin
+    .then(axios.spread((repository, pullrequests, events, releases) => admin
             .firestore()
             .collection('repositories')
             .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
-            .set({ ...GitHubRepositoryMapper.import(repository.data, 'all') }, { merge: true })
-
-        admin
-            .firestore()
-            .collection('repositories')
-            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
-            .set({ pullRequests: pullrequests.data.map((pullrequest) => GitHubPullRequestMapper.import(pullrequest)) }, { merge: true })
-
-        admin
-            .firestore()
-            .collection('repositories')
-            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
-            .set({ events: events.data.map((event) => GitHubEventMapper.import(event)) }, { merge: true })
-
-        admin
-            .firestore()
-            .collection('repositories')
-            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
-            .set({ releases: releases.data.map((release) => GitHubReleaseMapper.import(release)) }, { merge: true })
-    }));
+            .set({
+                events: events.data.map((event) => GitHubEventMapper.import(event)),
+                pullRequests: pullrequests.data.map((pullrequest) => GitHubPullRequestMapper.import(pullrequest)),
+                releases: releases.data.map((release) => GitHubReleaseMapper.import(release)),
+                ...GitHubRepositoryMapper.import(repository.data, 'all')
+            }, { merge: true }))
+    );
 });
