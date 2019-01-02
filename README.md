@@ -55,32 +55,13 @@ For more up to date information and more details please visit our [project board
 
 ## QUICK START
 
-Using `make` to build and run the project(s):
-
-*Note: You need AW configured, although it will not be used, the AWS CLI requires it*
-
-- 1. Install the `npm` dependencies for all projects, use `make install.local`
-
-Open 2 terminals and run each of these commands in its own terminal:
-
-- 2. API `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make api`
-
-*NOTE: You will need a `pem` file for local development, and needs to be in the directory `api` call `auth.pem` (`api/auth.pem`)*
-
-- 3. UI `make ui`
+1. `npm start`
 
 Then visit `http://localhost:4200/`
 
 ### RUNNING AUTOMATED TESTS
 
-This is done using `CumcumberJS`, with the `Given`, `When`, `Then` format in English, in the `api/tests/features` directory.
-
-Internet is needed when running the automated API tests, because a real `jwt` is used from `Auth0` service.
-
-- 1. Start the API (step 2 from previous section)
-- 2. Run `AUTH0_CLIENT_ID_TEST=XXX AUTH0_CLIENT_SECRET_TEST=YYY NODE_ENV=development make test`
-
-*Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
+Using Cypress, but currently in prototype mode.
 
 ### Commit message standards
 
