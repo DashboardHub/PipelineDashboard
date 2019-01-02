@@ -119,7 +119,6 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 | scope | releases | Releases module |
 | scope | tokens | Tokens module |
 
-
 ## SUB PROJECTS
 
 * `functions`, read the [API](api/README.md) docs
@@ -128,8 +127,6 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 ## COLLABORATION
 
 Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) to do realtime coding collaboration.
-
----
 
 ## FAQs
 
