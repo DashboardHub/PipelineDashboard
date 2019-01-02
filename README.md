@@ -39,26 +39,19 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 - `node` (minimum `v8`)
 - `npm` (minimum `v5`)
-- `java` (minimum `v8`) - *note: this is only to simulate aws services, you do not need to know any java*
 - `sed` - *note: available on linux by default, mac osx has a slightly different version that wont work, install linux version with **brew** `brew install gnu-sed --with-default-names`, more info in the [**FAQ**](https://github.com/DashboardHub/PipelineDashboard#faqs) section below.*
 
 ## Built with love using...
 
 ![angular](https://user-images.githubusercontent.com/624760/34513230-1e2ba5be-f05f-11e7-8cbf-c1b93415f4e5.png)
-![serverless](https://user-images.githubusercontent.com/624760/34513225-1b46a506-f05f-11e7-9fa3-a6b6bc740d1a.png)
 ![nodejs](https://user-images.githubusercontent.com/624760/34513224-17d6ff74-f05f-11e7-8080-18f09f63a3f4.png)
-![aws](https://user-images.githubusercontent.com/624760/35319340-4cb8b7b8-00d7-11e8-95f6-83c815d9138c.jpg)
+Firebase
 
 ## ROADMAP
 
 We have an aggressive plan for our ALPHA, so we can get feedback ASAP.
 
-| Milestone | Link |
-| :--- | :--- |
-| Remove template | https://github.com/DashboardHub/PipelineDashboard/milestone/23 |
-| Startup Grind event | https://github.com/DashboardHub/PipelineDashboard/milestone/30 |
-
-For more up to date information and more details please visit our [milestone list](https://github.com/DashboardHub/PipelineDashboard/milestones)
+For more up to date information and more details please visit our [project board](https://github.com/DashboardHub/PipelineDashboard/projects/4)
 
 ## QUICK START
 
