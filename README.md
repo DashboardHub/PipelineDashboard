@@ -122,7 +122,7 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 
 ## SUB PROJECTS
 
-* API, read the [API](api/README.md) docs
+* `functions`, read the [API](api/README.md) docs
 * Web UI, read the [UI](web/README.md) docs
 
 ## COLLABORATION
@@ -136,9 +136,6 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | OS | Question | Answer |
 | :--- | :--- | :--- |
 | Mac OSx | Error `sed: 1: "./config.json": invalid command code .` | Use linux sed `brew install gnu-sed --with-default-names` |
-| ALL | Changes to the API config `api/config.json` are lost | This file is generated, do not make changes to it. If you need to update any config make changes to `api/config.json.tpl` |
-| ALL | First time setup **login failure** | Check you have the `auth.pem` file in the API directory |
-| ALL | Worked before but now **login failure** | The API `pem` file was renamed from `dashboardhub.pem` to `auth.pem` |
 
 ## Social media
 
@@ -147,5 +144,3 @@ Use [Floobits](https://floobits.com/eddiejaoude/DashboardHub-PipelineDashboard) 
 | Twitter | https://twitter.com/dashboardhub |
 | LinkedIn | https://www.linkedin.com/showcase/dashboardhub/ |
 | Facebook | https://www.facebook.com/dashboardhub/ |
-
-
