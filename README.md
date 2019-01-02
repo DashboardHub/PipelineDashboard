@@ -82,10 +82,6 @@ Internet is needed when running the automated API tests, because a real `jwt` is
 
 *Note: To run only specific feature files use the envar `TEST_TAGS`, for example `TEST_TAGS=@Monitors`*
 
-### Additional useful commands
-
-- `make api.clean` resets the config files
-
 ### Commit message standards
 
 We use the Angular standards...
