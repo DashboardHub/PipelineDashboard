@@ -42,7 +42,7 @@ Then visit `http://localhost:4200/`
 
 ### RUNNING AUTOMATED TESTS
 
-Using Cypress, but currently in prototype mode.
+Currently in prototype mode.
 
 ### Commit message standards
 
