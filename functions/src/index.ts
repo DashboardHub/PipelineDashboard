@@ -50,3 +50,17 @@ export const getRepositoryInfo = functions.https.onCall((input, context) => {
             }, { merge: true }))
     );
 });
+
+export const getUserEvents = functions.https.onCall((input, context) => {
+    return axios.all([
+        http(input.token).get(`/users/${input.username}/events`),
+    ])
+    .then(axios.spread((events) => admin
+            .firestore()
+            .collection('users')
+            .doc(context.auth.uid)
+            .set({
+                activity: events.data.map((event) => GitHubEventMapper.import(event))
+            }, { merge: true }))
+    );
+});

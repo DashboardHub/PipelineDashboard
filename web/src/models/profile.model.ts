@@ -1,3 +1,4 @@
+import { ActivityModel } from './activity.model';
 import { Account } from './account.model';
 import { LoginAuditModel } from './loginAudit.model';
 import { RepositoriesModel } from './repositories.model';
@@ -26,4 +27,5 @@ export class ProfileModel {
     account?: Account = new Account();
     logins?: LoginAuditModel[] = [];
     repositories?: RepositoriesModel = new RepositoriesModel();
+    activity?: ActivityModel[] = [];
 }

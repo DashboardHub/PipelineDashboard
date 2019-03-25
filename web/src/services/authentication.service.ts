@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth, User } from 'firebase/app';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
@@ -19,6 +20,7 @@ export class AuthenticationService {
     constructor(
         public afAuth: AngularFireAuth,
         private afs: AngularFirestore,
+        private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
     ) {
         this.checkAuth()
@@ -119,7 +121,15 @@ export class AuthenticationService {
     public getProfile(uid: string): Observable<ProfileModel> {
         return this.afs.collection<ProfileModel>('users')
             .doc<ProfileModel>(uid)
-            .valueChanges();
+            .valueChanges()
+            .pipe(
+                switchMap((profile: ProfileModel): Observable<ProfileModel> => {
+                    const callable: any = this.fns.httpsCallable('getUserEvents');
+                    callable({ token: profile.oauth.githubToken, username: profile.username,  });
+
+                    return of(profile);
+                }),
+            );
     }
 
     private getAuthState(): Observable<User | null> {

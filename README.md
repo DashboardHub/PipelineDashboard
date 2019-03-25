@@ -36,7 +36,8 @@ For more up to date information and more details please visit our [project board
 
 ## QUICK START
 
-1. `npm start`
+1. `cd web`
+2. `npm start`
 
 Then visit `http://localhost:4200/`
 

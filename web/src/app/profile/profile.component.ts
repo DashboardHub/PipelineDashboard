@@ -11,7 +11,7 @@ export class ProfileComponent implements OnInit {
 
     private loginsSubscription: Subscription;
     public profile: ProfileModel;
-    public logins: LoginAuditModel[];
+    public logins: LoginAuditModel[] = [];
 
     constructor(public authService: AuthenticationService) {
     }

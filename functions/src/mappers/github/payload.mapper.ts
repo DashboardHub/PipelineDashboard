@@ -3,7 +3,7 @@ export class GitHubPayloadMapper {
         type: 'PullRequestEvent' | 'IssueCommentEvent' | 'CreateEvent' | 'ReleaseEvent' | 'WatchEvent' | 'PushEvent' | 'IssuesEvent',
         input: any
     ) {
-        let output: any = {};
+        const output: any = {};
 
         switch(type) {
             case 'PullRequestEvent':
@@ -11,9 +11,11 @@ export class GitHubPayloadMapper {
                 break;
             case 'IssuesEvent':
                 output.title = input.issue.title;
+                output.action = input.action;
                 break;
             case 'IssueCommentEvent':
                 output.title = input.comment.body;
+                output.action = input.action;
                 break;
             case 'CreateEvent':
                 output.title = `${input.ref_type}: ${input.ref}`;
