@@ -1,3 +1,4 @@
+import { HomepageComponent } from './homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,7 +13,6 @@ import { AuthGuard } from '../guards/authentication.guard';
 // import { ProfileResolver } from '../resolvers/profile.resolver';
 import { ProfileComponent } from './profile/profile.component';
 import { CreateProjectComponent } from './projects/create/create.component';
-import { PublicProjectsComponent } from './projects/public/public.component';
 import { ViewProjectComponent } from './projects/view/view.component';
 import { EditProjectComponent } from './projects/edit/edit.component';
 
@@ -24,7 +24,7 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: PublicProjectsComponent,
+                component: HomepageComponent,
             },
             {
                 path: 'projects/create',

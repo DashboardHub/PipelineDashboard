@@ -40,6 +40,7 @@ import { EditProjectComponent } from './projects/edit/edit.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
 import { RepositoryComponent } from './projects/repository/repository.component';
 import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
+import { HomepageComponent } from './homepage/homepage.component';
 
 export function tokenGetter(): string | null {
     return localStorage.getItem('access_token');
@@ -55,6 +56,7 @@ export function tokenGetter(): string | null {
         EditProjectComponent,
         FeaturesComponent,
         HelpComponent,
+        HomepageComponent,
         MainComponent,
         MarkdownDirective,
         PrivacyComponent,

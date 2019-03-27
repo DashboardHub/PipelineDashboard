@@ -1,6 +1,6 @@
 <mat-list>
     <h3 mat-subheader>Projects</h3>
-    <mat-list-item *ngFor="let project of projects">
+    <mat-list-item *ngFor="let project of projects" fxLayout='column'>
         <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'public'">lock_open</mat-icon>
         <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'private'">lock</mat-icon>
         <h4 mat-line><a [routerLink]="['/project', project.uid]">{{ project.title }}</a></h4>

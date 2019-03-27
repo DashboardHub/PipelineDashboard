@@ -8,3 +8,4 @@ export * from './repositories.model';
 export * from './project.model';
 export * from './pullRequest.model';
 export * from './user.model';
+export * from './userStats.model';

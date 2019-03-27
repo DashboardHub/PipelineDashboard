@@ -4,8 +4,6 @@ import { ProjectModel, RepositoryModel } from '../models/index.model';
 import { from, Observable, of, forkJoin } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AuthenticationService } from './authentication.service';
-import { mergeMap, tap } from 'rxjs/operators';
-import { RepositoryService } from './repository.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +13,6 @@ export class ProjectService {
     constructor(
         private afs: AngularFirestore,
         private authService: AuthenticationService,
-        private repositoryService: RepositoryService
     ) {
     }
 

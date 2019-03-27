@@ -14,9 +14,9 @@ export class MainComponent {
     public version: string;
     public publicRoutes: Navigation[] = [
         {
-            title: 'Public Projects',
+            title: 'Homepage',
             route: '/',
-            icon: 'group_work',
+            icon: 'home',
         },
     ];
     public privateRoutes: Navigation[] = [

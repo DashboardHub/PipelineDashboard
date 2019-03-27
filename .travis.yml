@@ -29,4 +29,4 @@ deploy:
       secure: $FIREBASE_TEST_TOKEN
     project: "pipelinedashboard-test"
     on:
-      branch: issue-firebase
+      branch: firebase-mvp
