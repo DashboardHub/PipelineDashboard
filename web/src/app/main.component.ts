@@ -78,7 +78,7 @@ export class MainComponent {
         this.authService.login();
     }
 
-    public logout() {
+    public logout(): void {
         this.authService.logout();
     }
 
