@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { Navigation } from '../models/navigation.model';
 import { environment } from '../environments/environment';
-import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
     selector: 'dashboard-main',
@@ -59,9 +58,7 @@ export class MainComponent {
         }
     ];
 
-    constructor(
-        public authService: AuthenticationService,
-    ) {
+    constructor() {
         this.version = environment.version;
     }
 
