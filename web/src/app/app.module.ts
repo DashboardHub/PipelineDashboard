@@ -27,7 +27,6 @@ import { GitHubHttpInterceptorModule } from '../interceptors/github.http.interce
 import { ErrorHttpInterceptorModule } from '../interceptors/error.http.interceptor';
 
 import { PipesModule } from '../pipes/pipes.module';
-import { ChartsModule } from './charts.module';
 import { MaterialModule } from './material.module';
 import { AppRoutesModule } from './routes.module';
 import { PrivateProjectsComponent } from './projects/private/private.component';
@@ -79,7 +78,6 @@ export function tokenGetter(): string | null {
         RouterModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
-        ChartsModule,
         MaterialModule,
         PipesModule,
         AppRoutesModule,
