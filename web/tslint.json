@@ -138,11 +138,14 @@
     "typedef": [
       true,
       "call-signature",
+      "arrow-call-signature",
       "parameter",
       "arrow-parameter",
       "property-declaration",
       "variable-declaration",
-      "member-variable-declaration"
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
     ],
     "typedef-whitespace": [
       true,
@@ -190,10 +193,6 @@
     "no-output-rename": false, // same but for @Output
     "no-forward-ref" : false,
     "use-life-cycle-interface": true,
-    "use-pipe-transform-interface": true,
-    "pipe-naming": [
-      true,
-      "camelCase"
-    ]
+    "use-pipe-transform-interface": true
   }
 }

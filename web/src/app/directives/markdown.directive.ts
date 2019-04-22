@@ -37,9 +37,9 @@ export class MarkdownDirective implements OnChanges {
         const renderer: any = new this.marked.Renderer();
 
         return {
-            heading: (text: string) => `<h3>${text}</h3>`,
-            image: (href: string, title: string, text: string) => `<img src="${href}" alt="${text}" title="${text}" style="max-width:100%">`,
-            link: (href: string, title: string, text: string) => {
+            heading: (text: string): string => `<h3>${text}</h3>`,
+            image: (href: string, title: string, text: string): string => `<img src="${href}" alt="${text}" title="${text}" style="max-width:100%">`,
+            link: (href: string, title: string, text: string): string => {
                 return `<a href="${href}" target="_blank" ${title ? `title="${title}"` : ''}>${text}</a>`;
             }
         };
