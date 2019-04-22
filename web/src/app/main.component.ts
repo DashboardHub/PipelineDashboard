@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Navigation } from '../models/navigation.model';
 import { environment } from '../environments/environment';
 import { AuthenticationService } from '../services/authentication.service';
+import { ProfileModel } from '../models/index.model';
 
 @Component({
     selector: 'dashboard-main',
@@ -60,9 +61,25 @@ export class MainComponent {
     ];
 
     constructor(
-        public authService: AuthenticationService,
+        private authService: AuthenticationService,
     ) {
         this.version = environment.version;
+    }
+
+    public getProfile(): ProfileModel {
+        return this.authService.profile;
+    }
+
+    public isAuthenticated(): boolean {
+        return this.authService.isAuthenticated;
+    }
+
+    public login(): void {
+        this.authService.login();
+    }
+
+    public logout(): void {
+        this.authService.logout();
     }
 
     public showDoorbell(): void {

@@ -1,4 +1,5 @@
 import { PullRequestModel } from './pullRequest.model';
+import { ReleaseModel } from './release.model';
 
 export class RepositoryModel {
     uid?: string;
@@ -18,6 +19,9 @@ export class RepositoryModel {
     issues?: number;
     license?: string;
     pullRequests?: PullRequestModel[];
+    events?: Event[];
+    releases?: ReleaseModel[];
+    lastUpdated: Date;
 
     constructor(fullName: string) {
         this.fullName = fullName;
