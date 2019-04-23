@@ -1,0 +1,49 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+/* Setup site theme */
+$dashboard-primary: mat-palette($mat-blue, 700);
+$dashboard-accent: mat-palette($mat-orange, 800, A100, A400);
+$dashboard-warn: mat-palette($mat-red, 600);
+$dashboard-theme: mat-light-theme($dashboard-primary, $dashboard-accent, $dashboard-warn);
+
+@include angular-material-theme($dashboard-theme);
+
+/* Setup Angular Material typography */
+
+$dashboard-global-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $body-1: mat-typography-level(0.9rem, 1.5em, 400),
+    $body-2: mat-typography-level(0.9rem, 1.5em, 700)
+);
+
+@include angular-material-typography($dashboard-global-typography);
+
+$dashboard-base-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $headline: mat-typography-level(2.4rem, 1.5em, 100),
+    $title: mat-typography-level(1.7rem, 1.5em, 300),
+    $subheading-2: mat-typography-level(1.4rem, 1.5em, 300),
+    $subheading-1: mat-typography-level(1.1rem, 1.5em, 400),
+    $body-1: mat-typography-level(0.9rem, 1.5em, 400),
+    $body-2: mat-typography-level(0.9rem, 1.5em, 700),
+    $caption: mat-typography-level(0.8rem, 1.5em, 400)
+);
+
+@include mat-base-typography($dashboard-base-typography);
+
+$dashboard-toolbar-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $title: mat-typography-level(1.3rem, 1.3em, 300)
+);
+
+@include mat-toolbar-typography($dashboard-toolbar-typography);
+
+$dashboard-card-typography: mat-typography-config(
+    $font-family: 'Roboto',
+    $headline: mat-typography-level(1.7rem, 1.5em, 300),
+    $title: mat-typography-level(1.7rem, 1.5em, 300)
+);
+
+@include mat-card-typography($dashboard-card-typography);
