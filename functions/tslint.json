@@ -114,7 +114,36 @@
     "prefer-const": {"severity": "warning"},
 
     // Multi-line object literals and function calls should have a trailing comma. This helps avoid merge conflicts.
-    "trailing-comma": {"severity": "warning"}
+    "trailing-comma": {"severity": "warning"},
+
+    // Prefer strict type defintion for parameters and function
+    "typedef": [
+      true,
+      "parameter",
+      "arrow-parameter",
+      "property-declaration",
+      "variable-declaration",
+      "member-variable-declaration",
+      "object-destructuring",
+      "array-destructuring"
+    ],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "onespace",
+        "index-signature": "onespace",
+        "parameter": "onespace",
+        "property-declaration": "onespace",
+        "variable-declaration": "onespace"
+      }
+    ]
   },
 
   "defaultSeverity": "error"
