@@ -1,20 +1,21 @@
-import { HomepageComponent } from './homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+// Authentication guards for dashboard hub app module
+import { AuthGuard } from '../guards/authentication.guard';
+
+// Dashboard hub app module components
+import { EditProjectComponent } from './projects/edit/edit.component';
+import { CreateProjectComponent } from './projects/create/create.component';
 import { MainComponent } from './main.component';
 import { FeaturesComponent } from './features/features.component';
 import { HelpComponent } from './help/help.component';
-import { PrivacyComponent } from './legal/privacy/privacy.component';
-import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
-
-import { PrivateProjectsComponent } from './projects/private/private.component';
-import { AuthGuard } from '../guards/authentication.guard';
-// import { ProfileResolver } from '../resolvers/profile.resolver';
+import { HomepageComponent } from './homepage/homepage.component';
 import { ProfileComponent } from './profile/profile.component';
-import { CreateProjectComponent } from './projects/create/create.component';
+import { PrivacyComponent } from './legal/privacy/privacy.component';
+import { PrivateProjectsComponent } from './projects/private/private.component';
+import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { ViewProjectComponent } from './projects/view/view.component';
-import { EditProjectComponent } from './projects/edit/edit.component';
 
 const routes: Routes = [
     {
@@ -24,37 +25,35 @@ const routes: Routes = [
         children: [
             {
                 path: '',
-                component: HomepageComponent,
+                component: HomepageComponent
             },
             {
                 path: 'projects/create',
                 pathMatch: 'full',
                 component: CreateProjectComponent,
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard]
             },
             {
                 path: 'project/:uid',
                 pathMatch: 'full',
                 component: ViewProjectComponent,
-                // canActivate: [AuthGuard],
             },
             {
                 path: 'project/:uid/edit',
                 pathMatch: 'full',
                 component: EditProjectComponent,
-                // canActivate: [AuthGuard],
             },
             {
                 path: 'projects',
                 pathMatch: 'full',
                 component: PrivateProjectsComponent,
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard]
             },
             {
                 path: 'profile',
                 pathMatch: 'full',
                 component: ProfileComponent,
-                canActivate: [AuthGuard],
+                canActivate: [AuthGuard]
             },
             {
                 path: 'features',
@@ -64,7 +63,7 @@ const routes: Routes = [
             {
                 path: 'help',
                 pathMatch: 'full',
-                component: HelpComponent,
+                component: HelpComponent
             },
             {
                 path: 'terms-and-conditions',
@@ -74,20 +73,15 @@ const routes: Routes = [
             {
                 path: 'privacy',
                 pathMatch: 'full',
-                component: PrivacyComponent,
+                component: PrivacyComponent
             },
-            { path: '**', redirectTo: '/' },
+            { path: '**', redirectTo: '/' }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forRoot(routes)
-    ],
-    exports: [
-        RouterModule
-    ]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutesModule {
-}
+export class AppRoutingModule {}
