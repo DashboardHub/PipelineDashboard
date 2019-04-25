@@ -20,8 +20,6 @@ import {
     MatRadioModule,
 } from '@angular/material';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 @NgModule({
     imports: [
         MatBadgeModule,
@@ -41,7 +39,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        FlexLayoutModule,
     ],
     exports: [
         MatBadgeModule,
@@ -61,8 +58,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatTabsModule,
         MatToolbarModule,
         MatTooltipModule,
-        FlexLayoutModule,
     ]
 })
-export class MaterialModule {
+export class AppMaterialModule {
 }
