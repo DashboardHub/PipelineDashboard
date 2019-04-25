@@ -44,10 +44,6 @@ export class ViewProjectComponent implements OnInit {
             .findOneById(this.project.uid)
             .subscribe((project: ProjectModel) => {
                 this.project = project;
-                // Added check for not authenticated user and private project details
-                if (project.type === 'private' && !this.authService.isAuthenticated) {
-                    this.router.navigate(['/'])
-                }
             });
     }
 
