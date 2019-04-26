@@ -42,7 +42,7 @@ export class ViewProjectComponent implements OnInit {
     ngOnInit(): void {
         this.projectSubscription = this.projectService
             .findOneById(this.project.uid)
-            .subscribe((project: ProjectModel) => this.project = project );
+            .subscribe((project: ProjectModel) => this.project = project);
     }
 
     delete(): void {
@@ -70,9 +70,7 @@ export class ViewProjectComponent implements OnInit {
             .afterClosed()
             .pipe(
                 filter(
-                    (selectedRepositories: { value: string }[]) =>
-                        !!selectedRepositories
-                )
+                    (selectedRepositories: { value: string }[]) => !!selectedRepositories)
             )
             .subscribe((selectedRepositories: { value: string }[]) => {
                 this.projectService.saveRepositories(

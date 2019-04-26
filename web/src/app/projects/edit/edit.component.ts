@@ -29,7 +29,7 @@ export class EditProjectComponent implements OnInit {
         private form: FormBuilder,
         private snackBar: MatSnackBar,
         private projectService: ProjectService,
-     ) {
+    ) {
         this.uid = this.route.snapshot.paramMap.get('uid');
     }
 
@@ -42,9 +42,7 @@ export class EditProjectComponent implements OnInit {
 
         this.projectSubscription = this.projectService
             .findOneById(this.uid)
-            .subscribe((project: ProjectModel) => {
-                    this.projectForm.reset(project);
-            });
+            .subscribe((project: ProjectModel) => this.projectForm.reset(project));
     }
 
     save(): void {
