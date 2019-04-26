@@ -10,10 +10,11 @@ import { ProjectService } from '../services/project.service';
 })
 export class ViewProjectResolver implements Resolve<boolean> {
 
-    constructor(private authService: AuthenticationService, 
-                private projectService: ProjectService,
-                private router: Router) {
-    }
+    constructor(
+        private authService: AuthenticationService, 
+        private projectService: ProjectService,
+        private router: Router
+        ) {}
 
     resolve(route: ActivatedRouteSnapshot): any {
         this.projectService.findOneById(route.params.uid)

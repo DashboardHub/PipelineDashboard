@@ -10,9 +10,11 @@ import { ProjectService } from '../services/project.service';
 })
 export class EditProjectResolver implements Resolve<boolean> {
 
-    constructor(private authService: AuthenticationService,
-                private projectService: ProjectService,
-                private router: Router) {
+    constructor(
+        private authService: AuthenticationService,
+        private projectService: ProjectService,
+        private router: Router
+        ) {
     }
 
     resolve(route: ActivatedRouteSnapshot): any {
