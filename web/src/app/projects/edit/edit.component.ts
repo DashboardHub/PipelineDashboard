@@ -2,20 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { ProjectService } from '../../../services/project.service';
-import { catchError } from 'rxjs/operators';
-import { ProjectModel, RepositoryModel } from '../../../models/index.model';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+// Dashboard hub models
+import { RepositoryModel, ProjectModel } from '../../../models/index.model';
+
+// Dashboard hub services
+import { AuthenticationService } from '../../../services/authentication.service';
+import { ProjectService } from '../../../services/project.service';
 
 @Component({
     selector: 'dashboard-projects-edit',
     templateUrl: './edit.component.html',
 })
 export class EditProjectComponent implements OnInit {
-
     private projectSubscription: Subscription;
     private saveSubscription: Subscription;
-    private repositorySubscription: Subscription;
     public uid: string;
     public projectForm: FormGroup;
     public repositories: RepositoryModel[] = [];
@@ -52,9 +55,7 @@ export class EditProjectComponent implements OnInit {
     }
 
     ngDestroy(): void {
-        this.projectSubscription
-            .unsubscribe();
-        this.saveSubscription
-            .unsubscribe();
+        this.projectSubscription.unsubscribe();
+        this.saveSubscription.unsubscribe();
     }
 }

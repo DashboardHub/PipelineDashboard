@@ -1,21 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { ProjectService } from '../../../services/project.service';
 import { catchError, filter } from 'rxjs/operators';
-import { ProjectModel, RepositoriesModel } from '../../../models/index.model';
 import { Subscription } from 'rxjs';
-import { AuthenticationService } from '../../../services/authentication.service';
+
+// Dashboard hub models
+import { ProjectModel } from '../../../models/index.model';
+
+// Dashboard hub dialog component
 import { DialogListComponent } from '../../dialog/list/dialog-list.component';
+
+// Dashboard hub services
+import { AuthenticationService } from '../../../services/authentication.service';
+import { ProjectService } from '../../../services/project.service';
 import { RepositoryService } from '../../../services/repository.service';
 
 @Component({
     selector: 'dashboard-projects-view',
     templateUrl: './view.component.html',
-    styleUrls: ['./view.component.scss'],
+    styleUrls: ['./view.component.scss']
 })
-export class ViewProjectComponent implements OnInit {
 
+export class ViewProjectComponent implements OnInit {
     private projectSubscription: Subscription;
     private deleteSubscription: Subscription;
     private repositorySubscription: Subscription;
@@ -28,7 +34,7 @@ export class ViewProjectComponent implements OnInit {
         private dialog: MatDialog,
         private projectService: ProjectService,
         private repositoryService: RepositoryService,
-        private authService: AuthenticationService,
+        private authService: AuthenticationService
     ) {
         this.project.uid = this.route.snapshot.paramMap.get('uid');
     }
@@ -43,30 +49,41 @@ export class ViewProjectComponent implements OnInit {
         this.deleteSubscription = this.projectService
             .delete(this.project.uid)
             .pipe(
-                catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
+                catchError(
+                    (error: any): any =>
+                        this.snackBar.open(error.message, undefined, {
+                            duration: 5000
+                        })
+                )
             )
             .subscribe(() => this.router.navigate(['/projects']));
     }
 
     addRepository(): void {
-        this.dialog.open(DialogListComponent, {
-            data: { project: this.project, repositories: this.authService.profile.repositories },
-        })
-        .afterClosed()
-        .pipe(
-            filter((selectedRepositories: { value: string }[]) => !!selectedRepositories)
-        )
-        .subscribe((selectedRepositories: { value: string }[]) => {
-            this.projectService
-                .saveRepositories(
+        this.dialog
+            .open(DialogListComponent, {
+                data: {
+                    project: this.project,
+                    repositories: this.authService.profile.repositories
+                }
+            })
+            .afterClosed()
+            .pipe(
+                filter(
+                    (selectedRepositories: { value: string }[]) => !!selectedRepositories)
+            )
+            .subscribe((selectedRepositories: { value: string }[]) => {
+                this.projectService.saveRepositories(
                     this.project.uid,
-                    selectedRepositories.map((fullName: { value: string }) => fullName.value)
+                    selectedRepositories.map(
+                        (fullName: { value: string }) => fullName.value
+                    )
                 );
 
-            selectedRepositories
-                .forEach((fullName: { value: string }) => this.repositoryService
-                                                            .loadRepository(fullName.value));
-        });
+                selectedRepositories.forEach((fullName: { value: string }) =>
+                    this.repositoryService.loadRepository(fullName.value)
+                );
+            });
     }
 
     isAdmin(): boolean {
@@ -74,11 +91,8 @@ export class ViewProjectComponent implements OnInit {
     }
 
     ngDestroy(): void {
-        this.projectSubscription
-            .unsubscribe();
-        this.deleteSubscription
-            .unsubscribe();
-        this.repositorySubscription
-            .unsubscribe();
+        this.projectSubscription.unsubscribe();
+        this.deleteSubscription.unsubscribe();
+        this.repositorySubscription.unsubscribe();
     }
 }

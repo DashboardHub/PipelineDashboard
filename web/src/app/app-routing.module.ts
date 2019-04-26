@@ -17,6 +17,9 @@ import { PrivateProjectsComponent } from './projects/private/private.component';
 import { TermsConditionsComponent } from './legal/terms-conditions/terms-conditions.component';
 import { ViewProjectComponent } from './projects/view/view.component';
 
+import { ViewProjectResolver } from '../resolvers/view-project.resolver';
+import { EditProjectResolver } from '../resolvers/edit-project.resolver';
+
 const routes: Routes = [
     {
         path: '',
@@ -37,11 +40,13 @@ const routes: Routes = [
                 path: 'project/:uid',
                 pathMatch: 'full',
                 component: ViewProjectComponent,
+                resolve: { project: ViewProjectResolver }
             },
             {
                 path: 'project/:uid/edit',
                 pathMatch: 'full',
                 component: EditProjectComponent,
+                resolve: { project: EditProjectResolver }
             },
             {
                 path: 'projects',
