@@ -40,9 +40,9 @@ export class ViewProjectComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectSubscription = this.projectService.findOneById(this.project.uid).subscribe((project: ProjectModel) => {
-                this.project = project;
-            });
+        this.projectSubscription = this.projectService
+            .findOneById(this.project.uid)
+            .subscribe((project: ProjectModel) => { this.project = project; });
     }
 
     delete(): void {
