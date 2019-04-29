@@ -7,7 +7,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // Dashboard hub App modules
 import { AppMaterialModule } from '../app-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PipesModule } from '../../pipes/pipes.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
     declarations: [],
