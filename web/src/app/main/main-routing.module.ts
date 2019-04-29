@@ -16,7 +16,7 @@ import { HelpComponent } from '../help/help.component';
 import { TermsConditionsComponent } from '../legal/terms-conditions/terms-conditions.component';
 import { PrivacyComponent } from '../legal/privacy/privacy.component';
 
-import { AuthGuard } from '../../guards/authentication.guard';
+import { AuthGuard } from '../core/guards/authentication.guard';
 
 const routes: Routes = [
     {

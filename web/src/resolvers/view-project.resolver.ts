@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../app/core/services/authentication.service';
 import { ProjectModel } from '../models/index.model';
-import { ProjectService } from '../services/project.service';
+import { ProjectService } from '../app/core/services/project.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ import { ProjectService } from '../services/project.service';
 export class ViewProjectResolver implements Resolve<boolean> {
 
     constructor(
-        private authService: AuthenticationService, 
+        private authService: AuthenticationService,
         private projectService: ProjectService,
         private router: Router
         ) {}

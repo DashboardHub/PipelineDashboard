@@ -5,10 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MainRoutingModule } from './main-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
-// Dashboard hub interceptors
-import { GitHubHttpInterceptorModule } from '../../interceptors/github.http.interceptor';
-import { ErrorHttpInterceptorModule } from '../../interceptors/error.http.interceptor';
-
 // Dashboard hub components
 import { MainComponent } from './main.component';
 import { ViewProjectComponent } from '../projects/view/view.component';
@@ -33,9 +29,7 @@ import { CreateProjectComponent } from '../projects/create/create.component';
   imports: [
     CommonModule,
     MainRoutingModule,
-    SharedModule,
-    ErrorHttpInterceptorModule,
-    GitHubHttpInterceptorModule
+    SharedModule
   ],
   declarations: [MainComponent,
     CreateProjectComponent,

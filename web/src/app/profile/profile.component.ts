@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../core/services/authentication.service';
 import { ProfileModel, LoginAuditModel } from '../../models/index.model';
 import { Subscription } from 'rxjs';
 

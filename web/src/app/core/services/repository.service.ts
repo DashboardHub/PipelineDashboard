@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { RepositoryModel, ProfileModel } from '../models/index.model';
-import { from, Observable, of } from 'rxjs';
+import { RepositoryModel, ProfileModel } from '../../../models/index.model';
+import { from, Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-import { concatMap, pluck } from 'rxjs/operators';
-import { RepositoriesModel } from '../models/index.model';
-import { pipe } from '@angular/core/src/render3';
+import { pluck } from 'rxjs/operators';
+import { RepositoriesModel } from '../../../models/index.model';
 
 @Injectable({
     providedIn: 'root'

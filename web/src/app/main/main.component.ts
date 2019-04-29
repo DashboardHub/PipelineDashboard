@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 import { Navigation } from '../../models/navigation.model';
 import { environment } from '../../environments/environment';
-import { AuthenticationService } from '../../services/authentication.service';
 import { ProfileModel } from '../../models/index.model';
+import { AuthenticationService } from '../core/services/authentication.service';
 
 @Component({
     selector: 'dashboard-main',

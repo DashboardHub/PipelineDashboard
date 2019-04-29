@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ProjectModel, RepositoryModel } from '../models/index.model';
+import { ProjectModel, RepositoryModel } from '../../../models/index.model';
 import { from, Observable, of, forkJoin } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 import { AuthenticationService } from './authentication.service';

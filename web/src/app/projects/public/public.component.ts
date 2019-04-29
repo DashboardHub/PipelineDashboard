@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../../../services/project.service';
+import { ProjectService } from '../../core/services/project.service';
 import { ProjectModel } from '../../../models/index.model';
 import { Subscription } from 'rxjs';
 

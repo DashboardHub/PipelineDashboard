@@ -9,8 +9,8 @@ import { catchError } from 'rxjs/operators';
 import { RepositoryModel, ProjectModel } from '../../../models/index.model';
 
 // Dashboard hub services
-import { AuthenticationService } from '../../../services/authentication.service';
-import { ProjectService } from '../../../services/project.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { ProjectService } from '../../core/services/project.service';
 
 @Component({
     selector: 'dashboard-projects-edit',
