@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { ProjectModel } from '../../shared/models/index.model';
 
 // Dashboard hub dialog component
-import { DialogListComponent } from '../../dialog/list/dialog-list.component';
+import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
 
 // Dashboard hub services
 import { AuthenticationService } from '../../core/services/authentication.service';

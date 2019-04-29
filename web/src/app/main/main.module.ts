@@ -19,9 +19,6 @@ import { HomepageComponent } from '../homepage/homepage.component';
 import { HelpComponent } from '../help/help.component';
 import { FeaturesComponent } from '../features/features.component';
 import { EditProjectComponent } from '../projects/edit/edit.component';
-import { DialogMarkdownComponent } from '../dialog/markdown/dialog-markdown.component';
-import { DialogListComponent } from '../dialog/list/dialog-list.component';
-import { DialogConfirmationComponent } from '../dialog/confirmation/dialog-confirmation.component';
 import { CreateProjectComponent } from '../projects/create/create.component';
 
 @NgModule({
@@ -32,9 +29,6 @@ import { CreateProjectComponent } from '../projects/create/create.component';
   ],
   declarations: [MainComponent,
     CreateProjectComponent,
-    DialogConfirmationComponent,
-    DialogListComponent,
-    DialogMarkdownComponent,
     EditProjectComponent,
     FeaturesComponent,
     HelpComponent,
@@ -46,11 +40,6 @@ import { CreateProjectComponent } from '../projects/create/create.component';
     PublicProjectsComponent,
     RepositoryComponent,
     TermsConditionsComponent,
-    ViewProjectComponent],
-  entryComponents: [
-    DialogConfirmationComponent,
-    DialogListComponent,
-    DialogMarkdownComponent
-  ],
+    ViewProjectComponent]
 })
 export class MainModule { }
