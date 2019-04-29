@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 
-import { AuthenticationService } from '../app/core/services/authentication.service';
-import { ProjectModel } from '../models/index.model';
-import { ProjectService } from '../app/core/services/project.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { ProjectModel } from '../../../models/index.model';
+import { ProjectService } from '../services/project.service';
 
 @Injectable({
     providedIn: 'root'

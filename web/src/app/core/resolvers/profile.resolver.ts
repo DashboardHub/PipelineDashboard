@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { ProfileModel } from '../models/index.model';
+import { ProfileModel } from '../../../models/index.model';
 import { first } from 'rxjs/operators';
-import { AuthenticationService } from '../app/core/services/authentication.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
     providedIn: 'root'
