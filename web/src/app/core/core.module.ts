@@ -5,9 +5,11 @@ import { CommonModule } from '@angular/common';
 import { GitHubHttpInterceptorModule } from '../core/interceptors/github.http.interceptor';
 import { ErrorHttpInterceptorModule } from '../core/interceptors/error.http.interceptor';
 
+import { AppMaterialModule } from '../app-material.module';
+
 @NgModule({
   imports: [
-    CommonModule, GitHubHttpInterceptorModule, ErrorHttpInterceptorModule
+    CommonModule, AppMaterialModule, GitHubHttpInterceptorModule, ErrorHttpInterceptorModule
   ],
   declarations: [],
   providers: []
