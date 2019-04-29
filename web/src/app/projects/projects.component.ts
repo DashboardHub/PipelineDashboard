@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-import { ProjectModel } from '../../models/index.model';
+import { ProjectModel } from '../shared/models/index.model';
 
 @Component({
     selector: 'dashboard-projects',
