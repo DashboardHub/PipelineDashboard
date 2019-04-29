@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { ProjectService } from '../../core/services/project.service';
 import { catchError } from 'rxjs/operators';
-import { ProjectModel } from '../../../models/index.model';
+import { ProjectModel } from '../../shared/models/index.model';
 import { Subscription } from 'rxjs';
 
 @Component({

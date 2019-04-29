@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { Navigation } from '../../models/navigation.model';
+import { Navigation } from '../shared/models/navigation.model';
 import { environment } from '../../environments/environment';
-import { ProfileModel } from '../../models/index.model';
+import { ProfileModel } from '../shared/models/index.model';
 import { AuthenticationService } from '../core/services/authentication.service';
 
 @Component({

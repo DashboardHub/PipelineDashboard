@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 // Dashboard hub models
-import { RepositoryModel, ProjectModel } from '../../../models/index.model';
+import { RepositoryModel, ProjectModel } from '../../shared/models/index.model';
 
 // Dashboard hub services
 import { AuthenticationService } from '../../core/services/authentication.service';

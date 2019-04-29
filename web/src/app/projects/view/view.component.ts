@@ -5,7 +5,7 @@ import { catchError, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models
-import { ProjectModel } from '../../../models/index.model';
+import { ProjectModel } from '../../shared/models/index.model';
 
 // Dashboard hub dialog component
 import { DialogListComponent } from '../../dialog/list/dialog-list.component';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RepositoryModel } from '../../../models/index.model';
+import { RepositoryModel } from '../../shared/models/index.model';
 import { Subscription } from 'rxjs';
 import { RepositoryService } from '../../core/services/repository.service';
 

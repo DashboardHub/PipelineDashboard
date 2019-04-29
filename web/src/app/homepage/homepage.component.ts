@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserStatsModel } from '../../models/index.model';
+import { UserStatsModel } from '../shared/models/index.model';
 import { UserService } from '../core/services/user.service';
 
 @Component({
