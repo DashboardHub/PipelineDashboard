@@ -15,7 +15,6 @@ import { ProjectsComponent } from '../projects/projects.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { PrivateProjectsComponent } from '../projects/private/private.component';
 import { PrivacyComponent } from '../legal/privacy/privacy.component';
-import { MarkdownDirective } from '../directives/markdown.directive';
 import { HomepageComponent } from '../homepage/homepage.component';
 import { HelpComponent } from '../help/help.component';
 import { FeaturesComponent } from '../features/features.component';
@@ -40,7 +39,6 @@ import { CreateProjectComponent } from '../projects/create/create.component';
     FeaturesComponent,
     HelpComponent,
     HomepageComponent,
-    MarkdownDirective,
     PrivacyComponent,
     PrivateProjectsComponent,
     ProfileComponent,
