@@ -12,13 +12,18 @@ import { MarkdownDirective } from './directives/markdown.directive';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
+import { ProjectsComponent } from './components/projects/projects.component';
+import { PublicProjectsComponent } from './components/public/public.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [MarkdownDirective, DialogConfirmationComponent,
         DialogListComponent,
-        DialogMarkdownComponent],
-    imports: [CommonModule, FlexLayoutModule, AppMaterialModule, ReactiveFormsModule, PipesModule],
-    exports: [FlexLayoutModule, AppMaterialModule, ReactiveFormsModule, PipesModule, MarkdownDirective],
+        DialogMarkdownComponent,
+        ProjectsComponent, PublicProjectsComponent],
+    imports: [CommonModule, FlexLayoutModule, AppMaterialModule, RouterModule.forChild([]), ReactiveFormsModule, PipesModule],
+    exports: [FlexLayoutModule, AppMaterialModule, ReactiveFormsModule, PipesModule, MarkdownDirective, RouterModule,
+        ProjectsComponent, PublicProjectsComponent],
     entryComponents: [
         DialogConfirmationComponent,
         DialogListComponent,

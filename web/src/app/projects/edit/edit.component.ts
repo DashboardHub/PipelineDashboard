@@ -51,11 +51,15 @@ export class EditProjectComponent implements OnInit {
             .pipe(
                 catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
             )
-            .subscribe(() => this.router.navigate(['/project', this.uid]));
+            .subscribe(() => this.router.navigate(['/projects', this.uid]));
     }
 
     ngDestroy(): void {
         this.projectSubscription.unsubscribe();
         this.saveSubscription.unsubscribe();
+    }
+
+    onClickCancel(): void {
+        this.router.navigate([`projects/${this.uid}`]);
     }
 }

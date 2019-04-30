@@ -16,6 +16,7 @@ import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/
 // Dashboard hub modules
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 // Dashboard hub components
 import { AppComponent } from './app.component';
@@ -39,7 +40,8 @@ export function tokenGetter(): string | null {
         HttpClientModule,
         RouterModule,
         AppRoutingModule,
-        CoreModule
+        CoreModule,
+        SharedModule
     ],
     providers: [
         { provide: FunctionsRegionToken, useValue: 'us-central1' }
