@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../core/services/authentication.service';
-import { ProfileModel, LoginAuditModel } from '../shared/models/index.model';
+import { AuthenticationService } from '../../../core/services/authentication.service';
+import { ProfileModel, LoginAuditModel } from '../../../shared/models/index.model';
 import { Subscription } from 'rxjs';
 
 @Component({
