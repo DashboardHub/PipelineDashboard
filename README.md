@@ -92,3 +92,13 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 | Twitter | https://twitter.com/dashboardhub |
 | LinkedIn | https://www.linkedin.com/showcase/dashboardhub/ |
 | Facebook | https://www.facebook.com/dashboardhub/ |
+
+## Lazy Loading
+
+| module | description
+| :-- | :-- |
+| core | Contains all singleton services, guards, interceptors and resolvers|
+| main | Contains all components like homepage, features, help, legal and profile |
+| shared | Contains all shared components, directives, dialogs and models |
+| projects | Contains all components like create, edit, private , view projects and repository |
+| pipes | Contains all custom pipes |
