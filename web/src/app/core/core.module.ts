@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 // Dashboard hub interceptors
-import { GitHubHttpInterceptorModule } from '../core/interceptors/github.http.interceptor';
 import { ErrorHttpInterceptorModule } from '../core/interceptors/error.http.interceptor';
+import { GitHubHttpInterceptorModule } from '../core/interceptors/github.http.interceptor';
 
+// Dashboard hub material module
 import { AppMaterialModule } from '../app-material.module';
 
 @NgModule({
