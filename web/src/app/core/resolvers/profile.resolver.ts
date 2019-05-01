@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
-import { from, Observable } from 'rxjs';
-import { AuthenticationService } from '../services/authentication.service';
-import { ProfileModel } from '../models/index.model';
+import { Observable } from 'rxjs';
+import { ProfileModel } from '../../shared/models/index.model';
 import { first } from 'rxjs/operators';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
     providedIn: 'root'

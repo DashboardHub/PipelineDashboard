@@ -6,11 +6,11 @@ import { Subscription } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 // Dashboard hub models
-import { RepositoryModel, ProjectModel } from '../../../models/index.model';
+import { RepositoryModel, ProjectModel } from '../../shared/models/index.model';
 
 // Dashboard hub services
-import { AuthenticationService } from '../../../services/authentication.service';
-import { ProjectService } from '../../../services/project.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { ProjectService } from '../../core/services/project.service';
 
 @Component({
     selector: 'dashboard-projects-edit',
@@ -51,7 +51,7 @@ export class EditProjectComponent implements OnInit {
             .pipe(
                 catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
             )
-            .subscribe(() => this.router.navigate(['/project', this.uid]));
+            .subscribe(() => this.router.navigate(['/projects', this.uid]));
     }
 
     ngDestroy(): void {

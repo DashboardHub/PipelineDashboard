@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { UserStatsModel } from '../models/index.model';
+import { UserStatsModel } from '../../shared/models/index.model';
 import { from, Observable, } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 

@@ -5,15 +5,15 @@ import { catchError, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models
-import { ProjectModel } from '../../../models/index.model';
+import { ProjectModel } from '../../shared/models/index.model';
 
 // Dashboard hub dialog component
-import { DialogListComponent } from '../../dialog/list/dialog-list.component';
+import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
 
 // Dashboard hub services
-import { AuthenticationService } from '../../../services/authentication.service';
-import { ProjectService } from '../../../services/project.service';
-import { RepositoryService } from '../../../services/repository.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { ProjectService } from '../../core/services/project.service';
+import { RepositoryService } from '../../core/services/repository.service';
 
 @Component({
     selector: 'dashboard-projects-view',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { UserStatsModel } from '../../models/index.model';
-import { UserService } from '../../services/user.service';
+import { UserStatsModel } from '../../../shared/models/index.model';
+import { UserService } from '../../../core/services/user.service';
 
 @Component({
     selector: 'dashboard-homepage',

@@ -7,7 +7,7 @@ import { from, Observable, of } from 'rxjs';
 import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-import { ProfileModel, LoginAuditModel } from '../models/index.model';
+import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'

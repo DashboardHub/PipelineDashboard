@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-
 import { ProjectModel } from '../../models/index.model';
 
 @Component({
