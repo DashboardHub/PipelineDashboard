@@ -6,11 +6,11 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 // Dashboard hub components
-import { ViewProjectComponent } from './view/view.component';
-import { RepositoryComponent } from './repository/repository.component';
-import { PrivateProjectsComponent } from './private/private.component';
-import { EditProjectComponent } from './edit/edit.component';
 import { CreateProjectComponent } from './create/create.component';
+import { EditProjectComponent } from './edit/edit.component';
+import { PrivateProjectsComponent } from './private/private.component';
+import { RepositoryComponent } from './repository/repository.component';
+import { ViewProjectComponent } from './view/view.component';
 
 @NgModule({
   imports: [
