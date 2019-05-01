@@ -58,8 +58,4 @@ export class EditProjectComponent implements OnInit {
         this.projectSubscription.unsubscribe();
         this.saveSubscription.unsubscribe();
     }
-
-    onClickCancel(): void {
-        this.router.navigate([`projects/${this.uid}`]);
-    }
 }
