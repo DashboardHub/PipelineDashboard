@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+
+// Dashboard hub Icon register
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
-import { Navigation } from './shared/models/navigation.model';
-import { environment } from './../environments/environment';
-import { ProfileModel } from './shared/models/index.model';
+
+// Dashboard hub models and services
 import { AuthenticationService } from './core/services/authentication.service';
+import { ProfileModel } from './shared/models/index.model';
+import { Navigation } from './shared/models/navigation.model';
+
+import { environment } from './../environments/environment';
 
 @Component({
     selector: 'dashboard-app',

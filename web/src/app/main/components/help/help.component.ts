@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
+// Rxjs operators
 import { debounceTime } from 'rxjs/operators';
 
+// Dashboard hub components
 import { DialogMarkdownComponent } from '../../../shared/dialog/markdown/dialog-markdown.component';
 import { Help } from './help';
 
@@ -124,12 +126,14 @@ export class HelpComponent implements OnInit {
         this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe((search: string) => this.filterTopics(search));
     }
 
+    // This function searches the topics in help page
     filterTopics(keyword: string = ''): void {
         this.filteredTopics = this.topics.filter((help: Help) => {
             return help.title.toLowerCase().includes(keyword.toLowerCase()) || help.description.toLowerCase().includes(keyword.toLowerCase());
         });
     }
 
+    // This function opens the dialog on help page
     openDialog(help: Help): void {
         this.dialog.open(DialogMarkdownComponent, {
             width: '800px',

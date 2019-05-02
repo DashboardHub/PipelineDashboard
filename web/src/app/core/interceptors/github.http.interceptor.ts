@@ -1,7 +1,8 @@
 import { Injectable, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-
 import { Observable } from 'rxjs';
+
+// Dashboard hub services
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()

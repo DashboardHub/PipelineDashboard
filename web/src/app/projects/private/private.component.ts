@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+// Dashboard hub services and models
 import { ProjectService } from '../../core/services/project.service';
 import { ProjectModel } from '../../shared/models/index.model';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'dashboard-projects-private',

@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+
+// Dashboard hub model
 import { ProjectModel } from '../../models/index.model';
 
 @Component({
