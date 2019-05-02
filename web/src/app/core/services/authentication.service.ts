@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
+
+// Firestore modules
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth, User } from 'firebase/app';
+
+// Rxjs operators
 import { from, Observable, of } from 'rxjs';
 import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
+
+// Third party modules
 import { DeviceDetectorService } from 'ngx-device-detector';
 
+// Dashboard hub models
 import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
 
 @Injectable({
@@ -33,6 +40,7 @@ export class AuthenticationService {
             });
     }
 
+    // This function used to login via github
     public login(): void {
         const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
         provider.addScope('repo,admin:repo_hook');
@@ -88,6 +96,7 @@ export class AuthenticationService {
             .subscribe(() => this.isAuthenticated = true);
     }
 
+    // This function is used for logout from dashboard hub
     public logout(): void {
         from(this.afAuth.auth.signOut())
             .pipe(first())
@@ -97,6 +106,7 @@ export class AuthenticationService {
             });
     }
 
+    // This function checks authentication state of user
     public checkAuth(): Observable<ProfileModel> {
         return this.afAuth.authState
             .pipe(
@@ -108,6 +118,7 @@ export class AuthenticationService {
             );
     }
 
+    // This function returns all the logged in users list
     public getLogins(): Observable<LoginAuditModel[]> {
         return this.afs.collection<ProfileModel>('users')
             .doc<ProfileModel>(this.profile.uid)
@@ -118,6 +129,7 @@ export class AuthenticationService {
             );
     }
 
+    // This function returns the profile information of user
     public getProfile(uid: string): Observable<ProfileModel> {
         return this.afs.collection<ProfileModel>('users')
             .doc<ProfileModel>(uid)
@@ -132,6 +144,7 @@ export class AuthenticationService {
             );
     }
 
+    // This function returns the authenticated user state
     private getAuthState(): Observable<User | null> {
         return this.afAuth
             .authState.pipe(

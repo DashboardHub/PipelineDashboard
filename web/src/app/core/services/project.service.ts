@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { from, Observable, of, forkJoin } from 'rxjs';
 import { v4 as uuid } from 'uuid';
+
+// Dashboard model and services
+import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
@@ -16,6 +18,7 @@ export class ProjectService {
     ) {
     }
 
+    // This function is for creating the project for logged in user
     public create(data: ProjectModel): Observable<ProjectModel> {
         let project: ProjectModel = {
             uid: uuid(),
@@ -36,6 +39,7 @@ export class ProjectService {
             );
     }
 
+    // This function returns the public projects list
     public findPublicProjects(): Observable<ProjectModel[]> {
         return from(this.afs
             .collection<ProjectModel>(
@@ -47,6 +51,7 @@ export class ProjectService {
         );
     }
 
+    // This function returns the private projects list
     public findMyProjects(): Observable<ProjectModel[]> {
         return from(this.afs
             .collection<ProjectModel>(
@@ -58,10 +63,12 @@ export class ProjectService {
         );
     }
 
+    // This function returns the project details via id
     public findOneById(uid: string): Observable<ProjectModel> {
         return from(this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges());
     }
 
+    // This function update the project details
     public save(project: ProjectModel): Observable<void> {
         return from(
             this.afs
@@ -71,6 +78,7 @@ export class ProjectService {
         );
     }
 
+    // This function add the repository in any project
     public saveRepositories(uid: string, repositories: string[]): Observable<void> {
         return from(
             this.afs
@@ -85,6 +93,7 @@ export class ProjectService {
         );
     }
 
+    // This function delete the project via uid
     public delete(uid: string): Observable<void> {
         return from(
             this.afs

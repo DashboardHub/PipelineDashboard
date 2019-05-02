@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
+// Rxjs operators
 import { Observable } from 'rxjs';
-import { ProfileModel } from '../../shared/models/index.model';
 import { first } from 'rxjs/operators';
+
+// Dashboard hub model and services
+import { ProfileModel } from '../../shared/models/index.model';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({

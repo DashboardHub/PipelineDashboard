@@ -45,6 +45,7 @@ export class ViewProjectComponent implements OnInit {
             .subscribe((project: ProjectModel) => this.project = project);
     }
 
+    // This function delete the project
     delete(): void {
         this.deleteSubscription = this.projectService
             .delete(this.project.uid)
@@ -59,6 +60,7 @@ export class ViewProjectComponent implements OnInit {
             .subscribe(() => this.router.navigate(['/projects']));
     }
 
+    // This function add  the repository
     addRepository(): void {
         this.dialog
             .open(DialogListComponent, {
@@ -86,6 +88,7 @@ export class ViewProjectComponent implements OnInit {
             });
     }
 
+    // This function check if logged in user is also owner of the project
     isAdmin(): boolean {
         return this.project.access.admin.includes(this.authService.profile.uid);
     }

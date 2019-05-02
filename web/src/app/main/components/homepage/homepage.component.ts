@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+// Dashboard hub model and services
 import { UserStatsModel } from '../../../shared/models/index.model';
 import { UserService } from '../../../core/services/user.service';
 

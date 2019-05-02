@@ -9,7 +9,6 @@ import { catchError } from 'rxjs/operators';
 import { RepositoryModel, ProjectModel } from '../../shared/models/index.model';
 
 // Dashboard hub services
-import { AuthenticationService } from '../../core/services/authentication.service';
 import { ProjectService } from '../../core/services/project.service';
 
 @Component({
@@ -45,6 +44,7 @@ export class EditProjectComponent implements OnInit {
             .subscribe((project: ProjectModel) => this.projectForm.reset(project));
     }
 
+    // This function updates the project data
     save(): void {
         this.saveSubscription = this.projectService
             .save({ uid: this.uid, ...this.projectForm.getRawValue() })

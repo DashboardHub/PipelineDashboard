@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { UserStatsModel } from '../../shared/models/index.model';
 import { from, Observable, } from 'rxjs';
+
+// Firestore modules
+import { AngularFirestore } from '@angular/fire/firestore';
+
+// Dashboard hub model and services
 import { AuthenticationService } from './authentication.service';
+import { UserStatsModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +19,7 @@ export class UserService {
     ) {
     }
 
+    // This function returns the user information
     public findUserStats(): Observable<UserStatsModel[]> {
         return from(this.afs
             .collection<UserStatsModel>(

@@ -2,10 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { ProjectService } from '../../core/services/project.service';
+
+// Rxjs components
 import { catchError } from 'rxjs/operators';
-import { ProjectModel } from '../../shared/models/index.model';
 import { Subscription } from 'rxjs';
+
+// Dashboard hub services and models
+import { ProjectService } from '../../core/services/project.service';
+import { ProjectModel } from '../../shared/models/index.model';
 
 @Component({
     selector: 'dashboard-projects-create',

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RepositoryModel } from '../../shared/models/index.model';
 import { Subscription } from 'rxjs';
+
+// Dashboard hub model and services
+import { RepositoryModel } from '../../shared/models/index.model';
 import { RepositoryService } from '../../core/services/repository.service';
 
 @Component({
