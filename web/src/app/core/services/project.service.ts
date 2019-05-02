@@ -30,13 +30,23 @@ export class ProjectService {
         };
 
         return from(
-                this.afs.collection<ProjectModel>('projects')
+            this.afs.collection<ProjectModel>('projects')
                 .doc(project.uid)
                 .set(project)
-            )
+        )
             .pipe(
                 () => of(project)
             );
+    }
+
+    // This function delete the project via uid
+    public delete(uid: string): Observable<void> {
+        return from(
+            this.afs
+                .collection<ProjectModel>('projects')
+                .doc<ProjectModel>(uid)
+                .delete()
+        );
     }
 
     // This function returns the public projects list
@@ -45,7 +55,7 @@ export class ProjectService {
             .collection<ProjectModel>(
                 'projects',
                 (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-                                                    .orderBy('updatedOn', 'desc')
+                    .orderBy('updatedOn', 'desc')
             )
             .valueChanges()
         );
@@ -57,7 +67,7 @@ export class ProjectService {
             .collection<ProjectModel>(
                 'projects',
                 (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
-                                                    .orderBy('updatedOn', 'desc')
+                    .orderBy('updatedOn', 'desc')
             )
             .valueChanges()
         );
@@ -85,21 +95,11 @@ export class ProjectService {
                 .collection<ProjectModel>('projects')
                 .doc<ProjectModel>(uid)
                 .set(
-                {
-                    repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
-                    updatedOn: new Date(),
-                },
-                { merge: true })
-        );
-    }
-
-    // This function delete the project via uid
-    public delete(uid: string): Observable<void> {
-        return from(
-            this.afs
-                .collection<ProjectModel>('projects')
-                .doc<ProjectModel>(uid)
-                .delete()
+                    {
+                        repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
+                        updatedOn: new Date(),
+                    },
+                    { merge: true })
         );
     }
 }

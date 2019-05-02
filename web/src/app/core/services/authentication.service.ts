@@ -40,6 +40,44 @@ export class AuthenticationService {
             });
     }
 
+    // This function checks authentication state of user
+    public checkAuth(): Observable<ProfileModel> {
+        return this.afAuth.authState
+            .pipe(
+                filter((user: User) => !!user),
+                takeUntil<User>(this.getAuthState()),
+                switchMap((user: User) => this.afs
+                    .doc<ProfileModel>(`users/${user.uid}`)
+                    .valueChanges()),
+            );
+    }
+
+    // This function returns all the logged in users list
+    public getLogins(): Observable<LoginAuditModel[]> {
+        return this.afs.collection<ProfileModel>('users')
+            .doc<ProfileModel>(this.profile.uid)
+            .collection<LoginAuditModel>('logins', (ref: firebase.firestore.CollectionReference) => ref.orderBy('date', 'desc'))
+            .valueChanges()
+            .pipe(
+                takeUntil<LoginAuditModel[]>(this.getAuthState()),
+            );
+    }
+
+    // This function returns the profile information of user
+    public getProfile(uid: string): Observable<ProfileModel> {
+        return this.afs.collection<ProfileModel>('users')
+            .doc<ProfileModel>(uid)
+            .valueChanges()
+            .pipe(
+                switchMap((profile: ProfileModel): Observable<ProfileModel> => {
+                    const callable: any = this.fns.httpsCallable('getUserEvents');
+                    callable({ token: profile.oauth.githubToken, username: profile.username,  });
+
+                    return of(profile);
+                }),
+            );
+    }
+
     // This function used to login via github
     public login(): void {
         const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
@@ -104,44 +142,6 @@ export class AuthenticationService {
                 this.profile = new ProfileModel();
                 this.isAuthenticated = false;
             });
-    }
-
-    // This function checks authentication state of user
-    public checkAuth(): Observable<ProfileModel> {
-        return this.afAuth.authState
-            .pipe(
-                filter((user: User) => !!user),
-                takeUntil<User>(this.getAuthState()),
-                switchMap((user: User) => this.afs
-                    .doc<ProfileModel>(`users/${user.uid}`)
-                    .valueChanges()),
-            );
-    }
-
-    // This function returns all the logged in users list
-    public getLogins(): Observable<LoginAuditModel[]> {
-        return this.afs.collection<ProfileModel>('users')
-            .doc<ProfileModel>(this.profile.uid)
-            .collection<LoginAuditModel>('logins', (ref: firebase.firestore.CollectionReference) => ref.orderBy('date', 'desc'))
-            .valueChanges()
-            .pipe(
-                takeUntil<LoginAuditModel[]>(this.getAuthState()),
-            );
-    }
-
-    // This function returns the profile information of user
-    public getProfile(uid: string): Observable<ProfileModel> {
-        return this.afs.collection<ProfileModel>('users')
-            .doc<ProfileModel>(uid)
-            .valueChanges()
-            .pipe(
-                switchMap((profile: ProfileModel): Observable<ProfileModel> => {
-                    const callable: any = this.fns.httpsCallable('getUserEvents');
-                    callable({ token: profile.oauth.githubToken, username: profile.username,  });
-
-                    return of(profile);
-                }),
-            );
     }
 
     // This function returns the authenticated user state

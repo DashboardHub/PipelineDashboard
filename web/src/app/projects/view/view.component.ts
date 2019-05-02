@@ -45,21 +45,6 @@ export class ViewProjectComponent implements OnInit {
             .subscribe((project: ProjectModel) => this.project = project);
     }
 
-    // This function delete the project
-    delete(): void {
-        this.deleteSubscription = this.projectService
-            .delete(this.project.uid)
-            .pipe(
-                catchError(
-                    (error: any): any =>
-                        this.snackBar.open(error.message, undefined, {
-                            duration: 5000
-                        })
-                )
-            )
-            .subscribe(() => this.router.navigate(['/projects']));
-    }
-
     // This function add  the repository
     addRepository(): void {
         this.dialog
@@ -86,6 +71,21 @@ export class ViewProjectComponent implements OnInit {
                     this.repositoryService.loadRepository(fullName.value)
                 );
             });
+    }
+
+     // This function delete the project
+    delete(): void {
+        this.deleteSubscription = this.projectService
+            .delete(this.project.uid)
+            .pipe(
+                catchError(
+                    (error: any): any =>
+                        this.snackBar.open(error.message, undefined, {
+                            duration: 5000
+                        })
+                )
+            )
+            .subscribe(() => this.router.navigate(['/projects']));
     }
 
     // This function check if logged in user is also owner of the project

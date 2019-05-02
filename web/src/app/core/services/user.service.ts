@@ -5,7 +5,6 @@ import { from, Observable, } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 // Dashboard hub model and services
-import { AuthenticationService } from './authentication.service';
 import { UserStatsModel } from '../../shared/models/index.model';
 
 @Injectable({
@@ -14,8 +13,7 @@ import { UserStatsModel } from '../../shared/models/index.model';
 export class UserService {
 
     constructor(
-        private afs: AngularFirestore,
-        private authService: AuthenticationService,
+        private afs: AngularFirestore
     ) {
     }
 
