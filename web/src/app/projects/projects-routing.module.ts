@@ -5,7 +5,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { CreateProjectComponent } from './create/create.component';
 import { EditProjectComponent } from './edit/edit.component';
 import { EditProjectResolver } from '../core/resolvers/edit-project.resolver';
-import { PrivateProjectsComponent } from './private/private.component';
+import { PublicProjectsComponent } from '../shared/components/public/public.component';
+
 import { ViewProjectComponent } from './view/view.component';
 import { ViewProjectResolver } from '../core/resolvers/view-project.resolver';
 
@@ -15,7 +16,8 @@ import { AuthGuard } from '../core/guards/authentication.guard';
 const routes: Routes = [
     {
         path: '',
-        component: PrivateProjectsComponent,
+        component: PublicProjectsComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'create',
