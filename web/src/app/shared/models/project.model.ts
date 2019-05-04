@@ -1,4 +1,3 @@
-import { RepositoryModel } from './repository.model';
 import { AccessModel } from './access.model';
 
 export class ProjectModel {

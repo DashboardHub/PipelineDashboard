@@ -6,8 +6,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 // Dashboard hub components
-import { CreateProjectComponent } from './create/create.component';
-import { EditProjectComponent } from './edit/edit.component';
+import { CreateEditProjectComponent } from './create-edit/create-edit.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { ViewProjectComponent } from './view/view.component';
 
@@ -18,8 +17,7 @@ import { ViewProjectComponent } from './view/view.component';
     SharedModule
   ],
   declarations: [
-    CreateProjectComponent,
-    EditProjectComponent,
+    CreateEditProjectComponent,
     RepositoryComponent,
     ViewProjectComponent]
 })
