@@ -13,6 +13,7 @@ export class HomepageComponent implements OnInit {
 
     private userSubscription: Subscription;
     public users: UserStatsModel[] = [];
+    public title: string = 'Public Projects';
 
     constructor(
         private userService: UserService
