@@ -1,4 +1,4 @@
-RELATES TO # {issue_number}
+closes #{issue_number}
 
 ### Notes
 
