@@ -1,9 +1,31 @@
+
+export interface GitHubRepositoryInput {
+    id: string;
+    uid: string;
+    name?: string;
+    full_name?: string;
+    description?: string;
+    url: string;
+    private: boolean;
+    fork: string;
+}
+
+export interface GitHubRepositoryModel {
+    id: string;
+    uid: string;
+    fullName?: string;
+    description?: string;
+    url: string;
+    private: boolean;
+    fork: string;
+}
+
 export class GitHubRepositoryMapper {
     static fullNameToUid(fullName: string) {
         return fullName.replace('/', '+');
     }
 
-    static import(input: any, type: 'minimum' | 'all' | 'event' = 'minimum') {
+    static import(input: GitHubRepositoryInput, type: 'minimum' | 'all' | 'event' = 'minimum'): GitHubRepositoryModel {
         const output: any = {};
 
         switch(type) {
