@@ -1,5 +1,5 @@
 <div class="mat-content" fxLayout="column" fxLayoutGap="20px">
-    <form (submit)="create()" [formGroup]="projectForm">
+    <form (submit)="save()" [formGroup]="projectForm">
         <mat-card>
             <mat-card-header>
                 <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Project</mat-card-title>
@@ -39,7 +39,7 @@
                 <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
                     <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
                     <button mat-raised-button type="submit" color="accent" [disabled]="projectForm.invalid">
-                        <span *ngIf="!isEdit;else other">Create</span>
+                        <span *ngIf="!isEdit">Create</span>
                         <span *ngIf="isEdit">Save</span>
                     </button>
                 </div>

@@ -47,7 +47,7 @@ export class CreateEditProjectComponent implements OnInit {
     }
 
     // This function will create project and edit project details based upon if click on edit or add
-    create(): void {
+    save(): void {
         if (this.uid) {
             this.createEditSubscription = this.projectService
                 .save({ uid: this.uid, ...this.projectForm.getRawValue() })
