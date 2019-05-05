@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Dashboard hub components
-import { CreateProjectComponent } from './create/create.component';
-import { EditProjectComponent } from './edit/edit.component';
+import { CreateEditProjectComponent } from './create-edit/create-edit.component';
 import { EditProjectResolver } from '../core/resolvers/edit-project.resolver';
 import { PublicProjectsComponent } from '../shared/components/public/public.component';
 
@@ -21,7 +20,7 @@ const routes: Routes = [
     },
     {
         path: 'create',
-        component: CreateProjectComponent,
+        component: CreateEditProjectComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -31,7 +30,7 @@ const routes: Routes = [
     },
     {
         path: ':uid/edit',
-        component: EditProjectComponent,
+        component: CreateEditProjectComponent,
         resolve: { project: EditProjectResolver }
     }
 ];
