@@ -1,23 +1,21 @@
+import { FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubRepositoryModel } from './../mappers/github/repository.mapper';
 import { GitHubReleaseInput } from './../mappers/github/release.mapper';
-import { FirebaseAdmin } from './../index';
-import * as functions from 'firebase-functions';
-import { CallableContext } from 'firebase-functions/lib/providers/https';
 
 import { GitHubClient } from './../client/github';
 import { GitHubEventInput, GitHubRepositoryMapper, GitHubEventMapper, GitHubPullRequestMapper, GitHubPullRequestInput, GitHubReleaseMapper, GitHubRepositoryInput } from '../mappers/github/index.mapper';
 
-interface Input {
+export interface RepositoryInfoInput {
     token: string;
     fullName: string;
 }
 
-export const getRepositoryInfo: functions.HttpsFunction = functions.https.onCall( async (input: Input, context: CallableContext) => {
+export const getRepositoryInfo: any = async (token: string, fullName: string) => {
     const data: [GitHubRepositoryInput, GitHubPullRequestInput[], GitHubEventInput[], GitHubReleaseInput[]] = await Promise.all([
-        GitHubClient<GitHubRepositoryInput>(`/repos/${input.fullName}`, input.token),
-        GitHubClient<GitHubPullRequestInput[]>(`/repos/${input.fullName}/pulls?state=open`, input.token),
-        GitHubClient<GitHubEventInput[]>(`/repos/${input.fullName}/events`, input.token),
-        GitHubClient<GitHubReleaseInput[]>(`/repos/${input.fullName}/releases`, input.token),
+        GitHubClient<GitHubRepositoryInput>(`/repos/${fullName}`, token),
+        GitHubClient<GitHubPullRequestInput[]>(`/repos/${fullName}/pulls?state=open`, token),
+        GitHubClient<GitHubEventInput[]>(`/repos/${fullName}/events`, token),
+        GitHubClient<GitHubReleaseInput[]>(`/repos/${fullName}/releases`, token),
     ]);
     const mappedData: GitHubRepositoryModel = {
         ...GitHubRepositoryMapper.import(data[0], 'all'),
@@ -29,8 +27,8 @@ export const getRepositoryInfo: functions.HttpsFunction = functions.https.onCall
     await FirebaseAdmin
             .firestore()
             .collection('repositories')
-            .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
+            .doc(GitHubRepositoryMapper.fullNameToUid(fullName))
             .set(mappedData, { merge: true });
 
-    return
-});
+    return mappedData;
+};

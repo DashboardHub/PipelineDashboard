@@ -1,11 +1,9 @@
-import { FirebaseAdmin } from './../index';
-import * as functions from 'firebase-functions';
-import { CallableContext } from 'firebase-functions/lib/providers/https';
+import { FirebaseAdmin } from './../client/firebase-admin';
 
 import { GitHubClient } from './../client/github';
 import { GitHubRepositoryMapper, GitHubRepositoryInput, GitHubRepositoryModel } from './../mappers/github/repository.mapper';
 
-interface Input {
+export interface ReposInput {
     token: string;
 }
 
@@ -26,5 +24,3 @@ export const getUserRepos: any = async (token: string, uid: string) => {
 
     return mappedRepos;
 };
-
-export const findAllUserRepositories: functions.HttpsFunction = functions.https.onCall((input: Input, context: CallableContext) => getUserRepos(input.token, context.auth.uid));
