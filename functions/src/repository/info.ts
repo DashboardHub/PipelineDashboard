@@ -24,10 +24,10 @@ export const getRepositoryInfo: functions.HttpsFunction = functions.https.onCall
             .collection('repositories')
             .doc(GitHubRepositoryMapper.fullNameToUid(input.fullName))
             .set({
-                events: events.data.map((event: GitHubEventInput) => GitHubEventMapper.import(event)),
+                ...GitHubRepositoryMapper.import(repository.data, 'all'),
                 pullRequests: pullrequests.data.map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)),
+                events: events.data.map((event: GitHubEventInput) => GitHubEventMapper.import(event)),
                 releases: releases.data.map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)),
-                ...GitHubRepositoryMapper.import(repository.data, 'all')
             }, { merge: true }))
     );
 });
