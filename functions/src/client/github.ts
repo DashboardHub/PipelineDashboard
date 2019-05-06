@@ -1,14 +1,12 @@
-import axios from 'axios';
+import { get } from 'request-promise-native';
 
-export interface GitHubResponse<T> {
-    data: T;
-}
-
-export const GitHubClient: any = (token: string) => axios.create({
-    baseURL: 'https://api.github.com',
-    timeout: 1000,
-    headers: {
-        'User-Agent': 'DashboardHub',
-        Authorization: `token ${token}`
-    }
-});
+export async function GitHubClient<T>(uri: string, token: string): Promise<T> {
+    return <T> await get({
+        uri: `https://api.github.com${uri}`,
+        headers: {
+            'User-Agent': 'DashboardHub',
+            'Authorization': `token ${token}`,
+        },
+        json: true,
+    });
+};

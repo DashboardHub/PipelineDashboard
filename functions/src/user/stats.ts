@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import { Change, EventContext, firestore } from 'firebase-functions';
 
+import { FirebaseAdmin } from './../index';
 import { getUserRepos } from './repos';
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
 
@@ -35,7 +36,7 @@ export const updateUserStats: any = firestore
             promises.push(getUserRepos(user.token, user.uid));
         }
 
-        promises.push(admin
+        promises.push(FirebaseAdmin
             .firestore()
             .collection('userStats')
             .doc(user.uid)

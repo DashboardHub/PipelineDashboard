@@ -1,3 +1,6 @@
+import { GitHubEventModel } from './event.mapper';
+import { GitHubPullRequestModel } from './pullRequest.mapper';
+import { GitHubReleaseModel } from './release.mapper';
 
 export interface GitHubRepositoryInput {
     id: string;
@@ -18,6 +21,9 @@ export interface GitHubRepositoryModel {
     url: string;
     private: boolean;
     fork: string;
+    pullRequests?: GitHubPullRequestModel[];
+    events?: GitHubEventModel[];
+    releases?: GitHubReleaseModel[];
 }
 
 export class GitHubRepositoryMapper {
