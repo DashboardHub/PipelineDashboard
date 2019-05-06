@@ -23,22 +23,27 @@ export interface GitHubEventModel {
     public: string;
     actor: GitHubUserModel;
     repository: GitHubRepositoryModel;
-    organisation: GitHubOrganisationModel | undefined;
+    organisation?: GitHubOrganisationModel;
     payload: GitHubPayloadModel;
     createdOn: Date;
 }
 
 export class GitHubEventMapper {
     static import(input: GitHubEventInput): GitHubEventModel {
-        return {
+        const data: GitHubEventModel = {
             uid: input.id,
             type: input.type,
             public: input.public,
             actor: GitHubUserMapper.import(input.actor),
             repository: GitHubRepositoryMapper.import(input.repo, 'event'),
-            organisation: input.org ? GitHubOrganisationMapper.import(input.org) : undefined,
             payload: GitHubPayloadMapper.import(input.type, input.payload),
             createdOn: input.created_at,
         };
+
+        if (input.org) {
+            data.organisation = GitHubOrganisationMapper.import(input.org);
+        }
+
+        return data;
     }
 }
