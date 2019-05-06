@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-
+import { Router } from '@angular/router';
 // Firestore modules
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -30,6 +30,7 @@ export class AuthenticationService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
+        private router: Router
     ) {
         this.checkAuth()
             .pipe(
@@ -149,6 +150,7 @@ export class AuthenticationService {
             .subscribe(() => {
                 this.profile = new ProfileModel();
                 this.isAuthenticated = false;
+                this.router.navigate(['/']);
             });
     }
 
