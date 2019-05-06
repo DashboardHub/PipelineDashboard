@@ -49,7 +49,7 @@ export class RepositoryService {
 
     // This function loads all the available repositories
     public loadRepository(fullName: string): void {
-        const callable: any = this.fns.httpsCallable('getRepositoryInfo');
+        const callable: any = this.fns.httpsCallable('findRepositoryInfo');
         callable({ fullName, token: this.authService.profile.oauth.githubToken });
     }
 }

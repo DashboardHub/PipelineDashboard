@@ -70,7 +70,7 @@ export class AuthenticationService {
             .valueChanges()
             .pipe(
                 switchMap((profile: ProfileModel): Observable<ProfileModel> => {
-                    const callable: any = this.fns.httpsCallable('getUserEvents');
+                    const callable: any = this.fns.httpsCallable('findAllUserEvents');
                     callable({ token: profile.oauth.githubToken, username: profile.username,  });
 
                     return of(profile);
