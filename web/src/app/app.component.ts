@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Dashboard hub Icon register
 import { DomSanitizer } from '@angular/platform-browser';
@@ -16,7 +17,7 @@ import { environment } from './../environments/environment';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     public version: string;
     public publicRoutes: Navigation[] = [
         {
@@ -68,6 +69,7 @@ export class AppComponent {
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private authService: AuthenticationService,
+        private router: Router
     ) {
         this._iconRegistry
             .addSvgIconInNamespace('assets', 'dashboardhub',
@@ -110,5 +112,13 @@ export class AppComponent {
 
     public showDoorbell(): void {
         (<any>window).doorbell.show();
+    }
+
+    ngOnInit(): void {
+        this.authService.getLoginEmitter().subscribe((result: boolean) => {
+            if (result) {
+                this.router.navigate(['/']);
+            }
+        });
     }
 }
