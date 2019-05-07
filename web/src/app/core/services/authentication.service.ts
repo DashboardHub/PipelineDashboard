@@ -23,8 +23,6 @@ export class AuthenticationService {
     public profile: ProfileModel = new ProfileModel();
     public isAuthenticated: boolean = false;
 
-    @Output() isFirebaseLoggedIn: EventEmitter<boolean> = new EventEmitter<boolean>();
-
     constructor(
         public afAuth: AngularFireAuth,
         private afs: AngularFirestore,
@@ -134,14 +132,11 @@ export class AuthenticationService {
                 ),
             )
             .subscribe(() => {
-            this.isAuthenticated = true;
-            this.isFirebaseLoggedIn.emit(true);
+                this.isAuthenticated = true;
+                this.router.navigate(['/']);
+            // this.isFirebaseLoggedIn.emit(true);
             });
     }
-
-    public getLoginEmitter(): EventEmitter<boolean> {
-        return this.isFirebaseLoggedIn;
-      }
 
     // This function is used for logout from dashboard hub
     public logout(): void {

@@ -17,7 +17,7 @@ import { environment } from './../environments/environment';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
     public version: string;
     public publicRoutes: Navigation[] = [
         {
@@ -69,7 +69,6 @@ export class AppComponent implements OnInit {
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private authService: AuthenticationService,
-        private router: Router
     ) {
         this._iconRegistry
             .addSvgIconInNamespace('assets', 'dashboardhub',
@@ -112,13 +111,5 @@ export class AppComponent implements OnInit {
 
     public showDoorbell(): void {
         (<any>window).doorbell.show();
-    }
-
-    ngOnInit(): void {
-        this.authService.getLoginEmitter().subscribe((result: boolean) => {
-            if (result) {
-                this.router.navigate(['/']);
-            }
-        });
     }
 }
