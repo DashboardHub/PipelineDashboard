@@ -7,7 +7,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth, User } from 'firebase/app';
 
 // Rxjs operators
-import { from, Observable, of } from 'rxjs';
+import { from, Observable, of, Subject } from 'rxjs';
 import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
 
 // Third party modules
@@ -21,6 +21,7 @@ import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
 })
 export class AuthenticationService {
 
+    private spinnerSubject: Subject<Boolean> = new Subject();
     public profile: ProfileModel = new ProfileModel();
     public isAuthenticated: boolean = false;
 
@@ -29,7 +30,7 @@ export class AuthenticationService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
-    ) {
+        ) {
         this.checkAuth()
             .pipe(
                 switchMap((profile: ProfileModel): Observable<ProfileModel> => this.getProfile(profile.uid)),
@@ -71,7 +72,7 @@ export class AuthenticationService {
             .pipe(
                 switchMap((profile: ProfileModel): Observable<ProfileModel> => {
                     const callable: any = this.fns.httpsCallable('getUserEvents');
-                    callable({ token: profile.oauth.githubToken, username: profile.username,  });
+                    callable({ token: profile.oauth.githubToken, username: profile.username, });
 
                     return of(profile);
                 }),
@@ -80,6 +81,7 @@ export class AuthenticationService {
 
     // This function used to login via github
     public login(): void {
+        this.setProgressBar(true);
         const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
         provider.addScope('repo,admin:repo_hook');
         from(this.afAuth.auth.signInWithPopup(provider))
@@ -88,26 +90,26 @@ export class AuthenticationService {
                 concatMap(
                     (credentials: firebase.auth.UserCredential) => from(credentials.user.getIdTokenResult()),
                     (credentials: firebase.auth.UserCredential, oauth: firebase.auth.IdTokenResult) => ({
-                            uid: credentials.user.uid,
-                            username: credentials.additionalUserInfo.username,
-                            name: credentials.user.displayName,
-                            email: credentials.user.email,
-                            phone: credentials.user.phoneNumber,
-                            avatarUrl: credentials.user.photoURL,
-                            oauth: {
-                                // @ts-ignore
-                                githubToken: credentials.credential.accessToken,
-                                token: oauth.token,
-                                expirationTime: oauth.expirationTime,
-                                authTime: oauth.authTime,
-                                issuedAtTime: oauth.issuedAtTime,
-                                signInProvider: oauth.signInProvider,
-                                claims: oauth.claims,
-                            },
-                            emailVerified: credentials.user.emailVerified,
-                            creationTime: credentials.user.metadata.creationTime,
-                            lastSignInTime: credentials.user.metadata.lastSignInTime
-                        }),
+                        uid: credentials.user.uid,
+                        username: credentials.additionalUserInfo.username,
+                        name: credentials.user.displayName,
+                        email: credentials.user.email,
+                        phone: credentials.user.phoneNumber,
+                        avatarUrl: credentials.user.photoURL,
+                        oauth: {
+                            // @ts-ignore
+                            githubToken: credentials.credential.accessToken,
+                            token: oauth.token,
+                            expirationTime: oauth.expirationTime,
+                            authTime: oauth.authTime,
+                            issuedAtTime: oauth.issuedAtTime,
+                            signInProvider: oauth.signInProvider,
+                            claims: oauth.claims,
+                        },
+                        emailVerified: credentials.user.emailVerified,
+                        creationTime: credentials.user.metadata.creationTime,
+                        lastSignInTime: credentials.user.metadata.lastSignInTime
+                    }),
                 ),
                 concatMap(
                     (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
@@ -120,18 +122,21 @@ export class AuthenticationService {
                         .doc<ProfileModel>(profile.uid)
                         .collection<LoginAuditModel>('logins')
                         .add({
-                                date: new Date(),
-                                userAgent: this.deviceService.getDeviceInfo().userAgent,
-                                os: this.deviceService.getDeviceInfo().os,
-                                browser: this.deviceService.getDeviceInfo().browser,
-                                device: this.deviceService.getDeviceInfo().device,
-                                osVersion: this.deviceService.getDeviceInfo().os_version,
-                                browserVersion: this.deviceService.getDeviceInfo().browser_version,
+                            date: new Date(),
+                            userAgent: this.deviceService.getDeviceInfo().userAgent,
+                            os: this.deviceService.getDeviceInfo().os,
+                            browser: this.deviceService.getDeviceInfo().browser,
+                            device: this.deviceService.getDeviceInfo().device,
+                            osVersion: this.deviceService.getDeviceInfo().os_version,
+                            browserVersion: this.deviceService.getDeviceInfo().browser_version,
                         })),
                     (profile: ProfileModel) => this.profile = profile,
                 ),
             )
-            .subscribe(() => this.isAuthenticated = true);
+            .subscribe(() => {
+                this.isAuthenticated = true;
+                this.setProgressBar(false);
+            });
     }
 
     // This function is used for logout from dashboard hub
@@ -142,6 +147,16 @@ export class AuthenticationService {
                 this.profile = new ProfileModel();
                 this.isAuthenticated = false;
             });
+    }
+
+    // This function will set the progress bar status
+    public setProgressBar(status: boolean): void {
+       this.spinnerSubject.next(status);
+    }
+
+    // this function will return the status of progress bar to main component
+    public getProgressBar(): Observable<Boolean> {
+        return this.spinnerSubject.asObservable();
     }
 
     // This function returns the authenticated user state

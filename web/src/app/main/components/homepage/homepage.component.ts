@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
+import { AuthenticationService } from '../../../core/services/authentication.service';
 import { UserStatsModel } from '../../../shared/models/index.model';
 import { UserService } from '../../../core/services/user.service';
 
@@ -16,14 +17,19 @@ export class HomepageComponent implements OnInit {
     public title: string = 'Public Projects';
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        private authService: AuthenticationService
     ) {
     }
 
     ngOnInit(): void {
+        this.authService.setProgressBar(true);
         this.userSubscription = this.userService
             .findUserStats()
-            .subscribe((users: UserStatsModel[]) => this.users = users);
+            .subscribe((users: UserStatsModel[]) => {
+                this.users = users;
+                this.authService.setProgressBar(false);
+            });
     }
 
     ngDestroy(): void {

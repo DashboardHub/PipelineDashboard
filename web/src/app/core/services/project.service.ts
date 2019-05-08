@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { from, Observable, of, forkJoin } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
