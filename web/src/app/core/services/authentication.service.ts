@@ -7,21 +7,21 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth, User } from 'firebase/app';
 
 // Rxjs operators
-import { from, Observable, of, Subject } from 'rxjs';
-import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { filter, concatMap, switchMap, first, takeUntil } from 'rxjs/operators';
 
 // Third party modules
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
 import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
 
-    private spinnerSubject: Subject<Boolean> = new Subject();
     public profile: ProfileModel = new ProfileModel();
     public isAuthenticated: boolean = false;
 
@@ -30,7 +30,8 @@ export class AuthenticationService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
-        ) {
+        private spinnerService: SpinnerService
+    ) {
         this.checkAuth()
             .pipe(
                 switchMap((profile: ProfileModel): Observable<ProfileModel> => this.getProfile(profile.uid)),
@@ -81,7 +82,7 @@ export class AuthenticationService {
 
     // This function used to login via github
     public login(): void {
-        this.setProgressBar(true);
+        this.spinnerService.setProgressBar(true);
         const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
         provider.addScope('repo,admin:repo_hook');
         from(this.afAuth.auth.signInWithPopup(provider))
@@ -135,7 +136,7 @@ export class AuthenticationService {
             )
             .subscribe(() => {
                 this.isAuthenticated = true;
-                this.setProgressBar(false);
+                this.spinnerService.setProgressBar(false);
             });
     }
 
@@ -147,16 +148,6 @@ export class AuthenticationService {
                 this.profile = new ProfileModel();
                 this.isAuthenticated = false;
             });
-    }
-
-    // This function will set the progress bar status
-    public setProgressBar(status: boolean): void {
-       this.spinnerSubject.next(status);
-    }
-
-    // this function will return the status of progress bar to main component
-    public getProgressBar(): Observable<Boolean> {
-        return this.spinnerSubject.asObservable();
     }
 
     // This function returns the authenticated user state

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
-import { AuthenticationService } from '../../../core/services/authentication.service';
 import { UserStatsModel } from '../../../shared/models/index.model';
 import { UserService } from '../../../core/services/user.service';
+import { SpinnerService } from '../../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-homepage',
@@ -18,17 +18,17 @@ export class HomepageComponent implements OnInit {
 
     constructor(
         private userService: UserService,
-        private authService: AuthenticationService
+        private spinnerService: SpinnerService
     ) {
     }
 
     ngOnInit(): void {
-        this.authService.setProgressBar(true);
+        this.spinnerService.setProgressBar(true);
         this.userSubscription = this.userService
             .findUserStats()
             .subscribe((users: UserStatsModel[]) => {
                 this.users = users;
-                this.authService.setProgressBar(false);
+                this.spinnerService.setProgressBar(false);
             });
     }
 

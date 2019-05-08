@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../core/services/project.service';
-import { AuthenticationService } from '../core/services/authentication.service';
+import { SpinnerService } from '../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-main',
@@ -12,12 +11,12 @@ export class MainComponent implements OnInit {
     public showSpinner: boolean = true;
 
     constructor(
-        private authService: AuthenticationService
+        private spinnerService: SpinnerService
     ) { }
 
     ngOnInit(): void {
-        this.authService.getProgressBar().subscribe((data: boolean) => {
-            this.showSpinner = data;
-        });
+        this.spinnerService
+            .getProgressBar()
+            .subscribe((data: boolean) => this.showSpinner = data);
     }
 }

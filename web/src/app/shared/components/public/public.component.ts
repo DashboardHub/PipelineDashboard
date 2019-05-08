@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
-import { AuthenticationService } from '../../../core/services/authentication.service';
 import { ProjectModel } from '../../models/index.model';
 import { ProjectService } from '../../../core/services/project.service';
 import { Router } from '@angular/router';
+import { SpinnerService } from '../../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-projects-public',
@@ -20,25 +20,25 @@ export class PublicProjectsComponent implements OnInit {
     constructor(
         private projectService: ProjectService,
         private router: Router,
-        private authService: AuthenticationService
+        private spinnerService: SpinnerService
     ) {
     }
 
     ngOnInit(): void {
-        this.authService.setProgressBar(true);
+        this.spinnerService.setProgressBar(true);
         if (this.router.url === '/') {
             this.projectSubscription = this.projectService
                 .findPublicProjects()
                 .subscribe((projects: ProjectModel[]) => {
                     this.projects = projects;
-                    this.authService.setProgressBar(false);
+                    this.spinnerService.setProgressBar(false);
                 });
         } else {
             this.projectSubscription = this.projectService
                 .findMyProjects()
                 .subscribe((projects: ProjectModel[]) => {
                     this.projects = projects;
-                    this.authService.setProgressBar(false);
+                    this.spinnerService.setProgressBar(false);
                 });
         }
     }
