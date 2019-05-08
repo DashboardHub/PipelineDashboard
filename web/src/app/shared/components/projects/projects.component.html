@@ -5,7 +5,6 @@
         <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'private'">lock</mat-icon>
         <h4 mat-line><a [routerLink]="['/projects', project.uid]">{{ project.title }}</a></h4>
         <p mat-line>{{ project.description }}</p>
-        <span fxFlex></span>
-        <p>{{ project.updatedOn.toDate() | timeAgo }}</p>
+        <p class="text-right">{{ project.updatedOn.toDate() | timeAgo }}</p>
     </mat-list-item>
 </mat-list>
