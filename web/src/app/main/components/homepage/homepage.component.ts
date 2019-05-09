@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 // Dashboard hub model and services
 import { UserStatsModel } from '../../../shared/models/index.model';
 import { UserService } from '../../../core/services/user.service';
+import { SpinnerService } from '../../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-homepage',
@@ -16,14 +17,19 @@ export class HomepageComponent implements OnInit {
     public title: string = 'Public Projects';
 
     constructor(
-        private userService: UserService
+        private userService: UserService,
+        private spinnerService: SpinnerService
     ) {
     }
 
     ngOnInit(): void {
+        this.spinnerService.setProgressBar(true);
         this.userSubscription = this.userService
             .findUserStats()
-            .subscribe((users: UserStatsModel[]) => this.users = users);
+            .subscribe((users: UserStatsModel[]) => {
+                this.users = users;
+                this.spinnerService.setProgressBar(false);
+            });
     }
 
     ngDestroy(): void {
