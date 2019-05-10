@@ -23,12 +23,10 @@ export class HomepageComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.spinnerService.setProgressBar(true);
         this.userSubscription = this.userService
             .findUserStats()
             .subscribe((users: UserStatsModel[]) => {
                 this.users = users;
-                this.spinnerService.setProgressBar(false);
             });
     }
 
