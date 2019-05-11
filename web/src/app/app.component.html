@@ -65,6 +65,7 @@
         </mat-toolbar>
 
         <div class="content-container">
+            <mat-progress-bar *ngIf="showSpinner" mode="indeterminate"></mat-progress-bar>
             <router-outlet></router-outlet>
         </div>
 

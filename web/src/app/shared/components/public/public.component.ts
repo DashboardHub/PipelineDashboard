@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ProjectModel } from '../../models/index.model';
 import { ProjectService } from '../../../core/services/project.service';
 import { Router } from '@angular/router';
+import { SpinnerService } from '../../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-projects-public',
@@ -18,7 +19,8 @@ export class PublicProjectsComponent implements OnInit {
 
     constructor(
         private projectService: ProjectService,
-        private router: Router
+        private router: Router,
+        private spinnerService: SpinnerService
     ) {
     }
 
@@ -26,16 +28,20 @@ export class PublicProjectsComponent implements OnInit {
         if (this.router.url === '/') {
             this.projectSubscription = this.projectService
                 .findPublicProjects()
-                .subscribe((projects: ProjectModel[]) => this.projects = projects);
+                .subscribe((projects: ProjectModel[]) => {
+                    this.projects = projects;
+                });
         } else {
             this.projectSubscription = this.projectService
                 .findMyProjects()
-                .subscribe((projects: ProjectModel[]) => this.projects = projects);
+                .subscribe((projects: ProjectModel[]) => {
+                    this.projects = projects;
+                });
         }
-}
+    }
 
-ngDestroy(): void {
-    this.projectSubscription
-        .unsubscribe();
-}
+    ngDestroy(): void {
+        this.projectSubscription
+            .unsubscribe();
+    }
 }

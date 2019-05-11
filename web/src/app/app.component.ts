@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // Dashboard hub Icon register
 import { DomSanitizer } from '@angular/platform-browser';
@@ -8,6 +8,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { AuthenticationService } from './core/services/authentication.service';
 import { ProfileModel } from './shared/models/index.model';
 import { Navigation } from './shared/models/navigation.model';
+import { SpinnerService } from './core/services/spinner.service';
 
 import { environment } from './../environments/environment';
 
@@ -16,8 +17,9 @@ import { environment } from './../environments/environment';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     public version: string;
+    public showSpinner: boolean = false;
     public publicRoutes: Navigation[] = [
         {
             title: 'Homepage',
@@ -68,6 +70,7 @@ export class AppComponent {
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private authService: AuthenticationService,
+        private spinnerService: SpinnerService
     ) {
         this._iconRegistry
             .addSvgIconInNamespace('assets', 'dashboardhub',
@@ -90,6 +93,12 @@ export class AppComponent {
                     .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master//github.svg')
             );
         this.version = environment.version;
+    }
+
+    ngOnInit(): void {
+        this.spinnerService
+            .getProgressBar()
+            .subscribe((data: boolean) => this.showSpinner = data);
     }
 
     public getProfile(): ProfileModel {

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Firestore modules
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -8,13 +9,14 @@ import { auth, User } from 'firebase/app';
 
 // Rxjs operators
 import { from, Observable, of } from 'rxjs';
-import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
+import { filter, concatMap, switchMap, first, takeUntil } from 'rxjs/operators';
 
 // Third party modules
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
 import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +31,8 @@ export class AuthenticationService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
+        private spinnerService: SpinnerService,
+        private router: Router
     ) {
         this.checkAuth()
             .pipe(
@@ -71,7 +75,7 @@ export class AuthenticationService {
             .pipe(
                 switchMap((profile: ProfileModel): Observable<ProfileModel> => {
                     const callable: any = this.fns.httpsCallable('findAllUserEvents');
-                    callable({ token: profile.oauth.githubToken, username: profile.username,  });
+                    callable({ token: profile.oauth.githubToken, username: profile.username, });
 
                     return of(profile);
                 }),
@@ -80,6 +84,7 @@ export class AuthenticationService {
 
     // This function used to login via github
     public login(): void {
+        this.spinnerService.setProgressBar(true);
         const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
         provider.addScope('repo,admin:repo_hook');
         from(this.afAuth.auth.signInWithPopup(provider))
@@ -88,26 +93,26 @@ export class AuthenticationService {
                 concatMap(
                     (credentials: firebase.auth.UserCredential) => from(credentials.user.getIdTokenResult()),
                     (credentials: firebase.auth.UserCredential, oauth: firebase.auth.IdTokenResult) => ({
-                            uid: credentials.user.uid,
-                            username: credentials.additionalUserInfo.username,
-                            name: credentials.user.displayName,
-                            email: credentials.user.email,
-                            phone: credentials.user.phoneNumber,
-                            avatarUrl: credentials.user.photoURL,
-                            oauth: {
-                                // @ts-ignore
-                                githubToken: credentials.credential.accessToken,
-                                token: oauth.token,
-                                expirationTime: oauth.expirationTime,
-                                authTime: oauth.authTime,
-                                issuedAtTime: oauth.issuedAtTime,
-                                signInProvider: oauth.signInProvider,
-                                claims: oauth.claims,
-                            },
-                            emailVerified: credentials.user.emailVerified,
-                            creationTime: credentials.user.metadata.creationTime,
-                            lastSignInTime: credentials.user.metadata.lastSignInTime
-                        }),
+                        uid: credentials.user.uid,
+                        username: credentials.additionalUserInfo.username,
+                        name: credentials.user.displayName,
+                        email: credentials.user.email,
+                        phone: credentials.user.phoneNumber,
+                        avatarUrl: credentials.user.photoURL,
+                        oauth: {
+                            // @ts-ignore
+                            githubToken: credentials.credential.accessToken,
+                            token: oauth.token,
+                            expirationTime: oauth.expirationTime,
+                            authTime: oauth.authTime,
+                            issuedAtTime: oauth.issuedAtTime,
+                            signInProvider: oauth.signInProvider,
+                            claims: oauth.claims,
+                        },
+                        emailVerified: credentials.user.emailVerified,
+                        creationTime: credentials.user.metadata.creationTime,
+                        lastSignInTime: credentials.user.metadata.lastSignInTime
+                    }),
                 ),
                 concatMap(
                     (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
@@ -120,18 +125,21 @@ export class AuthenticationService {
                         .doc<ProfileModel>(profile.uid)
                         .collection<LoginAuditModel>('logins')
                         .add({
-                                date: new Date(),
-                                userAgent: this.deviceService.getDeviceInfo().userAgent,
-                                os: this.deviceService.getDeviceInfo().os,
-                                browser: this.deviceService.getDeviceInfo().browser,
-                                device: this.deviceService.getDeviceInfo().device,
-                                osVersion: this.deviceService.getDeviceInfo().os_version,
-                                browserVersion: this.deviceService.getDeviceInfo().browser_version,
+                            date: new Date(),
+                            userAgent: this.deviceService.getDeviceInfo().userAgent,
+                            os: this.deviceService.getDeviceInfo().os,
+                            browser: this.deviceService.getDeviceInfo().browser,
+                            device: this.deviceService.getDeviceInfo().device,
+                            osVersion: this.deviceService.getDeviceInfo().os_version,
+                            browserVersion: this.deviceService.getDeviceInfo().browser_version,
                         })),
                     (profile: ProfileModel) => this.profile = profile,
                 ),
             )
-            .subscribe(() => this.isAuthenticated = true);
+            .subscribe(() => {
+                this.isAuthenticated = true;
+                this.spinnerService.setProgressBar(false);
+            });
     }
 
     // This function is used for logout from dashboard hub
@@ -141,6 +149,7 @@ export class AuthenticationService {
             .subscribe(() => {
                 this.profile = new ProfileModel();
                 this.isAuthenticated = false;
+                this.router.navigate(['/']);
             });
     }
 
