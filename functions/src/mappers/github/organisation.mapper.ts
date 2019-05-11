@@ -1,10 +1,7 @@
-
-
 export interface GitHubOrganisationtInput {
     login: string;
     avatar_url: string;
 }
-
 
 export interface GitHubOrganisationModel {
     username: string;
