@@ -9,7 +9,7 @@ import { auth, User } from 'firebase/app';
 
 // Rxjs operators
 import { from, Observable, of } from 'rxjs';
-import { filter, concatMap, switchMap, first, takeUntil } from 'rxjs/operators';
+import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
 
 // Third party modules
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -84,11 +84,11 @@ export class AuthenticationService {
 
     // This function used to login via github
     public login(): void {
-        this.spinnerService.setProgressBar(true);
         const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
         provider.addScope('repo,admin:repo_hook');
         from(this.afAuth.auth.signInWithPopup(provider))
             .pipe(
+                tap(() => this.spinnerService.setProgressBar(true)),
                 filter((credentials: firebase.auth.UserCredential) => !!credentials),
                 concatMap(
                     (credentials: firebase.auth.UserCredential) => from(credentials.user.getIdTokenResult()),
@@ -135,11 +135,9 @@ export class AuthenticationService {
                         })),
                     (profile: ProfileModel) => this.profile = profile,
                 ),
+                tap(() => this.spinnerService.setProgressBar(false)),
             )
-            .subscribe(() => {
-                this.isAuthenticated = true;
-                this.spinnerService.setProgressBar(false);
-            });
+            .subscribe(() => this.isAuthenticated = true);
     }
 
     // This function is used for logout from dashboard hub
