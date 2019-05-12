@@ -20,7 +20,6 @@ export class PublicProjectsComponent implements OnInit {
     constructor(
         private projectService: ProjectService,
         private router: Router,
-        private spinnerService: SpinnerService
     ) {
     }
 
@@ -28,15 +27,11 @@ export class PublicProjectsComponent implements OnInit {
         if (this.router.url === '/') {
             this.projectSubscription = this.projectService
                 .findPublicProjects()
-                .subscribe((projects: ProjectModel[]) => {
-                    this.projects = projects;
-                });
+                .subscribe((projects: ProjectModel[]) => this.projects = projects);
         } else {
             this.projectSubscription = this.projectService
                 .findMyProjects()
-                .subscribe((projects: ProjectModel[]) => {
-                    this.projects = projects;
-                });
+                .subscribe((projects: ProjectModel[]) => this.projects = projects);
         }
     }
 
