@@ -28,5 +28,6 @@ deploy:
     token:
       secure: $FIREBASE_TEST_TOKEN
     project: "pipelinedashboard-test"
+    message: "Deploying v0.11.5"
     on:
       branch: v0.11.5
