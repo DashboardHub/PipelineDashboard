@@ -4,7 +4,7 @@ node_js:
 branches:
   only:
   - master
-  - v0.10-alpha
+  - v0.11.5
   - /issue-*/
 env:
   - NODE_ENV=development
