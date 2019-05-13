@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
+import { tap } from 'rxjs/operators';
 
 // Dashboard model and services
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +17,7 @@ export class ProjectService {
     constructor(
         private afs: AngularFirestore,
         private authService: AuthenticationService,
+        private spinnerService: SpinnerService
     ) {
     }
 
@@ -35,6 +38,7 @@ export class ProjectService {
                 .set(project)
         )
             .pipe(
+                tap(() => this.spinnerService.setProgressBar(true)),
                 () => of(project)
             );
     }
@@ -80,6 +84,7 @@ export class ProjectService {
 
     // This function update the project details
     public save(project: ProjectModel): Observable<void> {
+        this.spinnerService.setProgressBar(true);
         return from(
             this.afs
                 .collection<ProjectModel>('projects')

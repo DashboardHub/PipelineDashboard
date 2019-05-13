@@ -4,12 +4,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
 // Rxjs components
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub services and models
 import { ProjectService } from '../../core/services/project.service';
 import { ProjectModel } from '../../shared/models/index.model';
+import { SpinnerService } from '../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-projects-create',
@@ -28,7 +29,8 @@ export class CreateEditProjectComponent implements OnInit {
         private form: FormBuilder,
         private snackBar: MatSnackBar,
         private projectService: ProjectService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private spinnerService: SpinnerService
     ) { }
 
     ngOnInit(): void {
@@ -52,6 +54,7 @@ export class CreateEditProjectComponent implements OnInit {
             this.createEditSubscription = this.projectService
                 .save({ uid: this.uid, ...this.projectForm.getRawValue() })
                 .pipe(
+                    tap(() => this.spinnerService.setProgressBar(false)),
                     catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
                 )
                 .subscribe(() => this.router.navigate(['/projects', this.uid]));
@@ -59,6 +62,7 @@ export class CreateEditProjectComponent implements OnInit {
             this.createEditSubscription = this.projectService
                 .create(this.projectForm.getRawValue())
                 .pipe(
+                    tap(() => this.spinnerService.setProgressBar(false)),
                     catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
                 )
                 .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));

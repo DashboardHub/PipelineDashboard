@@ -6,12 +6,13 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 
 // Rxjs operators
 import { from, Observable } from 'rxjs';
-import { pluck } from 'rxjs/operators';
+import { pluck, tap } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { AuthenticationService } from './authentication.service';
 import { RepositoriesModel } from '../../shared/models/index.model';
 import { RepositoryModel, ProfileModel } from '../../shared/models/index.model';
+import { SpinnerService } from './spinner.service';
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,7 @@ export class RepositoryService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private authService: AuthenticationService,
+        private spinnerService: SpinnerService
     ) {
         this.authService.checkAuth().subscribe((profile: ProfileModel) => this.profile = profile);
     }
@@ -38,6 +40,7 @@ export class RepositoryService {
         return this.authService
                 .getProfile(this.authService.profile.uid)
                 .pipe(
+                    tap(() => this.spinnerService.setProgressBar(true)),
                     pluck('repositories')
                 );
     }

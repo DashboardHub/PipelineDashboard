@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { catchError, filter } from 'rxjs/operators';
+import { catchError, filter, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models
@@ -14,6 +14,7 @@ import { DialogListComponent } from '../../shared/dialog/list/dialog-list.compon
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { ProjectService } from '../../core/services/project.service';
 import { RepositoryService } from '../../core/services/repository.service';
+import { SpinnerService } from '../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-projects-view',
@@ -34,7 +35,8 @@ export class ViewProjectComponent implements OnInit {
         private dialog: MatDialog,
         private projectService: ProjectService,
         private repositoryService: RepositoryService,
-        private authService: AuthenticationService
+        private authService: AuthenticationService,
+        private spinnerService: SpinnerService
     ) {
         this.project.uid = this.route.snapshot.paramMap.get('uid');
     }
@@ -56,8 +58,10 @@ export class ViewProjectComponent implements OnInit {
             })
             .afterClosed()
             .pipe(
+                tap(() => this.spinnerService.setProgressBar(true)),
                 filter(
-                    (selectedRepositories: { value: string }[]) => !!selectedRepositories)
+                    (selectedRepositories: { value: string }[]) => !!selectedRepositories),
+                tap(() => this.spinnerService.setProgressBar(false)),
             )
             .subscribe((selectedRepositories: { value: string }[]) => {
                 this.projectService.saveRepositories(

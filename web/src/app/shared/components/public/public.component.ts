@@ -25,17 +25,20 @@ export class PublicProjectsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.spinnerService.setProgressBar(true);
         if (this.router.url === '/') {
             this.projectSubscription = this.projectService
                 .findPublicProjects()
                 .subscribe((projects: ProjectModel[]) => {
                     this.projects = projects;
+                    this.spinnerService.setProgressBar(false);
                 });
         } else {
             this.projectSubscription = this.projectService
                 .findMyProjects()
                 .subscribe((projects: ProjectModel[]) => {
                     this.projects = projects;
+                    this.spinnerService.setProgressBar(false);
                 });
         }
     }
