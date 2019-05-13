@@ -1,8 +1,34 @@
+import { GitHubEventType } from './event.mapper';
+
+export interface GitHubPayloadInput {
+    title: string;
+    action?: string;
+    ref?: string;
+    ref_type?: string;
+    pull_request?: {
+        title: string;
+    };
+    issue?: {
+        title: string;
+    };
+    comment?: {
+        body: string;
+    };
+    release?: {
+        name: string;
+    };
+}
+
+export interface GitHubPayloadModel {
+    title: string;
+    action?: string;
+}
+
 export class GitHubPayloadMapper {
     static import(
-        type: 'PullRequestEvent' | 'IssueCommentEvent' | 'CreateEvent' | 'ReleaseEvent' | 'WatchEvent' | 'PushEvent' | 'IssuesEvent',
-        input: any
-    ) {
+        type: GitHubEventType,
+        input: GitHubPayloadInput
+    ): GitHubPayloadModel {
         const output: any = {};
 
         switch(type) {
