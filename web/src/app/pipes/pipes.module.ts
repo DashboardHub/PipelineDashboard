@@ -6,6 +6,7 @@ import { ReleaseStatePipe } from './state.pipe';
 import { TimeAgoPipe } from './time-ago.pipe';
 import { TruncatePipe } from './truncate.pipe';
 import { UrlencodePipe } from './urlencode.pipe';
+import { UserPipe } from './user.pipe';
 
 @NgModule({
     declarations: [
@@ -14,7 +15,8 @@ import { UrlencodePipe } from './urlencode.pipe';
         ReleaseStatePipe,
         TimeAgoPipe,
         TruncatePipe,
-        UrlencodePipe
+        UrlencodePipe,
+        UserPipe,
     ],
     exports: [
         DigitsPipe,
@@ -22,7 +24,8 @@ import { UrlencodePipe } from './urlencode.pipe';
         ReleaseStatePipe,
         TimeAgoPipe,
         TruncatePipe,
-        UrlencodePipe
+        UrlencodePipe,
+        UserPipe,
     ]
 })
 export class PipesModule {

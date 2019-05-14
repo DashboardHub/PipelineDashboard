@@ -5,7 +5,7 @@ import { from, Observable, } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 // Dashboard hub model and services
-import { UserStatsModel } from '../../shared/models/index.model';
+import { UserStatsModel, UserModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'
@@ -17,8 +17,8 @@ export class UserService {
     ) {
     }
 
-    // This function returns the user information
-    public findUserStats(): Observable<UserStatsModel[]> {
+    // This function returns the user stats information
+    public findAllUserStats(): Observable<UserStatsModel[]> {
         return from(this.afs
             .collection<UserStatsModel>(
                 'userStats',
@@ -26,5 +26,12 @@ export class UserService {
             )
             .valueChanges()
         );
+    }
+
+    // This function returns the user information
+    public findUserStatsById(userId: string): Observable<UserModel> {
+        return this.afs
+            .doc<UserModel>(`userStats/${userId}`)
+            .valueChanges();
     }
 }

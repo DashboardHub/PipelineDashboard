@@ -20,7 +20,7 @@ export class PublicProjectsComponent implements OnInit {
     constructor(
         private projectService: ProjectService,
         private router: Router,
-        private spinnerService: SpinnerService
+        private spinnerService: SpinnerService,
     ) {
     }
 
