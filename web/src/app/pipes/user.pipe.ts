@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // DashboardHub imports
-import { UserModel } from '../shared/models/user.model';
+import { UserModel } from '../shared/models/index.model';
 import { UserService } from '../core/services/user.service';
 
 @Pipe({ name: 'user' })

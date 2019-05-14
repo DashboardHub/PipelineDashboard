@@ -7,7 +7,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 // Dashboard hub models and services
 import { AuthenticationService } from './core/services/authentication.service';
 import { ProfileModel } from './shared/models/index.model';
-import { Navigation } from './shared/models/navigation.model';
+import { Navigation } from './shared/models/index.model';
 import { SpinnerService } from './core/services/spinner.service';
 
 import { environment } from './../environments/environment';
