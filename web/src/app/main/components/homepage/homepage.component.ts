@@ -22,7 +22,7 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit(): void {
         this.userSubscription = this.userService
-            .findUserStats()
+            .findAllUserStats()
             .subscribe((users: UserStatsModel[]) => {
                 this.users = users;
             });
