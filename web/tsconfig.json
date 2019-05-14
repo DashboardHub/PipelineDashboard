@@ -17,5 +17,8 @@
     ],
     "module": "es2015",
     "baseUrl": "./"
-  }
+  },
+  "exclude": [
+    "**/.history/**"
+  ]
 }
