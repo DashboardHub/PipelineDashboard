@@ -25,7 +25,7 @@ export class RepositoryService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private authService: AuthenticationService,
-        private spinnerService: SpinnerService
+        private spinnerService: SpinnerService,
     ) {
         this.authService.checkAuth().subscribe((profile: ProfileModel) => this.profile = profile);
     }

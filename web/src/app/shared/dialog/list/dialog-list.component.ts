@@ -27,7 +27,8 @@ export class DialogListComponent {
     // @TODO: move out, otherwise can not be reused
     public refresh(): void {
         this.repositorySubscription = this.repositoryService
-            .findAll(true).pipe(
+            .findAll(true)
+            .pipe(
                 tap(() => this.spinnerService.setProgressBar(false))
             )
             .subscribe((repositories: RepositoriesModel) => this.data.repositories = repositories);

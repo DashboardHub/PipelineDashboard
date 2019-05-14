@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { delay } from 'rxjs/operators';
 
 // Dashboard hub Icon register
 import { DomSanitizer } from '@angular/platform-browser';
@@ -17,7 +18,7 @@ import { environment } from './../environments/environment';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements AfterViewInit {
     public version: string;
     public showSpinner: boolean = false;
     public publicRoutes: Navigation[] = [
@@ -95,9 +96,10 @@ export class AppComponent implements OnInit {
         this.version = environment.version;
     }
 
-    ngOnInit(): void {
+    ngAfterViewInit(): void {
         this.spinnerService
             .getProgressBar()
+            .pipe(delay(0))
             .subscribe((data: boolean) => this.showSpinner = data);
     }
 
