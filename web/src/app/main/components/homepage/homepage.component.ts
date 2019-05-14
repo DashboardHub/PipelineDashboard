@@ -23,9 +23,7 @@ export class HomepageComponent implements OnInit {
     ngOnInit(): void {
         this.userSubscription = this.userService
             .findAllUserStats()
-            .subscribe((users: UserStatsModel[]) => {
-                this.users = users;
-            });
+            .subscribe((users: UserStatsModel[]) => this.users = users);
     }
 
     ngDestroy(): void {

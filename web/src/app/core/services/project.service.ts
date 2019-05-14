@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from, Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { tap } from 'rxjs/operators';
+import { tap, switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
@@ -55,14 +55,17 @@ export class ProjectService {
 
     // This function returns the public projects list
     public findPublicProjects(): Observable<ProjectModel[]> {
-        return from(this.afs
-            .collection<ProjectModel>(
-                'projects',
-                (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-                    .orderBy('updatedOn', 'desc')
-            )
-            .valueChanges()
-        );
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs
+                    .collection<ProjectModel>(
+                        'projects',
+                        (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
+                        .orderBy('updatedOn', 'desc')
+                    )
+                .valueChanges())
+            );
     }
 
     // This function returns the private projects list

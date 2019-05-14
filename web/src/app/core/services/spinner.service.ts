@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, of, pipe } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,13 @@ export class SpinnerService {
   // this function will return the status of progress bar to main component
   public getProgressBar(): Observable<Boolean> {
     return this.spinnerSubject.asObservable();
+  }
+
+  public start(): Observable<Boolean> {
+      this.setProgressBar(true);
+      return of(true)
+        .pipe(
+            finalize(() => this.setProgressBar(false))
+        );
   }
 }
