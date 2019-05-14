@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { ProjectModel } from '../../models/index.model';
 import { ProjectService } from '../../../core/services/project.service';
 import { Router } from '@angular/router';
-import { SpinnerService } from '../../../core/services/spinner.service';
 
 @Component({
     selector: 'dashboard-projects-public',
