@@ -1,7 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 // Dashboard hub services
 import { RepositoryService } from '../../../core/services/repository.service';

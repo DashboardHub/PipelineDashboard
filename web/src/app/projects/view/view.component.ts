@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { catchError, filter, tap } from 'rxjs/operators';
+import { catchError, filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models

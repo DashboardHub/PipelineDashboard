@@ -4,13 +4,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 
 // Rxjs components
-import { catchError, tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub services and models
 import { ProjectService } from '../../core/services/project.service';
 import { ProjectModel } from '../../shared/models/index.model';
-import { ActivityService } from '../../core/services/activity.service';
 
 @Component({
     selector: 'dashboard-projects-create',
@@ -30,7 +28,6 @@ export class CreateEditProjectComponent implements OnInit {
         private snackBar: MatSnackBar,
         private projectService: ProjectService,
         private route: ActivatedRoute,
-        private activityService: ActivityService
     ) { }
 
     ngOnInit(): void {
