@@ -12,7 +12,7 @@ import { pluck, tap, switchMap } from 'rxjs/operators';
 import { AuthenticationService } from './authentication.service';
 import { RepositoriesModel } from '../../shared/models/index.model';
 import { RepositoryModel, ProfileModel } from '../../shared/models/index.model';
-import { SpinnerService } from './spinner.service';
+import { ActivityService } from './activity.service';
 
 @Injectable({
     providedIn: 'root'
@@ -25,7 +25,7 @@ export class RepositoryService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private authService: AuthenticationService,
-        private spinnerService: SpinnerService,
+        private activityService: ActivityService,
     ) {
         this.authService.checkAuth().subscribe((profile: ProfileModel) => this.profile = profile);
     }
@@ -37,7 +37,7 @@ export class RepositoryService {
             callable({ token: this.authService.profile.oauth.githubToken });
         }
 
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.authService.getProfile(this.authService.profile.uid)),
@@ -47,7 +47,7 @@ export class RepositoryService {
 
     // This function returns the repository via uid
     public findOneById(uid: string): Observable<RepositoryModel> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs.collection<RepositoryModel>('repositories').doc<RepositoryModel>(uid).valueChanges()),

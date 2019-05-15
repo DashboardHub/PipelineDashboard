@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
 // Dashboard model and services
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
-import { SpinnerService } from './spinner.service';
+import { ActivityService } from './activity.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,7 @@ export class ProjectService {
     constructor(
         private afs: AngularFirestore,
         private authService: AuthenticationService,
-        private spinnerService: SpinnerService,
+        private activityService: ActivityService,
     ) {
     }
 
@@ -32,7 +32,7 @@ export class ProjectService {
             updatedOn: new Date(),
         };
 
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
@@ -42,7 +42,7 @@ export class ProjectService {
 
     // This function delete the project via uid
     public delete(uid: string): Observable<void> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete()),
@@ -51,7 +51,7 @@ export class ProjectService {
 
     // This function returns the public projects list
     public findPublicProjects(): Observable<ProjectModel[]> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs
@@ -66,7 +66,7 @@ export class ProjectService {
 
     // This function returns the private projects list
     public findMyProjects(): Observable<ProjectModel[]> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs
@@ -81,7 +81,7 @@ export class ProjectService {
 
     // This function returns the project details via id
     public findOneById(uid: string): Observable<ProjectModel> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges()),
@@ -90,7 +90,7 @@ export class ProjectService {
 
     // This function update the project details
     public save(project: ProjectModel): Observable<void> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs
@@ -102,7 +102,7 @@ export class ProjectService {
 
     // This function add the repository in any project
     public saveRepositories(uid: string, repositories: string[]): Observable<void> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs

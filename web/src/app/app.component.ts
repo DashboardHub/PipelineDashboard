@@ -9,7 +9,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { AuthenticationService } from './core/services/authentication.service';
 import { ProfileModel } from './shared/models/index.model';
 import { Navigation } from './shared/models/navigation.model';
-import { SpinnerService } from './core/services/spinner.service';
+import { ActivityService } from './core/services/activity.service';
 
 import { environment } from './../environments/environment';
 
@@ -71,7 +71,7 @@ export class AppComponent implements AfterViewInit {
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private authService: AuthenticationService,
-        private spinnerService: SpinnerService
+        private activityService: ActivityService
     ) {
         this._iconRegistry
             .addSvgIconInNamespace('assets', 'dashboardhub',
@@ -97,7 +97,7 @@ export class AppComponent implements AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.spinnerService
+        this.activityService
             .getProgressBar()
             .pipe(delay(0))
             .subscribe((progress: number) => this.progress = progress);

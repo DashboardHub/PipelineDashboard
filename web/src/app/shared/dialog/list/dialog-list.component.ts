@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 // Dashboard hub services
 import { RepositoryService } from '../../../core/services/repository.service';
 import { ProjectModel, RepositoriesModel } from '../../models/index.model';
-import { SpinnerService } from '../../../core/services/spinner.service';
+import { ActivityService } from '../../../core/services/activity.service';
 
 @Component({
     selector: 'dashboard-dialog-list',
@@ -20,7 +20,7 @@ export class DialogListComponent {
         private repositoryService: RepositoryService,
         public dialogRef: MatDialogRef<DialogListComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { project: ProjectModel, repositories: RepositoriesModel },
-        private spinnerService: SpinnerService
+        private activityService: ActivityService
     ) {
     }
 
@@ -29,7 +29,7 @@ export class DialogListComponent {
         this.repositorySubscription = this.repositoryService
             .findAll(true)
             .pipe(
-                tap(() => this.spinnerService.setProgressBar(false))
+                tap(() => this.activityService.setProgressBar(false))
             )
             .subscribe((repositories: RepositoriesModel) => this.data.repositories = repositories);
     }

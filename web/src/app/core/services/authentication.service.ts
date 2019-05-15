@@ -16,7 +16,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
 import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
-import { SpinnerService } from './spinner.service';
+import { ActivityService } from './activity.service';
 
 @Injectable({
     providedIn: 'root'
@@ -31,7 +31,7 @@ export class AuthenticationService {
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
-        private spinnerService: SpinnerService,
+        private activityService: ActivityService,
         private router: Router,
     ) {
         this.checkAuth()
@@ -88,7 +88,7 @@ export class AuthenticationService {
         provider.addScope('repo,admin:repo_hook');
         from(this.afAuth.auth.signInWithPopup(provider))
             .pipe(
-                tap(() => this.spinnerService.setProgressBar(true)),
+                tap(() => this.activityService.setProgressBar(true)),
                 filter((credentials: firebase.auth.UserCredential) => !!credentials),
                 concatMap(
                     (credentials: firebase.auth.UserCredential) => from(credentials.user.getIdTokenResult()),
@@ -135,7 +135,7 @@ export class AuthenticationService {
                         })),
                     (profile: ProfileModel) => this.profile = profile,
                 ),
-                tap(() => this.spinnerService.setProgressBar(false)),
+                tap(() => this.activityService.setProgressBar(false)),
             )
             .subscribe(() => this.isAuthenticated = true);
     }

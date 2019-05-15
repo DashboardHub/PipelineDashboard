@@ -14,7 +14,7 @@ import { DialogListComponent } from '../../shared/dialog/list/dialog-list.compon
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { ProjectService } from '../../core/services/project.service';
 import { RepositoryService } from '../../core/services/repository.service';
-import { SpinnerService } from '../../core/services/spinner.service';
+import { ActivityService } from '../../core/services/activity.service';
 
 @Component({
     selector: 'dashboard-projects-view',
@@ -36,7 +36,7 @@ export class ViewProjectComponent implements OnInit {
         private projectService: ProjectService,
         private repositoryService: RepositoryService,
         private authService: AuthenticationService,
-        private spinnerService: SpinnerService
+        private activityService: ActivityService
     ) {
         this.project.uid = this.route.snapshot.paramMap.get('uid');
     }
@@ -58,10 +58,10 @@ export class ViewProjectComponent implements OnInit {
             })
             .afterClosed()
             .pipe(
-                tap(() => this.spinnerService.setProgressBar(true)),
+                tap(() => this.activityService.setProgressBar(true)),
                 filter(
                     (selectedRepositories: { value: string }[]) => !!selectedRepositories),
-                tap(() => this.spinnerService.setProgressBar(false)),
+                tap(() => this.activityService.setProgressBar(false)),
             )
             .subscribe((selectedRepositories: { value: string }[]) => {
                 this.projectService.saveRepositories(

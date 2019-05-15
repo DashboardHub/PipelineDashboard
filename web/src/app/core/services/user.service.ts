@@ -6,7 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 // Dashboard hub model and services
 import { UserStatsModel, UserModel } from '../../shared/models/index.model';
-import { SpinnerService } from './spinner.service';
+import { ActivityService } from './activity.service';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({
@@ -16,13 +16,13 @@ export class UserService {
 
     constructor(
         private afs: AngularFirestore,
-        private spinnerService: SpinnerService,
+        private activityService: ActivityService,
     ) {
     }
 
     // This function returns the user stats information
     public findAllUserStats(): Observable<UserStatsModel[]> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs
@@ -36,7 +36,7 @@ export class UserService {
 
     // This function returns the user information
     public findUserStatsById(userId: string): Observable<UserModel> {
-        return this.spinnerService
+        return this.activityService
             .start()
             .pipe(
                 switchMap(() => this.afs.doc<UserModel>(`userStats/${userId}`).valueChanges()),

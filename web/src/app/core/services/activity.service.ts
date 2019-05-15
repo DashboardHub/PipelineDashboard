@@ -5,7 +5,7 @@ import { finalize, startWith, tap, delay } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class SpinnerService {
+export class ActivityService {
 
   private activeCounter: number = 0;
   private spinnerSubject: Subject<number> = new Subject();

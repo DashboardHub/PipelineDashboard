@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { ProjectModel } from '../../models/index.model';
 import { ProjectService } from '../../../core/services/project.service';
 import { Router } from '@angular/router';
-import { SpinnerService } from '../../../core/services/spinner.service';
+import { ActivityService } from '../../../core/services/activity.service';
 
 @Component({
     selector: 'dashboard-projects-public',
@@ -20,7 +20,7 @@ export class PublicProjectsComponent implements OnInit {
     constructor(
         private projectService: ProjectService,
         private router: Router,
-        private spinnerService: SpinnerService,
+        private activityService: ActivityService,
     ) {
     }
 
