@@ -20,7 +20,7 @@ import { environment } from './../environments/environment';
 })
 export class AppComponent implements AfterViewInit {
     public version: string;
-    public showSpinner: boolean = false;
+    public progress: number = 0;
     public publicRoutes: Navigation[] = [
         {
             title: 'Homepage',
@@ -100,7 +100,7 @@ export class AppComponent implements AfterViewInit {
         this.spinnerService
             .getProgressBar()
             .pipe(delay(0))
-            .subscribe((data: boolean) => this.showSpinner = data);
+            .subscribe((progress: number) => this.progress = progress);
     }
 
     public getProfile(): ProfileModel {

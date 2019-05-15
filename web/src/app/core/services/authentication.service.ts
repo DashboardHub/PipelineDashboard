@@ -32,7 +32,7 @@ export class AuthenticationService {
         private fns: AngularFireFunctions,
         private deviceService: DeviceDetectorService,
         private spinnerService: SpinnerService,
-        private router: Router
+        private router: Router,
     ) {
         this.checkAuth()
             .pipe(
@@ -154,7 +154,8 @@ export class AuthenticationService {
     // This function returns the authenticated user state
     private getAuthState(): Observable<User | null> {
         return this.afAuth
-            .authState.pipe(
+            .authState
+            .pipe(
                 filter((user: User) => !user),
             );
     }

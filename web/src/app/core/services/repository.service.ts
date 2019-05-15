@@ -6,7 +6,7 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 
 // Rxjs operators
 import { from, Observable } from 'rxjs';
-import { pluck, tap } from 'rxjs/operators';
+import { pluck, tap, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { AuthenticationService } from './authentication.service';
@@ -37,17 +37,21 @@ export class RepositoryService {
             callable({ token: this.authService.profile.oauth.githubToken });
         }
 
-        return this.authService
-                .getProfile(this.authService.profile.uid)
-                .pipe(
-                    tap(() => this.spinnerService.setProgressBar(true)),
-                    pluck('repositories')
-                );
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.authService.getProfile(this.authService.profile.uid)),
+                pluck('repositories'),
+            );
     }
 
     // This function returns the repository via uid
     public findOneById(uid: string): Observable<RepositoryModel> {
-        return from(this.afs.collection<RepositoryModel>('repositories').doc<RepositoryModel>(uid).valueChanges());
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs.collection<RepositoryModel>('repositories').doc<RepositoryModel>(uid).valueChanges()),
+            );
     }
 
     // This function loads all the available repositories

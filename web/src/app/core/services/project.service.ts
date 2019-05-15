@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { from, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
-import { tap, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
@@ -17,7 +17,7 @@ export class ProjectService {
     constructor(
         private afs: AngularFirestore,
         private authService: AuthenticationService,
-        private spinnerService: SpinnerService
+        private spinnerService: SpinnerService,
     ) {
     }
 
@@ -32,25 +32,21 @@ export class ProjectService {
             updatedOn: new Date(),
         };
 
-        return from(
-            this.afs.collection<ProjectModel>('projects')
-                .doc(project.uid)
-                .set(project)
-        )
+        return this.spinnerService
+            .start()
             .pipe(
-                tap(() => this.spinnerService.setProgressBar(true)),
+                switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
                 () => of(project)
             );
     }
 
     // This function delete the project via uid
     public delete(uid: string): Observable<void> {
-        return from(
-            this.afs
-                .collection<ProjectModel>('projects')
-                .doc<ProjectModel>(uid)
-                .delete()
-        );
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete()),
+            );
     }
 
     // This function returns the public projects list
@@ -64,50 +60,60 @@ export class ProjectService {
                         (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
                         .orderBy('updatedOn', 'desc')
                     )
-                .valueChanges())
+                .valueChanges()),
             );
     }
 
     // This function returns the private projects list
     public findMyProjects(): Observable<ProjectModel[]> {
-        return from(this.afs
-            .collection<ProjectModel>(
-                'projects',
-                (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
-                    .orderBy('updatedOn', 'desc')
-            )
-            .valueChanges()
-        );
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs
+                    .collection<ProjectModel>(
+                        'projects',
+                        (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
+                            .orderBy('updatedOn', 'desc')
+                    )
+                    .valueChanges()),
+            );
     }
 
     // This function returns the project details via id
     public findOneById(uid: string): Observable<ProjectModel> {
-        return from(this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges());
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges()),
+            );
     }
 
     // This function update the project details
     public save(project: ProjectModel): Observable<void> {
-        this.spinnerService.setProgressBar(true);
-        return from(
-            this.afs
-                .collection<ProjectModel>('projects')
-                .doc<ProjectModel>(project.uid)
-                .set({ ...project, updatedOn: new Date() }, { merge: true })
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs
+                    .collection<ProjectModel>('projects')
+                    .doc<ProjectModel>(project.uid)
+                    .set({ ...project, updatedOn: new Date() }, { merge: true })),
         );
     }
 
     // This function add the repository in any project
     public saveRepositories(uid: string, repositories: string[]): Observable<void> {
-        return from(
-            this.afs
-                .collection<ProjectModel>('projects')
-                .doc<ProjectModel>(uid)
-                .set(
-                    {
-                        repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
-                        updatedOn: new Date(),
-                    },
-                    { merge: true })
-        );
+        return this.spinnerService
+            .start()
+            .pipe(
+                switchMap(() => this.afs
+                    .collection<ProjectModel>('projects')
+                    .doc<ProjectModel>(uid)
+                    .set(
+                        {
+                            repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
+                            updatedOn: new Date(),
+                        },
+                        { merge: true })),
+            );
     }
 }
