@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, of, timer } from 'rxjs';
-import { finalize, startWith, tap, delay } from 'rxjs/operators';
+import { finalize, startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

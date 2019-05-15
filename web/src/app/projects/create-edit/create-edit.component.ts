@@ -53,19 +53,17 @@ export class CreateEditProjectComponent implements OnInit {
         if (this.uid) {
             this.createEditSubscription = this.projectService
                 .save({ uid: this.uid, ...this.projectForm.getRawValue() })
-                .pipe(
-                    tap(() => this.activityService.setProgressBar(false)),
-                    catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
-                )
-                .subscribe(() => this.router.navigate(['/projects', this.uid]));
+                .subscribe(
+                    () => this.router.navigate(['/projects', this.uid]),
+                    (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+                );
         } else {
             this.createEditSubscription = this.projectService
                 .create(this.projectForm.getRawValue())
-                .pipe(
-                    tap(() => this.activityService.setProgressBar(false)),
-                    catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
-                )
-                .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));
+                .subscribe(
+                    (project: ProjectModel) => this.router.navigate(['/projects', project.uid]),
+                    (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+                );
         }
     }
 

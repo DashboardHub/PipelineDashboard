@@ -5,8 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 
 // Rxjs operators
-import { from, Observable } from 'rxjs';
-import { pluck, tap, switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { pluck, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { AuthenticationService } from './authentication.service';
