@@ -7,33 +7,33 @@ import { finalize, startWith } from 'rxjs/operators';
 })
 export class ActivityService {
 
-  private activeCounter: number = 0;
-  private spinnerSubject: Subject<number> = new Subject();
+  private counter: number = 0;
+  private subject: Subject<number> = new Subject();
 
   // This function will set the progress bar status
   public setProgressBar(status: boolean): number {
     switch(status) {
         case true:
-          this.activeCounter++;
+          this.counter++;
         break;
         case false:
-          this.activeCounter--;
+          this.counter--;
         break;
     }
 
     // activity bar disappears too quickly, delay the final step
-    if (this.activeCounter === 0 && status === false) {
-        timer(500).subscribe(() => this.spinnerSubject.next(this.activeCounter));
+    if (this.counter === 0 && status === false) {
+        timer(500).subscribe(() => this.subject.next(this.counter));
     } else {
-        this.spinnerSubject.next(this.activeCounter);
+        this.subject.next(this.counter);
     }
 
-    return this.activeCounter;
+    return this.counter;
   }
 
   // this function will return the status of progress bar to main component
   public getProgressBar(): Observable<number> {
-    return this.spinnerSubject.asObservable();
+    return this.subject.asObservable();
   }
 
   public start(): Observable<number> {
