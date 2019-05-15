@@ -1,4 +1,4 @@
-import { ActivityModel } from './activity.model';
+import { ActivityModel } from './index.model';
 import { Account } from './account.model';
 import { LoginAuditModel } from './loginAudit.model';
 import { RepositoriesModel } from './repositories.model';

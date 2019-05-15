@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
 import { RepositoryModel } from '../../shared/models/index.model';
-import { RepositoryService } from '../../core/services/repository.service';
+import { RepositoryService } from '../../core/services/index.service';
 
 @Component({
     selector: 'dashboard-repository',

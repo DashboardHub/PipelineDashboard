@@ -1,4 +1,4 @@
-import { RepositoryModel } from './repository.model';
+import { RepositoryModel } from './index.model';
 
 export class ActivityModel {
     type: string;

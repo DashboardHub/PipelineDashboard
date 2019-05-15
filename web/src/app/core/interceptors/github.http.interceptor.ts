@@ -3,7 +3,7 @@ import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Observable } from 'rxjs';
 
 // Dashboard hub services
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/index.service';
 
 @Injectable()
 export class GitHubHttpInterceptor implements HttpInterceptor {

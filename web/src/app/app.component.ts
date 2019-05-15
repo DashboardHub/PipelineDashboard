@@ -5,10 +5,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
 // Dashboard hub models and services
-import { AuthenticationService } from './core/services/authentication.service';
-import { ProfileModel } from './shared/models/index.model';
-import { Navigation } from './shared/models/index.model';
-import { SpinnerService } from './core/services/spinner.service';
+import { AuthenticationService, SpinnerService } from './core/services/index.service';
+import { ProfileModel, Navigation } from './shared/models/index.model';
 
 import { environment } from './../environments/environment';
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
-import { AuthenticationService } from '../../../core/services/authentication.service';
+import { AuthenticationService } from '../../../core/services/index.service';
 import { ProfileModel, LoginAuditModel } from '../../../shared/models/index.model';
 
 @Component({
