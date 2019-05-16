@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Rxjs components
-import { catchError } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 // Dashboard hub services and models
 import { ProjectService } from '../../core/services/index.service';

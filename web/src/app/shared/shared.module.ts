@@ -5,18 +5,18 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Dashboard hub App modules
-import { AppMaterialModule } from '../app-material.module';
-import { PipesModule } from '../pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AppMaterialModule } from '../app-material.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 // Dashboard hub components
+import { ProjectsComponent } from './components/projects/projects.component';
+import { PublicProjectsComponent } from './components/public/public.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 import { MarkdownDirective } from './directives/markdown.directive';
-import { ProjectsComponent } from './components/projects/projects.component';
-import { PublicProjectsComponent } from './components/public/public.component';
 
 @NgModule({
     declarations: [

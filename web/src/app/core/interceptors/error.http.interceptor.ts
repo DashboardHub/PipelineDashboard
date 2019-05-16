@@ -1,7 +1,7 @@
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 // Rxjs operators
 import { Observable } from 'rxjs';

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { from, Observable, of } from 'rxjs';
+import { from, of, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { AuthenticationService } from './authentication.service';
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
     providedIn: 'root'

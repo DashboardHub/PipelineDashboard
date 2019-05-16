@@ -8,14 +8,14 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { auth, User } from 'firebase/app';
 
 // Rxjs operators
-import { from, Observable, of } from 'rxjs';
-import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operators';
+import { from, of, Observable } from 'rxjs';
+import { concatMap, filter, first, switchMap, takeUntil, tap } from 'rxjs/operators';
 
 // Third party modules
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
-import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
+import { LoginAuditModel, ProfileModel } from '../../shared/models/index.model';
 import { SpinnerService } from './spinner.service';
 
 @Injectable({
