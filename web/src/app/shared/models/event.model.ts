@@ -1,4 +1,5 @@
-import { RepositoryModel, UserModel } from './index.model';
+import { RepositoryModel } from './repository.model';
+import { UserModel } from './user.model';
 
 export class EventModel {
     uid: string;
