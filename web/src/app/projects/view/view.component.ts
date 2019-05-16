@@ -11,9 +11,7 @@ import { ProjectModel } from '../../shared/models/index.model';
 import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
 
 // Dashboard hub services
-import { AuthenticationService } from '../../core/services/authentication.service';
-import { ProjectService } from '../../core/services/project.service';
-import { RepositoryService } from '../../core/services/repository.service';
+import { AuthenticationService, ProjectService, RepositoryService } from '../../core/services/index.service';
 
 @Component({
     selector: 'dashboard-projects-view',

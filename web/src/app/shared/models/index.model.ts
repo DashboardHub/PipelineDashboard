@@ -11,3 +11,4 @@ export * from './pullRequest.model';
 export * from './release.model';
 export * from './user.model';
 export * from './userStats.model';
+export * from './navigation.model';

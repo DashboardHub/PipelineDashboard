@@ -4,8 +4,8 @@ import { from, Observable, of } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
+import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'

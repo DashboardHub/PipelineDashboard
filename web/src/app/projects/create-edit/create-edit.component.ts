@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub services and models
-import { ProjectService } from '../../core/services/project.service';
+import { ProjectService } from '../../core/services/index.service';
 import { ProjectModel } from '../../shared/models/index.model';
 
 @Component({

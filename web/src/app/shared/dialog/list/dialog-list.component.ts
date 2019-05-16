@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub services
-import { RepositoryService } from '../../../core/services/repository.service';
+import { RepositoryService } from '../../../core/services/index.service';
 import { ProjectModel, RepositoriesModel } from '../../models/index.model';
 
 @Component({
