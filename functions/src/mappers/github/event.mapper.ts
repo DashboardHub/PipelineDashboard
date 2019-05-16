@@ -1,8 +1,8 @@
 import { GitHubEventType } from './event.mapper';
-import { GitHubUserMapper, GitHubUserModel, GitHubUserInput } from './user.mapper';
-import { GitHubOrganisationMapper, GitHubOrganisationtInput, GitHubOrganisationModel } from './organisation.mapper';
-import { GitHubPayloadMapper, GitHubPayloadInput, GitHubPayloadModel } from './payload.mapper';
-import { GitHubRepositoryMapper, GitHubRepositoryInput, GitHubRepositoryModel } from './repository.mapper';
+import { GitHubOrganisationtInput, GitHubOrganisationMapper, GitHubOrganisationModel } from './organisation.mapper';
+import { GitHubPayloadInput, GitHubPayloadMapper, GitHubPayloadModel } from './payload.mapper';
+import { GitHubRepositoryInput, GitHubRepositoryMapper, GitHubRepositoryModel } from './repository.mapper';
+import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
 export type GitHubEventType = 'PullRequestEvent' | 'IssueCommentEvent' | 'CreateEvent' | 'ReleaseEvent' | 'WatchEvent' | 'PushEvent' | 'IssuesEvent';
 

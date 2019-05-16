@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { environment } from '../environments/environment';
 
 // Third party modules
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { DeviceDetectorModule } from 'ngx-device-detector';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireFunctionsModule, FunctionsRegionToken } from '@angular/fire/functions';
+import { DeviceDetectorModule } from 'ngx-device-detector';
 
 // Dashboard hub modules
 import { AppRoutingModule } from './app-routing.module';

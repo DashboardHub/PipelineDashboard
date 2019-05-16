@@ -1,9 +1,9 @@
 import * as admin from 'firebase-admin';
-import { Change, EventContext, firestore } from 'firebase-functions';
+import { firestore, Change, EventContext } from 'firebase-functions';
 import { FirebaseAdmin } from './../client/firebase-admin';
 
-import { getUserRepos } from './repos';
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
+import { getUserRepos } from './repos';
 
 export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
 export declare type DocumentData = admin.firestore.DocumentData;

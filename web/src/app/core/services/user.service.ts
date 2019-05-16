@@ -5,7 +5,7 @@ import { from, Observable, } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 // Dashboard hub model and services
-import { UserStatsModel, UserModel } from '../../shared/models/index.model';
+import { UserModel, UserStatsModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'

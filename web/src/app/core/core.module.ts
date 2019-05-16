@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 // Dashboard hub interceptors
 import { ErrorHttpInterceptorModule } from '../core/interceptors/error.http.interceptor';

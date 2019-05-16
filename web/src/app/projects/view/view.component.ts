@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { catchError, filter } from 'rxjs/operators';
+import { ActivatedRoute, Router,  } from '@angular/router';
+
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
+import { catchError, filter } from 'rxjs/operators';
 
 // Dashboard hub models
 import { ProjectModel } from '../../shared/models/index.model';

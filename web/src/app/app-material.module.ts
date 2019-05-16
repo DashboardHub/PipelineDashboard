@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {
+    MatBadgeModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -10,14 +11,13 @@ import {
     MatListModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatRadioModule,
     MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatBadgeModule,
-    MatRadioModule,
 } from '@angular/material';
 
 @NgModule({

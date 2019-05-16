@@ -1,4 +1,4 @@
-import { GitHubUserMapper, GitHubUserInput, GitHubUserModel } from './user.mapper';
+import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
 export interface GitHubReleaseInput {
     id: string;

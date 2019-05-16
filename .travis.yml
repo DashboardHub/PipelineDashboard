@@ -15,6 +15,7 @@ before_install:
 
 script:
   - (cd web; npm install)
+  - (cd web; npm run lint)
   - (cd web; npm run build:dev)
 
 before_deploy:
