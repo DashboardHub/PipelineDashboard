@@ -8,30 +8,30 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { UserModel, UserStatsModel } from '../../shared/models/index.model';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class UserService {
 
-    constructor(
-        private afs: AngularFirestore
-    ) {
-    }
+  constructor(
+    private afs: AngularFirestore
+  ) {
+  }
 
-    // This function returns the user stats information
-    public findAllUserStats(): Observable<UserStatsModel[]> {
-        return from(this.afs
-            .collection<UserStatsModel>(
-                'userStats',
-                (ref: firebase.firestore.Query) => ref.orderBy('lastUpdated', 'desc')
-            )
-            .valueChanges()
-        );
-    }
+  // This function returns the user stats information
+  public findAllUserStats(): Observable<UserStatsModel[]> {
+    return from(this.afs
+      .collection<UserStatsModel>(
+        'userStats',
+        (ref: firebase.firestore.Query) => ref.orderBy('lastUpdated', 'desc')
+      )
+      .valueChanges()
+    );
+  }
 
-    // This function returns the user information
-    public findUserStatsById(userId: string): Observable<UserModel> {
-        return this.afs
-            .doc<UserModel>(`userStats/${userId}`)
-            .valueChanges();
-    }
+  // This function returns the user information
+  public findUserStatsById(userId: string): Observable<UserModel> {
+    return this.afs
+      .doc<UserModel>(`userStats/${userId}`)
+      .valueChanges();
+  }
 }

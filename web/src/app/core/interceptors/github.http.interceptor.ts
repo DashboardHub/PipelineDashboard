@@ -8,32 +8,32 @@ import { AuthenticationService } from '../services/index.service';
 @Injectable()
 export class GitHubHttpInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthenticationService) {
-    }
+  constructor(private authService: AuthenticationService) {
+  }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (req.url.includes('github.com')) {
-            req = req.clone({
-                setHeaders: {
-                    Authorization: `token ${this.authService.profile.oauth.githubToken}`,
-                    Accept: 'application/vnd.github.v3+json'
-                }
-            });
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (req.url.includes('github.com')) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `token ${this.authService.profile.oauth.githubToken}`,
+          Accept: 'application/vnd.github.v3+json'
         }
-
-        return next.handle(req);
+      });
     }
+
+    return next.handle(req);
+  }
 
 }
 
 @NgModule({
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: GitHubHttpInterceptor,
-            multi: true
-        }
-    ]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GitHubHttpInterceptor,
+      multi: true
+    }
+  ]
 })
 export class GitHubHttpInterceptorModule {
 }
