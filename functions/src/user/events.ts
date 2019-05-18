@@ -4,21 +4,21 @@ import { GitHubEventInput, GitHubEventMapper, GitHubEventModel } from '../mapper
 import { GitHubClient } from './../client/github';
 
 export interface EventsInput {
-    token: string;
-    username: string;
+  token: string;
+  username: string;
 }
 
 export const getUserEvents: any = async (token: string, uid: string, username: string) => {
-    const events: GitHubEventInput[] = await GitHubClient<GitHubEventInput[]>(`/users/${username}/events`, token);
-    const mappedEvents: GitHubEventModel[] = events.map((event: GitHubEventInput) => GitHubEventMapper.import(event));
+  const events: GitHubEventInput[] = await GitHubClient<GitHubEventInput[]>(`/users/${username}/events`, token);
+  const mappedEvents: GitHubEventModel[] = events.map((event: GitHubEventInput) => GitHubEventMapper.import(event));
 
-    await FirebaseAdmin
-        .firestore()
-        .collection('users')
-        .doc(uid)
-        .set({
-            activity: mappedEvents,
-        }, { merge: true });
+  await FirebaseAdmin
+    .firestore()
+    .collection('users')
+    .doc(uid)
+    .set({
+      activity: mappedEvents,
+    }, { merge: true });
 
-    return mappedEvents;
+  return mappedEvents;
 };
