@@ -6,10 +6,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 
 // Dashboard hub models and services
+import { ActivityService } from './core/services/activity.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { ProfileModel } from './shared/models/index.model';
 import { Navigation } from './shared/models/navigation.model';
-import { ActivityService } from './core/services/activity.service';
 
 import { environment } from './../environments/environment';
 
@@ -19,7 +19,6 @@ import { environment } from './../environments/environment';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-    public version: string;
     public progress: number = 0;
     public publicRoutes: Navigation[] = [
         {
@@ -67,11 +66,13 @@ export class AppComponent implements AfterViewInit {
             icon: 'gavel'
         }
     ];
+    public version: string;
+
     constructor(
         private _iconRegistry: MatIconRegistry,
         private _domSanitizer: DomSanitizer,
         private authService: AuthenticationService,
-        private activityService: ActivityService
+        private activityService: ActivityService,
     ) {
         this._iconRegistry
             .addSvgIconInNamespace('assets', 'dashboardhub',

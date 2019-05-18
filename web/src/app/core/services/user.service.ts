@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 // Firestore modules
 import { AngularFirestore } from '@angular/fire/firestore';
 
 // Dashboard hub model and services
-import { UserStatsModel, UserModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
-import { switchMap } from 'rxjs/operators';
+import { UserStatsModel, UserModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'

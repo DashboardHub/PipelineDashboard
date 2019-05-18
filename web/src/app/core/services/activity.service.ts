@@ -1,3 +1,4 @@
+// angular core imports
 import { Injectable } from '@angular/core';
 import { Subject, Observable, of, timer } from 'rxjs';
 import { finalize, startWith } from 'rxjs/operators';
@@ -10,15 +11,18 @@ export class ActivityService {
   private counter: number = 0;
   private subject: Subject<number> = new Subject();
 
-  // This function will set the progress bar status
+  /**
+   * Change status of the progress bar
+   *
+   * @param {boolean} status enable/disable progress bar
+   */
   public setProgressBar(status: boolean): number {
-    switch(status) {
-        case true:
-          this.counter++;
-        break;
-        case false:
-          this.counter--;
-        break;
+    if (status) {
+        this.counter++;
+    }
+
+    if (!status) {
+        this.counter--;
     }
 
     // activity bar disappears too quickly, delay the final step
@@ -31,11 +35,16 @@ export class ActivityService {
     return this.counter;
   }
 
-  // this function will return the status of progress bar to main component
+  /**
+   * Retrieve the status of progress bar
+   */
   public getProgressBar(): Observable<number> {
     return this.subject.asObservable();
   }
 
+  /**
+   * Starts the oberservable chain and finishes when complete
+   */
   public start(): Observable<number> {
       return of(0)
         .pipe(

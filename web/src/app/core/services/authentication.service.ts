@@ -15,8 +15,8 @@ import { filter, concatMap, switchMap, first, takeUntil, tap } from 'rxjs/operat
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
-import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
+import { ProfileModel, LoginAuditModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'
@@ -27,11 +27,11 @@ export class AuthenticationService {
     public isAuthenticated: boolean = false;
 
     constructor(
+        private activityService: ActivityService,
+        private deviceService: DeviceDetectorService,
         public afAuth: AngularFireAuth,
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
-        private deviceService: DeviceDetectorService,
-        private activityService: ActivityService,
         private router: Router,
     ) {
         this.checkAuth()
