@@ -1,6 +1,6 @@
 // angular core imports
 import { Injectable } from '@angular/core';
-import { Subject, Observable, of, timer } from 'rxjs';
+import { of, timer, Observable, Subject } from 'rxjs';
 import { finalize, startWith } from 'rxjs/operators';
 
 @Injectable({
