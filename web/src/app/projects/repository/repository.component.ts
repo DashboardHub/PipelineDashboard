@@ -6,32 +6,32 @@ import { RepositoryService } from '../../core/services/index.service';
 import { RepositoryModel } from '../../shared/models/index.model';
 
 @Component({
-    selector: 'dashboard-repository',
-    templateUrl: './repository.component.html',
-    styleUrls: ['./repository.component.scss'],
+  selector: 'dashboard-repository',
+  templateUrl: './repository.component.html',
+  styleUrls: ['./repository.component.scss'],
 })
 export class RepositoryComponent implements OnInit {
 
-    private repositorySubscription: Subscription;
+  private repositorySubscription: Subscription;
 
-    @Input()
-    public uid: string;
+  @Input()
+  public uid: string;
 
-    public repository: RepositoryModel = new RepositoryModel('');
+  public repository: RepositoryModel = new RepositoryModel('');
 
-    constructor(
-        private repositoryService: RepositoryService
-    ) {
-    }
+  constructor(
+    private repositoryService: RepositoryService
+  ) {
+  }
 
-    ngOnInit(): void {
-        this.repositorySubscription = this.repositoryService
-            .findOneById(this.uid)
-            .subscribe((repository: RepositoryModel) => this.repository = repository);
-    }
+  ngOnInit(): void {
+    this.repositorySubscription = this.repositoryService
+      .findOneById(this.uid)
+      .subscribe((repository: RepositoryModel) => this.repository = repository);
+  }
 
-    ngDestroy(): void {
-        this.repositorySubscription
-            .unsubscribe();
-    }
+  ngDestroy(): void {
+    this.repositorySubscription
+      .unsubscribe();
+  }
 }

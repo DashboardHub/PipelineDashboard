@@ -13,30 +13,30 @@ import { ViewProjectComponent } from './view/view.component';
 import { AuthGuard } from '../core/guards/authentication.guard';
 
 const routes: Routes = [
-    {
-        path: '',
-        component: PublicProjectsComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'create',
-        component: CreateEditProjectComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: ':uid',
-        component: ViewProjectComponent,
-        resolve: { project: ViewProjectResolver }
-    },
-    {
-        path: ':uid/edit',
-        component: CreateEditProjectComponent,
-        resolve: { project: EditProjectResolver }
-    }
+  {
+    path: '',
+    component: PublicProjectsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'create',
+    component: CreateEditProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':uid',
+    component: ViewProjectComponent,
+    resolve: { project: ViewProjectResolver }
+  },
+  {
+    path: ':uid/edit',
+    component: CreateEditProjectComponent,
+    resolve: { project: EditProjectResolver }
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class ProjectsRoutingModule { }

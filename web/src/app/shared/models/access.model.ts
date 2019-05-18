@@ -1,4 +1,4 @@
 export class AccessModel {
-    admin?: string[] = [];
-    readonly?: string[] = [];
+  admin?: string[] = [];
+  readonly?: string[] = [];
 }

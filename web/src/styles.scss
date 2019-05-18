@@ -1,77 +1,77 @@
 /* You can add global styles to this file, and also import other style files */
-@import "assets/scss/variable.scss";
+@import 'assets/scss/variable.scss';
 
-@import "assets/scss/custom-theme.scss";
+@import 'assets/scss/custom-theme.scss';
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 a {
-    color: mat-color($dashboard-accent, 900);
-    text-decoration: none;
+  color: mat-color($dashboard-accent, 900);
+  text-decoration: none;
 
-    &:hover,
-    &:active,
-    &:focus {
-        color: mat-color($dashboard-accent, 700);
-    }
+  &:hover,
+  &:active,
+  &:focus {
+    color: mat-color($dashboard-accent, 700);
+  }
 }
 
 table {
-    border-collapse: collapse;
-    word-break: keep-all;
+  border-collapse: collapse;
+  word-break: keep-all;
 
-    th {
-        text-align: center;
-    }
+  th {
+    text-align: center;
+  }
 
-    th,
-    td {
-        padding: 0.5em;
-        border: 1px #cacaca solid;
-    }
+  th,
+  td {
+    padding: 0.5em;
+    border: 1px #cacaca solid;
+  }
 
-    tbody {
-        tr:nth-child(even) {
-            background-color:$grey-color;
-        }
+  tbody {
+    tr:nth-child(even) {
+      background-color: $grey-color;
     }
+  }
 }
 
 code {
-    width: 100%;
-    padding: 0.2em 0.5em;
-    background-color: $grey-color;
+  width: 100%;
+  padding: 0.2em 0.5em;
+  background-color: $grey-color;
 }
 
 .text-primary {
-    color: mat-color($dashboard-primary, 900);
+  color: mat-color($dashboard-primary, 900);
 }
 
 .text-accent {
-    color: mat-color($dashboard-accent, 700);
+  color: mat-color($dashboard-accent, 700);
 }
 
 .text-warn {
-    color: mat-color($dashboard-warn, 700);
+  color: mat-color($dashboard-warn, 700);
 }
 
 .mat-content {
-    padding: 20px;
+  padding: 20px;
 
-    form {
-        width: 100%;
-        max-width: 1200px;
-        margin: auto;
-    }
+  form {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
 }
 
 .mat-icon {
-    &.mat-icon-2x {
-        font-size: 48px;
-        width: 48px;
-        height: 48px;
-    }
+  &.mat-icon-2x {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+  }
 }
