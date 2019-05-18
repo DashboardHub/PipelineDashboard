@@ -9,10 +9,9 @@ import { Observable } from 'rxjs';
 import { pluck, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { AuthenticationService } from './authentication.service';
-import { RepositoriesModel } from '../../shared/models/index.model';
-import { RepositoryModel, ProfileModel } from '../../shared/models/index.model';
+import { ProfileModel, RepositoriesModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
     providedIn: 'root'

@@ -7,7 +7,7 @@ import { first } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { ProfileModel } from '../../shared/models/index.model';
-import { AuthenticationService } from '../services/authentication.service';
+import { AuthenticationService } from '../services/index.service';
 
 @Injectable({
     providedIn: 'root'

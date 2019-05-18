@@ -1,7 +1,7 @@
 import { FirebaseAdmin } from './../client/firebase-admin';
 
 import { GitHubClient } from './../client/github';
-import { GitHubRepositoryMapper, GitHubRepositoryInput, GitHubRepositoryModel } from './../mappers/github/repository.mapper';
+import { GitHubRepositoryInput, GitHubRepositoryMapper, GitHubRepositoryModel } from './../mappers/github/repository.mapper';
 
 export interface ReposInput {
     token: string;

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
 // Dashboard hub model and services
-import { AuthenticationService } from '../services/authentication.service';
 import { ProjectModel } from '../../shared/models/index.model';
-import { ProjectService } from '../services/project.service';
+import { AuthenticationService, ProjectService } from '../services/index.service';
 
 @Injectable({
     providedIn: 'root'

@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
-import { ProjectModel } from '../../models/index.model';
-import { ProjectService } from '../../../core/services/project.service';
 import { Router } from '@angular/router';
+import { ProjectService } from '../../../core/services/index.service';
+import { ProjectModel } from '../../models/index.model';
 
 @Component({
     selector: 'dashboard-projects-public',

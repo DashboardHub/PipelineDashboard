@@ -6,8 +6,8 @@ import { switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 // Dashboard hub model and services
+import { UserModel, UserStatsModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
-import { UserStatsModel, UserModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'

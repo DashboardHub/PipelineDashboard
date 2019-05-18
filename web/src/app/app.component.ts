@@ -1,15 +1,13 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { delay } from 'rxjs/operators';
 
 // Dashboard hub Icon register
-import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 
 // Dashboard hub models and services
-import { ActivityService } from './core/services/activity.service';
-import { AuthenticationService } from './core/services/authentication.service';
-import { ProfileModel } from './shared/models/index.model';
-import { Navigation } from './shared/models/navigation.model';
+import { ActivityService, AuthenticationService } from './core/services/index.service';
+import { Navigation, ProfileModel } from './shared/models/index.model';
 
 import { environment } from './../environments/environment';
 

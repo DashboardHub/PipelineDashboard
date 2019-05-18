@@ -1,9 +1,9 @@
-import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
 import * as functions from 'firebase-functions';
 import { CallableContext } from 'firebase-functions/lib/providers/https';
+import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
 
-import { ReposInput, getUserRepos } from './user/repos';
 import { getUserEvents, EventsInput } from './user/events';
+import { getUserRepos, ReposInput } from './user/repos';
 
 declare type HttpsFunction = functions.HttpsFunction;
 

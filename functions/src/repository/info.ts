@@ -1,9 +1,9 @@
 import { FirebaseAdmin } from './../client/firebase-admin';
-import { GitHubRepositoryModel } from './../mappers/github/repository.mapper';
 import { GitHubReleaseInput } from './../mappers/github/release.mapper';
+import { GitHubRepositoryModel } from './../mappers/github/repository.mapper';
 
+import { GitHubEventInput, GitHubEventMapper, GitHubPullRequestInput, GitHubPullRequestMapper, GitHubReleaseMapper, GitHubRepositoryInput, GitHubRepositoryMapper } from '../mappers/github/index.mapper';
 import { GitHubClient } from './../client/github';
-import { GitHubEventInput, GitHubRepositoryMapper, GitHubEventMapper, GitHubPullRequestMapper, GitHubPullRequestInput, GitHubReleaseMapper, GitHubRepositoryInput } from '../mappers/github/index.mapper';
 
 export interface RepositoryInfoInput {
     token: string;

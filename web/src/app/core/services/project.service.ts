@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
-import { v4 as uuid } from 'uuid';
+import { of, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
+import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
-import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 
 @Injectable({
     providedIn: 'root'
