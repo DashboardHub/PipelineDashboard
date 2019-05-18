@@ -14,15 +14,15 @@ export class ViewProjectResolver implements Resolve<boolean> {
         private authService: AuthenticationService,
         private projectService: ProjectService,
         private router: Router
-        ) {}
+    ) { }
 
     resolve(route: ActivatedRouteSnapshot): any {
         this.projectService.findOneById(route.params.uid)
-        .subscribe((project: ProjectModel) => {
-            // Added check for not authenticated user and private project details
-            if (project.type === 'private' && !this.authService.isAuthenticated) {
-                this.router.navigate(['/']);
-            }
-        });
+            .subscribe((project: ProjectModel) => {
+                // Added check for not authenticated user and private project details
+                if (project.type === 'private' && !this.authService.isAuthenticated) {
+                    this.router.navigate(['/']);
+                }
+            });
     }
 }

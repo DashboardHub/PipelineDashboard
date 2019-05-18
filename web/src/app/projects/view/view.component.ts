@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router,  } from '@angular/router';
+import { ActivatedRoute, Router, } from '@angular/router';
 
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -72,7 +72,7 @@ export class ViewProjectComponent implements OnInit {
             });
     }
 
-     // This function delete the project
+    // This function delete the project
     delete(): void {
         this.deleteSubscription = this.projectService
             .delete(this.project.uid)

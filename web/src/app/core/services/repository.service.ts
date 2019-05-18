@@ -35,10 +35,10 @@ export class RepositoryService {
         }
 
         return this.authService
-                .getProfile(this.authService.profile.uid)
-                .pipe(
-                    pluck('repositories')
-                );
+            .getProfile(this.authService.profile.uid)
+            .pipe(
+                pluck('repositories')
+            );
     }
 
     // This function returns the repository via uid
