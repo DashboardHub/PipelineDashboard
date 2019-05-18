@@ -31,7 +31,7 @@ export class GitHubPayloadMapper {
     ): GitHubPayloadModel {
         const output: any = {};
 
-        switch(type) {
+        switch (type) {
             case 'PullRequestEvent':
                 output.title = input.pull_request.title;
                 break;

@@ -124,6 +124,13 @@
         "named-imports-order": "lowercase-first"
       }
     ],
+    
+    // Indentation rule added with 2 spaces
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
 
     // Prefer strict type defintion for parameters and function
     "typedef": [

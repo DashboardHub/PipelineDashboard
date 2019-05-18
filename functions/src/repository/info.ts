@@ -25,10 +25,10 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     }
 
     await FirebaseAdmin
-            .firestore()
-            .collection('repositories')
-            .doc(GitHubRepositoryMapper.fullNameToUid(fullName))
-            .set(mappedData, { merge: true });
+        .firestore()
+        .collection('repositories')
+        .doc(GitHubRepositoryMapper.fullNameToUid(fullName))
+        .set(mappedData, { merge: true });
 
     return mappedData;
 };

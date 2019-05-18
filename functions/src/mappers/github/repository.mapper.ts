@@ -34,7 +34,7 @@ export class GitHubRepositoryMapper {
     static import(input: GitHubRepositoryInput, type: 'minimum' | 'all' | 'event' = 'minimum'): GitHubRepositoryModel {
         const output: any = {};
 
-        switch(type) {
+        switch (type) {
             case 'all':
                 output.fork = input.fork;
                 break;
