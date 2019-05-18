@@ -1,4 +1,4 @@
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 
 @include mat-core();
 
@@ -17,7 +17,7 @@ $dashboard-theme: mat-light-theme(
 /* Setup Angular Material typography */
 
 $dashboard-global-typography: mat-typography-config(
-  $font-family: "Roboto",
+  $font-family: 'Roboto',
   $body-1: mat-typography-level(0.9rem, 1.5em, 400),
   $body-2: mat-typography-level(0.9rem, 1.5em, 700)
 );
@@ -25,7 +25,7 @@ $dashboard-global-typography: mat-typography-config(
 @include angular-material-typography($dashboard-global-typography);
 
 $dashboard-base-typography: mat-typography-config(
-  $font-family: "Roboto",
+  $font-family: 'Roboto',
   $headline: mat-typography-level(2.4rem, 1.5em, 100),
   $title: mat-typography-level(1.7rem, 1.5em, 300),
   $subheading-2: mat-typography-level(1.4rem, 1.5em, 300),
@@ -38,14 +38,14 @@ $dashboard-base-typography: mat-typography-config(
 @include mat-base-typography($dashboard-base-typography);
 
 $dashboard-toolbar-typography: mat-typography-config(
-  $font-family: "Roboto",
+  $font-family: 'Roboto',
   $title: mat-typography-level(1.3rem, 1.3em, 300)
 );
 
 @include mat-toolbar-typography($dashboard-toolbar-typography);
 
 $dashboard-card-typography: mat-typography-config(
-  $font-family: "Roboto",
+  $font-family: 'Roboto',
   $headline: mat-typography-level(1.7rem, 1.5em, 300),
   $title: mat-typography-level(1.7rem, 1.5em, 300)
 );
