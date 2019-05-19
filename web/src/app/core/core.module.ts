@@ -10,10 +10,10 @@ import { AppMaterialModule } from '../app-material.module';
 
 @NgModule({
   imports: [
-    CommonModule, AppMaterialModule, GitHubHttpInterceptorModule, ErrorHttpInterceptorModule
+    CommonModule, AppMaterialModule, GitHubHttpInterceptorModule, ErrorHttpInterceptorModule,
   ],
   declarations: [],
-  providers: []
+  providers: [],
 })
 export class CoreModule {
 }

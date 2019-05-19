@@ -10,7 +10,7 @@ import { ProfileModel } from '../../shared/models/index.model';
 import { AuthenticationService } from '../services/index.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileResolver implements Resolve<ProfileModel> {
 

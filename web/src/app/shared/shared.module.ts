@@ -45,7 +45,7 @@ import { MarkdownDirective } from './directives/markdown.directive';
   entryComponents: [
     DialogConfirmationComponent,
     DialogListComponent,
-    DialogMarkdownComponent
-  ]
+    DialogMarkdownComponent,
+  ],
 })
 export class SharedModule { }

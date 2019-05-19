@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 // Firestore modules
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -8,7 +8,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { UserModel, UserStatsModel } from '../../shared/models/index.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
 

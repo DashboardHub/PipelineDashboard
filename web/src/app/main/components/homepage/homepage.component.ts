@@ -16,7 +16,7 @@ export class HomepageComponent implements OnInit {
   public title: string = 'Public Projects';
 
   constructor(
-    private userService: UserService,
+    private userService: UserService
   ) {
   }
 

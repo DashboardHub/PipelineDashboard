@@ -141,7 +141,15 @@
       }
     ],
     "switch-default": true,
-    "trailing-comma": false,
+    "trailing-comma": [true, {
+      "singleline": "never",
+      "multiline": {
+        "objects": "always",
+        "arrays": "always",
+        "functions": "never",
+        "typeLiterals": "ignore"
+      }
+    }],
     "triple-equals": true,
     "typedef": [
       true,

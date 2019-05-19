@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'dashboard-dialog-markdown',
-  templateUrl: './dialog-markdown.component.html'
+  templateUrl: './dialog-markdown.component.html',
 })
 export class DialogMarkdownComponent {
 

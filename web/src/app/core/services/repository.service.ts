@@ -13,7 +13,7 @@ import { ProfileModel, RepositoriesModel, RepositoryModel } from '../../shared/m
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RepositoryService {
 
@@ -22,7 +22,7 @@ export class RepositoryService {
   constructor(
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService
   ) {
     this.authService.checkAuth().subscribe((profile: ProfileModel) => this.profile = profile);
   }
