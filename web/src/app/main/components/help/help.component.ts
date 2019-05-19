@@ -120,7 +120,7 @@ export class HelpComponent implements OnInit {
     this.filteredTopics = this.topics;
 
     this.searchForm = this.form.group({
-      search: [undefined, []]
+      search: [undefined, []],
     });
 
     this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe((search: string) => this.filterTopics(search));

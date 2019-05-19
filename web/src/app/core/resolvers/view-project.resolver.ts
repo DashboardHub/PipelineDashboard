@@ -6,7 +6,7 @@ import { ProjectModel } from '../../shared/models/index.model';
 import { AuthenticationService, ProjectService } from '../services/index.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ViewProjectResolver implements Resolve<boolean> {
 

@@ -28,7 +28,7 @@ import {
     TruncatePipe,
     UrlencodePipe,
     UserPipe,
-  ]
+  ],
 })
 export class PipesModule {
 }

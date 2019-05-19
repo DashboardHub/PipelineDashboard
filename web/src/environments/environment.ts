@@ -11,5 +11,5 @@ export const environment: Config = {
     projectId: 'pipelinedashboard-test',
     storageBucket: 'pipelinedashboard-test.appspot.com',
     messagingSenderId: '352932205551',
-  }
+  },
 };

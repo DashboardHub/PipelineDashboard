@@ -14,11 +14,11 @@ import { ViewProjectComponent } from './view/view.component';
   imports: [
     CommonModule,
     ProjectsRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [
     CreateEditProjectComponent,
     RepositoryComponent,
-    ViewProjectComponent]
+    ViewProjectComponent],
 })
 export class ProjectsModule { }

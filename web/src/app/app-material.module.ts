@@ -58,7 +58,7 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-  ]
+  ],
 })
 export class AppMaterialModule {
 }

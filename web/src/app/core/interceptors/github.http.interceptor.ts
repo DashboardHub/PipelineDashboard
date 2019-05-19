@@ -16,8 +16,8 @@ export class GitHubHttpInterceptor implements HttpInterceptor {
       req = req.clone({
         setHeaders: {
           Authorization: `token ${this.authService.profile.oauth.githubToken}`,
-          Accept: 'application/vnd.github.v3+json'
-        }
+          Accept: 'application/vnd.github.v3+json',
+        },
       });
     }
 
@@ -31,9 +31,9 @@ export class GitHubHttpInterceptor implements HttpInterceptor {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: GitHubHttpInterceptor,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class GitHubHttpInterceptorModule {
 }

@@ -44,9 +44,9 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHttpInterceptor,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class ErrorHttpInterceptorModule {
 }

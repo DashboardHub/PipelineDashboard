@@ -20,40 +20,40 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: HomepageComponent
+        component: HomepageComponent,
       },
       {
         path: 'profile',
         pathMatch: 'full',
         component: ProfileComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: 'features',
         pathMatch: 'full',
-        component: FeaturesComponent
+        component: FeaturesComponent,
       },
       {
         path: 'help',
         pathMatch: 'full',
-        component: HelpComponent
+        component: HelpComponent,
       },
       {
         path: 'terms-and-conditions',
         pathMatch: 'full',
-        component: TermsConditionsComponent
+        component: TermsConditionsComponent,
       },
       {
         path: 'privacy',
         pathMatch: 'full',
-        component: PrivacyComponent
-      }
-    ]
-  }
+        component: PrivacyComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MainRoutingModule { }

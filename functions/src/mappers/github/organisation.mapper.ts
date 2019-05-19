@@ -11,7 +11,7 @@ export class GitHubOrganisationMapper {
   static import(input: GitHubOrganisationtInput): GitHubOrganisationModel {
     return {
       username: input.login,
-      avatarUrl: input.avatar_url
+      avatarUrl: input.avatar_url,
     };
   }
 }
