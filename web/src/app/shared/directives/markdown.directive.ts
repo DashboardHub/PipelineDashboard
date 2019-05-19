@@ -27,7 +27,7 @@ export class MarkdownDirective implements OnChanges {
     }
 
     if (this.dashboardMarkdown) {
-      this.element.nativeElement.innerHTML = this.marked(this.dashboardMarkdown, { renderer: this.materialRender() });
+      this.element.nativeElement.innerHTML = this.marked(this.dashboardMarkdown);
     } else {
       this.element.nativeElement.innerHTML = this._original;
     }
