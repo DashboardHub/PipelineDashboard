@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[dashboardMarkdown]',
-  exportAs: 'markdown'
+  exportAs: 'markdown',
 })
 export class MarkdownDirective implements OnChanges {
 
@@ -19,7 +19,7 @@ export class MarkdownDirective implements OnChanges {
   ngOnChanges(): void {
     this.marked.setOptions({
       gfm: true,
-      sanitize: true
+      sanitize: true,
     });
 
     if (!this._original) {
@@ -41,7 +41,7 @@ export class MarkdownDirective implements OnChanges {
       image: (href: string, title: string, text: string): string => `<img src="${href}" alt="${text}" title="${text}" style="max-width:100%">`,
       link: (href: string, title: string, text: string): string => {
         return `<a href="${href}" target="_blank" ${title ? `title="${title}"` : ''}>${text}</a>`;
-      }
+      },
     };
   }
 

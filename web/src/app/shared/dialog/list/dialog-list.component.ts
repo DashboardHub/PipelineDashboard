@@ -17,7 +17,7 @@ export class DialogListComponent {
   constructor(
     private repositoryService: RepositoryService,
     public dialogRef: MatDialogRef<DialogListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { project: ProjectModel, repositories: RepositoriesModel },
+    @Inject(MAT_DIALOG_DATA) public data: { project: ProjectModel, repositories: RepositoriesModel }
   ) {
   }
 

@@ -16,27 +16,27 @@ const routes: Routes = [
   {
     path: '',
     component: PublicProjectsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: 'create',
     component: CreateEditProjectComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: ':uid',
     component: ViewProjectComponent,
-    resolve: { project: ViewProjectResolver }
+    resolve: { project: ViewProjectResolver },
   },
   {
     path: ':uid/edit',
     component: CreateEditProjectComponent,
-    resolve: { project: EditProjectResolver }
-  }
+    resolve: { project: EditProjectResolver },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ProjectsRoutingModule { }

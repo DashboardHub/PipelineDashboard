@@ -18,7 +18,7 @@ import { MainComponent } from './main.component';
   imports: [
     CommonModule,
     MainRoutingModule,
-    SharedModule
+    SharedModule,
   ],
   declarations: [MainComponent,
     FeaturesComponent,
@@ -26,7 +26,7 @@ import { MainComponent } from './main.component';
     HomepageComponent,
     PrivacyComponent,
     ProfileComponent,
-    TermsConditionsComponent
-  ]
+    TermsConditionsComponent,
+  ],
 })
 export class MainModule { }

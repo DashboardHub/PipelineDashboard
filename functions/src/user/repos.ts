@@ -19,7 +19,7 @@ export const getUserRepos: any = async (token: string, uid: string) => {
       repositories: {
         lastUpdated: new Date(),
         data: mappedRepos,
-      }
+      },
     }, { merge: true });
 
   return mappedRepos;

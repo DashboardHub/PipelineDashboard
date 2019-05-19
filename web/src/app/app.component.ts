@@ -13,7 +13,7 @@ import { environment } from './../environments/environment';
 @Component({
   selector: 'dashboard-app',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public version: string;
@@ -46,23 +46,23 @@ export class AppComponent implements OnInit {
     {
       title: 'Features',
       route: '/features',
-      icon: 'lightbulb_outline'
+      icon: 'lightbulb_outline',
     },
     {
       title: 'Help',
       route: '/help',
-      icon: 'live_help'
+      icon: 'live_help',
     },
     {
       title: 'Terms & Conditions',
       route: '/terms-and-conditions',
-      icon: 'copyright'
+      icon: 'copyright',
     },
     {
       title: 'Privacy',
       route: '/privacy',
-      icon: 'gavel'
-    }
+      icon: 'gavel',
+    },
   ];
   constructor(
     private _iconRegistry: MatIconRegistry,

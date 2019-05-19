@@ -26,7 +26,7 @@ export function tokenGetter(): string | null {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     AngularFireAuthModule,
@@ -40,12 +40,12 @@ export function tokenGetter(): string | null {
     RouterModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
-    { provide: FunctionsRegionToken, useValue: 'us-central1' }
+    { provide: FunctionsRegionToken, useValue: 'us-central1' },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

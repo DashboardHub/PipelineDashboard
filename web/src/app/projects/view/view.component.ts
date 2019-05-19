@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { AuthenticationService, ProjectService, RepositoryService } from '../../
 @Component({
   selector: 'dashboard-projects-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
+  styleUrls: ['./view.component.scss'],
 })
 
 export class ViewProjectComponent implements OnInit {
@@ -50,8 +50,8 @@ export class ViewProjectComponent implements OnInit {
       .open(DialogListComponent, {
         data: {
           project: this.project,
-          repositories: this.authService.profile.repositories
-        }
+          repositories: this.authService.profile.repositories,
+        },
       })
       .afterClosed()
       .pipe(
@@ -80,7 +80,7 @@ export class ViewProjectComponent implements OnInit {
         catchError(
           (error: any): any =>
             this.snackBar.open(error.message, undefined, {
-              duration: 5000
+              duration: 5000,
             })
         )
       )

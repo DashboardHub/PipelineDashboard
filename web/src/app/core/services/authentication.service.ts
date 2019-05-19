@@ -19,7 +19,7 @@ import { LoginAuditModel, ProfileModel } from '../../shared/models/index.model';
 import { SpinnerService } from './spinner.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
 
@@ -36,7 +36,7 @@ export class AuthenticationService {
   ) {
     this.checkAuth()
       .pipe(
-        switchMap((profile: ProfileModel): Observable<ProfileModel> => this.getProfile(profile.uid)),
+        switchMap((profile: ProfileModel): Observable<ProfileModel> => this.getProfile(profile.uid))
       )
       .subscribe((profile: ProfileModel) => {
         this.isAuthenticated = true;
@@ -52,7 +52,7 @@ export class AuthenticationService {
         takeUntil<User>(this.getAuthState()),
         switchMap((user: User) => this.afs
           .doc<ProfileModel>(`users/${user.uid}`)
-          .valueChanges()),
+          .valueChanges())
       );
   }
 
@@ -63,7 +63,7 @@ export class AuthenticationService {
       .collection<LoginAuditModel>('logins', (ref: firebase.firestore.CollectionReference) => ref.orderBy('date', 'desc'))
       .valueChanges()
       .pipe(
-        takeUntil<LoginAuditModel[]>(this.getAuthState()),
+        takeUntil<LoginAuditModel[]>(this.getAuthState())
       );
   }
 
@@ -75,10 +75,10 @@ export class AuthenticationService {
       .pipe(
         switchMap((profile: ProfileModel): Observable<ProfileModel> => {
           const callable: any = this.fns.httpsCallable('findAllUserEvents');
-          callable({ token: profile.oauth.githubToken, username: profile.username, });
+          callable({ token: profile.oauth.githubToken, username: profile.username });
 
           return of(profile);
-        }),
+        })
       );
   }
 
@@ -111,14 +111,14 @@ export class AuthenticationService {
             },
             emailVerified: credentials.user.emailVerified,
             creationTime: credentials.user.metadata.creationTime,
-            lastSignInTime: credentials.user.metadata.lastSignInTime
-          }),
+            lastSignInTime: credentials.user.metadata.lastSignInTime,
+          })
         ),
         concatMap(
           (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
             .doc<ProfileModel>(profile.uid)
             .set(profile, { merge: true })),
-          (profile: ProfileModel) => profile,
+          (profile: ProfileModel) => profile
         ),
         concatMap(
           (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
@@ -133,9 +133,9 @@ export class AuthenticationService {
               osVersion: this.deviceService.getDeviceInfo().os_version,
               browserVersion: this.deviceService.getDeviceInfo().browser_version,
             })),
-          (profile: ProfileModel) => this.profile = profile,
+          (profile: ProfileModel) => this.profile = profile
         ),
-        tap(() => this.spinnerService.setProgressBar(false)),
+        tap(() => this.spinnerService.setProgressBar(false))
       )
       .subscribe(() => this.isAuthenticated = true);
   }
@@ -155,7 +155,7 @@ export class AuthenticationService {
   private getAuthState(): Observable<User | null> {
     return this.afAuth
       .authState.pipe(
-        filter((user: User) => !user),
+        filter((user: User) => !user)
       );
   }
 }

@@ -8,13 +8,13 @@ import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectService {
 
   constructor(
     private afs: AngularFirestore,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService
   ) {
   }
 
