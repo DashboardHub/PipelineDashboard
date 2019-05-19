@@ -1,9 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'dashboard-dialog-markdown',
   templateUrl: './dialog-markdown.component.html',
+  styleUrls: ['./dialog-markdown.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DialogMarkdownComponent {
 
