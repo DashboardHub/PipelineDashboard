@@ -1,3 +1,4 @@
+import { firestore } from 'firebase';
 import { AccessModel } from './access.model';
 
 export class ProjectModel {
@@ -7,6 +8,6 @@ export class ProjectModel {
   description?: string = '';
   access?: AccessModel = new AccessModel();
   repositories?: string[] = [];
-  createdOn?: Date;
-  updatedOn: Date;
+  createdOn?: firestore.Timestamp;
+  updatedOn: firestore.Timestamp;
 }

@@ -4,6 +4,7 @@ import { from, of, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
+import * as firebase from 'firebase';
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
 
@@ -25,8 +26,8 @@ export class ProjectService {
       access: { admin: [this.authService.profile.uid] },
       ...data,
       repositories: [],
-      createdOn: new Date(),
-      updatedOn: new Date(),
+      createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
+      updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
     };
 
     return from(
@@ -84,7 +85,7 @@ export class ProjectService {
       this.afs
         .collection<ProjectModel>('projects')
         .doc<ProjectModel>(project.uid)
-        .set({ ...project, updatedOn: new Date() }, { merge: true })
+        .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true })
     );
   }
 
@@ -97,7 +98,7 @@ export class ProjectService {
         .set(
           {
             repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
-            updatedOn: new Date(),
+            updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
           },
           { merge: true })
     );

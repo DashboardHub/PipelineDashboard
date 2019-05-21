@@ -15,6 +15,7 @@ import { concatMap, filter, first, switchMap, takeUntil, tap } from 'rxjs/operat
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
+import * as firebase from 'firebase';
 import { LoginAuditModel, ProfileModel } from '../../shared/models/index.model';
 import { SpinnerService } from './spinner.service';
 
@@ -125,7 +126,7 @@ export class AuthenticationService {
             .doc<ProfileModel>(profile.uid)
             .collection<LoginAuditModel>('logins')
             .add({
-              date: new Date(),
+              date: firebase.firestore.Timestamp.fromDate(new Date()),
               userAgent: this.deviceService.getDeviceInfo().userAgent,
               os: this.deviceService.getDeviceInfo().os,
               browser: this.deviceService.getDeviceInfo().browser,
