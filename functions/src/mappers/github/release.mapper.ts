@@ -1,3 +1,7 @@
+// Third party modules
+import { firestore } from 'firebase-admin';
+
+// Dashboard hub firebase functions mappers/models
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
 export interface GitHubReleaseInput {
@@ -5,7 +9,7 @@ export interface GitHubReleaseInput {
   name: string;
   body: string;
   author: GitHubUserInput;
-  published_at: Date;
+  published_at: firestore.Timestamp;
 }
 
 export interface GitHubReleaseModel {
@@ -13,7 +17,7 @@ export interface GitHubReleaseModel {
   title: string;
   description: string;
   owner: GitHubUserModel;
-  createdOn: Date;
+  createdOn: firestore.Timestamp;
 }
 
 export class GitHubReleaseMapper {

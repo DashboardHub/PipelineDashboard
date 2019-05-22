@@ -1,7 +1,9 @@
+// Third party modules
 import * as admin from 'firebase-admin';
 import { firestore, Change, EventContext } from 'firebase-functions';
 import { FirebaseAdmin } from './../client/firebase-admin';
 
+// Dashboard hub firebase functions models/mappers
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
 import { getUserRepos } from './repos';
 
@@ -26,7 +28,7 @@ export const updateUserStats: any = firestore
           latest: user.activity ? user.activity[0] : {},
         },
       },
-      lastUpdated: new Date(),
+      lastUpdated: admin.firestore.Timestamp.fromDate(new Date()),
     };
 
     const promises: Promise<FirebaseFirestore.WriteResult>[] = [];
