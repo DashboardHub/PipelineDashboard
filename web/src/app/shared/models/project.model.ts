@@ -1,4 +1,7 @@
+// Third party modules
 import { firestore } from 'firebase';
+
+// Dashboard hub models
 import { AccessModel } from './access.model';
 
 export class ProjectModel {

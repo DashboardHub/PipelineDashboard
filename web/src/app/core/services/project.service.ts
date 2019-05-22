@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 import { from, of, Observable } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import * as firebase from 'firebase';
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { AuthenticationService } from './authentication.service';
 

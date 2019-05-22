@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import * as firebase from 'firebase';
 import { auth, User } from 'firebase/app';
 
 // Rxjs operators
@@ -15,7 +16,6 @@ import { concatMap, filter, first, switchMap, takeUntil, tap } from 'rxjs/operat
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
-import * as firebase from 'firebase';
 import { LoginAuditModel, ProfileModel } from '../../shared/models/index.model';
 import { SpinnerService } from './spinner.service';
 
