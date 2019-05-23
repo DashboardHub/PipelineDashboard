@@ -1,3 +1,7 @@
+// Third party modules
+import { firestore } from 'firebase-admin';
+
+// Dashboard hub firebase functions mappers/modesl
 import { GitHubEventType } from './event.mapper';
 import { GitHubOrganisationtInput, GitHubOrganisationMapper, GitHubOrganisationModel } from './organisation.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper, GitHubPayloadModel } from './payload.mapper';
@@ -14,7 +18,7 @@ export interface GitHubEventInput {
   repo: GitHubRepositoryInput;
   org: GitHubOrganisationtInput;
   payload: GitHubPayloadInput;
-  created_at: Date;
+  created_at: firestore.Timestamp;
 }
 
 export interface GitHubEventModel {
@@ -25,7 +29,7 @@ export interface GitHubEventModel {
   repository: GitHubRepositoryModel;
   organisation?: GitHubOrganisationModel;
   payload: GitHubPayloadModel;
-  createdOn: Date;
+  createdOn: firestore.Timestamp;
 }
 
 export class GitHubEventMapper {

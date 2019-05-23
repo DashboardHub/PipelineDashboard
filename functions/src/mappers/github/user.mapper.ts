@@ -1,3 +1,7 @@
+// Third party modules
+import { firestore } from 'firebase-admin';
+
+// Dashboard hub firebase functions models
 import { GitHubEventModel } from './event.mapper';
 
 export interface GitHubUserInput {
@@ -22,7 +26,7 @@ export interface GitHubUserStatsModel {
       latest: GitHubEventModel;
     }
   };
-  lastUpdated: Date;
+  lastUpdated: firestore.Timestamp;
 }
 
 export class GitHubUserMapper {

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
+import * as firebase from 'firebase';
 import { auth, User } from 'firebase/app';
 
 // Rxjs operators
@@ -125,7 +126,7 @@ export class AuthenticationService {
             .doc<ProfileModel>(profile.uid)
             .collection<LoginAuditModel>('logins')
             .add({
-              date: new Date(),
+              date: firebase.firestore.Timestamp.fromDate(new Date()),
               userAgent: this.deviceService.getDeviceInfo().userAgent,
               os: this.deviceService.getDeviceInfo().os,
               browser: this.deviceService.getDeviceInfo().browser,
