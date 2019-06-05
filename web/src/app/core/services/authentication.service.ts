@@ -32,7 +32,7 @@ export class AuthenticationService {
         public afAuth: AngularFireAuth,
         private afs: AngularFirestore,
         private fns: AngularFireFunctions,
-        private router: Router,
+        private router: Router
     ) {
         this.checkAuth()
             .pipe(
@@ -135,6 +135,10 @@ export class AuthenticationService {
                         })),
                     (profile: ProfileModel) => this.profile = profile,
                 ),
+                tap((profile: ProfileModel) => {
+                  const callable: any = this.fns.httpsCallable('findAllUserRepositories');
+                  callable({ token: profile.oauth.githubToken });
+                }),
                 tap(() => this.activityService.setProgressBar(false)),
             )
             .subscribe(() => this.isAuthenticated = true);

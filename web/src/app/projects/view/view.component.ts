@@ -46,6 +46,7 @@ export class ViewProjectComponent implements OnInit {
 
     // This function add  the repository
     addRepository(): void {
+        console.log('REPOSITORIES: ', this.authService.profile.repositories);
         this.dialog
             .open(DialogListComponent, {
                 data: {

@@ -3,7 +3,6 @@ import { firestore, Change, EventContext } from 'firebase-functions';
 import { FirebaseAdmin } from './../client/firebase-admin';
 
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
-import { getUserRepos } from './repos';
 
 export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
 export declare type DocumentData = admin.firestore.DocumentData;
@@ -29,18 +28,9 @@ export const updateUserStats: any = firestore
             lastUpdated: new Date(),
         };
 
-        const promises: Promise<FirebaseFirestore.WriteResult>[] = [];
-
-        // update user's repos
-        if (userBefore.lastSignInTime !== user.lastSignInTime) {
-            promises.push(getUserRepos(user.token, user.uid));
-        }
-
-        promises.push(FirebaseAdmin
+        return FirebaseAdmin
             .firestore()
             .collection('userStats')
             .doc(user.uid)
-            .set(data, { merge: true }));
-
-        return Promise.all(promises);
+            .set(data, { merge: true });
     });
