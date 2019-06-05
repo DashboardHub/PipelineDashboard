@@ -10,31 +10,170 @@
     </span>
   </mat-card-header>
   <mat-divider></mat-divider>
-  <mat-card-content fxLayout="row">
-    <mat-list fxFlex dense>
-      <h3 mat-subheader>Events</h3>
-      <mat-list-item *ngFor="let event of repository.events | slice:0:5">
-        <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
-        <h4 mat-line [matTooltip]="event.payload.title">{{ event.payload.title }}</h4>
-        <p mat-line>{{ event.createdOn | timeAgo }}</p>
-      </mat-list-item>
-    </mat-list>
-    <mat-list fxFlex dense>
-      <h3 mat-subheader>Pull Requests</h3>
-      <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
-        <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
-        <h4 mat-line>{{ pullRequest.title }}</h4>
-        <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
-      </mat-list-item>
-    </mat-list>
-    <mat-list fxFlex dense>
-      <h3 mat-subheader>Releases</h3>
-      <mat-list-item *ngFor="let release of repository.releases | slice:0:5">
-        <h4 mat-line>{{ release.title }}</h4>
-        <p mat-line>{{ release.createdOn | timeAgo }}</p>
-      </mat-list-item>
-    </mat-list>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutGap="2%" class="dashboard-cards-row">
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon">
+              <mat-icon>new_releases</mat-icon>
+            </div>
+            <p class="heading">Latest Release</p>
+            <h3 class="description">v1.0.0</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer">
+              <i class="material-icons text-danger more-icon">expand_more</i>
+              <a>Get More Info</a>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon control-point">
+              <mat-icon>control_point</mat-icon>
+            </div>
+            <p class="heading">Milestone last updated</p>
+            <h3 class="description">v1.0</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer">
+              <i class="material-icons text-danger more-icon">expand_more</i>
+              <a>Get more info</a>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon verified-user">
+              <mat-icon>verified_user</mat-icon>
+            </div>
+            <p class="heading">Top Contributor</p>
+            <h3 class="description">octocat</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer">
+              <i class="material-icons text-danger more-icon">expand_more</i>
+              <a>Get Top 5 contributors</a>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon">
+              <mat-icon>content_copy</mat-icon>
+            </div>
+            <p class="heading">Latest PR</p>
+            <h3 class="description">1347</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer">
+              <i class="material-icons text-danger more-icon">expand_more</i>
+              <a>Get All PR List</a>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
   </mat-card-content>
+  <div fxLayout="row" fxLayoutGap="1%" class="details-card">
+    <div fxFlex="50%">
+      <mat-card>
+        <mat-card-content class="dashboard-card">
+          <div class="tab-list">
+            <mat-tab-group>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon">new_releases</mat-icon>
+                  Releases
+                </ng-template>
+                <mat-list>
+                  <mat-list-item *ngFor="let release of repository.releases | slice:0:5">
+                    <h4 mat-line>{{ release.title }}</h4>
+                    <p mat-line>{{ release.createdOn | timeAgo }}</p>
+                  </mat-list-item>
+                </mat-list>
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon">cloud_queue</mat-icon>
+                  Events
+                </ng-template>
+                <mat-list>
+                  <mat-list-item *ngFor="let event of repository.events | slice:0:5">
+                    <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
+                    <h4 mat-line [matTooltip]="event.payload.title">{{ event.payload.title }}</h4>
+                    <p mat-line>{{ event.createdOn | timeAgo }}</p>
+                  </mat-list-item>
+                </mat-list>
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon">thumb_up</mat-icon>
+                  Milestones
+                </ng-template>
+
+                <mat-list role="list">
+                  <mat-list-item role="listitem">Item 1</mat-list-item>
+                  <mat-list-item role="listitem">Item 2</mat-list-item>
+                  <mat-list-item role="listitem">Item 3</mat-list-item>
+                </mat-list>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxFlex="50%">
+      <mat-card>
+        <mat-card-content class="dashboard-card right">
+          <div class="tab-list">
+            <mat-tab-group>
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon">list</mat-icon>
+                  Issues
+                </ng-template>
+                Content 1
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon">verified_user</mat-icon>
+                  Contributors
+                </ng-template>
+                Content 2
+              </mat-tab>
+
+              <mat-tab>
+                <ng-template mat-tab-label>
+                  <mat-icon class="example-tab-icon">arrow_upward</mat-icon>
+                  Pull Requests
+                </ng-template>
+
+                <mat-list fxFlex dense>
+                  <h3 mat-subheader>Pull Requests</h3>
+                  <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
+                    <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
+                    <h4 mat-line>{{ pullRequest.title }}</h4>
+                    <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
+                  </mat-list-item>
+                </mat-list>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
   <mat-card-footer>
     <span *ngIf="repository.license">
       <mat-icon>gavel</mat-icon> {{ repository.license.name }}

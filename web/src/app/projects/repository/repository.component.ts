@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
@@ -9,6 +9,7 @@ import { RepositoryModel } from '../../shared/models/index.model';
   selector: 'dashboard-repository',
   templateUrl: './repository.component.html',
   styleUrls: ['./repository.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RepositoryComponent implements OnInit {
 
