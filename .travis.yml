@@ -6,6 +6,7 @@ branches:
   - master
   - v0.11.5
   - /issue-*/
+  - /^greenkeeper/.*$/
 env:
   - NODE_ENV=development
 
