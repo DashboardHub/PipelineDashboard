@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=prototype-v0.8.0)](https://travis-ci.org/DashboardHub/PipelineDashboard)
+[![Build Status](https://travis-ci.org/DashboardHub/PipelineDashboard.svg?branch=prototype-v0.8.0)](https://travis-ci.org/DashboardHub/PipelineDashboard) [![Greenkeeper badge](https://badges.greenkeeper.io/DashboardHub/PipelineDashboard.svg)](https://greenkeeper.io/)
 
 # PipelineDashboard
 
