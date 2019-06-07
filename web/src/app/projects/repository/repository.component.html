@@ -122,9 +122,13 @@
                 </ng-template>
 
                 <mat-list role="list">
-                  <mat-list-item role="listitem">Item 1</mat-list-item>
-                  <mat-list-item role="listitem">Item 2</mat-list-item>
-                  <mat-list-item role="listitem">Item 3</mat-list-item>
+                    <mat-list-item role="listitem">
+                        <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
+                         />
+                        <h4 mat-line><a href="https://github.com/octocat/Hello-World/milestones/v1.0"> 
+                          v1.0 </a> </h4>
+                        <p mat-line>State: open | Open: 4 | Close 8</p>
+                    </mat-list-item>
                 </mat-list>
               </mat-tab>
             </mat-tab-group>
@@ -142,7 +146,22 @@
                   <mat-icon class="example-tab-icon">list</mat-icon>
                   Issues
                 </ng-template>
-                Content 1
+                <mat-list role="list">
+                  <mat-list-item role="listitem">
+                      <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
+                       />
+                      <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347"> 
+                        #1347 </a> Found a bug</h4>
+                      <p mat-line>I'm having a problem with this.</p>
+                  </mat-list-item>
+                  <mat-list-item role="listitem">
+                      <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
+                       />
+                      <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347"> 
+                        #1347 </a> Found a bug</h4>
+                      <p mat-line>I'm having a problem with this.</p>
+                  </mat-list-item>
+                 </mat-list>
               </mat-tab>
 
               <mat-tab>
@@ -150,7 +169,22 @@
                   <mat-icon class="example-tab-icon">verified_user</mat-icon>
                   Contributors
                 </ng-template>
-                Content 2
+                <mat-list role="list">
+                    <mat-list-item role="listitem">
+                        <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
+                         />
+                        <h4 mat-line><a href="https://github.com/octocat"> 
+                           </a>Octocat</h4>
+                        <p mat-line>Total commits: 135</p>
+                    </mat-list-item>  
+                    <mat-list-item role="listitem">
+                        <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
+                         />
+                        <h4 mat-line><a href="https://github.com/octocat"> 
+                           </a>Octocat</h4>
+                        <p mat-line>Total commits: 135</p>
+                    </mat-list-item>  
+                </mat-list>
               </mat-tab>
 
               <mat-tab>
