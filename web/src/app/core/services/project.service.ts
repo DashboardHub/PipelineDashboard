@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { of, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
@@ -36,7 +36,7 @@ export class ProjectService {
             .start()
             .pipe(
                 switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
-                () => of(project)
+                map(() => project),
             );
     }
 

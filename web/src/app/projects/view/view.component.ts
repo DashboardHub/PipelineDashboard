@@ -3,7 +3,7 @@ import { ActivatedRoute, Router,  } from '@angular/router';
 
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { catchError, filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 // Dashboard hub models
 import { ProjectModel } from '../../shared/models/index.model';
@@ -46,7 +46,6 @@ export class ViewProjectComponent implements OnInit {
 
     // This function add  the repository
     addRepository(): void {
-        console.log('REPOSITORIES: ', this.authService.profile.repositories);
         this.dialog
             .open(DialogListComponent, {
                 data: {
@@ -76,15 +75,10 @@ export class ViewProjectComponent implements OnInit {
     delete(): void {
         this.deleteSubscription = this.projectService
             .delete(this.project.uid)
-            .pipe(
-                catchError(
-                    (error: any): any =>
-                        this.snackBar.open(error.message, undefined, {
-                            duration: 5000
-                        })
-                )
-            )
-            .subscribe(() => this.router.navigate(['/projects']));
+            .subscribe(
+                () => this.router.navigate(['/projects']),
+                (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+            );
     }
 
     // This function check if logged in user is also owner of the project

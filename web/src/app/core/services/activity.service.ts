@@ -1,7 +1,7 @@
 // angular core imports
 import { Injectable } from '@angular/core';
 import { of, timer, Observable, Subject } from 'rxjs';
-import { finalize, startWith } from 'rxjs/operators';
+import { finalize, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class ActivityService {
   public start(): Observable<number> {
       return of(0)
         .pipe(
-            startWith(this.setProgressBar(true)),
+            tap(() => this.setProgressBar(true)),
             finalize(() => this.setProgressBar(false)),
         );
   }
