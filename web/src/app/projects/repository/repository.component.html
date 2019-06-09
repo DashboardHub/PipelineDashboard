@@ -21,12 +21,6 @@
             <p class="heading">Latest Release</p>
             <h3 class="description">v1.0.0</h3>
           </mat-card-content>
-          <mat-card-actions>
-            <div class="card-footer">
-              <i class="material-icons text-danger more-icon">expand_more</i>
-              <a>Get More Info</a>
-            </div>
-          </mat-card-actions>
         </mat-card>
       </div>
       <div fxFlex="24%">
@@ -38,12 +32,6 @@
             <p class="heading">Milestone last updated</p>
             <h3 class="description">v1.0</h3>
           </mat-card-content>
-          <mat-card-actions>
-            <div class="card-footer">
-              <i class="material-icons text-danger more-icon">expand_more</i>
-              <a>Get more info</a>
-            </div>
-          </mat-card-actions>
         </mat-card>
       </div>
       <div fxFlex="24%">
@@ -55,159 +43,94 @@
             <p class="heading">Top Contributor</p>
             <h3 class="description">octocat</h3>
           </mat-card-content>
-          <mat-card-actions>
-            <div class="card-footer">
-              <i class="material-icons text-danger more-icon">expand_more</i>
-              <a>Get Top 5 contributors</a>
-            </div>
-          </mat-card-actions>
         </mat-card>
       </div>
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
-            <div class="card-icon">
+            <div class="card-icon info-outline">
               <mat-icon>content_copy</mat-icon>
             </div>
             <p class="heading">Latest PR</p>
             <h3 class="description">1347</h3>
           </mat-card-content>
-          <mat-card-actions>
-            <div class="card-footer">
-              <i class="material-icons text-danger more-icon">expand_more</i>
-              <a>Get All PR List</a>
-            </div>
-          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" class="tab-list">
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 class="heading card-icon">Events List</h3>
+            <mat-list>
+              <mat-list-item *ngFor="let event of repository.events | slice:0:5">
+                <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
+                <h4 mat-line [matTooltip]="event.payload.title">{{ event.actor.username }}</h4>
+                <p mat-line>{{ event.createdOn | timeAgo }}</p>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 class="heading card-icon control-point">Issues</h3>
+            <mat-list role="list">
+              <mat-list-item role="listitem">
+                <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+                <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347">
+                    #1347 </a> Found a bug</h4>
+                <p mat-line>Last updated: 1 day ago</p>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+                <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347">
+                    #1347 </a> Found a bug</h4>
+                    <p mat-line>Last updated: 1 day ago</p>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 class="heading card-icon verified-user">Contributors</h3>
+            <mat-list role="list">
+              <mat-list-item role="listitem">
+                <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+                <h4 mat-line><a href="https://github.com/octocat">
+                  </a>Octocat</h4>
+                <p mat-line>Total commits: 135</p>
+              </mat-list-item>
+              <mat-list-item role="listitem">
+                <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+                <h4 mat-line><a href="https://github.com/octocat">
+                  </a>Octocat</h4>
+                <p mat-line>Total commits: 135</p>
+              </mat-list-item>
+            </mat-list>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 class="card-icon heading info-outline">Pull Requests</h3>
+            <mat-list>
+              <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
+                <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
+                <h4 mat-line>{{ pullRequest.title }}</h4>
+                <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
         </mat-card>
       </div>
     </div>
   </mat-card-content>
-  <div fxLayout="row" fxLayoutGap="1%" class="details-card">
-    <div fxFlex="50%">
-      <mat-card>
-        <mat-card-content class="dashboard-card">
-          <div class="tab-list">
-            <mat-tab-group>
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon">new_releases</mat-icon>
-                  Releases
-                </ng-template>
-                <mat-list>
-                  <mat-list-item *ngFor="let release of repository.releases | slice:0:5">
-                    <h4 mat-line>{{ release.title }}</h4>
-                    <p mat-line>{{ release.createdOn | timeAgo }}</p>
-                  </mat-list-item>
-                </mat-list>
-              </mat-tab>
-
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon">cloud_queue</mat-icon>
-                  Events
-                </ng-template>
-                <mat-list>
-                  <mat-list-item *ngFor="let event of repository.events | slice:0:5">
-                    <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
-                    <h4 mat-line [matTooltip]="event.payload.title">{{ event.payload.title }}</h4>
-                    <p mat-line>{{ event.createdOn | timeAgo }}</p>
-                  </mat-list-item>
-                </mat-list>
-              </mat-tab>
-
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon">thumb_up</mat-icon>
-                  Milestones
-                </ng-template>
-
-                <mat-list role="list">
-                    <mat-list-item role="listitem">
-                        <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
-                         />
-                        <h4 mat-line><a href="https://github.com/octocat/Hello-World/milestones/v1.0"> 
-                          v1.0 </a> </h4>
-                        <p mat-line>State: open | Open: 4 | Close 8</p>
-                    </mat-list-item>
-                </mat-list>
-              </mat-tab>
-            </mat-tab-group>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div fxFlex="50%">
-      <mat-card>
-        <mat-card-content class="dashboard-card right">
-          <div class="tab-list">
-            <mat-tab-group>
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon">list</mat-icon>
-                  Issues
-                </ng-template>
-                <mat-list role="list">
-                  <mat-list-item role="listitem">
-                      <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
-                       />
-                      <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347"> 
-                        #1347 </a> Found a bug</h4>
-                      <p mat-line>I'm having a problem with this.</p>
-                  </mat-list-item>
-                  <mat-list-item role="listitem">
-                      <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
-                       />
-                      <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347"> 
-                        #1347 </a> Found a bug</h4>
-                      <p mat-line>I'm having a problem with this.</p>
-                  </mat-list-item>
-                 </mat-list>
-              </mat-tab>
-
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon">verified_user</mat-icon>
-                  Contributors
-                </ng-template>
-                <mat-list role="list">
-                    <mat-list-item role="listitem">
-                        <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
-                         />
-                        <h4 mat-line><a href="https://github.com/octocat"> 
-                           </a>Octocat</h4>
-                        <p mat-line>Total commits: 135</p>
-                    </mat-list-item>  
-                    <mat-list-item role="listitem">
-                        <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4"
-                         />
-                        <h4 mat-line><a href="https://github.com/octocat"> 
-                           </a>Octocat</h4>
-                        <p mat-line>Total commits: 135</p>
-                    </mat-list-item>  
-                </mat-list>
-              </mat-tab>
-
-              <mat-tab>
-                <ng-template mat-tab-label>
-                  <mat-icon class="example-tab-icon">arrow_upward</mat-icon>
-                  Pull Requests
-                </ng-template>
-
-                <mat-list fxFlex dense>
-                  <h3 mat-subheader>Pull Requests</h3>
-                  <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
-                    <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
-                    <h4 mat-line>{{ pullRequest.title }}</h4>
-                    <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
-                  </mat-list-item>
-                </mat-list>
-              </mat-tab>
-            </mat-tab-group>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
   <mat-card-footer>
     <span *ngIf="repository.license">
       <mat-icon>gavel</mat-icon> {{ repository.license.name }}

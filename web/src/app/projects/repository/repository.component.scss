@@ -60,39 +60,12 @@ mat-list {
 }
 
 .tab-list{
-  .mat-tab-group{
-    margin-top: -30px;
-  }
-
-  .mat-tab-labels{
-    border-radius: 3px;
-    background-color: #999;
-    padding: 15px;
-    margin-top: 0px !important;
-    width: 95%;
-    float: left;
-    background: linear-gradient(60deg,#ab47bc,#8e24aa);
-  }
-
-  .mat-tab-label .mat-tab-label-content{
+   margin-top: 10px;
+  .heading{
+   float: none;
    color: white;
   }
-
-  .mat-tab-header{
-    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(156,39,176,.4);
-  }
- 
-  .mat-tab-label{
-    opacity: 1;
-  }
-}
-
-.details-card{
-  margin-top: 5%;
-}
-
-.right{
-  .mat-tab-labels {
-    background: linear-gradient(60deg,#ffa726,#fb8c00);
+  .mat-list-base .mat-list-item.mat-2-line, .mat-list-base .mat-list-option.mat-2-line {
+    height: 60px;
   }
 }
