@@ -41,7 +41,10 @@ export class ViewProjectComponent implements OnInit {
     ngOnInit(): void {
         this.projectSubscription = this.projectService
             .findOneById(this.project.uid)
-            .subscribe((project: ProjectModel) => this.project = project);
+            .subscribe(
+                (project: ProjectModel) => this.project = project,
+                () => this.router.navigate(['/projects'])
+            );
     }
 
     // This function add  the repository
@@ -75,15 +78,12 @@ export class ViewProjectComponent implements OnInit {
     delete(): void {
         this.deleteSubscription = this.projectService
             .delete(this.project.uid)
-            .subscribe(
-                () => this.router.navigate(['/projects']),
-                (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-            );
+            .subscribe(() => this.router.navigate(['/projects']));
     }
 
     // This function check if logged in user is also owner of the project
     isAdmin(): boolean {
-        return this.project.access.admin.includes(this.authService.profile.uid);
+        return this.projectService.isAdmin(this.project);
     }
 
     ngDestroy(): void {

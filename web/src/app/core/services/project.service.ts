@@ -88,6 +88,16 @@ export class ProjectService {
             );
     }
 
+    // check if has project access
+    hasAccess(project: ProjectModel): boolean {
+        return project.access.readonly && project.access.readonly.includes(this.authService.profile.uid);
+    }
+
+    // check if owner of the project
+    isAdmin(project: ProjectModel): boolean {
+        return project.access.admin.includes(this.authService.profile.uid);
+    }
+
     // This function update the project details
     public save(project: ProjectModel): Observable<void> {
         return this.activityService

@@ -9,4 +9,8 @@ export class ProjectModel {
     repositories?: string[] = [];
     createdOn?: Date;
     updatedOn: Date;
+
+    constructor(uid: string = '') {
+        this.uid = uid;
+    }
 }
