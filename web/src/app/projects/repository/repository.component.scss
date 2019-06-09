@@ -9,6 +9,9 @@ mat-list {
 
 .dashboard-card.mat-card-content{
   margin:0 !important;
+  .mat-list-base .mat-list-item p.mat-line{
+    font-size: 12px;
+  }
  }
 
 .card-icon {
@@ -49,7 +52,15 @@ mat-list {
 
 .card-footer{
   border-top: 1px solid #eee;
-  margin-top: 14px;
+  padding: 10px;
+  img{
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .bottom-line {
+    padding: 10px 10px 0 10px
+  }
 }
 
 .dashboard-cards-row{

@@ -21,17 +21,29 @@
             <p class="heading">Latest Release</p>
             <h3 class="description">v1.0.0</h3>
           </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row">
+              <img fxFlex="15%" src="https://avatars2.githubusercontent.com/u/10898595?v=4"/>
+              <p fxFlex="85%" class="bottom-line" mat-line> Published: 2 days ago</p>
+            </div>
+          </mat-card-actions>
         </mat-card>
       </div>
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
             <div class="card-icon control-point">
-              <mat-icon>control_point</mat-icon>
+              <mat-icon>content_copy</mat-icon>
             </div>
             <p class="heading">Milestone last updated</p>
             <h3 class="description">v1.0</h3>
           </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row">
+              <img fxFlex="15%" src="https://avatars2.githubusercontent.com/u/10898595?v=4"/>
+              <p fxFlex="85%" class="bottom-line" mat-line>State: Open | Open: 4 | Close: 10</p>
+            </div>
+          </mat-card-actions>
         </mat-card>
       </div>
       <div fxFlex="24%">
@@ -43,17 +55,29 @@
             <p class="heading">Top Contributor</p>
             <h3 class="description">octocat</h3>
           </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row">
+              <img fxFlex="15%" src="https://avatars2.githubusercontent.com/u/10898595?v=4"/>
+              <p fxFlex="85%" class="bottom-line" mat-line>Total commits : 136</p>
+            </div>
+          </mat-card-actions>
         </mat-card>
       </div>
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
             <div class="card-icon info-outline">
-              <mat-icon>content_copy</mat-icon>
+              <mat-icon>control_point</mat-icon>
             </div>
             <p class="heading">Latest PR</p>
             <h3 class="description">1347</h3>
           </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row">
+              <img fxFlex="15%" src="https://avatars2.githubusercontent.com/u/10898595?v=4"/>
+              <p fxFlex="85%" class="bottom-line" mat-line>Found a bug | webkhushboo</p>
+            </div>
+          </mat-card-actions>
         </mat-card>
       </div>
     </div>
@@ -65,7 +89,8 @@
             <mat-list>
               <mat-list-item *ngFor="let event of repository.events | slice:0:5">
                 <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
-                <h4 mat-line [matTooltip]="event.payload.title">{{ event.actor.username }}</h4>
+                <h4 mat-line [matTooltip]="event.payload.title">{{ event.payload.title }}</h4>
+                <p mat-line>{{event.type}}</p>
                 <p mat-line>{{ event.createdOn | timeAgo }}</p>
               </mat-list-item>
             </mat-list>
@@ -123,6 +148,7 @@
               <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
                 <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
                 <h4 mat-line>{{ pullRequest.title }}</h4>
+                <p mat-line>{{ pullRequest.owner.username }}</p>
                 <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
               </mat-list-item>
             </mat-list>
