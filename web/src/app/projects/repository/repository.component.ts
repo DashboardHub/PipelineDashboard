@@ -8,8 +8,7 @@ import { RepositoryModel } from '../../shared/models/index.model';
 @Component({
   selector: 'dashboard-repository',
   templateUrl: './repository.component.html',
-  styleUrls: ['./repository.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./repository.component.scss']
 })
 export class RepositoryComponent implements OnInit {
 
