@@ -3,8 +3,8 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
 // Dashboard hub model and services
 import { ProjectModel } from '../../shared/models/index.model';
-import { AuthenticationService, ProjectService } from '../services/index.service';
-import { take, switchMap, catchError } from 'rxjs/operators';
+import { ProjectService } from '../services/index.service';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable({

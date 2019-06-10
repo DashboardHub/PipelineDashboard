@@ -3,7 +3,7 @@ import { ActivatedRoute, Router,  } from '@angular/router';
 
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 // Dashboard hub models
 import { ProjectModel } from '../../shared/models/index.model';
@@ -38,8 +38,9 @@ export class ViewProjectComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectSubscription = this.route.data
-            .subscribe((data: { project: ProjectModel }) => this.project = data.project);
+        this.projectSubscription = this.projectService
+            .findOneById(this.route.snapshot.params.uid)
+            .subscribe((project: ProjectModel) => this.project = project);
     }
 
     // This function add  the repository
