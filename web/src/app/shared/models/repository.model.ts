@@ -17,7 +17,9 @@ export class RepositoryModel {
     watchers?: number;
     branch?: string;
     issues?: number;
-    license?: string;
+    license?: {
+        name: string;
+    };
     pullRequests?: PullRequestModel[];
     events?: Event[];
     releases?: ReleaseModel[];

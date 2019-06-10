@@ -61,7 +61,7 @@ export class ViewProjectComponent implements OnInit {
                     this.project.uid,
                     selectedRepositories.map((fullName: { value: string }) => fullName.value)
                 )
-                // need to nsst subscribes because already using 2 nested pipes :(
+                // @TODO: need to nest subscribes because already using 2 nested pipes :( - required imorovement to stop page flicker
                 .subscribe(() => selectedRepositories.forEach((fullName: { value: string }) => this.repositoryService.loadRepository(fullName.value)));
             });
     }
