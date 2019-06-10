@@ -29,7 +29,6 @@ export class ViewProjectComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private snackBar: MatSnackBar,
         private dialog: MatDialog,
         private projectService: ProjectService,
         private repositoryService: RepositoryService,
@@ -39,12 +38,8 @@ export class ViewProjectComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.projectSubscription = this.projectService
-            .findOneById(this.project.uid)
-            .subscribe(
-                (project: ProjectModel) => this.project = project,
-                () => this.router.navigate(['/projects'])
-            );
+        this.projectSubscription = this.route.data
+            .subscribe((data: { project: ProjectModel }) => this.project = data.project);
     }
 
     // This function add  the repository

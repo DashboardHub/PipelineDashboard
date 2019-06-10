@@ -40,9 +40,8 @@ export class CreateEditProjectComponent implements OnInit {
         });
         if (this.uid) {
             this.isEdit = true;
-            this.projectSubscription = this.projectService
-                .findOneById(this.uid)
-                .subscribe((project: ProjectModel) => this.projectForm.reset(project));
+            this.projectSubscription = this.route.data
+                .subscribe((data: { project: ProjectModel }) => this.projectForm.reset(data.project));
         }
     }
 
