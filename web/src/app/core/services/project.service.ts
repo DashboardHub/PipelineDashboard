@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
 import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
+import { RepositoryService } from './repository.service';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ export class ProjectService {
         private afs: AngularFirestore,
         private authService: AuthenticationService,
         private activityService: ActivityService,
+        private repositoryService: RepositoryService,
     ) {
     }
 
@@ -35,6 +37,7 @@ export class ProjectService {
         return this.activityService
             .start()
             .pipe(
+                tap(() => this.repositoryService.findAll(true)),
                 switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
                 map(() => project),
             );
