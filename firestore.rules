@@ -23,9 +23,9 @@ service cloud.firestore {
 
     match /repositories/{repository} {
       allow create: if request.auth.uid != null;
-      allow get, list: if resource.data.private == false;
+      allow get, list:if request.auth.uid != null;
       allow update: if request.auth.uid != null;
-      allow delete: if request.auth.uid != null && request.auth.uid == resource.data.ownerId;
+      allow delete: if request.auth.uid != null && request.auth.uid in resource.data.access.admin;
     }
   }
 
