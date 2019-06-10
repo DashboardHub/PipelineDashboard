@@ -63,14 +63,10 @@ export class ViewProjectComponent implements OnInit {
             .subscribe((selectedRepositories: { value: string }[]) => {
                 this.projectService.saveRepositories(
                     this.project.uid,
-                    selectedRepositories.map(
-                        (fullName: { value: string }) => fullName.value
-                    )
-                );
-
-                selectedRepositories.forEach((fullName: { value: string }) =>
-                    this.repositoryService.loadRepository(fullName.value)
-                );
+                    selectedRepositories.map((fullName: { value: string }) => fullName.value)
+                )
+                // need to nsst subscribes because already using 2 nested pipes :(
+                .subscribe(() => selectedRepositories.forEach((fullName: { value: string }) => this.repositoryService.loadRepository(fullName.value)));
             });
     }
 
