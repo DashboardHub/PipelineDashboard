@@ -4,12 +4,12 @@ import { Component, Input } from '@angular/core';
 import { ProjectModel } from '../../models/index.model';
 
 @Component({
-    selector: 'dashboard-projects',
-    templateUrl: './projects.component.html',
-    styleUrls: ['./projects.component.scss']
+  selector: 'dashboard-projects',
+  templateUrl: './projects.component.html',
+  styleUrls: ['./projects.component.scss'],
 })
 export class ProjectsComponent {
 
-    @Input()
-    public projects: ProjectModel[] = [];
+  @Input()
+  public projects: ProjectModel[] = [];
 }

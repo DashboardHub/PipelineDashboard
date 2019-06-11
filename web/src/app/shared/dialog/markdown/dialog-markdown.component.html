@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{ data.title }}</h2>
 
-<div mat-dialog-content [dashboardMarkdown]="data.content"></div>
+<div class="markdown-dialog" mat-dialog-content [dashboardMarkdown]="data.content"></div>
 
 <div mat-dialog-actions align="end">
-    <button mat-button type="button" (click)="dialogRef.close()" color="accent">CLOSE</button>
+  <button mat-button type="button" (click)="dialogRef.close()" color="accent">CLOSE</button>
 </div>

@@ -1,6 +1,8 @@
+import { firestore } from 'firebase';
+
 import { RepositoryModel } from './repository.model';
 
 export class RepositoriesModel {
-    lastUpdated: Date;
-    data: RepositoryModel[] = [];
+  lastUpdated: firestore.Timestamp;
+  data: RepositoryModel[] = [];
 }

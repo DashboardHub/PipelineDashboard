@@ -21,31 +21,31 @@ import { SharedModule } from './shared/shared.module';
 import { AppComponent } from './app.component';
 
 export function tokenGetter(): string | null {
-    return localStorage.getItem('access_token');
+  return localStorage.getItem('access_token');
 }
 
 @NgModule({
-    declarations: [
-        AppComponent
-    ],
-    imports: [
-        AngularFireAuthModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule.enablePersistence(),
-        AngularFireFunctionsModule,
-        BrowserAnimationsModule,
-        CommonModule,
-        DeviceDetectorModule.forRoot(),
-        HttpClientModule,
-        RouterModule,
-        AppRoutingModule,
-        CoreModule,
-        SharedModule
-    ],
-    providers: [
-        { provide: FunctionsRegionToken, useValue: 'us-central1' }
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule.enablePersistence(),
+    AngularFireFunctionsModule,
+    BrowserAnimationsModule,
+    CommonModule,
+    DeviceDetectorModule.forRoot(),
+    HttpClientModule,
+    RouterModule,
+    AppRoutingModule,
+    CoreModule,
+    SharedModule,
+  ],
+  providers: [
+    { provide: FunctionsRegionToken, useValue: 'us-central1' },
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

@@ -10,16 +10,16 @@ import { ProfileModel } from '../../shared/models/index.model';
 import { AuthenticationService } from '../services/index.service';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileResolver implements Resolve<ProfileModel> {
 
-    constructor(private authService: AuthenticationService) {
-    }
+  constructor(private authService: AuthenticationService) {
+  }
 
-    resolve(): Observable<ProfileModel> {
-        return this.authService
-            .checkAuth()
-            .pipe(first());
-    }
+  resolve(): Observable<ProfileModel> {
+    return this.authService
+      .checkAuth()
+      .pipe(first());
+  }
 }

@@ -19,33 +19,33 @@ import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.compo
 import { MarkdownDirective } from './directives/markdown.directive';
 
 @NgModule({
-    declarations: [
-        MarkdownDirective,
-        DialogConfirmationComponent,
-        DialogListComponent,
-        DialogMarkdownComponent,
-        ProjectsComponent,
-        PublicProjectsComponent],
-    imports: [
-        CommonModule,
-        FlexLayoutModule,
-        AppMaterialModule,
-        RouterModule.forChild([]),
-        ReactiveFormsModule,
-        PipesModule],
-    exports: [
-        FlexLayoutModule,
-        AppMaterialModule,
-        ReactiveFormsModule,
-        PipesModule,
-        MarkdownDirective,
-        RouterModule,
-        ProjectsComponent,
-        PublicProjectsComponent],
-    entryComponents: [
-        DialogConfirmationComponent,
-        DialogListComponent,
-        DialogMarkdownComponent
-    ]
+  declarations: [
+    MarkdownDirective,
+    DialogConfirmationComponent,
+    DialogListComponent,
+    DialogMarkdownComponent,
+    ProjectsComponent,
+    PublicProjectsComponent],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    AppMaterialModule,
+    RouterModule.forChild([]),
+    ReactiveFormsModule,
+    PipesModule],
+  exports: [
+    FlexLayoutModule,
+    AppMaterialModule,
+    ReactiveFormsModule,
+    PipesModule,
+    MarkdownDirective,
+    RouterModule,
+    ProjectsComponent,
+    PublicProjectsComponent],
+  entryComponents: [
+    DialogConfirmationComponent,
+    DialogListComponent,
+    DialogMarkdownComponent,
+  ],
 })
 export class SharedModule { }

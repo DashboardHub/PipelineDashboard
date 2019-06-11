@@ -10,43 +10,43 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class ErrorHttpInterceptor implements HttpInterceptor {
 
-    constructor(
-        private router: Router,
-        private snackBar: MatSnackBar
-    ) { }
+  constructor(
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(req).pipe(tap(undefined, (error: HttpErrorResponse) => {
-            if (error instanceof HttpErrorResponse) {
-                let message: string = '';
-                switch (error.status) {
-                    case 401:
-                    case 403:
-                        message = 'Permission denied. Please try again.';
-                        break;
-                    case 404:
-                        message = 'Not found. Please try again.';
-                        break;
-                    default:
-                        this.snackBar.open(error.message, undefined, { duration: 5000 });
-                        break;
-                }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(tap(undefined, (error: HttpErrorResponse) => {
+      if (error instanceof HttpErrorResponse) {
+        let message: string = '';
+        switch (error.status) {
+          case 401:
+          case 403:
+            message = 'Permission denied. Please try again.';
+            break;
+          case 404:
+            message = 'Not found. Please try again.';
+            break;
+          default:
+            this.snackBar.open(error.message, undefined, { duration: 5000 });
+            break;
+        }
 
-                this.router.navigate(['/'])
-                    .then(() => this.snackBar.open(message, undefined, { duration: 5000 }));
-            }
-        }));
-    }
+        this.router.navigate(['/'])
+          .then(() => this.snackBar.open(message, undefined, { duration: 5000 }));
+      }
+    }));
+  }
 }
 
 @NgModule({
-    providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: ErrorHttpInterceptor,
-            multi: true
-        }
-    ]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHttpInterceptor,
+      multi: true,
+    },
+  ],
 })
 export class ErrorHttpInterceptorModule {
 }

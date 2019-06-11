@@ -1,49 +1,49 @@
 <div class="mat-content" fxLayout="column" fxLayoutGap="20px">
-    <form (submit)="save()" [formGroup]="projectForm">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Project</mat-card-title>
-                <mat-card-subtitle>Group your repositories into a project view</mat-card-subtitle>
-            </mat-card-header>
-            <mat-divider></mat-divider>
+  <form (submit)="save()" [formGroup]="projectForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Project</mat-card-title>
+        <mat-card-subtitle>Group your repositories into a project view</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
 
-            <mat-card-content fxLayout="column" fxLayoutGap="20px">
-                <mat-form-field>
-                    <mat-select formControlName="type" placeholder="Type" required>
-                        <mat-option value="public">Public</mat-option>
-                        <mat-option value="private">Private</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="projectForm.get(['type']).hasError('required')">This field is required.</mat-error>
-                </mat-form-field>
+      <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <mat-form-field>
+          <mat-select formControlName="type" placeholder="Type" required>
+            <mat-option value="public">Public</mat-option>
+            <mat-option value="private">Private</mat-option>
+          </mat-select>
+          <mat-error *ngIf="projectForm.get(['type']).hasError('required')">This field is required.</mat-error>
+        </mat-form-field>
 
-                <mat-form-field>
-                    <input matInput type="text" placeholder="Title" formControlName="title" required>
-                    <mat-error *ngIf="projectForm.get(['title']).hasError('required')">This field is required.</mat-error>
-                    <mat-error *ngIf="projectForm.get(['title']).hasError('minlength')">Entered text is too short.</mat-error>
-                    <mat-error *ngIf="projectForm.get(['title']).hasError('maxlength')">Entered text is too long.</mat-error>
-                </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Title" formControlName="title" required>
+          <mat-error *ngIf="projectForm.get(['title']).hasError('required')">This field is required.</mat-error>
+          <mat-error *ngIf="projectForm.get(['title']).hasError('minlength')">Entered text is too short.</mat-error>
+          <mat-error *ngIf="projectForm.get(['title']).hasError('maxlength')">Entered text is too long.</mat-error>
+        </mat-form-field>
 
-                <mat-form-field>
-                    <input matInput type="text" placeholder="Description" formControlName="description">
-                    <mat-error *ngIf="projectForm.get(['description']).hasError('minlength')">
-                        Entered text is too short.
-                    </mat-error>
-                    <mat-error *ngIf="projectForm.get(['description']).hasError('maxlength')">
-                        Entered text is too long.
-                    </mat-error>
-                </mat-form-field>
-            </mat-card-content>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Description" formControlName="description">
+          <mat-error *ngIf="projectForm.get(['description']).hasError('minlength')">
+            Entered text is too short.
+          </mat-error>
+          <mat-error *ngIf="projectForm.get(['description']).hasError('maxlength')">
+            Entered text is too long.
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
 
-            <mat-divider></mat-divider>
-            <mat-card-actions>
-                <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-                    <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
-                    <button mat-raised-button type="submit" color="accent" [disabled]="projectForm.invalid">
-                        <span *ngIf="!isEdit">Create</span>
-                        <span *ngIf="isEdit">Save</span>
-                    </button>
-                </div>
-            </mat-card-actions>
-        </mat-card>
-    </form>
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
+          <button mat-raised-button type="submit" color="accent" [disabled]="projectForm.invalid">
+            <span *ngIf="!isEdit">Create</span>
+            <span *ngIf="isEdit">Save</span>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
 </div>

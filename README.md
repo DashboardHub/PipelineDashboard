@@ -102,3 +102,18 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 | shared | Contains all shared components, directives, dialogs and models |
 | projects | Contains all components like create, edit, private , view projects and repository |
 | pipes | Contains all custom pipes |
+
+
+## To set up admin credentials for emulated functions:
+
+1. Open the Service Accounts pane of the Google Cloud Console.
+2. Make sure that App Engine default service account is selected, and use the options menu at right to select Create key.
+3. When prompted, select JSON for the key type, and click Create.
+4. Set your Google default credentials to point to the downloaded key:
+
+## Deploy firebase functions on local
+
+1. `set GOOGLE_APPLICATION_CREDENTIALS=path\to\key.json`
+2. `firebase setup:emulators:firestore`
+3. `firebase emulators:start`
+

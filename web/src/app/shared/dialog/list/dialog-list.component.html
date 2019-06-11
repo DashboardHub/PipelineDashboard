@@ -1,23 +1,23 @@
 <h2 mat-dialog-title>
-    <mat-icon [matBadge]="data.repositories.data.length" matBadgeColor="accent">developer_board</mat-icon>
-    Your repositories
+  <mat-icon [matBadge]="data.repositories.data.length || 0" matBadgeColor="accent">developer_board</mat-icon>
+  Your repositories
 </h2>
 
 <div mat-dialog-content>
-    <mat-selection-list #repos>
-        <h3 mat-subheader *ngIf="data.repositories.lastUpdated">Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}</h3>
-        <h3 mat-subheader *ngIf="!data.repositories.lastUpdated">Click refresh</h3>
-        <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.uid)">
-            <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
-            <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
-            <h4 mat-line>{{ repository.fullName }}</h4>
-            <p mat-line> {{ repository.description }} </p>
-        </mat-list-option>
-    </mat-selection-list>
+  <mat-selection-list #repos>
+    <h3 mat-subheader *ngIf="data.repositories.lastUpdated">Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}</h3>
+    <h3 mat-subheader *ngIf="!data.repositories.lastUpdated">Click refresh</h3>
+    <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.uid)">
+      <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
+      <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
+      <h4 mat-line>{{ repository.fullName }}</h4>
+      <p mat-line> {{ repository.description }} </p>
+    </mat-list-option>
+  </mat-selection-list>
 </div>
 
 <div mat-dialog-actions align="end" fxLayout="row" fxLayoutGap="10px">
-    <button mat-stroked-button type="button" (click)="refresh()">Refresh</button>
-    <button mat-stroked-button type="button" (click)="dialogRef.close()" color="accent">CANCEL</button>
-    <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)" color="warn">CONFIRM</button>
+  <button mat-stroked-button type="button" (click)="refresh()">Refresh</button>
+  <button mat-stroked-button type="button" (click)="dialogRef.close()" color="accent">CANCEL</button>
+  <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)" color="warn">CONFIRM</button>
 </div>
