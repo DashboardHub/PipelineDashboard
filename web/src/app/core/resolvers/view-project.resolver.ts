@@ -23,7 +23,7 @@ export class ViewProjectResolver implements Resolve<ProjectModel> {
                 take(1),
                 switchMap((project: ProjectModel) => {
                     // for private project must have access
-                    if (!project || (project.type === 'private' && (!this.projectService.hasAccess(project) || !this.projectService.isAdmin(project)))) {
+                    if (!project || (project.type === 'private' && !this.projectService.hasAccess(project) && !this.projectService.isAdmin(project))) {
                         this.router.navigate(['/']);
                         return of(new ProjectModel());
                     }
