@@ -1,5 +1,5 @@
 import { GitHubEventModel } from './event.mapper';
-import { GitHubIssueModel } from './issues.mapper';
+import { GitHubIssueModel } from './issue.mapper';
 import { GitHubPullRequestModel } from './pullRequest.mapper';
 import { GitHubReleaseModel } from './release.mapper';
 

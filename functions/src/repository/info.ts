@@ -1,9 +1,12 @@
 import { FirebaseAdmin } from './../client/firebase-admin';
-import { GitHubReleaseInput } from './../mappers/github/release.mapper';
-import { GitHubRepositoryModel } from './../mappers/github/repository.mapper';
 
-import { GitHubEventInput, GitHubEventMapper, GitHubPullRequestInput, GitHubPullRequestMapper, GitHubReleaseMapper, GitHubRepositoryInput, GitHubRepositoryMapper } from '../mappers/github/index.mapper';
-import { GitHubIssueInput, GitHubIssueMapper } from '../mappers/github/issues.mapper';
+import {
+  GitHubEventInput, GitHubEventMapper,
+  GitHubIssueInput, GitHubIssueMapper,
+  GitHubPullRequestInput, GitHubPullRequestMapper,
+  GitHubReleaseInput, GitHubReleaseMapper,
+  GitHubRepositoryInput, GitHubRepositoryMapper, GitHubRepositoryModel
+} from '../mappers/github/index.mapper';
 import { GitHubClient } from './../client/github';
 
 export interface RepositoryInfoInput {
@@ -12,7 +15,13 @@ export interface RepositoryInfoInput {
 }
 
 export const getRepositoryInfo: any = async (token: string, fullName: string) => {
-  const data: [GitHubRepositoryInput, GitHubPullRequestInput[], GitHubEventInput[], GitHubReleaseInput[], GitHubIssueInput[]] = await Promise.all([
+  const data: [
+    GitHubRepositoryInput,
+    GitHubPullRequestInput[],
+    GitHubEventInput[],
+    GitHubReleaseInput[],
+    GitHubIssueInput[],
+  ] = await Promise.all([
     GitHubClient<GitHubRepositoryInput>(`/repos/${fullName}`, token),
     GitHubClient<GitHubPullRequestInput[]>(`/repos/${fullName}/pulls?state=open`, token),
     GitHubClient<GitHubEventInput[]>(`/repos/${fullName}/events`, token),
@@ -24,7 +33,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     pullRequests: data[1].map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)),
     events: data[2].map((event: GitHubEventInput) => GitHubEventMapper.import(event)),
     releases: data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)),
-    issues: data[4].map((issues: GitHubIssueInput) => GitHubIssueMapper.import(issues)),
+    issues: data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)),
   }
 
   await FirebaseAdmin
