@@ -1,3 +1,4 @@
+import { IssueModel } from './issue.model';
 import { PullRequestModel } from './pullRequest.model';
 import { ReleaseModel } from './release.model';
 
@@ -21,6 +22,7 @@ export class RepositoryModel {
   pullRequests?: PullRequestModel[];
   events?: Event[];
   releases?: ReleaseModel[];
+  issuesList?: IssueModel[];
   lastUpdated: Date;
 
   constructor(fullName: string) {
