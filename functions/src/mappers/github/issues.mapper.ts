@@ -4,7 +4,7 @@ import { firestore } from 'firebase-admin';
 // Dashboard hub firebase functions mappers/models
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
-export interface GitHubIssuesInput {
+export interface GitHubIssueInput {
   id: string;
   url: string;
   state: string;
@@ -17,7 +17,7 @@ export interface GitHubIssuesInput {
   updated_at: firestore.Timestamp;
 }
 
-export interface GitHubIssuesModel {
+export interface GitHubIssueModel {
   uid: string;
   url: string;
   state: string;
@@ -30,8 +30,8 @@ export interface GitHubIssuesModel {
   updatedOn: firestore.Timestamp;
 }
 
-export class GitHubIssuesMapper {
-  static import(input: GitHubIssuesInput): GitHubIssuesModel {
+export class GitHubIssueMapper {
+  static import(input: GitHubIssueInput): GitHubIssueModel {
     return {
       uid: input.id,
       url: input.url,

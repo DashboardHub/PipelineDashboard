@@ -1,5 +1,5 @@
 import { GitHubEventModel } from './event.mapper';
-import { GitHubIssuesModel } from './issues.mapper';
+import { GitHubIssueModel } from './issues.mapper';
 import { GitHubPullRequestModel } from './pullRequest.mapper';
 import { GitHubReleaseModel } from './release.mapper';
 
@@ -25,7 +25,7 @@ export interface GitHubRepositoryModel {
   pullRequests?: GitHubPullRequestModel[];
   events?: GitHubEventModel[];
   releases?: GitHubReleaseModel[];
-  issues?: GitHubIssuesModel[];
+  issues?: GitHubIssueModel[];
 }
 
 export class GitHubRepositoryMapper {
