@@ -102,17 +102,11 @@
           <mat-card-content class="dashboard-card">
             <h3 class="heading card-icon control-point">Issues</h3>
             <mat-list role="list">
-              <mat-list-item role="listitem">
-                <img matListAvatar alt ="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
-                <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347">
-                    #1347 </a> Found a bug</h4>
-                <p mat-line>Last updated: 1 day ago</p>
-              </mat-list-item>
-              <mat-list-item role="listitem">
-                <img matListAvatar src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
-                <h4 mat-line><a href="https://api.github.com/repos/octocat/Hello-World/issues/1347">
-                    #1347 </a> Found a bug</h4>
-                    <p mat-line>Last updated: 1 day ago</p>
+              <mat-list-item role="listitem" *ngFor="let issue of repository.issues | slice:0:5">
+                <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
+                <h4 mat-line><a href="{{issue.url}}">
+                    #{{issue.number}} </a> {{issue.title}}</h4>
+                    <p mat-line>Last updated: {{issue.updatedOn | timeAgo}}</p>
               </mat-list-item>
             </mat-list>
           </mat-card-content>
