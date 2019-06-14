@@ -25,7 +25,7 @@ service cloud.firestore {
       allow create: if request.auth.uid != null;
       allow get, list: if resource.data.private == false;
       allow update: if request.auth.uid != null;
-      allow delete: if request.auth.uid != null && request.auth.uid == resource.data.ownerId;
+      allow delete: if request.auth.uid != null && request.auth.uid in resource.data.access.admin;
     }
   }
 
