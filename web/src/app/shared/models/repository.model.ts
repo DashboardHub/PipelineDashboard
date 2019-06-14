@@ -17,12 +17,11 @@ export class RepositoryModel {
   stargazers?: string;
   watchers?: number;
   branch?: string;
-  issues?: number;
   license?: string;
   pullRequests?: PullRequestModel[];
   events?: Event[];
   releases?: ReleaseModel[];
-  issuesList?: IssueModel[];
+  issues?: IssueModel[];
   lastUpdated: Date;
 
   constructor(fullName: string) {
