@@ -1,3 +1,7 @@
+// Third party modules
+import { firestore } from 'firebase-admin';
+
+// DashboardHub imports
 import { GitHubEventModel } from './event.mapper';
 import { GitHubIssueModel } from './issue.mapper';
 import { GitHubPullRequestModel } from './pullRequest.mapper';
@@ -26,6 +30,7 @@ export interface GitHubRepositoryModel {
   events?: GitHubEventModel[];
   releases?: GitHubReleaseModel[];
   issues?: GitHubIssueModel[];
+  updatedAt: firestore.Timestamp;
 }
 
 export class GitHubRepositoryMapper {
