@@ -2,11 +2,13 @@
 import { firestore } from 'firebase-admin';
 
 import {
+  GitHubContributorInput, GitHubContributorMapper,
   GitHubEventInput, GitHubEventMapper,
   GitHubIssueInput, GitHubIssueMapper,
   GitHubPullRequestInput, GitHubPullRequestMapper,
-  GitHubReleaseInput, GitHubReleaseMapper,
-  GitHubRepositoryInput, GitHubRepositoryMapper, GitHubRepositoryModel
+  GitHubReleaseInput, GitHubReleaseMapper, 
+  GitHubRepositoryInput, GitHubRepositoryMapper, 
+  GitHubRepositoryModel
 } from '../mappers/github/index.mapper';
 import { FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClient } from './../client/github';
@@ -24,6 +26,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     GitHubEventInput[],
     GitHubReleaseInput[],
     GitHubIssueInput[],
+    GitHubContributorInput[],
   ];
   let mappedData: GitHubRepositoryModel;
 
@@ -34,6 +37,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       GitHubClient<GitHubEventInput[]>(`/repos/${fullName}/events`, token),
       GitHubClient<GitHubReleaseInput[]>(`/repos/${fullName}/releases`, token),
       GitHubClient<GitHubIssueInput[]>(`/repos/${fullName}/issues`, token),
+      GitHubClient<GitHubContributorInput[]>(`/repos/${fullName}/stats/contributors`, token),
     ]);
     mappedData = {
       ...GitHubRepositoryMapper.import(data[0], 'all'),
@@ -42,6 +46,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       releases: data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)),
       issues: data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)),
       updatedAt: firestore.Timestamp.fromDate(new Date()),
+      contributors: data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)),
     };
   } catch (error) {
     Logger.error(error);

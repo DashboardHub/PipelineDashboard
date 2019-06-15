@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
@@ -27,7 +27,10 @@ export class RepositoryComponent implements OnInit {
   ngOnInit(): void {
     this.repositorySubscription = this.repositoryService
       .findOneById(this.uid)
-      .subscribe((repository: RepositoryModel) => this.repository = repository);
+      .subscribe((repository: RepositoryModel) => {
+        this.repository = repository;
+        console.log(this.repository);
+      });
   }
 
   ngDestroy(): void {

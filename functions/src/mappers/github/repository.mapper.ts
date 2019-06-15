@@ -3,6 +3,7 @@ import { firestore } from 'firebase-admin';
 
 // DashboardHub imports
 import { GitHubEventModel } from './event.mapper';
+import { GitHubContributorModel } from './index.mapper';
 import { GitHubIssueModel } from './issue.mapper';
 import { GitHubPullRequestModel } from './pullRequest.mapper';
 import { GitHubReleaseModel } from './release.mapper';
@@ -31,6 +32,7 @@ export interface GitHubRepositoryModel {
   releases?: GitHubReleaseModel[];
   issues?: GitHubIssueModel[];
   updatedAt: firestore.Timestamp;
+  contributors: GitHubContributorModel[];
 }
 
 export class GitHubRepositoryMapper {

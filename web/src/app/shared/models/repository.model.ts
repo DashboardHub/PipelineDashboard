@@ -1,3 +1,4 @@
+import { ContributorModel } from './contributor.model';
 import { IssueModel } from './issue.model';
 import { PullRequestModel } from './pullRequest.model';
 import { ReleaseModel } from './release.model';
@@ -23,6 +24,7 @@ export class RepositoryModel {
   releases?: ReleaseModel[];
   issues?: IssueModel[];
   lastUpdated: Date;
+  contributors: ContributorModel[];
 
   constructor(fullName: string) {
     this.fullName = fullName;
