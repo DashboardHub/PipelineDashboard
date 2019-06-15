@@ -5,11 +5,11 @@ export const environment: Config = {
   version: 'x.x.x',
 
   firebase: {
-    apiKey: 'AIzaSyCHfk2qClE9-4DgpUxSlWlb-rN-CSGaNbU',
-    authDomain: 'pipelinedashboard-khushboo.firebaseapp.com',
-    databaseURL: 'https://pipelinedashboard-khushboo.firebaseio.com',
-    projectId: 'pipelinedashboard-khushboo',
-    storageBucket: 'pipelinedashboard-khushboo.appspot.com',
-    messagingSenderId: '460489678821',
+    apiKey: 'AIzaSyC6MQqAi7rT_DGPwltaIZJUdlvy-vh73YY',
+    authDomain: 'pipelinedashboard-test.firebaseapp.com',
+    databaseURL: 'https://pipelinedashboard-test.firebaseio.com',
+    projectId: 'pipelinedashboard-test',
+    storageBucket: 'pipelinedashboard-test.appspot.com',
+    messagingSenderId: '352932205551',
   },
 };

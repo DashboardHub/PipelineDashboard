@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "pipelinedashboard-khushboo",
-    "pipelinedashboard": "pipelinedashboard-test",
-    "pipeline-khushboo": "pipelinedashboard-khushboo"
+    "default": "pipelinedashboard-test"
   }
 }
