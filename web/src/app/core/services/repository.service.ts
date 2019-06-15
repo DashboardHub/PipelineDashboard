@@ -5,8 +5,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
 
 // Rxjs operators
-import { Observable } from 'rxjs';
-import { pluck, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { pluck, switchMap, map, mergeMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { ProfileModel, RepositoriesModel, RepositoryModel } from '../../shared/models/index.model';
@@ -25,23 +25,12 @@ export class RepositoryService {
     private fns: AngularFireFunctions,
     private authService: AuthenticationService,
     private activityService: ActivityService,
-  ) {
-    this.authService.checkAuth().subscribe((profile: ProfileModel) => this.profile = profile);
-  }
+  ) { }
 
-  // This function returns all the repository list for user
-  public findAll(force: boolean = false): Observable<RepositoriesModel> {
-    if (force) {
+  // Forces refresh of users repositories
+  public refresh(): Observable<RepositoriesModel> {
       const callable: any = this.fns.httpsCallable('findAllUserRepositories');
-      callable({ token: this.authService.profile.oauth.githubToken });
-    }
-
-    return this.activityService
-      .start()
-      .pipe(
-        switchMap(() => this.authService.getProfile(this.authService.profile.uid)),
-        pluck('repositories'),
-      );
+      return callable({ token: this.authService.profile.oauth.githubToken });
   }
 
   // This function returns the repository via uid
@@ -54,8 +43,8 @@ export class RepositoryService {
   }
 
   // This function loads all the available repositories
-  public loadRepository(fullName: string): void {
+  public loadRepository(fullName: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
-    callable({ fullName, token: this.authService.profile.oauth.githubToken });
+    return callable({ fullName, token: this.authService.profile.oauth.githubToken });
   }
 }

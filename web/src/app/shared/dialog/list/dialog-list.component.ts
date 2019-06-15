@@ -23,7 +23,7 @@ export class DialogListComponent {
   // @TODO: move out, otherwise can not be reused
   public refresh(): void {
     this.repositorySubscription = this.repositoryService
-      .findAll(true)
+      .refresh()
       .subscribe((repositories: RepositoriesModel) => this.data.repositories = repositories);
   }
 

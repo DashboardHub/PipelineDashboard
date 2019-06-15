@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, tap, switchMap } from 'rxjs/operators';
 
 // Dashboard hub models
 import { ProjectModel } from '../../shared/models/index.model';
@@ -62,7 +62,7 @@ export class ViewProjectComponent implements OnInit {
           selectedRepositories.map((fullName: { value: string }) => fullName.value)
         )
           // @TODO: need to nest subscribes because already using 2 nested pipes :( - required imorovement to stop page flicker
-          .subscribe(() => selectedRepositories.forEach((fullName: { value: string }) => this.repositoryService.loadRepository(fullName.value)));
+          .subscribe(() => {});
       });
   }
 

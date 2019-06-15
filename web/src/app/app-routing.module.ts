@@ -1,5 +1,6 @@
-// Dashboard hub core modules
 import { NgModule } from '@angular/core';
+
+// Dashboard hub core modules
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [

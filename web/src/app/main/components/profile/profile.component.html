@@ -28,6 +28,23 @@
 
         <mat-tab>
           <ng-template mat-tab-label>
+            <mat-icon [matBadge]="profile.repositories.data.length" matBadgePosition="above before">info</mat-icon>
+            Repositories
+          </ng-template>
+
+          <mat-list>
+            <h3 mat-subheader>Last updated {{ profile.repositories.lastUpdated.toDate() | timeAgo }}</h3>
+            <mat-list-item *ngFor="let repository of profile.repositories.data">
+              <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
+              <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
+              <h4 mat-line>{{ repository.fullName }}</h4>
+              <p mat-line>{{ repository.description }}</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
             <mat-icon [matBadge]="logins.length" matBadgePosition="above before">security</mat-icon>
             Security
           </ng-template>
