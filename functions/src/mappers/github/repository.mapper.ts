@@ -41,21 +41,21 @@ export class GitHubRepositoryMapper {
   static import(input: GitHubRepositoryInput, type: 'minimum' | 'all' | 'event' = 'minimum'): GitHubRepositoryModel {
     const output: any = {};
 
-    switch (type) {
-      case 'all':
+    if (type === 'all') {
         output.fork = input.fork;
-        break;
-      case 'event':
+    }
+
+    if (type === 'event' || type === 'all') {
         output.id = input.id;
         output.fullName = input.name;
         output.url = input.url;
-        break;
-      case 'minimum':
+    }
+
+    if (type === 'minimum' || type === 'all') {
         output.uid = GitHubRepositoryMapper.fullNameToUid(input.full_name);
         output.fullName = input.full_name;
         output.description = input.description;
         output.private = input.private;
-        break;
     }
 
     return output;
