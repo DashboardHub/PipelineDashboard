@@ -7,11 +7,13 @@ import { GitHubEventModel } from './event.mapper';
 export interface GitHubUserInput {
   login: string;
   avatar_url: string;
+  url: string;
 }
 
 export interface GitHubUserModel {
   username: string;
   avatarUrl: string;
+  url: string;
 }
 
 export interface GitHubUserStatsModel {
@@ -34,6 +36,7 @@ export class GitHubUserMapper {
     return {
       username: input.login,
       avatarUrl: input.avatar_url,
+      url: input.url,
     };
   }
 }
