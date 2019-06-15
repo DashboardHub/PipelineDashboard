@@ -27,10 +27,7 @@ export class RepositoryComponent implements OnInit {
   ngOnInit(): void {
     this.repositorySubscription = this.repositoryService
       .findOneById(this.uid)
-      .subscribe((repository: RepositoryModel) => {
-        this.repository = repository;
-        console.log(this.repository);
-      });
+      .subscribe((repository: RepositoryModel) => this.repository = repository);
   }
 
   ngDestroy(): void {
