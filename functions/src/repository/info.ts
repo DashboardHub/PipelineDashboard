@@ -55,10 +55,10 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
   Logger.info({
     repository: fullName,
     imported: {
-      pullRequests: mappedData.pullRequests.length || 0,
-      events: mappedData.events.length || 0,
-      releases: mappedData.releases.length || 0,
-      issues: mappedData.issues.length || 0,
+      pullRequests: mappedData && mappedData.pullRequests.length || 0,
+      events: mappedData && mappedData.events.length || 0,
+      releases: mappedData && mappedData.releases.length || 0,
+      issues: mappedData && mappedData.issues.length || 0,
     },
   });
 
