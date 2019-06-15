@@ -85,7 +85,8 @@
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
-            <h3 class="heading card-icon">Events List</h3>
+            <h3 *ngIf="repository.events && repository.events.length > 0; else eventsOther" class="heading card-icon">Events List</h3>
+            <ng-template #eventsOther><p> No events are available</p></ng-template>
             <mat-list>
               <mat-list-item *ngFor="let event of repository.events | slice:0:5">
                 <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
@@ -100,7 +101,8 @@
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
-            <h3 class="heading card-icon control-point">Issues</h3>
+            <h3 *ngIf="repository.issues && repository.issues.length > 0; else issuesOther" class="heading card-icon control-point">Issues</h3>
+            <ng-template #issuesOther><p> No issues are available</p></ng-template>
             <mat-list role="list">
               <mat-list-item role="listitem" *ngFor="let issue of repository.issues | slice:0:5">
                 <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
@@ -115,7 +117,8 @@
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
-            <h3 class="heading card-icon verified-user">Contributors</h3>
+            <h3 *ngIf="repository.contributors && repository.contributors.length > 0; else contributorsOther" class="heading card-icon verified-user">Contributors</h3>
+            <ng-template #contributorsOther><p> No contributors are available</p></ng-template>
             <mat-list role="list">
               <mat-list-item role="listitem" *ngFor="let contributor of repository.contributors | slice:0:5">
                 <img matListAvatar [alt] ="contributor.owner.username" [src]="contributor.owner.avatarUrl"/>
@@ -131,7 +134,8 @@
       <div fxFlex="24%">
         <mat-card>
           <mat-card-content class="dashboard-card">
-            <h3 class="card-icon heading info-outline">Pull Requests</h3>
+            <h3 *ngIf="repository.pullRequests && repository.pullRequests.length > 0; else pullRequestsOther" class="card-icon heading info-outline">Pull Requests</h3>
+            <ng-template #pullRequestsOther><p> No pull requests are available</p></ng-template>
             <mat-list>
               <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
                 <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
