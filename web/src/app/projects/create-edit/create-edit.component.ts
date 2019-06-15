@@ -27,7 +27,7 @@ export class CreateEditProjectComponent implements OnInit {
     private form: FormBuilder,
     private snackBar: MatSnackBar,
     private projectService: ProjectService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {

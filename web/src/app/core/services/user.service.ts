@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 // Firestore modules
@@ -16,7 +16,7 @@ export class UserService {
 
   constructor(
     private afs: AngularFirestore,
-    private activityService: ActivityService,
+    private activityService: ActivityService
   ) {
   }
 
@@ -30,7 +30,7 @@ export class UserService {
             'userStats',
             (ref: firebase.firestore.Query) => ref.orderBy('lastUpdated', 'desc')
           )
-          .valueChanges()),
+          .valueChanges())
       );
   }
 
@@ -39,7 +39,7 @@ export class UserService {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.doc<UserModel>(`userStats/${userId}`).valueChanges()),
+        switchMap(() => this.afs.doc<UserModel>(`userStats/${userId}`).valueChanges())
       );
   }
 }

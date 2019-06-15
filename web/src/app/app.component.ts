@@ -62,7 +62,7 @@ export class AppComponent implements AfterViewInit {
       title: 'Privacy',
       route: '/privacy',
       icon: 'gavel',
-    }
+    },
   ];
   public version: string;
 
@@ -70,7 +70,7 @@ export class AppComponent implements AfterViewInit {
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
     private authService: AuthenticationService,
-    private activityService: ActivityService,
+    private activityService: ActivityService
   ) {
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',

@@ -10,7 +10,7 @@ import { auth, User } from 'firebase/app';
 
 // Rxjs operators
 import { from, of, Observable, Subscription } from 'rxjs';
-import { concatMap, filter, first, switchMap, takeUntil, tap, take } from 'rxjs/operators';
+import { concatMap, filter, first, switchMap, tap } from 'rxjs/operators';
 
 // Third party modules
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -24,9 +24,9 @@ import { ActivityService } from './activity.service';
 })
 export class AuthenticationService {
 
+  private subscriptions: Subscription[] = [];
   public profile: ProfileModel = new ProfileModel();
   public isAuthenticated: boolean = false;
-  private subscriptions: Subscription[] = [];
 
   constructor(
     private activityService: ActivityService,
@@ -41,12 +41,12 @@ export class AuthenticationService {
 
   // This function checks authentication state of user
   public checkAuth(): void {
-    const subscription = this.afAuth.authState
+    const subscription: Subscription = this.afAuth.authState
       .pipe(
         filter((user: User) => !!user),
         switchMap((user: User) => this.afs
           .doc<ProfileModel>(`users/${user.uid}`)
-          .valueChanges()),
+          .valueChanges())
       )
       .subscribe((profile: ProfileModel) => {
         this.isAuthenticated = true;
@@ -75,7 +75,7 @@ export class AuthenticationService {
   public login(): void {
     const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
     provider.addScope('repo,admin:repo_hook');
-    const subscription = from(this.afAuth.auth.signInWithPopup(provider))
+    const subscription: Subscription = from(this.afAuth.auth.signInWithPopup(provider))
       .pipe(
         tap(() => this.activityService.setProgressBar(true)),
         filter((credentials: firebase.auth.UserCredential) => !!credentials),
@@ -100,14 +100,14 @@ export class AuthenticationService {
             },
             emailVerified: credentials.user.emailVerified,
             creationTime: credentials.user.metadata.creationTime,
-            lastSignInTime: credentials.user.metadata.lastSignInTime
-          }),
+            lastSignInTime: credentials.user.metadata.lastSignInTime,
+          })
         ),
         concatMap(
           (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
             .doc<ProfileModel>(profile.uid)
             .set(profile, { merge: true })),
-          (profile: ProfileModel) => profile,
+          (profile: ProfileModel) => profile
         ),
         concatMap(
           (profile: ProfileModel) => from(this.afs.collection<ProfileModel>('users')
@@ -122,7 +122,7 @@ export class AuthenticationService {
               osVersion: this.deviceService.getDeviceInfo().os_version,
               browserVersion: this.deviceService.getDeviceInfo().browser_version,
             })),
-          (profile: ProfileModel) => this.profile = profile,
+          (profile: ProfileModel) => this.profile = profile
         ),
         tap((profile: ProfileModel): Observable<ProfileModel> => {
           const callable: any = this.fns.httpsCallable('findAllUserEvents');
@@ -133,7 +133,7 @@ export class AuthenticationService {
         switchMap((profile: ProfileModel) => {
           const callable: any = this.fns.httpsCallable('findAllUserRepositories');
           return callable({ token: profile.oauth.githubToken });
-        }),
+        })
       )
       .subscribe(() => {
         this.isAuthenticated = true;
@@ -151,7 +151,7 @@ export class AuthenticationService {
       .subscribe(() => {
         this.profile = new ProfileModel();
         this.isAuthenticated = false;
-        this.subscriptions.map((subscription) => subscription.unsubscribe());
+        this.subscriptions.map((subscription: Subscription) => subscription.unsubscribe());
         this.router.navigate(['/']);
       });
   }

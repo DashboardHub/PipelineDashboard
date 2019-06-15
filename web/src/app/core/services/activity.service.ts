@@ -4,7 +4,7 @@ import { of, timer, Observable, Subject } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ActivityService {
 
@@ -49,7 +49,7 @@ export class ActivityService {
       return of(0)
         .pipe(
             tap(() => this.setProgressBar(true)),
-            finalize(() => this.setProgressBar(false)),
+            finalize(() => this.setProgressBar(false))
         );
   }
 }

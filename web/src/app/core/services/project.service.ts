@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { map, switchMap, tap, mergeMap, concatMap } from 'rxjs/operators';
 import * as firebase from 'firebase';
-import { Observable, of, forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
+import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
@@ -20,7 +20,7 @@ export class ProjectService {
     private afs: AngularFirestore,
     private authService: AuthenticationService,
     private activityService: ActivityService,
-    private repositoryService: RepositoryService,
+    private repositoryService: RepositoryService
   ) {
   }
 
@@ -40,7 +40,7 @@ export class ProjectService {
       .pipe(
         tap(() => this.repositoryService.refresh()),
         switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
-        map(() => project),
+        map(() => project)
       );
   }
 
@@ -49,7 +49,7 @@ export class ProjectService {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete()),
+        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete())
       );
   }
 
@@ -64,7 +64,7 @@ export class ProjectService {
             (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
               .orderBy('updatedOn', 'desc')
           )
-          .valueChanges()),
+          .valueChanges())
       );
   }
 
@@ -79,7 +79,7 @@ export class ProjectService {
             (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
               .orderBy('updatedOn', 'desc')
           )
-          .valueChanges()),
+          .valueChanges())
       );
   }
 
@@ -88,7 +88,7 @@ export class ProjectService {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges()),
+        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).valueChanges())
       );
   }
 
@@ -110,16 +110,32 @@ export class ProjectService {
         switchMap(() => this.afs
           .collection<ProjectModel>('projects')
           .doc<ProjectModel>(project.uid)
-          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()), }, { merge: true })),
+          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true }))
       );
   }
 
   // This function add the repository in any project
   public saveRepositories(uid: string, repositories: string[]): Observable<void> {
+    if (!repositories.length) {
+      return this.activityService
+        .start()
+        .pipe(
+          switchMap(() => this.afs
+            .collection<ProjectModel>('projects')
+            .doc<ProjectModel>(uid)
+            .set(
+              {
+                repositories: [],
+                updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+              },
+              { merge: true }))
+        );
+    }
+
     return this.activityService
       .start()
       .pipe(
-        mergeMap(() => forkJoin(...repositories.map((repository) => this.repositoryService.loadRepository(repository)))),
+        mergeMap(() => forkJoin(...repositories.map((repository: string) => this.repositoryService.loadRepository(repository)))),
         switchMap(() => this.afs
           .collection<ProjectModel>('projects')
           .doc<ProjectModel>(uid)
@@ -128,7 +144,7 @@ export class ProjectService {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
-            { merge: true })),
+            { merge: true }))
       );
   }
 }

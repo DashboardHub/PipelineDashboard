@@ -1,18 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 import { MatDialog } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { filter, tap, switchMap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
-// Dashboard hub models
-import { ProjectModel } from '../../shared/models/index.model';
-
-// Dashboard hub dialog component
+// DashboardHub
+import { AuthenticationService, ProjectService } from '../../core/services/index.service';
 import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
-
-// Dashboard hub services
-import { AuthenticationService, ProjectService, RepositoryService } from '../../core/services/index.service';
+import { ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',
@@ -23,7 +18,6 @@ import { AuthenticationService, ProjectService, RepositoryService } from '../../
 export class ViewProjectComponent implements OnInit {
   private projectSubscription: Subscription;
   private deleteSubscription: Subscription;
-  private repositorySubscription: Subscription;
   public project: ProjectModel = new ProjectModel();
 
   constructor(
@@ -31,8 +25,7 @@ export class ViewProjectComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private projectService: ProjectService,
-    private repositoryService: RepositoryService,
-    private authService: AuthenticationService,
+    private authService: AuthenticationService
   ) {
     this.project.uid = this.route.snapshot.paramMap.get('uid');
   }
@@ -49,21 +42,18 @@ export class ViewProjectComponent implements OnInit {
       .open(DialogListComponent, {
         data: {
           project: this.project,
-          repositories: this.authService.profile.repositories
-        }
+          repositories: this.authService.profile.repositories,
+        },
       })
       .afterClosed()
       .pipe(
         filter((selectedRepositories: { value: string }[]) => !!selectedRepositories),
-      )
-      .subscribe((selectedRepositories: { value: string }[]) => {
-        this.projectService.saveRepositories(
+        switchMap((selectedRepositories: { value: string }[]) => this.projectService.saveRepositories(
           this.project.uid,
           selectedRepositories.map((fullName: { value: string }) => fullName.value)
-        )
-          // @TODO: need to nest subscribes because already using 2 nested pipes :( - required imorovement to stop page flicker
-          .subscribe(() => {});
-      });
+        ))
+      )
+      .subscribe(() => true);
   }
 
   // This function delete the project
@@ -81,6 +71,5 @@ export class ViewProjectComponent implements OnInit {
   ngDestroy(): void {
     this.projectSubscription.unsubscribe();
     this.deleteSubscription.unsubscribe();
-    this.repositorySubscription.unsubscribe();
   }
 }
