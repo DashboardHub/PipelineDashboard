@@ -23,8 +23,14 @@ script:
 
 before_deploy:
   - (cd functions; npm install)
-  - (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.5-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.test.ts)
-  - (cd web; npm run build:test)
+  - (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.5-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
+  - (cd web/src/environments; sed -i 's/{{ FIREBASE_API_KEY }}/'$FIREBASE_API_KEY_EDDIE'/g' environment.prod.ts)
+  - (cd web/src/environments; sed -i 's/{{ FIREBASE_AUTH_DOMAIN }}/'$FIREBASE_AUTH_DOMAIN_EDDIE'/g' environment.prod.ts)
+  - (cd web/src/environments; sed -i 's/{{ FIREBASE_DATABASE_URL }}/'$FIREBASE_DATABASE_URL_EDDIE'/g' environment.prod.ts)
+  - (cd web/src/environments; sed -i 's/{{ FIREBASE_PROJECT_ID }}/'$FIREBASE_PROJECT_ID_EDDIE'/g' environment.prod.ts)
+  - (cd web/src/environments; sed -i 's/{{ FIREBASE_STORAGE_BUCKET }}/'$FIREBASE_STORAGE_BUCKET_EDDIE'/g' environment.prod.ts)
+  - (cd web/src/environments; sed -i 's/{{ FIREBASE_MESSAGING_SEND_ID }}/'$FIREBASE_MESSAGING_SEND_ID_EDDIE'/g' environment.prod.ts)
+  - (cd web; npm run build:prod)
 
 deploy:
   - provider: firebase
@@ -35,3 +41,11 @@ deploy:
     message: "Deploying v0.11.5-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
       branch: v0.11.5
+  - provider: firebase
+    skip_cleanup: true
+    token:
+      secure: $FIREBASE_TOKEN_EDDIE
+    project: "pipelinedashboard-eddie"
+    message: "Deploying v0.11.6-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: issue-1304
