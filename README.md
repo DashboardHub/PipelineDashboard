@@ -39,16 +39,13 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 ### LOCAL DEVELOPMENT
 
-#### FIREBASE & AUTH
+#### FIREBASE & GITHUB OAUTH
 
 1. Create a firebase project with the name `pipelinedashboard-dev` via their firebase console https://console.firebase.google.com (*note: this must have a credit card assigned for external http access*)
 2. Turn on **OAuth** authentication on the project (we use GitHub here, but you can use another or allow multiple)
    1. If using GitHub OAuth, create an OAuth App on GitHub
    2. Enter the 2 OAuth private keys from GitHub into the Firebase Authentication
 3. Click **Databases** and create an empty `firestore` database (indexes, security, collections and rules will all be automatically created later on as part of the deployment)
-4. Deploy all the code (db, functions and UI - you don't have to use the UI, you can connect from your local code, instructions below)
-   1. `npm --prefix web run build:local`
-   2. Login in with firebase cli `firebase login` and then deploy `firebase deploy --project pipelinedashboard-dev`
 
 #### Angular
 
@@ -63,6 +60,12 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 4. `npm start`
 
 Then visit `http://localhost:4200/`
+
+#### DEPLOY (optional)
+
+1. Deploy all the code (db, functions and UI - you don't have to use the UI, you can connect from your local code, instructions below)
+   1. `npm --prefix web run build:local`
+   2. Login in with firebase cli `firebase login` and then deploy `firebase deploy --project pipelinedashboard-dev`
 
 **NOTE: Do not forget to run `npm run list` in `web` or `functions` directory depending on where you made your changes before commiting, these will run the lint checks for you**
 
