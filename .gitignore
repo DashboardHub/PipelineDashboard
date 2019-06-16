@@ -2,3 +2,4 @@
 .idea
 .firebase
 *.log
+web/src/environments/environment.local.ts

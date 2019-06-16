@@ -9,5 +9,6 @@ export class Config {
     projectId: string,
     storageBucket: string,
     messagingSenderId: string,
+    appId?: string,
   };
 }

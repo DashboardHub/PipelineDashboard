@@ -1,6 +1,6 @@
 {
   "name": "dashboardhub-pipelinedashboard",
-  "version": "0.9.0",
+  "version": "0.11.6",
   "private": true,
   "description": "Your Delivery Pipeline overview in One Place",
   "keywords": [
@@ -9,9 +9,8 @@
     "devops"
   ],
   "scripts": {
-    "start": "ng serve",
-    "build:dev": "ng build --prod --aot",
-    "build:test": "ng build --prod --aot --configuration=test",
+    "start": "ng serve --configuration=local",
+    "build:local": "ng build --prod --aot --configuration=local",
     "build:prod": "ng build --prod --aot --configuration=production",
     "lint": "ng lint",
     "reinstall": "rm -rf node_modules tmp deploy dist && npm install && npm rebuild node-sass",
@@ -19,8 +18,8 @@
     "test": "npm run lint && npm run build:dev && concurrently -k -s first \"npm start\" \"sleep 15 && npm run e2e:ci\""
   },
   "engines": {
-    "node": ">6.12.0",
-    "npm": ">3"
+    "node": ">10.15.2",
+    "npm": ">6.4.1"
   },
   "repository": "git@github.com:DashboardHub/PipelineDashboard.git",
   "license": "MIT",
