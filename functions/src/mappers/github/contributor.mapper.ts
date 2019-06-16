@@ -1,12 +1,12 @@
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './index.mapper';
 
 export interface GitHubContributorInput {
-  author: GitHubUserInput,
+  author: GitHubUserInput;
   total: number;
 }
 
 export interface GitHubContributorModel {
-  owner: GitHubUserModel,
+  owner: GitHubUserModel;
   total: number;
 }
 

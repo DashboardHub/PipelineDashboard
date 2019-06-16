@@ -11,7 +11,7 @@ export interface GitHubIssueInput {
   title: string;
   number: number;
   body: string;
-  user: GitHubUserInput
+  user: GitHubUserInput;
   assignees: GitHubUserInput[];
   created_at: firestore.Timestamp;
   updated_at: firestore.Timestamp;
