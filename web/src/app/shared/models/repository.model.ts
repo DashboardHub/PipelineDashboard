@@ -1,3 +1,5 @@
+import { ContributorModel } from './contributor.model';
+import { IssueModel } from './issue.model';
 import { PullRequestModel } from './pullRequest.model';
 import { ReleaseModel } from './release.model';
 
@@ -16,12 +18,13 @@ export class RepositoryModel {
   stargazers?: string;
   watchers?: number;
   branch?: string;
-  issues?: number;
   license?: string;
   pullRequests?: PullRequestModel[];
   events?: Event[];
   releases?: ReleaseModel[];
+  issues?: IssueModel[];
   lastUpdated: Date;
+  contributors: ContributorModel[];
 
   constructor(fullName: string) {
     this.fullName = fullName;

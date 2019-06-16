@@ -1,9 +1,10 @@
 // Third party modules
 import * as admin from 'firebase-admin';
 import { firestore, Change, EventContext } from 'firebase-functions';
-import { FirebaseAdmin } from './../client/firebase-admin';
 
 // Dashboard hub firebase functions models/mappers
+import { FirebaseAdmin } from './../client/firebase-admin';
+import { Logger } from './../client/logger';
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
 import { getUserRepos } from './repos';
 
@@ -37,6 +38,11 @@ export const updateUserStats: any = firestore
     if (userBefore.lastSignInTime !== user.lastSignInTime) {
       promises.push(getUserRepos(user.token, user.uid));
     }
+
+    Logger.info({
+      user: user.username,
+      imported: {},
+    });
 
     promises.push(FirebaseAdmin
       .firestore()
