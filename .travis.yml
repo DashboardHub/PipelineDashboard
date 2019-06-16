@@ -23,8 +23,8 @@ script:
 
 deploy:
   - provider: script
-    skip_cleanup: false
-    script: scripts/deployment/eddie.sh
+    skip_cleanup: true
+    script: ./scripts/deployment/eddie.sh
     token:
       secure: $FIREBASE_TOKEN_EDDIE
     project: "pipelinedashboard-eddie"
