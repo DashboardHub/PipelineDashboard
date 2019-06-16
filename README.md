@@ -48,7 +48,7 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 3. Click **Databases** and create an empty `firestore` database (indexes, security, collections and rules will all be automatically created later on as part of the deployment)
 4. Deploy all the code (db, functions and UI - you don't have to use the UI, you can connect from your local code, instructions below)
    1. `npm --prefix web run build:local`
-   2. `firebase deploy --project pipelinedashboard-dev`
+   2. Login in with firebase cli `firebase login` and then deploy `firebase deploy --project pipelinedashboard-dev`
 
 #### Angular
 

@@ -25,9 +25,6 @@ deploy:
   - provider: script
     skip_cleanup: true
     script: ./scripts/deployment/eddie.sh
-    token:
-      secure: $FIREBASE_TOKEN_EDDIE
-    project: "pipelinedashboard-eddie"
     message: "Deploying v0.11.6-issue-1304-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
       branch: "issue-1304"

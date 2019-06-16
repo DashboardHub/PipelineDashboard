@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # FUNCTIONS
 (cd functions; npm install)
 
@@ -12,4 +14,4 @@
 
 # DEPLOY
 npm --prefix web run build:prod
-firebase deploy --project pipelinedashboard-eddie
+firebase deploy --project pipelinedashboard-eddie --token $FIREBASE_TOKEN_EDDIE
