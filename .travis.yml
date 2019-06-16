@@ -19,7 +19,7 @@ script:
   - (cd functions; npm run build)
   - (cd web; npm install)
   - (cd web; npm run lint)
-  - (cd web; npm run build:dev)
+  - (cd web; npm run build:prod)
 
 before_deploy:
   - (cd functions; npm install)
