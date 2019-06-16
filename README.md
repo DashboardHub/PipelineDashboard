@@ -2,9 +2,9 @@
 
 # PipelineDashboard
 
-Display your **deployed versions** and **monitor** it.
+The **heartbeat** of your project, easily see an overview of your project and display your **deployed versions** and **monitor** them.
 
-Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/4) and epic branch `issue-firebase`
+Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/7)
 
 ## WANT TO GET INVOLVED? Don't know how? ...
 
@@ -14,15 +14,15 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 - Angular (v7+)
 - Material design
-- Node
-- Firebase
+- Firebase (with nodejs)
 
 ---
 
 ### REQUIREMENTS
 
-- `node` (minimum `v8`)
-- `npm` (minimum `v5`)
+- `node` (minimum `v10+`)
+- `npm` (minimum `v5+`)
+- Firebase cli & account
 
 ## Built with love using...
 
@@ -30,18 +30,44 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 ![nodejs](https://user-images.githubusercontent.com/624760/34513224-17d6ff74-f05f-11e7-8080-18f09f63a3f4.png)
 ![Firebase](https://user-images.githubusercontent.com/624760/54749741-74b66480-4bcd-11e9-9698-be02405a59ae.png)
 
-## ROADMAP
-
-We have an aggressive plan for our ALPHA, so we can get feedback ASAP.
-
-For more up to date information and more details please visit our [project board](https://github.com/DashboardHub/PipelineDashboard/projects/5)
-
 ## QUICK START
 
-1. `cd web`
-2. `npm start`
+### DIRECTORY STRUCTURE
+
+- `functions` where all the backend firebase (serverless) code lives
+- `web` where all the UI (angular) code lives
+
+### LOCAL DEVELOPMENT
+
+#### FIREBASE & GITHUB OAUTH
+
+1. Create a firebase project with the name `pipelinedashboard-dev` via their firebase console https://console.firebase.google.com (*note: this must have a credit card assigned for external http access*)
+2. Turn on **OAuth** authentication on the project (we use GitHub here, but you can use another or allow multiple)
+   1. If using GitHub OAuth, create an OAuth App on GitHub
+   2. Enter the 2 OAuth private keys from GitHub into the Firebase Authentication
+3. Click **Databases** and create an empty `firestore` database (indexes, security, collections and rules will all be automatically created later on as part of the deployment)
+
+#### Angular
+
+*Note: Make sure you have done the firebase steps above*
+
+1. Now we need to add your firebase keys to your local project
+   1. Duplicate the file `web/environments/environment.ts` to `web/environments/environment.local.ts`
+   2. Go to your firebase project config page and select `config` to see your project keys in `json` format
+   3. Then copy/paste them to the file `web/environments/environment.local.ts` (this file is ignored by git and is not saved to the project)
+2. `cd web`
+3. `npm install`
+4. `npm start`
 
 Then visit `http://localhost:4200/`
+
+#### DEPLOY (optional)
+
+1. Deploy all the code (db, functions and UI - you don't have to use the UI, you can connect from your local code, instructions below)
+   1. `npm --prefix web run build:local`
+   2. Login in with firebase cli `firebase login` and then deploy `firebase deploy --project pipelinedashboard-dev`
+
+**NOTE: Do not forget to run `npm run list` in `web` or `functions` directory depending on where you made your changes before commiting, these will run the lint checks for you**
 
 ### RUNNING AUTOMATED TESTS
 
