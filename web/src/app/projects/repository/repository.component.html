@@ -8,30 +8,168 @@
     </span>
   </mat-card-header>
   <mat-divider></mat-divider>
-  <mat-card-content fxLayout="row">
-    <mat-list fxFlex dense>
-      <h3 mat-subheader>Events</h3>
-      <mat-list-item *ngFor="let event of repository.events | slice:0:5">
-        <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
-        <h4 mat-line [matTooltip]="event.payload.title">{{ event.payload.title }}</h4>
-        <p mat-line>{{ event.createdOn | timeAgo }}</p>
-      </mat-list-item>
-    </mat-list>
-    <mat-list fxFlex dense>
-      <h3 mat-subheader>Pull Requests</h3>
-      <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
-        <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
-        <h4 mat-line>{{ pullRequest.title }}</h4>
-        <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
-      </mat-list-item>
-    </mat-list>
-    <mat-list fxFlex dense>
-      <h3 mat-subheader>Releases</h3>
-      <mat-list-item *ngFor="let release of repository.releases | slice:0:5">
-        <h4 mat-line>{{ release.title }}</h4>
-        <p mat-line>{{ release.createdOn | timeAgo }}</p>
-      </mat-list-item>
-    </mat-list>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutGap="2%" class="dashboard-cards-row">
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon">
+              <mat-icon>new_releases</mat-icon>
+            </div>
+            <p class="heading">Latest Release</p>
+            <h3 class="description">v1.0.0</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+              <div fxFlex="15%">
+                <img alt="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+              </div>
+              <div fxFlex="85%">
+                <p class="bottom-line" mat-line> Published: 2 days ago</p>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon control-point">
+              <mat-icon>content_copy</mat-icon>
+            </div>
+            <p class="heading">Milestone last updated</p>
+            <h3 class="description">v1.0</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+              <div fxFlex="15%">
+                <img alt="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+              </div>
+              <div fxFlex="85%">
+                <p class="bottom-line" mat-line>State: Open | Open: 4 | Close: 10</p>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon verified-user">
+              <mat-icon>verified_user</mat-icon>
+            </div>
+            <p class="heading">Top Contributor</p>
+            <h3 class="description">octocat</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+              <div fxFlex="15%">
+                <img alt="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+              </div>
+              <div fxFlex="85%">
+                <p class="bottom-line" mat-line> Total Commits: 135</p>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <div class="card-icon info-outline">
+              <mat-icon>control_point</mat-icon>
+            </div>
+            <p class="heading">Latest PR</p>
+            <h3 class="description">1347</h3>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
+              <div fxFlex="15%">
+                <img alt="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+              </div>
+              <div fxFlex="85%">
+                <p class="bottom-line" mat-line> Found a bug | webkhushboo</p>
+              </div>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" class="tab-list">
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 *ngIf="repository.events && repository.events.length > 0; else eventsOther" class="heading card-icon">Events</h3>
+            <ng-template #eventsOther>
+              <p> No events are available</p>
+            </ng-template>
+            <mat-list>
+              <mat-list-item *ngFor="let event of repository.events | slice:0:5">
+                <img matListAvatar [src]="event.actor.avatarUrl" [alt]="event.actor.username" />
+                <h4 mat-line [matTooltip]="event.type">{{ event.type}}</h4>
+                <p mat-line>{{event.payload.title}}</p>
+                <p mat-line>{{ event.createdOn | timeAgo }}</p>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 *ngIf="repository.issues && repository.issues.length > 0; else issuesOther" class="heading card-icon control-point">Issues</h3>
+            <ng-template #issuesOther>
+              <p> No issues are available</p>
+            </ng-template>
+            <mat-list role="list">
+              <mat-list-item role="listitem" *ngFor="let issue of repository.issues | slice:0:5">
+                <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
+                <h4 mat-line><a href="{{issue.url}}">
+                    #{{issue.number}} </a> {{issue.title}}</h4>
+                <p mat-line>Last updated: {{issue.updatedOn | timeAgo}}</p>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 *ngIf="repository.contributors && repository.contributors.length > 0; else contributorsOther" class="heading card-icon verified-user">Contributors</h3>
+            <ng-template #contributorsOther>
+              <p> No contributors are available</p>
+            </ng-template>
+            <mat-list role="list">
+              <mat-list-item role="listitem" *ngFor="let contributor of repository.contributors | slice:0:5">
+                <img matListAvatar [alt]="contributor.owner.username" [src]="contributor.owner.avatarUrl" />
+                <h4 mat-line><a href="https://github.com/{{contributor.owner.username}}">
+                    {{contributor.owner.username}}</a></h4>
+                <p mat-line>Total commits: {{contributor.total}}</p>
+              </mat-list-item>
+            </mat-list>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div fxFlex="24%">
+        <mat-card>
+          <mat-card-content class="dashboard-card">
+            <h3 *ngIf="repository.pullRequests && repository.pullRequests.length > 0; else pullRequestsOther" class="card-icon heading info-outline">Pull Requests</h3>
+            <ng-template #pullRequestsOther>
+              <p> No pull requests are available</p>
+            </ng-template>
+            <mat-list>
+              <mat-list-item *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
+                <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
+                <h4 mat-line>{{ pullRequest.title }}</h4>
+                <p mat-line>{{ pullRequest.owner.username }}</p>
+                <p mat-line>{{ pullRequest.createdOn | timeAgo }}</p>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
   </mat-card-content>
   <mat-card-footer>
     <span *ngIf="repository.license">

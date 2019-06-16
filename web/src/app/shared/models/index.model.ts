@@ -1,4 +1,5 @@
 export * from './activity.model';
+export * from './contributor.model';
 export * from './event.model';
 export * from './profile.model';
 export * from './account.model';

@@ -1,4 +1,6 @@
+export * from './contributor.mapper';
 export * from './event.mapper';
+export * from './issue.mapper';
 export * from './organisation.mapper';
 export * from './payload.mapper';
 export * from './pullRequest.mapper';

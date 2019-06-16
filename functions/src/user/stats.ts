@@ -1,9 +1,10 @@
 // Third party modules
 import * as admin from 'firebase-admin';
 import { firestore, Change, EventContext } from 'firebase-functions';
-import { FirebaseAdmin } from './../client/firebase-admin';
 
 // Dashboard hub firebase functions models/mappers
+import { FirebaseAdmin } from './../client/firebase-admin';
+import { Logger } from './../client/logger';
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
 
 export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
@@ -29,6 +30,11 @@ export const updateUserStats: any = firestore
       },
       lastUpdated: admin.firestore.Timestamp.fromDate(new Date()),
     };
+
+    Logger.info({
+      user: user.username,
+      imported: {},
+    });
 
     return FirebaseAdmin
       .firestore()
