@@ -5,11 +5,11 @@ export const environment: Config = {
   version: 'x.x.x',
 
   firebase: {
-    apiKey: 'AIzaSyC6MQqAi7rT_DGPwltaIZJUdlvy-vh73YY',
-    authDomain: 'pipelinedashboard-test.firebaseapp.com',
-    databaseURL: 'https://pipelinedashboard-test.firebaseio.com',
-    projectId: 'pipelinedashboard-test',
-    storageBucket: 'pipelinedashboard-test.appspot.com',
-    messagingSenderId: '352932205551',
+    apiKey: '{{ FIREBASE_API_KEY }}',
+    authDomain: '{{ FIREBASE_AUTH_DOMAIN }}',
+    databaseURL: '{{ FIREBASE_DATABASE_URL }}',
+    projectId: '{{ FIREBASE_PROJECT_ID }}',
+    storageBucket: '{{ FIREBASE_STORAGE_BUCKET }}',
+    messagingSenderId: '{{ FIREBASE_MESSAGING_SEND_ID }}',
   },
 };

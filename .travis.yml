@@ -6,6 +6,8 @@ branches:
   - master
   - v0.11.5
   - /issue-*/
+  - eddie
+  - khush
 env:
   - NODE_ENV=development
 
@@ -19,19 +21,30 @@ script:
   - (cd functions; npm run build)
   - (cd web; npm install)
   - (cd web; npm run lint)
-  - (cd web; npm run build:dev)
-
-before_deploy:
-  - (cd functions; npm install)
-  - (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.5-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.test.ts)
-  - (cd web; npm run build:test)
+  - (cd web; npm run build:prod)
 
 deploy:
-  - provider: firebase
+  - provider: script
     skip_cleanup: true
-    token:
-      secure: $FIREBASE_TEST_TOKEN
-    project: "pipelinedashboard-test"
-    message: "Deploying v0.11.5-$TRAVIS_BUILD_NUMBER-ALPHA"
+    script: sh ./scripts/deployment/eddie.sh
+    message: "Deploying v0.11.eddie-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: eddie
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/khush.sh
+    message: "Deploying v0.11.khush-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: khush
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/dev.sh
+    message: "Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
       branch: v0.11.5
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/prod.sh
+    message: "Deploying v0.11.6-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: master
