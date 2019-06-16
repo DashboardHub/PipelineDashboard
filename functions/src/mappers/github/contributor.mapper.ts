@@ -2,7 +2,7 @@ import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './index.mapp
 
 export interface GitHubContributorInput {
   author: GitHubUserInput,
-  total: number
+  total: number;
 }
 
 export interface GitHubContributorModel {

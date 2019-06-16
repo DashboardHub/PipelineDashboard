@@ -6,7 +6,7 @@ import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mappe
 
 export interface GitHubIssueInput {
   id: string;
-  url: string;
+  html_url: string;
   state: string;
   title: string;
   number: number;
@@ -34,7 +34,7 @@ export class GitHubIssueMapper {
   static import(input: GitHubIssueInput): GitHubIssueModel {
     return {
       uid: input.id,
-      url: input.url,
+      url: input.html_url,
       state: input.state,
       title: input.title,
       number: input.number,
