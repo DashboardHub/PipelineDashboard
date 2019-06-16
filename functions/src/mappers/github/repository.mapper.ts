@@ -31,7 +31,7 @@ export interface GitHubRepositoryModel {
   events?: GitHubEventModel[];
   releases?: GitHubReleaseModel[];
   issues?: GitHubIssueModel[];
-  contributors: GitHubContributorModel[];
+  contributors?: GitHubContributorModel[];
   updatedAt: firestore.Timestamp;
 }
 
