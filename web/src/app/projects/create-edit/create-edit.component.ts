@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Rxjs components
 import { Subscription } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 // Dashboard hub services and models
 import { ProjectService } from '../../core/services/index.service';
@@ -40,9 +39,8 @@ export class CreateEditProjectComponent implements OnInit {
     });
     if (this.uid) {
       this.isEdit = true;
-      this.projectSubscription = this.projectService
-        .findOneById(this.uid)
-        .subscribe((project: ProjectModel) => this.projectForm.reset(project));
+      this.projectSubscription = this.route.data
+        .subscribe((data: { project: ProjectModel }) => this.projectForm.reset(data.project));
     }
   }
 
@@ -51,17 +49,17 @@ export class CreateEditProjectComponent implements OnInit {
     if (this.uid) {
       this.createEditSubscription = this.projectService
         .save({ uid: this.uid, ...this.projectForm.getRawValue() })
-        .pipe(
-          catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
-        )
-        .subscribe(() => this.router.navigate(['/projects', this.uid]));
+        .subscribe(
+          () => this.router.navigate(['/projects', this.uid]),
+          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+        );
     } else {
       this.createEditSubscription = this.projectService
         .create(this.projectForm.getRawValue())
-        .pipe(
-          catchError((error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 }))
-        )
-        .subscribe((project: ProjectModel) => this.router.navigate(['/projects', project.uid]));
+        .subscribe(
+          (project: ProjectModel) => this.router.navigate(['/projects', project.uid]),
+          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+        );
     }
   }
 

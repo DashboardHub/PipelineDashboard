@@ -1,7 +1,5 @@
-<mat-card>
+<mat-card *ngIf="repository">
   <mat-card-header>
-    <mat-icon mat-card-avatar [matBadge]="repository.stargazers" matBadgeColor="accent" *ngIf="repository.private === false">lock_open</mat-icon>
-    <mat-icon mat-card-avatar [matBadge]="repository.stargazers" matBadgeColor="accent" *ngIf="repository.private === true">lock</mat-icon>
     <mat-card-title>{{ repository.fullName }}</mat-card-title>
     <mat-card-subtitle>{{ repository.description }}</mat-card-subtitle>
     <span fxFlex></span>
@@ -175,7 +173,7 @@
   </mat-card-content>
   <mat-card-footer>
     <span *ngIf="repository.license">
-      <mat-icon>gavel</mat-icon> {{ repository.license.name }}
+      <mat-icon>gavel</mat-icon> {{ repository.license.name || 'No license' }}
     </span>
   </mat-card-footer>
 </mat-card>

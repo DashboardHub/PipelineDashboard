@@ -17,15 +17,12 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private userService: UserService
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.userSubscription = this.userService
       .findAllUserStats()
-      .subscribe((users: UserStatsModel[]) => {
-        this.users = users;
-      });
+      .subscribe((users: UserStatsModel[]) => this.users = users);
   }
 
   ngDestroy(): void {

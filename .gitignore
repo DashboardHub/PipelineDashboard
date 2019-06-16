@@ -1,4 +1,5 @@
 .DS_Store
 .idea
 .firebase
+*.log
 web/src/environments/environment.local.ts

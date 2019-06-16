@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { delay } from 'rxjs/operators';
 
 // Dashboard hub Icon register
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 // Dashboard hub models and services
-import { AuthenticationService, SpinnerService } from './core/services/index.service';
+import { ActivityService, AuthenticationService } from './core/services/index.service';
 import { Navigation, ProfileModel } from './shared/models/index.model';
 
 import { environment } from './../environments/environment';
@@ -15,9 +16,8 @@ import { environment } from './../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-  public version: string;
-  public showSpinner: boolean = false;
+export class AppComponent implements AfterViewInit {
+  public progress: number = 0;
   public publicRoutes: Navigation[] = [
     {
       title: 'Homepage',
@@ -64,11 +64,13 @@ export class AppComponent implements OnInit {
       icon: 'gavel',
     },
   ];
+  public version: string;
+
   constructor(
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
     private authService: AuthenticationService,
-    private spinnerService: SpinnerService
+    private activityService: ActivityService
   ) {
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',
@@ -93,10 +95,11 @@ export class AppComponent implements OnInit {
     this.version = environment.version;
   }
 
-  ngOnInit(): void {
-    this.spinnerService
+  ngAfterViewInit(): void {
+    this.activityService
       .getProgressBar()
-      .subscribe((data: boolean) => this.showSpinner = data);
+      .pipe(delay(0))
+      .subscribe((progress: number) => this.progress = progress);
   }
 
   public getProfile(): ProfileModel {

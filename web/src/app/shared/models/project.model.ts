@@ -13,4 +13,8 @@ export class ProjectModel {
   repositories?: string[] = [];
   createdOn?: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
+
+  constructor(uid: string = '') {
+    this.uid = uid;
+  }
 }

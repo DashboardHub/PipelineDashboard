@@ -1,4 +1,4 @@
-<div class="mat-content">
+<div class="mat-content" *ngIf="project">
 
   <mat-toolbar>
     <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'public'">lock_open</mat-icon>

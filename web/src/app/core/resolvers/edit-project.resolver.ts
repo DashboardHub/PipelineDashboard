@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+import { of } from 'rxjs';
+import { catchError, switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { ProjectModel } from '../../shared/models/index.model';
-import { AuthenticationService, ProjectService } from '../services/index.service';
+import { ProjectService } from '../services/index.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,20 +13,27 @@ import { AuthenticationService, ProjectService } from '../services/index.service
 export class EditProjectResolver implements Resolve<boolean> {
 
   constructor(
-    private authService: AuthenticationService,
     private projectService: ProjectService,
     private router: Router
-  ) {
-  }
+  ) { }
 
   resolve(route: ActivatedRouteSnapshot): any {
-    this.projectService.findOneById(route.params.uid)
-      .subscribe((project: ProjectModel) => {
-        // Added check for not authenticated user and private project details as well for their ownner
-        if (project.type === 'private' && !this.authService.isAuthenticated ||
-          !project.access.admin.includes(this.authService.profile.uid)) {
-          this.router.navigate(['/']);
-        }
-      });
+    return this.projectService.findOneById(route.params.uid)
+      .pipe(
+        take(1),
+        switchMap((project: ProjectModel) => {
+          // for private project must have access
+          if (!project || (project.type === 'private' && !this.projectService.isAdmin(project))) {
+            this.router.navigate(['/projects']);
+            return of(new ProjectModel());
+          }
+
+          return of(project);
+        }),
+        catchError(() => {
+          this.router.navigate(['/projects']);
+          return of(new ProjectModel());
+        })
+      );
   }
 }

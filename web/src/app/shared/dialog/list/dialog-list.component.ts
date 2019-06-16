@@ -18,13 +18,12 @@ export class DialogListComponent {
     private repositoryService: RepositoryService,
     public dialogRef: MatDialogRef<DialogListComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { project: ProjectModel, repositories: RepositoriesModel }
-  ) {
-  }
+  ) { }
 
   // @TODO: move out, otherwise can not be reused
   public refresh(): void {
     this.repositorySubscription = this.repositoryService
-      .findAll(true)
+      .refresh()
       .subscribe((repositories: RepositoriesModel) => this.data.repositories = repositories);
   }
 

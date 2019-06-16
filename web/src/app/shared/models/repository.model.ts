@@ -18,7 +18,9 @@ export class RepositoryModel {
   stargazers?: string;
   watchers?: number;
   branch?: string;
-  license?: string;
+  license?: {
+    name: string;
+  };
   pullRequests?: PullRequestModel[];
   events?: Event[];
   releases?: ReleaseModel[];
