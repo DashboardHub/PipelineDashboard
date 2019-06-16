@@ -38,8 +38,8 @@ deploy:
       branch: khush
   - provider: script
     skip_cleanup: true
-    script: sh ./scripts/deployment/test.sh
-    message: "Deploying v0.11.test-$TRAVIS_BUILD_NUMBER-ALPHA"
+    script: sh ./scripts/deployment/dev.sh
+    message: "Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
       branch: v0.11.6
   - provider: script
