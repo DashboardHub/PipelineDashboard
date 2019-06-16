@@ -4,7 +4,7 @@
 (cd functions; npm install)
 
 # WEB
-(cd web/src/environments; sed -i 's/x\.x\.x/v0.11.6-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
+(cd web/src/environments; sed -i 's/x\.x\.x/v0.11.eddie-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_API_KEY }}/'$FIREBASE_API_KEY_EDDIE'/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_AUTH_DOMAIN }}/'$FIREBASE_AUTH_DOMAIN_EDDIE'/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_DATABASE_URL }}/'$FIREBASE_DATABASE_URL_EDDIE'/g' environment.prod.ts)

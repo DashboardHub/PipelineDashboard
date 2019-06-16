@@ -6,6 +6,8 @@ branches:
   - master
   - v0.11.6
   - /issue-*/
+  - eddie
+  - khush
 env:
   - NODE_ENV=development
 
@@ -24,7 +26,13 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER /bin/sh ./scripts/deployment/eddie.sh
-    message: "Deploying v0.11.6-issue-1304-$TRAVIS_BUILD_NUMBER-ALPHA"
+    script: sh ./scripts/deployment/eddie.sh
+    message: "Deploying v0.11.eddie-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
-      branch: "issue-1304"
+      branch: "eddie"
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/khush.sh
+    message: "Deploying v0.11.khush-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: "khush"
