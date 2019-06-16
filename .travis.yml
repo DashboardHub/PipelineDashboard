@@ -29,10 +29,22 @@ deploy:
     script: sh ./scripts/deployment/eddie.sh
     message: "Deploying v0.11.eddie-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
-      branch: "eddie"
+      branch: eddie
   - provider: script
     skip_cleanup: true
     script: sh ./scripts/deployment/khush.sh
     message: "Deploying v0.11.khush-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
-      branch: "khush"
+      branch: khush
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/test.sh
+    message: "Deploying v0.11.test-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: v0.11.6
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/prod.sh
+    message: "Deploying v0.11.6-$TRAVIS_BUILD_NUMBER-ALPHA"
+    on:
+      branch: master

@@ -14,4 +14,4 @@
 
 # DEPLOY
 npm --prefix web run build:prod
-firebase deploy --project pipelinedashboard-khushboo --token $FIREBASE_TOKEN_KHUSH
+firebase deploy --project pipelinedashboard-khush --token $FIREBASE_TOKEN_KHUSH
