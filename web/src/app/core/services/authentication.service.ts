@@ -25,16 +25,16 @@ import { ActivityService } from './activity.service';
 export class AuthenticationService {
 
   private subscriptions: Subscription[] = [];
-  public profile: ProfileModel = new ProfileModel();
   public isAuthenticated: boolean = false;
+  public profile: ProfileModel = new ProfileModel();
 
   constructor(
     private activityService: ActivityService,
-    private deviceService: DeviceDetectorService,
-    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private deviceService: DeviceDetectorService,
     private fns: AngularFireFunctions,
-    private router: Router
+    private router: Router,
+    public afAuth: AngularFireAuth
   ) {
     this.checkAuth();
   }

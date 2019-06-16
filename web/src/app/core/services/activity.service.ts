@@ -12,6 +12,13 @@ export class ActivityService {
   private subject: Subject<number> = new Subject();
 
   /**
+   * Retrieve the status of progress bar
+   */
+  public getProgressBar(): Observable<number> {
+    return this.subject.asObservable();
+  }
+
+  /**
    * Change status of the progress bar
    *
    * @param {boolean} status enable/disable progress bar
@@ -33,13 +40,6 @@ export class ActivityService {
     }
 
     return this.counter;
-  }
-
-  /**
-   * Retrieve the status of progress bar
-   */
-  public getProgressBar(): Observable<number> {
-    return this.subject.asObservable();
   }
 
   /**
