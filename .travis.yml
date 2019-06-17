@@ -4,7 +4,7 @@ node_js:
 branches:
   only:
   - master
-  - v0.11.5
+  - v0.11.6
   - /issue-*/
   - eddie
   - khush
@@ -41,7 +41,7 @@ deploy:
     script: sh ./scripts/deployment/dev.sh
     message: "Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA"
     on:
-      branch: v0.11.5
+      branch: v0.11.6
   - provider: script
     skip_cleanup: true
     script: sh ./scripts/deployment/prod.sh
