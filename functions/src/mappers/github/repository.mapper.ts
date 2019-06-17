@@ -5,6 +5,7 @@ import { firestore } from 'firebase-admin';
 import { GitHubEventModel } from './event.mapper';
 import { GitHubContributorModel } from './index.mapper';
 import { GitHubIssueModel } from './issue.mapper';
+import { GitHubMilestoneModel } from './milestone.mapper';
 import { GitHubPullRequestModel } from './pullRequest.mapper';
 import { GitHubReleaseModel } from './release.mapper';
 
@@ -32,6 +33,7 @@ export interface GitHubRepositoryModel {
   releases?: GitHubReleaseModel[];
   issues?: GitHubIssueModel[];
   contributors?: GitHubContributorModel[];
+  milestones?: GitHubMilestoneModel[];
   updatedAt: firestore.Timestamp;
 }
 

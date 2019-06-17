@@ -5,7 +5,8 @@ import {
   GitHubContributorInput, GitHubContributorMapper,
   GitHubEventInput, GitHubEventMapper,
   GitHubIssueInput, GitHubIssueMapper,
-  GitHubPullRequestInput, GitHubPullRequestMapper,
+  GitHubMilestoneInput, GitHubMilestoneMapper,
+  GitHubPullRequestInput, GitHubPullRequestMapper, 
   GitHubReleaseInput, GitHubReleaseMapper, 
   GitHubRepositoryInput, GitHubRepositoryMapper, 
   GitHubRepositoryModel
@@ -27,6 +28,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     GitHubReleaseInput[],
     GitHubIssueInput[],
     GitHubContributorInput[],
+    GitHubMilestoneInput[],
   ];
   let mappedData: GitHubRepositoryModel;
 
@@ -38,6 +40,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       GitHubClient<GitHubReleaseInput[]>(`/repos/${fullName}/releases`, token),
       GitHubClient<GitHubIssueInput[]>(`/repos/${fullName}/issues`, token),
       GitHubClient<GitHubContributorInput[]>(`/repos/${fullName}/stats/contributors`, token),
+      GitHubClient<GitHubMilestoneInput[]>(`/repos/${fullName}/milestones`, token),
     ]);
     mappedData = {
       ...GitHubRepositoryMapper.import(data[0], 'all'),
@@ -45,8 +48,9 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       events: data[2].map((event: GitHubEventInput) => GitHubEventMapper.import(event)),
       releases: data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)),
       issues: data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)),
-      updatedAt: firestore.Timestamp.fromDate(new Date()),
       contributors: data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)),
+      milestones: data[6].map((milestone: GitHubMilestoneInput) => GitHubMilestoneMapper.import(milestone)),
+      updatedAt: firestore.Timestamp.fromDate(new Date()),
     };
   } catch (error) {
     Logger.error(error);
@@ -59,6 +63,8 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       events: mappedData && mappedData.events.length || 0,
       releases: mappedData && mappedData.releases.length || 0,
       issues: mappedData && mappedData.issues.length || 0,
+      milestones: mappedData && mappedData.milestones.length || 0,
+      updatedAt: mappedData && mappedData.updatedAt,
     },
   });
 

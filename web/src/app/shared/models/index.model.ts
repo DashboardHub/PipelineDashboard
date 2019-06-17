@@ -7,6 +7,7 @@ export * from './loginAudit.model';
 export * from './access.model';
 export * from './repository.model';
 export * from './repositories.model';
+export * from './milestone.model';
 export * from './project.model';
 export * from './pullRequest.model';
 export * from './release.model';
