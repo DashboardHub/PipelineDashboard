@@ -1,0 +1,41 @@
+<div class="mat-content">
+	<mat-toolbar>
+		<span>Tokens</span>
+		<span fxFlex></span>
+		<span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+			<button mat-raised-button type="submit" color="accent"
+				[routerLink]="['/projects', projectuid,'tokens','create']">Create new Token</button>
+		</span>
+	</mat-toolbar>
+
+	<mat-list>
+		<mat-list-item *ngFor="let t of tokens" fxLayout='column'>
+			<mat-toolbar>
+				<span>{{ t.name }}</span>
+				<span fxFlex></span>
+				<span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+					<button mat-raised-button type="submit" color="accent"
+						[routerLink]="['/projects', t.projectuid,'tokens','edit',t.uid]">Edit</button>
+					<button mat-raised-button type="submit" color="warn" (click)="delete(t.uid)">Delete</button>
+				</span>
+			</mat-toolbar>
+		</mat-list-item>
+	</mat-list>
+</div>
+
+<!-- 
+<mat-list>
+	<h3 mat-subheader>Tokens</h3>
+	<h4 mat-line><a [routerLink]="['/projects', projectuid,'tokens','create']">Create new Token</a></h4>
+	<mat-list-item *ngFor="let t of tokens" fxLayout='column'>
+		<mat-toolbar>
+			<span>{{ t.name }}</span>
+			<span fxFlex></span>
+			<span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+				<button mat-raised-button type="submit" color="accent" [routerLink]="['/projects', token.projectuid,'tokens','edit',t.uid]">Edit</button>
+				<button mat-raised-button type="submit" color="warn" (click)="delete(t.uid)">Delete</button>
+			</span>
+		</mat-toolbar>
+	</mat-list-item>
+</mat-list>
+ -->

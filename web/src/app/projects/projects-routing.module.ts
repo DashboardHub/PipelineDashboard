@@ -5,8 +5,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditProjectResolver } from '../core/resolvers/edit-project.resolver';
 import { PublicProjectsComponent } from '../shared/components/public/public.component';
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
+import { TokensProjectComponent } from './tokens/tokens.component'; 
+import { CreateEditTokenComponent } from './create-edit-token/create-edit-token.component';
 
 import { ViewProjectResolver } from '../core/resolvers/view-project.resolver';
+import { ViewTokenResolver } from '../core/resolvers/view-token.resolver';
 import { ViewProjectComponent } from './view/view.component';
 
 // Dashboard hub authentication guards
@@ -24,6 +27,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: ':projectuid/tokens/create',
+    component: CreateEditTokenComponent,
+    resolve: { project: ViewTokenResolver },
+  },
+  {
+    path: ':projectuid/tokens/edit/:uid',
+    component: CreateEditTokenComponent,
+    resolve: { project: ViewTokenResolver },
+  },
+  {
     path: ':uid',
     component: ViewProjectComponent,
     resolve: { project: ViewProjectResolver },
@@ -33,6 +46,12 @@ const routes: Routes = [
     component: CreateEditProjectComponent,
     resolve: { project: EditProjectResolver },
   },
+  {
+    path: ':uid/tokens',
+    component: TokensProjectComponent,
+    resolve: { project: ViewProjectResolver },
+  },
+  
 ];
 
 @NgModule({

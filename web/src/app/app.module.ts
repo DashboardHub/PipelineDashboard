@@ -30,7 +30,7 @@ export function tokenGetter(): string | null {
   ],
   imports: [
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
     AngularFireFunctionsModule,
     BrowserAnimationsModule,
