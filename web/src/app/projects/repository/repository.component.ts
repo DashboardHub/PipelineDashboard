@@ -2,8 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
-import { RepositoryService } from '../../core/services/index.service';
-import { SortingService } from '../../core/services/sorting.service';
+import { RepositoryService, SortingService } from '../../core/services/index.service';
 import { RepositoryModel } from '../../shared/models/index.model';
 
 @Component({
