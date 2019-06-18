@@ -31,8 +31,12 @@ export class RepositoryComponent implements OnInit {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        this.sortingService.sortList(this.repository.milestones, 'updatedAt');
+        if (this.repository.milestones) {
+          this.sortingService.sortList(this.repository.milestones, 'updatedAt');
+        }
+        if (this.repository.releases) {
         this.sortingService.sortList(this.repository.releases, 'createdAt');
+        }
       });
   }
 
