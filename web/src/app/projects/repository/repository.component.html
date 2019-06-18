@@ -38,7 +38,7 @@
               <mat-icon>content_copy</mat-icon>
             </div>
             <p class="heading">Milestone last updated</p>
-            <h3 class="description" *ngIf="repository.milestones && repository.milestones.length > 0; else milestonesOther">{{repository.milestones[0].title}}</h3>
+            <h3 class="description" *ngIf="repository.milestones && repository.milestones.length > 0; else milestonesOther"><a href="{{repository.milestones[0].htmlUrl}}">{{repository.milestones[0].title}}</a></h3>
           </mat-card-content>
           <mat-card-actions>
             <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
@@ -56,7 +56,7 @@
           </mat-card-actions>
         </mat-card>
         <ng-template #milestonesOther>
-            <p>No milestones are available</p>
+          <p>No milestones are available</p>
         </ng-template>
       </div>
       <div fxFlex="24%">
