@@ -5,5 +5,6 @@ export class ReleaseModel {
   title: string;
   description: string;
   owner: UserModel;
+  htmlUrl: string;
   createdOn: Date;
 }

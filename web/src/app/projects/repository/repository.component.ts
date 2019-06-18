@@ -3,7 +3,8 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
 import { RepositoryService } from '../../core/services/index.service';
-import { MilestoneModel, RepositoryModel } from '../../shared/models/index.model';
+import { SortingService } from '../../core/services/sorting.service';
+import { RepositoryModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-repository',
@@ -20,7 +21,8 @@ export class RepositoryComponent implements OnInit {
   public repository: RepositoryModel = new RepositoryModel('');
 
   constructor(
-    private repositoryService: RepositoryService
+    private repositoryService: RepositoryService,
+    private sortingService: SortingService
   ) {
   }
 
@@ -29,23 +31,13 @@ export class RepositoryComponent implements OnInit {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        this.sortMilestones();
+        this.sortingService.sortList(this.repository.milestones, 'updatedAt');
+        this.sortingService.sortList(this.repository.releases, 'createdAt');
       });
   }
 
   ngDestroy(): void {
     this.repositorySubscription
       .unsubscribe();
-  }
-
-  /**
-   * This function is used for sorting the milestones by updatedAt
-   */
-  sortMilestones(): void {
-    this.repository.milestones.sort((m1: MilestoneModel, m2: MilestoneModel) => {
-      const date1: Date = new Date(m1.updatedAt);
-      const date2: Date = new Date(m2.updatedAt);
-      return date1 > date2 ? -1 : date1 < date2 ? 1 : 0;
-    });
   }
 }
