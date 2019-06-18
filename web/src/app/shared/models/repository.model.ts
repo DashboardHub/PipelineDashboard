@@ -1,8 +1,12 @@
 import { ContributorModel } from './contributor.model';
 import { IssueModel } from './issue.model';
+import { MilestoneModel } from './milestone.model';
 import { PullRequestModel } from './pullRequest.model';
 import { ReleaseModel } from './release.model';
 
+/**
+ * Repository model
+ */
 export class RepositoryModel {
   uid?: string;
   id?: string;
@@ -27,6 +31,7 @@ export class RepositoryModel {
   issues?: IssueModel[];
   lastUpdated: Date;
   contributors: ContributorModel[];
+  milestones: MilestoneModel[];
 
   constructor(fullName: string) {
     this.fullName = fullName;

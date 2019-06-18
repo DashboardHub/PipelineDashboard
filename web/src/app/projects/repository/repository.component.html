@@ -38,19 +38,26 @@
               <mat-icon>content_copy</mat-icon>
             </div>
             <p class="heading">Milestone last updated</p>
-            <h3 class="description">v1.0</h3>
+            <h3 class="description" *ngIf="repository.milestones && repository.milestones.length > 0; else milestonesOther"><a href="{{repository.milestones[0].htmlUrl}}">{{repository.milestones[0].title}}</a></h3>
           </mat-card-content>
           <mat-card-actions>
             <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-              <div fxFlex="15%">
-                <img alt="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+              <div fxFlex="15%" *ngIf="repository.milestones && repository.milestones.length > 0">
+                <img [alt]="repository.milestones[0].creator.username" [src]="repository.milestones[0].creator.avatarUrl" />
+              </div>
+              <div fxFlex="15%" *ngIf="repository.milestones && !repository.milestones.length">
+                <mat-icon class="person-class">person</mat-icon>
               </div>
               <div fxFlex="85%">
-                <p class="bottom-line" mat-line>State: Open | Open: 4 | Close: 10</p>
+                <p class="bottom-line" *ngIf="repository.milestones && repository.milestones.length > 0" mat-line>State: {{repository.milestones[0].state}} | Open: {{repository.milestones[0].openIssues}} | Close: {{repository.milestones[0].closeIssues}}</p>
+                <p class="bottom-line-none" *ngIf="repository.milestones && !repository.milestones.length" mat-line>State: N/A | Open: N/A | Close: N/A</p>
               </div>
             </div>
           </mat-card-actions>
         </mat-card>
+        <ng-template #milestonesOther>
+          <p>No milestones are available</p>
+        </ng-template>
       </div>
       <div fxFlex="24%">
         <mat-card>
