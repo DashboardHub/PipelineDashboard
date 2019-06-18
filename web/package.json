@@ -9,7 +9,7 @@
     "devops"
   ],
   "scripts": {
-    "start": "ng serve --configuration=local",
+    "start": "ng serve --configuration=local --source-map=false",
     "build:local": "ng build --prod --aot --configuration=local",
     "build:prod": "ng build --prod --aot --configuration=production",
     "lint": "ng lint",
