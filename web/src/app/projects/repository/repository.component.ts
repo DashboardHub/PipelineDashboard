@@ -31,10 +31,13 @@ export class RepositoryComponent implements OnInit {
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
         if (this.repository.milestones) {
-          this.sortingService.sortList(this.repository.milestones, 'updatedAt');
+          this.sortingService.sortListByDate(this.repository.milestones, 'updatedAt');
         }
         if (this.repository.releases) {
-          this.sortingService.sortList(this.repository.releases, 'createdAt');
+          this.sortingService.sortListByDate(this.repository.releases, 'createdAt');
+        }
+        if (this.repository.contributors) {
+          this.sortingService.sortListByNumber(this.repository.contributors, 'total');
         }
       });
   }
