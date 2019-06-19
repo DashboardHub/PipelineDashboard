@@ -34,7 +34,7 @@ export class RepositoryComponent implements OnInit {
           this.sortingService.sortList(this.repository.milestones, 'updatedAt');
         }
         if (this.repository.releases) {
-        this.sortingService.sortList(this.repository.releases, 'createdAt');
+          this.sortingService.sortList(this.repository.releases, 'createdAt');
         }
       });
   }
