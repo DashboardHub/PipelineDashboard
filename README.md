@@ -61,13 +61,17 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 Then visit `http://localhost:4200/`
 
-#### DEPLOY (optional)
+#### DEPLOY
 
 1. Deploy all the code (db, functions and UI - you don't have to use the UI, you can connect from your local code, instructions below)
    1. `npm --prefix web run build:local`
    2. Login in with firebase cli `firebase login` and then deploy `firebase deploy --project pipelinedashboard-dev`
 
-**NOTE: Do not forget to run `npm run list` in `web` or `functions` directory depending on where you made your changes before commiting, these will run the lint checks for you**
+**NOTE: After `web/` changes you can still use the UI code locally, but any `functions` / `rules` / `indexes` changes will require another deployment**
+
+#### Before contributing
+
+Do not forget to run `npm run list` in `web` or `functions` directory depending on where you made your changes before commiting, these will run the lint checks for you
 
 ### RUNNING AUTOMATED TESTS
 
