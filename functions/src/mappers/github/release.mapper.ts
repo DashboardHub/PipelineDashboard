@@ -9,6 +9,7 @@ export interface GitHubReleaseInput {
   name: string;
   body: string;
   author: GitHubUserInput;
+  html_url: string;
   published_at: firestore.Timestamp;
 }
 
@@ -17,6 +18,7 @@ export interface GitHubReleaseModel {
   title: string;
   description: string;
   owner: GitHubUserModel;
+  htmlUrl: string;
   createdOn: firestore.Timestamp;
 }
 
@@ -27,6 +29,7 @@ export class GitHubReleaseMapper {
       title: input.name,
       description: input.body,
       owner: GitHubUserMapper.import(input.author),
+      htmlUrl: input.html_url,
       createdOn: input.published_at,
     };
   }

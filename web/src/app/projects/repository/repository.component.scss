@@ -61,11 +61,11 @@ mat-list {
   .bottom-line {
     padding: 10px 10px 0 10px;
   }
-  .person-class{
+  .person-class {
     font-size: 30px;
-    padding:4px;
+    padding: 4px;
   }
-  .bottom-line-none{
+  .bottom-line-none {
     font-size: 13px;
     padding-top: 10px;
   }
@@ -75,6 +75,16 @@ mat-list {
   margin-top: 2% !important;
   .mat-card-header-text {
     margin: 0 !important;
+  }
+  .empty-release {
+    padding: 0 10px 10px 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.dashboard-card {
+  .description {
+    font-size: 20px;
   }
 }
 
