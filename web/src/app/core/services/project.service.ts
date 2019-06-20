@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
@@ -40,7 +40,8 @@ export class ProjectService {
       .pipe(
         tap(() => this.repositoryService.refresh()),
         switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
-        map(() => project)
+        map(() => project),
+        take(1)
       );
   }
 
@@ -49,7 +50,8 @@ export class ProjectService {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete())
+        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete()),
+        take(1)
       );
   }
 
