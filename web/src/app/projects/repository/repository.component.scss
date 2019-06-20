@@ -60,6 +60,9 @@ mat-list {
   }
   .bottom-line {
     padding: 10px 10px 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .person-class {
     font-size: 30px;

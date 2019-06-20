@@ -39,6 +39,9 @@ export class RepositoryComponent implements OnInit {
         if (this.repository.contributors) {
           this.sortingService.sortListByNumber(this.repository.contributors, 'total');
         }
+        if (this.repository.pullRequests) {
+          this.sortingService.sortListByDate(this.repository.pullRequests, 'createdOn');
+        }
       });
   }
 
