@@ -2,6 +2,7 @@ import { FirebaseAdmin } from './../client/firebase-admin';
 
 import { GitHubEventInput, GitHubEventMapper, GitHubEventModel } from '../mappers/github/index.mapper';
 import { GitHubClient } from './../client/github';
+import { Logger } from './../client/logger';
 
 export interface EventsInput {
   token: string;
@@ -9,7 +10,13 @@ export interface EventsInput {
 }
 
 export const getUserEvents: any = async (token: string, uid: string, username: string) => {
-  const events: GitHubEventInput[] = await GitHubClient<GitHubEventInput[]>(`/users/${username}/events`, token);
+  let events: GitHubEventInput[] = [];
+  try {
+    events = await GitHubClient<GitHubEventInput[]>(`/users/${username}/events`, token);
+  } catch (error) {
+    Logger.error(error);
+    throw new Error(error);
+  }
   const mappedEvents: GitHubEventModel[] = events.map((event: GitHubEventInput) => GitHubEventMapper.import(event));
 
   await FirebaseAdmin

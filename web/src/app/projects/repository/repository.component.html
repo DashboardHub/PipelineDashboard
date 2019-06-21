@@ -73,19 +73,27 @@
               <mat-icon>verified_user</mat-icon>
             </div>
             <p class="heading">Top Contributor</p>
-            <h3 class="description">octocat</h3>
+            <h3 class="description" *ngIf="repository.contributors && repository.contributors.length > 0; else topContributorsOther">{{repository.contributors[0].owner.username}}</h3>
           </mat-card-content>
           <mat-card-actions>
             <div class="card-footer" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column">
-              <div fxFlex="15%">
-                <img alt="webkhushboo" src="https://avatars2.githubusercontent.com/u/10898595?v=4" />
+              <div fxFlex="15%" *ngIf="repository.contributors && repository.contributors.length > 0">
+                <img [alt]="repository.contributors[0].owner.username" [src]="repository.contributors[0].owner.avatarUrl" />
+              </div>
+              <div fxFlex="15%" *ngIf="repository.contributors && !repository.contributors.length">
+                <mat-icon class="person-class">person</mat-icon>
               </div>
               <div fxFlex="85%">
-                <p class="bottom-line" mat-line> Total Commits: 135</p>
+                <p class="bottom-line" *ngIf="repository.contributors && repository.contributors.length > 0" mat-line> Total Commits: {{repository.contributors[0].total}}</p>
+                <p class="bottom-line-none" *ngIf="repository.contributors && !repository.contributors.length" mat-line>Total Commits: N/A</p>
+              
               </div>
             </div>
           </mat-card-actions>
         </mat-card>
+        <ng-template #topContributorsOther>
+          <p>No contributors are available</p>
+        </ng-template>
       </div>
       <div fxFlex="24%">
         <mat-card>

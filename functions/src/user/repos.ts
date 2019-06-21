@@ -12,11 +12,12 @@ export interface ReposInput {
 }
 
 export const getUserRepos: any = async (token: string, uid: string) => {
-  let repositories: GitHubRepositoryInput[];
+  let repositories: GitHubRepositoryInput[] = [];
   try {
     repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos', token);
   } catch (error) {
-    console.error(error);
+    Logger.error(error);
+    throw new Error(error);
   }
 
   const mappedRepos: GitHubRepositoryModel[] = repositories.map((repository: GitHubRepositoryInput) => GitHubRepositoryMapper.import(repository));
