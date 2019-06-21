@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
-import {  Observable, pipe } from 'rxjs';
+import {  Observable } from 'rxjs';
 import {  map, take } from 'rxjs/operators';
 
 // Dashboard model and services
