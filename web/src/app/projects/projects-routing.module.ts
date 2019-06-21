@@ -33,6 +33,10 @@ const routes: Routes = [
     component: CreateEditProjectComponent,
     resolve: { project: EditProjectResolver },
   },
+  {
+    path: ':projectUid/tokens',
+    loadChildren: './tokens/tokens.module#TokensModule',
+  },
 ];
 
 @NgModule({

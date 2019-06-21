@@ -1,0 +1,32 @@
+<div class="mat-content" fxLayout="column" fxLayoutGap="20px">
+  <form (submit)="save()" [formGroup]="tokenForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Project</mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+
+      <mat-card-content fxLayout="column" fxLayoutGap="20px">
+
+        <mat-form-field>
+          <input matInput type="text" placeholder="Title" formControlName="name" required>
+          <mat-error *ngIf="tokenForm.get(['name']).hasError('required')">This field is required.</mat-error>
+          <mat-error *ngIf="tokenForm.get(['name']).hasError('minlength')">Entered text is too short.</mat-error>
+          <mat-error *ngIf="tokenForm.get(['name']).hasError('maxlength')">Entered text is too long.</mat-error>
+        </mat-form-field>
+
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
+          <button mat-raised-button type="submit" color="accent" [disabled]="tokenForm.invalid">
+            <span *ngIf="!isEdit">Create</span>
+            <span *ngIf="isEdit">Save</span>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
