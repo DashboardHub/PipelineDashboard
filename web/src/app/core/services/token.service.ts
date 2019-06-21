@@ -9,7 +9,6 @@ import { v4 as uuid } from 'uuid';
 import { ProjectTokenModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
-import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +18,7 @@ export class TokenService {
   constructor(
     private afs: AngularFirestore,
     private authService: AuthenticationService,
-    private activityService: ActivityService,
-    private projectService: ProjectService
+    private activityService: ActivityService
   ) { }
 
   // This function returns the token details via id
@@ -49,6 +47,20 @@ export class TokenService {
           .doc(projectUid)
           .collection<ProjectTokenModel>('tokens')
           .valueChanges()
+        )
+      );
+  }
+  // This function returns the tokens via name
+  public findProjectTokenByName(projectUid: string, name: string): Observable<ProjectTokenModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection('projects').doc(projectUid)
+          .collection<ProjectTokenModel>(
+            'tokens',
+            (ref: firebase.firestore.Query) => ref.where('name', '==', name)
+          ).valueChanges()
         )
       );
   }

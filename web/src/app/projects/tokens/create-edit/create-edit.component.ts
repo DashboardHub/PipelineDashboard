@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import { throwError, Observable, Subscription } from 'rxjs';
+import { first, map, switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { ProjectService } from '../../../core/services/index.service';
 import { TokenService } from '../../../core/services/token.service';
 import { ProjectTokenModel } from '../../../shared/models/index.model';
 
@@ -17,7 +17,6 @@ import { ProjectTokenModel } from '../../../shared/models/index.model';
 })
 export class CreateEditProjectTokenComponent implements OnInit {
 
-  private createEditSubscription: Subscription;
   private projectSubscription: Subscription;
   private projectUid: string;
   private uid: string;
@@ -36,7 +35,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.uid = this.route.snapshot.paramMap.get('uid');
     this.tokenForm = this.form.group({
-      name: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(255)]],
+      name: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(255)], [this.validateTokenNotTaken.bind(this)]],
     });
     if (this.uid) {
       this.isEdit = true;
@@ -45,27 +44,44 @@ export class CreateEditProjectTokenComponent implements OnInit {
     }
   }
 
-  // This function will create project and edit project details based upon if click on edit or add
+  // This function will create project token and edit project token details based upon if click on edit or add
   save(): void {
-    if (this.uid) {
-      this.createEditSubscription = this.tokenService
-        .save(this.projectUid, { uid: this.uid, ...this.tokenForm.getRawValue() })
-        .subscribe(
-          () => this.router.navigate(['/projects', this.projectUid, 'tokens']),
-          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-        );
-    } else {
-      this.createEditSubscription = this.tokenService
-        .create(this.projectUid, this.tokenForm.getRawValue())
-        .subscribe(
-          (token: ProjectTokenModel) => this.router.navigate(['/projects', this.projectUid, 'tokens']),
-          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-        );
-    }
+    this.tokenService.findProjectTokenByName(this.projectUid, this.tokenForm.get('name').value)
+      .pipe(
+        first(),
+        switchMap((tokens: ProjectTokenModel[]) => {
+          const error: any = tokens && tokens.length > 0 ? { tokenTaken: true } : undefined;
+
+          if (error) {
+            this.tokenForm.controls.name.setErrors(error);
+            return throwError(new Error('Entered token is taken.'));
+          }
+
+          if (this.uid) {
+            return this.tokenService.save(this.projectUid, { uid: this.uid, ...this.tokenForm.getRawValue() });
+          } else {
+            return this.tokenService.create(this.projectUid, this.tokenForm.getRawValue());
+          }
+        }),
+        first()
+      )
+      .subscribe(
+        () => this.router.navigate(['/projects', this.projectUid, 'tokens']),
+        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+      );
   }
 
   ngDestroy(): void {
-    this.createEditSubscription.unsubscribe();
     this.projectSubscription.unsubscribe();
+  }
+
+  private validateTokenNotTaken(control: AbstractControl): Observable<any> {
+    return this.tokenService.findProjectTokenByName(this.projectUid, control.value)
+      .pipe(
+        map((tokens: ProjectTokenModel[]) => {
+          return tokens && tokens.length > 0 ? { tokenTaken: true } : undefined;
+        }),
+        first()
+      );
   }
 }

@@ -13,6 +13,7 @@
           <mat-error *ngIf="tokenForm.get(['name']).hasError('required')">This field is required.</mat-error>
           <mat-error *ngIf="tokenForm.get(['name']).hasError('minlength')">Entered text is too short.</mat-error>
           <mat-error *ngIf="tokenForm.get(['name']).hasError('maxlength')">Entered text is too long.</mat-error>
+          <mat-error *ngIf="tokenForm.get(['name']).hasError('tokenTaken')">Entered token is taken.</mat-error>
         </mat-form-field>
 
       </mat-card-content>
