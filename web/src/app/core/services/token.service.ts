@@ -64,7 +64,7 @@ export class TokenService {
       .start()
       .pipe(
         switchMap(() => this.afs
-          .collection('tokens').doc(projectUid)
+          .collection('projects').doc(projectUid)
           .collection<ProjectTokenModel>('tokens').doc(token.uid)
           .set(token)
         ),
