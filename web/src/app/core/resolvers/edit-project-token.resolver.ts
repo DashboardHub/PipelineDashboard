@@ -22,7 +22,6 @@ export class EditProjectTokenResolver implements Resolve<ProjectTokenModel> {
       .pipe(
         take(1),
         catchError(() => {
-          this.router.navigate(['/']);
           return of(new ProjectTokenModel());
         })
       );

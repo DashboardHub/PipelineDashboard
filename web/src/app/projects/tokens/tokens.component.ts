@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {  Observable } from 'rxjs';
-import {  map } from 'rxjs/operators';
+import {  Observable, pipe } from 'rxjs';
+import {  map, take } from 'rxjs/operators';
 
 // Dashboard model and services
 import { TokenService } from '../../core/services/token.service';
@@ -33,8 +33,10 @@ export class ProjectTokensComponent {
   delete(token: ProjectTokenModel): void {
     this.tokenService
       .delete(this.projectUid, token.uid)
-      .toPromise()
-      .then(() => {
+      .pipe(
+        take(1)
+      )
+      .subscribe(() => {
         this.tokens$ = this.tokenService.findProjectTokens(this.projectUid);
       });
   }
