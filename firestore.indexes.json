@@ -1,7 +1,8 @@
 {
   "indexes": [
     {
-      "collectionId": "projects",
+      "collectionGroup": "projects",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "type",
@@ -14,11 +15,26 @@
       ]
     },
     {
-      "collectionId": "projects",
+      "collectionGroup": "projects",
+      "queryScope": "COLLECTION",
       "fields": [
         {
           "fieldPath": "access.admin",
           "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "updatedOn",
+          "mode": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "projects",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "access.admin",
+          "mode": "ARRAY_CONTAINS"
         },
         {
           "fieldPath": "updatedOn",
