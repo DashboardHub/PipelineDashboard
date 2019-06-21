@@ -1,0 +1,65 @@
+<div class="mat-content">
+  <mat-card>
+    <mat-card-header>
+      <img mat-card-avatar [src]="profile.avatarUrl" />
+      <mat-card-title>Profile</mat-card-title>
+      <mat-card-subtitle>{{ profile.name }} ({{ profile.username }})</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <mat-tab-group>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>account_box</mat-icon>
+            Overview
+          </ng-template>
+
+          <mat-list>
+            <h3 mat-subheader>GitHub activity</h3>
+            <mat-list-item *ngFor="let activity of profile.activity">
+              <mat-icon mat-list-icon>security</mat-icon>
+              <h4 mat-line><i>{{ activity.type }}</i> {{ activity.payload.title }}</h4>
+              <!-- <h4 mat-line>{{ activity.createdOn | timeAgo }}</h4> -->
+              <p mat-line>{{ activity.repository.fullName }}</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon [matBadge]="profile.repositories.data.length" matBadgePosition="above before">info</mat-icon>
+            Repositories
+          </ng-template>
+
+          <mat-list>
+            <h3 mat-subheader>Last updated {{ profile.repositories.lastUpdated.toDate() | timeAgo }}</h3>
+            <mat-list-item *ngFor="let repository of profile.repositories.data">
+              <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
+              <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
+              <h4 mat-line>{{ repository.fullName }}</h4>
+              <p mat-line>{{ repository.description }}</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon [matBadge]="logins.length" matBadgePosition="above before">security</mat-icon>
+            Security
+          </ng-template>
+
+          <mat-list>
+            <h3 mat-subheader>Login history</h3>
+            <mat-list-item *ngFor="let login of logins">
+              <mat-icon mat-list-icon>security</mat-icon>
+              <h4 mat-line>{{ login.date.toDate() | timeAgo }}</h4>
+              <p mat-line>{{ login.userAgent }}, {{ login.device }}, {{ login.os }}, {{ login.osVersion }}, {{ login.browser }}, {{ login.browserVersion }}</p>
+            </mat-list-item>
+          </mat-list>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-card-content>
+  </mat-card>
+</div>

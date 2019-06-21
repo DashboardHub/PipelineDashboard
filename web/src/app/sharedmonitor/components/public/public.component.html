@@ -1,0 +1,12 @@
+<div class="mat-content">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{title}}</mat-card-title>
+      <mat-card-subtitle>You have {{ monitors.length }} monitors</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <dashboard-monitors [monitors]="monitors"></dashboard-monitors>
+    </mat-card-content>
+  </mat-card>
+</div>

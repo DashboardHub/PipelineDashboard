@@ -15,7 +15,7 @@ import { ViewProjectComponent } from './view/view.component';
     CommonModule,
     ProjectsRoutingModule,
     SharedModule,
-  ],
+  ], 
   declarations: [
     CreateEditProjectComponent,
     RepositoryComponent,

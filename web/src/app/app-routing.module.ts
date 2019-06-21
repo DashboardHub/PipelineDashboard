@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'projects',
     loadChildren: './projects/projects.module#ProjectsModule',
   },
+  {
+    path: 'monitors',
+    loadChildren: './monitors/monitors.module#MonitorsModule',
+  },
 ];
 
 @NgModule({
@@ -19,3 +23,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
+         
