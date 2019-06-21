@@ -2,7 +2,7 @@
   <form (submit)="save()" [formGroup]="tokenForm">
     <mat-card>
       <mat-card-header>
-        <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Project</mat-card-title>
+        <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Token</mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
 
@@ -20,7 +20,7 @@
       <mat-divider></mat-divider>
       <mat-card-actions>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-          <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
+          <button mat-stroked-button type="button" routerLink="../../" color="warn">Cancel</button>
           <button mat-raised-button type="submit" color="accent" [disabled]="tokenForm.invalid">
             <span *ngIf="!isEdit">Create</span>
             <span *ngIf="isEdit">Save</span>

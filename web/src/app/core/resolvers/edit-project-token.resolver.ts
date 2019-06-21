@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { of } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { ProjectModel, ProjectTokenModel } from '../../shared/models/index.model';
-import { ProjectService } from '../services/index.service';
+import { ProjectTokenModel } from '../../shared/models/index.model';
 import { TokenService } from '../services/token.service';
 
 @Injectable({

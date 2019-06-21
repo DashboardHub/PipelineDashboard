@@ -19,7 +19,7 @@
           <span fxFlex></span>
           <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
             <button mat-raised-button type="submit" color="accent" [routerLink]="[token.uid, 'edit']">Edit</button>
-            <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
+            <button mat-raised-button type="submit" color="warn" (click)="delete(token)">Delete</button>
           </span>
           <mat-divider [inset]="true" *ngIf="!isLast"></mat-divider>
         </mat-list-item>

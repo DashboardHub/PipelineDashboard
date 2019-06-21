@@ -13,7 +13,7 @@ import { TokenService } from '../services/token.service';
 export class ProjectTokensResolver implements Resolve<ProjectTokenModel[]> {
 
   constructor(
-    private tokenService: TokenService,
+    private tokenService: TokenService
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<ProjectTokenModel[]> {
