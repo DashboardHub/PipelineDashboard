@@ -6,9 +6,9 @@ import {
   GitHubEventInput, GitHubEventMapper,
   GitHubIssueInput, GitHubIssueMapper,
   GitHubMilestoneInput, GitHubMilestoneMapper,
-  GitHubPullRequestInput, GitHubPullRequestMapper, 
-  GitHubReleaseInput, GitHubReleaseMapper, 
-  GitHubRepositoryInput, GitHubRepositoryMapper, 
+  GitHubPullRequestInput, GitHubPullRequestMapper,
+  GitHubReleaseInput, GitHubReleaseMapper,
+  GitHubRepositoryInput, GitHubRepositoryMapper,
   GitHubRepositoryModel
 } from '../mappers/github/index.mapper';
 import { FirebaseAdmin } from './../client/firebase-admin';
@@ -54,6 +54,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     };
   } catch (error) {
     Logger.error(error);
+    throw new Error(error);
   }
 
   Logger.info({
