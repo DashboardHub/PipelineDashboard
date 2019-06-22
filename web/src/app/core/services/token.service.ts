@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import * as firebase from 'firebase';
-import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { throwError, Observable } from 'rxjs';
+import { first, map, switchMap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { ProjectTokenModel } from '../../shared/models/index.model';
-import { ActivityService } from './activity.service';
-import { AuthenticationService } from './authentication.service';
+import { IProjectTokenModel, ProjectModel } from '../../shared/models/index.model';
+import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,95 +13,93 @@ import { AuthenticationService } from './authentication.service';
 export class TokenService {
 
   constructor(
-    private afs: AngularFirestore,
-    private authService: AuthenticationService,
-    private activityService: ActivityService
+    private projectService: ProjectService
   ) { }
 
   // This function returns the token details via id
-  public findOneById(projectUid: string, tokenUid: string): Observable<ProjectTokenModel> {
-    return this.activityService
-      .start()
+  public findOneById(projectUid: string, tokenUid: string): Observable<IProjectTokenModel> {
+    return this.projectService.findOneById(projectUid)
       .pipe(
-        switchMap(() => this.afs
-          .collection('projects').doc(projectUid)
-          .collection<ProjectTokenModel>('tokens').doc<ProjectTokenModel>(tokenUid)
-          .valueChanges()
-        )
+        map((data: ProjectModel) => data && data.tokens && data.tokens.find((item: IProjectTokenModel) => item.uid === tokenUid))
       );
   }
 
   // This function returns the tokens list
-  public findProjectTokens(projectUid: string): Observable<ProjectTokenModel[]> {
-    return this.activityService
-      .start()
+  public findProjectTokens(projectUid: string): Observable<IProjectTokenModel[]> {
+    return this.projectService.findOneById(projectUid)
       .pipe(
-        switchMap(() => this.afs
-          .collection(
-            'projects',
-            (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
-          )
-          .doc(projectUid)
-          .collection<ProjectTokenModel>('tokens')
-          .valueChanges()
-        )
+        map((data: ProjectModel) => Array.isArray(data.tokens) ? data.tokens : [])
       );
   }
   // This function returns the tokens via name
-  public findProjectTokenByName(projectUid: string, name: string): Observable<ProjectTokenModel[]> {
-    return this.activityService
-      .start()
+  public findProjectTokenByName(projectUid: string, name: string): Observable<IProjectTokenModel[]> {
+    return this.findProjectTokens(projectUid)
       .pipe(
-        switchMap(() => this.afs
-          .collection('projects').doc(projectUid)
-          .collection<ProjectTokenModel>(
-            'tokens',
-            (ref: firebase.firestore.Query) => ref.where('name', '==', name)
-          ).valueChanges()
-        )
+        map((tokens: IProjectTokenModel[]) => tokens.filter((item: IProjectTokenModel) => item.name === name))
       );
   }
 
-  // This function is for creating the token
-  public create(projectUid: string, data: ProjectTokenModel): Observable<ProjectTokenModel> {
-    let token: ProjectTokenModel = {
+  // This function create the project token
+  public create(projectUid: string, data: IProjectTokenModel): Observable<IProjectTokenModel> {
+    let token: IProjectTokenModel = {
       uid: uuid(),
       ...data,
     };
 
-    return this.activityService
-      .start()
+    return this.projectService.findOneById(projectUid)
       .pipe(
-        switchMap(() => this.afs
-          .collection('projects').doc(projectUid)
-          .collection<ProjectTokenModel>('tokens').doc(token.uid)
-          .set(token)
-        ),
+        first(),
+        switchMap((project: ProjectModel) => {
+          if (Array.isArray(project.tokens)) {
+            project.tokens.push(token);
+          } else {
+            project.tokens = [token];
+          }
+          return this.projectService.save(project);
+        }),
         map(() => token)
       );
   }
 
   // This function update the token details
-  public save(projectUid: string, data: ProjectTokenModel): Observable<void> {
-    return this.activityService
-      .start()
+  public save(projectUid: string, data: IProjectTokenModel): Observable<IProjectTokenModel> {
+    return this.projectService.findOneById(projectUid)
       .pipe(
-        switchMap(() => this.afs
-          .collection('projects').doc(projectUid)
-          .collection<ProjectTokenModel>('tokens').doc<ProjectTokenModel>(data.uid)
-          .set({ ...data }, { merge: true }))
+        first(),
+        switchMap((project: ProjectModel) => {
+          const found: IProjectTokenModel = Array.isArray(project.tokens) && project.tokens.find((item: IProjectTokenModel) => item.uid === data.uid);
+
+          if (found) {
+            Object.assign(found, data);
+          } else {
+            return throwError(new Error('Token not found.'));
+          }
+
+          return this.projectService.save(project).pipe(
+            map(() => found)
+          );
+        })
       );
   }
 
   // This function delete the token via uid
-  public delete(projectUid: string, tokenUid: string): Observable<void> {
-    return this.activityService
-      .start()
+  public delete(projectUid: string, tokenUid: string): Observable<IProjectTokenModel> {
+    return this.projectService.findOneById(projectUid)
       .pipe(
-        switchMap(() => this.afs
-          .collection('projects').doc(projectUid)
-          .collection<ProjectTokenModel>('tokens').doc<ProjectTokenModel>(tokenUid)
-          .delete())
+        first(),
+        switchMap((project: ProjectModel) => {
+          const found: IProjectTokenModel = Array.isArray(project.tokens) && project.tokens.find((item: IProjectTokenModel) => item.uid === tokenUid);
+
+          if (Array.isArray(project.tokens) && found) {
+            project.tokens = project.tokens.filter((item: IProjectTokenModel) => item.uid !== tokenUid);
+          } else {
+            return throwError(new Error('Token not found.'));
+          }
+
+          return this.projectService.save(project).pipe(
+            map(() => found)
+          );
+        })
       );
   }
 

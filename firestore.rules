@@ -21,20 +21,9 @@ service cloud.firestore {
     }
 
     match /projects/{project} {
-    
-      function projectData() {
-          return get(/databases/$(database)/documents/projects/$(project)).data;
-      }
-
       allow create: if isSignedIn();
       allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
       allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
-
-      match /tokens/{token} {
-        allow create: if isSignedIn();
-        allow get, list: if projectData().type == 'public' || request.auth.uid in projectData().access.admin || request.auth.uid in projectData().access.readonly;
-        allow update, delete: if isSignedIn() && request.auth.uid in projectData().access.admin;
-      }
     }
 
     match /repositories/{repository} {

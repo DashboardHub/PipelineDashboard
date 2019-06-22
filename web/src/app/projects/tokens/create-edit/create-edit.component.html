@@ -22,7 +22,7 @@
       <mat-card-actions>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
           <button mat-stroked-button type="button" [routerLink]="isEdit ? '../../' : '../'" color="warn">Cancel</button>
-          <button mat-raised-button type="submit" color="accent" [disabled]="tokenForm.invalid">
+          <button mat-raised-button type="submit" color="accent" [disabled]="tokenForm.invalid || tokenForm.status !== 'VALID'">
             <span *ngIf="!isEdit">Create</span>
             <span *ngIf="isEdit">Save</span>
           </button>
