@@ -24,7 +24,7 @@ export interface GitHubPullRequestModel {
   state: string;
   title: string;
   description: string;
-  number: number;
+  id: number;
   owner: GitHubUserModel;
   assignees: GitHubUserModel[];
   reviewers: GitHubUserModel[];
@@ -40,7 +40,7 @@ export class GitHubPullRequestMapper {
       state: input.state,
       title: input.title,
       description: input.body,
-      number: input.number,
+      id: input.number,
       owner: GitHubUserMapper.import(input.user),
       assignees: input.assignees.map((assignee: GitHubUserInput) => GitHubUserMapper.import(assignee)),
       reviewers: input.requested_reviewers.map((reviewer: GitHubUserInput) => GitHubUserMapper.import(reviewer)),

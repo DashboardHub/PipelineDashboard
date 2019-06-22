@@ -104,7 +104,7 @@
             </div>
             <p class="heading">Latest PR</p>
             <h3 class="description" *ngIf="repository.pullRequests && repository.pullRequests.length > 0; else otherLatestPR">
-              <a href="{{repository.pullRequests[0].url}}">{{repository.pullRequests[0].number}}</a>
+              <a href="{{repository.pullRequests[0].url}}">{{repository.pullRequests[0].id}}</a>
             </h3>
           </mat-card-content>
           <mat-card-actions>

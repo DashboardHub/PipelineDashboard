@@ -6,7 +6,7 @@ export class PullRequestModel {
   state: 'open' | 'closed';
   title: string = '';
   owner: UserModel;
-  number: number;
+  id: number;
   assigned: UserModel;
   requestedReviewers: UserModel;
   description: string = '';
