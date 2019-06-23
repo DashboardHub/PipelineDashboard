@@ -81,9 +81,7 @@ export class TokenService {
             return throwError(new Error('Token not found.'));
           }
 
-          return this.projectService.save(project).pipe(
-            map(() => found)
-          );
+          return this.projectService.save(project).pipe(map(() => found));
         })
       );
   }

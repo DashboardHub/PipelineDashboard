@@ -33,6 +33,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  // This function will be called when component is initialized
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -44,6 +45,11 @@ export class CreateEditProjectTokenComponent implements OnInit {
       this.projectSubscription = this.route.data
         .subscribe((data: { token: IProjectTokenModel }) => this.tokenForm.reset(data.token));
     }
+  }
+
+  // This function will be called when component is destroyed
+  ngDestroy(): void {
+    this.projectSubscription.unsubscribe();
   }
 
   // This function will create project token and edit project token details based upon if click on edit or add
@@ -73,11 +79,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
       );
   }
 
-  ngDestroy(): void {
-    this.projectSubscription.unsubscribe();
-  }
-
-  // This function will check the project token on uniqueness
+  // This function check the project token on uniqueness
   private validateTokenNotTaken(control: AbstractControl): Observable<any> {
     return this.tokenService.findProjectTokenByName(this.projectUid, control.value)
       .pipe(
