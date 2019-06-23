@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import {  Observable } from 'rxjs';
-import {  map, take } from 'rxjs/operators';
+// Third party modules
+import { Observable } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 // Dashboard model and services
 import { TokenService } from '../../core/services/token.service';
-import { ProjectTokenModel } from '../../shared/models/index.model';
+import { IProjectTokenModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens',
@@ -16,7 +17,7 @@ import { ProjectTokenModel } from '../../shared/models/index.model';
 export class ProjectTokensComponent {
 
   public projectUid: string;
-  public tokens$: Observable<ProjectTokenModel[]>;
+  public tokens$: Observable<IProjectTokenModel[]>;
 
   constructor(
     private tokenService: TokenService,
@@ -25,20 +26,18 @@ export class ProjectTokensComponent {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.tokens$ = this.route.data
       .pipe(
-        map((data: { tokens: ProjectTokenModel[] }) => data.tokens)
+        map((data: { tokens: IProjectTokenModel[] }) => data.tokens)
       );
   }
 
   // This function delete the project token
-  delete(token: ProjectTokenModel): void {
+  delete(token: IProjectTokenModel): void {
     this.tokenService
       .delete(this.projectUid, token.uid)
       .pipe(
         take(1)
       )
-      .subscribe(() => {
-        this.tokens$ = this.tokenService.findProjectTokens(this.projectUid);
-      });
+      .subscribe(() => this.tokens$ = this.tokenService.findAll(this.projectUid));
   }
 
 }

@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+
+// Third party modules
 import { of } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { ProjectTokenModel } from '../../shared/models/index.model';
+import { IProjectTokenModel, ProjectTokenModel } from '../../shared/models/index.model';
 import { TokenService } from '../services/token.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EditProjectTokenResolver implements Resolve<ProjectTokenModel> {
+export class EditProjectTokenResolver implements Resolve<IProjectTokenModel> {
 
   constructor(
     private tokenService: TokenService,

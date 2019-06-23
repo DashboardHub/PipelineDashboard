@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+
+// Third party modules
+import * as firebase from 'firebase';
 import { throwError, Observable } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
@@ -25,7 +28,7 @@ export class TokenService {
   }
 
   // This function returns the tokens list
-  public findProjectTokens(projectUid: string): Observable<IProjectTokenModel[]> {
+  public findAll(projectUid: string): Observable<IProjectTokenModel[]> {
     return this.projectService.findOneById(projectUid)
       .pipe(
         map((data: ProjectModel) => Array.isArray(data.tokens) ? data.tokens : [])
@@ -33,7 +36,7 @@ export class TokenService {
   }
   // This function returns the tokens via name
   public findProjectTokenByName(projectUid: string, name: string): Observable<IProjectTokenModel[]> {
-    return this.findProjectTokens(projectUid)
+    return this.findAll(projectUid)
       .pipe(
         map((tokens: IProjectTokenModel[]) => tokens.filter((item: IProjectTokenModel) => item.name === name))
       );
@@ -44,6 +47,8 @@ export class TokenService {
     let token: IProjectTokenModel = {
       uid: uuid(),
       ...data,
+      createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
+      updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
     };
 
     return this.projectService.findOneById(projectUid)

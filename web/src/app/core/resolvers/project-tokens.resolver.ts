@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
+
+// Third party modules
 import { of, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { ProjectTokenModel } from '../../shared/models/index.model';
+import { IProjectTokenModel } from '../../shared/models/index.model';
 import { TokenService } from '../services/token.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectTokensResolver implements Resolve<ProjectTokenModel[]> {
+export class ProjectTokensResolver implements Resolve<IProjectTokenModel[]> {
 
   constructor(
     private tokenService: TokenService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ProjectTokenModel[]> {
-    return this.tokenService.findProjectTokens(route.params.projectUid)
+  resolve(route: ActivatedRouteSnapshot): Observable<IProjectTokenModel[]> {
+    return this.tokenService.findAll(route.params.projectUid)
       .pipe(
         take(1),
-        catchError(() => {
-          return of([]);
-        })
+        catchError(() =>  of([]))
       );
   }
 }

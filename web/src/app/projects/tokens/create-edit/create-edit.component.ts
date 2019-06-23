@@ -3,12 +3,13 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// Third party modules
 import { throwError, Observable, Subscription } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
 import { TokenService } from '../../../core/services/token.service';
-import { ProjectTokenModel } from '../../../shared/models/index.model';
+import { IProjectTokenModel } from '../../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens-create',
@@ -20,6 +21,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
   private projectSubscription: Subscription;
   private projectUid: string;
   private uid: string;
+
   public isEdit: Boolean = false;
   public tokenForm: FormGroup;
 
@@ -40,7 +42,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
     if (this.uid) {
       this.isEdit = true;
       this.projectSubscription = this.route.data
-        .subscribe((data: { token: ProjectTokenModel }) => this.tokenForm.reset(data.token));
+        .subscribe((data: { token: IProjectTokenModel }) => this.tokenForm.reset(data.token));
     }
   }
 
@@ -49,7 +51,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
     this.tokenService.findProjectTokenByName(this.projectUid, this.tokenForm.get('name').value)
       .pipe(
         first(),
-        switchMap((tokens: ProjectTokenModel[]) => {
+        switchMap((tokens: IProjectTokenModel[]) => {
           const error: any = tokens && tokens.length > 0 ? { tokenTaken: true } : undefined;
 
           if (error) {
@@ -75,12 +77,11 @@ export class CreateEditProjectTokenComponent implements OnInit {
     this.projectSubscription.unsubscribe();
   }
 
+  // This function will check the project token on uniqueness
   private validateTokenNotTaken(control: AbstractControl): Observable<any> {
     return this.tokenService.findProjectTokenByName(this.projectUid, control.value)
       .pipe(
-        map((tokens: ProjectTokenModel[]) => {
-          return tokens && tokens.length > 0 ? { tokenTaken: true } : undefined;
-        }),
+        map((tokens: IProjectTokenModel[]) => tokens && tokens.length > 0 ? { tokenTaken: true } : undefined),
         first()
       );
   }
