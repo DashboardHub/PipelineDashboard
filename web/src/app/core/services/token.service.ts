@@ -76,6 +76,7 @@ export class TokenService {
 
           if (found) {
             Object.assign(found, data);
+            found.updatedOn = firebase.firestore.Timestamp.fromDate(new Date());
           } else {
             return throwError(new Error('Token not found.'));
           }
