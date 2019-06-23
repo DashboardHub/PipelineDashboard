@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '../../core/services/index.service';
-import { RepositoryModel } from '../../shared/models/index.model';
+import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-repository',
@@ -31,13 +31,16 @@ export class RepositoryComponent implements OnInit {
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
         if (this.repository.milestones) {
-          this.sortingService.sortListByDate(this.repository.milestones, 'updatedAt');
+          this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
         if (this.repository.releases) {
-          this.sortingService.sortListByDate(this.repository.releases, 'createdAt');
+          this.sortingService.sortListByDate<ReleaseModel>(this.repository.releases, 'createdAt');
         }
         if (this.repository.contributors) {
-          this.sortingService.sortListByNumber(this.repository.contributors, 'total');
+          this.sortingService.sortListByNumber<ContributorModel>(this.repository.contributors, 'total');
+        }
+        if (this.repository.pullRequests) {
+          this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
       });
   }
