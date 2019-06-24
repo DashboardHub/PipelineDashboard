@@ -6,10 +6,11 @@ import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mappe
 
 export interface GitHubPullRequestInput {
   id: string;
-  url: string;
+  html_url: string;
   state: string;
   title: string;
   body: string;
+  number: number;
   user: GitHubUserInput
   assignees: GitHubUserInput[];
   requested_reviewers: GitHubUserInput[];
@@ -23,6 +24,7 @@ export interface GitHubPullRequestModel {
   state: string;
   title: string;
   description: string;
+  id: number;
   owner: GitHubUserModel;
   assignees: GitHubUserModel[];
   reviewers: GitHubUserModel[];
@@ -34,10 +36,11 @@ export class GitHubPullRequestMapper {
   static import(input: GitHubPullRequestInput): GitHubPullRequestModel {
     return {
       uid: input.id,
-      url: input.url,
+      url: input.html_url,
       state: input.state,
       title: input.title,
       description: input.body,
+      id: input.number,
       owner: GitHubUserMapper.import(input.user),
       assignees: input.assignees.map((assignee: GitHubUserInput) => GitHubUserMapper.import(assignee)),
       reviewers: input.requested_reviewers.map((reviewer: GitHubUserInput) => GitHubUserMapper.import(reviewer)),
