@@ -1,20 +1,13 @@
 // Third party modules
 import { firestore } from 'firebase';
 
-export interface IProjectTokenModel {
-  uid: string;
-  name: string;
-  createdOn?: firestore.Timestamp;
-  updatedOn: firestore.Timestamp;
-}
-
-export class ProjectTokenModel implements IProjectTokenModel {
+export class ProjectTokenModel {
   uid: string;
   name: string;
   createdOn: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
 
-  constructor(obj?: IProjectTokenModel) {
+  constructor(obj?: any) {
     this.uid = obj ? obj.uid : undefined;
     this.name = obj ? obj.name : undefined;
     this.createdOn = obj ? obj.createdOn : undefined;

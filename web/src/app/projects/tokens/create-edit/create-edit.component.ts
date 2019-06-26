@@ -8,8 +8,8 @@ import { throwError, Observable, Subscription } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { TokenService } from '../../../core/services/token.service';
-import { IProjectTokenModel } from '../../../shared/models/index.model';
+import { ProjectTokenService } from '../../../core/services/project-token.service';
+import { ProjectTokenModel } from '../../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens-create',
@@ -29,7 +29,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
     private router: Router,
     private form: FormBuilder,
     private snackBar: MatSnackBar,
-    private tokenService: TokenService,
+    private projectTokenService: ProjectTokenService,
     private route: ActivatedRoute
   ) { }
 
@@ -43,7 +43,7 @@ export class CreateEditProjectTokenComponent implements OnInit {
     if (this.uid) {
       this.isEdit = true;
       this.projectSubscription = this.route.data
-        .subscribe((data: { token: IProjectTokenModel }) => this.tokenForm.reset(data.token));
+        .subscribe((data: { token: ProjectTokenModel }) => this.tokenForm.reset(data.token));
     }
   }
 
@@ -60,10 +60,10 @@ export class CreateEditProjectTokenComponent implements OnInit {
 
   // This function will create project token and edit project token details based upon if click on edit or add
   save(): void {
-    this.tokenService.findProjectTokenByName(this.projectUid, this.tokenForm.get('name').value)
+    this.projectTokenService.findProjectTokenByName(this.projectUid, this.tokenForm.get('name').value)
       .pipe(
         first(),
-        switchMap((tokens: IProjectTokenModel[]) => {
+        switchMap((tokens: ProjectTokenModel[]) => {
           const error: any = tokens && tokens.length > 0 ? { tokenTaken: true } : undefined;
 
           if (error) {
@@ -72,9 +72,9 @@ export class CreateEditProjectTokenComponent implements OnInit {
           }
 
           if (this.uid) {
-            return this.tokenService.save(this.projectUid, { uid: this.uid, ...this.tokenForm.getRawValue() });
+            return this.projectTokenService.save(this.projectUid, { uid: this.uid, ...this.tokenForm.getRawValue() });
           } else {
-            return this.tokenService.create(this.projectUid, this.tokenForm.getRawValue());
+            return this.projectTokenService.create(this.projectUid, this.tokenForm.getRawValue());
           }
         }),
         first()
@@ -87,9 +87,9 @@ export class CreateEditProjectTokenComponent implements OnInit {
 
   // This function check the project token on uniqueness
   private validateTokenNotTaken(control: AbstractControl): Observable<any> {
-    return this.tokenService.findProjectTokenByName(this.projectUid, control.value)
+    return this.projectTokenService.findProjectTokenByName(this.projectUid, control.value)
       .pipe(
-        map((tokens: IProjectTokenModel[]) => tokens && tokens.length > 0 ? { tokenTaken: true } : undefined),
+        map((tokens: ProjectTokenModel[]) => tokens && tokens.length > 0 ? { tokenTaken: true } : undefined),
         first()
       );
   }
