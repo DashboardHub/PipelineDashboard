@@ -1,3 +1,4 @@
+// Angular modules
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -26,11 +27,11 @@ export class CreateEditProjectTokenComponent implements OnInit {
   public tokenForm: FormGroup;
 
   constructor(
-    private router: Router,
     private form: FormBuilder,
-    private snackBar: MatSnackBar,
     private projectTokenService: ProjectTokenService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   // This function will be called when component is initialized

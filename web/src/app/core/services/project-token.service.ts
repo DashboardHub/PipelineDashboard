@@ -1,3 +1,4 @@
+// Angular modules
 import { Injectable } from '@angular/core';
 
 // Third party modules
@@ -100,9 +101,10 @@ export class ProjectTokenService {
             return throwError(new Error('Token not found.'));
           }
 
-          return this.projectService.save(project).pipe(
-            map(() => found)
-          );
+          return this.projectService.save(project)
+            .pipe(
+              map(() => found)
+            );
         })
       );
   }
