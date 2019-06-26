@@ -9,7 +9,7 @@
       <mat-card-content fxLayout="column" fxLayoutGap="20px">
 
         <mat-form-field>
-          <input matInput type="text" placeholder="Title" formControlName="name" required>
+          <input matInput type="text" placeholder="Title" formControlName="name" (click)="clickInputName($event)" >
           <mat-error *ngIf="tokenForm.get(['name']).hasError('required')">This field is required.</mat-error>
           <mat-error *ngIf="tokenForm.get(['name']).hasError('minlength')">Entered text is too short.</mat-error>
           <mat-error *ngIf="tokenForm.get(['name']).hasError('maxlength')">Entered text is too long.</mat-error>

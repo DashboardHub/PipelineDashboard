@@ -52,6 +52,12 @@ export class CreateEditProjectTokenComponent implements OnInit {
     this.projectSubscription.unsubscribe();
   }
 
+  // This function click input field on name token
+  clickInputName(e: MouseEvent): void {
+    (e.toElement as any).blur();
+    (e.toElement as any).focus();
+  }
+
   // This function will create project token and edit project token details based upon if click on edit or add
   save(): void {
     this.tokenService.findProjectTokenByName(this.projectUid, this.tokenForm.get('name').value)
