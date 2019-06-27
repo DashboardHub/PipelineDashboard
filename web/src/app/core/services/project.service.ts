@@ -6,7 +6,7 @@ import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
+import { MonitorModel, ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 import { RepositoryService } from './repository.service';
@@ -142,6 +142,39 @@ export class ProjectService {
           .set(
             {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
+              updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+            },
+            { merge: true }))
+      );
+  }
+
+   // This function add the repository in any project
+   public saveMonitors(uid: string, monitors: MonitorModel[]): Observable<void> {
+    if (!monitors.length) {
+      return this.activityService
+        .start()
+        .pipe(
+          switchMap(() => this.afs
+            .collection<ProjectModel>('projects')
+            .doc<ProjectModel>(uid)
+            .set(
+              {
+                monitors: [],
+                updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+              },
+              { merge: true }))
+        );
+    }
+
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<ProjectModel>('projects')
+          .doc<ProjectModel>(uid)
+          .set(
+            {
+              monitors: monitors,
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
             { merge: true }))

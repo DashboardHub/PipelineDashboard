@@ -33,6 +33,10 @@ const routes: Routes = [
     component: CreateEditProjectComponent,
     resolve: { project: EditProjectResolver },
   },
+  {
+    path: ':uid/monitors',
+    loadChildren: '../monitors/monitors.module#MonitorsModule',
+  },
 ];
 
 @NgModule({
