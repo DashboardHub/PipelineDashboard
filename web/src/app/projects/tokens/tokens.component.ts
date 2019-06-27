@@ -18,14 +18,14 @@ import { ProjectTokenModel } from '../../shared/models/index.model';
 export class ProjectTokensComponent {
 
   public projectUid: string;
-  public tokens$: Observable<ProjectTokenModel[]>;
+  public tokens: Observable<ProjectTokenModel[]>;
 
   constructor(
     private projectTokenService: ProjectTokenService,
     private route: ActivatedRoute
   ) {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
-    this.tokens$ = this.route.data
+    this.tokens = this.route.data
       .pipe(
         map((data: { tokens: ProjectTokenModel[] }) => data.tokens)
       );
@@ -38,7 +38,7 @@ export class ProjectTokensComponent {
       .pipe(
         take(1)
       )
-      .subscribe(() => this.tokens$ = this.projectTokenService.findAll(this.projectUid));
+      .subscribe(() => this.tokens = this.projectTokenService.findAll(this.projectUid));
   }
 
 }
