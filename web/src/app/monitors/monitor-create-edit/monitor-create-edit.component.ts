@@ -23,7 +23,6 @@ export class MonitorCreateEditComponent implements OnInit {
 
   private id: string;
   private monitorsList: MonitorModel[] = [];
-  private project: ProjectModel;
   private uid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
@@ -52,8 +51,7 @@ export class MonitorCreateEditComponent implements OnInit {
     this.projectSubscription = this.projectService
       .findOneById(this.uid)
       .subscribe((project: ProjectModel) => {
-        this.project = project;
-        this.monitorsList = this.project.monitors ? this.project.monitors : [];
+        this.monitorsList = project.monitors ? project.monitors : [];
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
           this.isEdit = true;
@@ -76,7 +74,7 @@ export class MonitorCreateEditComponent implements OnInit {
   /**
    * This function is used to add the monitor in the array
    */
-  addMonitorToList(): void {
+  addMonitor(): void {
     this.monitorsList.push(this.monitorForm.value);
     this.saveMonitor(this.monitorsList);
   }

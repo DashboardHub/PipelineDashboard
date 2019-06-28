@@ -3,14 +3,14 @@
     <div fxFlex="80%">
       <h3>Monitors</h3>
     </div>
-    <div fxFlex="20%"><button mat-raised-button type="submit" color="accent" routerLink="create">Add new monitor</button></div>
+    <div fxFlex="20%"><button mat-raised-button type="submit" color="accent" routerLink="create">Add monitor</button></div>
   </div>
   <mat-list>
     <mat-list-item fxLayout="column" *ngFor="let monitor of monitors">
       <h4 mat-line>{{monitor.name}}</h4>
       <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
       <p class="text-right">
-        <button mat-raised-button color="accent" (click)="editMonitor(monitor.uid)">Edit</button>
+        <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
         <button mat-raised-button color="accent" (click)="deleteMonitor(monitor.uid)">Delete</button>
       </p>
     </mat-list-item>

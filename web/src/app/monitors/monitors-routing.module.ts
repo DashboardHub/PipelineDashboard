@@ -11,11 +11,11 @@ const routes: Routes = [
     component: MonitorsListComponent,
   },
   {
-    path: ':id',
+    path: 'create',
     component: MonitorCreateEditComponent,
   },
   {
-    path: 'create',
+    path: ':id',
     component: MonitorCreateEditComponent,
   },
 ];

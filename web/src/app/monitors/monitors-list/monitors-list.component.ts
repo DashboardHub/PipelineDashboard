@@ -51,13 +51,6 @@ export class MonitorsListComponent implements OnInit {
   }
 
   /**
-   * This method is used to navigate on edit monitor screen
-   */
-  editMonitor(id: string): void {
-    this.router.navigate([`/projects/${this.uid}/monitors/${id}`]);
-  }
-
-  /**
    * This method is used to delete the monitor from list
    */
   deleteMonitor(id: string): void {
