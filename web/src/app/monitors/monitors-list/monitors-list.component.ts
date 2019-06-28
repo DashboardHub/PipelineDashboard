@@ -48,11 +48,7 @@ export class MonitorsListComponent implements OnInit {
    * This method is used to delete the monitor from list
    */
   deleteMonitor(id: string): void {
-    const objIndex: number = this.monitors.findIndex((monitor: MonitorModel) => monitor.uid === id);
-    this.monitors = [
-      ...this.monitors.slice(0, objIndex),
-      ...this.monitors.slice(objIndex + 1),
-    ];
+    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== id);
     this.monitorService.saveMonitor(id, this.monitors);
   }
 }
