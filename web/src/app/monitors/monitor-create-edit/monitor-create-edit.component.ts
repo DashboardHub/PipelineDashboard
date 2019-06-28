@@ -3,12 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuid } from 'uuid';
 
 // Third party modules
-import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models and services
-import { ProjectService } from '../../core/services/index.service';
+import { MonitorService, ProjectService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -18,21 +17,18 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 })
 export class MonitorCreateEditComponent implements OnInit {
 
-  private createEditSubscription: Subscription;
-  private projectSubscription: Subscription;
-
   private id: string;
   private monitorsList: MonitorModel[] = [];
+  private projectSubscription: Subscription;
   private uid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
 
   constructor(
     private form: FormBuilder,
+    private monitorService: MonitorService,
     private projectService: ProjectService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private route: ActivatedRoute
   ) { }
 
   /**
@@ -40,14 +36,7 @@ export class MonitorCreateEditComponent implements OnInit {
    */
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('uid');
-    this.monitorForm = this.form.group({
-      uid: uuid(),
-      name: [undefined, [Validators.required, Validators.minLength(3)]],
-      method: [undefined, Validators.required],
-      path: [undefined, Validators.required],
-      expectedCode: [undefined, Validators.required],
-      expectedText: [undefined],
-    });
+    this.intializeMonitorForm();
     this.projectSubscription = this.projectService
       .findOneById(this.uid)
       .subscribe((project: ProjectModel) => {
@@ -55,10 +44,8 @@ export class MonitorCreateEditComponent implements OnInit {
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id) {
           this.isEdit = true;
-          const filteredMonitor: MonitorModel[] = this.monitorsList.filter((monitor: MonitorModel) => {
-            return monitor.uid === this.id;
-          });
-          this.monitorForm.reset(filteredMonitor[0]);
+          const filteredMonitor: MonitorModel = this.monitorService.findMonitorById(this.monitorsList, this.id);
+          this.monitorForm.reset(filteredMonitor);
         }
       });
   }
@@ -67,7 +54,6 @@ export class MonitorCreateEditComponent implements OnInit {
    * Lifecycle destroy method
    */
   ngDestroy(): void {
-    this.createEditSubscription.unsubscribe();
     this.projectSubscription.unsubscribe();
   }
 
@@ -76,7 +62,18 @@ export class MonitorCreateEditComponent implements OnInit {
    */
   addMonitor(): void {
     this.monitorsList.push(this.monitorForm.value);
-    this.saveMonitor(this.monitorsList);
+    this.monitorService.saveMonitor(this.uid, this.monitorsList);
+  }
+
+  intializeMonitorForm(): void {
+    this.monitorForm = this.form.group({
+      uid: uuid(),
+      name: [undefined, [Validators.required, Validators.minLength(3)]],
+      method: [undefined, Validators.required],
+      path: [undefined, Validators.required],
+      expectedCode: [undefined, Validators.required],
+      expectedText: [undefined],
+    });
   }
 
   /**
@@ -89,18 +86,6 @@ export class MonitorCreateEditComponent implements OnInit {
       this.monitorForm.value,
       ...this.monitorsList.slice(objIndex + 1),
     ];
-    this.saveMonitor(this.monitorsList);
-  }
-
-  /**
-   * @param monitors This function is used to save monitor into the database
-   */
-  saveMonitor(monitors: MonitorModel[]): void {
-    this.createEditSubscription = this.projectService
-      .saveMonitors(this.uid, monitors)
-      .subscribe(
-        () => this.router.navigate([`/projects/${this.uid}/monitors`]),
-        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-      );
+    this.monitorService.saveMonitor(this.uid, this.monitorsList);
   }
 }

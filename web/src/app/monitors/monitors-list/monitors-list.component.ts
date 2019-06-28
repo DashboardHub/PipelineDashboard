@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 // Rxjs operators
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub application model and services
-import { MatSnackBar } from '@angular/material';
-import { ProjectService } from '../../core/services/index.service';
+import { MonitorService, ProjectService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -17,16 +16,13 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 export class MonitorsListComponent implements OnInit {
 
   private projectSubscription: Subscription;
-  private deleteSubscription: Subscription;
-  private project: ProjectModel;
   private uid: string;
   public monitors: MonitorModel[] = [];
 
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private snackBar: MatSnackBar
+    private monitorService: MonitorService,
+    private route: ActivatedRoute
   ) { }
 
   /**
@@ -37,7 +33,6 @@ export class MonitorsListComponent implements OnInit {
     this.projectSubscription = this.projectService
       .findOneById(this.uid)
       .subscribe((project: ProjectModel) => {
-        this.project = project;
         this.monitors = project.monitors ? project.monitors : [];
       });
   }
@@ -47,7 +42,6 @@ export class MonitorsListComponent implements OnInit {
    */
   ngDestroy(): void {
     this.projectSubscription.unsubscribe();
-    this.deleteSubscription.unsubscribe();
   }
 
   /**
@@ -59,11 +53,6 @@ export class MonitorsListComponent implements OnInit {
       ...this.monitors.slice(0, objIndex),
       ...this.monitors.slice(objIndex + 1),
     ];
-    this.deleteSubscription = this.projectService
-      .saveMonitors(this.uid, this.monitors)
-      .subscribe(
-        () => this.router.navigate([`/projects/${this.uid}/monitors`]),
-        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-      );
+    this.monitorService.saveMonitor(id, this.monitors);
   }
 }

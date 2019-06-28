@@ -147,37 +147,4 @@ export class ProjectService {
             { merge: true }))
       );
   }
-
-   // This function add the repository in any project
-   public saveMonitors(uid: string, monitors: MonitorModel[]): Observable<void> {
-    if (!monitors.length) {
-      return this.activityService
-        .start()
-        .pipe(
-          switchMap(() => this.afs
-            .collection<ProjectModel>('projects')
-            .doc<ProjectModel>(uid)
-            .set(
-              {
-                monitors: [],
-                updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-              },
-              { merge: true }))
-        );
-    }
-
-    return this.activityService
-      .start()
-      .pipe(
-        switchMap(() => this.afs
-          .collection<ProjectModel>('projects')
-          .doc<ProjectModel>(uid)
-          .set(
-            {
-              monitors: monitors,
-              updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-            },
-            { merge: true }))
-      );
-  }
 }
