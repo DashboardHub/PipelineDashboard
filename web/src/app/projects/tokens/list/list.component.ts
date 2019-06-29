@@ -14,7 +14,7 @@ import { ProjectTokenModel } from '../../../shared/models/index.model';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListProjectTokenComponent {
+export class ProjectTokenListComponent {
 
   public projectUid: string;
   public tokenList: ProjectTokenModel[];
