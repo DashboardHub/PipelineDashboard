@@ -58,6 +58,7 @@ export class ViewProjectComponent implements OnInit {
 
   // This function delete the project
   delete(): void {
+    this.projectSubscription.unsubscribe();
     this.deleteSubscription = this.projectService
       .delete(this.project.uid)
       .subscribe(() => this.router.navigate(['/projects']));
