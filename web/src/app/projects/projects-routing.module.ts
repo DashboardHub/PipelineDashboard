@@ -24,17 +24,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: ':uid',
+    path: ':projectUid',
     component: ViewProjectComponent,
     resolve: { project: ViewProjectResolver },
   },
   {
-    path: ':uid/edit',
+    path: ':projectUid/edit',
     component: CreateEditProjectComponent,
     resolve: { project: EditProjectResolver },
   },
   {
-    path: ':uid/monitors',
+    path: ':projectUid/monitors',
     loadChildren: '../monitors/monitors.module#MonitorsModule',
   },
 ];

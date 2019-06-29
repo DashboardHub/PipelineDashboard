@@ -9,7 +9,7 @@ import * as firebase from 'firebase';
 
 // Rxjs operators
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub models and services
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
@@ -30,17 +30,18 @@ export class MonitorService {
 
   /**
    *
-   * @param monitors This function will return the monitor by id
-   * @param id
+   * @param monitors monitors list
+   * @param id id of monitor which needs to be find
+   * This function will return the monitor by id
    */
   findMonitorById(monitors: MonitorModel[], id: string): MonitorModel {
-    return monitors.filter((monitor: MonitorModel) => {
-      return monitor.uid === id;
-    })[0];
+    return monitors.find((monitor: MonitorModel) => monitor.uid === id);
   }
 
   /**
-   * @param monitors This function is used to save monitor and navigate to monitors list
+   * @param uid uid of monitor which needs to be added into monitors list
+   * @param monitors monitors list to be updated
+   * This function is used to save monitor and navigate to monitors list screen
    */
   saveMonitor(uid: string, monitors: MonitorModel[]): void {
     this.saveMonitors(uid, monitors)
@@ -52,14 +53,16 @@ export class MonitorService {
 
   /**
    *
-   * @param uid This function is used to save monitors in the database
-   * @param monitors
+   * @param uid uid of monitor which needs to be save
+   * @param monitors monitors list
+   * This function is used to save monitors in the database
    */
   public saveMonitors(uid: string, monitors: MonitorModel[]): Observable<void> {
     if (!monitors.length) {
       return this.activityService
         .start()
         .pipe(
+          take(1),
           switchMap(() => this.afs
             .collection<ProjectModel>('projects')
             .doc<ProjectModel>(uid)
@@ -75,6 +78,7 @@ export class MonitorService {
     return this.activityService
       .start()
       .pipe(
+        take(1),
         switchMap(() => this.afs
           .collection<ProjectModel>('projects')
           .doc<ProjectModel>(uid)

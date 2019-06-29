@@ -15,7 +15,7 @@ const routes: Routes = [
     component: MonitorCreateEditComponent,
   },
   {
-    path: ':id',
+    path: ':monitorUid',
     component: MonitorCreateEditComponent,
   },
 ];
