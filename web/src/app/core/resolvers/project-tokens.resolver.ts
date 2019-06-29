@@ -8,7 +8,7 @@ import { catchError, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { ProjectTokenModel } from '../../shared/models/index.model';
-import { ProjectTokenService } from '../services/project-token.service';
+import { ProjectTokenService } from '../services/index.service';
 
 @Injectable({
   providedIn: 'root',

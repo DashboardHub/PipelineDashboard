@@ -9,7 +9,7 @@ import { throwError, Observable, Subscription } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { ProjectTokenService } from '../../../core/services/project-token.service';
+import { ProjectTokenService } from '../../../core/services/index.service';
 import { ProjectTokenModel } from '../../../shared/models/index.model';
 
 @Component({

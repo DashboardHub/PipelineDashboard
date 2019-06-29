@@ -8,7 +8,7 @@ import { TokensRoutingModule } from './tokens-routing.module';
 
 // Dashboard hub components
 import { CreateEditProjectTokenComponent } from './create-edit/create-edit.component';
-import { ProjectTokensComponent } from './tokens.component';
+import { ListProjectTokenComponent } from './list/list.component';
 
 @NgModule({
   imports: [
@@ -18,7 +18,7 @@ import { ProjectTokensComponent } from './tokens.component';
   ],
   declarations: [
     CreateEditProjectTokenComponent,
-    ProjectTokensComponent,
+    ListProjectTokenComponent,
   ],
 })
 export class TokensModule { }

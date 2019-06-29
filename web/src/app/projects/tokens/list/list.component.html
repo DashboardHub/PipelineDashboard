@@ -1,8 +1,8 @@
-<div class="mat-content" *ngIf="tokens | async as tokens">
+<div class="mat-content">
   <mat-card>
     <mat-card-header>
       <mat-card-title>Project tokens</mat-card-title>
-      <mat-card-subtitle>You have {{ tokens.length }} project tokens</mat-card-subtitle>
+      <mat-card-subtitle>You have {{ tokenList && tokenList.length ? tokenList.length : 0 }} project tokens</mat-card-subtitle>
       <span fxFlex></span>
       <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <button mat-raised-button type="submit" color="accent" [routerLink]="['create']">
@@ -14,7 +14,7 @@
     <mat-card-content>
 
       <mat-list>
-        <mat-list-item *ngFor="let token of tokens; isLast as last">
+        <mat-list-item *ngFor="let token of tokenList; isLast as last">
           <span>{{ token.name }}</span>
           <span fxFlex></span>
           <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">

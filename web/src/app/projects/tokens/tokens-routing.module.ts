@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Dashboard hub components
 import { CreateEditProjectTokenComponent } from './create-edit/create-edit.component';
-import { ProjectTokensComponent } from './tokens.component';
+import { ListProjectTokenComponent } from './list/list.component';
 
 import { EditProjectTokenResolver } from '../../core/resolvers/edit-project-token.resolver';
 import { ProjectTokensResolver } from '../../core/resolvers/project-tokens.resolver';
@@ -14,7 +14,7 @@ import { AuthGuard } from '../../core/guards/authentication.guard';
 const routes: Routes = [
   {
     path: '',
-    component: ProjectTokensComponent,
+    component: ListProjectTokenComponent,
     canActivate: [AuthGuard],
     resolve: { tokens: ProjectTokensResolver },
   },
