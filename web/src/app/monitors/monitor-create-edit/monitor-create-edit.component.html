@@ -2,7 +2,11 @@
   <form [formGroup]="monitorForm">
     <mat-card>
       <mat-card-header>
-        <mat-card-title> <span *ngIf="!isEdit">Create</span> <span *ngIf="isEdit"> Edit </span> Monitor</mat-card-title>
+        <mat-card-title>
+          <span *ngIf="!isEdit">Create</span>
+          <span *ngIf="isEdit"> Edit </span>
+          Monitor
+        </mat-card-title>
       </mat-card-header>
       <mat-divider></mat-divider>
 

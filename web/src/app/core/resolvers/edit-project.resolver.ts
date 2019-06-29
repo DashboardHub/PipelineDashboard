@@ -18,7 +18,7 @@ export class EditProjectResolver implements Resolve<boolean> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): any {
-    return this.projectService.findOneById(route.params.uid)
+    return this.projectService.findOneById(route.params.projectUid)
       .pipe(
         take(1),
         switchMap((project: ProjectModel) => {

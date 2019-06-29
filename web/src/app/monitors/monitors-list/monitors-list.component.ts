@@ -29,12 +29,10 @@ export class MonitorsListComponent implements OnInit {
    * Lifecycle init method
    */
   ngOnInit(): void {
-    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.uid = this.route.snapshot.paramMap.get('projectUid');
     this.projectSubscription = this.projectService
       .findOneById(this.uid)
-      .subscribe((project: ProjectModel) => {
-        this.monitors = project.monitors ? project.monitors : [];
-      });
+      .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
   }
 
   /**

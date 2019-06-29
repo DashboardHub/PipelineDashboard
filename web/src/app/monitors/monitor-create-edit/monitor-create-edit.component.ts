@@ -17,10 +17,10 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 })
 export class MonitorCreateEditComponent implements OnInit {
 
-  private id: string;
+  private monitorUid: string;
   private monitorsList: MonitorModel[] = [];
   private projectSubscription: Subscription;
-  private uid: string;
+  private projectUid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
 
@@ -35,16 +35,16 @@ export class MonitorCreateEditComponent implements OnInit {
    * Lifecycle init method
    */
   ngOnInit(): void {
-    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.intializeMonitorForm();
     this.projectSubscription = this.projectService
-      .findOneById(this.uid)
+      .findOneById(this.projectUid)
       .subscribe((project: ProjectModel) => {
         this.monitorsList = project.monitors ? project.monitors : [];
-        this.id = this.route.snapshot.paramMap.get('id');
-        if (this.id) {
+        this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
+        if (this.monitorUid) {
           this.isEdit = true;
-          const filteredMonitor: MonitorModel = this.monitorService.findMonitorById(this.monitorsList, this.id);
+          const filteredMonitor: MonitorModel = this.monitorService.findMonitorById(this.monitorsList, this.monitorUid);
           this.monitorForm.reset(filteredMonitor);
         }
       });
@@ -62,7 +62,7 @@ export class MonitorCreateEditComponent implements OnInit {
    */
   addMonitor(): void {
     this.monitorsList.push(this.monitorForm.value);
-    this.monitorService.saveMonitor(this.uid, this.monitorsList);
+    this.monitorService.saveMonitor(this.projectUid, this.monitorsList);
   }
 
   intializeMonitorForm(): void {
@@ -80,12 +80,8 @@ export class MonitorCreateEditComponent implements OnInit {
    * This function is used to update the monitor
    */
   updateMonitor(): void {
-    const objIndex: number = this.monitorsList.findIndex((monitor: MonitorModel) => monitor.uid === this.id);
-    this.monitorsList = [
-      ...this.monitorsList.slice(0, objIndex),
-      this.monitorForm.value,
-      ...this.monitorsList.slice(objIndex + 1),
-    ];
-    this.monitorService.saveMonitor(this.uid, this.monitorsList);
-  }
+    this.monitorsList = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
+    this.monitorsList.push(this.monitorForm.value);
+    this.monitorService.saveMonitor(this.projectUid, this.monitorsList);
+    }
 }
