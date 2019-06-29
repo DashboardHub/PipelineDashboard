@@ -112,7 +112,8 @@ export class ProjectService {
         switchMap(() => this.afs
           .collection<ProjectModel>('projects')
           .doc<ProjectModel>(project.uid)
-          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true }))
+          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true })),
+        take(1)
       );
   }
 
@@ -130,7 +131,8 @@ export class ProjectService {
                 repositories: [],
                 updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
               },
-              { merge: true }))
+              { merge: true })),
+          take(1)
         );
     }
 
@@ -146,7 +148,8 @@ export class ProjectService {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
-            { merge: true }))
+            { merge: true })),
+        take(1)
       );
   }
 }
