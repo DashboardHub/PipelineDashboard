@@ -37,9 +37,9 @@ export class MonitorCreateEditComponent implements OnInit {
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.intializeMonitorForm();
-    this.projectSubscription = this.projectService
-      .findOneById(this.projectUid)
-      .subscribe((project: ProjectModel) => {
+    this.projectSubscription = this.route.data
+      .subscribe((data: { project: ProjectModel }) => {
+        const project: ProjectModel = data.project;
         this.monitorsList = project.monitors ? project.monitors : [];
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
@@ -83,5 +83,5 @@ export class MonitorCreateEditComponent implements OnInit {
     this.monitorsList = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
     this.monitorsList.push(this.monitorForm.value);
     this.monitorService.saveMonitor(this.projectUid, this.monitorsList);
-    }
+  }
 }
