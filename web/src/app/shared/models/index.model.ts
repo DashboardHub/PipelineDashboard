@@ -10,6 +10,7 @@ export * from './repositories.model';
 export * from './monitor.model';
 export * from './milestone.model';
 export * from './project.model';
+export * from './project-token.model';
 export * from './pullRequest.model';
 export * from './release.model';
 export * from './user.model';
