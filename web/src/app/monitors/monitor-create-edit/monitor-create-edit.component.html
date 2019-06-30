@@ -4,7 +4,7 @@
       <mat-card-header>
         <mat-card-title>
           <span *ngIf="!isEdit">Create</span>
-          <span *ngIf="isEdit"> Edit </span>
+          <span *ngIf="isEdit">Edit</span>
           Monitor
         </mat-card-title>
       </mat-card-header>
@@ -17,8 +17,8 @@
         </mat-form-field>
         <mat-form-field>
           <mat-select formControlName="method" placeholder="Method" required>
-            <mat-option value="get">Get</mat-option>
-            <mat-option value="post">Post</mat-option>
+            <mat-option value="GET">Get</mat-option>
+            <mat-option value="POST">Post</mat-option>
           </mat-select>
           <mat-error *ngIf="monitorForm.get(['method']).hasError('required')">This field is required.</mat-error>
         </mat-form-field>

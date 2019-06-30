@@ -29,19 +29,22 @@ export class MonitorService {
   }
 
   /**
+   * This function will return the monitor by id
    *
    * @param monitors monitors list
    * @param id id of monitor which needs to be find
-   * This function will return the monitor by id
+   * @returns the monitor
    */
   findMonitorById(monitors: MonitorModel[], id: string): MonitorModel {
     return monitors.find((monitor: MonitorModel) => monitor.uid === id);
   }
 
   /**
+   * This function is used to save monitor and navigate to monitors list screen
+   *
    * @param uid uid of monitor which needs to be added into monitors list
    * @param monitors monitors list to be updated
-   * This function is used to save monitor and navigate to monitors list screen
+   *
    */
   saveMonitor(uid: string, monitors: MonitorModel[]): void {
     this.saveMonitors(uid, monitors)
@@ -52,10 +55,11 @@ export class MonitorService {
   }
 
   /**
+   * This function is used to save monitors in the database
    *
    * @param uid uid of monitor which needs to be save
    * @param monitors monitors list
-   * This function is used to save monitors in the database
+   * @returns the observable
    */
   public saveMonitors(uid: string, monitors: MonitorModel[]): Observable<void> {
     if (!monitors.length) {
