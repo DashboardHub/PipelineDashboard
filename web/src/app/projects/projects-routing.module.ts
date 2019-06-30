@@ -37,6 +37,10 @@ const routes: Routes = [
     path: ':projectUid/monitors',
     loadChildren: '../monitors/monitors.module#MonitorsModule',
   },
+  {
+    path: ':projectUid/tokens',
+    loadChildren: './tokens/tokens.module#TokensModule',
+  },
 ];
 
 @NgModule({

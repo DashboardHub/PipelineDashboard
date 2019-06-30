@@ -1,31 +1,36 @@
 service cloud.firestore {
 
   match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth.uid != null;
+    }
+
     match /users/{user} {
-      allow create: if request.auth.uid != null;
-      allow get, list, update, delete: if request.auth.uid != null && request.auth.uid == resource.data.uid;
+      allow create: if isSignedIn();
+      allow get, list, update, delete: if isSignedIn() && request.auth.uid == resource.data.uid;
 
       match /logins/{login} {
-        allow read, write: if request.auth.uid != null && get(/databases/$(database)/documents/users/$(user)).data.uid == request.auth.uid;
+        allow read, write: if isSignedIn() && get(/databases/$(database)/documents/users/$(user)).data.uid == request.auth.uid;
       }
     }
 
     match /userStats/{user} {
-      allow create, update: if request.auth.uid != null;
+      allow create, update: if isSignedIn();
       allow get, list: if true;
     }
 
     match /projects/{project} {
-      allow create: if request.auth.uid != null;
+      allow create: if isSignedIn();
       allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
-      allow update, delete: if request.auth.uid != null && request.auth.uid in resource.data.access.admin;
+      allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
     }
 
     match /repositories/{repository} {
-      allow create: if request.auth.uid != null;
-      allow get, list:if request.auth.uid != null;
-      allow update: if request.auth.uid != null;
-      allow delete: if request.auth.uid != null && request.auth.uid in resource.data.access.admin;
+      allow create: if isSignedIn();
+      allow get, list: if isSignedIn();
+      allow update: if isSignedIn();
+      allow delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
     }
   }
 
