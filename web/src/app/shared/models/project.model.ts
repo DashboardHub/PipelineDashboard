@@ -3,6 +3,7 @@ import { firestore } from 'firebase';
 
 // Dashboard hub models
 import { AccessModel } from './access.model';
+import { MonitorModel } from './monitor.model';
 import { ProjectTokenModel } from './project-token.model';
 
 export class ProjectModel {
@@ -12,6 +13,7 @@ export class ProjectModel {
   description?: string = '';
   access?: AccessModel = new AccessModel();
   repositories?: string[] = [];
+  monitors?: MonitorModel[] = [];
   tokens?: ProjectTokenModel[] = [];
   createdOn?: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
