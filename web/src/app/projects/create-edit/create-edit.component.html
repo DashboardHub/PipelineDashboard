@@ -32,6 +32,13 @@
             Entered text is too long.
           </mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="url" placeholder="Url" formControlName="url" pattern="https?://.+">
+          <mat-error *ngIf="projectForm.get(['url']).hasError('pattern')">
+            Please enter correct URL
+          </mat-error>
+        </mat-form-field>
       </mat-card-content>
 
       <mat-divider></mat-divider>
