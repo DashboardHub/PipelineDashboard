@@ -11,6 +11,7 @@ export class ProjectModel {
   type?: 'private' | 'public' = 'public';
   title?: string = '';
   description?: string = '';
+  url?: string = '';
   access?: AccessModel = new AccessModel();
   repositories?: string[] = [];
   monitors?: MonitorModel[] = [];
