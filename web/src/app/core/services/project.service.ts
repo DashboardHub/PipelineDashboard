@@ -26,6 +26,10 @@ export class ProjectService {
 
   // This function is for creating the project for logged in user
   public create(data: ProjectModel): Observable<ProjectModel> {
+    if (data.url) {
+      // @TODO: move to model
+      data.url = this.stripeSlash(data.url);
+    }
     let project: ProjectModel = {
       uid: uuid(),
       access: { admin: [this.authService.profile.uid] },
@@ -106,6 +110,10 @@ export class ProjectService {
 
   // This function update the project details
   public save(project: ProjectModel): Observable<void> {
+    if (project.url) {
+      // @TODO: move to project model
+      project.url = this.stripeSlash(project.url);
+    }
     return this.activityService
       .start()
       .pipe(
