@@ -27,12 +27,12 @@ export class ViewProjectComponent implements OnInit {
     private projectService: ProjectService,
     private authService: AuthenticationService
   ) {
-    this.project.uid = this.route.snapshot.paramMap.get('uid');
+    this.project.uid = this.route.snapshot.paramMap.get('projectUid');
   }
 
   ngOnInit(): void {
     this.projectSubscription = this.projectService
-      .findOneById(this.route.snapshot.params.uid)
+      .findOneById(this.route.snapshot.params.projectUid)
       .subscribe((project: ProjectModel) => this.project = project);
   }
 
@@ -58,6 +58,7 @@ export class ViewProjectComponent implements OnInit {
 
   // This function delete the project
   delete(): void {
+    this.projectSubscription.unsubscribe();
     this.deleteSubscription = this.projectService
       .delete(this.project.uid)
       .subscribe(() => this.router.navigate(['/projects']));

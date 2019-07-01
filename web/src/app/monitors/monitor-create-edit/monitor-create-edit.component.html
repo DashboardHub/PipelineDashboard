@@ -1,0 +1,58 @@
+<div *ngIf="monitorForm" class="mat-content" fxLayout="column" fxLayoutGap="20px">
+  <form [formGroup]="monitorForm">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <span *ngIf="!isEdit">Create</span>
+          <span *ngIf="isEdit">Edit</span>
+          Monitor
+        </mat-card-title>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+
+      <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Name" formControlName="name" required>
+          <mat-error *ngIf="monitorForm.get(['name']).hasError('required')">This field is required.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="method" placeholder="Method" required>
+            <mat-option value="GET">Get</mat-option>
+            <mat-option value="POST">Post</mat-option>
+          </mat-select>
+          <mat-error *ngIf="monitorForm.get(['method']).hasError('required')">This field is required.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Path" formControlName="path" required>
+          <mat-error *ngIf="monitorForm.get(['path']).hasError('required')">This field is required.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select formControlName="expectedCode" placeholder="Code" required>
+            <mat-option value="200">200</mat-option>
+            <mat-option value="201">201</mat-option>
+            <mat-option value="204">204</mat-option>
+            <mat-option value="400">400</mat-option>
+            <mat-option value="401">401</mat-option>
+            <mat-option value="404">404</mat-option>
+            <mat-option value="500">500</mat-option>
+          </mat-select>
+          <mat-error *ngIf="monitorForm.get(['expectedCode']).hasError('required')">This field is required.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Expected Text" formControlName="expectedText">
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
+          <button mat-raised-button type="submit" color="accent" [disabled]="monitorForm.invalid">
+            <span *ngIf="!isEdit" (click)="addMonitor()">Create</span>
+            <span *ngIf="isEdit" (click)="updateMonitor()">Save</span>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
-import { map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
+import { MonitorModel, ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 import { RepositoryService } from './repository.service';
@@ -40,7 +40,8 @@ export class ProjectService {
       .pipe(
         tap(() => this.repositoryService.refresh()),
         switchMap(() => this.afs.collection<ProjectModel>('projects').doc(project.uid).set(project)),
-        map(() => project)
+        map(() => project),
+        take(1)
       );
   }
 
@@ -49,7 +50,8 @@ export class ProjectService {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete())
+        switchMap(() => this.afs.collection<ProjectModel>('projects').doc<ProjectModel>(uid).delete()),
+        take(1)
       );
   }
 
@@ -110,7 +112,8 @@ export class ProjectService {
         switchMap(() => this.afs
           .collection<ProjectModel>('projects')
           .doc<ProjectModel>(project.uid)
-          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true }))
+          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true })),
+        take(1)
       );
   }
 
@@ -128,7 +131,8 @@ export class ProjectService {
                 repositories: [],
                 updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
               },
-              { merge: true }))
+              { merge: true })),
+          take(1)
         );
     }
 
@@ -144,7 +148,8 @@ export class ProjectService {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
-            { merge: true }))
+            { merge: true })),
+        take(1)
       );
   }
 }

@@ -31,7 +31,7 @@ export class CreateEditProjectComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.uid = this.route.snapshot.paramMap.get('uid');
+    this.uid = this.route.snapshot.paramMap.get('projectUid');
     this.projectForm = this.form.group({
       type: [undefined, [Validators.required]],
       title: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
