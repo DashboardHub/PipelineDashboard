@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -47,6 +47,7 @@ export class CreateEditProjectComponent implements OnInit {
 
   // This function will create project and edit project details based upon if click on edit or add
   save(): void {
+    this.url.patchValue(this.projectService.stripeSlash(this.url.value));
     if (this.uid) {
       this.createEditSubscription = this.projectService
         .save({ uid: this.uid, ...this.projectForm.getRawValue() })
@@ -67,5 +68,12 @@ export class CreateEditProjectComponent implements OnInit {
   ngDestroy(): void {
     this.createEditSubscription.unsubscribe();
     this.projectSubscription.unsubscribe();
+  }
+
+  /**
+   * Getter for url
+   */
+  get url(): AbstractControl {
+    return this.projectForm.get('url');
   }
 }

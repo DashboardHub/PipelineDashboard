@@ -1,6 +1,5 @@
 export * from './digits.pipe';
 export * from './state.pipe';
-export * from './stripe-slash.pipe';
 export * from './time-ago.pipe';
 export * from './truncate.pipe';
 export * from './type.pipe';

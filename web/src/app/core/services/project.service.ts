@@ -152,4 +152,17 @@ export class ProjectService {
         take(1)
       );
   }
+
+  /**
+   * This function stripes the trailing slash from url
+   * @param url the url address
+   * @return the url after stripe of the trailing slash
+   */
+  stripeSlash(url: string): string {
+    if (url.endsWith('/')) {
+      const index: number = url.lastIndexOf('\/');
+      url = url.substring(0, index);
+    }
+    return url;
+  }
 }
