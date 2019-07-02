@@ -6,15 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { map, take } from 'rxjs/operators';
 
 // Dashboard model and services
-import { ProjectTokenService } from '../../../core/services/index.service';
-import { ProjectTokenModel } from '../../../shared/models/index.model';
+import { ProjectTokenService } from '../../core/services/index.service';
+import { ProjectTokenModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss'],
+  templateUrl: './tokens-list.component.html',
+  styleUrls: ['./tokens-list.component.scss'],
 })
-export class ProjectTokenListComponent {
+export class TokensListComponent {
 
   public projectUid: string;
   public tokenList: ProjectTokenModel[];

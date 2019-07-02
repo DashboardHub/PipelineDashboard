@@ -2,30 +2,29 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // Dashboard hub components
-import { CreateEditProjectTokenComponent } from './create-edit/create-edit.component';
-import { ProjectTokenListComponent } from './list/list.component';
-
-import { EditProjectTokenResolver } from '../../core/resolvers/edit-project-token.resolver';
-import { ProjectTokensResolver } from '../../core/resolvers/project-tokens.resolver';
+import { EditProjectTokenResolver } from '../core/resolvers/edit-project-token.resolver';
+import { ProjectTokensResolver } from '../core/resolvers/project-tokens.resolver';
+import { TokensListComponent } from './tokens-list/tokens-list.component';
 
 // Dashboard hub authentication guards
-import { AuthGuard } from '../../core/guards/authentication.guard';
+import { AuthGuard } from '../core/guards/authentication.guard';
+import { TokensCreateEditComponent } from './tokens-create-edit/tokens-create-edit.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProjectTokenListComponent,
+    component: TokensListComponent,
     canActivate: [AuthGuard],
     resolve: { tokens: ProjectTokensResolver },
   },
   {
     path: 'create',
-    component: CreateEditProjectTokenComponent,
+    component: TokensCreateEditComponent,
     canActivate: [AuthGuard],
   },
   {
     path: ':uid/edit',
-    component: CreateEditProjectTokenComponent,
+    component: TokensCreateEditComponent,
     canActivate: [AuthGuard],
     resolve: { token: EditProjectTokenResolver },
   },
