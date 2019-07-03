@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Dashboard hub components
 import { EditProjectResolver } from '../core/resolvers/edit-project.resolver';
-import { PublicProjectsComponent } from '../shared/components/public/public.component';
+import { PrivatePublicProjectComponent } from '../shared/components/private-public-project/private-public-project.component';
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
 
 import { ViewProjectResolver } from '../core/resolvers/view-project.resolver';
@@ -15,7 +15,7 @@ import { AuthGuard } from '../core/guards/authentication.guard';
 const routes: Routes = [
   {
     path: '',
-    component: PublicProjectsComponent,
+    component: PrivatePublicProjectComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: ':projectUid/tokens',
-    loadChildren: './tokens/tokens.module#TokensModule',
+    loadChildren: '../tokens/tokens.module#TokensModule',
   },
 ];
 

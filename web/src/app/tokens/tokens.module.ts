@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // Dashboard hub routing modules
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { TokensRoutingModule } from './tokens-routing.module';
 
 // Dashboard hub components
-import { CreateEditProjectTokenComponent } from './create-edit/create-edit.component';
-import { ProjectTokenListComponent } from './list/list.component';
+import { TokensCreateEditComponent } from './tokens-create-edit/tokens-create-edit.component';
+import { TokensListComponent } from './tokens-list/tokens-list.component';
 
 @NgModule({
   imports: [
@@ -17,8 +17,8 @@ import { ProjectTokenListComponent } from './list/list.component';
     SharedModule,
   ],
   declarations: [
-    CreateEditProjectTokenComponent,
-    ProjectTokenListComponent,
+    TokensCreateEditComponent,
+    TokensListComponent,
   ],
 })
 export class TokensModule { }

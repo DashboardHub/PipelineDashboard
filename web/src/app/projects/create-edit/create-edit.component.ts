@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -36,6 +36,7 @@ export class CreateEditProjectComponent implements OnInit {
       type: [undefined, [Validators.required]],
       title: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
       description: [undefined, [Validators.minLength(3), Validators.maxLength(1024)]],
+      url: [undefined],
     });
     if (this.uid) {
       this.isEdit = true;

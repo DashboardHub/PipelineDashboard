@@ -9,15 +9,15 @@ import { throwError, Observable, Subscription } from 'rxjs';
 import { first, map, switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { ProjectTokenService } from '../../../core/services/index.service';
-import { ProjectTokenModel } from '../../../shared/models/index.model';
+import { ProjectTokenService } from '../../core/services/index.service';
+import { ProjectTokenModel } from '../../shared/models/index.model';
 
 @Component({
-  selector: 'dashboard-project-tokens-create',
-  templateUrl: './create-edit.component.html',
-  styleUrls: ['./create-edit.component.scss'],
+  selector: 'dashboard-project-tokens-create-edit',
+  templateUrl: './tokens-create-edit.component.html',
+  styleUrls: ['./tokens-create-edit.component.scss'],
 })
-export class CreateEditProjectTokenComponent implements OnInit {
+export class TokensCreateEditComponent implements OnInit {
 
   private projectSubscription: Subscription;
   private projectUid: string;

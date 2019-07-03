@@ -11,8 +11,8 @@ import { AppMaterialModule } from '../app-material.module';
 import { PipesModule } from '../pipes/pipes.module';
 
 // Dashboard hub components
-import { ProjectsComponent } from './components/projects/projects.component';
-import { PublicProjectsComponent } from './components/public/public.component';
+import { PrivatePublicProjectComponent } from './components/private-public-project/private-public-project.component';
+import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
 import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
@@ -24,8 +24,8 @@ import { MarkdownDirective } from './directives/markdown.directive';
     DialogConfirmationComponent,
     DialogListComponent,
     DialogMarkdownComponent,
-    ProjectsComponent,
-    PublicProjectsComponent],
+    ProjectsListComponent,
+    PrivatePublicProjectComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
@@ -40,8 +40,8 @@ import { MarkdownDirective } from './directives/markdown.directive';
     PipesModule,
     MarkdownDirective,
     RouterModule,
-    ProjectsComponent,
-    PublicProjectsComponent],
+    ProjectsListComponent,
+    PrivatePublicProjectComponent],
   entryComponents: [
     DialogConfirmationComponent,
     DialogListComponent,

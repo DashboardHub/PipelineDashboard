@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models and services
-import { MonitorService, ProjectService } from '../../core/services/index.service';
+import { MonitorService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -27,7 +27,6 @@ export class MonitorCreateEditComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private monitorService: MonitorService,
-    private projectService: ProjectService,
     private route: ActivatedRoute
   ) { }
 
@@ -36,7 +35,7 @@ export class MonitorCreateEditComponent implements OnInit {
    */
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
-    this.intializeMonitorForm();
+    this.initializeMonitorForm();
     this.projectSubscription = this.route.data
       .subscribe((data: { project: ProjectModel }) => {
         const project: ProjectModel = data.project;
@@ -65,7 +64,10 @@ export class MonitorCreateEditComponent implements OnInit {
     this.monitorService.saveMonitor(this.projectUid, this.monitorsList);
   }
 
-  intializeMonitorForm(): void {
+  /**
+   * To initialize monitor form
+   */
+  initializeMonitorForm(): void {
     this.monitorForm = this.form.group({
       uid: uuid(),
       name: [undefined, [Validators.required, Validators.minLength(3)]],

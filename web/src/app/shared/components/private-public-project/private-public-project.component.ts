@@ -7,10 +7,10 @@ import { ProjectService } from '../../../core/services/index.service';
 import { ProjectModel } from '../../models/index.model';
 
 @Component({
-  selector: 'dashboard-projects-public',
-  templateUrl: './public.component.html',
+  selector: 'dashboard-projects-private-public',
+  templateUrl: './private-public-project.component.html',
 })
-export class PublicProjectsComponent implements OnInit {
+export class PrivatePublicProjectComponent implements OnInit {
 
   private projectSubscription: Subscription;
   public projects: ProjectModel[] = [];
