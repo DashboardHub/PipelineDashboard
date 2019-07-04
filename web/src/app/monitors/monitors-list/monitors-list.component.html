@@ -20,7 +20,7 @@
           <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
           <p class="text-right">
             <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
-            <button mat-raised-button color="accent" (click)="deleteMonitor(monitor.uid)">Delete</button>
+            <button mat-raised-button color="warn" (click)="deleteMonitor(monitor.uid)">Delete</button>
           </p>
         </mat-list-item>
       </mat-list>
