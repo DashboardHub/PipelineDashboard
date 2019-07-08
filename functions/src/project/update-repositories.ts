@@ -1,15 +1,8 @@
 // Third party modules
-import * as admin from 'firebase-admin';
 import { firestore, Change, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
-import { FirebaseAdmin } from './../client/firebase-admin';
-
-
-export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
-export declare type DocumentData = admin.firestore.DocumentData;
-export declare type WriteResult = admin.firestore.WriteResult;
-
+import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onUpdateProjectRepositories: any = firestore
   .document('projects/{projectUid}')

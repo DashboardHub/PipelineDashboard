@@ -1,15 +1,8 @@
 // Third party modules
-import * as admin from 'firebase-admin';
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
-import { FirebaseAdmin } from './../client/firebase-admin';
-
-
-export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
-export declare type DocumentData = admin.firestore.DocumentData;
-export declare type QuerySnapshot = admin.firestore.QuerySnapshot;
-export declare type QueryDocumentSnapshot = admin.firestore.QueryDocumentSnapshot;
+import { DocumentData, DocumentSnapshot, FirebaseAdmin, QueryDocumentSnapshot } from './../client/firebase-admin';
 
 export const onCreateRepository: CloudFunction<DocumentSnapshot> = firestore
   .document('repositories/{repositoryUid}')

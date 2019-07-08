@@ -1,14 +1,8 @@
 // Third party modules
-import * as admin from 'firebase-admin';
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
-import { FirebaseAdmin } from './../client/firebase-admin';
-
-
-export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
-export declare type DocumentData = admin.firestore.DocumentData;
-export declare type WriteResult = admin.firestore.WriteResult;
+import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = firestore
   .document('projects/{projectUid}')
@@ -26,10 +20,7 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
             .then((repoSnapshot: DocumentSnapshot) => {
               const repoData: DocumentData = repoSnapshot.data();
               if (Array.isArray(repoData.projects)) {
-                const foundIndex: number = repoData.projects.findIndex((element: string) => element === context.params.projectUid);
-                if (foundIndex > -1) {
-                  repoData.projects.splice(foundIndex, 1);
-                }
+                repoData.projects = repoData.projects.filter((element: string) => element !== context.params.projectUid);
               } else {
                 repoData.projects = [];
               }
