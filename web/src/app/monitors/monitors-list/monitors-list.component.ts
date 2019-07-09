@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // Rxjs operators
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
 import { MonitorService, ProjectService } from '../../core/services/index.service';
@@ -30,8 +31,11 @@ export class MonitorsListComponent implements OnInit {
    */
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
-    this.projectSubscription = this.projectService
-      .findOneById(this.projectUid)
+    this.route.data
+      .pipe(
+        map((data: { project: ProjectModel }) => data.project),
+        take(1)
+      )
       .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
   }
 
