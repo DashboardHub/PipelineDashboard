@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 // Rxjs operators
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 // Dashboard hub application model and services
-import { MonitorService, ProjectService } from '../../core/services/index.service';
+import { AngularFireFunctions } from '@angular/fire/functions';
+import { AuthenticationService, MonitorService, ProjectService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -20,6 +21,8 @@ export class MonitorsListComponent implements OnInit {
   public monitors: MonitorModel[] = [];
 
   constructor(
+    private authService: AuthenticationService,
+    private fns: AngularFireFunctions,
     private projectService: ProjectService,
     private monitorService: MonitorService,
     private route: ActivatedRoute
@@ -50,5 +53,11 @@ export class MonitorsListComponent implements OnInit {
   deleteMonitor(id: string): void {
     this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== id);
     this.monitorService.saveMonitor(id, this.monitors);
+  }
+
+   // This function will ping the monitor
+   public pingMonitor(monitorUid: string): Observable<boolean> {
+    const callable: any = this.fns.httpsCallable('pingMonitor');
+    return callable({ token: this.authService.profile.oauth.githubToken, projectUid: this.uid, monitorUid: monitorUid });
   }
 }
