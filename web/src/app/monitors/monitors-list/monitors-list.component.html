@@ -1,24 +1,29 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Monitors</mat-card-title>
-    <mat-card-subtitle>You have {{ monitors.length }} monitors</mat-card-subtitle>
-    <span fxFlex></span>
-    <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-      <button mat-raised-button type="submit" color="accent" routerLink="create">
-        <mat-icon>add</mat-icon> Monitor
-      </button>
-    </span>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list>
-      <mat-list-item fxLayout="column" *ngFor="let monitor of monitors">
-        <h4 mat-line>{{monitor.name}}</h4>
-        <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
-        <p class="text-right">
-          <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
-          <button mat-raised-button color="accent" (click)="deleteMonitor(monitor.uid)">Delete</button>
-        </p>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<div class="mat-content">
+  <mat-card class="bread-crumb">
+    <a [routerLink]="['/projects', projectUid]">Projects</a> > <span>Monitors</span>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Monitors</mat-card-title>
+      <mat-card-subtitle>You have {{ monitors.length }} monitors</mat-card-subtitle>
+      <span fxFlex></span>
+      <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <button mat-raised-button type="submit" color="accent" routerLink="create">
+          <mat-icon>add</mat-icon> Monitor
+        </button>
+      </span>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item fxLayout="column" *ngFor="let monitor of monitors">
+          <h4 mat-line>{{monitor.name}}</h4>
+          <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
+          <p class="text-right">
+            <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
+            <button mat-raised-button color="warn" (click)="deleteMonitor(monitor.uid)">Delete</button>
+          </p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
