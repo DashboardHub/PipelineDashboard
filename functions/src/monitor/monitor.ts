@@ -41,5 +41,10 @@ export const getMonitorPings: any = async (token: string, projectUid: string, mo
 
   Logger.info(pingResult);
 
+  await FirebaseAdmin
+    .firestore()
+    .collection(`projects/${projectUid}/pings`)
+    .add(pingResult);
+
   return pingResult;
 }
