@@ -1,6 +1,12 @@
+// 3rd party
 import { FirebaseAdmin } from '../client/firebase-admin';
-import { MonitorPing } from '../client/ping';
+
+// DashboardHub
+import { Ping, PingResponse } from '../client/ping';
 import { Logger } from './../client/logger';
+import { MonitorModel, PingModel, ProjectModel } from './../models/index.model';
+
+type Document = FirebaseFirestore.DocumentSnapshot
 
 export interface MonitorInfoInput {
   token: string;
@@ -9,29 +15,31 @@ export interface MonitorInfoInput {
 }
 
 export const getMonitorPings: any = async (token: string, projectUid: string, monitorUid: string) => {
-  return FirebaseAdmin.firestore()
+  const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
-    .get()
-    .then(async (doc: any) => {
-      Logger.info({
-        projectUid: projectUid,
-        doc: doc.data(),
-      });
-      const monitors: any = doc.data().monitors;
-      const monitor: any = monitors.find((item: any) => item.uid === monitorUid);
-      const uri: string = doc.data().url + monitor.path ;
-      Logger.info({
-        uri: uri,
-      });
-      const data: any = await Promise.all([
-        MonitorPing(uri, token),
-      ]);
-      Logger.info({
-        pingsData: data,
-      });
-      Logger.info({
-        status: data.statusCode,
-      })
-    });
+    .get();
+  const project: ProjectModel = <ProjectModel> document.data();
+  Logger.info(project);
+  const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
+  Logger.info(monitor);
+  const uri: string = project.url + monitor.path;
+
+  // const start: Date = new Date();
+  const response: PingResponse = await Ping<PingResponse>(uri, token);
+  Logger.info(response);
+  // const end: number = new Date();
+  const pingResult: PingModel = {
+    statusCode: response.statusCode,
+    expectedCode: monitor.expectedCode,
+    expectedText: monitor.expectedText,
+    duration: 0, // end - start // milli seconds
+    codeMatched: monitor.expectedCode === response.statusCode,
+    textMatched: monitor.expectedText ? response.body.includes(monitor.expectedText) : true,
+  };
+  pingResult.isValid = !!(pingResult.codeMatched && pingResult.textMatched);
+
+  Logger.info(pingResult);
+
+  return pingResult;
 }
