@@ -1,8 +1,11 @@
+/**
+ * Monitor model for functions
+ */
 export class MonitorModel {
-  uid: string;
-  name: string;
-  method: 'GET' | 'POST';
-  path: string;
   expectedCode: number;
   expectedText?: string;
+  method: 'GET' | 'POST';
+  name: string;
+  path: string;
+  uid: string;
 }

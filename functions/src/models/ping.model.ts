@@ -1,9 +1,12 @@
+/**
+ * Pings model for functions
+ */
 export interface PingModel {
-  statusCode: number;
+  codeMatched: boolean;
+  duration: number;
   expectedCode: number;
   expectedText: string;
-  codeMatched: boolean;
-  textMatched: boolean;
-  duration: number;
   isValid?: boolean;
+  statusCode: number;
+  textMatched: boolean;
 }
