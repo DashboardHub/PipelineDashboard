@@ -9,24 +9,21 @@ import { MonitorModel, PingModel, ProjectModel } from './../models/index.model';
 type Document = FirebaseFirestore.DocumentSnapshot
 
 export interface MonitorInfoInput {
-  token: string;
   projectUid: string;
   monitorUid: string;
 }
 
-export const getMonitorPings: any = async (token: string, projectUid: string, monitorUid: string) => {
+export const getMonitorPings: any = async (projectUid: string, monitorUid: string) => {
   const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
     .get();
   const project: ProjectModel = <ProjectModel> document.data();
-  Logger.info(project);
   const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
-  Logger.info(monitor);
   const uri: string = project.url + monitor.path;
 
   const start: number = (new Date()).getMilliseconds();
-  const response: PingResponse = await Ping<PingResponse>(uri, token);
+  const response: PingResponse = await Ping<PingResponse>(uri);
   Logger.info(response);
   const end: number = (new Date()).getMilliseconds();
   const pingResult: PingModel = {

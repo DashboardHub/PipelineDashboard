@@ -5,12 +5,11 @@ export interface PingResponse {
   body: string;
 }
 
-export async function Ping<T>(uri: string, token: string): Promise<T> {
+export async function Ping<T>(uri: string): Promise<T> {
   return <T> await get({
     uri: uri,
     headers: {
       'User-Agent': 'DashboardHub',
-      'Authorization': `token ${token}`,
     },
     json: true,
     resolveWithFullResponse: true,

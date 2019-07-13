@@ -4,7 +4,7 @@
 export class MonitorModel {
   expectedCode: number;
   expectedText?: string;
-  method: 'GET' | 'POST';
+  method: 'GET';
   name: string;
   path: string;
   uid: string;
