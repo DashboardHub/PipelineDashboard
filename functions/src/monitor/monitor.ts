@@ -33,7 +33,8 @@ export const getMonitorPings: any = async (token: string, projectUid: string, mo
     statusCode: response.statusCode,
     expectedCode: monitor.expectedCode,
     expectedText: monitor.expectedText,
-    duration: end - start, // Milli seconds
+    fullUrl: uri,
+    duration: end - start, // Milliseconds
     codeMatched: monitor.expectedCode === response.statusCode,
     textMatched: monitor.expectedText ? response.body.includes(monitor.expectedText) : true,
   };

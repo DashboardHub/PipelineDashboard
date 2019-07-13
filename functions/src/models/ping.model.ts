@@ -6,6 +6,7 @@ export interface PingModel {
   duration: number;
   expectedCode: number;
   expectedText: string;
+  fullUrl: string;
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
