@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // Rxjs operators
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -17,8 +18,8 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 export class MonitorsListComponent implements OnInit {
 
   private projectSubscription: Subscription;
-  private uid: string;
   public monitors: MonitorModel[] = [];
+  public projectUid: string;
 
   constructor(
     private authService: AuthenticationService,
@@ -32,9 +33,12 @@ export class MonitorsListComponent implements OnInit {
    * Lifecycle init method
    */
   ngOnInit(): void {
-    this.uid = this.route.snapshot.paramMap.get('projectUid');
-    this.projectSubscription = this.projectService
-      .findOneById(this.uid)
+    this.projectUid = this.route.snapshot.paramMap.get('projectUid');
+    this.route.data
+      .pipe(
+        map((data: { project: ProjectModel }) => data.project),
+        take(1)
+      )
       .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
   }
 
@@ -58,6 +62,6 @@ export class MonitorsListComponent implements OnInit {
    // This function will ping the monitor
    public pingMonitor(monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');
-    return callable({ token: this.authService.profile.oauth.githubToken, projectUid: this.uid, monitorUid: monitorUid });
+    return callable({ token: this.authService.profile.oauth.githubToken, projectUid: this.projectUid, monitorUid: monitorUid });
   }
 }
