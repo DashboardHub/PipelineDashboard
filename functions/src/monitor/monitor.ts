@@ -25,15 +25,15 @@ export const getMonitorPings: any = async (token: string, projectUid: string, mo
   Logger.info(monitor);
   const uri: string = project.url + monitor.path;
 
-  // const start: Date = new Date();
+  const start: number = (new Date()).getMilliseconds();
   const response: PingResponse = await Ping<PingResponse>(uri, token);
   Logger.info(response);
-  // const end: number = new Date();
+  const end: number = (new Date()).getMilliseconds();
   const pingResult: PingModel = {
     statusCode: response.statusCode,
     expectedCode: monitor.expectedCode,
     expectedText: monitor.expectedText,
-    duration: 0, // end - start // milli seconds
+    duration: end - start, // Milli seconds
     codeMatched: monitor.expectedCode === response.statusCode,
     textMatched: monitor.expectedText ? response.body.includes(monitor.expectedText) : true,
   };
