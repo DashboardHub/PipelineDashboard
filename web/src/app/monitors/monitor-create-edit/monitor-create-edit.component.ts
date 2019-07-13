@@ -23,6 +23,7 @@ export class MonitorCreateEditComponent implements OnInit {
   private projectUid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
+  public statusCodeList: Number[] = [200, 201, 204, 400, 401, 404, 500];
 
   constructor(
     private form: FormBuilder,

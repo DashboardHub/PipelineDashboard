@@ -28,13 +28,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-select formControlName="expectedCode" placeholder="Code" required>
-            <mat-option value="200">200</mat-option>
-            <mat-option value="201">201</mat-option>
-            <mat-option value="204">204</mat-option>
-            <mat-option value="400">400</mat-option>
-            <mat-option value="401">401</mat-option>
-            <mat-option value="404">404</mat-option>
-            <mat-option value="500">500</mat-option>
+            <mat-option *ngFor="let status of statusCodeList" [value]="status">{{status}}</mat-option>
           </mat-select>
           <mat-error *ngIf="monitorForm.get(['expectedCode']).hasError('required')">This field is required.</mat-error>
         </mat-form-field>
