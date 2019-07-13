@@ -62,6 +62,6 @@ export class MonitorsListComponent implements OnInit {
    // This function will ping the monitor
    public pingMonitor(monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');
-    return callable({ token: this.authService.profile.oauth.githubToken, projectUid: this.projectUid, monitorUid: monitorUid });
+    return callable({ projectUid: this.projectUid, monitorUid: monitorUid });
   }
 }
