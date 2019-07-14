@@ -1,4 +1,5 @@
 // 3rd party
+import { v4 as uuid } from 'uuid';
 import { FirebaseAdmin } from '../client/firebase-admin';
 
 // DashboardHub
@@ -18,9 +19,10 @@ export const getMonitorPings: any = async (projectUid: string, monitorUid: strin
     .collection('projects')
     .doc(projectUid)
     .get();
-  const project: ProjectModel = <ProjectModel> document.data();
+  const project: ProjectModel = <ProjectModel>document.data();
   const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
   const uri: string = project.url + monitor.path;
+  const uid: string = uuid();
 
   const start: number = (new Date()).getMilliseconds();
   const response: PingResponse = await Ping<PingResponse>(uri);
@@ -41,8 +43,16 @@ export const getMonitorPings: any = async (projectUid: string, monitorUid: strin
 
   await FirebaseAdmin
     .firestore()
-    .collection(`projects/${projectUid}/pings`)
-    .add(pingResult);
+    .collection(`projects/${projectUid}/${monitorUid}`)
+    .doc(uid)
+    .set(pingResult);
 
   return pingResult;
+}
+
+export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string) => {
+  await FirebaseAdmin.firestore()
+    .collection(`projects/${projectUid}/${monitorUid}`)
+    .doc()
+    .delete()
 }
