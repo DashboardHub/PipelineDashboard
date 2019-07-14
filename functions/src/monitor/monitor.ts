@@ -8,6 +8,7 @@ import { Logger } from './../client/logger';
 import { MonitorModel, PingModel, ProjectModel } from './../models/index.model';
 
 type Document = FirebaseFirestore.DocumentSnapshot
+type DocumentReference = FirebaseFirestore.DocumentReference;
 
 export interface MonitorInfoInput {
   projectUid: string;
@@ -53,6 +54,10 @@ export const getMonitorPings: any = async (projectUid: string, monitorUid: strin
 export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string) => {
   await FirebaseAdmin.firestore()
     .collection(`projects/${projectUid}/${monitorUid}`)
-    .doc()
-    .delete()
+    .listDocuments()
+    .then((documents: DocumentReference[]) => {
+      documents.map((doc: any) => {
+        doc.delete()
+      });
+    })
 }
