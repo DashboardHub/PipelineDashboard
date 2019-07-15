@@ -20,7 +20,7 @@ export const getMonitorPings: any = async (projectUid: string, monitorUid: strin
     .collection('projects')
     .doc(projectUid)
     .get();
-  const project: ProjectModel = <ProjectModel>document.data();
+  const project: ProjectModel = <ProjectModel> document.data();
   const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
   const uri: string = project.url + monitor.path;
   const uid: string = uuid();
