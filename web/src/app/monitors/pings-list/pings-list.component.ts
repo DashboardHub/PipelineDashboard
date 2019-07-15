@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 // Dashboard hub models
-import { PingModel } from 'src/app/shared/models/index.model';
+import { PingModel } from '../../shared/models/index.model';
 
 /**
  * Ping list components
