@@ -1,11 +1,9 @@
-// Third party modules
-import { firestore } from 'firebase-admin';
-
 import { enviroment } from '../environments/environment';
-import { GitHubRepositoryWebhookRequestCreate, GitHubRepositoryWebhookResponse } from '../mappers/github/webhook.mapper';
+import { GitHubRepositoryWebhookMapper, GitHubRepositoryWebhookModel, GitHubRepositoryWebhookRequestCreate, GitHubRepositoryWebhookResponse } from '../mappers/github/webhook.mapper';
 import { DocumentData, DocumentReference, FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClientPost } from './../client/github';
 import { Logger } from './../client/logger';
+import { findWebhook } from './find-git-webhook-repository';
 
 export interface CreateGitWebhookRepositoryInput {
   token: string;
@@ -14,10 +12,20 @@ export interface CreateGitWebhookRepositoryInput {
 
 export const onCreateGitWebhookRepository: any = async (token: string, repositoryUid: string) => {
   try {
-    const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid) 
-    const repository: DocumentData = (await FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()).data();
+    const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
+    const repository: DocumentData = (await repositorySnapshot.get()).data();
 
-    repository.webhook = await createWebhook(repository, token);
+    let webhook: GitHubRepositoryWebhookModel;
+
+    const exist: GitHubRepositoryWebhookResponse = await findWebhook(repository, token);
+
+    if (exist) {
+      webhook = GitHubRepositoryWebhookMapper.import(exist);
+    } else {
+      webhook = GitHubRepositoryWebhookMapper.import(await createWebhook(repository, token));
+    }
+
+    repository.webhook = webhook;
     await repositorySnapshot.update(repository);
 
     return repository;
@@ -28,15 +36,12 @@ export const onCreateGitWebhookRepository: any = async (token: string, repositor
 };
 
 
-function createWebhook(repository: DocumentData, token: string): Promise<GitHubRepositoryWebhookResponse> {
+export function createWebhook(repository: DocumentData, token: string): Promise<GitHubRepositoryWebhookResponse> {
   const body: GitHubRepositoryWebhookRequestCreate = {
     // name: enviroment.githubWebhook.name,
     name: 'web',
     active: true,
-    events: [
-      'push',
-      'pull_request',
-    ],
+    events: enviroment.githubWebhook.events,
     config: {
       url: enviroment.githubWebhook.url,
       content_type: 'json',

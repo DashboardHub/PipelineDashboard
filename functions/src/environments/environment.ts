@@ -1,7 +1,11 @@
 
 export const enviroment: Config = {
   githubWebhook: {
-    url: "https://us-central1-pipelinedashboard-dev-cfa68.cloudfunctions.ne/responseGitWebhookRepository",
+    url: "https://us-central1-pipelinedashboard-dev-cfa68.cloudfunctions.net/responseGitWebhookRepository",
+    events: [
+      'push',
+      'pull_request',
+    ],
   },
 
 }
@@ -9,5 +13,6 @@ export const enviroment: Config = {
 interface Config {
   githubWebhook: {
     url: string,
+    events: string[],
   }
 }

@@ -54,8 +54,6 @@ export class RepositoryComponent implements OnInit {
   public createWebhook(): void {
     this.repositoryService.createGitWebhook(this.repository)
       .pipe(take(1))
-      .subscribe((data: RepositoryModel) => {
-        console.log(data);
-      });
+      .subscribe();
   }
 }
