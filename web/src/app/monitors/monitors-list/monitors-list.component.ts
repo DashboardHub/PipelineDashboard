@@ -7,7 +7,7 @@ import { map, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { AuthenticationService, MonitorService, ProjectService } from '../../core/services/index.service';
+import { MonitorService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -17,14 +17,11 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 })
 export class MonitorsListComponent implements OnInit {
 
-  private projectSubscription: Subscription;
   public monitors: MonitorModel[] = [];
   public projectUid: string;
 
   constructor(
-    private authService: AuthenticationService,
     private fns: AngularFireFunctions,
-    private projectService: ProjectService,
     private monitorService: MonitorService,
     private route: ActivatedRoute
   ) { }
@@ -40,13 +37,6 @@ export class MonitorsListComponent implements OnInit {
         take(1)
       )
       .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
-  }
-
-  /**
-   * Lifecycle destroy method
-   */
-  ngDestroy(): void {
-    this.projectSubscription.unsubscribe();
   }
 
   /**

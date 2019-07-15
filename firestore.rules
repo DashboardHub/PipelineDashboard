@@ -32,6 +32,10 @@ service cloud.firestore {
       allow update: if isSignedIn();
       allow delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
     }
+
+    match /projects/{project}/{monitor} {
+      allow get, list: if isSignedIn();
+    }
   }
 
 }

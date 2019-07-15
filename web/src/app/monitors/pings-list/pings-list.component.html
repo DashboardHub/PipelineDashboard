@@ -1,0 +1,21 @@
+<div class="mat-content">
+  <mat-card class="bread-crumb">
+    <a [routerLink]="['/projects', projectUid]">Projects</a> >
+    <a [routerLink]="['/monitors', monitorUid]">Monitors</a> >
+    <span>Pings</span>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Pings</mat-card-title>
+      <mat-card-subtitle>You have {{ pings.length }} pings</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item fxLayout="column" *ngFor="let ping of pings">
+          <h4 mat-line>{{ping.fullUrl}}</h4>
+          <p mat-line>{{ping.statusCode}}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>
