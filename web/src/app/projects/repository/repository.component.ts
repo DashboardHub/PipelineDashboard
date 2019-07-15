@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '../../core/services/index.service';
@@ -48,5 +49,13 @@ export class RepositoryComponent implements OnInit {
   ngDestroy(): void {
     this.repositorySubscription
       .unsubscribe();
+  }
+
+  public createWebhook(): void {
+    this.repositoryService.createGitWebhook(this.repository)
+      .pipe(take(1))
+      .subscribe((data: RepositoryModel) => {
+        console.log(data);
+      });
   }
 }
