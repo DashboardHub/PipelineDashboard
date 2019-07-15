@@ -52,12 +52,10 @@ export const getMonitorPings: any = async (projectUid: string, monitorUid: strin
 }
 
 export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string) => {
-  await FirebaseAdmin.firestore()
+  const documents: DocumentReference[] = await FirebaseAdmin.firestore()
     .collection(`projects/${projectUid}/${monitorUid}`)
     .listDocuments()
-    .then((documents: DocumentReference[]) => {
-      documents.map((doc: any) => {
-        doc.delete()
-      });
-    })
+  documents.forEach((doc: any) => {
+    doc.delete();
+  });
 }
