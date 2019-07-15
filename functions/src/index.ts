@@ -6,6 +6,7 @@ import { CallableContext } from 'firebase-functions/lib/providers/https';
 import { DocumentSnapshot } from './client/firebase-admin';
 
 // Dashboard repositories
+import { onCreateGitWebhookRepository, CreateGitWebhookRepositoryInput } from './repository/create-git-webhook-repository';
 import { onCreateRepository } from './repository/create-repository';
 import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
 import { onUpdateDeleteRepository } from './repository/update-delete-repository';
@@ -18,6 +19,7 @@ import { onUpdateUserStats } from './user/stats';
 // Dashboard projects
 import { onDeleteProjectRepositories } from './project/delete-project';
 import { onUpdateProjectRepositories } from './project/update-repositories';
+import { onResponseGitWebhookRepository } from './repository/response-git-webhook-repository';
 
 declare type HttpsFunction = functions.HttpsFunction;
 declare type CloudFunction<T> = functions.CloudFunction<T>;
@@ -26,6 +28,8 @@ declare type Change<T> = functions.Change<T>;
 export const findAllUserRepositories: HttpsFunction = functions.https.onCall((input: ReposInput, context: CallableContext) => getUserRepos(input.token, context.auth.uid));
 export const findAllUserEvents: HttpsFunction = functions.https.onCall((input: EventsInput, context: CallableContext) => getUserEvents(input.token, context.auth.uid, input.username));
 export const findRepositoryInfo: HttpsFunction = functions.https.onCall((input: RepositoryInfoInput, context: CallableContext) => getRepositoryInfo(input.token, input.fullName));
+export const createGitWebhookRepository: HttpsFunction = functions.https.onCall((input: CreateGitWebhookRepositoryInput, context: CallableContext) => onCreateGitWebhookRepository(input.token, input.repositoryUid));
+export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
 
 export const deleteProjectRepositories: CloudFunction<DocumentSnapshot> = onDeleteProjectRepositories;
 export const updateProjectRepositories: CloudFunction<DocumentSnapshot> = onUpdateProjectRepositories;
