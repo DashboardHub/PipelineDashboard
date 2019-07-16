@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models
-import { PingModel } from '../../shared/models/index.model';
 import { PingService } from '../../core/services/index.service';
+import { PingModel } from '../../shared/models/index.model';
 
 /**
  * Ping list components
@@ -23,7 +23,7 @@ export class PingsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private pingService: PingService,
+    private pingService: PingService
   ) { }
 
   ngOnInit(): void {
