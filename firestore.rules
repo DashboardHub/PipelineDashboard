@@ -24,6 +24,12 @@ service cloud.firestore {
       allow create: if isSignedIn();
       allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
       allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
+
+      match /pings/{ping} {
+        allow create: if isSignedIn();
+        allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
+        allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
+      }
     }
 
     match /repositories/{repository} {
@@ -31,10 +37,6 @@ service cloud.firestore {
       allow get, list: if isSignedIn();
       allow update: if isSignedIn();
       allow delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
-    }
-
-    match /projects/{project}/{monitor} {
-      allow get, list: if isSignedIn();
     }
   }
 

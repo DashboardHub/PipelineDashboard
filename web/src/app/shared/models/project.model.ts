@@ -5,6 +5,7 @@ import { firestore } from 'firebase';
 import { AccessModel } from './access.model';
 import { MonitorModel } from './monitor.model';
 import { ProjectTokenModel } from './project-token.model';
+import { PingModel } from './ping.model';
 
 export class ProjectModel {
   uid?: string = '';
@@ -15,6 +16,7 @@ export class ProjectModel {
   access?: AccessModel = new AccessModel();
   repositories?: string[] = [];
   monitors?: MonitorModel[] = [];
+  pings?: PingModel[] = [];
   tokens?: ProjectTokenModel[] = [];
   createdOn?: firestore.Timestamp;
   updatedOn: firestore.Timestamp;

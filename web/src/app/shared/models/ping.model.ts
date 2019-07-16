@@ -6,7 +6,7 @@ export class PingModel {
   duration: number;
   expectedCode: number;
   expectedText: string;
-  fullUrl: string;
+  url: string;
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;

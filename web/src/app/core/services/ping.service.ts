@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { PingModel } from '../../shared/models/index.model';
+import { PingModel, ProjectModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 @Injectable({
@@ -19,15 +19,18 @@ export class PingService {
   }
 
   // This function returns the pings details via monitorUid
-  public findOneById(projectUid: string, monitorUid: string): Observable<PingModel[]> {
+  public findAllByMonitor(projectUid: string, monitorUid: string): Observable<PingModel[]> {
     return this.activityService
       .start()
       .pipe(
         switchMap(() => this.afs
-          .collection<PingModel>(
-            `projects/${projectUid}/${monitorUid}`
+          .collection<ProjectModel>('projects')
+          .doc<ProjectModel>(projectUid)
+          .collection<PingModel>('pings',
+            (ref: firebase.firestore.Query) => ref.where('monitorUid', '==', monitorUid)
+              .orderBy('createdOn', 'desc')
           )
-          .valueChanges())
+          .valueChanges()),
       );
   }
 }

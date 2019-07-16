@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
 
 // Dashboard hub models
 import { PingModel } from '../../shared/models/index.model';
@@ -15,7 +14,7 @@ import { PingModel } from '../../shared/models/index.model';
 })
 export class PingsListComponent implements OnInit {
 
-  public pings: PingModel[];
+  public pings: PingModel[] = [];
   public projectUid: string;
   public monitorUid: string;
 
@@ -27,12 +26,6 @@ export class PingsListComponent implements OnInit {
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
-    this.route.data
-      .pipe(
-        take(1)
-      )
-      .subscribe((pings: PingModel[]) => {
-        this.pings = pings;
-      });
+    this.route.data.subscribe((data: { pings: PingModel[] }) => this.pings = data.pings);
   }
 }

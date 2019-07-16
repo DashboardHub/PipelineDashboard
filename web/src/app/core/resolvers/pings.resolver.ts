@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
 // Third party modules
-import { of } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
+import { of, Observable } from 'rxjs';
+import { catchError, take } from 'rxjs/operators';
 import { PingModel } from '../../shared/models/index.model';
 import { PingService } from '../services/ping.service';
 
@@ -13,23 +13,20 @@ import { PingService } from '../services/ping.service';
 @Injectable({
   providedIn: 'root',
 })
-export class PingResolver implements Resolve<PingModel> {
+export class PingsResolver implements Resolve<PingModel[]> {
 
   constructor(
     private pingService: PingService,
     private router: Router
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot): any {
-    return this.pingService.findOneById(route.params.projectUid, route.params.monitorUid)
+  resolve(route: ActivatedRouteSnapshot): Observable<PingModel[]> {
+    return this.pingService.findAllByMonitor(route.params.projectUid, route.params.monitorUid)
       .pipe(
         take(1),
-        switchMap((pings: PingModel[]) => {
-          return of(pings);
-        }),
         catchError(() => {
-          this.router.navigate(['/']);
-          return of(new PingModel());
+          this.router.navigate(['/projects', route.params.projectUid, 'monitors']);
+          return of([]);
         })
       );
   }
