@@ -42,15 +42,15 @@ export class MonitorsListComponent implements OnInit {
   /**
    * This method is used to delete the monitor from list
    *
-   * @param id the id of monitor which needs to be deleted
+   * @param uid the uid of monitor which needs to be deleted
    */
-  deleteMonitor(id: string): void {
-    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== id);
+  deleteMonitor(uid: string): void {
+    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== uid);
     this.monitorService.saveMonitor(this.projectUid, this.monitors);
 
     // When delete a monitor , deleting all its pings
     const callable: any = this.fns.httpsCallable('deletePings');
-    return callable({ projectUid: this.projectUid, monitorUid: id });
+    return callable({ projectUid: this.projectUid, monitorUid: uid });
   }
 
    // This function will ping the monitor
