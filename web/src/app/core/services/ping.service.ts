@@ -30,7 +30,7 @@ export class PingService {
             (ref: firebase.firestore.Query) => ref.where('monitorUid', '==', monitorUid)
               .orderBy('createdOn', 'desc')
           )
-          .valueChanges()),
+          .valueChanges())
       );
   }
 }
