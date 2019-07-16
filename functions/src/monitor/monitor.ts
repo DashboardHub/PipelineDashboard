@@ -8,7 +8,7 @@ import { Ping, PingResponse } from '../client/ping';
 import { MonitorModel, PingModel, ProjectModel } from './../models/index.model';
 
 type Document = FirebaseFirestore.DocumentSnapshot
-type DocumentReference = FirebaseFirestore.DocumentReference;
+type QuerySnapshot = firestore.QuerySnapshot;
 
 export interface MonitorInfoInput {
   projectUid: string;
@@ -51,9 +51,12 @@ export const ping: any = async (projectUid: string, monitorUid: string) => {
 }
 
 export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string) => {
-  const documents: DocumentReference[] = await FirebaseAdmin.firestore()
-    .collection(`projects/${projectUid}/${monitorUid}`)
-    .listDocuments()
+  const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
+    .collection(`projects/${projectUid}/pings`)
+    .where('monitorUid', '==', monitorUid)
+    .get()
 
-    documents.forEach((doc: any) => doc.delete());
+  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => {
+    doc.ref.delete();
+  });
 }
