@@ -24,7 +24,8 @@ export class PingsResolver implements Resolve<PingModel[]> {
     return this.pingService.findAllByMonitor(route.params.projectUid, route.params.monitorUid)
       .pipe(
         take(1),
-        catchError(() => {
+        catchError((e) => {
+          console.log(e)
           this.router.navigate(['/projects', route.params.projectUid, 'monitors']);
           return of([]);
         })

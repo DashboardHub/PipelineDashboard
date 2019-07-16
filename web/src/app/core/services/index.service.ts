@@ -1,6 +1,7 @@
 export * from './activity.service';
 export * from './authentication.service';
 export * from './monitor.service';
+export * from './ping.service';
 export * from './project.service';
 export * from './project-token.service';
 export * from './repository.service';

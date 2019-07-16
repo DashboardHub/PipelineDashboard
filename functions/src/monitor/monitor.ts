@@ -56,7 +56,5 @@ export const deleteMonitorPings: any = async (projectUid: string, monitorUid: st
     .where('monitorUid', '==', monitorUid)
     .get()
 
-  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => {
-    doc.ref.delete();
-  });
+  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => doc.ref.delete());
 }

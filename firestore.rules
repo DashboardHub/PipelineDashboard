@@ -25,10 +25,14 @@ service cloud.firestore {
       allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
       allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
 
+      function projectDoc() {
+        return get(/databases/$(database)/documents/projects/$(project)).data
+      }
+
       match /pings/{ping} {
         allow create: if isSignedIn();
-        allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
-        allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
+        allow get, list: if resource.data.type == 'public' || request.auth.uid in projectDoc().access.admin || request.auth.uid in projectDoc().access.readonly;
+        allow update, delete: if isSignedIn() && request.auth.uid in projectDoc().access.admin;
       }
     }
 
