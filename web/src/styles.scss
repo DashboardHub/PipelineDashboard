@@ -11,6 +11,7 @@ body {
 a {
   color: mat-color($dashboard-accent, 900);
   text-decoration: none;
+  cursor: pointer;
 
   &:hover,
   &:active,
@@ -77,9 +78,14 @@ code {
 }
 
 mat-progress-bar {
-    background: #fff;
+  background: #fff;
 }
 
-.bread-crumb{
+.bread-crumb {
   margin-bottom: 10px;
+}
+
+.text-right {
+  text-align: right;
+  width: 100%;
 }
