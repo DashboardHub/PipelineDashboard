@@ -21,7 +21,6 @@ export class MonitorsListComponent implements OnInit {
   public projectUid: string;
 
   constructor(
-    private fns: AngularFireFunctions,
     private monitorService: MonitorService,
     private route: ActivatedRoute
   ) { }
@@ -44,18 +43,18 @@ export class MonitorsListComponent implements OnInit {
    *
    * @param uid the uid of monitor which needs to be deleted
    */
-  deleteMonitor(uid: string): void {
-    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== uid);
+  deleteMonitor(monitorUid: string): void {
+    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
     this.monitorService.saveMonitor(this.projectUid, this.monitors);
 
     // When delete a monitor , deleting all its pings
-    const callable: any = this.fns.httpsCallable('deletePings');
-    return callable({ projectUid: this.projectUid, monitorUid: uid });
+    this.monitorService
+      .deletePingsByMonitor(this.projectUid, monitorUid);
   }
 
    // This function will ping the monitor
-   public pingMonitor(monitorUid: string): Observable<boolean> {
-    const callable: any = this.fns.httpsCallable('pingMonitor');
-    return callable({ projectUid: this.projectUid, monitorUid: monitorUid });
+   public pingMonitor(monitorUid: string): void {
+    this.monitorService
+      .pingMonitor(this.projectUid, monitorUid)
   }
 }

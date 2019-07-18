@@ -4,6 +4,7 @@ import { firestore } from "firebase-admin";
  * Pings model for functions
  */
 export interface PingModel {
+  uid: string;
   monitorUid: string;
   codeMatched: boolean;
   duration: number;
