@@ -41,6 +41,20 @@
           "mode": "DESCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "pings",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "monitorUid",
+          "mode": "DESCENDING"
+        },
+        {
+          "fieldPath": "createdOn",
+          "mode": "DESCENDING"
+        }
+      ]
     }
   ]
 }

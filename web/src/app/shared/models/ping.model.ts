@@ -1,11 +1,7 @@
-import { firestore } from "firebase-admin";
-
 /**
- * Pings model for functions
+ * Pings model for web
  */
-export interface PingModel {
-  uid: string;
-  monitorUid: string;
+export class PingModel {
   codeMatched: boolean;
   duration: number;
   expectedCode: number;
@@ -14,5 +10,5 @@ export interface PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
-  createdOn: firestore.Timestamp;
+  createdOn: Date;
 }

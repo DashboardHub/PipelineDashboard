@@ -4,6 +4,7 @@ import { firestore } from 'firebase';
 // Dashboard hub models
 import { AccessModel } from './access.model';
 import { MonitorModel } from './monitor.model';
+import { PingModel } from './ping.model';
 import { ProjectTokenModel } from './project-token.model';
 
 export class ProjectModel {
@@ -15,6 +16,7 @@ export class ProjectModel {
   access?: AccessModel = new AccessModel();
   repositories?: string[] = [];
   monitors?: MonitorModel[] = [];
+  pings?: PingModel[] = [];
   tokens?: ProjectTokenModel[] = [];
   createdOn?: firestore.Timestamp;
   updatedOn: firestore.Timestamp;

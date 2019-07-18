@@ -16,7 +16,7 @@
     <mat-card-content>
       <mat-list>
         <mat-list-item fxLayout="column" *ngFor="let monitor of monitors">
-          <h4 mat-line>{{monitor.name}}</h4>
+          <h4 mat-line><a [routerLink]="[monitor.uid,'pings']">{{monitor.name}}</a></h4>
           <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
           <p class="text-right">
             <button mat-raised-button color="accent" (click)="pingMonitor(monitor.uid)">Ping</button>

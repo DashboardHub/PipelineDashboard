@@ -7,7 +7,7 @@ import { map, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
 import { AngularFireFunctions } from '@angular/fire/functions';
-import { AuthenticationService, MonitorService, ProjectService } from '../../core/services/index.service';
+import { MonitorService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -17,14 +17,10 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 })
 export class MonitorsListComponent implements OnInit {
 
-  private projectSubscription: Subscription;
   public monitors: MonitorModel[] = [];
   public projectUid: string;
 
   constructor(
-    private authService: AuthenticationService,
-    private fns: AngularFireFunctions,
-    private projectService: ProjectService,
     private monitorService: MonitorService,
     private route: ActivatedRoute
   ) { }
@@ -43,25 +39,22 @@ export class MonitorsListComponent implements OnInit {
   }
 
   /**
-   * Lifecycle destroy method
-   */
-  ngDestroy(): void {
-    this.projectSubscription.unsubscribe();
-  }
-
-  /**
    * This method is used to delete the monitor from list
    *
-   * @param id the id of monitor which needs to be deleted
+   * @param uid the uid of monitor which needs to be deleted
    */
-  deleteMonitor(id: string): void {
-    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== id);
-    this.monitorService.saveMonitor(id, this.monitors);
+  deleteMonitor(monitorUid: string): void {
+    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
+    this.monitorService.saveMonitor(this.projectUid, this.monitors);
+
+    // When delete a monitor , deleting all its pings
+    this.monitorService
+      .deletePingsByMonitor(this.projectUid, monitorUid);
   }
 
    // This function will ping the monitor
-   public pingMonitor(monitorUid: string): Observable<boolean> {
-    const callable: any = this.fns.httpsCallable('pingMonitor');
-    return callable({ projectUid: this.projectUid, monitorUid: monitorUid });
+   public pingMonitor(monitorUid: string): void {
+    this.monitorService
+      .pingMonitor(this.projectUid, monitorUid);
   }
 }
