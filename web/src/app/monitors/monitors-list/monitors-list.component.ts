@@ -55,6 +55,6 @@ export class MonitorsListComponent implements OnInit {
    // This function will ping the monitor
    public pingMonitor(monitorUid: string): void {
     this.monitorService
-      .pingMonitor(this.projectUid, monitorUid)
+      .pingMonitor(this.projectUid, monitorUid);
   }
 }
