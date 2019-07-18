@@ -10,4 +10,5 @@ export class PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
+  createdOn: Date;
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 // Firestore modules
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import * as firebase from 'firebase';
 
 // Rxjs operators
@@ -23,6 +24,7 @@ export class MonitorService {
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService,
+    private fns: AngularFireFunctions,
     private snackBar: MatSnackBar,
     private router: Router
   ) {
@@ -93,5 +95,15 @@ export class MonitorService {
             },
             { merge: true }))
       );
+  }
+
+  public deletePingsByMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
+    const callable: any = this.fns.httpsCallable('deletePings');
+    return callable({ projectUid, monitorUid });
+  }
+
+  public pingMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
+    const callable: any = this.fns.httpsCallable('pingMonitor');
+    return callable({ projectUid, monitorUid });
   }
 }

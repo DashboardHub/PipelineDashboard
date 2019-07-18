@@ -9,13 +9,14 @@ import { MonitorModel, PingModel, ProjectModel } from './../models/index.model';
 
 type Document = FirebaseFirestore.DocumentSnapshot
 type QuerySnapshot = firestore.QuerySnapshot;
+type WriteResult = firestore.WriteResult;
 
 export interface MonitorInfoInput {
   projectUid: string;
   monitorUid: string;
 }
 
-export const ping: any = async (projectUid: string, monitorUid: string) => {
+export const ping: any = async (projectUid: string, monitorUid: string): Promise<WriteResult> => {
   const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
@@ -25,10 +26,19 @@ export const ping: any = async (projectUid: string, monitorUid: string) => {
   const url: string = project.url + monitor.path;
   const uid: string = uuid();
 
-  const start: number = (new Date()).getMilliseconds();
-  const response: PingResponse = await Ping<PingResponse>(url);
-  const end: number = (new Date()).getMilliseconds();
+  const start: number = Date.now();
+  let response: PingResponse;
+  try {
+    response = await Ping<PingResponse>(url);
+  } catch (error) {
+    response = {
+      statusCode: error.statusCode,
+      body: error.message,
+    }
+  }
+  const end: number = Date.now();
   const pingResult: PingModel = {
+    uid: uid,
     monitorUid: monitorUid,
     statusCode: response.statusCode,
     expectedCode: monitor.expectedCode,
@@ -41,20 +51,22 @@ export const ping: any = async (projectUid: string, monitorUid: string) => {
   };
   pingResult.isValid = !!(pingResult.codeMatched && pingResult.textMatched);
 
-  await FirebaseAdmin
+  return FirebaseAdmin
     .firestore()
     .collection(`projects/${projectUid}/pings`)
     .doc(uid)
     .set(pingResult);
-
-  return pingResult;
 }
 
-export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string) => {
+export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string): Promise<WriteResult[]> => {
   const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
     .collection(`projects/${projectUid}/pings`)
     .where('monitorUid', '==', monitorUid)
-    .get()
+    .get();
 
-  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => doc.ref.delete());
+  const promises: Promise<WriteResult>[] = [];
+
+  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => promises.push(doc.ref.delete()));
+
+  return Promise.all(promises);
 }
