@@ -52,7 +52,7 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
   pingResult.isValid = !!(pingResult.codeMatched && pingResult.textMatched);
 
   // Updating monitor with latest ping information
-  monitor['latestPing'] = pingResult;
+  monitor.latestPing = pingResult;
   
   // Update monitor in the database
   await FirebaseAdmin
