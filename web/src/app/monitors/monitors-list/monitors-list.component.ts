@@ -17,8 +17,10 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 })
 export class MonitorsListComponent implements OnInit {
 
+  public currentMonitorId: string;
   public monitors: MonitorModel[] = [];
   public projectUid: string;
+  public pingProgress: boolean = false;
 
   constructor(
     private monitorService: MonitorService,
@@ -52,9 +54,17 @@ export class MonitorsListComponent implements OnInit {
       .deletePingsByMonitor(this.projectUid, monitorUid);
   }
 
-   // This function will ping the monitor
-   public pingMonitor(monitorUid: string): void {
+  // This function will ping the monitor
+  public pingMonitor(monitorUid: string): void {
+    this.pingProgress = true;
+    this.currentMonitorId = monitorUid;
     this.monitorService
       .pingMonitor(this.projectUid, monitorUid);
+
+    // disable the ping button for 1 second
+    setTimeout(() => {
+      this.pingProgress = false;
+    },
+      60000);
   }
 }
