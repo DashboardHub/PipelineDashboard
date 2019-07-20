@@ -1,3 +1,5 @@
+import { PingModel } from './ping.model';
+
 /**
  * Monitor model for functions
  */
@@ -8,4 +10,5 @@ export class MonitorModel {
   name: string;
   path: string;
   uid: string;
+  latestPing: PingModel;
 }

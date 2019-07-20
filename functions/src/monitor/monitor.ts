@@ -21,7 +21,7 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
     .collection('projects')
     .doc(projectUid)
     .get();
-  const project: ProjectModel = <ProjectModel> document.data();
+  const project: ProjectModel = <ProjectModel>document.data();
   const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
   const url: string = project.url + monitor.path;
   const uid: string = uuid();
@@ -50,6 +50,21 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
     createdOn: firestore.Timestamp.fromDate(new Date()),
   };
   pingResult.isValid = !!(pingResult.codeMatched && pingResult.textMatched);
+
+  // Updating monitor with latest ping information
+  monitor.latestPing = pingResult;
+  
+  // Update monitor in the database
+  await FirebaseAdmin
+    .firestore()
+    .collection('projects')
+    .doc(projectUid)
+    .set(
+      {
+        monitors: project.monitors,
+        updatedOn: new Date(),
+      },
+      { merge: true });
 
   return FirebaseAdmin
     .firestore()

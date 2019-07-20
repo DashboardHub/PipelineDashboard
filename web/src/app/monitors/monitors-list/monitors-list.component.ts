@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 // Rxjs operators
 import { ActivatedRoute } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
-import { AngularFireFunctions } from '@angular/fire/functions';
 import { MonitorService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
@@ -19,6 +17,7 @@ export class MonitorsListComponent implements OnInit {
 
   public monitors: MonitorModel[] = [];
   public projectUid: string;
+  public manualPing: boolean = false;
 
   constructor(
     private monitorService: MonitorService,
@@ -52,9 +51,13 @@ export class MonitorsListComponent implements OnInit {
       .deletePingsByMonitor(this.projectUid, monitorUid);
   }
 
-   // This function will ping the monitor
-   public pingMonitor(monitorUid: string): void {
+  // This function will ping the monitor
+  public pingMonitor(monitorUid: string): void {
+    this.manualPing = true;
     this.monitorService
       .pingMonitor(this.projectUid, monitorUid);
+
+    // disable the ping button for 1 second
+    setTimeout(() => this.manualPing = false, 10000);
   }
 }
