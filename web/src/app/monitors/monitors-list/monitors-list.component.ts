@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // Rxjs operators
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
-import { MonitorService } from '../../core/services/index.service';
+import { MonitorService, ProjectService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -13,19 +14,21 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
   templateUrl: './monitors-list.component.html',
   styleUrls: ['./monitors-list.component.scss'],
 })
-export class MonitorsListComponent implements OnInit {
+export class MonitorsListComponent implements OnInit, OnDestroy {
 
+  private monitorSubscription: Subscription;
   public monitors: MonitorModel[] = [];
   public projectUid: string;
   public manualPing: boolean = false;
 
   constructor(
     private monitorService: MonitorService,
+    private projectService: ProjectService,
     private route: ActivatedRoute
   ) { }
 
   /**
-   * Lifecycle init method
+   * Life cycle init method
    */
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
@@ -35,6 +38,10 @@ export class MonitorsListComponent implements OnInit {
         take(1)
       )
       .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
+
+    this.monitorSubscription = this.projectService
+      .findOneById(this.projectUid)
+      .subscribe((projects: ProjectModel) => this.monitors = projects.monitors ? projects.monitors : []);
   }
 
   /**
@@ -59,5 +66,12 @@ export class MonitorsListComponent implements OnInit {
 
     // disable the ping button for 1 second
     setTimeout(() => this.manualPing = false, 10000);
+  }
+
+  /**
+   * Life cycle On destroy method
+   */
+  ngOnDestroy(): void {
+    this.monitorSubscription.unsubscribe();
   }
 }
