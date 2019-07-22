@@ -19,7 +19,7 @@
           <div class="monitors">
             <h4 mat-line><a [routerLink]="[monitor.uid,'pings']">{{monitor.name}}</a></h4>
             <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
-            <p mat-line>Successful pings: {{monitor.successPingCounts ? monitor.successPingCounts : 0}} | Unsuccessful pings: {{monitor.unsuccessPingCounts ? monitor.unsuccessPingCounts : 0}}  </p>
+            <p mat-line>Successful pings: {{monitor.successfulPings || 0}} | Unsuccessful pings: {{monitor.unsuccessfulPings || 0}}  </p>
             <p mat-line></p>
           </div>
           <div class="pings" fxLayout="column" *ngIf="monitor.latestPing">

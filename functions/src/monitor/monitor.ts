@@ -56,9 +56,9 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
   
   // Updating success and unsuccessful ping counts
   if (pingResult.isValid) {
-    monitor.successPingCounts = monitor.successPingCounts ? monitor.successPingCounts + 1 : 1;
+    monitor.successfulPings = monitor.successfulPings ? monitor.successfulPings + 1 : 1;
   } else {
-    monitor.unsuccessPingCounts = monitor.unsuccessPingCounts ? monitor.unsuccessPingCounts + 1 : 1;
+    monitor.unsuccessfulPings = monitor.unsuccessfulPings ? monitor.unsuccessfulPings + 1 : 1;
   }
 
   // Update monitor in the database

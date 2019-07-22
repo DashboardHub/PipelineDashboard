@@ -34,8 +34,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.route.data
       .pipe(
-        map((data: { project: ProjectModel }) => data.project),
-        take(1)
+        map((data: { project: ProjectModel }) => data.project)
       )
       .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
 

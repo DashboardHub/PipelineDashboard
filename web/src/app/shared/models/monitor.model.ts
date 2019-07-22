@@ -8,6 +8,6 @@ export class MonitorModel {
   expectedCode: number;
   expectedText?: string;
   latestPing: PingModel;
-  successPingCounts: number;
-  unsuccessPingCounts: number;
+  successfulPings: number;
+  unsuccessfulPings: number;
 }
