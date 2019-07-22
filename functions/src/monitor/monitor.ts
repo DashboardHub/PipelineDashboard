@@ -54,6 +54,13 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
   // Updating monitor with latest ping information
   monitor.latestPing = pingResult;
   
+  // Updating success and unsuccessful ping counts
+  if (pingResult.isValid) {
+    monitor.successfulPings = monitor.successfulPings ? monitor.successfulPings + 1 : 1;
+  } else {
+    monitor.unsuccessfulPings = monitor.unsuccessfulPings ? monitor.unsuccessfulPings + 1 : 1;
+  }
+
   // Update monitor in the database
   await FirebaseAdmin
     .firestore()

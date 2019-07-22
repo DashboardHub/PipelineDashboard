@@ -16,13 +16,23 @@
     <mat-card-content>
       <mat-list>
         <mat-list-item fxLayout="column" *ngFor="let monitor of monitors">
-          <h4 mat-line><a [routerLink]="[monitor.uid,'pings']">{{monitor.name}}</a></h4>
-          <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
-          <p class="button-right">
-            <button mat-raised-button color="accent" [disabled]= "manualPing" (click)="pingMonitor(monitor.uid)">Ping</button>
-            <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
-            <button mat-raised-button color="warn" (click)="deleteMonitor(monitor.uid)">Delete</button>
-          </p>
+          <div class="monitors">
+            <h4 mat-line><a [routerLink]="[monitor.uid,'pings']">{{monitor.name}}</a></h4>
+            <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
+            <p mat-line>Successful pings: {{monitor.successfulPings || 0}} | Unsuccessful pings: {{monitor.unsuccessfulPings || 0}}  </p>
+            <p mat-line></p>
+          </div>
+          <div class="pings" fxLayout="column" *ngIf="monitor.latestPing">
+            <p mat-line>{{ monitor.latestPing.url }}</p>
+            <p mat-line>{{ monitor.latestPing.statusCode }} | {{ monitor.latestPing.duration }}ms | {{ monitor.latestPing.createdOn.toDate() | timeAgo }}</p>
+          </div>
+          <div class="button-right">
+            <p>
+              <button mat-raised-button color="accent" [disabled]="manualPing" (click)="pingMonitor(monitor.uid)">Ping</button>
+              <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
+              <button mat-raised-button color="warn" (click)="deleteMonitor(monitor.uid)">Delete</button>
+            </p>
+          </div>
         </mat-list-item>
       </mat-list>
     </mat-card-content>

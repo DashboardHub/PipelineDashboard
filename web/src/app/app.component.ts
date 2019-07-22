@@ -75,22 +75,22 @@ export class AppComponent implements AfterViewInit {
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',
         this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo-horizontal-std.svg')
+          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/logo-horizontal-std.svg')
       );
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub_white',
         this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo-horizontal-white.svg')
+          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/logo-horizontal-white.svg')
       );
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub_icon',
         this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/icon-only-orange.svg')
+          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/icon-only-orange.svg')
       );
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'github',
         this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master//github.svg')
+          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/github.svg')
       );
     this.version = environment.version;
   }

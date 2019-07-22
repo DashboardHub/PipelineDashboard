@@ -11,4 +11,6 @@ export class MonitorModel {
   path: string;
   uid: string;
   latestPing: PingModel;
+  successfulPings: number;
+  unsuccessfulPings: number;
 }
