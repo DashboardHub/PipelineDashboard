@@ -22,7 +22,7 @@
             <p mat-line>Successful pings: {{monitor.successPingCounts ? monitor.successPingCounts : 0}} | Unsuccessful pings: {{monitor.unsuccessPingCounts ? monitor.unsuccessPingCounts : 0}}  </p>
             <p mat-line></p>
           </div>
-          <div class="pings" fxLayout="column">
+          <div class="pings" fxLayout="column" *ngIf="monitor.latestPing">
             <p mat-line>{{ monitor.latestPing.url }}</p>
             <p mat-line>{{ monitor.latestPing.statusCode }} | {{ monitor.latestPing.duration }}ms | {{ monitor.latestPing.createdOn.toDate() | timeAgo }}</p>
           </div>
