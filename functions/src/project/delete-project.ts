@@ -16,21 +16,18 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
 
         const promiseList: Promise<WriteResult>[] = [];
 
-        project.repositories.forEach((repositoryUid: string) => {
-          const repo: Promise<WriteResult> = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()
-            .then((repoSnapshot: DocumentSnapshot) => {
-              const repoData: DocumentData = repoSnapshot.data();
-              if (Array.isArray(repoData.projects)) {
-                repoData.projects = repoData.projects.filter((element: string) => element !== context.params.projectUid);
-              } else {
-                repoData.projects = [];
-              }
+        for (const repositoryUid of project.repositories) {
+          const repoData: DocumentData = (await FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()).data();
 
-              return FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).update(repoData);
-            });
+          if (Array.isArray(repoData.projects)) {
+            repoData.projects = repoData.projects.filter((element: string) => element !== context.params.projectUid);
+          } else {
+            repoData.projects = [];
+          }
 
+          const repo: Promise<WriteResult> = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).update(repoData);
           promiseList.push(repo);
-        });
+        }
 
         await Promise.all(promiseList);
       }
