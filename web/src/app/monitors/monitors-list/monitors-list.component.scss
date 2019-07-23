@@ -1,6 +1,18 @@
-.text-right {
-  width: 25%;
+.button-right {
+  width: 20%;
   button {
     margin-left: 10px;
+  }
+}
+
+.monitors {
+  width: 40%;
+}
+
+.pings {
+  width: 40%;
+  .mat-icon{
+    top: 10px;
+    margin: 10px 10px 10px 0;
   }
 }

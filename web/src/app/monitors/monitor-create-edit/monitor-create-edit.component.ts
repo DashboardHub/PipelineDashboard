@@ -23,6 +23,7 @@ export class MonitorCreateEditComponent implements OnInit {
   private projectUid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
+  public statusCodeList: Number[] = [200, 201, 204, 400, 401, 404, 500];
 
   constructor(
     private form: FormBuilder,
@@ -39,7 +40,7 @@ export class MonitorCreateEditComponent implements OnInit {
     this.projectSubscription = this.route.data
       .subscribe((data: { project: ProjectModel }) => {
         const project: ProjectModel = data.project;
-        this.monitorsList = project.monitors ? project.monitors : [];
+        this.monitorsList = project && project.monitors ? project.monitors : [];
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
           this.isEdit = true;
