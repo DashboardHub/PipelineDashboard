@@ -2,6 +2,7 @@
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
+import { Logger } from '../client/logger';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = firestore
@@ -37,8 +38,8 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
       return;
 
     } catch (err) {
-      console.log(err)
-      throw err;
+      Logger.error(err);
+      throw new Error(err);
     }
 
   });

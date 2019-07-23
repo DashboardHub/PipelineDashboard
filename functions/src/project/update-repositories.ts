@@ -2,6 +2,7 @@
 import { firestore, Change, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
+import { Logger } from '../client/logger';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onUpdateProjectRepositories: any = firestore
@@ -71,8 +72,8 @@ export const onUpdateProjectRepositories: any = firestore
       return Promise.all(promiseList);
 
     } catch (err) {
-      console.log(err)
-      throw err;
+      Logger.error(err);
+      throw new Error(err);
     }
 
   });
