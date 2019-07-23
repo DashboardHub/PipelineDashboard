@@ -16,7 +16,7 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
 
         const promiseList: Promise<WriteResult>[] = [];
 
-        for (const repositoryUid of project.repositories) {
+        project.repositories.forEach((repositoryUid: string) => {
           const repo: Promise<WriteResult> = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()
             .then((repoSnapshot: DocumentSnapshot) => {
               const repoData: DocumentData = repoSnapshot.data();
@@ -30,7 +30,7 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
             });
 
           promiseList.push(repo);
-        }
+        });
 
         await Promise.all(promiseList);
       }
