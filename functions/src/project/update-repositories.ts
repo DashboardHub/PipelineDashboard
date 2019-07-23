@@ -51,10 +51,7 @@ export const onUpdateProjectRepositories: any = firestore
         const repoData: DocumentData = (await FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()).data();
 
         if (Array.isArray(repoData.projects)) {
-          const foundIndex: number = repoData.projects.findIndex((element: string) => element === context.params.projectUid);
-          if (foundIndex > -1) {
-            repoData.projects.splice(foundIndex, 1);
-          }
+          repoData.projects = repoData.projects.filter((element: string) => element !== context.params.projectUid);
         } else {
           repoData.projects = [];
         }
