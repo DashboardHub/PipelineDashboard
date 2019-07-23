@@ -8,7 +8,7 @@ import { DocumentSnapshot } from './client/firebase-admin';
 // Dashboard repositories
 import { onCreateRepository } from './repository/create-repository';
 import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
-import { onUpdateDeleteRepository } from './repository/update-delete-repository';
+import { onUpdateRepository } from './repository/update-repository';
 
 // Dashboard users
 import { getUserEvents, EventsInput } from './user/events';
@@ -32,6 +32,6 @@ export const deletePings: HttpsFunction = functions.https.onCall((input: Monitor
 
 export const deleteProjectRepositories: CloudFunction<DocumentSnapshot> = onDeleteProjectRepositories;
 export const updateProjectRepositories: CloudFunction<DocumentSnapshot> = onUpdateProjectRepositories;
-export const updateDeleteRepository: CloudFunction<Change<DocumentSnapshot>> = onUpdateDeleteRepository;
+export const updateRepository: CloudFunction<Change<DocumentSnapshot>> = onUpdateRepository;
 export const createRepository: CloudFunction<DocumentSnapshot> = onCreateRepository;
 export const updateUserStats: CloudFunction<DocumentSnapshot> = onUpdateUserStats;

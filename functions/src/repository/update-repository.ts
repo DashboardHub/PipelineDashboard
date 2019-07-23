@@ -5,7 +5,7 @@ import { firestore, Change, CloudFunction, EventContext } from 'firebase-functio
 import { Logger } from '../client/logger';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin } from './../client/firebase-admin';
 
-export const onUpdateDeleteRepository: CloudFunction<Change<DocumentSnapshot>> = firestore
+export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = firestore
   .document('repositories/{repositoryUid}')
   .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
 
