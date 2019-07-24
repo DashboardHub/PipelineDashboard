@@ -15,7 +15,7 @@ export const onFindGitWebhookRepository: any = async (token: string, repositoryU
     const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
     const repository: DocumentData = (await repositorySnapshot.get()).data();
 
-    return await findWebhook(repository, token);
+    return await findWebhook(repository.fullName, token);
   } catch (error) {
     Logger.error(error);
     throw new Error(error);
@@ -23,14 +23,13 @@ export const onFindGitWebhookRepository: any = async (token: string, repositoryU
 };
 
 
-export function listWebhook(repository: DocumentData, token: string): Promise<GitHubRepositoryWebhookResponse[]> {
-  return GitHubClient<GitHubRepositoryWebhookResponse[]>(`/repos/${repository.fullName}/hooks`, token);
+export function listWebhook(repositoryUid: string, token: string): Promise<GitHubRepositoryWebhookResponse[]> {
+  return GitHubClient<GitHubRepositoryWebhookResponse[]>(`/repos/${repositoryUid}/hooks`, token);
 }
 
 
-export async function findWebhook(repository: DocumentData, token: string): Promise<GitHubRepositoryWebhookResponse> {
+export async function findWebhook(repositoryUid: string, token: string): Promise<GitHubRepositoryWebhookResponse> {
+  const list: GitHubRepositoryWebhookResponse[] = await listWebhook(repositoryUid, token);
 
-  const list: GitHubRepositoryWebhookResponse[] = await listWebhook(repository, token);
-
-  return list.find((elem: GitHubRepositoryWebhookResponse) => elem.config.url === enviroment.githubWebhook.url)
+  return list.find((elem: GitHubRepositoryWebhookResponse) => elem && elem.config && elem.config.url === enviroment.githubWebhook.url)
 }
