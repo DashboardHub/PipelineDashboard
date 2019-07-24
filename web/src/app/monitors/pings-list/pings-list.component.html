@@ -1,0 +1,24 @@
+<div class="mat-content">
+  <mat-card class="bread-crumb">
+    <a [routerLink]="['/projects', projectUid]">Project</a> >
+    <a [routerLink]="['/projects', projectUid, 'monitors']">Monitors</a> >
+    <span>Pings</span>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Pings</mat-card-title>
+      <mat-card-subtitle>You have {{ pings.length }} pings</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item fxLayout="column" *ngFor="let ping of pings">
+          <mat-icon mat-list-icon [matBadge]="ping.duration" matBadgeColor="success" *ngIf="ping.isValid">done</mat-icon>
+          <mat-icon mat-list-icon [matBadge]="ping.duration" matBadgeColor="warn" *ngIf="!ping.isValid">error</mat-icon>
+          <h4 mat-line>{{ ping.url }}</h4>
+          <p mat-line>{{ ping.statusCode }} | {{ ping.duration }}ms | {{ ping.createdOn.toDate() | timeAgo }}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

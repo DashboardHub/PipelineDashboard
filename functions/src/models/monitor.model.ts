@@ -1,12 +1,15 @@
 import { PingModel } from './ping.model';
 
+/**
+ * Monitor model for functions
+ */
 export class MonitorModel {
-  uid: string;
-  name: string;
-  method: 'GET' | 'POST';
-  path: string;
   expectedCode: number;
   expectedText?: string;
+  method: 'GET';
+  name: string;
+  path: string;
+  uid: string;
   latestPing: PingModel;
   successfulPings: number;
   unsuccessfulPings: number;

@@ -2,6 +2,7 @@
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
+import { Logger } from '../client/logger';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin, QueryDocumentSnapshot } from './../client/firebase-admin';
 
 async function addProjects(repositoryUid: string, repo: DocumentData): Promise<boolean> {
@@ -33,7 +34,7 @@ export const onCreateRepository: CloudFunction<DocumentSnapshot> = firestore
       }
       return newData;
     } catch (err) {
-      console.log(err)
-      throw err;
+      Logger.error(err);
+      throw new Error(err);
     }
   });

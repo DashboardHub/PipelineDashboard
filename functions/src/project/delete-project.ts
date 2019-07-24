@@ -2,6 +2,7 @@
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
+import { Logger } from '../client/logger';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = firestore
@@ -16,18 +17,15 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
         const promiseList: Promise<WriteResult>[] = [];
 
         for (const repositoryUid of project.repositories) {
-          const repo: Promise<WriteResult> = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()
-            .then((repoSnapshot: DocumentSnapshot) => {
-              const repoData: DocumentData = repoSnapshot.data();
-              if (Array.isArray(repoData.projects)) {
-                repoData.projects = repoData.projects.filter((element: string) => element !== context.params.projectUid);
-              } else {
-                repoData.projects = [];
-              }
+          const repoData: DocumentData = (await FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()).data();
 
-              return FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).update(repoData);
-            });
+          if (Array.isArray(repoData.projects)) {
+            repoData.projects = repoData.projects.filter((element: string) => element !== context.params.projectUid);
+          } else {
+            repoData.projects = [];
+          }
 
+          const repo: Promise<WriteResult> = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).update(repoData);
           promiseList.push(repo);
         }
 
@@ -37,8 +35,8 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
       return;
 
     } catch (err) {
-      console.log(err)
-      throw err;
+      Logger.error(err);
+      throw new Error(err);
     }
 
   });

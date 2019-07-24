@@ -19,6 +19,7 @@ import { getUserRepos, ReposInput } from './user/repos';
 import { onUpdateUserStats } from './user/stats';
 
 // Dashboard projects
+import { deleteMonitorPings, ping, MonitorInfoInput } from './monitor/monitor';
 import { onDeleteProjectRepositories } from './project/delete-project';
 import { onUpdateProjectRepositories } from './project/update-repositories';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
@@ -35,6 +36,8 @@ export const createGitWebhookRepository: HttpsFunction = functions.https.onCall(
 export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall((input: DeleteGitWebhookRepositoryInput, context: CallableContext) => onDeleteGitWebhookRepository(input.token, input.repositoryUid));
 export const findGitWebhookRepository: HttpsFunction = functions.https.onCall((input: FindGitWebhookRepositoryInput, context: CallableContext) => onFindGitWebhookRepository(input.token, input.repositoryUid));
 export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
+export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid));
+export const deletePings: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
 
 export const deleteProjectRepositories: CloudFunction<DocumentSnapshot> = onDeleteProjectRepositories;
 export const updateProjectRepositories: CloudFunction<DocumentSnapshot> = onUpdateProjectRepositories;

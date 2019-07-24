@@ -2,6 +2,7 @@
 import { firestore, Change, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
+import { Logger } from '../client/logger';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin } from './../client/firebase-admin';
 
 export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = firestore
@@ -18,8 +19,8 @@ export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = fires
       return newData;
 
     } catch (err) {
-      console.log(err)
-      throw err;
+      Logger.error(err);
+      throw new Error(err);
     }
 
   });
