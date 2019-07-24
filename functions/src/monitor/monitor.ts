@@ -53,7 +53,7 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
 
   // Updating monitor with latest ping information
   monitor.latestPing = pingResult;
-  
+
   // Updating success and unsuccessful ping counts
   if (pingResult.isValid) {
     monitor.successfulPings = monitor.successfulPings ? monitor.successfulPings + 1 : 1;
@@ -89,6 +89,23 @@ export const deleteMonitorPings: any = async (projectUid: string, monitorUid: st
   const promises: Promise<WriteResult>[] = [];
 
   snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => promises.push(doc.ref.delete()));
+
+  return Promise.all(promises);
+}
+
+export const deleteProjectPings: any = async (projectUid: string): Promise<WriteResult[]> => {
+  const document: Document = await FirebaseAdmin.firestore()
+    .collection('projects')
+    .doc(projectUid)
+    .get();
+  const project: ProjectModel = <ProjectModel>document.data();
+  const monitors: MonitorModel[] = project.monitors;
+  
+  const promises: Promise<WriteResult>[] = [];
+
+  monitors.forEach((monitor: MonitorModel) => {
+    promises.push(deleteMonitorPings(project.uid, monitor.uid))
+  });
 
   return Promise.all(promises);
 }
