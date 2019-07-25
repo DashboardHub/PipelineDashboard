@@ -37,6 +37,10 @@ export class RepositoryModel {
 
   constructor(fullName: string) {
     this.fullName = fullName;
-    this.uid = fullName.replace('/', '+');
+    this.uid = RepositoryModel.getUid(fullName);
+  }
+
+  public static getUid(fullName: string): string {
+    return fullName.replace('/', '+');
   }
 }

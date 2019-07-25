@@ -12,7 +12,7 @@ export const onDeleteGitWebhookRepository: any = async (token: string, repositor
     const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
     const repository: DocumentData = (await repositorySnapshot.get()).data();
 
-    if (repository.webhook) {
+    if (repository.projects && repository.projects.length === 1 && repository.webhook) {
       await deleteWebhook(repository, token);
       repository.webhook = null;
       await repositorySnapshot.update(repository);

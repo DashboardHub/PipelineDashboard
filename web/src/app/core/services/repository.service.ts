@@ -48,4 +48,9 @@ export class RepositoryService {
     const callable: any = this.fns.httpsCallable('createGitWebhookRepository');
     return callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken });
   }
+
+  public deleteGitWebhook(repositoryUid: string): Observable<RepositoryModel> {
+    const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
+    return callable({ repositoryUid, token: this.authService.profile.oauth.githubToken });
+  }
 }
