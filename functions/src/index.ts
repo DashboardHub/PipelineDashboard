@@ -19,6 +19,7 @@ import { onUpdateUserStats } from './user/stats';
 import { deleteMonitorPings, ping, MonitorInfoInput } from './monitor/monitor';
 import { onDeleteProject, onDeleteProjectRepositories } from './project/delete-project';
 import { onUpdateProjectRepositories } from './project/update-repositories';
+import { deletePingsAfter30days } from './scheduler/schedule';
 
 declare type HttpsFunction = functions.HttpsFunction;
 declare type CloudFunction<T> = functions.CloudFunction<T>;
@@ -36,3 +37,4 @@ export const updateProjectRepositories: CloudFunction<DocumentSnapshot> = onUpda
 export const updateRepository: CloudFunction<Change<DocumentSnapshot>> = onUpdateRepository;
 export const createRepository: CloudFunction<DocumentSnapshot> = onCreateRepository;
 export const updateUserStats: CloudFunction<DocumentSnapshot> = onUpdateUserStats;
+export const delete30DaysPings: CloudFunction<DocumentSnapshot> = deletePingsAfter30days;
