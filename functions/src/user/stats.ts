@@ -3,14 +3,11 @@ import * as admin from 'firebase-admin';
 import { firestore, Change, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
-import { FirebaseAdmin } from './../client/firebase-admin';
+import { DocumentData, DocumentSnapshot, FirebaseAdmin } from './../client/firebase-admin';
 import { Logger } from './../client/logger';
 import { GitHubUserStatsModel } from './../mappers/github/user.mapper';
 
-export declare type DocumentSnapshot = admin.firestore.DocumentSnapshot;
-export declare type DocumentData = admin.firestore.DocumentData;
-
-export const updateUserStats: any = firestore
+export const onUpdateUserStats: any = firestore
   .document('users/{userId}')
   .onWrite((change: Change<DocumentSnapshot>, context: EventContext) => {
     const user: DocumentData = change.after.data();
