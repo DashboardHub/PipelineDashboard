@@ -16,7 +16,7 @@ export interface MonitorInfoInput {
   monitorUid: string;
 }
 
-export const ping: any = async (projectUid: string, monitorUid: string): Promise<WriteResult> => {
+export const ping: any = async (projectUid: string, monitorUid: string): Promise<WriteResult | boolean> => {
   const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
@@ -25,6 +25,11 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
   const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
   const url: string = project.url + monitor.path;
   const uid: string = uuid();
+
+  // if project does not have a url, do not continue
+  if (project.url.length === 0) {
+    return Promise.resolve(false);
+  }
 
   const start: number = Date.now();
   let response: PingResponse;
@@ -89,7 +94,7 @@ export const deleteMonitorPings: any = async (projectUid: string, monitorUid: st
   const promises: Promise<WriteResult>[] = [];
 
   snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => {
-    
+
     // Delete pings sub collection if more than 30 days
     if (isExpiredPings) {
       const currentPing: PingModel = <PingModel>doc.data();

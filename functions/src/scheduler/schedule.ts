@@ -6,14 +6,16 @@ import { FirebaseAdmin } from '../client/firebase-admin';
 // Dashboard Hub models
 import { ProjectModel } from '../models/index.model';
 import { deleteProjectPings } from '../project/delete-project';
+import { Logger } from './../client/logger';
 
 type QuerySnapshot = firestore.QuerySnapshot;
 type WriteResult = firestore.WriteResult;
 
-export const deletePingsAfter30days: any = functions.pubsub.schedule('0 12 * * *').timeZone('UTC')
+export const deletePingsAfter30days: any = functions.pubsub.schedule('00 00 * * *').timeZone('UTC')
   .onRun(async () => {
+    Logger.info('Scheduler running');
     const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
-      .collection(`projects`)
+      .collection('projects')
       .get();
 
     const promises: Promise<WriteResult>[] = [];

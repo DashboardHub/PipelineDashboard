@@ -20,9 +20,9 @@ import { ProjectTokenModel } from '../../shared/models/index.model';
 export class TokensCreateEditComponent implements OnInit {
 
   private projectSubscription: Subscription;
-  private projectUid: string;
   private uid: string;
 
+  public projectUid: string;
   public isEdit: Boolean = false;
   public tokenForm: FormGroup;
 

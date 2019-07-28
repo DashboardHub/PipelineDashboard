@@ -1,4 +1,8 @@
 <div class="mat-content" fxLayout="column" fxLayoutGap="20px">
+  <mat-card class="bread-crumb">
+    <a [routerLink]="['/projects', projectUid]">Project</a> > <span>Tokens</span>
+  </mat-card>
+
   <form (submit)="save()" [formGroup]="tokenForm">
     <mat-card>
       <mat-card-header>
