@@ -22,8 +22,8 @@ export class TokensCreateEditComponent implements OnInit {
   private projectSubscription: Subscription;
   private uid: string;
 
-  public projectUid: string;
   public isEdit: Boolean = false;
+  public projectUid: string;
   public tokenForm: FormGroup;
 
   constructor(
