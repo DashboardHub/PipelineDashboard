@@ -34,16 +34,16 @@ export const runAllMonitors60Mins: any = functions.pubsub.schedule('every 60 min
     
     snapshots.docs.forEach(async (doc: firestore.QueryDocumentSnapshot) => {
       const project: ProjectModel = <ProjectModel>doc.data();
+      const promises: Promise<WriteResult>[] = [];
       try {
         if (project.url && Array.isArray(project.monitors) && project.monitors.length > 0) {
-          const promises: Promise<WriteResult>[] = [];
 
           for (const monitor of project.monitors) {
             promises.push(ping(project.uid, monitor.uid))
           }
           await Promise.all(promises);
         }
-        await Promise.all([]);
+        await Promise.all(promises);
 
       } catch (err) {
         Logger.error(err);
