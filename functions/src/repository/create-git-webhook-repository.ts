@@ -52,7 +52,6 @@ export async function getWebhook(repositoryUid: string, token: string): Promise<
 
   if (exist) {
     return GitHubRepositoryWebhookMapper.import(exist);
-  } else {
-    return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryUid, token));
   }
+  return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryUid, token));
 }

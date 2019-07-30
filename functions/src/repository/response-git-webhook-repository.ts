@@ -1,10 +1,11 @@
 // Third party modules
 import * as CORS from 'cors';
-import { RequestHandler, Response } from 'express';
 // import { firestore } from 'firebase-admin';
-import { https, HttpsFunction } from 'firebase-functions';
+import { https, HttpsFunction, Response } from 'firebase-functions';
+import { Logger } from '../client/logger';
 
-const cors: RequestHandler = CORS({
+// tslint:disable-next-line: typedef
+const cors = CORS({
   origin: true,
 });
 
@@ -15,7 +16,7 @@ export interface ResponseGitWebhookRepositoryInput {
 
 export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((req: https.Request, res: Response) => {
   return cors(req, res, () => {
-    console.log(`${req.protocol}://${req.hostname} ; onResponseGitWebhookRepository: success!`);
+    Logger.info(`${req.protocol}://${req.hostname} ; onResponseGitWebhookRepository: success!`);
     res.status(200).send();
   });
 });
