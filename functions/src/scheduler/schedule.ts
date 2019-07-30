@@ -41,9 +41,8 @@ export const runAllMonitors60Mins: any = functions.pubsub.schedule('every 60 min
           for (const monitor of project.monitors) {
             promises.push(ping(project.uid, monitor.uid))
           }
-          await Promise.all(promises);
         }
-        await Promise.all(promises);
+        return Promise.all(promises);
 
       } catch (err) {
         Logger.error(err);
