@@ -1,6 +1,9 @@
 <div class="mat-content">
   <mat-card class="bread-crumb">
-    <a [routerLink]="['/projects', projectUid]">Projects</a> > <span>Monitors</span>
+    <a [routerLink]="['/projects', projectUid]">Project</a> > <span>Monitors</span>
+  </mat-card>
+  <mat-card class="alert" *ngIf="!project.url">
+    <mat-icon>error</mat-icon> Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run
   </mat-card>
   <mat-card>
     <mat-card-header>
@@ -28,7 +31,7 @@
           </div>
           <div class="button-right">
             <p>
-              <button mat-raised-button color="accent" [disabled]="manualPing" (click)="pingMonitor(monitor.uid)">Ping</button>
+              <button mat-raised-button color="accent" [disabled]="manualPing || !project.url" (click)="pingMonitor(monitor.uid)">Ping</button>
               <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
               <button mat-raised-button color="warn" (click)="deleteMonitor(monitor.uid)">Delete</button>
             </p>

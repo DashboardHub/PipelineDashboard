@@ -6,7 +6,7 @@ import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { MonitorModel, ProjectModel, RepositoryModel } from '../../shared/models/index.model';
+import { ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 import { RepositoryService } from './repository.service';

@@ -19,10 +19,11 @@ import { onUpdateUserStats } from './user/stats';
 
 // Dashboard projects
 import { deleteMonitorPings, ping, MonitorInfoInput } from './monitor/monitor';
-import { onDeleteProjectRepositories } from './project/delete-project';
+import { onDeleteProject, onDeleteProjectRepositories } from './project/delete-project';
 import { onUpdateProjectRepositories } from './project/update-repositories';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
 
+import { deletePingsAfter30days } from './scheduler/schedule';
 
 declare type HttpsFunction = functions.HttpsFunction;
 declare type CloudFunction<T> = functions.CloudFunction<T>;
@@ -35,10 +36,12 @@ export const createGitWebhookRepository: HttpsFunction = functions.https.onCall(
 export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall((input: DeleteGitWebhookRepositoryInput, context: CallableContext) => onDeleteGitWebhookRepository(input.token, input.repositoryUid));
 export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
 export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid));
-export const deletePings: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
+export const deletePingsByMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
 
+export const deletePingsByProject: CloudFunction<DocumentSnapshot> = onDeleteProject;
 export const deleteProjectRepositories: CloudFunction<DocumentSnapshot> = onDeleteProjectRepositories;
 export const updateProjectRepositories: CloudFunction<DocumentSnapshot> = onUpdateProjectRepositories;
 export const updateRepository: CloudFunction<Change<DocumentSnapshot>> = onUpdateRepository;
 export const createRepository: CloudFunction<DocumentSnapshot> = onCreateRepository;
 export const updateUserStats: CloudFunction<DocumentSnapshot> = onUpdateUserStats;
+export const delete30DaysPings: CloudFunction<DocumentSnapshot> = deletePingsAfter30days;

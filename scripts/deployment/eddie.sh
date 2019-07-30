@@ -14,4 +14,4 @@
 
 # DEPLOY
 npm --prefix web run build:prod
-firebase deploy --project pipelinedashboard-eddie --token $FIREBASE_TOKEN_EDDIE
+firebase deploy --project pipelinedashboard-eddie --token $FIREBASE_TOKEN_EDDIE --force
