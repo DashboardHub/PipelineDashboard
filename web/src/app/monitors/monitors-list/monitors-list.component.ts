@@ -18,6 +18,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
 
   private monitorSubscription: Subscription;
   public monitors: MonitorModel[] = [];
+  public project: ProjectModel;
   public projectUid: string;
   public manualPing: boolean = false;
 
@@ -36,7 +37,10 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
       .pipe(
         map((data: { project: ProjectModel }) => data.project)
       )
-      .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
+      .subscribe((project: ProjectModel) => {
+        this.project = project;
+        this.monitors = project.monitors ? project.monitors : [];
+      });
 
     this.monitorSubscription = this.projectService
       .findOneById(this.projectUid)

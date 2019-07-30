@@ -3,6 +3,8 @@ import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
 import { Logger } from '../client/logger';
+import { ProjectModel } from '../models/index.model';
+import { deleteMonitorPings } from '../monitor/monitor';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = firestore
@@ -39,4 +41,29 @@ export const onDeleteProjectRepositories: CloudFunction<DocumentSnapshot> = fire
       throw new Error(err);
     }
 
+  });
+
+export const deleteProjectPings: any = async (project: ProjectModel, isExpiredFlag: boolean): Promise<WriteResult[]> => {
+    try {
+      if (Array.isArray(project.monitors) && project.monitors.length > 0) {
+        const promises: Promise<WriteResult>[] = [];
+  
+        for (const monitor of project.monitors) {
+          promises.push(deleteMonitorPings(project.uid, monitor.uid, isExpiredFlag))
+        }
+        return Promise.all(promises);
+      }
+      return Promise.all([]);
+  
+    } catch (err) {
+      Logger.error(err);
+      throw new Error(err);
+    }
+  };
+
+export const onDeleteProject: CloudFunction<DocumentSnapshot> = firestore
+  .document('projects/{projectUid}')
+  .onDelete(async (projectSnapshot: DocumentSnapshot, context: EventContext) => {
+    const project: ProjectModel = <ProjectModel>projectSnapshot.data();
+    deleteProjectPings(project);
   });
