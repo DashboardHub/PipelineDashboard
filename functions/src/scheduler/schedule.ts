@@ -5,7 +5,7 @@ import { FirebaseAdmin } from '../client/firebase-admin';
 
 // Dashboard Hub models
 import { Logger } from '../client/logger';
-import { ProjectModel } from '../models/index.model';
+import { MonitorModel, ProjectModel } from '../models/index.model';
 import { ping } from '../monitor/monitor';
 import { deleteProjectPings } from '../project/delete-project';
 
@@ -32,21 +32,18 @@ export const runAllMonitors60Mins: any = functions.pubsub.schedule('every 60 min
       .collection('projects')
       .get();
     
+    const promises: Promise<WriteResult>[] = [];  
+    let project: ProjectModel;
     snapshots.docs.forEach(async (doc: firestore.QueryDocumentSnapshot) => {
-      const project: ProjectModel = <ProjectModel>doc.data();
-      const promises: Promise<WriteResult>[] = [];
+      project = <ProjectModel>doc.data();
       try {
         if (project.url && Array.isArray(project.monitors) && project.monitors.length > 0) {
-
-          for (const monitor of project.monitors) {
-            promises.push(ping(project.uid, monitor.uid))
-          }
+          project.monitors.forEach((monitor: MonitorModel) => promises.push(ping(project.uid, monitor.uid)));
         }
-        return Promise.all(promises);
-
       } catch (err) {
         Logger.error(err);
         throw new Error(err);
       }
     });
+    return Promise.all(promises);
   });
