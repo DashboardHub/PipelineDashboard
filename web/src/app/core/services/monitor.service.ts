@@ -81,7 +81,7 @@ export class MonitorService {
   }
 
   public deletePingsByMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
-    const callable: any = this.fns.httpsCallable('deletePings');
+    const callable: any = this.fns.httpsCallable('deletePingsByMonitor');
     return callable({ projectUid, monitorUid });
   }
 

@@ -14,4 +14,4 @@
 
 # DEPLOY
 npm --prefix web run build:prod
-firebase deploy --project pipelinedashboard-dev --token $FIREBASE_TOKEN_DEV
+firebase deploy --project pipelinedashboard-dev --token $FIREBASE_TOKEN_DEV --force

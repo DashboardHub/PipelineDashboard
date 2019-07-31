@@ -20,10 +20,10 @@ import { ProjectTokenModel } from '../../shared/models/index.model';
 export class TokensCreateEditComponent implements OnInit, OnDestroy {
 
   private projectSubscription: Subscription;
-  private projectUid: string;
   private uid: string;
 
   public isEdit: Boolean = false;
+  public projectUid: string;
   public tokenForm: FormGroup;
 
   constructor(

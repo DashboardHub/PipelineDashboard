@@ -16,7 +16,7 @@ export interface MonitorInfoInput {
   monitorUid: string;
 }
 
-export const ping: any = async (projectUid: string, monitorUid: string): Promise<WriteResult> => {
+export const ping: any = async (projectUid: string, monitorUid: string): Promise<WriteResult | boolean> => {
   const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
@@ -25,6 +25,11 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
   const monitor: MonitorModel = project.monitors.find((item: MonitorModel) => item.uid === monitorUid);
   const url: string = project.url + monitor.path;
   const uid: string = uuid();
+
+  // if project does not have a url, do not continue
+  if (project.url.length === 0) {
+    return Promise.resolve(false);
+  }
 
   const start: number = Date.now();
   let response: PingResponse;
@@ -53,7 +58,7 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
 
   // Updating monitor with latest ping information
   monitor.latestPing = pingResult;
-  
+
   // Updating success and unsuccessful ping counts
   if (pingResult.isValid) {
     monitor.successfulPings = monitor.successfulPings ? monitor.successfulPings + 1 : 1;
@@ -80,7 +85,7 @@ export const ping: any = async (projectUid: string, monitorUid: string): Promise
     .set(pingResult);
 }
 
-export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string): Promise<WriteResult[]> => {
+export const deleteMonitorPings: any = async (projectUid: string, monitorUid: string, isExpiredPings: boolean): Promise<WriteResult[]> => {
   const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
     .collection(`projects/${projectUid}/pings`)
     .where('monitorUid', '==', monitorUid)
@@ -88,7 +93,23 @@ export const deleteMonitorPings: any = async (projectUid: string, monitorUid: st
 
   const promises: Promise<WriteResult>[] = [];
 
-  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => promises.push(doc.ref.delete()));
+  snapshots.docs.forEach((doc: firestore.QueryDocumentSnapshot) => {
+
+    // Delete pings sub collection if more than 30 days
+    if (isExpiredPings) {
+      const currentPing: PingModel = <PingModel>doc.data();
+      const timeDiff: number = firestore.Timestamp.fromDate(new Date()).toMillis() - currentPing.createdOn.toMillis();
+      const days: number = timeDiff / (1000 * 60 * 60 * 24);
+      if (days > 30) {
+        promises.push(doc.ref.delete());
+      }
+    }
+
+    // Delete pings when deleted by monitor
+    if (!isExpiredPings) {
+      promises.push(doc.ref.delete());
+    }
+  });
 
   return Promise.all(promises);
 }
