@@ -1,5 +1,5 @@
 // Angular modules
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,7 +17,7 @@ import { ProjectTokenModel } from '../../shared/models/index.model';
   templateUrl: './tokens-create-edit.component.html',
   styleUrls: ['./tokens-create-edit.component.scss'],
 })
-export class TokensCreateEditComponent implements OnInit {
+export class TokensCreateEditComponent implements OnInit, OnDestroy {
 
   private projectSubscription: Subscription;
   private projectUid: string;
@@ -49,8 +49,10 @@ export class TokensCreateEditComponent implements OnInit {
   }
 
   // This function will be called when component is destroyed
-  ngDestroy(): void {
-    this.projectSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.projectSubscription) {
+      this.projectSubscription.unsubscribe();
+    }
   }
 
   // This function click input field on name token

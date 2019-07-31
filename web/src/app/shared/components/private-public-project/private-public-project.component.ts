@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
@@ -10,7 +10,7 @@ import { ProjectModel } from '../../models/index.model';
   selector: 'dashboard-projects-private-public',
   templateUrl: './private-public-project.component.html',
 })
-export class PrivatePublicProjectComponent implements OnInit {
+export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
 
   private projectSubscription: Subscription;
   public projects: ProjectModel[] = [];
@@ -34,7 +34,7 @@ export class PrivatePublicProjectComponent implements OnInit {
     }
   }
 
-  ngDestroy(): void {
+  ngOnDestroy(): void {
     this.projectSubscription
       .unsubscribe();
   }
