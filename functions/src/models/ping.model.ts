@@ -15,4 +15,5 @@ export interface PingModel {
   statusCode: number;
   textMatched: boolean;
   createdOn: firestore.Timestamp;
+  type: string;
 }

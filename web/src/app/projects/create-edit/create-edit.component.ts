@@ -65,7 +65,9 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.createEditSubscription.unsubscribe();
+    if (this.createEditSubscription) {
+      this.createEditSubscription.unsubscribe();
+    }
     if (this.projectSubscription) {
       this.projectSubscription.unsubscribe();
     }

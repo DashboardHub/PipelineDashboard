@@ -11,4 +11,5 @@ export class PingModel {
   statusCode: number;
   textMatched: boolean;
   createdOn: Date;
+  type: string;
 }
