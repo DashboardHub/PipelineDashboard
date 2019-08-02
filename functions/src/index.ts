@@ -23,7 +23,8 @@ import { onDeleteProject, onDeleteProjectRepositories } from './project/delete-p
 import { onUpdateProjectRepositories } from './project/update-repositories';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
 
-import { deletePingsAfter30days } from './scheduler/schedule';
+import { deletePingsAfter30days, runAllMonitors60Mins } from './scheduler/schedule';
+
 
 declare type HttpsFunction = functions.HttpsFunction;
 declare type CloudFunction<T> = functions.CloudFunction<T>;
@@ -45,3 +46,4 @@ export const updateRepository: CloudFunction<Change<DocumentSnapshot>> = onUpdat
 export const createRepository: CloudFunction<DocumentSnapshot> = onCreateRepository;
 export const updateUserStats: CloudFunction<DocumentSnapshot> = onUpdateUserStats;
 export const delete30DaysPings: CloudFunction<DocumentSnapshot> = deletePingsAfter30days;
+export const runPings60Mins: CloudFunction<DocumentSnapshot> = runAllMonitors60Mins;
