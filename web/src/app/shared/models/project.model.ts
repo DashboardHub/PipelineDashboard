@@ -20,6 +20,7 @@ export class ProjectModel {
   tokens?: ProjectTokenModel[] = [];
   createdOn?: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
+  pingCount?: number;
 
   constructor(uid: string = '') {
     this.uid = uid;

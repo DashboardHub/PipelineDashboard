@@ -33,4 +33,16 @@ export class PingService {
           .valueChanges())
       );
   }
+
+  public findAllPingsCount(projectUid: string): Observable<PingModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<ProjectModel>('projects')
+          .doc<ProjectModel>(projectUid)
+          .collection<PingModel>('pings')
+          .valueChanges())
+      );
+  }
 }
