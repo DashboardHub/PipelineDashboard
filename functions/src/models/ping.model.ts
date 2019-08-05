@@ -14,6 +14,6 @@ export interface PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
+  type: 'scheduler' | 'manual';
   createdOn: firestore.Timestamp;
-  type: string;
 }
