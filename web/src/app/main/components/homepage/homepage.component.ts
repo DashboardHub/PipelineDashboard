@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
@@ -9,7 +9,7 @@ import { UserStatsModel } from '../../../shared/models/index.model';
   selector: 'dashboard-homepage',
   templateUrl: './homepage.component.html',
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription;
   public users: UserStatsModel[] = [];
@@ -25,7 +25,7 @@ export class HomepageComponent implements OnInit {
       .subscribe((users: UserStatsModel[]) => this.users = users);
   }
 
-  ngDestroy(): void {
+  ngOnDestroy(): void {
     this.userSubscription
       .unsubscribe();
   }

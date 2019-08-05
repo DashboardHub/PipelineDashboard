@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuid } from 'uuid';
 
 // Third party modules
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub models and services
+import { MatSnackBar } from '@angular/material';
 import { MonitorService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
@@ -15,11 +16,12 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
   templateUrl: './monitor-create-edit.component.html',
   styleUrls: ['./monitor-create-edit.component.scss'],
 })
-export class MonitorCreateEditComponent implements OnInit {
+export class MonitorCreateEditComponent implements OnInit, OnDestroy {
 
   private monitorUid: string;
   private monitorsList: MonitorModel[] = [];
   private projectSubscription: Subscription;
+  private saveMonitorSubscription: Subscription;
   private projectUid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
@@ -28,7 +30,9 @@ export class MonitorCreateEditComponent implements OnInit {
   constructor(
     private form: FormBuilder,
     private monitorService: MonitorService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   /**
@@ -53,8 +57,11 @@ export class MonitorCreateEditComponent implements OnInit {
   /**
    * Lifecycle destroy method
    */
-  ngDestroy(): void {
+  ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
+    if (this.saveMonitorSubscription) {
+      this.saveMonitorSubscription.unsubscribe();
+    }
   }
 
   /**
@@ -62,7 +69,7 @@ export class MonitorCreateEditComponent implements OnInit {
    */
   addMonitor(): void {
     this.monitorsList.push(this.monitorForm.value);
-    this.monitorService.saveMonitor(this.projectUid, this.monitorsList);
+    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 
   /**
@@ -80,11 +87,26 @@ export class MonitorCreateEditComponent implements OnInit {
   }
 
   /**
+   * This function is used to save monitor and navigate to monitors list screen
+   *
+   * @param uid uid of monitor which needs to be added into monitors list
+   * @param monitors monitors list to be updated
+   *
+   */
+  saveMonitor(uid: string, monitors: MonitorModel[]): void {
+    this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
+      .subscribe(
+        () => this.router.navigate([`/projects/${uid}/monitors`]),
+        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+      );
+  }
+
+  /**
    * This function is used to update the monitor
    */
   updateMonitor(): void {
     this.monitorsList = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
     this.monitorsList.push(this.monitorForm.value);
-    this.monitorService.saveMonitor(this.projectUid, this.monitorsList);
+    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 }
