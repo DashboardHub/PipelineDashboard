@@ -17,7 +17,7 @@ export interface MonitorInfoInput {
   type: string;
 }
 
-export const ping: any = async (projectUid: string, monitorUid: string, type: string): Promise<WriteResult | boolean> => {
+export const ping: any = async (projectUid: string, monitorUid: string, type: 'scheduler' | 'manual' = 'scheduler'): Promise<WriteResult | boolean> => {
   const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
@@ -54,7 +54,7 @@ export const ping: any = async (projectUid: string, monitorUid: string, type: st
     codeMatched: monitor.expectedCode === response.statusCode,
     textMatched: monitor.expectedText ? response.body.includes(monitor.expectedText) : true,
     createdOn: firestore.Timestamp.fromDate(new Date()),
-    type: type ? type: 'scheduler',
+    type: type,
   };
   pingResult.isValid = !!(pingResult.codeMatched && pingResult.textMatched);
 

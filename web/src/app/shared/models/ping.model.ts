@@ -10,6 +10,6 @@ export class PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
+  type: 'scheduler' | 'manual';
   createdOn: Date;
-  type: string;
 }
