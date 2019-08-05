@@ -87,6 +87,7 @@ export class MonitorService {
 
   public pingMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');
-    return callable({ projectUid, monitorUid });
+    const type: string = 'manual';
+    return callable({ projectUid, monitorUid, type });
   }
 }
