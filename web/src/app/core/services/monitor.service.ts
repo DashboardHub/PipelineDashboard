@@ -24,9 +24,7 @@ export class MonitorService {
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService,
-    private fns: AngularFireFunctions,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private fns: AngularFireFunctions
   ) {
   }
 
@@ -39,21 +37,6 @@ export class MonitorService {
    */
   findMonitorById(monitors: MonitorModel[], id: string): MonitorModel {
     return monitors.find((monitor: MonitorModel) => monitor.uid === id);
-  }
-
-  /**
-   * This function is used to save monitor and navigate to monitors list screen
-   *
-   * @param uid uid of monitor which needs to be added into monitors list
-   * @param monitors monitors list to be updated
-   *
-   */
-  saveMonitor(uid: string, monitors: MonitorModel[]): void {
-    this.saveMonitors(uid, monitors)
-      .subscribe(
-        () => this.router.navigate([`/projects/${uid}/monitors`]),
-        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-      );
   }
 
   /**
@@ -104,6 +87,7 @@ export class MonitorService {
 
   public pingMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');
-    return callable({ projectUid, monitorUid });
+    const type: string = 'manual';
+    return callable({ projectUid, monitorUid, type });
   }
 }

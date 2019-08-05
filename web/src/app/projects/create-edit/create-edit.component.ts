@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { ProjectModel } from '../../shared/models/index.model';
   selector: 'dashboard-projects-create',
   templateUrl: './create-edit.component.html',
 })
-export class CreateEditProjectComponent implements OnInit {
+export class CreateEditProjectComponent implements OnInit, OnDestroy {
 
   private createEditSubscription: Subscription;
   private projectSubscription: Subscription;
@@ -64,8 +64,12 @@ export class CreateEditProjectComponent implements OnInit {
     }
   }
 
-  ngDestroy(): void {
-    this.createEditSubscription.unsubscribe();
-    this.projectSubscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.createEditSubscription) {
+      this.createEditSubscription.unsubscribe();
+    }
+    if (this.projectSubscription) {
+      this.projectSubscription.unsubscribe();
+    }
   }
 }

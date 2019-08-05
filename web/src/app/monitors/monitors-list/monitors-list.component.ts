@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // Rxjs operators
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 // Dashboard hub application model and services
+import { MatSnackBar } from '@angular/material';
 import { MonitorService, ProjectService } from '../../core/services/index.service';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
@@ -17,6 +18,7 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 export class MonitorsListComponent implements OnInit, OnDestroy {
 
   private monitorSubscription: Subscription;
+  private saveMonitorSubscription: Subscription;
   public monitors: MonitorModel[] = [];
   public project: ProjectModel;
   public projectUid: string;
@@ -25,7 +27,9 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   constructor(
     private monitorService: MonitorService,
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   /**
@@ -54,7 +58,11 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
    */
   deleteMonitor(monitorUid: string): void {
     this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
-    this.monitorService.saveMonitor(this.projectUid, this.monitors);
+    this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
+      .subscribe(
+        () => this.router.navigate([`/projects/${this.projectUid}/monitors`]),
+        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+      );
 
     // When delete a monitor , deleting all its pings
     this.monitorService
@@ -76,5 +84,8 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.monitorSubscription.unsubscribe();
+    if (this.saveMonitorSubscription) {
+      this.saveMonitorSubscription.unsubscribe();
+    }
   }
 }

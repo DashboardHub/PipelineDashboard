@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { ProjectModel, RepositoriesModel } from '../../models/index.model';
   selector: 'dashboard-dialog-list',
   templateUrl: './dialog-list.component.html',
 })
-export class DialogListComponent {
+export class DialogListComponent implements OnDestroy {
 
   private repositorySubscription: Subscription;
 
@@ -27,7 +27,9 @@ export class DialogListComponent {
       .subscribe((repositories: RepositoriesModel) => this.data.repositories = repositories);
   }
 
-  ngDestroy(): void {
-    this.repositorySubscription.unsubscribe();
+  ngOnDestroy(): void {
+    if (this.repositorySubscription) {
+      this.repositorySubscription.unsubscribe();
+    }
   }
 }
