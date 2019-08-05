@@ -7,7 +7,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 
 // Dashboard hub components
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
-import { MonitorTableComponent } from './monitor-table/monitor-table.component';
+import { MonitorSummaryComponent } from './monitor-summary/monitor-summary.component';
 import { RepositoryComponent } from './repository/repository.component';
 import { ViewProjectComponent } from './view/view.component';
 
@@ -21,6 +21,7 @@ import { ViewProjectComponent } from './view/view.component';
     CreateEditProjectComponent,
     RepositoryComponent,
     ViewProjectComponent,
-    MonitorTableComponent],
+    MonitorSummaryComponent,
+  ],
 })
 export class ProjectsModule { }

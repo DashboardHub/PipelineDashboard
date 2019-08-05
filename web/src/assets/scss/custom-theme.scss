@@ -51,16 +51,3 @@ $dashboard-card-typography: mat-typography-config(
 );
 
 @include mat-card-typography($dashboard-card-typography);
-
-@mixin mat-table-theme() {
-  .mat-header-cell,
-  .mat-cell {
-    text-align: center !important;
-  }
-  
-  .mat-sort-header-container{
-    justify-content: center;
-  }
-}
-
-@include mat-table-theme();

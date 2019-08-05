@@ -13,7 +13,7 @@
       <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
     </span>
   </mat-toolbar>
-  
-  <dashboard-monitor-table></dashboard-monitor-table>
+
+  <dashboard-monitor-summary [monitors]="project.monitors"></dashboard-monitor-summary>
   <dashboard-repository *ngFor="let uid of project.repositories" [uid]="uid"></dashboard-repository>
 </div>
