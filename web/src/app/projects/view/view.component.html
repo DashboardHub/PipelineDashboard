@@ -6,9 +6,9 @@
     <span>{{ project.title }}</span>
     <span fxFlex></span>
     <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="isAdmin()">
-      <button mat-raised-button type="submit" color="accent" routerLink="monitors">Monitors</button>
-      <button mat-raised-button type="submit" color="accent" [routerLink]="['tokens']">Tokens</button>
-      <button mat-raised-button type="submit" color="accent" (click)="addRepository()">Repositories</button>
+      <button mat-raised-button type="submit" [matBadge]="project.monitors && project.monitors.length || 0" matBadgePosition="after" matBadgeColor="primary" color="accent" routerLink="monitors">Monitors</button>
+      <button mat-raised-button type="submit" [matBadge]="project.tokens && project.tokens.length || 0" matBadgePosition="after" matBadgeColor="primary" color="accent" [routerLink]="['tokens']">Tokens</button>
+      <button mat-raised-button type="submit" [matBadge]="project.repositories && project.repositories.length || 0" matBadgePosition="after" matBadgeColor="primary" color="accent" (click)="addRepository()">Repositories</button>
       <button mat-raised-button type="submit" color="accent" [routerLink]="['edit']">Edit</button>
       <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
     </span>
