@@ -14,5 +14,6 @@
     </span>
   </mat-toolbar>
 
+  <dashboard-monitor-summary [monitors]="project.monitors"></dashboard-monitor-summary>
   <dashboard-repository *ngFor="let uid of project.repositories" [uid]="uid"></dashboard-repository>
 </div>
