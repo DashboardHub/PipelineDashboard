@@ -19,9 +19,9 @@ import { ViewProjectComponent } from './view/view.component';
   ],
   declarations: [
     CreateEditProjectComponent,
+    MonitorSummaryComponent,
     RepositoryComponent,
     ViewProjectComponent,
-    MonitorSummaryComponent,
   ],
 })
 export class ProjectsModule { }
