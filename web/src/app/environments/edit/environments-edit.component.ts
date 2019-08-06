@@ -1,36 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EnvironmentForm } from '../environment.form';
-import { Environment } from '../environment.model';
-import { EnvironmentService } from '../environment.service';
+import { MatSnackBar } from '@angular/material';
+
+import { Environment } from '../../../models/environment.model';
+import { EnvironmentService } from '../../../services/environment.service';
 
 @Component({
-  selector: 'qs-environments-edit',
-  templateUrl: './environments-edit.component.html',
+    selector: 'dashboard-environments-edit',
+    templateUrl: './environments-edit.component.html'
 })
 export class EnvironmentsEditComponent implements OnInit {
-  public environment: Environment = new Environment();
-  public form: EnvironmentForm;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private snackBar: MatSnackBar,
-              private environmentService: EnvironmentService) {
-  }
+    public environment: Environment = new Environment();
+    public environmentForm: FormGroup;
 
-  ngOnInit(): void {
-    this.environment = this.route.snapshot.data.environment;
-    this.form = new EnvironmentForm(this.environment);
-  }
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private form: FormBuilder,
+        private snackBar: MatSnackBar,
+        private environmentService: EnvironmentService
+    ) { }
 
-  submit(form: AbstractControl): void {
-    this.environmentService
-      .update(this.environment.id, form.value)
-      .subscribe(
-        (environment: Environment) => this.router.navigate(['/environments', environment.id]),
-        (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 }),
-      );
-  }
+    ngOnInit(): void {
+        this.environment = this.route.snapshot.data.environment;
+
+        this.environmentForm = this.form.group({
+            type: ['build-deploy', [Validators.required]],
+            title: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
+            description: [undefined, [Validators.minLength(3), Validators.maxLength(1024)]],
+            link: [undefined, [Validators.pattern(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/)]],
+            logo: [undefined, [Validators.maxLength(1024), Validators.pattern(/^https:\/\//)]]
+        });
+
+        this.environmentForm.reset(this.environment);
+    }
+
+    updateEnvironment(): void {
+        this.environmentService
+            .update(this.environment.id, this.environmentForm.getRawValue())
+            .subscribe(
+                (environment: Environment) => this.router.navigate(['/environments', environment.id]),
+                (error: any) => this.snackBar.open(error.message, undefined, { duration: 5000 })
+            );
+    }
 }
