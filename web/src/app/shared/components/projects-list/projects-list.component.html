@@ -9,7 +9,7 @@
       <p>{{ project.description }} </p>
       <p *ngIf="project.url"><a href="{{project.url}}">{{ project.url }}</a></p>
     </div>
-    <div fxFlex="12%"> <span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0}} </span> </div>
+    <div fxFlex="12%"><span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0 }}</span></div>
     <div fxFlex="12%"> <span *ngIf="project.monitors">Monitors {{ project.monitors.length || 0}} </span></div>
     <div fxFlex="12%"> Pings {{ project.pingCount || 0 }}</div>
     <div fxFlex="12%"> {{ (project.access.admin[0] | user | async)?.username }} </div>
