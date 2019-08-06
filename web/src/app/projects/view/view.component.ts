@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { ProjectModel } from '../../shared/models/index.model';
   styleUrls: ['./view.component.scss'],
 })
 
-export class ViewProjectComponent implements OnInit {
+export class ViewProjectComponent implements OnInit, OnDestroy {
   private projectSubscription: Subscription;
   private deleteSubscription: Subscription;
   public project: ProjectModel = new ProjectModel();
@@ -69,8 +69,10 @@ export class ViewProjectComponent implements OnInit {
     return this.projectService.isAdmin(this.project);
   }
 
-  ngDestroy(): void {
+  ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
-    this.deleteSubscription.unsubscribe();
+    if (this.deleteSubscription) {
+      this.deleteSubscription.unsubscribe();
+    }
   }
 }

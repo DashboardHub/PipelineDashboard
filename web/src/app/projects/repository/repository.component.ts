@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, Repos
   templateUrl: './repository.component.html',
   styleUrls: ['./repository.component.scss'],
 })
-export class RepositoryComponent implements OnInit {
+export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
 
@@ -46,7 +46,7 @@ export class RepositoryComponent implements OnInit {
       });
   }
 
-  ngDestroy(): void {
+  ngOnDestroy(): void {
     this.repositorySubscription
       .unsubscribe();
   }
