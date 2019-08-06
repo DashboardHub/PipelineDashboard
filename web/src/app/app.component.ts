@@ -18,18 +18,18 @@ export class AppComponent {
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',
         this._domSanitizer.bypassSecurityTrustResourceUrl(
-          'https://raw.githubusercontent.com/DashboardHub/Assets/logo/master/logo-horizontal-std.svg'
+          'https://cdn.dashboardhub.io/logo/logo-horizontal-std.svg'
         ));
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub_white',
         this._domSanitizer.bypassSecurityTrustResourceUrl(
-          'https://raw.githubusercontent.com/DashboardHub/Assets/logo/master/logo-horizontal-white.svg'
+          'https://cdn.dashboardhub.io/logo/logo-horizontal-white.svg'
         ));
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub_icon',
-        this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/logo/master/icon-only-orange.svg'));
+        this._domSanitizer.bypassSecurityTrustResourceUrl('https://cdn.dashboardhub.io/logo/icon-only-orange.svg'));
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'github',
-        this._domSanitizer.bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/logo/master//github.svg'));
+        this._domSanitizer.bypassSecurityTrustResourceUrl('https://cdn.dashboardhub.io/logo/github.svg'));
   }
 }
