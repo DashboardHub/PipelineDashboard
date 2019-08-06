@@ -19,7 +19,6 @@ script:
   - make install.local
   - AUTH0_CLIENT_ID_TEST="${AUTH0_CLIENT_ID_DEV}" AUTH0_CLIENT_SECRET_TEST="${AUTH0_CLIENT_SECRET_DEV}" make api &
   - make ui.build
-  - make test
 
 deploy:
   - provider: script
