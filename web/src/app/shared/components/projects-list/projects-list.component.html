@@ -8,7 +8,7 @@
       <h4><a [routerLink]="['/projects', project.uid]">{{ project.title }}</a></h4>
       <p>{{ project.description || 'no description' }} <a href="{{project.url}}" *ngIf="project.url">{{ project.url }}</a></p>
     </div>
-    <div fxFlex="12%"> <span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0}} </span> </div>
+    <div fxFlex="12%"><span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0 }}</span></div>
     <div fxFlex="12%"> <span *ngIf="project.monitors">Monitors {{ project.monitors.length || 0}} </span></div>
     <div fxFlex="12%"> Pings {{ project.getTotalPings() }}</div>
     <div fxFlex="12%"> {{ (project.access.admin[0] | user | async)?.username }} </div>
