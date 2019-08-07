@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 
 // Dashboard hub model
-import { PingService } from '../../../core/services/index.service';
-import { PingModel, ProjectModel } from '../../models/index.model';
+import { IProject, ProjectModel } from '../../models/index.model';
 
 @Component({
   selector: 'dashboard-projects-list',
@@ -12,14 +11,10 @@ import { PingModel, ProjectModel } from '../../models/index.model';
 export class ProjectsListComponent implements OnChanges {
 
   @Input()
-  public projects: ProjectModel[] = [];
+  public projects: IProject[] = [];
   public pingCount: [];
 
-  constructor(private pingService: PingService) { }
-
   ngOnChanges(): void {
-    this.projects.forEach((project: ProjectModel) => {
-      this.pingService.findAllPingsCount(project.uid).subscribe((data: PingModel[]) => project.pingCount = data.length);
-    });
+    this.projects = this.projects.map((project: IProject) => new ProjectModel(project));
   }
 }

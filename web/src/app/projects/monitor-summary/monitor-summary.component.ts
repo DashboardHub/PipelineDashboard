@@ -15,7 +15,7 @@ import { MonitorModel } from '../../shared/models/index.model';
 export class MonitorSummaryComponent {
 
   @Input()
-  public monitors: MonitorModel[];
+  public monitors: MonitorModel[] = [];
 
   /**
    * This function for filtering the monitors based upon the valid and invalid status

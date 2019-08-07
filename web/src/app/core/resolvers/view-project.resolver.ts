@@ -25,14 +25,14 @@ export class ViewProjectResolver implements Resolve<ProjectModel> {
           // for private project must have access
           if (!project || (project.type === 'private' && !this.projectService.hasAccess(project) && !this.projectService.isAdmin(project))) {
             this.router.navigate(['/']);
-            return of(new ProjectModel());
+            return of(new ProjectModel({ uid: 'error'}));
           }
 
           return of(project);
         }),
         catchError(() => {
           this.router.navigate(['/']);
-          return of(new ProjectModel());
+          return of(new ProjectModel({ uid: 'error'}));
         })
       );
   }

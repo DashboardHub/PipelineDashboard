@@ -1,3 +1,4 @@
+import { IProject } from './../../shared/models/project.model';
 // Core components
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
@@ -53,8 +54,8 @@ export class MonitorService {
         .pipe(
           take(1),
           switchMap(() => this.afs
-            .collection<ProjectModel>('projects')
-            .doc<ProjectModel>(uid)
+            .collection<IProject>('projects')
+            .doc<IProject>(uid)
             .set(
               {
                 monitors: [],
@@ -69,8 +70,8 @@ export class MonitorService {
       .pipe(
         take(1),
         switchMap(() => this.afs
-          .collection<ProjectModel>('projects')
-          .doc<ProjectModel>(uid)
+          .collection<IProject>('projects')
+          .doc<IProject>(uid)
           .set(
             {
               monitors: monitors,
