@@ -16,6 +16,7 @@ export class IProject {
   title?: string;
   description?: string;
   url?: string;
+  logoUrl?: string;
   access?: AccessModel;
   repositories?: string[];
   monitors?: MonitorModel[];
@@ -34,6 +35,7 @@ export class ProjectModel {
   title: string;
   description: string;
   url?: string = '';
+  logoUrl?: string = '';
   access?: AccessModel;
   repositories: string[];
   monitors: MonitorModel[];
@@ -52,6 +54,7 @@ export class ProjectModel {
     this.title = project.title ? project.title : undefined;
     this.description = project.description ? project.description : undefined;
     this.url = project.url ? project.url : undefined;
+    this.logoUrl = project.logoUrl ? project.logoUrl : undefined;
     this.access = project.access ? project.access : new AccessModel();
     this.repositories = project.repositories ? project.repositories : [];
     this.monitors = project.monitors ? project.monitors : [];

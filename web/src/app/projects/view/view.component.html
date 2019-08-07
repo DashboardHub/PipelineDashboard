@@ -1,8 +1,9 @@
 <div class="mat-content" *ngIf="project">
 
   <mat-toolbar>
-    <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'public'">lock_open</mat-icon>
-    <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'private'">lock</mat-icon>
+    <img src="{{project.logoUrl}}" *ngIf="project.logoUrl"/>
+    <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
+    <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
     <span>{{ project.title }}</span>
     <span fxFlex></span>
     <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="isAdmin()">
