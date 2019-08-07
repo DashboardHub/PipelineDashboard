@@ -7,6 +7,9 @@ import { MonitorModel } from './monitor.model';
 import { PingModel } from './ping.model';
 import { ProjectTokenModel } from './project-token.model';
 
+/**
+ * Interface for project
+ */
 export class IProject {
   uid?: string;
   type?: 'private' | 'public' = 'public';
@@ -22,6 +25,9 @@ export class IProject {
   updatedOn?: firestore.Timestamp;
 }
 
+/**
+ * Project class model
+ */
 export class ProjectModel {
   uid: string;
   type: 'private' | 'public';
@@ -36,6 +42,10 @@ export class ProjectModel {
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
 
+  /**
+   * Life cycle method
+   * @param project project
+   */
   constructor(project: IProject) {
     this.uid = project.uid;
     this.type = project.type ? project.type : 'public';
@@ -51,6 +61,9 @@ export class ProjectModel {
     this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
   }
 
+  /**
+   * Function to return the total ping count for each project
+   */
   public getTotalPings(): number {
     let total: number = 0;
     this.monitors.forEach((monitor: MonitorModel) => {
