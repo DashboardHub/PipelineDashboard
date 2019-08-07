@@ -1,8 +1,5 @@
-import { IProject } from './../../shared/models/project.model';
 // Core components
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
 
 // Firestore modules
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -14,7 +11,7 @@ import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub models and services
-import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { IProject, MonitorModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 @Injectable({
