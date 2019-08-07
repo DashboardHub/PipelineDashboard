@@ -1,5 +1,5 @@
 // Core components
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 // Dashboard hub model
 import { MonitorModel } from '../../shared/models/index.model';
@@ -12,7 +12,7 @@ import { MonitorModel } from '../../shared/models/index.model';
   templateUrl: './monitor-summary.component.html',
   styleUrls: ['./monitor-summary.component.scss'],
 })
-export class MonitorSummaryComponent {
+export class MonitorSummaryComponent implements OnChanges {
 
   @Input()
   public monitors: MonitorModel[] = [];
@@ -22,6 +22,17 @@ export class MonitorSummaryComponent {
    * @param isValid isValid ping or not
    */
   public filterBy(isValid: boolean): MonitorModel[] {
-    return this.monitors.filter((monitor: MonitorModel) => monitor.latestPing.isValid === isValid);
+    return this.monitors.filter((monitor: MonitorModel) => {
+      if (monitor && monitor.latestPing) {
+        return monitor.latestPing.isValid === isValid;
+      }
+    });
+  }
+
+  /**
+   * Method to detect the change in Input property from parent
+   */
+  ngOnChanges(): void {
+    this.monitors = this.monitors;
   }
 }
