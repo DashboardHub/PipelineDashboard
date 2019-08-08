@@ -24,6 +24,7 @@ export class IProject {
   tokens?: ProjectTokenModel[];
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
+  views?: number;
 }
 
 /**
@@ -43,6 +44,7 @@ export class ProjectModel {
   tokens: ProjectTokenModel[] = [];
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
+  views?: number;
 
   /**
    * Life cycle method
@@ -62,6 +64,7 @@ export class ProjectModel {
     this.tokens = project.tokens ? project.tokens : [];
     this.createdOn = project.createdOn ? project.createdOn : undefined;
     this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
+    this.views = project.views ? project.views : undefined;
   }
 
   /**

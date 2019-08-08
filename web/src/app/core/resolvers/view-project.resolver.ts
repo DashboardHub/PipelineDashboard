@@ -27,7 +27,7 @@ export class ViewProjectResolver implements Resolve<ProjectModel> {
             this.router.navigate(['/']);
             return of(new ProjectModel({ uid: 'error'}));
           }
-
+          this.projectService.incrementViewById(route.params.projectUid , project.views).subscribe();
           return of(project);
         }),
         catchError(() => {
