@@ -52,7 +52,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       events: data[2].map((event: GitHubEventInput) => GitHubEventMapper.import(event)),
       releases: data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)),
       issues: data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)),
-      contributors: data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)),
+      contributors: Array.isArray(data[5]) ? data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)) : [],
       milestones: data[6].map((milestone: GitHubMilestoneInput) => GitHubMilestoneMapper.import(milestone)),
       updatedAt: firestore.Timestamp.fromDate(new Date()),
       webhook: data[7],

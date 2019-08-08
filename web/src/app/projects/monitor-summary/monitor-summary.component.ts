@@ -22,6 +22,6 @@ export class MonitorSummaryComponent {
    * @param isValid isValid ping or not
    */
   public filterBy(isValid: boolean): MonitorModel[] {
-    return this.monitors.filter((monitor: MonitorModel) => monitor.latestPing.isValid === isValid);
+    return Array.isArray(this.monitors) && this.monitors.filter((monitor: MonitorModel) => monitor.latestPing.isValid === isValid) || [];
   }
 }
