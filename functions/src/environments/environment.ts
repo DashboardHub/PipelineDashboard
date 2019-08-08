@@ -5,6 +5,13 @@ export const enviroment: Config = {
     events: [
       'push',
       'pull_request',
+      'issues',
+      'repository',
+      'release',
+      'milestone',
+      'issue_comment',
+      'create',
+      'watch',
     ],
   },
 
