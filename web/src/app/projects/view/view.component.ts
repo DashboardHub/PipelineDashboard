@@ -7,7 +7,7 @@ import { filter, switchMap } from 'rxjs/operators';
 // DashboardHub
 import { AuthenticationService, ProjectService } from '../../core/services/index.service';
 import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
-import { ProjectModel } from '../../shared/models/index.model';
+import { IProject, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',
@@ -18,7 +18,7 @@ import { ProjectModel } from '../../shared/models/index.model';
 export class ViewProjectComponent implements OnInit, OnDestroy {
   private projectSubscription: Subscription;
   private deleteSubscription: Subscription;
-  public project: ProjectModel = new ProjectModel();
+  public project: ProjectModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,13 +27,13 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     private projectService: ProjectService,
     private authService: AuthenticationService
   ) {
-    this.project.uid = this.route.snapshot.paramMap.get('projectUid');
+    this.project = new ProjectModel({ uid: this.route.snapshot.paramMap.get('projectUid') });
   }
 
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: ProjectModel) => this.project = project);
+      .subscribe((project: IProject) => this.project = new ProjectModel(project));
   }
 
   // This function add  the repository
