@@ -1,7 +1,7 @@
 <div class="mat-content" *ngIf="project">
 
   <mat-toolbar>
-    <img src="{{project.logoUrl}}" *ngIf="project.logoUrl"/>
+    <img [src]="project.logoUrl" *ngIf="project.logoUrl"/>
     <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
     <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
     <span>{{ project.title }}</span>
