@@ -1,7 +1,7 @@
   <h3 mat-subheader>Projects</h3>
   <div *ngFor="let project of projects" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="left left">
     <div fxFlex="2%">
-      <img src="{{project.logoUrl}}" *ngIf="project.logoUrl"/>
+      <img [src]="project.logoUrl" *ngIf="project.logoUrl"/>
       <mat-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
       <mat-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
     </div>
