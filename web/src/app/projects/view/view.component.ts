@@ -18,7 +18,7 @@ import { IProject, ProjectModel } from '../../shared/models/index.model';
 export class ViewProjectComponent implements OnInit, OnDestroy {
   private projectSubscription: Subscription;
   private deleteSubscription: Subscription;
-  public project: IProject;
+  public project: ProjectModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +33,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: IProject) => this.project = project);
+      .subscribe((project: IProject) => this.project = new ProjectModel(project));
   }
 
   // This function add  the repository

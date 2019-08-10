@@ -1,5 +1,5 @@
 // Core components
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 // Dashboard hub model
 import { MonitorModel } from '../../shared/models/index.model';
@@ -12,23 +12,24 @@ import { MonitorModel } from '../../shared/models/index.model';
   templateUrl: './monitor-summary.component.html',
   styleUrls: ['./monitor-summary.component.scss'],
 })
-export class MonitorSummaryComponent  {
+export class MonitorSummaryComponent implements OnChanges {
 
-  public _monitors: MonitorModel[] = [];
   @Input('monitors')
-  set monitors(value: MonitorModel[]) {
-    this._monitors = value;
-  }
+  public monitors: MonitorModel[] = [];
 
   /**
    * This function for filtering the monitors based upon the valid and invalid status
    * @param isValid isValid ping or not
    */
   public filterBy(isValid: boolean): MonitorModel[] {
-    return this._monitors.filter((monitor: MonitorModel) => {
+    return this.monitors.filter((monitor: MonitorModel) => {
       if (monitor && monitor.latestPing) {
         return monitor.latestPing.isValid === isValid;
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.monitors = changes.monitors.currentValue;
   }
 }
