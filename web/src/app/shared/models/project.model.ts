@@ -30,21 +30,21 @@ export class IProject {
 /**
  * Project class model
  */
-export class ProjectModel {
+export class ProjectModel implements IProject {
   uid: string;
   type: 'private' | 'public';
   title: string;
   description: string;
-  url?: string = '';
-  logoUrl?: string = '';
+  url?: string;
+  logoUrl?: string;
   access?: AccessModel;
   repositories: string[];
   monitors: MonitorModel[];
-  pings: PingModel[] = [];
-  tokens: ProjectTokenModel[] = [];
+  pings: PingModel[];
+  tokens: ProjectTokenModel[];
+  views?: firebase.firestore.FieldValue;
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
-  views?: firebase.firestore.FieldValue;
 
   /**
    * Life cycle method
@@ -62,9 +62,9 @@ export class ProjectModel {
     this.monitors = project.monitors ? project.monitors : [];
     this.pings = project.pings ? project.pings : [];
     this.tokens = project.tokens ? project.tokens : [];
+    this.views = project.views ? project.views : undefined;
     this.createdOn = project.createdOn ? project.createdOn : undefined;
     this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
-    this.views = project.views ? project.views : undefined;
   }
 
   /**

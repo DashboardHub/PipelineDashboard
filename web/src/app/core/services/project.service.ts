@@ -179,14 +179,15 @@ export class ProjectService {
    * @param uid uid of project
    * @param count count of project views
    */
-  public incrementViewById(uid: string): Observable<void> {
+  public incrementView(project: IProject): Observable<IProject> {
     return this.activityService
       .start()
       .pipe(
         switchMap(() => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(uid)
-          .set({ views: firebase.firestore.FieldValue.increment(1) }, { merge: true }))
+          .doc<IProject>(project.uid)
+          .set({ views: firebase.firestore.FieldValue.increment(1) }, { merge: true })),
+        map(() => project)
       );
   }
 }

@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 // Dashboard hub model and services
 import { Router } from '@angular/router';
 import { ProjectService } from '../../../core/services/index.service';
-import { ProjectModel } from '../../models/index.model';
+import { IProject } from '../../models/index.model';
 
 @Component({
   selector: 'dashboard-projects-private-public',
@@ -13,7 +13,7 @@ import { ProjectModel } from '../../models/index.model';
 export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
 
   private projectSubscription: Subscription;
-  public projects: ProjectModel[] = [];
+  public projects: IProject[] = [];
   @Input() title: string = 'My Projects';
 
   constructor(
@@ -26,11 +26,11 @@ export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
     if (this.router.url === '/') {
       this.projectSubscription = this.projectService
         .findPublicProjects()
-        .subscribe((projects: ProjectModel[]) => this.projects = projects);
+        .subscribe((projects: IProject[]) => this.projects = projects);
     } else {
       this.projectSubscription = this.projectService
         .findMyProjects()
-        .subscribe((projects: ProjectModel[]) => this.projects = projects);
+        .subscribe((projects: IProject[]) => this.projects = projects);
     }
   }
 

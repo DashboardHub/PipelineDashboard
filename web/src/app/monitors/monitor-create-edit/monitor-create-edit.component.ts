@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 // Dashboard hub models and services
 import { MatSnackBar } from '@angular/material';
 import { MonitorService } from '../../core/services/index.service';
-import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { IProject, MonitorModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitor-create-edit',
@@ -42,8 +42,8 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.initializeMonitorForm();
     this.projectSubscription = this.route.data
-      .subscribe((data: { project: ProjectModel }) => {
-        const project: ProjectModel = data.project;
+      .subscribe((data: { project: IProject }) => {
+        const project: IProject = data.project;
         this.monitorsList = project && project.monitors ? project.monitors : [];
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
