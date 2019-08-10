@@ -3,23 +3,23 @@ import { firestore } from 'firebase';
 
 // Dashboard hub models
 import { AccessModel } from './access.model';
-import { MonitorModel } from './monitor.model';
+import { IMonitor, MonitorModel } from './monitor.model';
 import { PingModel } from './ping.model';
 import { ProjectTokenModel } from './project-token.model';
 
 /**
  * Interface for project
  */
-export class IProject {
+export interface IProject {
   uid?: string;
-  type?: 'private' | 'public' = 'public';
+  type?: 'private' | 'public';
   title?: string;
   description?: string;
   url?: string;
   logoUrl?: string;
   access?: AccessModel;
   repositories?: string[];
-  monitors?: MonitorModel[];
+  monitors?: IMonitor[];
   pings?: PingModel[];
   tokens?: ProjectTokenModel[];
   createdOn?: firestore.Timestamp;
@@ -57,7 +57,7 @@ export class ProjectModel {
     this.logoUrl = project.logoUrl ? project.logoUrl : undefined;
     this.access = project.access ? project.access : new AccessModel();
     this.repositories = project.repositories ? project.repositories : [];
-    this.monitors = project.monitors ? project.monitors : [];
+    this.monitors = project.monitors ? project.monitors.map((monitor: IMonitor) => new MonitorModel(monitor)) : [];
     this.pings = project.pings ? project.pings : [];
     this.tokens = project.tokens ? project.tokens : [];
     this.createdOn = project.createdOn ? project.createdOn : undefined;
@@ -69,10 +69,7 @@ export class ProjectModel {
    */
   public getTotalPings(): number {
     let total: number = 0;
-    this.monitors.forEach((monitor: MonitorModel) => {
-      total += monitor.successfulPings || 0;
-      total += monitor.unsuccessfulPings || 0;
-    });
+    this.monitors.forEach((monitor: MonitorModel) => monitor.getTotalPings());
 
     return total;
   }
