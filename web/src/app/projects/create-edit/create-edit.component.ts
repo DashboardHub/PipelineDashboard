@@ -37,6 +37,7 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
       title: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
       description: [undefined, [Validators.minLength(3), Validators.maxLength(1024)]],
       url: [undefined],
+      logoUrl: [undefined],
     });
     if (this.uid) {
       this.isEdit = true;
