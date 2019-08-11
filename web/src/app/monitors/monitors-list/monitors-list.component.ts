@@ -71,16 +71,15 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
     this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
     this.dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
-        this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
         this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
           .subscribe(
-            () => this.router.navigate([`/projects/${this.projectUid}/monitors`]),
+            () => {
+              // When delete a monitor , deleting all its pings
+              this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
+              this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid);
+            },
             (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
           );
-
-        // When delete a monitor , deleting all its pings
-        this.monitorService
-          .deletePingsByMonitor(this.projectUid, monitorUid);
       }
     });
   }

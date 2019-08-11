@@ -37,7 +37,7 @@ export class TokensListComponent {
   }
 
   // This function delete the project token
-  delete(token: ProjectTokenModel): void {
+  delete(tokenUid: string): void {
     let dialogConfig: MatDialogConfig = new MatDialogConfig();
     dialogConfig = {
       width: '500px',
@@ -50,18 +50,14 @@ export class TokensListComponent {
     this.dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
         this.projectTokenService
-          .delete(this.projectUid, token.uid)
+          .delete(this.projectUid, tokenUid)
           .pipe(
             take(1)
-          )
-          .subscribe(() => {
-            this.projectTokenService.findAll(this.projectUid)
-              .pipe(
-                take(1)
-              )
-              .subscribe((data: ProjectTokenModel[]) => this.tokenList = data);
+          ).
+          subscribe(() => {
+            this.tokenList = this.tokenList.filter((token: ProjectTokenModel) => token.uid !== tokenUid);
           });
       }
-  });
- }
+    });
+  }
 }
