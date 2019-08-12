@@ -8,7 +8,7 @@
       <mat-list-item *ngFor="let valid of filterBy(true)">
         <mat-icon mat-list-icon [matBadge]="valid.latestPing.duration" matBadgeColor="success" *ngIf="valid.latestPing.isValid">done</mat-icon>
         <h4 mat-line>{{ valid.latestPing.url }}</h4>
-        <p mat-line>{{ valid.latestPing.statusCode }} | {{ valid.latestPing.duration }}ms | {{ valid.latestPing.type }} | {{ valid.latestPing.createdOn.toDate() | timeAgo }}</p>
+        <p mat-line>{{ valid.latestPing.statusCode }} | {{ valid.latestPing.duration }}ms | {{ valid.latestPing.type }} | {{ valid.latestPing.createdOn.toDate() | timeAgo }} ({{ valid.getTotalPings() }})</p>
       </mat-list-item>
     </mat-list>
     <mat-list dense fxFlex="50">
@@ -17,7 +17,7 @@
       <mat-list-item *ngFor="let invalid of filterBy(false)">
         <mat-icon mat-list-icon [matBadge]="invalid.latestPing.duration" matBadgeColor="warn" *ngIf="!invalid.latestPing.isValid">error</mat-icon>
         <h4 mat-line>{{ invalid.latestPing.url }}</h4>
-        <p mat-line>{{ invalid.latestPing.statusCode }} | {{ invalid.latestPing.duration }}ms | {{ invalid.latestPing.type }} | {{ invalid.latestPing.createdOn.toDate() | timeAgo }}</p>
+        <p mat-line>{{ invalid.latestPing.statusCode }} | {{ invalid.latestPing.duration }}ms | {{ invalid.latestPing.type }} | {{ invalid.latestPing.createdOn.toDate() | timeAgo }} ({{ invalid.getTotalPings() }})</p>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
