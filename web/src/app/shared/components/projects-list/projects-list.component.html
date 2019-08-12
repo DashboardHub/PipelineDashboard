@@ -1,12 +1,17 @@
-<mat-list>
   <h3 mat-subheader>Projects</h3>
-  <mat-list-item *ngFor="let project of projects" fxLayout='column'>
-    <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'public'">lock_open</mat-icon>
-    <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="project.type === 'private'">lock</mat-icon>
-    <h4 mat-line><a [routerLink]="['/projects', project.uid]">{{ project.title }}</a></h4>
-    <p mat-line>{{ project.description }}</p>
-    <p mat-line *ngIf="project.url"><a href="{{project.url}}">{{ project.url }}</a></p>
-    <p>{{ (project.access.admin[0] | user | async)?.username }}</p>
-    <p class="text-right">{{ project.updatedOn.toDate() | timeAgo }}</p>
-  </mat-list-item>
-</mat-list>
+  <div *ngFor="let project of projects" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="left left">
+    <div fxFlex="2%">
+      <img [src]="project.logoUrl" *ngIf="project.logoUrl"/>
+      <mat-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
+      <mat-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
+    </div>
+    <div fxFlex="40%">
+      <h4><a [routerLink]="['/projects', project.uid]">{{ project.title }}</a></h4>
+      <p>{{ project.description || 'no description' }} <a href="{{project.url}}" *ngIf="project.url">{{ project.url }}</a></p>
+    </div>
+    <div fxFlex="12%"><span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0 }}</span></div>
+    <div fxFlex="12%"> <span *ngIf="project.monitors">Monitors {{ project.monitors.length || 0}} </span></div>
+    <div fxFlex="12%"> Pings {{ project.getTotalPings() }}</div>
+    <div fxFlex="12%"> {{ (project.access.admin[0] | user | async)?.username }} </div>
+    <div fxFlex="12%"> {{ project.updatedOn.toDate() | timeAgo }}</div>
+  </div>

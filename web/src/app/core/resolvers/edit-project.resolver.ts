@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
@@ -10,14 +10,14 @@ import { ProjectService } from '../services/index.service';
 @Injectable({
   providedIn: 'root',
 })
-export class EditProjectResolver implements Resolve<boolean> {
+export class EditProjectResolver implements Resolve<ProjectModel> {
 
   constructor(
     private projectService: ProjectService,
     private router: Router
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot): any {
+  resolve(route: ActivatedRouteSnapshot): Observable<ProjectModel> {
     return this.projectService.findOneById(route.params.projectUid)
       .pipe(
         take(1),
@@ -25,14 +25,14 @@ export class EditProjectResolver implements Resolve<boolean> {
           // for private project must have access
           if (!project || (project.type === 'private' && !this.projectService.isAdmin(project))) {
             this.router.navigate(['/projects']);
-            return of(new ProjectModel());
+            return of(new ProjectModel({ uid: 'error'}));
           }
 
           return of(project);
         }),
         catchError(() => {
           this.router.navigate(['/projects']);
-          return of(new ProjectModel());
+          return of(new ProjectModel({ uid: 'error'}));
         })
       );
   }
