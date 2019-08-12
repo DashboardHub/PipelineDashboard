@@ -54,9 +54,7 @@ export class TokensListComponent {
           .pipe(
             take(1)
           ).
-          subscribe(() => {
-            this.tokenList = this.tokenList.filter((token: ProjectTokenModel) => token.uid !== tokenUid);
-          });
+          subscribe(() => this.tokenList = this.tokenList.filter((token: ProjectTokenModel) => token.uid !== tokenUid));
       }
     });
   }

@@ -4,7 +4,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/
 // Rxjs operators
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub application model and services
 import { MonitorService, ProjectService } from '../../core/services/index.service';
@@ -72,12 +72,10 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
     this.dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result === true) {
         this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
-          .subscribe(
-            () => {
-              // When delete a monitor , deleting all its pings
-              this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
-              this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid);
-            },
+          .pipe(
+            take(1),
+            switchMap(() => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid)))
+          .subscribe(() => this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid),
             (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
           );
       }
