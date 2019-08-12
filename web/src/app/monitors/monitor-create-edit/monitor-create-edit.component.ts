@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 // Dashboard hub models and services
 import { MatSnackBar } from '@angular/material';
 import { MonitorService } from '../../core/services/index.service';
-import { IProject, MonitorModel } from '../../shared/models/index.model';
+import { IMonitor, MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitor-create-edit',
@@ -42,8 +42,8 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.initializeMonitorForm();
     this.projectSubscription = this.route.data
-      .subscribe((data: { project: IProject }) => {
-        const project: IProject = data.project;
+      .subscribe((data: { project: ProjectModel }) => {
+        const project: ProjectModel = data.project;
         this.monitorsList = project && project.monitors ? project.monitors : [];
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
@@ -52,16 +52,6 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
           this.monitorForm.reset(filteredMonitor);
         }
       });
-  }
-
-  /**
-   * Lifecycle destroy method
-   */
-  ngOnDestroy(): void {
-    this.projectSubscription.unsubscribe();
-    if (this.saveMonitorSubscription) {
-      this.saveMonitorSubscription.unsubscribe();
-    }
   }
 
   /**
@@ -93,7 +83,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    * @param monitors monitors list to be updated
    *
    */
-  saveMonitor(uid: string, monitors: MonitorModel[]): void {
+  saveMonitor(uid: string, monitors: IMonitor[]): void {
     this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
       .subscribe(
         () => this.router.navigate([`/projects/${uid}/monitors`]),
@@ -108,5 +98,15 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
     this.monitorsList = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
     this.monitorsList.push(this.monitorForm.value);
     this.saveMonitor(this.projectUid, this.monitorsList);
+  }
+
+  /**
+   * Lifecycle destroy method
+   */
+  ngOnDestroy(): void {
+    this.projectSubscription.unsubscribe();
+    if (this.saveMonitorSubscription) {
+      this.saveMonitorSubscription.unsubscribe();
+    }
   }
 }

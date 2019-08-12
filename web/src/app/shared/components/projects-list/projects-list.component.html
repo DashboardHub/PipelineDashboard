@@ -7,7 +7,7 @@
     </div>
     <div fxFlex="40%">
       <h4><a [routerLink]="['/projects', project.uid]">{{ project.title }}</a></h4>
-      <p>{{ project.description || 'no description' }} <a href="{{project.url}}" *ngIf="project.url">{{ project.url }}</a></p>
+      <p>{{ project.description || 'no description' }} <a href="{{ project.url }}" *ngIf="project.url">{{ project.url }}</a></p>
     </div>
     <div fxFlex="10%"> <span *ngIf="project.views"> Views {{ project.views }} </span></div>
     <div fxFlex="10%"><span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0 }}</span></div>

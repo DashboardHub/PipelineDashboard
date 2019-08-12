@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 // Dashboard hub application model and services
 import { MatSnackBar } from '@angular/material';
 import { MonitorService, ProjectService } from '../../core/services/index.service';
-import { IProject, MonitorModel } from '../../shared/models/index.model';
+import { IProject, MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitors-list',
@@ -20,7 +20,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   private monitorSubscription: Subscription;
   private saveMonitorSubscription: Subscription;
   public monitors: MonitorModel[] = [];
-  public project: IProject;
+  public project: ProjectModel;
   public projectUid: string;
   public manualPing: boolean = false;
 
@@ -39,16 +39,16 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.route.data
       .pipe(
-        map((data: { project: IProject }) => data.project)
+        map((data: { project: ProjectModel }) => data.project)
       )
-      .subscribe((project: IProject) => {
+      .subscribe((project: ProjectModel) => {
         this.project = project;
         this.monitors = project.monitors ? project.monitors : [];
       });
 
     this.monitorSubscription = this.projectService
       .findOneById(this.projectUid)
-      .subscribe((projects: IProject) => this.monitors = projects.monitors ? projects.monitors : []);
+      .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
   }
 
   /**

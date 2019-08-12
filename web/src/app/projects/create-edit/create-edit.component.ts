@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub services and models
 import { ProjectService } from '../../core/services/index.service';
-import { IProject } from '../../shared/models/index.model';
+import { IProject, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-create',
@@ -42,7 +42,7 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
     if (this.uid) {
       this.isEdit = true;
       this.projectSubscription = this.route.data
-        .subscribe((data: { project: IProject }) => this.projectForm.reset(data.project));
+        .subscribe((data: { project: ProjectModel }) => this.projectForm.reset(data.project));
     }
   }
 
@@ -59,7 +59,7 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
       this.createEditSubscription = this.projectService
         .create(this.projectForm.getRawValue())
         .subscribe(
-          (project: IProject) => this.router.navigate(['/projects', project.uid]),
+          (project: ProjectModel) => this.router.navigate(['/projects', project.uid]),
           (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
         );
     }

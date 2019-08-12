@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub models and services
-import { IProject, MonitorModel } from '../../shared/models/index.model';
+import { IMonitor, IProject, MonitorModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 @Injectable({
@@ -44,7 +44,7 @@ export class MonitorService {
    * @param monitors monitors list
    * @returns the observable
    */
-  public saveMonitors(uid: string, monitors: MonitorModel[]): Observable<void> {
+  public saveMonitors(uid: string, monitors: IMonitor[]): Observable<void> {
     if (!monitors.length) {
       return this.activityService
         .start()
