@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 // Third party modules
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub models and services
 import { MatSnackBar } from '@angular/material';
@@ -69,7 +70,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    */
   addMonitor(): void {
     this.monitorsList.push(this.monitorForm.value);
-    this.saveMonitor(this.projectUid, this.monitorsList);
+    this.saveMonitor(this.projectUid, this.monitorsList, this.monitorUid);
   }
 
   /**
@@ -93,15 +94,21 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    * @param monitors monitors list to be updated
    *
    */
-  saveMonitor(uid: string, monitors: MonitorModel[]): void {
-    this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
-      .subscribe(
-        () => {
-          this.monitorService.pingMonitor(this.projectUid, this.monitorUid, 'automatic');
-          this.router.navigate([`/projects/${uid}/monitors`]);
-        },
-        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-      );
+  saveMonitor(uid: string, monitors: MonitorModel[], monitorUid: string): void {
+    if (monitorUid) {
+      this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
+        .pipe(
+          take(1),
+          switchMap(() => this.monitorService.pingMonitor(this.projectUid, this.monitorUid, 'automatic')))
+        .subscribe(() => this.router.navigate([`/projects/${uid}/monitors`]),
+          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+        );
+    } else {
+      this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
+        .subscribe(() => this.router.navigate([`/projects/${uid}/monitors`]),
+          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+        );
+    }
   }
 
   /**
@@ -117,6 +124,6 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
     currentMonitor.expectedText = this.monitorForm.get('expectedText').value;
     monitorsList.push(currentMonitor);
     this.monitorsList = monitorsList;
-    this.saveMonitor(this.projectUid, this.monitorsList);
+    this.saveMonitor(this.projectUid, this.monitorsList, this.monitorUid);
   }
 }
