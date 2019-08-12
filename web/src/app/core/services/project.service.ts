@@ -6,7 +6,7 @@ import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { IProject, RepositoryModel } from '../../shared/models/index.model';
+import { IProject, ProjectModel, RepositoryModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 import { RepositoryService } from './repository.service';
@@ -145,7 +145,7 @@ export class ProjectService {
         .pipe(
           switchMap(() => this.afs
             .collection<IProject>('projects')
-            .doc<IProject>(uid)
+            .doc<IProject>(project.uid)
             .set(
               {
                 repositories: [],
@@ -162,7 +162,7 @@ export class ProjectService {
         mergeMap(() => forkJoin(...repositories.map((repository: string) => this.repositoryService.loadRepository(repository)))),
         switchMap(() => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(uid)
+          .doc<IProject>(project.uid)
           .set(
             {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
