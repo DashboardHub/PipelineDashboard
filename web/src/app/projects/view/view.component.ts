@@ -49,7 +49,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .pipe(
         filter((selectedRepositories: { value: string }[]) => !!selectedRepositories),
         switchMap((selectedRepositories: { value: string }[]) => this.projectService.saveRepositories(
-          this.project.uid,
+          this.project,
           selectedRepositories.map((fullName: { value: string }) => fullName.value)
         ))
       )
