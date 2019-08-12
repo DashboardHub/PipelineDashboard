@@ -2,7 +2,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 // Dashboard hub model
-import { IProject, ProjectModel } from '../../models/index.model';
+import { ProjectModel } from '../../models/index.model';
 
 /**
  * Project list component

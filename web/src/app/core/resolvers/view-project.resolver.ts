@@ -5,7 +5,7 @@ import { catchError, switchMap, take, tap } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { IProject, ProjectModel } from '../../shared/models/index.model';
-import { AuthenticationService, ProjectService } from '../services/index.service';
+import { ProjectService } from '../services/index.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,6 @@ import { AuthenticationService, ProjectService } from '../services/index.service
 export class ViewProjectResolver implements Resolve<IProject> {
 
   constructor(
-    private authService: AuthenticationService,
     private projectService: ProjectService,
     private router: Router
   ) { }

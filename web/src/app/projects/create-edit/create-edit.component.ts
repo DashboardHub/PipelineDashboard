@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub services and models
 import { ProjectService } from '../../core/services/index.service';
-import { IProject, ProjectModel } from '../../shared/models/index.model';
+import { ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-create',

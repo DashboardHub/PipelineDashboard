@@ -7,7 +7,7 @@ import { filter, switchMap } from 'rxjs/operators';
 // DashboardHub
 import { AuthenticationService, ProjectService } from '../../core/services/index.service';
 import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
-import { IProject, ProjectModel } from '../../shared/models/index.model';
+import { ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',

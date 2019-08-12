@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 // Dashboard hub application model and services
 import { MatSnackBar } from '@angular/material';
 import { MonitorService, ProjectService } from '../../core/services/index.service';
-import { IProject, MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitors-list',
