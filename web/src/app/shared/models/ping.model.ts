@@ -1,3 +1,5 @@
+export type PingType = 'scheduler' | 'manual'| 'automatic';
+
 /**
  * Pings model for web
  */
@@ -10,6 +12,6 @@ export class PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
-  type: 'scheduler' | 'manual';
+  type: PingType;
   createdOn: Date;
 }

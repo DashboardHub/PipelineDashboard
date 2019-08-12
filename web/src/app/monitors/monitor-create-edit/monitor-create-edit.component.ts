@@ -96,7 +96,10 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   saveMonitor(uid: string, monitors: MonitorModel[]): void {
     this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
       .subscribe(
-        () => this.router.navigate([`/projects/${uid}/monitors`]),
+        () => {
+          this.monitorService.pingMonitor(this.projectUid, this.monitorUid, 'automatic');
+          this.router.navigate([`/projects/${uid}/monitors`]);
+        },
         (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
       );
   }
@@ -105,8 +108,15 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    * This function is used to update the monitor
    */
   updateMonitor(): void {
-    this.monitorsList = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
-    this.monitorsList.push(this.monitorForm.value);
+    const monitorsList: MonitorModel[] = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
+    const currentMonitor: MonitorModel = this.monitorsList.find((monitor: MonitorModel) => this.monitorUid === monitor.uid);
+    currentMonitor.name = this.monitorForm.get('name').value;
+    currentMonitor.method = this.monitorForm.get('method').value;
+    currentMonitor.path = this.monitorForm.get('path').value;
+    currentMonitor.expectedCode = this.monitorForm.get('expectedCode').value;
+    currentMonitor.expectedText = this.monitorForm.get('expectedText').value;
+    monitorsList.push(currentMonitor);
+    this.monitorsList = monitorsList;
     this.saveMonitor(this.projectUid, this.monitorsList);
   }
 }
