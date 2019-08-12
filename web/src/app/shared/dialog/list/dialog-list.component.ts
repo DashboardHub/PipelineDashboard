@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub services
 import { RepositoryService } from '../../../core/services/index.service';
-import { IProject, RepositoriesModel } from '../../models/index.model';
+import { ProjectModel, RepositoriesModel } from '../../models/index.model';
 
 @Component({
   selector: 'dashboard-dialog-list',
@@ -17,7 +17,7 @@ export class DialogListComponent implements OnDestroy {
   constructor(
     private repositoryService: RepositoryService,
     public dialogRef: MatDialogRef<DialogListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { project: IProject, repositories: RepositoriesModel }
+    @Inject(MAT_DIALOG_DATA) public data: { project: ProjectModel, repositories: RepositoriesModel }
   ) { }
 
   // @TODO: move out, otherwise can not be reused

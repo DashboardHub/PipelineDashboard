@@ -8,7 +8,7 @@ import { first, map, switchMap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { IProject, ProjectTokenModel } from '../../shared/models/index.model';
+import { ProjectModel, ProjectTokenModel } from '../../shared/models/index.model';
 import { ProjectService } from './project.service';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ProjectTokenService {
   public findOneById(projectUid: string, tokenUid: string): Observable<ProjectTokenModel> {
     return this.projectService.findOneById(projectUid)
       .pipe(
-        map((data: IProject) => data && data.tokens && data.tokens.find((item: ProjectTokenModel) => item.uid === tokenUid))
+        map((data: ProjectModel) => data && data.tokens && data.tokens.find((item: ProjectTokenModel) => item.uid === tokenUid))
       );
   }
 
@@ -32,7 +32,7 @@ export class ProjectTokenService {
   public findAll(projectUid: string): Observable<ProjectTokenModel[]> {
     return this.projectService.findOneById(projectUid)
       .pipe(
-        map((data: IProject) => Array.isArray(data.tokens) ? data.tokens : [])
+        map((data: ProjectModel) => Array.isArray(data.tokens) ? data.tokens : [])
       );
   }
   // This function returns the tokens via name
@@ -55,7 +55,7 @@ export class ProjectTokenService {
     return this.projectService.findOneById(projectUid)
       .pipe(
         first(),
-        switchMap((project: IProject) => {
+        switchMap((project: ProjectModel) => {
           if (Array.isArray(project.tokens)) {
             project.tokens.push(token);
           } else {
@@ -72,7 +72,7 @@ export class ProjectTokenService {
     return this.projectService.findOneById(projectUid)
       .pipe(
         first(),
-        switchMap((project: IProject) => {
+        switchMap((project: ProjectModel) => {
           const found: ProjectTokenModel = Array.isArray(project.tokens) && project.tokens.find((item: ProjectTokenModel) => item.uid === data.uid);
 
           if (found) {
@@ -92,7 +92,7 @@ export class ProjectTokenService {
     return this.projectService.findOneById(projectUid)
       .pipe(
         first(),
-        switchMap((project: IProject) => {
+        switchMap((project: ProjectModel) => {
           const found: ProjectTokenModel = Array.isArray(project.tokens) && project.tokens.find((item: ProjectTokenModel) => item.uid === tokenUid);
 
           if (Array.isArray(project.tokens) && found) {
