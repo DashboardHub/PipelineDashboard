@@ -8,3 +8,4 @@ export * from './pullRequest.mapper';
 export * from './release.mapper';
 export * from './repository.mapper';
 export * from './user.mapper';
+export * from './webhook.mapper';
