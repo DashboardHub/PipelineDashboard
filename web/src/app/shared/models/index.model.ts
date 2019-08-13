@@ -1,3 +1,5 @@
+export * from './factories/model.factory';
+export * from './model.model';
 export * from './activity.model';
 export * from './contributor.model';
 export * from './event.model';

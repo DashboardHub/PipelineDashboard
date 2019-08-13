@@ -3,6 +3,7 @@ import { firestore } from 'firebase';
 
 // Dashboard hub models
 import { AccessModel, IAccess } from './access.model';
+import { IModel, Model } from './model.model';
 import { IMonitor, MonitorModel } from './monitor.model';
 import { PingModel } from './ping.model';
 import { ProjectTokenModel } from './project-token.model';
@@ -10,7 +11,7 @@ import { ProjectTokenModel } from './project-token.model';
 /**
  * Interface for project
  */
-export interface IProject {
+export interface IProject extends IModel {
   uid?: string;
   type?: 'private' | 'public';
   title?: string;
@@ -30,7 +31,7 @@ export interface IProject {
 /**
  * Project class model
  */
-export class ProjectModel implements IProject {
+export class ProjectModel extends Model<IProject> implements IProject {
   private _url?: string;
   private _access?: AccessModel;
 
@@ -52,6 +53,7 @@ export class ProjectModel implements IProject {
    * @param project project
    */
   constructor(project: IProject) {
+    super();
     this.uid = project.uid;
     this.type = project.type ? project.type : 'public';
     this.title = project.title ? project.title : undefined;
@@ -63,7 +65,7 @@ export class ProjectModel implements IProject {
     this.monitors = project.monitors ? project.monitors.map((monitor: IMonitor) => new MonitorModel(monitor)) : [];
     this.pings = project.pings ? project.pings : [];
     this.tokens = project.tokens ? project.tokens : [];
-    if (project.views) { this.views = project.views; }
+    this.views = project.views ? project.views : 0;
     this.createdOn = project.createdOn ? project.createdOn : undefined;
     this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
   }
@@ -128,5 +130,24 @@ export class ProjectModel implements IProject {
    */
   public isAdmin(userUid: string): boolean {
     return this.access.admin.includes(userUid);
+  }
+
+  public toData(): IProject {
+    return {
+      uid: this.uid,
+      type: this.type,
+      title: this.title,
+      description: this.description,
+      url: this.url,
+      logoUrl: this.logoUrl,
+      access: this.access.toData(),
+      repositories: this.repositories,
+      monitors: this.monitors.map((monitor) => monitor.toData()),
+      pings: this.pings,
+      tokens: this.tokens,
+      views: this.views,
+      createdOn: this.createdOn,
+      updatedOn: this.updatedOn,
+    };
   }
 }

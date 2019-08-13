@@ -1,6 +1,7 @@
 import { PingModel } from './ping.model';
+import { IModel, Model } from './model.model';
 
-export interface IMonitor {
+export interface IMonitor extends IModel {
   uid: string;
   name: string;
   method: 'GET' | 'POST';
@@ -12,7 +13,7 @@ export interface IMonitor {
   unsuccessfulPings: number;
 }
 
-export class MonitorModel implements IMonitor {
+export class MonitorModel extends Model<IMonitor> implements IMonitor {
   uid: string;
   name: string;
   method: 'GET' | 'POST';
@@ -24,6 +25,7 @@ export class MonitorModel implements IMonitor {
   unsuccessfulPings: number;
 
   constructor(monitor: IMonitor) {
+    super();
     this.uid = monitor.uid;
     this.name = monitor.name;
     this.method = monitor.method;
@@ -37,5 +39,19 @@ export class MonitorModel implements IMonitor {
 
   public getTotalPings(): number {
     return this.successfulPings + this.unsuccessfulPings;
+  }
+
+  public toData(): IMonitor {
+    return {
+      uid: this.uid,
+      name: this.name,
+      method: this.method,
+      path: this.path,
+      expectedCode: this.expectedCode,
+      expectedText: this.expectedText,
+      latestPing: this.latestPing,
+      successfulPings: this.successfulPings,
+      unsuccessfulPings: this.unsuccessfulPings,
+    };
   }
 }

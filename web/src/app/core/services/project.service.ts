@@ -26,21 +26,23 @@ export class ProjectService {
 
   // This function is for creating the project for logged in user
   public create(data: IProject): Observable<ProjectModel> {
-    let project: ProjectModel = new ProjectModel({
-      uid: uuid(),
-      access: { admin: [this.authService.profile.uid] },
-      ...data,
-      repositories: [],
-      createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
-      updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-    });
+    const project: ProjectModel = new ProjectModel(
+      {
+        uid: uuid(), ...data,
+        access: { admin: [this.authService.profile.uid] },
+        createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
+        updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+      }
+    );
+
+    console.log(project.toData());
 
     return this.activityService
       .start()
       .pipe(
         tap(() => this.repositoryService.refresh()),
-        switchMap(() => this.afs.collection<IProject>('projects').doc(project.uid).set(project)),
-        map(() => new ProjectModel(project)),
+        switchMap(() => this.afs.collection<IProject>('projects').doc(project.uid).set(project.toData())),
+        map(() => project),
         take(1)
       );
   }
