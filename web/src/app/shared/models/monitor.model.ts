@@ -1,5 +1,5 @@
-import { PingModel } from './ping.model';
 import { IModel, Model } from './model.model';
+import { PingModel } from './ping.model';
 
 export interface IMonitor extends IModel {
   uid: string;

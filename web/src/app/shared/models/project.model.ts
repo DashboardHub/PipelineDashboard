@@ -142,7 +142,7 @@ export class ProjectModel extends Model<IProject> implements IProject {
       logoUrl: this.logoUrl,
       access: this.access.toData(),
       repositories: this.repositories,
-      monitors: this.monitors.map((monitor) => monitor.toData()),
+      monitors: this.monitors.map((monitor: MonitorModel) => monitor.toData()),
       pings: this.pings,
       tokens: this.tokens,
       views: this.views,

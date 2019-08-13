@@ -35,8 +35,6 @@ export class ProjectService {
       }
     );
 
-    console.log(project.toData());
-
     return this.activityService
       .start()
       .pipe(

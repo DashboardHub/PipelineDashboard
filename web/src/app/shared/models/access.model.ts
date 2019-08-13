@@ -1,4 +1,4 @@
-import { Model, IModel } from './model.model';
+import { IModel, Model } from './model.model';
 
 export interface IAccess extends IModel {
   admin: string[];
