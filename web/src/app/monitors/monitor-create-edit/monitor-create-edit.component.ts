@@ -84,7 +84,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    *
    */
   saveMonitor(uid: string, monitors: IMonitor[]): void {
-    this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, ModelFactory.toModel<IMonitor, MonitorModel>(monitors, MonitorModel))
+    this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, ModelFactory.toModels<IMonitor, MonitorModel>(monitors, MonitorModel))
       .subscribe(
         () => this.router.navigate([`/projects/${uid}/monitors`]),
         (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })

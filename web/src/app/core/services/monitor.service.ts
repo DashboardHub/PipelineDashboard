@@ -71,7 +71,7 @@ export class MonitorService {
           .doc<IProject>(uid)
           .set(
             {
-              monitors: ModelFactory.fromModel<MonitorModel, IMonitor>(monitors),
+              monitors: ModelFactory.fromModels<MonitorModel, IMonitor>(monitors),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
             { merge: true }))

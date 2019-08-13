@@ -28,7 +28,8 @@ export class ProjectService {
   public create(data: IProject): Observable<ProjectModel> {
     const project: ProjectModel = new ProjectModel(
       {
-        uid: uuid(), ...data,
+        uid: uuid(),
+        ...data,
         access: { admin: [this.authService.profile.uid] },
         createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
         updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
@@ -98,23 +99,23 @@ export class ProjectService {
   }
 
   // This function update the project details
-  public save(project: IProject): Observable<void> {
-    const projectModel: ProjectModel = new ProjectModel(project);
+  public save(data: IProject): Observable<void> {
+    const projectModel: ProjectModel = new ProjectModel(
+      {
+        uid: uuid(),
+        ...data,
+        access: { admin: [this.authService.profile.uid] },
+        updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+      }
+    );
 
     return this.activityService
       .start()
       .pipe(
         switchMap(() => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(project.uid)
-          .set({
-            type: projectModel.type,
-            title: projectModel.title,
-            description: projectModel.description,
-            url: projectModel.url,
-            logoUrl: projectModel.logoUrl,
-            updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-          }, { merge: true })),
+          .doc<IProject>(projectModel.uid)
+          .set(projectModel.toData(), { merge: true })),
         take(1)
       );
   }
