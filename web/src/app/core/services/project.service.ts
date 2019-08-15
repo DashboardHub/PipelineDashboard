@@ -65,7 +65,7 @@ export class ProjectService {
           .collection<IProject>(
             'projects',
             (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-              .orderBy('updatedOn', 'desc')
+              .orderBy('views', 'desc').limit(5)
           )
           .valueChanges()),
         map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
