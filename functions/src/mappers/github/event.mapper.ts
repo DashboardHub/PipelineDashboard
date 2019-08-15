@@ -1,6 +1,3 @@
-// Third party modules
-import { firestore } from 'firebase-admin';
-
 // Dashboard hub firebase functions mappers/modesl
 import { GitHubEventType } from './event.mapper';
 import { GitHubOrganisationtInput, GitHubOrganisationMapper, GitHubOrganisationModel } from './organisation.mapper';

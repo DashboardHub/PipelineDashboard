@@ -1,4 +1,3 @@
-import { firestore } from "firebase-admin";
 import { GitHubEventModel, GitHubEventType } from "../event.mapper";
 import { GitHubPayloadInput, GitHubPayloadMapper } from "../payload.mapper";
 import { GitHubRepositoryMapper } from "../repository.mapper";
