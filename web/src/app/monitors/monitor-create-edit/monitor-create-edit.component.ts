@@ -70,7 +70,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    */
   addMonitor(): void {
     this.monitorsList.push(this.monitorForm.value);
-    this.saveMonitor(this.projectUid, this.monitorsList, this.monitorUid);
+    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 
   /**
@@ -94,8 +94,8 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    * @param monitors monitors list to be updated
    *
    */
-  saveMonitor(uid: string, monitors: MonitorModel[], monitorUid: string): void {
-    if (monitorUid) {
+  saveMonitor(uid: string, monitors: MonitorModel[]): void {
+    if (this.monitorUid) {
       this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
         .pipe(
           take(1),
@@ -124,6 +124,6 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
     currentMonitor.expectedText = this.monitorForm.get('expectedText').value;
     monitorsList.push(currentMonitor);
     this.monitorsList = monitorsList;
-    this.saveMonitor(this.projectUid, this.monitorsList, this.monitorUid);
+    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 }
