@@ -73,14 +73,15 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       },
     };
     this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
-    this.dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result === true) {
-        this.projectSubscription.unsubscribe();
-        this.deleteSubscription = this.projectService
-          .delete(this.project.uid)
-          .subscribe(() => this.router.navigate(['/projects']));
-      }
-    });
+    this.dialogRef.afterClosed()
+      .subscribe((result: boolean) => {
+        if (result === true) {
+          this.projectSubscription.unsubscribe();
+          this.deleteSubscription = this.projectService
+            .delete(this.project.uid)
+            .subscribe(() => this.router.navigate(['/projects']));
+        }
+      });
   }
 
   // This function check if logged in user is also owner of the project

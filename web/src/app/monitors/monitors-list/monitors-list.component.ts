@@ -74,8 +74,10 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
         this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
           .pipe(
             take(1),
-            switchMap(() => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid)))
-          .subscribe(() => this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid),
+            switchMap(() => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid))
+            )
+          .subscribe(() =>
+             this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid),
             (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
           );
       }
