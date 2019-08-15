@@ -1,4 +1,9 @@
-import { isExistProperties, Issue, Repository, User } from './shared';
+import { firestore } from 'firebase-admin';
+import { GitHubEventModel, GitHubEventType } from '../event.mapper';
+import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
+import { GitHubRepositoryMapper } from '../repository.mapper';
+import { GitHubUserMapper } from '../user.mapper';
+import { isExistProperties, HubEventActions, Issue, Repository, User } from './shared';
 
 interface Comment {
   url: string;
@@ -23,7 +28,7 @@ export interface IssueCommentEventInput {
   sender: User;
 }
 
-export class IssueCommentEventModel implements IssueCommentEventInput {
+export class IssueCommentEventModel implements IssueCommentEventInput, HubEventActions {
   action: Action;
   issue: Issue;
   comment: Comment;
@@ -38,4 +43,25 @@ export class IssueCommentEventModel implements IssueCommentEventInput {
     const requireKeys: string[] = ['action', 'issue', 'comment', 'repository', 'sender'];
     return isExistProperties(input, requireKeys);
   }
+
+  convertToHubEvent(): GitHubEventModel {
+    const eventType: GitHubEventType = 'IssueCommentEvent';
+    const payload: GitHubPayloadInput = {
+      action: this.action,
+      comment: this.comment,
+    };
+
+    const data: GitHubEventModel = {
+      type: eventType,
+      public: true, // TODO where get
+      actor: GitHubUserMapper.import(this.sender),
+      repository: GitHubRepositoryMapper.import(this.repository, 'event'),
+      payload: GitHubPayloadMapper.import(eventType, payload),
+      createdOn: new Date().toISOString(),
+    };
+
+    return data;
+  }
+
+
 }

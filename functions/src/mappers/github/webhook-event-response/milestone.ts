@@ -23,4 +23,5 @@ export class MilestoneEventModel implements MilestoneEventInput {
     const requireKeys: string[] = ['action', 'milestone', 'repository', 'sender'];
     return isExistProperties(input, requireKeys);
   }
+
 }

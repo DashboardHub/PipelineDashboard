@@ -11,24 +11,24 @@ import { GitHubReleaseModel } from './release.mapper';
 import { GitHubRepositoryWebhookModel } from './webhook.mapper';
 
 export interface GitHubRepositoryInput {
-  id: string;
-  uid: string;
+  id: number;
+  uid?: string;
   name?: string;
   full_name?: string;
   description?: string;
   url: string;
   private: boolean;
-  fork: string;
+  fork: boolean;
 }
 
 export interface GitHubRepositoryModel {
-  id: string;
+  id: number;
   uid: string;
   fullName?: string;
   description?: string;
   url: string;
   private: boolean;
-  fork: string;
+  fork: boolean;
   pullRequests?: GitHubPullRequestModel[];
   events?: GitHubEventModel[];
   releases?: GitHubReleaseModel[];

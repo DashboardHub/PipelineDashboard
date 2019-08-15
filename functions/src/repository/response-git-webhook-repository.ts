@@ -1,8 +1,8 @@
 // Third party modules
 import * as CORS from 'cors';
-// import { firestore } from 'firebase-admin';
 import { https, HttpsFunction, Response } from 'firebase-functions';
 import { Logger } from '../client/logger';
+import { GitHubRepositoryMapper } from '../mappers/github/index.mapper';
 import {
   CreateEventModel,
   IssuesEventModel,
@@ -14,6 +14,8 @@ import {
   RepositoryEventModel,
   WatchEventModel,
 } from '../mappers/github/webhook-event-response';
+import { HubEventActions } from '../mappers/github/webhook-event-response/shared';
+import { DocumentData, DocumentReference, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 // tslint:disable-next-line: typedef
 const cors = CORS({
@@ -30,87 +32,162 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
     Logger.info(`${req.protocol}://${req.hostname} ; onResponseGitWebhookRepository: success!`);
 
     const inputData: any = req.body;
+    let result: Promise<any>;
 
     Logger.info(req.body);
     Logger.info(Object.keys(inputData));
 
     if (IssueCommentEventModel.isCurrentModel(inputData)) {
 
-      issueCommentEvent(new IssueCommentEventModel(inputData));
+      result = issueCommentEvent(new IssueCommentEventModel(inputData));
 
     } else if (IssuesEventModel.isCurrentModel(inputData)) {
 
-      issuesEvent(new IssuesEventModel(inputData));
+      result = issuesEvent(new IssuesEventModel(inputData));
 
     } else if (CreateEventModel.isCurrentModel(inputData)) {
 
-      createEvent(new CreateEventModel(inputData));
+      result = createEvent(new CreateEventModel(inputData));
 
     } else if (PushEventModel.isCurrentModel(inputData)) {
 
-      pushEvent(new PushEventModel(inputData));
+      result = pushEvent(new PushEventModel(inputData));
 
     } else if (PullRequestEventModel.isCurrentModel(inputData)) {
 
-      pullRequestEvent(new PullRequestEventModel(inputData));
+      result = pullRequestEvent(new PullRequestEventModel(inputData));
 
     } else if (ReleaseEventModel.isCurrentModel(inputData)) {
 
-      releaseEvent(new ReleaseEventModel(inputData));
+      result = releaseEvent(new ReleaseEventModel(inputData));
 
     } else if (MilestoneEventModel.isCurrentModel(inputData)) {
 
-      milestoneEvent(new MilestoneEventModel(inputData));
+      result = milestoneEvent(new MilestoneEventModel(inputData));
 
     } else if (WatchEventModel.isCurrentModel(inputData)) {
 
-      watchEvent(new WatchEventModel(inputData));
+      result = watchEvent(new WatchEventModel(inputData));
 
     } else if (RepositoryEventModel.isCurrentModel(inputData)) {
 
-      repositoryEvent(new RepositoryEventModel(inputData));
+      result = repositoryEvent(new RepositoryEventModel(inputData));
 
     } else {
       Logger.error('Not found parser for event');
     }
 
-    res.status(200).send();
+    if (result) {
+      result
+        .then(() => {
+          Logger.info('Parsing done!');
+          res.status(200).send();
+        })
+        .catch((err: any) => {
+          Logger.error('Parser error!');
+          Logger.error(err);
+          res.status(500).send('Parser error!');
+        });
+    } else {
+      // res.status(200).send();
+      res.status(500).send('Not found parser for event');      
+    }
+
   });
 });
 
+async function simpleHubEvent(data: HubEventActions): Promise<void> {
+  const repository: DocumentData = await getRepository(data.repository.full_name);
 
-function issuesEvent(data: any): void {
+  addHubEventToCollection(repository, data);
+  await saveRepository(repository);
+}
+
+async function issuesEvent(data: IssuesEventModel): Promise<void> {
   Logger.info('issuesEvent');
+  const repository: DocumentData = await getRepository(data.repository.full_name);
+
+  // TODO add parse
+
+  addHubEventToCollection(repository, data);
+  await saveRepository(repository);
 }
 
-function repositoryEvent(data: any): void {
+async function repositoryEvent(data: RepositoryEventModel): Promise<void> {
   Logger.info('repositoryEvent');
+  // const repository: DocumentData = await getRepository(data.repository.full_name);
+
+  // TODO add parse
+
+  // await saveRepository(repository);
 }
 
-function pullRequestEvent(data: any): void {
+async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
   Logger.info('pullRequestEvent');
+  const repository: DocumentData = await getRepository(data.repository.full_name);
+
+  // TODO add parse
+
+  addHubEventToCollection(repository, data);
+  await saveRepository(repository);
 }
 
-function releaseEvent(data: any): void {
+async function releaseEvent(data: ReleaseEventModel): Promise<void> {
   Logger.info('releaseEvent');
+  const repository: DocumentData = await getRepository(data.repository.full_name);
+
+  // TODO add parse
+
+  addHubEventToCollection(repository, data);
+  await saveRepository(repository);
 }
 
-function milestoneEvent(data: any): void {
+async function milestoneEvent(data: MilestoneEventModel): Promise<void> {
   Logger.info('milestoneEvent');
+  // const repository: DocumentData = await getRepository(data.repository.full_name);
+
+  // TODO add parse
+
+  // await saveRepository(repository);
 }
 
-function watchEvent(data: any): void {
+async function watchEvent(data: WatchEventModel): Promise<void> {
   Logger.info('watchEvent');
+  await simpleHubEvent(data);
 }
 
-function pushEvent(data: any): void {
+async function pushEvent(data: PushEventModel): Promise<void> {
   Logger.info('pushEvent');
+  await simpleHubEvent(data);
 }
 
-function issueCommentEvent(data: any): void {
+async function issueCommentEvent(data: IssueCommentEventModel): Promise<void> {
   Logger.info('issueCommentEvent');
+  await simpleHubEvent(data);
 }
 
-function createEvent(data: any): void {
+async function createEvent(data: CreateEventModel): Promise<void> {
   Logger.info('createEvent');
+  await simpleHubEvent(data);
+}
+
+async function getRepository(fullName: string): Promise<DocumentData> {
+  const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(GitHubRepositoryMapper.fullNameToUid(fullName));
+  return (await repositorySnapshot.get()).data();
+}
+
+async function saveRepository(repository: DocumentData): Promise<WriteResult> {
+  return await FirebaseAdmin
+    .firestore()
+    .collection('repositories')
+    .doc(repository.uid)
+    .set(repository, { merge: true });
+}
+
+function addHubEventToCollection(repository: DocumentData, event: HubEventActions) {
+  if (!Array.isArray(repository.events)) {
+    repository.events = [];
+  }
+
+  repository.events.unshift(event.convertToHubEvent());
 }

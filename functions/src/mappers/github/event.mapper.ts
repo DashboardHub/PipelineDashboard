@@ -13,23 +13,23 @@ export type GitHubEventType = 'PullRequestEvent' | 'IssueCommentEvent' | 'Create
 export interface GitHubEventInput {
   id: string;
   type: GitHubEventType;
-  public: string;
+  public: boolean;
   actor: GitHubUserInput;
   repo: GitHubRepositoryInput;
   org: GitHubOrganisationtInput;
   payload: GitHubPayloadInput;
-  created_at: firestore.Timestamp;
+  created_at: string;
 }
 
 export interface GitHubEventModel {
-  uid: string;
+  uid?: string;
   type: GitHubEventType;
-  public: string;
+  public: boolean;
   actor: GitHubUserModel;
   repository: GitHubRepositoryModel;
   organisation?: GitHubOrganisationModel;
   payload: GitHubPayloadModel;
-  createdOn: firestore.Timestamp;
+  createdOn: string;
 }
 
 export class GitHubEventMapper {

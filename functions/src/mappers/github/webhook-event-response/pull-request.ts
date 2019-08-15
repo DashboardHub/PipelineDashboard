@@ -1,4 +1,9 @@
-import { isExistProperties, Repository, User } from './shared';
+import { firestore } from 'firebase-admin';
+import { GitHubEventModel, GitHubEventType } from '../event.mapper';
+import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
+import { GitHubRepositoryMapper } from '../repository.mapper';
+import { GitHubUserMapper } from '../user.mapper';
+import { isExistProperties, HubEventActions, Repository, User } from './shared';
 
 
 interface InfoRepoObj {
@@ -38,8 +43,8 @@ interface PullRequest {
   title: string;
   user: User;
   body: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   closed_at?: any;
   merged_at?: any;
   merge_commit_sha?: any;
@@ -83,7 +88,7 @@ export interface PullRequestEventInput {
   sender: User;
 }
 
-export class PullRequestEventModel implements PullRequestEventInput {
+export class PullRequestEventModel implements PullRequestEventInput, HubEventActions {
   action: Action;
   number: number;
   pull_request: PullRequest;
@@ -98,4 +103,24 @@ export class PullRequestEventModel implements PullRequestEventInput {
     const requireKeys: string[] = ['action', 'number', 'pull_request', 'repository', 'sender'];
     return isExistProperties(input, requireKeys);
   }
+
+  convertToHubEvent(): GitHubEventModel {
+    const eventType: GitHubEventType = 'IssuesEvent';
+    const payload: GitHubPayloadInput = {
+      action: this.action,
+      pull_request: this.pull_request,
+    };
+
+    const data: GitHubEventModel = {
+      type: eventType,
+      public: true, // TODO where get
+      actor: GitHubUserMapper.import(this.sender),
+      repository: GitHubRepositoryMapper.import(this.repository, 'event'),
+      payload: GitHubPayloadMapper.import(eventType, payload),
+      createdOn: this.pull_request.created_at,
+    };
+
+    return data;
+  }
+
 }

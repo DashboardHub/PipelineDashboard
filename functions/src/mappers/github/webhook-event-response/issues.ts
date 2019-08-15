@@ -1,4 +1,9 @@
-import { isExistProperties, Issue, Repository, User } from './shared';
+import { firestore } from 'firebase-admin';
+import { GitHubEventModel, GitHubEventType } from '../event.mapper';
+import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
+import { GitHubRepositoryMapper } from '../repository.mapper';
+import { GitHubUserMapper } from '../user.mapper';
+import { isExistProperties, HubEventActions, Issue, Repository, User } from './shared';
 
 type Action = 'opened' | 'edited' | 'deleted' | 'transferred' | 'pinned' | 'unpinned' | 'closed' | 'reopened' | 'assigned' | 'unassigned' | 'labeled' | 'unlabeled' | 'locked' | 'unlocked' | 'milestoned' | 'demilestoned';
 
@@ -10,7 +15,7 @@ export interface IssuesEventInput {
   sender: User;
 }
 
-export class IssuesEventModel implements IssuesEventInput {
+export class IssuesEventModel implements IssuesEventInput, HubEventActions {
   action: Action;
   issue: Issue;
   changes?: any;
@@ -25,4 +30,25 @@ export class IssuesEventModel implements IssuesEventInput {
     const requireKeys: string[] = ['action', 'issue', 'repository', 'sender'];
     return isExistProperties(input, requireKeys);
   }
+
+  convertToHubEvent(): GitHubEventModel {
+    const eventType: GitHubEventType = 'IssuesEvent';
+    const payload: GitHubPayloadInput = {
+      action: this.action,
+      issue: this.issue,
+    };
+
+    const data: GitHubEventModel = {
+      type: eventType,
+      public: true, // TODO where get
+      actor: GitHubUserMapper.import(this.sender),
+      repository: GitHubRepositoryMapper.import(this.repository, 'event'),
+      payload: GitHubPayloadMapper.import(eventType, payload),
+      createdOn: new Date().toISOString(),
+    };
+
+    return data;
+  }
+
+
 }
