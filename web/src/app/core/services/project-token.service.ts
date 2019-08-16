@@ -88,7 +88,7 @@ export class ProjectTokenService {
   }
 
   // This function delete the token via uid
-  public delete(projectUid: string, tokenUid: string): Observable<ProjectTokenModel> {
+  public delete(projectUid: string, tokenUid: string): Observable<ProjectTokenModel[]> {
     return this.projectService.findOneById(projectUid)
       .pipe(
         first(),
@@ -103,7 +103,7 @@ export class ProjectTokenService {
 
           return this.projectService.save(project)
             .pipe(
-              map(() => found)
+              map(() => project.tokens)
             );
         })
       );

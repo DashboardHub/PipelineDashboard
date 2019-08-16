@@ -102,3 +102,38 @@ mat-list {
     height: 60px;
   }
 }
+.alert-row {
+  margin-top: 10px;
+
+  .alert {
+    min-width: 150px;
+    padding: 10px 15px;
+    margin: 10px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(#000, .12), 0 1px 2px rgba(#000, .24);
+
+    &:hover {
+      box-shadow: 0 3px 6px rgba(#000, .16), 0 3px 6px rgba(#000, .23);
+    }
+
+    &-success {
+      background-color: lighten(#5cb85c, 15%);
+      border-color: lighten(#5cb85c, 10%);
+      color: darken(#5cb85c, 15%);
+    }
+
+    &-warning {
+      background-color: lighten(#E2A41F, 15%);
+      border-color: lighten(#E2A41F, 10%);
+      color: darken(#E2A41F, 15%);
+    }
+
+    &-danger {
+      background-color: lighten(#e53935, 10%);
+      border-color: lighten(#e53935, 5%);
+      color: white;
+    }
+  }
+
+}

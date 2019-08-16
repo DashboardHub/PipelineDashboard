@@ -121,14 +121,26 @@ export class ProjectService {
   }
 
   // This function add the repository in any project
-  public saveRepositories(uid: string, repositories: string[]): Observable<void> {
+  public saveRepositories(project: ProjectModel, repositories: string[]): Observable<void> {
+    // remove webhook from unselected repo
+    if (project.repositories && project.repositories.length > 0) {
+      const remove: string[] = project.repositories
+        .filter((uid: string) => repositories.findIndex((name: string) => uid === RepositoryModel.getUid(name)) === -1);
+      const removeWebhooks: Observable<RepositoryModel>[] = [];
+      remove.forEach((element: string) => {
+        const tmp: Observable<RepositoryModel> = this.repositoryService.deleteGitWebhook(element).pipe(take(1));
+        removeWebhooks.push(tmp);
+      });
+      forkJoin(removeWebhooks).subscribe();
+    }
+
     if (!repositories.length) {
       return this.activityService
         .start()
         .pipe(
           switchMap(() => this.afs
             .collection<IProject>('projects')
-            .doc<IProject>(uid)
+            .doc<IProject>(project.uid)
             .set(
               {
                 repositories: [],
@@ -145,7 +157,7 @@ export class ProjectService {
         mergeMap(() => forkJoin(...repositories.map((repository: string) => this.repositoryService.loadRepository(repository)))),
         switchMap(() => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(uid)
+          .doc<IProject>(project.uid)
           .set(
             {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),

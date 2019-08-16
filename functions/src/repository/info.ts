@@ -9,11 +9,13 @@ import {
   GitHubPullRequestInput, GitHubPullRequestMapper,
   GitHubReleaseInput, GitHubReleaseMapper,
   GitHubRepositoryInput, GitHubRepositoryMapper,
-  GitHubRepositoryModel
+  GitHubRepositoryModel,
+  GitHubRepositoryWebhookModel,
 } from '../mappers/github/index.mapper';
 import { FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClient } from './../client/github';
 import { Logger } from './../client/logger';
+import { getWebhook } from './create-git-webhook-repository';
 
 export interface RepositoryInfoInput {
   token: string;
@@ -29,6 +31,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     GitHubIssueInput[],
     GitHubContributorInput[],
     GitHubMilestoneInput[],
+    GitHubRepositoryWebhookModel,
   ];
   let mappedData: GitHubRepositoryModel;
 
@@ -41,6 +44,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       GitHubClient<GitHubIssueInput[]>(`/repos/${fullName}/issues`, token),
       GitHubClient<GitHubContributorInput[]>(`/repos/${fullName}/stats/contributors`, token),
       GitHubClient<GitHubMilestoneInput[]>(`/repos/${fullName}/milestones`, token),
+      getWebhook(fullName, token),
     ]);
     mappedData = {
       ...GitHubRepositoryMapper.import(data[0], 'all'),
@@ -51,6 +55,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       contributors: data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)),
       milestones: data[6].map((milestone: GitHubMilestoneInput) => GitHubMilestoneMapper.import(milestone)),
       updatedAt: firestore.Timestamp.fromDate(new Date()),
+      webhook: data[7],
     };
   } catch (error) {
     Logger.error(error);
@@ -66,6 +71,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       issues: mappedData && mappedData.issues.length || 0,
       milestones: mappedData && mappedData.milestones.length || 0,
       updatedAt: mappedData && mappedData.updatedAt,
+      webhook: mappedData && mappedData.webhook,
     },
   });
 
