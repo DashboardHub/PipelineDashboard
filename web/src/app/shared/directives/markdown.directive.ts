@@ -34,7 +34,6 @@ export class MarkdownDirective implements OnChanges {
   }
 
   materialRender(): any {
-    const renderer: any = new this.marked.Renderer();
 
     return {
       heading: (text: string): string => `<h3>${text}</h3>`,

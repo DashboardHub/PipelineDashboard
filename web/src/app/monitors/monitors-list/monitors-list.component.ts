@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 
 // Rxjs operators
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 // Dashboard hub application model and services
 import { MonitorService, ProjectService } from '../../core/services/index.service';
@@ -31,8 +31,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
     private monitorService: MonitorService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private snackBar: MatSnackBar
   ) { }
 
   /**
