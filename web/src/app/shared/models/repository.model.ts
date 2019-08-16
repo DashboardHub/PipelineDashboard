@@ -3,6 +3,7 @@ import { IssueModel } from './issue.model';
 import { MilestoneModel } from './milestone.model';
 import { PullRequestModel } from './pullRequest.model';
 import { ReleaseModel } from './release.model';
+import { WebhookModel } from './webhook.model';
 
 /**
  * Repository model
@@ -32,9 +33,14 @@ export class RepositoryModel {
   lastUpdated: Date;
   contributors: ContributorModel[];
   milestones: MilestoneModel[];
+  webhook: WebhookModel;
 
   constructor(fullName: string) {
     this.fullName = fullName;
-    this.uid = fullName.replace('/', '+');
+    this.uid = RepositoryModel.getUid(fullName);
+  }
+
+  public static getUid(fullName: string): string {
+    return fullName.replace('/', '+');
   }
 }
