@@ -47,15 +47,13 @@ export class TokensListComponent {
       },
     };
     this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
-    this.dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result === true) {
-        this.projectTokenService
-          .delete(this.projectUid, tokenUid)
-          .pipe(
-            take(1)
-          ).
-          subscribe(() => this.tokenList = this.tokenList.filter((token: ProjectTokenModel) => token.uid !== tokenUid));
-      }
-    });
+    this.dialogRef.afterClosed()
+      .subscribe((result: boolean) => {
+        if (result === true) {
+          this.projectTokenService
+            .delete(this.projectUid, tokenUid)
+            .subscribe((tokens: ProjectTokenModel[]) => this.tokenList = tokens);
+        }
+      });
   }
 }

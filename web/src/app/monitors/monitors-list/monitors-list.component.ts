@@ -69,19 +69,17 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
       },
     };
     this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
-    this.dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result === true) {
-        this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
-          .pipe(
-            take(1),
-            switchMap(() => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid))
-            )
-          .subscribe(() =>
-             this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid),
-            (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-          );
-      }
-    });
+    this.dialogRef.afterClosed()
+      .subscribe((result: boolean) => {
+        if (result === true) {
+          this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
+          this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
+            .subscribe(
+              () => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid),
+              (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+            );
+        }
+      });
   }
 
   // This function will ping the monitor
