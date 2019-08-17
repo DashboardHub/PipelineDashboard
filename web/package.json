@@ -45,7 +45,7 @@
     "firebase": "^5.5.9",
     "hammerjs": "2.0.8",
     "highlight.js": "9.13.1",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "ngx-device-detector": "^1.3.4",
     "normalize.css": "8.0.0",
     "rxjs": "6.5.2",
