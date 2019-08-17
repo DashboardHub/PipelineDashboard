@@ -20,8 +20,7 @@ script:
   - (cd functions; npm run lint)
   - (cd functions; npm run build)
   - (cd web; npm install)
-  - (cd web; npm run lint)
-  - (cd web; npm run build:prod)
+  - (cd web; npm test)
 
 deploy:
   - provider: script
