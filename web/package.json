@@ -16,7 +16,7 @@
     "reinstall": "rm -rf node_modules tmp deploy dist && npm install && npm rebuild node-sass",
     "reinstall:latest": "rm -rf node_modules tmp deploy dist && npm install",
     "start:test": "npx serve -s -p 8080 dist",
-    "test": "npm run lint && npm run build:local && concurrently -r -k -s first \"npm run start:test\" \"npm run cypress:run\"",
+    "test": "npm run lint && npm run build:prod && concurrently -r -k -s first \"npm run start:test\" \"npm run cypress:run\"",
     "cypress:run": "npx cypress run",
     "cypress:open": "npx cypress open"
   },
