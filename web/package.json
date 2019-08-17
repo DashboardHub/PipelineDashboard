@@ -15,7 +15,9 @@
     "lint": "ng lint",
     "reinstall": "rm -rf node_modules tmp deploy dist && npm install && npm rebuild node-sass",
     "reinstall:latest": "rm -rf node_modules tmp deploy dist && npm install",
-    "test": "npm run lint && npm run build:dev && concurrently -k -s first \"npm start\" \"sleep 15 && npm run e2e:ci\""
+    "test": "npm run lint && npm run build:dev && concurrently -k -s first \"npm start\" \"sleep 15 && npm run e2e:ci\"",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open"
   },
   "engines": {
     "node": ">10.15.2",
@@ -24,6 +26,10 @@
   "repository": "git@github.com:DashboardHub/PipelineDashboard.git",
   "license": "MIT",
   "author": "DashboardHub",
+  "cypress-cucumber-preprocessor": {
+    "commonPath": "common",
+    "step_definitions": "test/step_definitions"
+  },
   "dependencies": {
     "@angular/animations": "7.2.15",
     "@angular/cdk": "7.3.7",
@@ -64,6 +70,8 @@
     "@types/node": "10.12.0",
     "codelyzer": "4.5.0",
     "concurrently": "^4.1.0",
+    "cypress": "^3.4.1",
+    "cypress-cucumber-preprocessor": "^1.13.1",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
     "typescript": "3.2.4"
