@@ -11,6 +11,15 @@ branches:
 env:
   - NODE_ENV=development
 
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+cache:
+  npm: true
+  directories:
+    - ~/.cache
+
 before_install:
   - npm cache --force clean
   - npm install -g firebase-tools
@@ -20,8 +29,7 @@ script:
   - (cd functions; npm run lint)
   - (cd functions; npm run build)
   - (cd web; npm install)
-  - (cd web; npm run lint)
-  - (cd web; npm run build:prod)
+  - (cd web; npm test)
 
 deploy:
   - provider: script
