@@ -1,4 +1,7 @@
-{
+{ 
+  "extends": [
+    "tslint-etc"
+  ],
   "rulesDirectory": ["./node_modules/codelyzer"],
   "rules": {
     "align": [
@@ -64,6 +67,7 @@
     "no-bitwise": true,
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": [true],
+    "no-unused-declaration": true,
     "no-console": [
       true,
       "assert",
