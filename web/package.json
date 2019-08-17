@@ -15,9 +15,10 @@
     "lint": "ng lint",
     "reinstall": "rm -rf node_modules tmp deploy dist && npm install && npm rebuild node-sass",
     "reinstall:latest": "rm -rf node_modules tmp deploy dist && npm install",
-    "test": "npm run lint && npm run build:dev && concurrently -k -s first \"npm start\" \"sleep 15 && npm run e2e:ci\"",
-    "cypress:run": "cypress run",
-    "cypress:open": "cypress open"
+    "start:test": "npx serve -s -p 8080 dist",
+    "test": "npm run lint && npm run build:local && concurrently -r -k -s first \"npm run start:test\" \"npm run cypress:run\"",
+    "cypress:run": "npx cypress run",
+    "cypress:open": "npx cypress open"
   },
   "engines": {
     "node": ">10.15.2",
@@ -72,6 +73,7 @@
     "concurrently": "^4.1.0",
     "cypress": "^3.4.1",
     "cypress-cucumber-preprocessor": "^1.13.1",
+    "serve": "^11.1.0",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
     "typescript": "3.2.4"

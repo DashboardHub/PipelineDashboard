@@ -1,6 +1,6 @@
 import { Given, Then } from 'cypress-cucumber-preprocessor/steps';
 
-const url = 'http://localhost:4200';
+const url = 'http://localhost:8080';
 
 Given(/^the "([^"]*)" page is open$/, (path) => {
     cy.visit(`${url}/${path}`);
