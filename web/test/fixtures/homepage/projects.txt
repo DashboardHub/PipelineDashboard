@@ -1,0 +1,82 @@
+1204
+[[1,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      8
+    ]
+  }
+}
+]],[2,[{
+  "targetChange": {
+    "resumeToken": "CgkIq8nIxeKM5AI=",
+    "readTime": "2019-08-18T15:48:47.380651Z"
+  }
+}
+]],[3,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      22
+    ]
+  }
+}
+]],[4,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      66
+    ]
+  }
+}
+]],[5,[{
+  "targetChange": {
+    "targetIds": [
+      66
+    ],
+    "resumeToken": "CgkI4bqvhuSM5AI=",
+    "readTime": "2019-08-18T15:55:31.719521Z"
+  }
+}
+]],[6,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      8
+    ],
+    "resumeToken": "CgkI4bqvhuSM5AI=",
+    "readTime": "2019-08-18T15:55:31.719521Z"
+  }
+}
+]],[7,[{
+  "targetChange": {
+    "resumeToken": "CgkI4bqvhuSM5AI=",
+    "readTime": "2019-08-18T15:55:31.719521Z"
+  }
+}
+]],[8,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      22,
+      66
+    ],
+    "resumeToken": "CgkIkuu7huSM5AI=",
+    "readTime": "2019-08-18T15:55:31.922322Z"
+  }
+}
+]],[9,[{
+  "targetChange": {
+    "resumeToken": "CgkIkuu7huSM5AI=",
+    "readTime": "2019-08-18T15:55:31.922322Z"
+  }
+}
+]]]15
+[[10,["noop"]]]122
+[[11,[{
+  "targetChange": {
+    "resumeToken": "CgkI8bi3n+SM5AI=",
+    "readTime": "2019-08-18T15:56:24.279153Z"
+  }
+}
+]]]
