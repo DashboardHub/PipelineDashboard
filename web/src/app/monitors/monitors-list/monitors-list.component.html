@@ -33,7 +33,7 @@
             <p>
               <button mat-raised-button color="accent" [disabled]="manualPing || !project.url" (click)="pingMonitor(monitor.uid)">Ping</button>
               <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
-              <button mat-raised-button color="warn" (click)="deleteMonitor(monitor.uid)">Delete</button>
+              <button mat-raised-button color="warn" (click)="delete(monitor.uid)">Delete</button>
             </p>
           </div>
         </mat-list-item>

@@ -132,6 +132,9 @@ export class ProjectModel extends Model<IProject> implements IProject {
     return this.access.admin.includes(userUid);
   }
 
+  /**
+   * The models to data only
+   */
   public toData(): IProject {
     return {
       uid: this.uid,

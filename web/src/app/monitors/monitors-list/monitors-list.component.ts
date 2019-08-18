@@ -58,7 +58,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
    *
    * @param uid the uid of monitor which needs to be deleted
    */
-  deleteMonitor(monitorUid: string): void {
+  delete(monitorUid: string): void {
     let dialogConfig: MatDialogConfig = new MatDialogConfig();
     dialogConfig = {
       width: '500px',
@@ -71,8 +71,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
     this.dialogRef.afterClosed()
       .subscribe((result: boolean) => {
         if (result === true) {
-          this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
-          this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
+          this.saveMonitorSubscription = this.monitorService.delete(this.projectUid, monitorUid)
             .subscribe(
               () => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid),
               (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })

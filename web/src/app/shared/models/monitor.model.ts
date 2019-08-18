@@ -9,8 +9,8 @@ export interface IMonitor extends IModel {
   expectedCode: number;
   expectedText?: string;
   latestPing?: PingModel;
-  successfulPings: number;
-  unsuccessfulPings: number;
+  successfulPings?: number;
+  unsuccessfulPings?: number;
 }
 
 export class MonitorModel extends Model<IMonitor> implements IMonitor {
@@ -41,7 +41,7 @@ export class MonitorModel extends Model<IMonitor> implements IMonitor {
     return this.successfulPings + this.unsuccessfulPings;
   }
 
-  public toData(): IMonitor {
+  public toData(requiredOnly?: boolean): IMonitor {
     let data: IMonitor = {
       uid: this.uid,
       name: this.name,
@@ -49,9 +49,12 @@ export class MonitorModel extends Model<IMonitor> implements IMonitor {
       path: this.path,
       expectedCode: this.expectedCode,
       expectedText: this.expectedText,
-      successfulPings: this.successfulPings,
-      unsuccessfulPings: this.unsuccessfulPings,
     };
+
+    if (!requiredOnly) {
+      data.successfulPings = this.successfulPings;
+      data.unsuccessfulPings = this.unsuccessfulPings;
+    }
 
     if (this.latestPing) {
       data.latestPing = this.latestPing;

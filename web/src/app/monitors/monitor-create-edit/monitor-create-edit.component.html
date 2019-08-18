@@ -39,11 +39,8 @@
       <mat-divider></mat-divider>
       <mat-card-actions>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-          <button mat-stroked-button type="button" routerLink="../" color="warn">Cancel</button>
-          <button mat-raised-button type="submit" color="accent" [disabled]="monitorForm.invalid">
-            <span *ngIf="!isEdit" (click)="addMonitor()">Create</span>
-            <span *ngIf="isEdit" (click)="updateMonitor()">Save</span>
-          </button>
+          <button mat-stroked-button type="button" [routerLink]="['/projects', projectUid, 'monitors']" color="warn">Cancel</button>
+          <button mat-raised-button type="submit" color="accent" (click)="save()" [disabled]="monitorForm.invalid">Save</button>
         </div>
       </mat-card-actions>
     </mat-card>

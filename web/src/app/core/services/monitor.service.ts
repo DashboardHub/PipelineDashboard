@@ -8,11 +8,12 @@ import * as firebase from 'firebase';
 
 // Rxjs operators
 import { Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub models and services
-import { IMonitor, IProject, ModelFactory, MonitorModel } from '../../shared/models/index.model';
+import { IMonitor, IProject, ModelFactory, MonitorModel, ProjectModel } from '../../shared/models/index.model';
 import { ActivityService } from './activity.service';
+import { ProjectService } from './project.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,8 @@ export class MonitorService {
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService,
-    private fns: AngularFireFunctions
+    private fns: AngularFireFunctions,
+    private projectService: ProjectService
   ) {
   }
 
@@ -40,38 +42,52 @@ export class MonitorService {
   /**
    * This function is used to save monitors in the database
    *
-   * @param uid uid of monitor which needs to be save
-   * @param monitors monitors list
+   * @param projectUid uid of project
+   * @param monitor monitor to save
    * @returns the observable
    */
-  public saveMonitors(uid: string, monitors: MonitorModel[]): Observable<void> {
-    if (!monitors.length) {
-      return this.activityService
-        .start()
-        .pipe(
-          take(1),
-          switchMap(() => this.afs
-            .collection<IProject>('projects')
-            .doc<IProject>(uid)
-            .set(
-              {
-                monitors: [],
-                updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-              },
-              { merge: true }))
-        );
-    }
-
-    return this.activityService
-      .start()
+  public save(projectUid: string, monitor: MonitorModel): Observable<void> {
+    return this.projectService.findOneById(projectUid)
       .pipe(
         take(1),
-        switchMap(() => this.afs
+        map((project: ProjectModel) => {
+          const monitors: MonitorModel[] = project.monitors;
+
+          if (monitors.find((monitorModel: MonitorModel) => monitorModel.uid === monitor.uid)) {
+            return project.monitors.map((monitorModel: MonitorModel) => {
+              if (monitorModel.uid === monitor.uid) {
+                return new MonitorModel({ ...monitorModel.toData(), ...monitor.toData(true) });
+              }
+
+              return monitorModel;
+            });
+          }
+
+          return project.monitors.concat(monitor);
+        }),
+        switchMap((monitors: MonitorModel[]) => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(uid)
+          .doc<IProject>(projectUid)
           .set(
             {
               monitors: ModelFactory.fromModels<MonitorModel, IMonitor>(monitors),
+              updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+            },
+            { merge: true }))
+      );
+  }
+
+  public delete(projectUid: string, monitorUid: string): Observable<void> {
+    return this.projectService.findOneById(projectUid)
+      .pipe(
+        take(1),
+        switchMap((project: ProjectModel) => this.afs
+          .collection<IProject>('projects')
+          .doc<IProject>(projectUid)
+          .set(
+            {
+              monitors: ModelFactory
+                .fromModels<MonitorModel, IMonitor>(project.monitors.filter((monitorModel: MonitorModel) => monitorModel.uid !== monitorUid)),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
             { merge: true }))
