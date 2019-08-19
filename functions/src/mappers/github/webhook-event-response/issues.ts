@@ -1,5 +1,6 @@
 import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
+import { GitHubIssueModel } from '../issue.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
 import { GitHubUserMapper } from '../user.mapper';
@@ -53,72 +54,137 @@ export class IssuesEventModel implements IssuesEventInput, HubEventActions {
 
   updateData(repository: DocumentData): void {
 
+    if (!Array.isArray(repository.issues)) {
+      repository.issues = [];
+    }
+
     switch (this.action) {
       case 'opened': {
+        this.opened(repository);
+
         break;
       }
       case 'edited': {
+        this.edited(repository);
         break;
       }
 
       case 'deleted': {
+        this.deleted(repository);
         break;
       }
 
       case 'transferred': {
+        this.edited(repository);
         break;
       }
 
       case 'pinned': {
+        this.edited(repository);
         break;
       }
 
       case 'unpinned': {
+        this.edited(repository);
         break;
       }
 
       case 'closed': {
+        this.edited(repository);
         break;
       }
 
       case 'reopened': {
+        this.edited(repository);
         break;
       }
 
       case 'assigned': {
+        this.edited(repository);
         break;
       }
 
       case 'unassigned': {
+        this.edited(repository);
         break;
       }
 
       case 'labeled': {
+        this.edited(repository);
         break;
       }
 
       case 'unlabeled': {
+        this.edited(repository);
         break;
       }
 
       case 'locked': {
+        this.edited(repository);
         break;
       }
 
       case 'unlocked': {
+        this.edited(repository);
         break;
       }
 
       case 'milestoned': {
+        this.edited(repository);
         break;
       }
 
       case 'demilestoned': {
+        this.edited(repository);
         break;
       }
 
+      default: {
+        throw new Error('Not found action');
+      }
+    }
+
+  }
+
+  private getModel(): GitHubIssueModel {
+    return {
+      uid: this.issue.id,
+      url: this.issue.html_url,
+      state: this.issue.state,
+      title: this.issue.title,
+      number: this.issue.number,
+      description: this.issue.body,
+      owner: GitHubUserMapper.import(this.issue.user),
+      assignees: this.issue.assignees.map((assignee: User) => GitHubUserMapper.import(assignee)),
+      createdOn: this.issue.created_at,
+      updatedOn: this.issue.updated_at,
     }
   }
 
+  private opened(repository: DocumentData): void {
+
+    const issue: GitHubIssueModel = this.getModel();
+
+    repository.issues.unshift(issue);
+  }
+
+
+  private edited(repository: DocumentData): void {
+    const foundIndex: number = repository.issues.findIndex((elem: GitHubIssueModel) => elem.uid === this.issue.id);
+    if (foundIndex > -1) {
+      repository.issues[foundIndex] = this.getModel();
+    } else {
+      this.opened(repository);
+    }
+  }
+
+
+  private deleted(repository: DocumentData): void {
+    if (!Array.isArray(repository.issues)) {
+      return;
+    }
+
+    repository.issues = repository.issues.filter((item: GitHubIssueModel) => item.uid !== this.issue.id);
+  }
 
 }

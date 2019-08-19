@@ -107,7 +107,7 @@ async function issuesEvent(data: IssuesEventModel): Promise<void> {
   Logger.info('issuesEvent');
   const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
-  // TODO add parse
+  data.updateData(repository);
 
   addHubEventToCollection(repository, data);
   await RepositoryModel.saveRepository(repository);

@@ -1,5 +1,4 @@
 import { DocumentData } from '../../../client/firebase-admin';
-import { Logger } from '../../../client/logger';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubReleaseMapper, GitHubReleaseModel } from '../release.mapper';
@@ -111,7 +110,6 @@ export class ReleaseEventModel implements ReleaseEventInput, HubEventActions {
       }
 
       default: {
-        Logger.error('Not found action');
         throw new Error('Not found action');
       }
     }

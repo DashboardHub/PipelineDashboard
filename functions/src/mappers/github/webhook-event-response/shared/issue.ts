@@ -30,8 +30,8 @@ export interface Issue {
   assignees: User[];
   milestone: Milestone;
   comments: number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   closed_at?: any;
   author_association: string;
   body: string;
