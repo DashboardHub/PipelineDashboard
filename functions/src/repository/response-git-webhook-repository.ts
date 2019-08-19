@@ -2,7 +2,6 @@
 import * as CORS from 'cors';
 import { https, HttpsFunction, Response } from 'firebase-functions';
 import { Logger } from '../client/logger';
-import { GitHubRepositoryMapper } from '../mappers/github/index.mapper';
 import {
   CreateEventModel,
   IssuesEventModel,
@@ -14,8 +13,9 @@ import {
   RepositoryEventModel,
   WatchEventModel,
 } from '../mappers/github/webhook-event-response';
-import { HubEventActions } from '../mappers/github/webhook-event-response/shared';
-import { DocumentData, DocumentReference, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
+import { addHubEventToCollection, HubEventActions } from '../mappers/github/webhook-event-response/shared';
+import { RepositoryModel } from '../models/index.model';
+import { DocumentData } from './../client/firebase-admin';
 
 // tslint:disable-next-line: typedef
 const cors = CORS({
@@ -97,20 +97,20 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
 });
 
 async function simpleHubEvent(data: HubEventActions): Promise<void> {
-  const repository: DocumentData = await getRepository(data.repository.full_name);
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
   addHubEventToCollection(repository, data);
-  await saveRepository(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function issuesEvent(data: IssuesEventModel): Promise<void> {
   Logger.info('issuesEvent');
-  const repository: DocumentData = await getRepository(data.repository.full_name);
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
   // TODO add parse
 
   addHubEventToCollection(repository, data);
-  await saveRepository(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function repositoryEvent(data: RepositoryEventModel): Promise<void> {
@@ -124,22 +124,22 @@ async function repositoryEvent(data: RepositoryEventModel): Promise<void> {
 
 async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
   Logger.info('pullRequestEvent');
-  const repository: DocumentData = await getRepository(data.repository.full_name);
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
   // TODO add parse
 
   addHubEventToCollection(repository, data);
-  await saveRepository(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function releaseEvent(data: ReleaseEventModel): Promise<void> {
   Logger.info('releaseEvent');
-  const repository: DocumentData = await getRepository(data.repository.full_name);
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
-  // TODO add parse
+  data.updateData(repository);
 
   addHubEventToCollection(repository, data);
-  await saveRepository(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function milestoneEvent(data: MilestoneEventModel): Promise<void> {
@@ -169,25 +169,4 @@ async function issueCommentEvent(data: IssueCommentEventModel): Promise<void> {
 async function createEvent(data: CreateEventModel): Promise<void> {
   Logger.info('createEvent');
   await simpleHubEvent(data);
-}
-
-async function getRepository(fullName: string): Promise<DocumentData> {
-  const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(GitHubRepositoryMapper.fullNameToUid(fullName));
-  return (await repositorySnapshot.get()).data();
-}
-
-async function saveRepository(repository: DocumentData): Promise<WriteResult> {
-  return await FirebaseAdmin
-    .firestore()
-    .collection('repositories')
-    .doc(repository.uid)
-    .set(repository, { merge: true });
-}
-
-function addHubEventToCollection(repository: DocumentData, event: HubEventActions) {
-  if (!Array.isArray(repository.events)) {
-    repository.events = [];
-  }
-
-  repository.events.unshift(event.convertToHubEvent());
 }

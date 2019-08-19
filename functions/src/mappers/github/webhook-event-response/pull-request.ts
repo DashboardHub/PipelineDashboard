@@ -116,7 +116,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
       actor: GitHubUserMapper.import(this.sender),
       repository: GitHubRepositoryMapper.import(this.repository, 'event'),
       payload: GitHubPayloadMapper.import(eventType, payload),
-      createdOn: this.pull_request.created_at,
+      createdOn: new Date().toISOString(),
     };
 
     return data;

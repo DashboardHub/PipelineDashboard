@@ -1,3 +1,4 @@
+import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
@@ -47,6 +48,76 @@ export class IssuesEventModel implements IssuesEventInput, HubEventActions {
     };
 
     return data;
+  }
+
+
+  updateData(repository: DocumentData): void {
+
+    switch (this.action) {
+      case 'opened': {
+        break;
+      }
+      case 'edited': {
+        break;
+      }
+
+      case 'deleted': {
+        break;
+      }
+
+      case 'transferred': {
+        break;
+      }
+
+      case 'pinned': {
+        break;
+      }
+
+      case 'unpinned': {
+        break;
+      }
+
+      case 'closed': {
+        break;
+      }
+
+      case 'reopened': {
+        break;
+      }
+
+      case 'assigned': {
+        break;
+      }
+
+      case 'unassigned': {
+        break;
+      }
+
+      case 'labeled': {
+        break;
+      }
+
+      case 'unlabeled': {
+        break;
+      }
+
+      case 'locked': {
+        break;
+      }
+
+      case 'unlocked': {
+        break;
+      }
+
+      case 'milestoned': {
+        break;
+      }
+
+      case 'demilestoned': {
+        break;
+      }
+
+    }
   }
 
 
