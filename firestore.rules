@@ -22,7 +22,7 @@ service cloud.firestore {
 
     match /projects/{project} {
       allow create: if isSignedIn();
-      allow get, list: if resource.data.type == 'public' || request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly;
+      allow get, list: if resource.data.type == 'public' || (isSignedIn() && (request.auth.uid in resource.data.access.admin || request.auth.uid in resource.data.access.readonly));
       allow update, delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
 
       function projectDoc() {

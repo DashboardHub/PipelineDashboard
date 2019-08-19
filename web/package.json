@@ -15,7 +15,10 @@
     "lint": "ng lint",
     "reinstall": "rm -rf node_modules tmp deploy dist && npm install && npm rebuild node-sass",
     "reinstall:latest": "rm -rf node_modules tmp deploy dist && npm install",
-    "test": "npm run lint && npm run build:dev && concurrently -k -s first \"npm start\" \"sleep 15 && npm run e2e:ci\""
+    "start:test": "npx serve -s -p 8080 dist",
+    "test": "npm run lint && npm run build:prod && concurrently -r -k -s first \"npm run start:test\" \"npm run cypress:run\"",
+    "cypress:run": "npx cypress run",
+    "cypress:open": "npx cypress open"
   },
   "engines": {
     "node": ">10.15.2",
@@ -24,6 +27,10 @@
   "repository": "git@github.com:DashboardHub/PipelineDashboard.git",
   "license": "MIT",
   "author": "DashboardHub",
+  "cypress-cucumber-preprocessor": {
+    "commonPath": "common",
+    "step_definitions": "test/step_definitions"
+  },
   "dependencies": {
     "@angular/animations": "7.2.15",
     "@angular/cdk": "7.3.7",
@@ -45,11 +52,12 @@
     "firebase": "^5.5.9",
     "hammerjs": "2.0.8",
     "highlight.js": "9.13.1",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "ngx-device-detector": "^1.3.4",
     "normalize.css": "8.0.0",
     "rxjs": "6.5.2",
     "tslib": "^1.9.0",
+    "tslint-etc": "^1.6.0",
     "uuid": "^3.3.2",
     "web-animations-js": "2.3.1",
     "zone.js": "0.8.29"
@@ -63,6 +71,9 @@
     "@types/node": "10.12.0",
     "codelyzer": "4.5.0",
     "concurrently": "^4.1.0",
+    "cypress": "^3.4.1",
+    "cypress-cucumber-preprocessor": "^1.13.1",
+    "serve": "^11.1.0",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
     "typescript": "3.2.4"
