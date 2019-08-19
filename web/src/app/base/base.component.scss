@@ -1,0 +1,53 @@
+@import "~@angular/material/theming";
+
+.sidenav-container {
+  height: 100%;
+  background-color: #eaeaea;
+}
+
+.sidenav {
+  width: 300px;
+
+  .heading {
+    margin: 10px;
+
+    img {
+      border-radius: 50%;
+      height: 4rem;
+      width: 4rem;
+    }
+
+    .mat-icon {
+      font-size: 4rem;
+      height: 4rem;
+      width: 4rem;
+    }
+  }
+
+  .mat-icon {
+    padding-right: 10px;
+    opacity: 0.7;
+  }
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.content-container {
+  min-height: calc(100% - 128px);
+  margin-top: 60px;
+
+  @media ($mat-xsmall) {
+    min-height: calc(100% - 112px);
+    margin-top: 56px;
+  }
+}

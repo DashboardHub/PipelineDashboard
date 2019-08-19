@@ -40,20 +40,14 @@ export class AuthenticationService {
   }
 
   // This function checks authentication state of user
-  public checkAuth(): void {
-    const subscription: Subscription = this.afAuth.authState
+  public checkAuth(): Observable<ProfileModel> {
+    return this.afAuth.authState
       .pipe(
         filter((user: User) => !!user),
         switchMap((user: User) => this.afs
           .doc<ProfileModel>(`users/${user.uid}`)
           .valueChanges())
-      )
-      .subscribe((profile: ProfileModel) => {
-        this.isAuthenticated = true;
-        this.profile = profile;
-      });
-
-    this.subscriptions.push(subscription);
+      );
   }
 
   // This function returns all the logged in users list
