@@ -1,0 +1,128 @@
+3874
+[[6,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      2
+    ]
+  }
+}
+]],[7,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/userStats/BJnbyhEbxCbtZcSAARdV0DHBhXl2",
+      "fields": {
+        "avatarUrl": {
+          "stringValue": "https://avatars0.githubusercontent.com/u/11989248?v=4"
+        },
+        "github": {
+          "mapValue": {
+            "fields": {
+              "repository": {
+                "mapValue": {
+                  "fields": {
+                    "total": {
+                      "integerValue": "9"
+                    }
+                  }
+                }
+              },
+              "activity": {
+                "mapValue": {
+                  "fields": {
+                    "latest": {
+                      "mapValue": {
+                        "fields": {
+                          "actor": {
+                            "mapValue": {
+                              "fields": {
+                                "username": {
+                                  "stringValue": "grandmasterthimps"
+                                },
+                                "avatarUrl": {
+                                  "stringValue": "https://avatars.githubusercontent.com/u/11989248?"
+                                }
+                              }
+                            }
+                          },
+                          "public": {
+                            "booleanValue": true
+                          },
+                          "payload": {
+                            "mapValue": {
+                              "fields": {
+                                "title": {
+                                  "stringValue": "started watching"
+                                }
+                              }
+                            }
+                          },
+                          "repository": {
+                            "mapValue": {
+                              "fields": {
+                                "fullName": {
+                                  "stringValue": "webkhushboo/bootstrap-slider"
+                                },
+                                "id": {
+                                  "integerValue": "124392924"
+                                },
+                                "url": {
+                                  "stringValue": "https://api.github.com/repos/webkhushboo/bootstrap-slider"
+                                }
+                              }
+                            }
+                          },
+                          "type": {
+                            "stringValue": "WatchEvent test"
+                          },
+                          "createdOn": {
+                            "stringValue": "2019-06-15T04:32:18Z"
+                          },
+                          "uid": {
+                            "stringValue": "9827772814"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "name": {
+          "stringValue": "Test User 2"
+        },
+        "lastUpdated": {
+          "timestampValue": "2019-08-18T11:48:46.235Z"
+        },
+        "username": {
+          "stringValue": "testuser1"
+        }
+      },
+      "createTime": "2019-07-28T10:50:17.331007Z",
+      "updateTime": "2019-08-18T11:48:46.301099Z"
+    },
+    "targetIds": [
+      2
+    ]
+  }
+}
+]],[8,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      2
+    ],
+    "resumeToken": "XXXXXXXXXXXXXXX=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
+  }
+}
+]],[9,[{
+  "targetChange": {
+    "resumeToken": "XXXXXXXXXXXXXXX=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
+  }
+}
+]],[10,["noop"]
+]]

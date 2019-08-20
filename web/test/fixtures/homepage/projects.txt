@@ -1,82 +1,110 @@
-1204
+2582
 [[1,[{
   "targetChange": {
     "targetChangeType": "ADD",
     "targetIds": [
-      8
+      2
     ]
   }
 }
 ]],[2,[{
-  "targetChange": {
-    "resumeToken": "CgkIq8nIxeKM5AI=",
-    "readTime": "2019-08-18T15:48:47.380651Z"
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/2725bf61-2859-45e7-a51d-001770e55b80",
+      "fields": {
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "nullValue": null
+        },
+        "monitors": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "uid": {
+                      "stringValue": "47d8f4ea-cd13-4f63-aa4c-b2cf4fca88df"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "expectedText": {
+                      "nullValue": null
+                    },
+                    "name": {
+                      "stringValue": "test"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "url": {
+          "nullValue": null
+        },
+        "repositories": {
+          "arrayValue": {}
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "createdOn": {
+          "timestampValue": "2019-07-28T11:03:15.072Z"
+        },
+        "uid": {
+          "stringValue": "2725bf61-2859-45e7-a51d-001770e55b80"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-07-28T11:03:46.442Z"
+        },
+        "title": {
+          "stringValue": "Test project 3"
+        }
+      },
+      "createTime": "2019-07-28T11:03:15.391296Z",
+      "updateTime": "2019-07-28T11:03:46.674543Z"
+    },
+    "targetIds": [
+      2
+    ]
   }
 }
 ]],[3,[{
   "targetChange": {
-    "targetChangeType": "ADD",
+    "targetChangeType": "CURRENT",
     "targetIds": [
-      22
-    ]
+      2
+    ],
+    "resumeToken": "XXXXXXXXXXXXXXX=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
   }
 }
 ]],[4,[{
   "targetChange": {
-    "targetChangeType": "ADD",
-    "targetIds": [
-      66
-    ]
+    "resumeToken": "XXXXXXXXXXXXXXX=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
   }
 }
-]],[5,[{
-  "targetChange": {
-    "targetIds": [
-      66
-    ],
-    "resumeToken": "CgkI4bqvhuSM5AI=",
-    "readTime": "2019-08-18T15:55:31.719521Z"
-  }
-}
-]],[6,[{
-  "targetChange": {
-    "targetChangeType": "CURRENT",
-    "targetIds": [
-      8
-    ],
-    "resumeToken": "CgkI4bqvhuSM5AI=",
-    "readTime": "2019-08-18T15:55:31.719521Z"
-  }
-}
-]],[7,[{
-  "targetChange": {
-    "resumeToken": "CgkI4bqvhuSM5AI=",
-    "readTime": "2019-08-18T15:55:31.719521Z"
-  }
-}
-]],[8,[{
-  "targetChange": {
-    "targetChangeType": "CURRENT",
-    "targetIds": [
-      22,
-      66
-    ],
-    "resumeToken": "CgkIkuu7huSM5AI=",
-    "readTime": "2019-08-18T15:55:31.922322Z"
-  }
-}
-]],[9,[{
-  "targetChange": {
-    "resumeToken": "CgkIkuu7huSM5AI=",
-    "readTime": "2019-08-18T15:55:31.922322Z"
-  }
-}
-]]]15
-[[10,["noop"]]]122
-[[11,[{
-  "targetChange": {
-    "resumeToken": "CgkI8bi3n+SM5AI=",
-    "readTime": "2019-08-18T15:56:24.279153Z"
-  }
-}
-]]]
+]],[5,["noop"]
+]]

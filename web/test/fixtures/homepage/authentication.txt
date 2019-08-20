@@ -1,0 +1,28 @@
+{
+  "kind": "identitytoolkit#GetAccountInfoResponse",
+  "users": [
+    {
+      "localId": "BJnbyhEbxCbtZcSAARdV0DHBhXl2",
+      "email": "sara@abou-jaoude.co.uk",
+      "displayName": "Test User 1",
+      "photoUrl": "https://avatars0.githubusercontent.com/u/11989248?v=4",
+      "emailVerified": false,
+      "providerUserInfo": [
+        {
+          "providerId": "github.com",
+          "displayName": "Test User 2",
+          "photoUrl": "https://avatars0.githubusercontent.com/u/11989248?v=4",
+          "federatedId": "11989248",
+          "email": "sara@abou-jaoude.co.uk",
+          "rawId": "11989248",
+          "screenName": "grandmasterthimps"
+        }
+      ],
+      "validSince": "1560655927",
+      "lastLoginAt": "1565266418113",
+      "createdAt": "1560655927581",
+      "screenName": "grandmasterthimps",
+      "lastRefreshAt": "2019-08-19T08:30:59.166Z"
+    }
+  ]
+}

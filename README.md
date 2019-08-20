@@ -75,7 +75,10 @@ Do not forget to run `npm run list` in `web` or `functions` directory depending 
 
 ### RUNNING AUTOMATED TESTS
 
-Currently in prototype mode.
+1. Navigate to the `web` directory with with `cd web`
+2. Compile the code in production mode `npm run build:prod`
+3. Run the code in production mode `npm run start:test`
+4. Run tests with `npm run cypress:open`
 
 ### Commit message standards
 

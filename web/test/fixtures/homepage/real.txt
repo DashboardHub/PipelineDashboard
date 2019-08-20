@@ -1,0 +1,1206 @@
+33015
+[[1,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      2
+    ]
+  }
+}
+]],[2,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[3,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/9c26be90-b1f8-471c-8ff0-a0c157610d21",
+      "fields": {
+        "pings": {
+          "arrayValue": {}
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              },
+              "readonly": {
+                "arrayValue": {}
+              }
+            }
+          }
+        },
+        "description": {
+          "stringValue": ""
+        },
+        "monitors": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "uid": {
+                      "stringValue": "c06bf760-a886-48ab-9e5b-c64a4f374d6a"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "latestPing": {
+                      "mapValue": {
+                        "fields": {
+                          "expectedCode": {
+                            "integerValue": "200"
+                          },
+                          "codeMatched": {
+                            "booleanValue": true
+                          },
+                          "statusCode": {
+                            "integerValue": "200"
+                          },
+                          "expectedText": {
+                            "stringValue": ""
+                          },
+                          "url": {
+                            "stringValue": "http://dashboardhub.io/"
+                          },
+                          "createdOn": {
+                            "timestampValue": "2019-08-20T11:50:01.780Z"
+                          },
+                          "isValid": {
+                            "booleanValue": true
+                          },
+                          "textMatched": {
+                            "booleanValue": true
+                          },
+                          "monitorUid": {
+                            "stringValue": "c06bf760-a886-48ab-9e5b-c64a4f374d6a"
+                          },
+                          "type": {
+                            "stringValue": "scheduler"
+                          },
+                          "uid": {
+                            "stringValue": "8d90d671-f707-48d1-8a8b-6389e94d7a72"
+                          },
+                          "duration": {
+                            "integerValue": "240"
+                          }
+                        }
+                      }
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "unsuccessfulPings": {
+                      "integerValue": "0"
+                    },
+                    "expectedText": {
+                      "stringValue": ""
+                    },
+                    "name": {
+                      "stringValue": "fasfs"
+                    },
+                    "successfulPings": {
+                      "integerValue": "23"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "unsuccessfulPings": {
+                      "integerValue": "0"
+                    },
+                    "expectedText": {
+                      "stringValue": ""
+                    },
+                    "name": {
+                      "stringValue": "uuuuuu4444"
+                    },
+                    "successfulPings": {
+                      "integerValue": "29"
+                    },
+                    "uid": {
+                      "stringValue": "d4c34e32-2d87-4c33-bcc1-836bcb4fa756"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "latestPing": {
+                      "mapValue": {
+                        "fields": {
+                          "monitorUid": {
+                            "stringValue": "d4c34e32-2d87-4c33-bcc1-836bcb4fa756"
+                          },
+                          "type": {
+                            "stringValue": "scheduler"
+                          },
+                          "uid": {
+                            "stringValue": "56d9ad5a-d6a0-4fbe-87b1-c0098699d56d"
+                          },
+                          "duration": {
+                            "integerValue": "207"
+                          },
+                          "expectedCode": {
+                            "integerValue": "200"
+                          },
+                          "codeMatched": {
+                            "booleanValue": true
+                          },
+                          "url": {
+                            "stringValue": "http://dashboardhub.io/"
+                          },
+                          "expectedText": {
+                            "stringValue": ""
+                          },
+                          "statusCode": {
+                            "integerValue": "200"
+                          },
+                          "createdOn": {
+                            "timestampValue": "2019-08-20T12:50:01.185Z"
+                          },
+                          "isValid": {
+                            "booleanValue": true
+                          },
+                          "textMatched": {
+                            "booleanValue": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "views": {
+          "integerValue": "48"
+        },
+        "repositories": {
+          "arrayValue": {}
+        },
+        "url": {
+          "stringValue": "http://dashboardhub.io"
+        },
+        "createdOn": {
+          "timestampValue": "2019-08-12T14:59:30.639Z"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-20T12:50:01.185Z"
+        },
+        "title": {
+          "stringValue": "to data 2"
+        },
+        "logoUrl": {
+          "stringValue": ""
+        },
+        "tokens": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "updatedOn": {
+                      "timestampValue": "2019-08-16T11:26:25.077Z"
+                    },
+                    "name": {
+                      "stringValue": "aaaaa"
+                    },
+                    "createdOn": {
+                      "timestampValue": "2019-08-16T11:26:25.077Z"
+                    },
+                    "uid": {
+                      "stringValue": "ae2bb859-2bb9-4a57-86ab-0b592d88629a"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "name": {
+                      "stringValue": "bbbbb"
+                    },
+                    "createdOn": {
+                      "timestampValue": "2019-08-16T11:26:29.575Z"
+                    },
+                    "uid": {
+                      "stringValue": "38767de7-d4d8-47fe-b904-a98df065e853"
+                    },
+                    "updatedOn": {
+                      "timestampValue": "2019-08-16T11:26:29.575Z"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "uid": {
+          "stringValue": "9c26be90-b1f8-471c-8ff0-a0c157610d21"
+        }
+      },
+      "createTime": "2019-08-12T14:59:31.081388Z",
+      "updateTime": "2019-08-20T12:50:01.558639Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[4,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/e9074f26-5b87-4199-aa73-5335b6cf0747",
+      "fields": {
+        "repositories": {
+          "arrayValue": {
+            "values": [
+              {
+                "stringValue": "DashboardHub+Assets"
+              }
+            ]
+          }
+        },
+        "views": {
+          "integerValue": "170"
+        },
+        "url": {
+          "stringValue": "http://dashboardhub.io"
+        },
+        "_url": {
+          "stringValue": "http://dashboardhub.io"
+        },
+        "createdOn": {
+          "timestampValue": "2019-07-30T07:06:13.552Z"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-18T09:37:43.532Z"
+        },
+        "title": {
+          "stringValue": "edde 222"
+        },
+        "logoUrl": {
+          "stringValue": ""
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "tokens": {
+          "arrayValue": {}
+        },
+        "uid": {
+          "stringValue": "e9074f26-5b87-4199-aa73-5335b6cf0747"
+        },
+        "pings": {
+          "arrayValue": {}
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "readonly": {
+                "arrayValue": {}
+              },
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "stringValue": ""
+        },
+        "monitors": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "name": {
+                      "stringValue": "root 2"
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "uid": {
+                      "stringValue": "e0cd87ef-3ca8-4832-b186-457c9896ac88"
+                    }
+                  }
+                }
+              },
+              {
+                "mapValue": {
+                  "fields": {
+                    "path": {
+                      "stringValue": "/error"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "name": {
+                      "stringValue": "error monitor 2"
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "uid": {
+                      "stringValue": "3a32c656-90de-495f-bddf-f01a844dbda7"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "createTime": "2019-07-30T07:06:13.833173Z",
+      "updateTime": "2019-08-18T09:37:44.174079Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[5,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/3edcb42c-a53e-43a4-a451-f336c7b70722",
+      "fields": {
+        "createdOn": {
+          "timestampValue": "2019-08-17T08:43:36.891Z"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-17T08:43:44.346Z"
+        },
+        "title": {
+          "stringValue": "new project 2"
+        },
+        "logoUrl": {
+          "stringValue": ""
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "tokens": {
+          "arrayValue": {}
+        },
+        "uid": {
+          "stringValue": "3edcb42c-a53e-43a4-a451-f336c7b70722"
+        },
+        "pings": {
+          "arrayValue": {}
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "readonly": {
+                "arrayValue": {}
+              },
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "stringValue": ""
+        },
+        "monitors": {
+          "arrayValue": {}
+        },
+        "url": {
+          "stringValue": ""
+        },
+        "views": {
+          "integerValue": "2"
+        },
+        "repositories": {
+          "arrayValue": {}
+        }
+      },
+      "createTime": "2019-08-17T08:43:37.030622Z",
+      "updateTime": "2019-08-17T08:43:45.078063Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[6,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/c20ff5be-8a38-480e-a068-6cf2463fad20",
+      "fields": {
+        "access": {
+          "mapValue": {
+            "fields": {
+              "readonly": {
+                "arrayValue": {}
+              },
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "stringValue": ""
+        },
+        "monitors": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "unsuccessfulPings": {
+                      "integerValue": "0"
+                    },
+                    "expectedText": {
+                      "stringValue": ""
+                    },
+                    "successfulPings": {
+                      "integerValue": "0"
+                    },
+                    "name": {
+                      "stringValue": "iuiouioo"
+                    },
+                    "uid": {
+                      "stringValue": "409c2d43-1012-4984-812f-f721fc1ad794"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "views": {
+          "integerValue": "7"
+        },
+        "url": {
+          "stringValue": ""
+        },
+        "repositories": {
+          "arrayValue": {}
+        },
+        "createdOn": {
+          "timestampValue": "2019-08-13T20:15:15.564Z"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-13T20:29:34.163Z"
+        },
+        "title": {
+          "stringValue": "yuyuuyuuy"
+        },
+        "logoUrl": {
+          "stringValue": ""
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "tokens": {
+          "arrayValue": {}
+        },
+        "uid": {
+          "stringValue": "c20ff5be-8a38-480e-a068-6cf2463fad20"
+        },
+        "pings": {
+          "arrayValue": {}
+        }
+      },
+      "createTime": "2019-08-13T20:15:15.881558Z",
+      "updateTime": "2019-08-13T20:31:56.040479Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[7,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/51f49dad-b8e5-484b-b687-1664c71c7e96",
+      "fields": {
+        "url": {
+          "nullValue": null
+        },
+        "repositories": {
+          "arrayValue": {}
+        },
+        "views": {
+          "integerValue": "12"
+        },
+        "logoUrl": {
+          "nullValue": null
+        },
+        "createdOn": {
+          "timestampValue": "2019-08-10T08:43:08.941Z"
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "uid": {
+          "stringValue": "51f49dad-b8e5-484b-b687-1664c71c7e96"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-10T08:43:08.941Z"
+        },
+        "title": {
+          "stringValue": "incrementor "
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "nullValue": null
+        }
+      },
+      "createTime": "2019-08-10T08:43:09.080574Z",
+      "updateTime": "2019-08-10T09:23:49.009551Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[8,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/76d119df-07db-4726-b9b0-cd4ca2dd571f",
+      "fields": {
+        "repositories": {
+          "arrayValue": {
+            "values": [
+              {
+                "stringValue": "DashboardHub+PipelineDashboard"
+              }
+            ]
+          }
+        },
+        "url": {
+          "nullValue": null
+        },
+        "createdOn": {
+          "timestampValue": "2019-08-08T12:38:15.933Z"
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "uid": {
+          "stringValue": "76d119df-07db-4726-b9b0-cd4ca2dd571f"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-08T12:38:40.546Z"
+        },
+        "title": {
+          "stringValue": "demo project"
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "nullValue": null
+        }
+      },
+      "createTime": "2019-08-08T12:38:16.284358Z",
+      "updateTime": "2019-08-08T12:38:40.741599Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[9,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/0d9d4006-7e80-4234-82fd-12ed8d8ef762",
+      "fields": {
+        "updatedOn": {
+          "timestampValue": "2019-08-08T12:10:15.681Z"
+        },
+        "title": {
+          "stringValue": "csenge"
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl1"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "nullValue": null
+        },
+        "url": {
+          "stringValue": "http://dashboardhub.io"
+        },
+        "repositories": {
+          "arrayValue": {
+            "values": [
+              {
+                "stringValue": "DashboardHub+PipelineDashboard"
+              }
+            ]
+          }
+        },
+        "createdOn": {
+          "timestampValue": "2019-08-08T10:40:56.610Z"
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "uid": {
+          "stringValue": "0d9d4006-7e80-4234-82fd-12ed8d8ef762"
+        }
+      },
+      "createTime": "2019-08-08T10:40:56.946290Z",
+      "updateTime": "2019-08-10T14:19:06.052623Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[10,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/30723f02-afdc-431f-93f2-48bf85f8de6d",
+      "fields": {
+        "createdOn": {
+          "timestampValue": "2019-07-30T15:16:55.946Z"
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "uid": {
+          "stringValue": "30723f02-afdc-431f-93f2-48bf85f8de6d"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-08-07T07:11:30.838Z"
+        },
+        "title": {
+          "stringValue": "offline project"
+        },
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "stringValue": "my description"
+        },
+        "url": {
+          "nullValue": null
+        },
+        "repositories": {
+          "arrayValue": {}
+        }
+      },
+      "createTime": "2019-07-30T15:17:58.220354Z",
+      "updateTime": "2019-08-07T07:11:31.060495Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[11,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/2725bf61-2859-45e7-a51d-001770e55b80",
+      "fields": {
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "nullValue": null
+        },
+        "monitors": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "uid": {
+                      "stringValue": "47d8f4ea-cd13-4f63-aa4c-b2cf4fca88df"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "expectedText": {
+                      "nullValue": null
+                    },
+                    "name": {
+                      "stringValue": "test"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "url": {
+          "nullValue": null
+        },
+        "repositories": {
+          "arrayValue": {}
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "createdOn": {
+          "timestampValue": "2019-07-28T11:03:15.072Z"
+        },
+        "uid": {
+          "stringValue": "2725bf61-2859-45e7-a51d-001770e55b80"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-07-28T11:03:46.442Z"
+        },
+        "title": {
+          "stringValue": "no url"
+        }
+      },
+      "createTime": "2019-07-28T11:03:15.391296Z",
+      "updateTime": "2019-07-28T11:03:46.674543Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[12,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/userStats/BJnbyhEbxCbtZcSAARdV0DHBhXl2",
+      "fields": {
+        "avatarUrl": {
+          "stringValue": "https://avatars0.githubusercontent.com/u/11989248?v=4"
+        },
+        "github": {
+          "mapValue": {
+            "fields": {
+              "repository": {
+                "mapValue": {
+                  "fields": {
+                    "total": {
+                      "integerValue": "9"
+                    }
+                  }
+                }
+              },
+              "activity": {
+                "mapValue": {
+                  "fields": {
+                    "latest": {
+                      "mapValue": {
+                        "fields": {
+                          "public": {
+                            "booleanValue": true
+                          },
+                          "repository": {
+                            "mapValue": {
+                              "fields": {
+                                "fullName": {
+                                  "stringValue": "webkhushboo/bootstrap-slider"
+                                },
+                                "id": {
+                                  "integerValue": "124392924"
+                                },
+                                "url": {
+                                  "stringValue": "https://api.github.com/repos/webkhushboo/bootstrap-slider"
+                                }
+                              }
+                            }
+                          },
+                          "payload": {
+                            "mapValue": {
+                              "fields": {
+                                "title": {
+                                  "stringValue": "started watching"
+                                }
+                              }
+                            }
+                          },
+                          "createdOn": {
+                            "stringValue": "2019-06-15T04:32:18Z"
+                          },
+                          "type": {
+                            "stringValue": "WatchEvent"
+                          },
+                          "uid": {
+                            "stringValue": "9827772814"
+                          },
+                          "actor": {
+                            "mapValue": {
+                              "fields": {
+                                "username": {
+                                  "stringValue": "grandmasterthimps"
+                                },
+                                "avatarUrl": {
+                                  "stringValue": "https://avatars.githubusercontent.com/u/11989248?"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "name": {
+          "stringValue": "Thumper"
+        },
+        "lastUpdated": {
+          "timestampValue": "2019-08-18T11:48:46.235Z"
+        },
+        "username": {
+          "stringValue": "grandmasterthimps"
+        }
+      },
+      "createTime": "2019-07-28T10:50:17.331007Z",
+      "updateTime": "2019-08-18T11:48:46.301099Z"
+    },
+    "targetIds": [
+      2
+    ]
+  }
+}
+]],[13,[{
+  "targetChange": {
+    "targetIds": [
+      4
+    ],
+    "resumeToken": "CgkI8JyGrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.025584Z"
+  }
+}
+]],[14,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      2
+    ],
+    "resumeToken": "CgkI8JyGrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.025584Z"
+  }
+}
+]],[15,[{
+  "targetChange": {
+    "resumeToken": "CgkI8JyGrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.025584Z"
+  }
+}
+]],[16,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      4
+    ],
+    "resumeToken": "CgkIvI2YrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.318524Z"
+  }
+}
+]],[17,[{
+  "targetChange": {
+    "resumeToken": "CgkIvI2YrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.318524Z"
+  }
+}
+]],[18,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      6
+    ]
+  }
+}
+]],[19,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      8
+    ]
+  }
+}
+]],[20,[{
+  "documentDelete": {
+    "document": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/userStats/BJnbyhEbxCbtZcSAARdV0DHBhXl1",
+    "readTime": "2019-08-20T13:21:30.025584Z",
+    "removedTargetIds": [
+      8
+    ]
+  }
+}
+]],[21,[{
+  "targetChange": {
+    "targetIds": [
+      8
+    ],
+    "resumeToken": "CgkI8JyGrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.025584Z"
+  }
+}
+]],[22,[{
+  "targetChange": {
+    "targetIds": [
+      8
+    ],
+    "resumeToken": "CgkIvI2YrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.318524Z"
+  }
+}
+]],[23,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/userStats/BJnbyhEbxCbtZcSAARdV0DHBhXl2",
+      "fields": {
+        "avatarUrl": {
+          "stringValue": "https://avatars0.githubusercontent.com/u/11989248?v=4"
+        },
+        "github": {
+          "mapValue": {
+            "fields": {
+              "repository": {
+                "mapValue": {
+                  "fields": {
+                    "total": {
+                      "integerValue": "9"
+                    }
+                  }
+                }
+              },
+              "activity": {
+                "mapValue": {
+                  "fields": {
+                    "latest": {
+                      "mapValue": {
+                        "fields": {
+                          "actor": {
+                            "mapValue": {
+                              "fields": {
+                                "username": {
+                                  "stringValue": "grandmasterthimps"
+                                },
+                                "avatarUrl": {
+                                  "stringValue": "https://avatars.githubusercontent.com/u/11989248?"
+                                }
+                              }
+                            }
+                          },
+                          "public": {
+                            "booleanValue": true
+                          },
+                          "payload": {
+                            "mapValue": {
+                              "fields": {
+                                "title": {
+                                  "stringValue": "started watching"
+                                }
+                              }
+                            }
+                          },
+                          "repository": {
+                            "mapValue": {
+                              "fields": {
+                                "fullName": {
+                                  "stringValue": "webkhushboo/bootstrap-slider"
+                                },
+                                "id": {
+                                  "integerValue": "124392924"
+                                },
+                                "url": {
+                                  "stringValue": "https://api.github.com/repos/webkhushboo/bootstrap-slider"
+                                }
+                              }
+                            }
+                          },
+                          "type": {
+                            "stringValue": "WatchEvent"
+                          },
+                          "createdOn": {
+                            "stringValue": "2019-06-15T04:32:18Z"
+                          },
+                          "uid": {
+                            "stringValue": "9827772814"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "name": {
+          "stringValue": "Thumper"
+        },
+        "lastUpdated": {
+          "timestampValue": "2019-08-18T11:48:46.235Z"
+        },
+        "username": {
+          "stringValue": "grandmasterthimps"
+        }
+      },
+      "createTime": "2019-07-28T10:50:17.331007Z",
+      "updateTime": "2019-08-18T11:48:46.301099Z"
+    },
+    "targetIds": [
+      6
+    ]
+  }
+}
+]],[24,[{
+  "targetChange": {
+    "targetIds": [
+      6
+    ],
+    "resumeToken": "CgkI8JyGrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.025584Z"
+  }
+}
+]],[25,[{
+  "targetChange": {
+    "resumeToken": "CgkIvI2YrcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.318524Z"
+  }
+}
+]],[26,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      6,
+      8
+    ],
+    "resumeToken": "CgkIr8W6rcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.882735Z"
+  }
+}
+]],[27,[{
+  "targetChange": {
+    "resumeToken": "CgkIr8W6rcWR5AI=",
+    "readTime": "2019-08-20T13:21:30.882735Z"
+  }
+}
+]],[28,["noop"]]]

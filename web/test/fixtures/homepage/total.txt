@@ -1,0 +1,235 @@
+6439
+[[1,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      2
+    ]
+  }
+}
+]],[2,[{
+  "targetChange": {
+    "targetChangeType": "ADD",
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[3,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/projects/2725bf61-2859-45e7-a51d-001770e55b80",
+      "fields": {
+        "access": {
+          "mapValue": {
+            "fields": {
+              "admin": {
+                "arrayValue": {
+                  "values": [
+                    {
+                      "stringValue": "BJnbyhEbxCbtZcSAARdV0DHBhXl2"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": {
+          "nullValue": null
+        },
+        "monitors": {
+          "arrayValue": {
+            "values": [
+              {
+                "mapValue": {
+                  "fields": {
+                    "uid": {
+                      "stringValue": "47d8f4ea-cd13-4f63-aa4c-b2cf4fca88df"
+                    },
+                    "method": {
+                      "stringValue": "GET"
+                    },
+                    "path": {
+                      "stringValue": "/"
+                    },
+                    "expectedCode": {
+                      "integerValue": "200"
+                    },
+                    "expectedText": {
+                      "nullValue": null
+                    },
+                    "name": {
+                      "stringValue": "test"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "url": {
+          "nullValue": null
+        },
+        "repositories": {
+          "arrayValue": {}
+        },
+        "type": {
+          "stringValue": "public"
+        },
+        "createdOn": {
+          "timestampValue": "2019-07-28T11:03:15.072Z"
+        },
+        "uid": {
+          "stringValue": "2725bf61-2859-45e7-a51d-001770e55b80"
+        },
+        "updatedOn": {
+          "timestampValue": "2019-07-28T11:03:46.442Z"
+        },
+        "title": {
+          "stringValue": "Test project 2"
+        }
+      },
+      "createTime": "2019-07-28T11:03:15.391296Z",
+      "updateTime": "2019-07-28T11:03:46.674543Z"
+    },
+    "targetIds": [
+      2
+    ]
+  }
+}
+]],[4,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      2
+    ],
+    "resumeToken": "XXXXXXXXXXXXXXA=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
+  }
+}
+]],[5,[{
+  "targetChange": {
+    "resumeToken": "XXXXXXXXXXXXXXA=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
+  }
+}
+]],[6,[{
+  "documentChange": {
+    "document": {
+      "name": "projects/{{ FIREBASE_PROJECT_ID }}/databases/(default)/documents/userStats/BJnbyhEbxCbtZcSAARdV0DHBhXl2",
+      "fields": {
+        "avatarUrl": {
+          "stringValue": "https://avatars0.githubusercontent.com/u/11989248?v=4"
+        },
+        "github": {
+          "mapValue": {
+            "fields": {
+              "repository": {
+                "mapValue": {
+                  "fields": {
+                    "total": {
+                      "integerValue": "9"
+                    }
+                  }
+                }
+              },
+              "activity": {
+                "mapValue": {
+                  "fields": {
+                    "latest": {
+                      "mapValue": {
+                        "fields": {
+                          "actor": {
+                            "mapValue": {
+                              "fields": {
+                                "username": {
+                                  "stringValue": "grandmasterthimps"
+                                },
+                                "avatarUrl": {
+                                  "stringValue": "https://avatars.githubusercontent.com/u/11989248?"
+                                }
+                              }
+                            }
+                          },
+                          "public": {
+                            "booleanValue": true
+                          },
+                          "payload": {
+                            "mapValue": {
+                              "fields": {
+                                "title": {
+                                  "stringValue": "started watching"
+                                }
+                              }
+                            }
+                          },
+                          "repository": {
+                            "mapValue": {
+                              "fields": {
+                                "fullName": {
+                                  "stringValue": "webkhushboo/bootstrap-slider"
+                                },
+                                "id": {
+                                  "integerValue": "124392924"
+                                },
+                                "url": {
+                                  "stringValue": "https://api.github.com/repos/webkhushboo/bootstrap-slider"
+                                }
+                              }
+                            }
+                          },
+                          "type": {
+                            "stringValue": "WatchEvent test"
+                          },
+                          "createdOn": {
+                            "stringValue": "2019-06-15T04:32:18Z"
+                          },
+                          "uid": {
+                            "stringValue": "9827772814"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "name": {
+          "stringValue": "Test User 2"
+        },
+        "lastUpdated": {
+          "timestampValue": "2019-08-18T11:48:46.235Z"
+        },
+        "username": {
+          "stringValue": "testuser1"
+        }
+      },
+      "createTime": "2019-07-28T10:50:17.331007Z",
+      "updateTime": "2019-08-18T11:48:46.301099Z"
+    },
+    "targetIds": [
+      4
+    ]
+  }
+}
+]],[7,[{
+  "targetChange": {
+    "targetChangeType": "CURRENT",
+    "targetIds": [
+      4
+    ],
+    "resumeToken": "XXXXXXXXXXXXXXB=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
+  }
+}
+]],[8,[{
+  "targetChange": {
+    "resumeToken": "XXXXXXXXXXXXXXB=",
+    "readTime": "2025-02-28T12:00:00.000000Z"
+  }
+}
+]],[9,["noop"]
+]]
