@@ -66,8 +66,6 @@ export class BaseComponent implements AfterViewInit, OnInit {
     },
   ];
   public version: string;
-  public profile: ProfileModel;
-  public isAuthenticated: boolean = false;
 
   constructor(
     private _iconRegistry: MatIconRegistry,
@@ -108,9 +106,17 @@ export class BaseComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     this.route.data.subscribe((data: { profile: ProfileModel }) => {
-      this.isAuthenticated = true;
-      this.profile = data[0];
+      this.authService.isAuthenticated = true;
+      this.authService.profile = data[0];
     });
+  }
+
+  public get isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }
+
+  public get profile(): ProfileModel {
+    return this.authService.profile;
   }
 
   public login(): void {
@@ -118,7 +124,6 @@ export class BaseComponent implements AfterViewInit, OnInit {
   }
 
   public logout(): void {
-    this.isAuthenticated = false;
     this.authService.logout();
   }
 
