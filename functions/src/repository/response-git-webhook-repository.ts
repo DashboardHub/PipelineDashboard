@@ -90,7 +90,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
         });
     } else {
       // res.status(200).send();
-      res.status(500).send('Not found parser for event');      
+      res.status(500).send('Not found parser for event');
     }
 
   });
@@ -126,7 +126,7 @@ async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
   Logger.info('pullRequestEvent');
   const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
-  // TODO add parse
+  data.updateData(repository);
 
   addHubEventToCollection(repository, data);
   await RepositoryModel.saveRepository(repository);
@@ -144,11 +144,11 @@ async function releaseEvent(data: ReleaseEventModel): Promise<void> {
 
 async function milestoneEvent(data: MilestoneEventModel): Promise<void> {
   Logger.info('milestoneEvent');
-  // const repository: DocumentData = await getRepository(data.repository.full_name);
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name); 
 
-  // TODO add parse
+  data.updateData(repository);
 
-  // await saveRepository(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function watchEvent(data: WatchEventModel): Promise<void> {

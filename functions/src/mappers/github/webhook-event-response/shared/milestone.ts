@@ -13,8 +13,8 @@ export interface Milestone {
   open_issues: number;
   closed_issues: number;
   state: string;
-  created_at: Date;
-  updated_at: Date;
-  due_on: Date;
-  closed_at?: Date;
+  created_at: string;
+  updated_at: string;
+  due_on: string;
+  closed_at?: string;
 }

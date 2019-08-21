@@ -1,6 +1,7 @@
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './index.mapper';
 
 export interface GitHubMilestoneInput {
+  id: number;
   title: string;
   creator: GitHubUserInput;
   state: string;
@@ -12,6 +13,7 @@ export interface GitHubMilestoneInput {
 }
 
 export interface GitHubMilestoneModel {
+  uid: number;
   title: string;
   creator: GitHubUserModel;
   state: string;
@@ -25,6 +27,7 @@ export interface GitHubMilestoneModel {
 export class GitHubMilestoneMapper {
   static import(input: GitHubMilestoneInput): GitHubMilestoneModel {
     return {
+      uid: input.id,
       title: input.title,
       creator: GitHubUserMapper.import(input.creator),
       state: input.state,

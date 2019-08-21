@@ -1,5 +1,7 @@
+import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
+import { GitHubPullRequestModel } from '../pullRequest.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
 import { GitHubUserMapper } from '../user.mapper';
 import { isExistProperties, HubEventActions, Repository, User } from './shared';
@@ -104,7 +106,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
   }
 
   convertToHubEvent(): GitHubEventModel {
-    const eventType: GitHubEventType = 'IssuesEvent';
+    const eventType: GitHubEventType = 'PullRequestEvent';
     const payload: GitHubPayloadInput = {
       action: this.action,
       pull_request: this.pull_request,
@@ -120,6 +122,83 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
     };
 
     return data;
+  }
+
+  updateData(repository: DocumentData): void {
+
+    if (!Array.isArray(repository.pullRequests)) {
+      repository.pullRequests = [];
+    }
+
+    switch (this.action) {
+      case 'opened': {
+        this.opened(repository);
+        break;
+      }
+      case 'closed': {
+        this.closed(repository);
+        break;
+      }
+      case 'assigned':
+      case 'unassigned':
+      case 'review_requested':
+      case 'review_request_removed':
+      case 'labeled':
+      case 'unlabeled':
+      case 'ready_for_review':
+      case 'locked':
+      case 'unlocked':
+      case 'reopened':
+      case 'edited': {
+        this.edited(repository);
+        break;
+      }
+      default: {
+        throw new Error('Not found action');
+      }
+    }
+
+  }
+
+  private getModel(): GitHubPullRequestModel {
+    return {
+      uid: this.pull_request.id,
+      url: this.pull_request.html_url,
+      state: this.pull_request.state,
+      title: this.pull_request.title,
+      description: this.pull_request.body,
+      id: this.pull_request.number,
+      owner: GitHubUserMapper.import(this.pull_request.user),
+      assignees: this.pull_request.assignees.map((assignee: User) => GitHubUserMapper.import(assignee)),
+      reviewers: this.pull_request.requested_reviewers.map((reviewer: User) => GitHubUserMapper.import(reviewer)),
+      createdOn: this.pull_request.created_at,
+      updatedOn: this.pull_request.updated_at,
+    }
+  }
+
+  private opened(repository: DocumentData): void {
+
+    const pull_request: GitHubPullRequestModel = this.getModel();
+
+    repository.pullRequests.unshift(pull_request);
+  }
+
+
+  private edited(repository: DocumentData): void {
+    const foundIndex: number = repository.pullRequests.findIndex((elem: GitHubPullRequestModel) => elem.uid === this.pull_request.id);
+    if (foundIndex > -1) {
+      repository.pullRequests[foundIndex] = this.getModel();
+    } else {
+      this.opened(repository);
+    }
+  }
+
+
+  private closed(repository: DocumentData): void {
+    if (!Array.isArray(repository.pullRequests)) {
+      return;
+    }
+    repository.pullRequests = repository.pullRequests.filter((item: GitHubPullRequestModel) => item.uid !== this.pull_request.id);
   }
 
 }
