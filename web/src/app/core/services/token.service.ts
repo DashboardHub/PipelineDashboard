@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { throwError, Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { first, map, switchMap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 

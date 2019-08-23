@@ -28,14 +28,13 @@ export class TokenModel extends Model<IToken> implements IToken {
   public toData(requiredOnly?: boolean): IToken {
     const data: IToken = {
       uid: this.uid,
-      name: this.name
+      name: this.name,
     };
 
     if (!requiredOnly) {
       data.createdOn = this.createdOn;
       data.updatedOn = this.updatedOn;
     }
-
 
     return data;
   }
