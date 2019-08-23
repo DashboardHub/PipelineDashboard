@@ -48,7 +48,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
           this.isEdit = true;
-          const filteredMonitor: MonitorModel = this.monitorService.findMonitorById(this.monitorsList, this.monitorUid);
+          const filteredMonitor: MonitorModel = this.monitorsList.find((monitor: MonitorModel) => monitor.uid === this.monitorUid);
           this.monitorForm.reset(filteredMonitor);
         }
       });

@@ -1,12 +1,14 @@
+
 // Third party modules
 import { firestore } from 'firebase';
 
-// Dashboard hub models
+// DashboardHub models
 import { AccessModel, IAccess } from './access.model';
+import { ModelFactory } from './factories/model.factory';
 import { IModel, Model } from './model.model';
 import { IMonitor, MonitorModel } from './monitor.model';
 import { PingModel } from './ping.model';
-import { ProjectTokenModel } from './project-token.model';
+import { IToken, TokenModel } from './token.model';
 
 /**
  * Interface for project
@@ -22,7 +24,7 @@ export interface IProject extends IModel {
   repositories?: string[];
   monitors?: IMonitor[];
   pings?: PingModel[];
-  tokens?: ProjectTokenModel[];
+  tokens?: IToken[];
   views?: firebase.firestore.FieldValue | number;
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
@@ -43,7 +45,7 @@ export class ProjectModel extends Model<IProject> implements IProject {
   repositories: string[];
   monitors: MonitorModel[];
   pings: PingModel[];
-  tokens: ProjectTokenModel[];
+  tokens: TokenModel[];
   views?: firebase.firestore.FieldValue | number;
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
@@ -62,9 +64,9 @@ export class ProjectModel extends Model<IProject> implements IProject {
     this.logoUrl = project.logoUrl ? project.logoUrl : '';
     this.access = project.access ? new AccessModel(project.access) : new AccessModel();
     this.repositories = project.repositories ? project.repositories : [];
-    this.monitors = project.monitors ? project.monitors.map((monitor: IMonitor) => new MonitorModel(monitor)) : [];
+    this.monitors = project.monitors ? ModelFactory.toModels<IMonitor, MonitorModel>(project.monitors, MonitorModel) : [];
     this.pings = project.pings ? project.pings : [];
-    this.tokens = project.tokens ? project.tokens : [];
+    this.tokens = project.tokens ? ModelFactory.toModels<IToken, TokenModel>(project.tokens, TokenModel) : [];
     this.views = project.views ? project.views : 0;
     this.createdOn = project.createdOn ? project.createdOn : undefined;
     this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
@@ -145,9 +147,9 @@ export class ProjectModel extends Model<IProject> implements IProject {
       logoUrl: this.logoUrl,
       access: this.access.toData(),
       repositories: this.repositories,
-      monitors: this.monitors.map((monitor: MonitorModel) => monitor.toData()),
+      monitors: ModelFactory.fromModels<MonitorModel, IMonitor>(this.monitors),
       pings: this.pings,
-      tokens: this.tokens,
+      tokens: ModelFactory.fromModels<TokenModel, IToken>(this.tokens),
       views: this.views,
       createdOn: this.createdOn,
       updatedOn: this.updatedOn,

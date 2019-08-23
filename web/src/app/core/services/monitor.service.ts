@@ -10,9 +10,8 @@ import * as firebase from 'firebase';
 import { Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 
-// Dashboard hub models and services
+// DashboardHub models and services
 import { IMonitor, IProject, ModelFactory, MonitorModel, ProjectModel } from '../../shared/models/index.model';
-import { ActivityService } from './activity.service';
 import { ProjectService } from './project.service';
 
 @Injectable({
@@ -22,21 +21,9 @@ export class MonitorService {
 
   constructor(
     private afs: AngularFirestore,
-    private activityService: ActivityService,
     private fns: AngularFireFunctions,
     private projectService: ProjectService
   ) {
-  }
-
-  /**
-   * This function will return the monitor by id
-   *
-   * @param monitors monitors list
-   * @param id id of monitor which needs to be find
-   * @returns the monitor
-   */
-  findMonitorById(monitors: MonitorModel[], id: string): MonitorModel {
-    return monitors.find((monitor: MonitorModel) => monitor.uid === id);
   }
 
   /**
