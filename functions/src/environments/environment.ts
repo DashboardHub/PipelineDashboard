@@ -12,6 +12,8 @@ export const enviroment: Config = {
       'issue_comment',
       'create',
       'watch',
+      'status',
+      'member',
     ],
   },
 

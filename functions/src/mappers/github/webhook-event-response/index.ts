@@ -7,3 +7,5 @@ export * from './watch';
 export * from './create';
 export * from './push';
 export * from './issue-comment';
+export * from './member';
+export * from './status';

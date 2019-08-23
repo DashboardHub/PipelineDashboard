@@ -1,16 +1,20 @@
 // Third party modules
 import * as CORS from 'cors';
 import { https, HttpsFunction, Response } from 'firebase-functions';
+import { GitHubClient } from '../client/github';
 import { Logger } from '../client/logger';
+import { GitHubContributorInput, GitHubContributorMapper } from '../mappers/github/index.mapper';
 import {
   CreateEventModel,
   IssuesEventModel,
   IssueCommentEventModel,
+  MemberEventModel,
   MilestoneEventModel,
   PullRequestEventModel,
   PushEventModel,
   ReleaseEventModel,
   RepositoryEventModel,
+  StatusEventModel,
   WatchEventModel,
 } from '../mappers/github/webhook-event-response';
 import { addHubEventToCollection, HubEventActions } from '../mappers/github/webhook-event-response/shared';
@@ -72,6 +76,14 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
     } else if (RepositoryEventModel.isCurrentModel(inputData)) {
 
       result = repositoryEvent(new RepositoryEventModel(inputData));
+
+    } else if (MemberEventModel.isCurrentModel(inputData)) {
+
+      result = memberEvent(new MemberEventModel(inputData));
+
+    } else if (StatusEventModel.isCurrentModel(inputData)) {
+
+      result = statusEvent(new StatusEventModel(inputData));
 
     } else {
       Logger.error('Not found parser for event');
@@ -144,7 +156,7 @@ async function releaseEvent(data: ReleaseEventModel): Promise<void> {
 
 async function milestoneEvent(data: MilestoneEventModel): Promise<void> {
   Logger.info('milestoneEvent');
-  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name); 
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
 
   data.updateData(repository);
 
@@ -158,7 +170,12 @@ async function watchEvent(data: WatchEventModel): Promise<void> {
 
 async function pushEvent(data: PushEventModel): Promise<void> {
   Logger.info('pushEvent');
-  await simpleHubEvent(data);
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
+
+  addHubEventToCollection(repository, data);
+  await updateContributors(repository);
+
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function issueCommentEvent(data: IssueCommentEventModel): Promise<void> {
@@ -169,4 +186,27 @@ async function issueCommentEvent(data: IssueCommentEventModel): Promise<void> {
 async function createEvent(data: CreateEventModel): Promise<void> {
   Logger.info('createEvent');
   await simpleHubEvent(data);
+}
+
+async function memberEvent(data: MemberEventModel): Promise<void> {
+  Logger.info('memberEvent');
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
+
+  await updateContributors(repository);
+
+  await RepositoryModel.saveRepository(repository);
+}
+
+async function statusEvent(data: StatusEventModel): Promise<void> {
+  Logger.info('statusEvent');
+  const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(data.repository.full_name);
+
+  await updateContributors(repository);
+
+  await RepositoryModel.saveRepository(repository);
+}
+
+async function updateContributors(repository: DocumentData): Promise<void> {
+  const response: GitHubContributorInput[] = await GitHubClient<GitHubContributorInput[]>(`/repos/${repository.fullName}/stats/contributors`);
+  repository.contributors = Array.isArray(response) ? response.map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)) : [];
 }

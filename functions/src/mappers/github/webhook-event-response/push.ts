@@ -1,8 +1,8 @@
-import { GitHubEventModel, GitHubEventType } from "../event.mapper";
-import { GitHubPayloadInput, GitHubPayloadMapper } from "../payload.mapper";
-import { GitHubRepositoryMapper } from "../repository.mapper";
-import { GitHubUserMapper } from "../user.mapper";
-import { isExistProperties, HubEventActions, Repository, User } from "./shared";
+import { GitHubEventModel, GitHubEventType } from '../event.mapper';
+import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
+import { GitHubRepositoryMapper } from '../repository.mapper';
+import { GitHubUserMapper } from '../user.mapper';
+import { isExistProperties, HubEventActions, Repository, User } from './shared';
 
 interface Pusher {
   name: string;
