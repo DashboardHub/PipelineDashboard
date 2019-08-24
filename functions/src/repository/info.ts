@@ -31,7 +31,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     GitHubIssueInput[],
     GitHubContributorInput[],
     GitHubMilestoneInput[],
-    GitHubRepositoryWebhookModel,
+    GitHubRepositoryWebhookModel?,
   ];
   let mappedData: GitHubRepositoryModel;
 
@@ -44,22 +44,26 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       GitHubClient<GitHubIssueInput[]>(`/repos/${fullName}/issues`, token),
       GitHubClient<GitHubContributorInput[]>(`/repos/${fullName}/stats/contributors`, token),
       GitHubClient<GitHubMilestoneInput[]>(`/repos/${fullName}/milestones`, token),
-      getWebhook(fullName, token),
     ]);
     mappedData = {
       ...GitHubRepositoryMapper.import(data[0], 'all'),
-      pullRequests: data[1].map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)),
-      events: data[2].map((event: GitHubEventInput) => GitHubEventMapper.import(event)),
-      releases: data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)),
-      issues: data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)),
-      contributors: data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)),
-      milestones: data[6].map((milestone: GitHubMilestoneInput) => GitHubMilestoneMapper.import(milestone)),
+      pullRequests: data[1] ? data[1].map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)) : [],
+      events: data[2] ? data[2].map((event: GitHubEventInput) => GitHubEventMapper.import(event)) : [],
+      releases: data[3] ? data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)) : [],
+      issues: Array.isArray(data[4]) ? data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)) : [],
+      contributors: Array.isArray(data[5]) ? data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)) : [],
+      milestones: Array.isArray(data[6]) ? data[6].map((milestone: GitHubMilestoneInput) => GitHubMilestoneMapper.import(milestone)) : [],
       updatedAt: firestore.Timestamp.fromDate(new Date()),
-      webhook: data[7],
     };
   } catch (error) {
-    Logger.error(error);
+    Logger.error(error, [`Repository Path: ${fullName}`]);
     throw new Error(error);
+  }
+
+  try {
+    mappedData.webhook = await getWebhook(fullName, token);
+  } catch (error) {
+    Logger.error(error, ['Webhook failed', `Repository Path: ${fullName}`]);
   }
 
   Logger.info({
@@ -70,8 +74,8 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       releases: mappedData && mappedData.releases.length || 0,
       issues: mappedData && mappedData.issues.length || 0,
       milestones: mappedData && mappedData.milestones.length || 0,
-      updatedAt: mappedData && mappedData.updatedAt,
       webhook: mappedData && mappedData.webhook,
+      updatedAt: mappedData && mappedData.updatedAt,
     },
   });
 

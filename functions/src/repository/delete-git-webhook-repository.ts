@@ -8,20 +8,23 @@ export interface DeleteGitWebhookRepositoryInput {
 }
 
 export const onDeleteGitWebhookRepository: any = async (token: string, repositoryUid: string) => {
-  try {
-    const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
-    const repository: DocumentData = (await repositorySnapshot.get()).data();
+  const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
+  const repository: DocumentData = (await repositorySnapshot.get()).data();
 
+  try {
     if (repository.projects && repository.projects.length === 1 && repository.webhook) {
       await deleteWebhook(repository, token);
       repository.webhook = null;
       await repositorySnapshot.update(repository);
     }
 
+    Logger.info(`Webhook removed for ${repository.fullName}`);
+
     return repository;
   } catch (error) {
+    Logger.info(`No Webhook for ${repository.fullName}`);
     Logger.error(error);
-    throw new Error(error);
+    return repository;
   }
 };
 
