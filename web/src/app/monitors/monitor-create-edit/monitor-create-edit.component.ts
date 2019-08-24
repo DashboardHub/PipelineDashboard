@@ -5,7 +5,6 @@ import { v4 as uuid } from 'uuid';
 // Third party modules
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub models and services
 import { MatSnackBar } from '@angular/material';
@@ -23,9 +22,9 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   private monitorsList: MonitorModel[] = [];
   private projectSubscription: Subscription;
   private saveMonitorSubscription: Subscription;
-  private projectUid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
+  public projectUid: string;
   public statusCodeList: Number[] = [200, 201, 204, 400, 401, 404, 500];
 
   constructor(
@@ -49,28 +48,10 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
           this.isEdit = true;
-          const filteredMonitor: MonitorModel = this.monitorService.findMonitorById(this.monitorsList, this.monitorUid);
+          const filteredMonitor: MonitorModel = this.monitorsList.find((monitor: MonitorModel) => monitor.uid === this.monitorUid);
           this.monitorForm.reset(filteredMonitor);
         }
       });
-  }
-
-  /**
-   * Lifecycle destroy method
-   */
-  ngOnDestroy(): void {
-    this.projectSubscription.unsubscribe();
-    if (this.saveMonitorSubscription) {
-      this.saveMonitorSubscription.unsubscribe();
-    }
-  }
-
-  /**
-   * This function is used to add the monitor in the array
-   */
-  addMonitor(): void {
-    this.monitorsList.push(this.monitorForm.value);
-    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 
   /**
@@ -94,36 +75,22 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    * @param monitors monitors list to be updated
    *
    */
-  saveMonitor(uid: string, monitors: MonitorModel[]): void {
-    if (this.monitorUid) {
-      this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
-        .pipe(
-          take(1),
-          switchMap(() => this.monitorService.pingMonitor(this.projectUid, this.monitorUid, 'automatic')))
-        .subscribe(() => this.router.navigate([`/projects/${uid}/monitors`]),
-          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-        );
-    } else {
-      this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, monitors)
-        .subscribe(() => this.router.navigate([`/projects/${uid}/monitors`]),
-          (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-        );
-    }
+  save(): void {
+    this.saveMonitorSubscription = this.monitorService
+      .save(this.projectUid, new MonitorModel({ ...this.monitorForm.value }))
+      .subscribe(
+        () => this.router.navigate([`/projects/${this.projectUid}/monitors`]),
+        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+      );
   }
 
   /**
-   * This function is used to update the monitor
+   * Lifecycle destroy method
    */
-  updateMonitor(): void {
-    const monitorsList: MonitorModel[] = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
-    const currentMonitor: MonitorModel = this.monitorsList.find((monitor: MonitorModel) => this.monitorUid === monitor.uid);
-    currentMonitor.name = this.monitorForm.get('name').value;
-    currentMonitor.method = this.monitorForm.get('method').value;
-    currentMonitor.path = this.monitorForm.get('path').value;
-    currentMonitor.expectedCode = this.monitorForm.get('expectedCode').value;
-    currentMonitor.expectedText = this.monitorForm.get('expectedText').value;
-    monitorsList.push(currentMonitor);
-    this.monitorsList = monitorsList;
-    this.saveMonitor(this.projectUid, this.monitorsList);
+  ngOnDestroy(): void {
+    this.projectSubscription.unsubscribe();
+    if (this.saveMonitorSubscription) {
+      this.saveMonitorSubscription.unsubscribe();
+    }
   }
 }

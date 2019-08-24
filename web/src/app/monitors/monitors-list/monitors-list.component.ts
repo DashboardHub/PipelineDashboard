@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 
 // Rxjs operators
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 // Dashboard hub application model and services
-import { MatSnackBar } from '@angular/material';
 import { MonitorService, ProjectService } from '../../core/services/index.service';
+import { DialogConfirmationComponent } from '../../shared/dialog/confirmation/dialog-confirmation.component';
 import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
@@ -17,6 +18,7 @@ import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 })
 export class MonitorsListComponent implements OnInit, OnDestroy {
 
+  private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   private monitorSubscription: Subscription;
   private saveMonitorSubscription: Subscription;
   public monitors: MonitorModel[] = [];
@@ -25,11 +27,11 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public manualPing: boolean = false;
 
   constructor(
+    private dialog: MatDialog,
     private monitorService: MonitorService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private router: Router
+    private snackBar: MatSnackBar
   ) { }
 
   /**
@@ -48,7 +50,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
 
     this.monitorSubscription = this.projectService
       .findOneById(this.projectUid)
-      .subscribe((projects: ProjectModel) => this.monitors = projects.monitors ? projects.monitors : []);
+      .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
   }
 
   /**
@@ -56,17 +58,26 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
    *
    * @param uid the uid of monitor which needs to be deleted
    */
-  deleteMonitor(monitorUid: string): void {
-    this.monitors = this.monitors.filter((monitor: MonitorModel) => monitor.uid !== monitorUid);
-    this.saveMonitorSubscription = this.monitorService.saveMonitors(this.projectUid, this.monitors)
-      .subscribe(
-        () => this.router.navigate([`/projects/${this.projectUid}/monitors`]),
-        (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
-      );
-
-    // When delete a monitor , deleting all its pings
-    this.monitorService
-      .deletePingsByMonitor(this.projectUid, monitorUid);
+  delete(monitorUid: string): void {
+    let dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      width: '500px',
+      data: {
+        title: 'Delete Monitor',
+        content: 'Are you sure you want to delete?',
+      },
+    };
+    this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
+    this.dialogRef.afterClosed()
+      .subscribe((result: boolean) => {
+        if (result === true) {
+          this.saveMonitorSubscription = this.monitorService.delete(this.projectUid, monitorUid)
+            .subscribe(
+              () => this.monitorService.deletePingsByMonitor(this.projectUid, monitorUid),
+              (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
+            );
+        }
+      });
   }
 
   // This function will ping the monitor
