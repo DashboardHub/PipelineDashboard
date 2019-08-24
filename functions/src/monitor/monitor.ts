@@ -5,7 +5,7 @@ import { FirebaseAdmin } from '../client/firebase-admin';
 
 // DashboardHub
 import { Ping, PingResponse } from '../client/ping';
-import { MonitorModel, PingModel, ProjectModel } from './../models/index.model';
+import { MonitorModel, PingModel, PingType, ProjectModel } from './../models/index.model';
 
 type Document = FirebaseFirestore.DocumentSnapshot
 type QuerySnapshot = firestore.QuerySnapshot;
@@ -17,7 +17,7 @@ export interface MonitorInfoInput {
   type: string;
 }
 
-export const ping: any = async (projectUid: string, monitorUid: string, type: 'scheduler' | 'manual' = 'scheduler'): Promise<WriteResult | boolean> => {
+export const ping: any = async (projectUid: string, monitorUid: string, type: PingType = 'scheduler'): Promise<WriteResult | boolean> => {
   const document: Document = await FirebaseAdmin.firestore()
     .collection('projects')
     .doc(projectUid)
