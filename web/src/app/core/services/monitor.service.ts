@@ -8,7 +8,7 @@ import * as firebase from 'firebase';
 
 // Rxjs operators
 import { Observable } from 'rxjs';
-import { map, switchMap, take } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 
 // DashboardHub models and services
 import { IMonitor, IProject, ModelFactory, MonitorModel, ProjectModel } from '../../shared/models/index.model';
@@ -37,13 +37,13 @@ export class MonitorService {
     return this.projectService.findOneById(projectUid)
       .pipe(
         take(1),
+        tap(() => this.pingMonitor(projectUid, monitor.uid, 'automatic')),
         map((project: ProjectModel) => {
           const monitors: MonitorModel[] = project.monitors;
 
           if (monitors.find((monitorModel: MonitorModel) => monitorModel.uid === monitor.uid)) {
             return project.monitors.map((monitorModel: MonitorModel) => {
               if (monitorModel.uid === monitor.uid) {
-                this.pingMonitor(projectUid, monitor.uid, 'automatic');
                 return new MonitorModel({ ...monitorModel.toData(), ...monitor.toData(true) });
               }
               return monitorModel;
