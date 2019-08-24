@@ -7,3 +7,5 @@ export declare type DocumentData = admin.firestore.DocumentData;
 export declare type WriteResult = admin.firestore.WriteResult;
 export declare type QuerySnapshot = admin.firestore.QuerySnapshot;
 export declare type QueryDocumentSnapshot = admin.firestore.QueryDocumentSnapshot;
+export declare type DocumentReference = admin.firestore.DocumentReference;
+

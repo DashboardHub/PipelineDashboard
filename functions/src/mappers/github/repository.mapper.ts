@@ -8,6 +8,7 @@ import { GitHubIssueModel } from './issue.mapper';
 import { GitHubMilestoneModel } from './milestone.mapper';
 import { GitHubPullRequestModel } from './pullRequest.mapper';
 import { GitHubReleaseModel } from './release.mapper';
+import { GitHubRepositoryWebhookModel } from './webhook.mapper';
 
 export interface GitHubRepositoryInput {
   id: string;
@@ -35,6 +36,7 @@ export interface GitHubRepositoryModel {
   contributors?: GitHubContributorModel[];
   milestones?: GitHubMilestoneModel[];
   updatedAt: firestore.Timestamp;
+  webhook?: GitHubRepositoryWebhookModel;
 }
 
 export class GitHubRepositoryMapper {

@@ -9,6 +9,17 @@
   </mat-card-header>
   <mat-divider></mat-divider>
   <mat-card-content>
+
+    <div *ngIf="repository.webhook == null || repository.webhook.id == null" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" class="alert-row">
+      <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="alert alert-danger">
+        <mat-icon class="icon">warning</mat-icon>
+        <span class="message">Webhook not found on this repository. This is required for realtime data.</span>
+        <button class="btn-action" mat-stroked-button (click)="createWebhook()">
+          Create webhook!
+        </button>
+      </div>
+    </div>
+
     <div fxLayout="row" fxLayoutGap="2%" class="dashboard-cards-row">
       <div fxFlex="24%">
         <mat-card>
@@ -116,7 +127,7 @@
                 <mat-icon class="person-class">person</mat-icon>
               </div>
               <div fxFlex="85%">
-                <p class="bottom-line" mat-line *ngIf="repository.pullRequests && repository.pullRequests.length > 0">  {{repository.pullRequests[0].title}} </p>
+                <p class="bottom-line" mat-line *ngIf="repository.pullRequests && repository.pullRequests.length > 0"> {{repository.pullRequests[0].title}} </p>
                 <p class="bottom-line-none" *ngIf="repository.pullRequests && !repository.pullRequests.length" mat-line>Title: N/A</p>
               </div>
             </div>

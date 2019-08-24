@@ -13,7 +13,7 @@ export * from './monitor.model';
 export * from './milestone.model';
 export * from './ping.model';
 export * from './project.model';
-export * from './project-token.model';
+export * from './token.model';
 export * from './pullRequest.model';
 export * from './release.model';
 export * from './user.model';

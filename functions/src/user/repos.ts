@@ -14,7 +14,7 @@ export interface ReposInput {
 export const getUserRepos: any = async (token: string, uid: string) => {
   let repositories: GitHubRepositoryInput[] = [];
   try {
-    repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos', token);
+    repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos?visibility=public&affiliation=owner', token);
   } catch (error) {
     Logger.error(error);
     throw new Error(error);

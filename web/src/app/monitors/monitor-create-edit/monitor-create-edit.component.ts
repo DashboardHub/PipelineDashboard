@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 // Dashboard hub models and services
 import { MatSnackBar } from '@angular/material';
 import { MonitorService } from '../../core/services/index.service';
-import { IMonitor, ModelFactory, MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitor-create-edit',
@@ -22,9 +22,9 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   private monitorsList: MonitorModel[] = [];
   private projectSubscription: Subscription;
   private saveMonitorSubscription: Subscription;
-  private projectUid: string;
   public isEdit: Boolean = false;
   public monitorForm: FormGroup;
+  public projectUid: string;
   public statusCodeList: Number[] = [200, 201, 204, 400, 401, 404, 500];
 
   constructor(
@@ -48,18 +48,10 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
           this.isEdit = true;
-          const filteredMonitor: MonitorModel = this.monitorService.findMonitorById(this.monitorsList, this.monitorUid);
+          const filteredMonitor: MonitorModel = this.monitorsList.find((monitor: MonitorModel) => monitor.uid === this.monitorUid);
           this.monitorForm.reset(filteredMonitor);
         }
       });
-  }
-
-  /**
-   * This function is used to add the monitor in the array
-   */
-  addMonitor(): void {
-    this.monitorsList.push(this.monitorForm.value);
-    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 
   /**
@@ -83,21 +75,13 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
    * @param monitors monitors list to be updated
    *
    */
-  saveMonitor(uid: string, monitors: IMonitor[]): void {
-    this.saveMonitorSubscription = this.monitorService.saveMonitors(uid, ModelFactory.toModels<IMonitor, MonitorModel>(monitors, MonitorModel))
+  save(): void {
+    this.saveMonitorSubscription = this.monitorService
+      .save(this.projectUid, new MonitorModel({ ...this.monitorForm.value }))
       .subscribe(
-        () => this.router.navigate([`/projects/${uid}/monitors`]),
+        () => this.router.navigate([`/projects/${this.projectUid}/monitors`]),
         (error: any): any => this.snackBar.open(error.message, undefined, { duration: 5000 })
       );
-  }
-
-  /**
-   * This function is used to update the monitor
-   */
-  updateMonitor(): void {
-    this.monitorsList = this.monitorsList.filter((monitor: MonitorModel) => monitor.uid !== this.monitorUid);
-    this.monitorsList.push(this.monitorForm.value);
-    this.saveMonitor(this.projectUid, this.monitorsList);
   }
 
   /**

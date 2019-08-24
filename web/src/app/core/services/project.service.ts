@@ -100,35 +100,43 @@ export class ProjectService {
 
   // This function update the project details
   public save(data: IProject): Observable<void> {
-    const projectModel: ProjectModel = new ProjectModel(
-      {
-        uid: uuid(),
-        ...data,
-        access: { admin: [this.authService.profile.uid] },
-        updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-      }
-    );
-
-    return this.activityService
-      .start()
+    return this.findOneById(data.uid)
       .pipe(
-        switchMap(() => this.afs
+        take(1),
+        map((project: ProjectModel) => ({
+          ...project.toData(),
+          ...data,
+          updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+        })),
+        switchMap((project: IProject) => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(projectModel.uid)
-          .set(projectModel.toData(), { merge: true })),
-        take(1)
+          .doc<IProject>(project.uid)
+          .set(project, { merge: true }))
       );
   }
 
   // This function add the repository in any project
-  public saveRepositories(uid: string, repositories: string[]): Observable<void> {
+  // @TODO: move to repository service
+  public saveRepositories(project: ProjectModel, repositories: string[]): Observable<void> {
+    // remove webhook from unselected repo
+    if (project.repositories && project.repositories.length > 0) {
+      const remove: string[] = project.repositories
+        .filter((uid: string) => repositories.findIndex((name: string) => uid === RepositoryModel.getUid(name)) === -1);
+      const removeWebhooks: Observable<RepositoryModel>[] = [];
+      remove.forEach((element: string) => {
+        const tmp: Observable<RepositoryModel> = this.repositoryService.deleteGitWebhook(element).pipe(take(1));
+        removeWebhooks.push(tmp);
+      });
+      forkJoin(removeWebhooks).subscribe();
+    }
+
     if (!repositories.length) {
       return this.activityService
         .start()
         .pipe(
           switchMap(() => this.afs
             .collection<IProject>('projects')
-            .doc<IProject>(uid)
+            .doc<IProject>(project.uid)
             .set(
               {
                 repositories: [],
@@ -145,7 +153,7 @@ export class ProjectService {
         mergeMap(() => forkJoin(...repositories.map((repository: string) => this.repositoryService.loadRepository(repository)))),
         switchMap(() => this.afs
           .collection<IProject>('projects')
-          .doc<IProject>(uid)
+          .doc<IProject>(project.uid)
           .set(
             {
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
@@ -159,7 +167,6 @@ export class ProjectService {
   /**
    * Function to update the project views
    * @param uid uid of project
-   * @param count count of project views
    */
   public incrementView(project: ProjectModel): Observable<ProjectModel> {
     return this.activityService

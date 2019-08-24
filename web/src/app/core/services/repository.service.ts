@@ -25,8 +25,8 @@ export class RepositoryService {
 
   // Forces refresh of users repositories
   public refresh(): Observable<RepositoriesModel> {
-      const callable: any = this.fns.httpsCallable('findAllUserRepositories');
-      return callable({ token: this.authService.profile.oauth.githubToken });
+    const callable: any = this.fns.httpsCallable('findAllUserRepositories');
+    return callable({ token: this.authService.profile.oauth.githubToken });
   }
 
   // This function returns the repository via uid
@@ -42,5 +42,15 @@ export class RepositoryService {
   public loadRepository(fullName: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
     return callable({ fullName, token: this.authService.profile.oauth.githubToken });
+  }
+
+  public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
+    const callable: any = this.fns.httpsCallable('createGitWebhookRepository');
+    return callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken });
+  }
+
+  public deleteGitWebhook(repositoryUid: string): Observable<RepositoryModel> {
+    const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
+    return callable({ repositoryUid, token: this.authService.profile.oauth.githubToken });
   }
 }

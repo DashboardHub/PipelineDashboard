@@ -36,6 +36,7 @@ const routes: Routes = [
   {
     path: ':projectUid/monitors',
     loadChildren: '../monitors/monitors.module#MonitorsModule',
+    canActivate: [AuthGuard],
   },
   {
     path: ':projectUid/tokens',

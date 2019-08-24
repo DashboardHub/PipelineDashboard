@@ -15,6 +15,9 @@ export class AccessModel extends Model<IAccess> implements IAccess {
     this.readonly = access && access.readonly ? access.readonly : [];
   }
 
+  /**
+   * The models to data only
+   */
   public toData(): IAccess {
     return {
       admin: this.admin,
