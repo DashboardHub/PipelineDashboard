@@ -26,6 +26,7 @@ export interface IProject extends IModel {
   pings?: PingModel[];
   tokens?: IToken[];
   views?: firebase.firestore.FieldValue | number;
+  repoCount?: number;
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
 }
@@ -47,6 +48,7 @@ export class ProjectModel extends Model<IProject> implements IProject {
   pings: PingModel[];
   tokens: TokenModel[];
   views?: firebase.firestore.FieldValue | number;
+  repoCount?: number;
   createdOn?: firestore.Timestamp;
   updatedOn?: firestore.Timestamp;
 
@@ -68,6 +70,7 @@ export class ProjectModel extends Model<IProject> implements IProject {
     this.pings = project.pings ? project.pings : [];
     this.tokens = project.tokens ? ModelFactory.toModels<IToken, TokenModel>(project.tokens, TokenModel) : [];
     this.views = project.views ? project.views : 0;
+    this.repoCount = project.repoCount ? project.repoCount : 0;
     this.createdOn = project.createdOn ? project.createdOn : undefined;
     this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
   }
@@ -151,6 +154,7 @@ export class ProjectModel extends Model<IProject> implements IProject {
       pings: this.pings,
       tokens: ModelFactory.fromModels<TokenModel, IToken>(this.tokens),
       views: this.views,
+      repoCount: this.repoCount,
       createdOn: this.createdOn,
       updatedOn: this.updatedOn,
     };

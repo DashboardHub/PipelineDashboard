@@ -1,16 +1,26 @@
 <div class="mat-content">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Active Users</mat-card-title>
-      <mat-card-subtitle>Most active users</mat-card-subtitle>
+      <mat-card-title>Active Users and popular projects</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-      <mat-list fxFlex dense>
+      <mat-list fxFlex="50%" dense>
+        <h3 mat-subheader>Most Active Users</h3>
         <mat-list-item *ngFor="let user of users">
           <img matListAvatar [src]="user.avatarUrl" [alt]="user.username" />
           <h4 mat-line><a href="https://github.com/{{user.username}}">{{ user.name ? user.name : user.username }}</a></h4>
           <p mat-line>{{ user.github.activity.latest.type }} on {{ user.github.activity.latest.repository.fullName }} at {{ user.lastUpdated.toDate() | timeAgo }}</p>
+        </mat-list-item>
+      </mat-list>
+      <mat-list fxFlex="50%" dense>
+        <h3 mat-subheader>Most Popular Projects</h3>
+        <mat-list-item *ngFor="let project of projects">
+          <img [src]="project.logoUrl" *ngIf="project.logoUrl" />
+          <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
+          <mat-icon mat-list-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
+          <h4 mat-line>{{ project.title }} | Views: {{project.views}} | Last Updated: {{ project.updatedOn.toDate() | timeAgo }}</h4>
+          <p mat-line>{{ project.description }}</p>
         </mat-list-item>
       </mat-list>
     </mat-card-content>
