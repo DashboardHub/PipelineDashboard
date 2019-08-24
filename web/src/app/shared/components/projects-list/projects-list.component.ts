@@ -1,8 +1,8 @@
 // Core components
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 // Dashboard hub model
-import { IProject, ProjectModel } from '../../models/index.model';
+import { ProjectModel } from '../../models/index.model';
 
 /**
  * Project list component
@@ -15,13 +15,13 @@ import { IProject, ProjectModel } from '../../models/index.model';
 export class ProjectsListComponent implements OnChanges {
 
   @Input()
-  public projects: IProject[] = [];
+  public projects: ProjectModel[] = [];
   public pingCount: [];
 
   /**
    * Life cycle on change event to detect change in input property
    */
-  ngOnChanges(): void {
-    this.projects = this.projects.map((project: IProject) => new ProjectModel(project));
+  ngOnChanges(changes: SimpleChanges): void {
+    this.projects = changes.projects.currentValue;
   }
 }
