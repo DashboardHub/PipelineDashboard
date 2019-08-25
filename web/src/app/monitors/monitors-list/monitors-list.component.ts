@@ -84,10 +84,8 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public pingMonitor(monitorUid: string): void {
     this.manualPing = true;
     this.monitorService
-      .pingMonitor(this.projectUid, monitorUid);
-
-    // disable the ping button for 1 second
-    setTimeout(() => this.manualPing = false, 10000);
+      .pingMonitor(this.projectUid, monitorUid, 'manual')
+      .subscribe(() => setTimeout(() => this.manualPing = false, 10000)); // disable the ping button for 1 second
   }
 
   /**

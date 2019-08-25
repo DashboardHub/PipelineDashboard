@@ -1,5 +1,6 @@
 import { firestore } from "firebase-admin";
 
+export type PingType = 'scheduler' | 'manual'| 'automatic';
 /**
  * Pings model for functions
  */
@@ -14,6 +15,6 @@ export interface PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
-  type: 'scheduler' | 'manual';
+  type: PingType;
   createdOn: firestore.Timestamp;
 }
