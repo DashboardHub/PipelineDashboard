@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { IProject, PingModel } from '../../shared/models/index.model';
+import { IProject, PingModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 @Injectable({

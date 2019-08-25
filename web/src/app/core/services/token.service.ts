@@ -10,8 +10,8 @@ import { first, map, switchMap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { IProject, IToken, ProjectModel, TokenModel } from '../../shared/models/index.model';
-import { ModelFactory } from './../../shared/models/factories/model.factory';
+import { ModelFactory } from '@shared/models/factories/model.factory';
+import { IProject, IToken, ProjectModel, TokenModel } from '@shared/models/index.model';
 import { ProjectService } from './project.service';
 
 @Injectable({

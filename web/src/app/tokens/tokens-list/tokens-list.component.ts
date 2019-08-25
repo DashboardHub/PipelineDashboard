@@ -7,9 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { map, take } from 'rxjs/operators';
 
 // Dashboard model and services
-import { TokenService } from '../../core/services/index.service';
-import { DialogConfirmationComponent } from '../../shared/dialog/confirmation/dialog-confirmation.component';
-import { TokenModel } from '../../shared/models/index.model';
+import { TokenService } from '@core/services/index.service';
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
+import { TokenModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens-list',

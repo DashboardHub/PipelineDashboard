@@ -16,7 +16,7 @@ import { concatMap, filter, first, switchMap, tap } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
-import { LoginAuditModel, ProfileModel } from '../../shared/models/index.model';
+import { LoginAuditModel, ProfileModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 @Injectable({

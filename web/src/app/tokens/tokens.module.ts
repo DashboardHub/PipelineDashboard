@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // Dashboard hub routing modules
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { TokensRoutingModule } from './tokens-routing.module';
 
 // Dashboard hub components

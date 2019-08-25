@@ -4,7 +4,7 @@ import { of, Observable } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { IProject, ProjectModel } from '../../shared/models/index.model';
+import { IProject, ProjectModel } from '@shared/models/index.model';
 import { ProjectService } from '../services/index.service';
 
 @Injectable({

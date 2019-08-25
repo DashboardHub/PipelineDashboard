@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub models and services
 import { MatSnackBar } from '@angular/material';
-import { MonitorService } from '../../core/services/index.service';
-import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { MonitorService } from '@core/services/index.service';
+import { MonitorModel, ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitor-create-edit',

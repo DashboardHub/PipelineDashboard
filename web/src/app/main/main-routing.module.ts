@@ -11,7 +11,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MainComponent } from './main.component';
 
 // Dashboard hub authentication guards
-import { AuthGuard } from '../core/guards/authentication.guard';
+import { AuthGuard } from '@core/guards/authentication.guard';
 
 const routes: Routes = [
   {
