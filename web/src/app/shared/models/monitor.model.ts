@@ -1,10 +1,12 @@
 import { IModel, Model } from './model.model';
 import { PingModel } from './ping.model';
 
+export type MonitorMethod = 'GET' | 'POST';
+
 export interface IMonitor extends IModel {
   uid: string;
   name: string;
-  method: 'GET' | 'POST';
+  method: MonitorMethod;
   path: string;
   expectedCode: number;
   expectedText?: string;
@@ -16,7 +18,7 @@ export interface IMonitor extends IModel {
 export class MonitorModel extends Model<IMonitor> implements IMonitor {
   uid: string;
   name: string;
-  method: 'GET' | 'POST';
+  method: MonitorMethod;
   path: string;
   expectedCode: number;
   expectedText?: string;
