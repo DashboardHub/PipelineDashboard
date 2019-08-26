@@ -6,6 +6,7 @@
           <div class="repository__container__info">
             <div class="heading repository__header__icon">
               <mat-icon svgIcon="repository_folder"></mat-icon>
+
             </div>
             <div class="repository__header">
               <div class="repository__header__panel__name">
@@ -23,6 +24,7 @@
               <mat-icon *ngIf="!expansion.expanded">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expansion.expanded">keyboard_arrow_up</mat-icon>
             </div>
+
             <div class="repository__header__contributors__container">
               <div *ngFor="let contributor of repository.contributors | slice:0:numberOfDisplayedUsers" fxLayoutGap="2px">
                 <img class="repository__header__contributors__avatar" matTooltipClass="repository-tooltip" matTooltip="{{getMoreInformation(contributor)}}" [alt]="contributor.owner.username" [src]="contributor.owner.avatarUrl" />
@@ -41,6 +43,15 @@
       </div>
     </mat-expansion-panel-header>
     <div class="latest-body">
+      <div *ngIf="repository.webhook == null || repository.webhook.id == null" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" class="alert-row">
+        <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="alert alert-danger">
+          <mat-icon class="icon">warning</mat-icon>
+          <span class="message">Webhook not found on this repository. This is required for realtime data.</span>
+          <button class="btn-action" mat-stroked-button (click)="createWebhook()">
+            Create webhook!
+          </button>
+        </div>
+      </div>
       <mat-divider></mat-divider>
       <ng-container *ngTemplateOutlet="latestInformation"></ng-container>
     </div>

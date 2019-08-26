@@ -6,7 +6,7 @@ import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { IProject, ProjectModel, RepositoryModel } from '../../shared/models/index.model';
+import { IProject, ProjectModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 import { RepositoryService } from './repository.service';
@@ -25,25 +25,22 @@ export class ProjectService {
   }
 
   // This function is for creating the project for logged in user
-  public create(data: IProject): Observable<IProject> {
-    if (data.url) {
-      // @TODO: move to model
-      data.url = this.stripeSlash(data.url);
-    }
-    let project: IProject = {
-      uid: uuid(),
-      access: { admin: [this.authService.profile.uid] },
-      ...data,
-      repositories: [],
-      createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
-      updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
-    };
+  public create(data: IProject): Observable<ProjectModel> {
+    const project: ProjectModel = new ProjectModel(
+      {
+        uid: uuid(),
+        ...data,
+        access: { admin: [this.authService.profile.uid] },
+        createdOn: firebase.firestore.Timestamp.fromDate(new Date()),
+        updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+      }
+    );
 
     return this.activityService
       .start()
       .pipe(
         tap(() => this.repositoryService.refresh()),
-        switchMap(() => this.afs.collection<IProject>('projects').doc(project.uid).set(project)),
+        switchMap(() => this.afs.collection<IProject>('projects').doc(project.uid).set(project.toData())),
         map(() => project),
         take(1)
       );
@@ -60,7 +57,7 @@ export class ProjectService {
   }
 
   // This function returns the public projects list
-  public findPublicProjects(): Observable<IProject[]> {
+  public findPublicProjects(): Observable<ProjectModel[]> {
     return this.activityService
       .start()
       .pipe(
@@ -68,14 +65,15 @@ export class ProjectService {
           .collection<IProject>(
             'projects',
             (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-              .orderBy('updatedOn', 'desc')
+              .orderBy('updatedOn', 'desc').limit(10)
           )
-          .valueChanges())
+          .valueChanges()),
+        map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
       );
   }
 
   // This function returns the private projects list
-  public findMyProjects(): Observable<IProject[]> {
+  public findMyProjects(): Observable<ProjectModel[]> {
     return this.activityService
       .start()
       .pipe(
@@ -85,47 +83,40 @@ export class ProjectService {
             (ref: firebase.firestore.Query) => ref.where('access.admin', 'array-contains', this.authService.profile.uid)
               .orderBy('updatedOn', 'desc')
           )
-          .valueChanges())
+          .valueChanges()),
+        map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
       );
   }
 
   // This function returns the project details via id
-  public findOneById(uid: string): Observable<IProject> {
+  public findOneById(uid: string): Observable<ProjectModel> {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.collection<IProject>('projects').doc<IProject>(uid).valueChanges())
+        switchMap(() => this.afs.collection<IProject>('projects').doc<IProject>(uid).valueChanges()),
+        map((project: IProject) => new ProjectModel(project))
       );
   }
 
-  // check if has project access
-  hasAccess(project: IProject): boolean {
-    return project.access.readonly && project.access.readonly.includes(this.authService.profile.uid);
-  }
-
-  // check if owner of the project
-  isAdmin(project: IProject): boolean {
-    return project.access.admin.includes(this.authService.profile.uid);
-  }
-
   // This function update the project details
-  public save(project: IProject): Observable<void> {
-    if (project.url) {
-      // @TODO: move to project model
-      project.url = this.stripeSlash(project.url);
-    }
-    return this.activityService
-      .start()
+  public save(data: IProject): Observable<void> {
+    return this.findOneById(data.uid)
       .pipe(
-        switchMap(() => this.afs
+        take(1),
+        map((project: ProjectModel) => ({
+          ...project.toData(),
+          ...data,
+          updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
+        })),
+        switchMap((project: IProject) => this.afs
           .collection<IProject>('projects')
           .doc<IProject>(project.uid)
-          .set({ ...project, updatedOn: firebase.firestore.Timestamp.fromDate(new Date()) }, { merge: true })),
-        take(1)
+          .set(project, { merge: true }))
       );
   }
 
   // This function add the repository in any project
+  // @TODO: move to repository service
   public saveRepositories(project: ProjectModel, repositories: string[]): Observable<void> {
     // remove webhook from unselected repo
     if (project.repositories && project.repositories.length > 0) {
@@ -174,15 +165,33 @@ export class ProjectService {
   }
 
   /**
-   * This function stripes the trailing slash from url
-   * @param url the url address
-   * @return the url after stripe of the trailing slash
+   * Function to update the project views
+   * @param uid uid of project
    */
-  stripeSlash(url: string): string {
-    if (url.endsWith('/')) {
-      const index: number = url.lastIndexOf('\/');
-      url = url.substring(0, index);
-    }
-    return url;
+  public incrementView(project: ProjectModel): Observable<ProjectModel> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<IProject>('projects')
+          .doc<IProject>(project.uid)
+          .set({ views: firebase.firestore.FieldValue.increment(1) }, { merge: true })),
+        map(() => project)
+      );
+  }
+
+  public getPopularProjects(): Observable<ProjectModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<IProject>(
+            'projects',
+            (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
+              .orderBy('views', 'desc').limit(3)
+          )
+          .valueChanges()),
+        map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
+      );
   }
 }

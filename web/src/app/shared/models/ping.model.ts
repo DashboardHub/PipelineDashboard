@@ -1,7 +1,11 @@
+export type PingType = 'scheduler' | 'manual'| 'automatic';
+
 /**
  * Pings model for web
  */
-export class PingModel {
+
+export interface IPing {
+  uid: string;
   codeMatched: boolean;
   duration: number;
   expectedCode: number;
@@ -10,6 +14,20 @@ export class PingModel {
   isValid?: boolean;
   statusCode: number;
   textMatched: boolean;
-  type: 'scheduler' | 'manual';
+  type: PingType;
+  createdOn: Date;
+}
+
+export class PingModel {
+  uid: string;
+  codeMatched: boolean;
+  duration: number;
+  expectedCode: number;
+  expectedText: string;
+  url: string;
+  isValid?: boolean;
+  statusCode: number;
+  textMatched: boolean;
+  type: PingType;
   createdOn: Date;
 }

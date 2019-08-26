@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 // Dashboard hub services
-import { AuthenticationService } from '../services/index.service';
+import { AuthenticationService } from '@core/services/index.service';
 
 @Injectable({
   providedIn: 'root',

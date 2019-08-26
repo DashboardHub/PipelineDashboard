@@ -7,8 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub services and models
-import { ProjectService } from '../../core/services/index.service';
-import { ProjectModel } from '../../shared/models/index.model';
+import { ProjectService } from '@core/services/index.service';
+import { ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-create',

@@ -7,10 +7,10 @@ import { Subscription } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
 // DashboardHub
-import { AuthenticationService, ProjectService } from '../../core/services/index.service';
-import { DialogConfirmationComponent } from '../../shared/dialog/confirmation/dialog-confirmation.component';
-import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
-import { IProject, ProjectModel } from '../../shared/models/index.model';
+import { AuthenticationService, ProjectService } from '@core/services/index.service';
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
+import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
+import { ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',
@@ -33,14 +33,14 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     private projectService: ProjectService,
     private authService: AuthenticationService
   ) {
-    this.project = new ProjectModel({ uid: this.route.snapshot.paramMap.get('projectUid') });
+    this.route.data.subscribe((data: { project: ProjectModel }) => this.project = data.project);
   }
 
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: IProject) => {
-        this.project = new ProjectModel(project);
+      .subscribe((project: ProjectModel) => {
+        this.project = project;
         if (!this.project.logoUrl) {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }
@@ -51,7 +51,6 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
         }
       }
       );
-
   }
 
   // This function add  the repository
@@ -98,7 +97,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
   // This function check if logged in user is also owner of the project
   isAdmin(): boolean {
-    return this.projectService.isAdmin(this.project);
+    return this.project.isAdmin(this.authService.profile.uid);
   }
 
   ngOnDestroy(): void {
