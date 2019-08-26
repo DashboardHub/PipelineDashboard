@@ -102,7 +102,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
         });
     } else {
       // res.status(200).send();
-      res.status(500).send('Not found parser for event');
+      res.status(200).send('Not found parser for event');
     }
 
   });
@@ -207,6 +207,7 @@ async function statusEvent(data: StatusEventModel): Promise<void> {
 }
 
 async function updateContributors(repository: DocumentData): Promise<void> {
+  // TODO return is empty obj
   const response: GitHubContributorInput[] = await GitHubClient<GitHubContributorInput[]>(`/repos/${repository.fullName}/stats/contributors`);
   repository.contributors = Array.isArray(response) ? response.map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)) : [];
 }

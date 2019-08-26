@@ -3,6 +3,7 @@ import { GitHubRepositoryWebhookMapper, GitHubRepositoryWebhookModel, GitHubRepo
 import { DocumentData, DocumentReference, FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClientPost } from './../client/github';
 import { Logger } from './../client/logger';
+import { deleteWebhook } from './delete-git-webhook-repository';
 import { findWebhook } from './find-git-webhook-repository';
 
 export interface CreateGitWebhookRepositoryInput {
@@ -30,7 +31,7 @@ export const onCreateGitWebhookRepository: any = async (token: string, repositor
 };
 
 
-export function createWebhook(repositoryUid: string, token: string): Promise<GitHubRepositoryWebhookResponse> {
+export function createWebhook(repositoryFullName: string, token: string): Promise<GitHubRepositoryWebhookResponse> {
   const body: GitHubRepositoryWebhookRequestCreate = {
     // name: enviroment.githubWebhook.name,
     name: 'web',
@@ -42,16 +43,32 @@ export function createWebhook(repositoryUid: string, token: string): Promise<Git
       insecure_ssl: '0',
     },
   }
-  return GitHubClientPost<GitHubRepositoryWebhookResponse>(`/repos/${repositoryUid}/hooks`, token, body);
+  return GitHubClientPost<GitHubRepositoryWebhookResponse>(`/repos/${repositoryFullName}/hooks`, token, body);
 }
 
 
-export async function getWebhook(repositoryUid: string, token: string): Promise<GitHubRepositoryWebhookModel> {
+export async function getWebhook(repositoryFullName: string, token: string): Promise<GitHubRepositoryWebhookModel> {
 
-  const exist: GitHubRepositoryWebhookResponse = await findWebhook(repositoryUid, token);
+  const exist: GitHubRepositoryWebhookResponse = await findWebhook(repositoryFullName, token);
 
   if (exist) {
-    return GitHubRepositoryWebhookMapper.import(exist);
+    let isEqual: boolean = exist.events.length === enviroment.githubWebhook.events.length;
+
+    if (isEqual) {
+
+      for (const existItem of exist.events) {
+        if (enviroment.githubWebhook.events.findIndex((envItem: string) => existItem === envItem) === -1) {
+          isEqual = false;
+          break;
+        }
+      }
+
+      if (isEqual) {
+        return GitHubRepositoryWebhookMapper.import(exist);
+      }
+    }
+    await deleteWebhook(repositoryFullName, exist.id, token);
   }
-  return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryUid, token));
+
+    return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryFullName, token));
 }

@@ -13,7 +13,7 @@ export const onDeleteGitWebhookRepository: any = async (token: string, repositor
 
   try {
     if (repository.projects && repository.projects.length === 1 && repository.webhook) {
-      await deleteWebhook(repository, token);
+      await deleteWebhook(repository.fullName, repository.webhook.id, token);
       repository.webhook = null;
       await repositorySnapshot.update(repository);
     }
@@ -29,6 +29,6 @@ export const onDeleteGitWebhookRepository: any = async (token: string, repositor
 };
 
 
-function deleteWebhook(repository: DocumentData, token: string): Promise<void> {
-  return GitHubClientDelete<void>(`/repos/${repository.fullName}/hooks/${repository.webhook.id}`, token);
+export function deleteWebhook(repositoryFullName: string, webhookId: number, token: string): Promise<void> {
+  return GitHubClientDelete<void>(`/repos/${repositoryFullName}/hooks/${webhookId}`, token);
 }
