@@ -13,7 +13,7 @@
     <div *ngIf="repository.webhook == null || repository.webhook.id == null" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" class="alert-row">
       <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="alert alert-danger">
         <mat-icon class="icon">warning</mat-icon>
-        <span class="message"> Not found webhook on this repository!</span>
+        <span class="message">Webhook not found on this repository. This is required for realtime data.</span>
         <button class="btn-action" mat-stroked-button (click)="createWebhook()">
           Create webhook!
         </button>

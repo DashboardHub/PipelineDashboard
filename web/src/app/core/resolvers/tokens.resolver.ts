@@ -7,20 +7,20 @@ import { of, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { ProjectTokenModel } from '../../shared/models/index.model';
-import { ProjectTokenService } from '../services/index.service';
+import { TokenService } from '@core/services/index.service';
+import { TokenModel } from '@shared/models/index.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProjectTokensResolver implements Resolve<ProjectTokenModel[]> {
+export class TokensResolver implements Resolve<TokenModel[]> {
 
   constructor(
-    private projectTokenService: ProjectTokenService
+    private tokenService: TokenService
   ) { }
 
-  resolve(route: ActivatedRouteSnapshot): Observable<ProjectTokenModel[]> {
-    return this.projectTokenService.findAll(route.params.projectUid)
+  resolve(route: ActivatedRouteSnapshot): Observable<TokenModel[]> {
+    return this.tokenService.findAll(route.params.projectUid)
       .pipe(
         take(1),
         catchError(() =>  of([]))

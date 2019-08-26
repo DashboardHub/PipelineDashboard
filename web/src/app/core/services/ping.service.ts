@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 // Dashboard model and services
-import { PingModel, ProjectModel } from '../../shared/models/index.model';
+import { IProject, PingModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 @Injectable({
@@ -24,8 +24,8 @@ export class PingService {
       .start()
       .pipe(
         switchMap(() => this.afs
-          .collection<ProjectModel>('projects')
-          .doc<ProjectModel>(projectUid)
+          .collection<IProject>('projects')
+          .doc<IProject>(projectUid)
           .collection<PingModel>('pings',
             (ref: firebase.firestore.Query) => ref.where('monitorUid', '==', monitorUid)
               .orderBy('createdOn', 'desc')

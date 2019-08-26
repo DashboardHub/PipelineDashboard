@@ -2,7 +2,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 // Dashboard hub model
-import { MonitorModel } from '../../shared/models/index.model';
+import { MonitorModel } from '@shared/models/index.model';
 
 /**
  * Monitor summary component

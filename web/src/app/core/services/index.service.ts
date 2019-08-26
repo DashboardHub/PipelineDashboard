@@ -3,7 +3,7 @@ export * from './authentication.service';
 export * from './monitor.service';
 export * from './ping.service';
 export * from './project.service';
-export * from './project-token.service';
+export * from './token.service';
 export * from './repository.service';
 export * from './sorting.service';
 export * from './user.service';

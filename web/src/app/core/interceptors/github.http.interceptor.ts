@@ -3,7 +3,7 @@ import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
 
 // Dashboard hub services
-import { AuthenticationService } from '../services/index.service';
+import { AuthenticationService } from '@core/services/index.service';
 
 @Injectable()
 export class GitHubHttpInterceptor implements HttpInterceptor {

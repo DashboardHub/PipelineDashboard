@@ -7,9 +7,9 @@ import { ActivatedRoute } from '@angular/router';
 import { map, take } from 'rxjs/operators';
 
 // Dashboard model and services
-import { ProjectTokenService } from '../../core/services/index.service';
-import { DialogConfirmationComponent } from '../../shared/dialog/confirmation/dialog-confirmation.component';
-import { ProjectTokenModel } from '../../shared/models/index.model';
+import { TokenService } from '@core/services/index.service';
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
+import { TokenModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens-list',
@@ -20,20 +20,20 @@ export class TokensListComponent {
 
   private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   public projectUid: string;
-  public tokenList: ProjectTokenModel[];
+  public tokenList: TokenModel[];
 
   constructor(
     private dialog: MatDialog,
-    private projectTokenService: ProjectTokenService,
+    private tokenService: TokenService,
     private route: ActivatedRoute
   ) {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.route.data
       .pipe(
-        map((data: { tokens: ProjectTokenModel[] }) => data.tokens),
+        map((data: { tokens: TokenModel[] }) => data.tokens),
         take(1)
       )
-      .subscribe((data: ProjectTokenModel[]) => this.tokenList = data);
+      .subscribe((data: TokenModel[]) => this.tokenList = data);
   }
 
   // This function delete the project token
@@ -50,9 +50,9 @@ export class TokensListComponent {
     this.dialogRef.afterClosed()
       .subscribe((result: boolean) => {
         if (result === true) {
-          this.projectTokenService
+          this.tokenService
             .delete(this.projectUid, tokenUid)
-            .subscribe((tokens: ProjectTokenModel[]) => this.tokenList = tokens);
+            .subscribe((tokens: TokenModel[]) => this.tokenList = tokens);
         }
       });
   }
