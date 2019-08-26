@@ -139,7 +139,6 @@ export class ProjectService {
             .doc<IProject>(project.uid)
             .set(
               {
-                repoCount: repositories.length,
                 repositories: [],
                 updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
               },
@@ -157,7 +156,6 @@ export class ProjectService {
           .doc<IProject>(project.uid)
           .set(
             {
-              repoCount: repositories.length,
               repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
@@ -190,7 +188,7 @@ export class ProjectService {
           .collection<IProject>(
             'projects',
             (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-              .orderBy('repoCount', 'desc').limit(3)
+              .orderBy('views', 'desc').limit(3)
           )
           .valueChanges()),
         map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
