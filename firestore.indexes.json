@@ -33,6 +33,20 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
+          "fieldPath": "type",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "views",
+          "mode": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "projects",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
           "fieldPath": "access.admin",
           "mode": "ARRAY_CONTAINS"
         },

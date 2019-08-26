@@ -84,7 +84,7 @@ export class ProjectService {
               .orderBy('updatedOn', 'desc')
           )
           .valueChanges()),
-          map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
+        map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
       );
   }
 
@@ -177,6 +177,21 @@ export class ProjectService {
           .doc<IProject>(project.uid)
           .set({ views: firebase.firestore.FieldValue.increment(1) }, { merge: true })),
         map(() => project)
+      );
+  }
+
+  public getPopularProjects(): Observable<ProjectModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<IProject>(
+            'projects',
+            (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
+              .orderBy('views', 'desc').limit(3)
+          )
+          .valueChanges()),
+        map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
       );
   }
 }
