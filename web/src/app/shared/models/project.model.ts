@@ -76,7 +76,8 @@ export class ProjectModel extends Model<IProject> implements IProject {
    * Function to return the total ping count for each project
    */
   public getTotalPings(): number {
-    return this.monitors.reduce((accumulator, currentValue) => accumulator + currentValue.getTotalPings(), 0);
+    return this.monitors
+      .reduce((accumulator: number, currentValue: MonitorModel) => accumulator + currentValue.getTotalPings(), 0);
   }
 
   /**
