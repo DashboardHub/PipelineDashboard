@@ -2,11 +2,13 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
-// Third party modules
-import { PingModel } from '@shared/models/index.model';
+// 3rd party
 import { of, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
+
+// Third party modules
 import { PingService } from '@core/services/index.service';
+import { PingModel } from '@shared/models/index.model';
 
 // Dashboard hub model and services
 

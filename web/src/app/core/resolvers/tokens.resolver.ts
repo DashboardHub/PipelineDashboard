@@ -7,8 +7,8 @@ import { of, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { TokenModel } from '@shared/models/index.model';
 import { TokenService } from '@core/services/index.service';
+import { TokenModel } from '@shared/models/index.model';
 
 @Injectable({
   providedIn: 'root',
