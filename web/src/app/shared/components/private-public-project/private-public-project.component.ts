@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
 import { Router } from '@angular/router';
-import { ProjectService } from '../../../core/services/index.service';
+import { ProjectService } from '@core/services/index.service';
 import { IProject, ProjectModel } from '../../models/index.model';
 
 @Component({

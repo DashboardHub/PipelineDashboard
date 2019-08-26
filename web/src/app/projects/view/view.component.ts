@@ -7,10 +7,10 @@ import { Subscription } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 
 // DashboardHub
-import { AuthenticationService, ProjectService } from '../../core/services/index.service';
-import { DialogConfirmationComponent } from '../../shared/dialog/confirmation/dialog-confirmation.component';
-import { DialogListComponent } from '../../shared/dialog/list/dialog-list.component';
-import { ProjectModel } from '../../shared/models/index.model';
+import { AuthenticationService, ProjectService } from '@core/services/index.service';
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
+import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
+import { ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',

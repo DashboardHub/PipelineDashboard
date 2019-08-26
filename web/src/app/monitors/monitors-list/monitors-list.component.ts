@@ -7,9 +7,9 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 // Dashboard hub application model and services
-import { MonitorService, ProjectService } from '../../core/services/index.service';
-import { DialogConfirmationComponent } from '../../shared/dialog/confirmation/dialog-confirmation.component';
-import { MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { MonitorService, ProjectService } from '@core/services/index.service';
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
+import { MonitorModel, ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-monitors-list',

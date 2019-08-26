@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material';
 import { debounceTime } from 'rxjs/operators';
 
 // Dashboard hub components
-import { DialogMarkdownComponent } from '../../../shared/dialog/markdown/dialog-markdown.component';
+import { DialogMarkdownComponent } from '@shared/dialog/markdown/dialog-markdown.component';
 import { Help } from './help';
 
 @Component({

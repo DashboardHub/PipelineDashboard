@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 
 // DashboardHub models and services
-import { IMonitor, IProject, ModelFactory, MonitorModel, ProjectModel } from '../../shared/models/index.model';
+import { IMonitor, IProject, ModelFactory, MonitorModel, ProjectModel } from '@shared/models/index.model';
 import { ProjectService } from './project.service';
 
 @Injectable({

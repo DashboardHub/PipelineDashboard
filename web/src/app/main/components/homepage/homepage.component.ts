@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
-import { ProjectService, UserService } from '../../../core/services/index.service';
-import { ProjectModel, UserStatsModel } from '../../../shared/models/index.model';
+import { ProjectService, UserService } from '@core/services/index.service';
+import { ProjectModel, UserStatsModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-homepage',

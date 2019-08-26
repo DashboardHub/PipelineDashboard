@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { RepositoryService, SortingService } from '../../core/services/index.service';
-import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '../../shared/models/index.model';
+import { RepositoryService, SortingService } from '@core/services/index.service';
+import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-repository',

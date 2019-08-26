@@ -10,8 +10,8 @@ import { first, map } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
-import { TokenService } from '../../core/services/index.service';
-import { TokenModel } from '../../shared/models/index.model';
+import { TokenService } from '@core/services/index.service';
+import { TokenModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-project-tokens-create-edit',
