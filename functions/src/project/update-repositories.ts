@@ -3,7 +3,6 @@ import { firestore, Change, EventContext } from 'firebase-functions';
 
 // Dashboard hub firebase functions models/mappers
 import { Logger } from '../client/logger';
-import { ProjectModel } from '../models/index.model';
 import { DocumentData, DocumentSnapshot, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 
 export const onUpdateProjectRepositories: any = firestore
@@ -21,8 +20,8 @@ export const onUpdateProjectRepositories: any = firestore
 
       if (isArrayNewDataRepositories) {
         if (isArrayPreviousDataRepositories) {
-          add = newData.repositories.filter((element: string) => previousData.repositories.find((item: string) => element === item));
-          remove = previousData.repositories.filter((element: string) => newData.repositories.find((item: string) => element === item));
+          add = newData.repositories.filter((element: string) => previousData.repositories.findIndex((item: string) => element === item) === -1);
+          remove = previousData.repositories.filter((element: string) => newData.repositories.findIndex((item: string) => element === item) === -1);
         } else {
           add = newData.repositories;
           remove = [];
@@ -36,8 +35,8 @@ export const onUpdateProjectRepositories: any = firestore
         const repoData: DocumentData = (await FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid).get()).data();
 
         if (Array.isArray(repoData.projects)) {
-          const project: ProjectModel = repoData.projects.find((element: string) => element === context.params.projectUid);
-          if (project) {
+          const foundIndex: number = repoData.projects.findIndex((element: string) => element === context.params.projectUid);
+          if (foundIndex === -1) {
             repoData.projects.push(context.params.projectUid);
           }
         } else {

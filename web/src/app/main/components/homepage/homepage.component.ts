@@ -32,10 +32,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSubscription
-      .unsubscribe();
-    if (this.projectSubscription) {
-      this.projectSubscription.unsubscribe();
-    }
+    this.userSubscription.unsubscribe();
+    this.projectSubscription.unsubscribe();
   }
 }
