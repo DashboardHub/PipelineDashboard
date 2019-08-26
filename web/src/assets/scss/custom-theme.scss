@@ -1,9 +1,43 @@
 @import '~@angular/material/theming';
 
+
 @include mat-core();
 
+$mat-blue: (
+  50 : #e9f1fb,
+  100 : #c9dcf5,
+  200 : #a5c4ee,
+  300 : #81ace7,
+  400 : #669be1,
+  500 : #4b89dc,
+  600 : #4481d8,
+  700 : #3b76d3,
+  800 : #336cce,
+  900 : #2359c5,
+  A100 : #ffffff,
+  A200 : #cddcff,
+  A400 : #9ab9ff,
+  A700 : #80a7ff,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
 /* Setup site theme */
-$dashboard-primary: mat-palette($mat-blue, 700);
+$dashboard-primary: mat-palette($mat-blue, 500);
 $dashboard-accent: mat-palette($mat-orange, 800, A100, A400);
 $dashboard-warn: mat-palette($mat-red, 600);
 $dashboard-theme: mat-light-theme(

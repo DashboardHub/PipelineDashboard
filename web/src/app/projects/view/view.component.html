@@ -1,20 +1,65 @@
-<div class="mat-content" *ngIf="project">
+<div *ngIf="project">
+  <div class="project-body">
+    <div class="project-body__header" fxLayout="row" fxLayoutAlign="space-between start">
+      <div class="project-body__header__content" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center">
 
-  <mat-toolbar>
-    <img [src]="project.logoUrl" *ngIf="project.logoUrl"/>
-    <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
-    <mat-icon mat-card-avatar [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
-    <span>{{ project.title }}</span>
-    <span fxFlex></span>
-    <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" *ngIf="isAdmin()">
-      <button mat-raised-button type="submit" [matBadge]="project.monitors && project.monitors.length || 0" matBadgePosition="after" matBadgeColor="primary" color="accent" routerLink="monitors">Monitors</button>
-      <button mat-raised-button type="submit" [matBadge]="project.tokens && project.tokens.length || 0" matBadgePosition="after" matBadgeColor="primary" color="accent" [routerLink]="['tokens']">Tokens</button>
-      <button mat-raised-button type="submit" [matBadge]="project.repositories && project.repositories.length || 0" matBadgePosition="after" matBadgeColor="primary" color="accent" (click)="addRepository()">Repositories</button>
-      <button mat-raised-button type="submit" color="accent" [routerLink]="['edit']">Edit</button>
-      <button mat-raised-button type="submit" color="warn" (click)="delete()">Delete</button>
-    </span>
-  </mat-toolbar>
+        <span [matMenuTriggerFor]="menu" class="project-body__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
+          <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
+        </span>
+        <mat-menu #menu="matMenu">
+          <button mat [routerLink]="['edit']" mat-menu-item>
+            <mat-icon svgIcon="edit_icon"></mat-icon> Edit
+          </button>
+          <button (click)="delete()" mat-menu-item>
+            <mat-icon svgIcon="delete_icon"></mat-icon> Delete
+          </button>
+          <button mat-menu-item>
+            <mat-icon svgIcon="hide_icon"></mat-icon> Hide
+          </button>
+        </mat-menu>
+        <mat-icon svgIcon="{{ typeIcon}}"></mat-icon>
+        <span class="project-body__header__content__name">{{ project.title }}</span>
+      </div>
+      <div class="project-body__header__content information">
+        <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start" *ngIf="isAdmin()">
+          <ng-container *ngTemplateOutlet="infoContent"></ng-container>
 
-  <dashboard-monitor-summary [monitors]="project.monitors || []"></dashboard-monitor-summary>
-  <dashboard-repository *ngFor="let uid of project.repositories" [uid]="uid"></dashboard-repository>
+        </span>
+      </div>
+      <div class="actions-menu">
+        <button mat-button [matMenuTriggerFor]="menuAction" #trigger="matMenuTrigger" [ngClass]="{'actions-menu__isActive': trigger.menuOpen}">
+          <mat-icon *ngIf="!trigger.menuOpen; else whiteIcon" svgIcon="tune_icon"></mat-icon> Actions
+        </button>
+        <mat-menu #menuAction="matMenu">
+          <span fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-around start" *ngIf="isAdmin()">
+            <ng-container *ngTemplateOutlet="infoContent"></ng-container>
+          </span>
+        </mat-menu>
+        <ng-template #whiteIcon>
+          <mat-icon svgIcon="tune_white_icon"></mat-icon>
+        </ng-template>
+      </div>
+      <ng-template #infoContent>
+        <div routerLink="monitors" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="monitor_icon"></mat-icon> <span> {{project.monitors.length}} | Monitors</span>
+        </div>
+        <div [routerLink]="['tokens']" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="token_icon"></mat-icon> <span> {{project.tokens.length }} | Tokens</span>
+        </div>
+        <div (click)="addRepository()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="repository_icon"></mat-icon> <span> {{project.repositories.length }} | Repositories</span>
+        </div>
+        <div class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="ping_icon"></mat-icon> <span> {{project.pings.length }} | Total Pings</span>
+        </div>
+      </ng-template>
+
+    </div>
+
+    <dashboard-monitor-summary [monitors]="project.monitors || []"></dashboard-monitor-summary>
+    <div class="repository" *ngFor="let uid of project.repositories">
+      <dashboard-repository [uid]="uid"></dashboard-repository>
+    </div>
+
+  </div>
 </div>

@@ -6,9 +6,11 @@ import {
   MatCardModule,
   MatDialogModule,
   MatDividerModule,
+  MatExpansionModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatMenuModule,
   MatProgressBarModule,
   MatProgressSpinnerModule,
   MatRadioModule,
@@ -39,6 +41,8 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatExpansionModule,
+    MatMenuModule,
   ],
   exports: [
     MatBadgeModule,
@@ -58,6 +62,8 @@ import {
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatExpansionModule,
+    MatMenuModule,
   ],
 })
 export class AppMaterialModule {
