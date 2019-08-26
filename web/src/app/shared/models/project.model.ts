@@ -77,7 +77,7 @@ export class ProjectModel extends Model<IProject> implements IProject {
    */
   public getTotalPings(): number {
     let total: number = 0;
-    this.monitors.forEach((monitor: MonitorModel) => monitor.getTotalPings());
+    this.monitors.forEach((monitor: MonitorModel) => total = total + monitor.getTotalPings());
 
     return total;
   }
