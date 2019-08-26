@@ -6,7 +6,7 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { PingModel } from '@shared/models/index.model';
 import { of, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
-import { PingService } from '../services/ping.service';
+import { PingService } from '@core/services/index.service';
 
 // Dashboard hub model and services
 

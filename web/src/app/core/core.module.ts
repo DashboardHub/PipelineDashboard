@@ -6,7 +6,7 @@ import { ErrorHttpInterceptorModule } from '@core/interceptors/error.http.interc
 import { GitHubHttpInterceptorModule } from '@core/interceptors/github.http.interceptor';
 
 // Dashboard hub material module
-import { AppMaterialModule } from '../app-material.module';
+import { AppMaterialModule } from '@app/app-material.module';
 
 @NgModule({
   imports: [
