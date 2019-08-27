@@ -8,13 +8,13 @@
         </span>
         <mat-menu #menu="matMenu">
           <button mat [routerLink]="['edit']" mat-menu-item>
-            <mat-icon svgIcon="edit_icon"></mat-icon> Edit
+            <mat-icon svgIcon="edit_icon"></mat-icon>Edit
           </button>
           <button (click)="delete()" mat-menu-item>
-            <mat-icon svgIcon="delete_icon"></mat-icon> Delete
+            <mat-icon svgIcon="delete_icon"></mat-icon>Delete
           </button>
           <button mat-menu-item>
-            <mat-icon svgIcon="hide_icon"></mat-icon> Hide
+            <mat-icon svgIcon="hide_icon"></mat-icon>Hide
           </button>
         </mat-menu>
         <mat-icon svgIcon="{{ typeIcon}}"></mat-icon>
@@ -28,7 +28,7 @@
       </div>
       <div class="actions-menu">
         <button mat-button [matMenuTriggerFor]="menuAction" #trigger="matMenuTrigger" [ngClass]="{'actions-menu__isActive': trigger.menuOpen}">
-          <mat-icon *ngIf="!trigger.menuOpen; else whiteIcon" svgIcon="tune_icon"></mat-icon> Actions
+          <mat-icon *ngIf="!trigger.menuOpen; else whiteIcon" svgIcon="tune_icon"></mat-icon>Actions
         </button>
         <mat-menu #menuAction="matMenu">
           <span fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-around start" *ngIf="isAdmin()">
@@ -41,16 +41,16 @@
       </div>
       <ng-template #infoContent>
         <div routerLink="monitors" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
-          <mat-icon svgIcon="monitor_icon"></mat-icon> <span> {{project.monitors.length}} | Monitors</span>
+          <mat-icon svgIcon="monitor_icon"></mat-icon><span>{{ project.monitors.length }} | Monitors</span>
         </div>
         <div [routerLink]="['tokens']" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
-          <mat-icon svgIcon="token_icon"></mat-icon> <span> {{project.tokens.length }} | Tokens</span>
+          <mat-icon svgIcon="token_icon"></mat-icon><span>{{ project.tokens.length }} | Tokens</span>
         </div>
         <div (click)="addRepository()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
-          <mat-icon svgIcon="repository_icon"></mat-icon> <span> {{project.repositories.length }} | Repositories</span>
+          <mat-icon svgIcon="repository_icon"></mat-icon><span>{{ project.repositories.length }} | Repositories</span>
         </div>
         <div class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
-          <mat-icon svgIcon="ping_icon"></mat-icon> <span> {{project.pings.length }} | Total Pings</span>
+          <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.pings.length }} | Total Pings</span>
         </div>
       </ng-template>
 

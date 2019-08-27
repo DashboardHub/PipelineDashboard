@@ -1,12 +1,11 @@
-
 @import "../../../assets/scss/variable";
 
 .project-body {
-  padding-left: 34px;
-  padding-right: 34px;
+  margin-left: 34px;
+  margin-right: 34px;
 
   .repository {
-    padding-bottom:  3rem;
+    padding-bottom: 3rem;
   }
 
   &__header {
@@ -35,12 +34,14 @@
       }
 
       &__name {
-          font-size: 22px;
+        font-size: 22px;
       }
     }
+
     .actions-menu {
       background-color: #fff;
       border-radius: 4px;
+
       &__isActive {
         color: #fff;
         background-color: $blue-color;

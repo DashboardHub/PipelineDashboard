@@ -56,9 +56,9 @@
       }
 
       &__divider {
-        width: 90% !important;
-        margin: auto !important;
-        left: auto !important;
+        width: 90%;
+        margin: auto;
+        left: auto;
       }
 
       &__time {
@@ -88,7 +88,7 @@
           max-width: 250px;
 
           &__issues {
-            display: flex !important;
+            display: flex;
             flex-direction: column;
           }
         }
@@ -212,7 +212,7 @@
         margin-top: 10px;
         padding-top: 5px;
         border-top: 1px solid;
-        border-top-color: rgba(0, 0, 0, 0.12);
+        border-top-color: $border-color;
 
         &__avatar {
           margin-top: 3px;

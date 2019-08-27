@@ -12,10 +12,10 @@
     margin-left: 15px;
   }
 
-@media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-md) {
     &__valid {
       margin-right: 0;
-      margin-bottom:  2rem;
+      margin-bottom: 2rem;
     }
 
     &__invalid {
@@ -62,7 +62,7 @@
 
     .invalid-monitor {
       background: $red-color 0% 0% no-repeat padding-box;
-      box-shadow: 0px 3px 6px  $red-color;
+      box-shadow: 0px 3px 6px $red-color;
     }
 
     &__content {
@@ -74,13 +74,30 @@
         justify-content: space-between;
         align-items: center;
         font-weight: lighter;
+        font-size: 14px;
         color: $dark-grey-color;
-        &__valid{
+        border-bottom: 1px solid;
+        border-bottom-color: $border-color;
+
+        &__first {
+          border-bottom: none;
+        }
+
+        &__valid {
           color: $green-color;
           font-weight: bold;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          width: 50px;
           padding-right: 5px;
         }
-        &__invalid{
+
+        &__invalid {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          width: 50px;
           color: $red-color;
           font-weight: bold;
           padding-right: 5px;

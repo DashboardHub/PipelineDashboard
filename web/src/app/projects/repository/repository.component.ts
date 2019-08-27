@@ -15,7 +15,7 @@ import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, Repos
 export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
-  private headerHeight: number;
+  public headerHeight: number;
   public isLargeScreen: boolean;
 
   @Input()
@@ -68,11 +68,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
           this.numberOfDisplayedUsers = 4;
         }
         if (this.headerHeight === 50) {
-          if (this.repository.description && this.repository.description.length > 50) {
-            this.headerHeight += 50;
-          } else {
-            this.headerHeight += 5;
-          }
+          this.headerHeight = 100;
           if (this.isLargeScreen) {
             this.headerHeight = 200;
             this.isLargeScreen = false;
@@ -82,6 +78,15 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       });
     this.breakpointObserver
       .observe([Breakpoints.Large])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.numberOfDisplayedUsers = 8;
+          this.headerHeight = 200;
+          this.isLargeScreen = true;
+        }
+      });
+    this.breakpointObserver
+      .observe([Breakpoints.XLarge])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.numberOfDisplayedUsers = 8;
