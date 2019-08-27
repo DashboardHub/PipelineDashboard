@@ -1,15 +1,13 @@
 // 3rd party
 import { firestore } from 'firebase-admin';
-import { FirebaseAdmin } from '../client/firebase-admin';
+import { FirebaseAdmin, WriteResult } from '../client/firebase-admin';
 
 export interface ProjectInput {
   projectUid: string
 }
 
-export const updateViews: any = async (projectUid: string): Promise<void> => {
-
-  // Update views of the project
-  await FirebaseAdmin
+export const updateViews: any = async (projectUid: string): Promise<WriteResult> => {
+  return FirebaseAdmin
     .firestore()
     .collection('projects')
     .doc(projectUid)

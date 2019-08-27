@@ -164,22 +164,6 @@ export class ProjectService {
       );
   }
 
-  /**
-   * Function to update the project views
-   * @param uid uid of project
-   */
-  public incrementView(project: ProjectModel): Observable<ProjectModel> {
-    return this.activityService
-      .start()
-      .pipe(
-        switchMap(() => this.afs
-          .collection<IProject>('projects')
-          .doc<IProject>(project.uid)
-          .set({ views: firebase.firestore.FieldValue.increment(1) }, { merge: true })),
-        map(() => project)
-      );
-  }
-
   public getPopularProjects(): Observable<ProjectModel[]> {
     return this.activityService
       .start()
