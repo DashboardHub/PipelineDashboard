@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
+
+// Third party modules
+import { AngularFireFunctions } from '@angular/fire/functions';
 import { of, Observable } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
+import { catchError, take, tap } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { ProjectService } from '@core/services/index.service';
@@ -13,18 +16,20 @@ import { IProject, ProjectModel } from '@shared/models/index.model';
 export class ViewProjectResolver implements Resolve<IProject> {
 
   constructor(
+    private fns: AngularFireFunctions,
     private projectService: ProjectService,
     private router: Router
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
+    const callable: any = this.fns.httpsCallable('updateProjectViews');
     return this.projectService.findOneById(route.params.projectUid)
       .pipe(
         take(1),
-        switchMap((project: ProjectModel) => this.projectService.incrementView(project)),
+        tap(() => callable({ projectUid: route.params.projectUid })),
         catchError(() => {
           this.router.navigate(['/']);
-          return of(new ProjectModel({ uid: 'error'}));
+          return of(new ProjectModel({ uid: 'error' }));
         })
       );
   }
