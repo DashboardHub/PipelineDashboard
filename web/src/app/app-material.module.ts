@@ -17,6 +17,7 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
@@ -43,6 +44,7 @@ import {
     MatTooltipModule,
     MatExpansionModule,
     MatMenuModule,
+    MatTableModule,
   ],
   exports: [
     MatBadgeModule,
@@ -64,6 +66,7 @@ import {
     MatTooltipModule,
     MatExpansionModule,
     MatMenuModule,
+    MatTableModule,
   ],
 })
 export class AppMaterialModule {

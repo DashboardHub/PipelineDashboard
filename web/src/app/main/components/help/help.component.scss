@@ -1,0 +1,64 @@
+@import "../../../../styles.scss";
+@import "../../../../assets/scss/variable";
+
+
+.help {
+  padding: 30px 30px;
+
+  &__title {
+    font-size: 20pt;
+  }
+
+  &__card {
+    margin-top: 30px;
+
+    &__header {
+      @include header-icon;
+      left: 20px;
+      right: 20px;
+      padding: 5px;
+      margin-right: 0px;
+      background: $purple-color;
+      box-shadow: none;
+
+      &__search {
+        color: #fff;
+        padding: 0 0;
+      }
+
+      ;
+    }
+
+    &__title {
+      @include title;
+
+      &__subtitle {
+        @include subtitle;
+      }
+    }
+
+    &__content {
+      padding-top: 60px;
+      color: $dark-grey-color;
+      &__title {
+        font-size: 22pt;
+        padding: 15px 0;
+      }
+
+      &__text {
+        color: $dark-grey-color;
+        font-weight: lighter;
+        font-size: 18px;
+      }
+    }
+
+    &__actions {
+      padding: 0 10px;
+
+      &__disagree {
+        background-color: #AAAAAA;
+        color: #fff;
+      }
+    }
+  }
+}

@@ -76,7 +76,7 @@
                 <mat-divider class="repository-detail-card__content__divider"></mat-divider>
                 <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues">
-                  <a href="{{ issue.url }}">#{{ issue.number }}</a>{{ issue.title }}</h4>
+                  <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
                 <span class="repository-detail-card__content__time-container-top">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn | timeAgo }}</p>

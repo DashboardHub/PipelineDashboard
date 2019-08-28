@@ -20,26 +20,26 @@ a {
   }
 }
 
-table {
-  border-collapse: collapse;
-  word-break: keep-all;
+// table {
+//   border-collapse: collapse;
+//   word-break: keep-all;
 
-  th {
-    text-align: center;
-  }
+//   th {
+//     text-align: center;
+//   }
 
-  th,
-  td {
-    padding: 0.5em;
-    border: 1px #cacaca solid;
-  }
+//   th,
+//   td {
+//     padding: 0.5em;
+//     border: 1px #cacaca solid;
+//   }
 
-  tbody {
-    tr:nth-child(even) {
-      background-color: $grey-color;
-    }
-  }
-}
+//   tbody {
+//     tr:nth-child(even) {
+//       background-color: $grey-color;
+//     }
+//   }
+// }
 
 code {
   width: 100%;
@@ -111,9 +111,31 @@ mat-progress-bar {
     color: white;
   }
 }
+@mixin subtitle{
+  font-size: 14px;
+  @include title;
+  width: 29vh;
+}
+@mixin title{
+  @include ellipsisText;
+  padding-left: 60px;
+  width: 30vh;
+  font-weight: lighter;
+}
+@mixin ellipsisText{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .mat-content {
   width: 100%;
 }
 .repository-tooltip{
   white-space: pre-line;
 }
+
+//ToDo change color of mat-ink-bar
+// .mat-tab-label-0-1[aria-selected="true"] .mat-tab-group.mat-primary .mat-ink-bar,
+// .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+//   background-color: #2C702A;
+// }

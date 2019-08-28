@@ -1,11 +1,25 @@
-<div class="mat-content">
-  <mat-card>
+<div class="project">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="project__title" *ngIf="showTitle">
+    <div class="project__title__header">My Projects</div>
+    <button mat-button class="project__title__add-button" [routerLink]="[ './create' ]">
+      <mat-icon svgIcon="create_project_icon"></mat-icon>
+      Add project
+
+    </button>
+  </div>
+
+  <mat-card class="project-card">
     <mat-card-header>
-      <mat-card-title>{{title}}</mat-card-title>
-      <mat-card-subtitle>You have {{ projects.length }} projects</mat-card-subtitle>
+      <div class="project-card__header">
+        <mat-icon svgIcon="project_list_icon"></mat-icon>
+      </div>
+      <mat-card-title class="project-card__title">
+        {{ title }}
+      </mat-card-title>
+      <mat-card-subtitle class="project-card__title__subtitle">You have {{ projects.length }} projects</mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content>
+    <mat-card-content class="project-card__content">
       <dashboard-projects-list [projects]="projects"></dashboard-projects-list>
     </mat-card-content>
   </mat-card>

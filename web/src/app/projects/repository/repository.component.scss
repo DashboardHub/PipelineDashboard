@@ -149,7 +149,7 @@
 
     &__panel__description {
       text-align: left;
-      font-size: 14px;
+      font-size: 0.9rem;
       font-weight: lighter;
       letter-spacing: 0.18px;
       color: $dark-grey-color;
@@ -195,16 +195,12 @@
       padding-left: 80px;
 
       &__panel__name {
-
         font-size: 19px;
-
       }
 
       &__panel__description {
-
-        font-size: 13px;
+        font-size: 0.9rem;
         letter-spacing: 0.17px;
-
       }
 
       &__contributors {

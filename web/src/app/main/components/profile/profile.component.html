@@ -1,62 +1,136 @@
-<div class="mat-content">
-  <mat-card>
-    <mat-card-header>
-      <img mat-card-avatar [src]="profile.avatarUrl" />
-      <mat-card-title>Profile</mat-card-title>
-      <mat-card-subtitle>{{ profile.name }} ({{ profile.username }})</mat-card-subtitle>
-    </mat-card-header>
+<div>
+  <div fxLayout="row" fxLayoutAlign="start center" class="header">
+    <div class="header__title">Profile</div>
+  </div>
 
+  <mat-card class="profile-card">
+    <mat-card-header>
+      <div class="profile-card__header">
+        <img class="profile-card__header__avatar" [src]="profile.avatarUrl" />
+      </div>
+      <mat-card-title class="profile-card__title">
+        {{ profile.username }}
+      </mat-card-title>
+      <mat-card-subtitle class="profile-card__title__subtitle">
+        {{ profile.email }}
+      </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
 
       <mat-tab-group>
         <mat-tab>
           <ng-template mat-tab-label>
-            <mat-icon>account_box</mat-icon>
-            Overview
-          </ng-template>
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+              <mat-icon svgIcon="overwiew_icon"></mat-icon>
+              <div>Overview</div>
 
-          <mat-list>
-            <h3 mat-subheader>GitHub activity</h3>
-            <mat-list-item *ngFor="let activity of profile.activity">
-              <mat-icon mat-list-icon>security</mat-icon>
-              <h4 mat-line><i>{{ activity.type }}</i> {{ activity.payload.title }}</h4>
-              <!-- <h4 mat-line>{{ activity.createdOn | timeAgo }}</h4> -->
-              <p mat-line>{{ activity.repository.fullName }}</p>
-            </mat-list-item>
-          </mat-list>
+            </div>
+
+          </ng-template>
+          <div class="profile-card__content__title">GitHub activity</div>
+          <table mat-table [dataSource]=" profile.activity" class="profile-card__content__table">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="profile-card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                  <mat-icon *ngIf="!isSmallScreen" mat-list-icon svgIcon="check_icon"></mat-icon> {{ element.type }} {{ element.payload.title }}
+                </div>
+                <div *ngIf="isSmallScreen" class="profile-card__content__table__title">
+                  {{ element.repository.fullName }}
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">{{ element.repository.fullName }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
         </mat-tab>
 
         <mat-tab>
           <ng-template mat-tab-label>
-            <mat-icon [matBadge]="profile.repositories.data.length" matBadgePosition="above before">info</mat-icon>
-            Repositories
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+              <mat-icon svgIcon="repository_icon"></mat-icon>
+              <div>{{ profile.repositories.data.length }} | Repositories</div>
+            </div>
           </ng-template>
+          <div class="profile-card__content__title">Last updated {{ profile.repositories.lastUpdated.toDate() | timeAgo }}</div>
+          <table mat-table [dataSource]="profile.repositories.data" class="profile-card__content__table">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="profile-card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                  <div *ngIf="!isSmallScreen">
+                    <mat-icon mat-list-icon *ngIf="element.private" svgIcon="private_icon"></mat-icon>
+                    <mat-icon mat-list-icon *ngIf="!element.private" svgIcon="public_icon"></mat-icon>
+                  </div>
+                  <div>{{ element.fullName }}</div>
+                </div>
+                <div *ngIf="isSmallScreen" class="profile-card__content__table__title">
+                  {{ element.description }}
+                </div>
+              </td>
+            </ng-container>
 
-          <mat-list>
-            <h3 mat-subheader>Last updated {{ profile.repositories.lastUpdated.toDate() | timeAgo }}</h3>
-            <mat-list-item *ngFor="let repository of profile.repositories.data">
-              <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
-              <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
-              <h4 mat-line>{{ repository.fullName }}</h4>
-              <p mat-line>{{ repository.description }}</p>
-            </mat-list-item>
-          </mat-list>
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
         </mat-tab>
 
         <mat-tab>
           <ng-template mat-tab-label>
-            <mat-icon [matBadge]="logins.length" matBadgePosition="above before">security</mat-icon>
-            Security
+            <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+              <mat-icon svgIcon="security_icon"></mat-icon>
+              <div>{{ logins.length }}| Security</div>
+            </div>
           </ng-template>
+          <div class="profile-card__content__title">Login history</div>
+          <table mat-table [dataSource]="logins" class="profile-card__content__table">
 
-          <mat-list>
-            <h3 mat-subheader>Login history</h3>
-            <mat-list-item *ngFor="let login of logins">
-              <mat-icon mat-list-icon>security</mat-icon>
-              <h4 mat-line>{{ login.date.toDate() | timeAgo }}</h4>
-              <p mat-line>{{ login.userAgent }}, {{ login.device }}, {{ login.os }}, {{ login.osVersion }}, {{ login.browser }}, {{ login.browserVersion }}</p>
-            </mat-list-item>
-          </mat-list>
+            <ng-container matColumnDef="icon">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+
+
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Title</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="profile-card__content__table__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                  <div *ngIf="!isSmallScreen">
+                    <mat-icon mat-list-icon svgIcon="security_icon"></mat-icon>
+                  </div>
+                  <span *ngIf="isSmallScreen">last login: </span>
+                  {{ element.date.toDate() | timeAgo }}
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Description</th>
+              <td mat-cell *matCellDef="let element">
+                <div>
+                  {{ element.userAgent }}, {{ element.device }}, {{ element.os }}, {{ element.osVersion }}, {{ element.browser }}, {{ element.browserVersion }}
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </mat-tab>
       </mat-tab-group>
 

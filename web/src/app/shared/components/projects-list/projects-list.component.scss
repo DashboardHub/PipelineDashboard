@@ -1,3 +1,17 @@
 h4 {
   margin-bottom: 5px;
 }
+.project{
+
+  &__list{
+    width: 100%;
+    &__actions{
+      cursor: pointer;
+    }
+    &__monitors{
+      &__icon{
+        padding-top: 6px;
+      }
+    }
+  }
+}

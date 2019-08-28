@@ -1,0 +1,73 @@
+@import "../../../../styles.scss";
+@import "../../../../assets/scss/variable";
+
+.header {
+  padding: 20px 30px;
+
+  &__title {
+    font-size: 20pt;
+  }
+}
+
+.profile-card {
+  margin: 10px 30px;
+
+  &__header {
+    @include header-icon;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+
+    &__avatar {
+      width: 65px;
+      height: 65px;
+      border-radius: 5px
+    }
+  }
+
+  &__title {
+    @include title;
+
+    &__subtitle {
+      @include subtitle;
+    }
+  }
+
+  &__content {
+    &__title {
+      font-size: 18px;
+      color: $dark-grey-color;
+      font-weight: lighter;
+      padding: 16px 0px;
+    }
+
+    &__table {
+      width: 100%;
+      font-weight: lighter;
+
+      &__title {
+        min-width: 10vh;
+      }
+
+      &__icon {
+        min-width: 1vh;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        &__title {
+          @include ellipsisText;
+          color: $dark-grey-color;
+          max-width: 30vh;
+          min-width: 0vh;
+
+          &__main {
+            @include ellipsisText;
+            color: $dark-grey-3-color;
+            max-width: 30vh;
+            min-width: 0vh;
+          }
+        }
+      }
+    }
+  }
+}

@@ -94,6 +94,18 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-tune-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'create_project_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-add_to_photos-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'home_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-account_white_circle-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'project_list_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-dashboard-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'time_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-update-24px.svg')
     );
@@ -126,6 +138,54 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-edit-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'quickstart_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-flag-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'glosary_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-description-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'enviroment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-vertical_split-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'how_becon_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-settings-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'create_enviroment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-touch_app-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'edit_enviroment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-edit-grey-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'delete_enviroment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-delete_forever-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'badges_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-work_outline-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'using_badges_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-markunread_mailbox-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'how_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-contact_support-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'why_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-code-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'communication_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-chat-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'delete_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-delete-24px.svg')
     );
@@ -140,6 +200,26 @@ export class AppComponent implements AfterViewInit {
     this._iconRegistry.addSvgIcon(
       'private_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-lock-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'privacy_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-lock-white-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'terms_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/terms.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'overwiew_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'security_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-security-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'check_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-check_circle-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
       'repository_icon',

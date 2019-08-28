@@ -81,7 +81,7 @@ $dashboard-toolbar-typography: mat-typography-config(
 $dashboard-card-typography: mat-typography-config(
   $font-family: 'Roboto',
   $headline: mat-typography-level(1.7rem, 1.5em, 300),
-  $title: mat-typography-level(1.7rem, 1.5em, 300)
+  $title: mat-typography-level(20px, 1.5em, 300)
 );
 
 @include mat-card-typography($dashboard-card-typography);
