@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 // Application component
-import { SharedModule } from '@app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ErrorRoutingModule } from './error-routing.module';
 import { ErrorComponent } from './error.component';
 
