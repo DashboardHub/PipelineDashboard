@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'projects',
     loadChildren: './projects/projects.module#ProjectsModule',
   },
+  {
+    path: '**',
+    loadChildren: './error/error.module#ErrorModule',
+  },
 ];
 
 @NgModule({
