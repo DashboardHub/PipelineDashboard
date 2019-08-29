@@ -37,10 +37,11 @@ service cloud.firestore {
     }
 
     match /repositories/{repository} {
-      allow create: if isSignedIn();
-      allow get, list: if isSignedIn();
-      allow update: if isSignedIn();
-      allow delete: if isSignedIn() && request.auth.uid in resource.data.access.admin;
+      allow create: if false;
+      allow get: if resource.data.private == false;
+      allow list: if false;
+      allow update: if false;
+      allow delete: if false;
     }
   }
 

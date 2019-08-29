@@ -23,6 +23,7 @@ import { onDeleteProject, onDeleteProjectRepositories } from './project/delete-p
 import { onUpdateProjectRepositories } from './project/update-repositories';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
 
+import { updateViews, ProjectInput } from './project/project';
 import { deletePingsAfter30days, runAllMonitors60Mins } from './scheduler/schedule';
 
 
@@ -38,6 +39,7 @@ export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall(
 export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
 export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid, input.type));
 export const deletePingsByMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
+export const updateProjectViews: HttpsFunction = functions.https.onCall((input: ProjectInput, context: CallableContext) => updateViews(input.projectUid));
 
 export const deletePingsByProject: CloudFunction<DocumentSnapshot> = onDeleteProject;
 export const deleteProjectRepositories: CloudFunction<DocumentSnapshot> = onDeleteProjectRepositories;
