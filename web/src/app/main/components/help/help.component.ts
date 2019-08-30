@@ -139,6 +139,7 @@ export class HelpComponent implements OnInit {
     this.dialog.open(DialogMarkdownComponent, {
       width: '800px',
       data: {
+        icon: help.icon,
         title: help.title,
         content: help.content,
       },

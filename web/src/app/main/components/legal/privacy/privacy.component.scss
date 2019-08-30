@@ -3,14 +3,18 @@
 
 
 .privacy {
+  @include pageContainer;
+
   &__title {
-    padding: 30px;
-    font-size: 20pt;
+    @include pageHeader;
+
   }
 
   &__card {
     max-width: 915px;
-    margin: 10px 30px;
+    @include cardContainer;
+    margin-left: auto;
+    margin-right: auto;
 
     &__header {
       @include header-icon;

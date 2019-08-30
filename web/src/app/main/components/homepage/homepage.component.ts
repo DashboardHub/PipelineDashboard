@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public users: UserStatsModel[] = [];
   public title: string = 'Public Projects';
   public isSmallScreen: boolean;
-  displayedColumns: string[] = ['avatar', 'title', 'description'];
+  public displayedColumns: string[] = ['avatar', 'title', 'description'];
   constructor(
     private projectService: ProjectService,
     private userService: UserService,

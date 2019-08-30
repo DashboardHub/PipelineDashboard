@@ -16,6 +16,7 @@ import {
   MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
+  MatSlideToggleModule,
   MatSnackBarModule,
   MatTableModule,
   MatTabsModule,
@@ -45,6 +46,7 @@ import {
     MatExpansionModule,
     MatMenuModule,
     MatTableModule,
+    MatSlideToggleModule,
   ],
   exports: [
     MatBadgeModule,
@@ -67,6 +69,7 @@ import {
     MatExpansionModule,
     MatMenuModule,
     MatTableModule,
+    MatSlideToggleModule,
   ],
 })
 export class AppMaterialModule {

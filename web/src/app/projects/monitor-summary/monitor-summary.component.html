@@ -3,13 +3,13 @@
     <mat-card>
       <mat-card-content class="summary__dashboard">
         <h3 class="heading summary__dashboard__card-icon valid-monitor" fxLayout fxLayoutAlign="start center">
-          <mat-icon fxFlexOffset="5px" class="summary__dashboard__card-icon__windows">desktop_windows</mat-icon>
+          <mat-icon fxFlexOffset="5px" class="summary__dashboard__card-icon__windows" svgIcon="monitor_white_icon"></mat-icon>
           <div fxFlexOffset="5px" fxFlexAlign="center">Latest Valid Ping</div>
         </h3>
         <div class="summary__dashboard__content" *ngIf="!filterBy(true).length">No valid monitors</div>
         <div role="list" class="summary__dashboard__content">
           <div *ngFor="let valid of filterBy(true); first as isFirst">
-            <div class="summary__dashboard__content__item" fxLayout="row" [ngClass]="{'summary__dashboard__content__item__first': isFirst}">
+            <div class="summary__dashboard__content__item" fxLayout="row" fxLayoutGap="10px" [ngClass]="{'summary__dashboard__content__item__first': isFirst}">
               <div fxFlex="10">
                 <div class="summary__dashboard__content__item__valid">{{ valid.latestPing.duration }}</div>
               </div>
@@ -29,7 +29,7 @@
     <mat-card>
       <mat-card-content class="summary__dashboard">
         <h3 class="heading summary__dashboard__card-icon invalid-monitor" fxLayout fxLayoutAlign="start center">
-          <mat-icon fxFlexOffset="5px" class="summary__dashboard__card-icon__windows">desktop_windows</mat-icon>
+          <mat-icon fxFlexOffset="5px" class="summary__dashboard__card-icon__windows" svgIcon="monitor_white_icon"></mat-icon>
           <div fxFlexOffset="5px" fxFlexAlign="center">Latest Invalid Ping</div>
         </h3>
         <div class="summary__dashboard__content" *ngIf="!filterBy(false).length">No invalid monitors</div>

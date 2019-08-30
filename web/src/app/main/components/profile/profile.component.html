@@ -1,17 +1,17 @@
-<div>
-  <div fxLayout="row" fxLayoutAlign="start center" class="header">
-    <div class="header__title">Profile</div>
+<div class="profile">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="profile__title">Profile</div>
   </div>
 
-  <mat-card class="profile-card">
+  <mat-card class="profile__card">
     <mat-card-header>
-      <div class="profile-card__header">
-        <img class="profile-card__header__avatar" [src]="profile.avatarUrl" />
+      <div class="profile__card__header">
+        <img class="profile__card__header__avatar" [src]="profile.avatarUrl" />
       </div>
-      <mat-card-title class="profile-card__title">
+      <mat-card-title class="profile__card__title">
         {{ profile.username }}
       </mat-card-title>
-      <mat-card-subtitle class="profile-card__title__subtitle">
+      <mat-card-subtitle class="profile__card__title__subtitle">
         {{ profile.email }}
       </mat-card-subtitle>
     </mat-card-header>
@@ -27,15 +27,15 @@
             </div>
 
           </ng-template>
-          <div class="profile-card__content__title">GitHub activity</div>
-          <table mat-table [dataSource]=" profile.activity" class="profile-card__content__table">
+          <div class="profile__card__content__title">GitHub activity</div>
+          <table mat-table [dataSource]=" profile.activity" class="profile__card__content__table">
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef>Title</th>
               <td mat-cell *matCellDef="let element">
-                <div class="profile-card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <div class="profile__card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                   <mat-icon *ngIf="!isSmallScreen" mat-list-icon svgIcon="check_icon"></mat-icon> {{ element.type }} {{ element.payload.title }}
                 </div>
-                <div *ngIf="isSmallScreen" class="profile-card__content__table__title">
+                <div *ngIf="isSmallScreen" class="profile__card__content__table__title">
                   {{ element.repository.fullName }}
                 </div>
               </td>
@@ -59,19 +59,19 @@
               <div>{{ profile.repositories.data.length }} | Repositories</div>
             </div>
           </ng-template>
-          <div class="profile-card__content__title">Last updated {{ profile.repositories.lastUpdated.toDate() | timeAgo }}</div>
-          <table mat-table [dataSource]="profile.repositories.data" class="profile-card__content__table">
+          <div class="profile__card__content__title">Last updated {{ profile.repositories.lastUpdated.toDate() | timeAgo }}</div>
+          <table mat-table [dataSource]="profile.repositories.data" class="profile__card__content__table">
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef>Title</th>
               <td mat-cell *matCellDef="let element">
-                <div class="profile-card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <div class="profile__card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                   <div *ngIf="!isSmallScreen">
                     <mat-icon mat-list-icon *ngIf="element.private" svgIcon="private_icon"></mat-icon>
                     <mat-icon mat-list-icon *ngIf="!element.private" svgIcon="public_icon"></mat-icon>
                   </div>
                   <div>{{ element.fullName }}</div>
                 </div>
-                <div *ngIf="isSmallScreen" class="profile-card__content__table__title">
+                <div *ngIf="isSmallScreen" class="profile__card__content__table__title">
                   {{ element.description }}
                 </div>
               </td>
@@ -95,8 +95,8 @@
               <div>{{ logins.length }}| Security</div>
             </div>
           </ng-template>
-          <div class="profile-card__content__title">Login history</div>
-          <table mat-table [dataSource]="logins" class="profile-card__content__table">
+          <div class="profile__card__content__title">Login history</div>
+          <table mat-table [dataSource]="logins" class="profile__card__content__table">
 
             <ng-container matColumnDef="icon">
               <th mat-header-cell *matHeaderCellDef></th>
@@ -109,7 +109,7 @@
             <ng-container matColumnDef="title">
               <th mat-header-cell *matHeaderCellDef>Title</th>
               <td mat-cell *matCellDef="let element">
-                <div class="profile-card__content__table__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <div class="profile__card__content__table__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                   <div *ngIf="!isSmallScreen">
                     <mat-icon mat-list-icon svgIcon="security_icon"></mat-icon>
                   </div>

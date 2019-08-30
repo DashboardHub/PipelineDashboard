@@ -1,198 +1,204 @@
-<div class="mat-content" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
-  <div fxFlex fxFlex.gt-sm="33%">
-    <mat-card>
-      <mat-card-title>
-        <mat-icon>developer_mode</mat-icon> Starter
-      </mat-card-title>
-      <mat-card-subtitle>For solo developers</mat-card-subtitle>
+<div class="feature">
+  <div class="feature__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="space-between center">
+    <div>Features</div>
+    <div *ngIf="isSmallScreen" class="feature__title__toogle" fxLayout="row" fxLayoutGap="5px">
+      <span>Monthly</span>
+      <span>
+        <mat-slide-toggle>Annually</mat-slide-toggle>
+      </span>
 
-      <mat-card-content>
-        <mat-list>
-          <h3 mat-subheader>Available now</h3>
-          <mat-list-item>
-            <mat-icon matListIcon>verified_user</mat-icon>
-            <h4 mat-line>GitHub login</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>lock_open</mat-icon>
-            <h4 mat-line>Unlimited public environments</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>new_releases</mat-icon>
-            <h4 mat-line>*Unlimited releases</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>sim_card_alert</mat-icon>
-            <h4 mat-line>*1 monitor per environment</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>note</mat-icon>
-            <h4 mat-line>Badges</h4>
-          </mat-list-item>
-          <mat-divider></mat-divider>
-          <h3 mat-subheader>Coming soon</h3>
-          <mat-list-item>
-            <mat-icon matListIcon>people_outline</mat-icon>
-            <h4 mat-line>Unlimited followers</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>notifications</mat-icon>
-            <h4 mat-line>Unlimited notifications</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>compare_arrows</mat-icon>
-            <h4 mat-line>Notifications webhooks</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>show_chart</mat-icon>
-            <h4 mat-line>Deployments/Releases graphs</h4>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="accent" routerLink="/login">
-          <mat-icon>payment</mat-icon> £0.00 FREE
-        </button>
-      </mat-card-actions>
-    </mat-card>
+    </div>
   </div>
+  <mat-card class="feature__card" *ngIf="!isSmallScreen; else smallScreenBlock">
+    <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
+      <div fxFlex="25%" class="feature__card__column">
+        <ng-container *ngTemplateOutlet="menuBlock"></ng-container>
+      </div>
+      <div fxFlex="25%" class="feature__card__column">
+        <ng-container *ngTemplateOutlet="starterBlock"></ng-container>
+      </div>
+      <div fxFlex="25%" class="feature__card__column">
+        <ng-container *ngTemplateOutlet="professionalBlock"></ng-container>
+      </div>
+      <div fxFlex="25%" class="feature__card__column">
+        <ng-container *ngTemplateOutlet="enterpriseBlock"></ng-container>
+      </div>
+    </div>
+  </mat-card>
 
-  <div fxFlex fxFlex.gt-xs="33%">
-    <mat-card>
-      <mat-card-title>
-        <mat-icon>favorite</mat-icon> Professional
-      </mat-card-title>
-      <mat-card-subtitle>For small teams</mat-card-subtitle>
-
-      <mat-card-content>
-        <mat-list>
-          <h3 mat-subheader>Coming soon</h3>
-          <mat-list-item>
-            <mat-icon matListIcon>verified_user</mat-icon>
-            <h4 mat-line>GitHub login</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>lock_open</mat-icon>
-            <h4 mat-line>Unlimited public environments</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>new_releases</mat-icon>
-            <h4 mat-line>*Unlimited releases</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>sim_card_alert</mat-icon>
-            <h4 mat-line>*5 monitors per environment</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>lock</mat-icon>
-            <h4 mat-line>3 private environments</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>people_outline</mat-icon>
-            <h4 mat-line>Unlimited followers</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>notifications</mat-icon>
-            <h4 mat-line>Unlimited notifications</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>compare_arrows</mat-icon>
-            <h4 mat-line>Notification webhooks</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>note</mat-icon>
-            <h4 mat-line>Badges</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>show_chart</mat-icon>
-            <h4 mat-line>Deployments/Releases graphs</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>schedule</mat-icon>
-            <h4 mat-line>Scheduled releases</h4>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="accent" [disabled]="true">
-          <mat-icon>payment</mat-icon> £10.00 / month / environment
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-
-  <div fxFlex fxFlex.gt-xs="33%">
-    <mat-card>
-      <mat-card-title>
-        <mat-icon>business_center</mat-icon> Enterprise
-      </mat-card-title>
-      <mat-card-subtitle>For large teams</mat-card-subtitle>
-
-      <mat-card-content>
-        <mat-list>
-          <h3 mat-subheader>Coming soon</h3>
-          <mat-list-item>
-            <mat-icon matListIcon>verified_user</mat-icon>
-            <h4 mat-line>GitHub Login</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>lock_open</mat-icon>
-            <h4 mat-line>Unlimited public environments</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>new_releases</mat-icon>
-            <h4 mat-line>Unlimited releases</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>sim_card_alert</mat-icon>
-            <h4 mat-line>20 monitors per environment</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>lock</mat-icon>
-            <h4 mat-line>50 private environments</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>people_outline</mat-icon>
-            <h4 mat-line>Unlimited followers</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>notifications</mat-icon>
-            <h4 mat-line>Unlimited notifications</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>compare_arrows</mat-icon>
-            <h4 mat-line>Notification webhooks</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>note</mat-icon>
-            <h4 mat-line>Badges</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>show_chart</mat-icon>
-            <h4 mat-line>Deployments/Releases graphs</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>schedule</mat-icon>
-            <h4 mat-line>Scheduled releases</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>import_export</mat-icon>
-            <h4 mat-line>Export data</h4>
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon matListIcon>people</mat-icon>
-            <h4 mat-line>User management</h4>
-          </mat-list-item>
-        </mat-list>
-      </mat-card-content>
-
-      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button color="accent" [disabled]="true">
-          <mat-icon>payment</mat-icon> £600 / month
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
 </div>
+
+<ng-template #smallScreenBlock>
+  <mat-tab-group>
+    <mat-tab label="Starter">
+      <div class="feature__phone">
+        <mat-card class="feature__card">
+          <ng-container *ngTemplateOutlet="starterBlock"></ng-container>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Professional">
+      <div class="feature__phone">
+        <mat-card class="feature__card">
+          <ng-container *ngTemplateOutlet="professionalBlock"></ng-container>
+        </mat-card>
+      </div>
+    </mat-tab>
+    <mat-tab label="Enterprise">
+      <div class="feature__phone">
+        <mat-card class="feature__card">
+          <ng-container *ngTemplateOutlet="enterpriseBlock"></ng-container>
+        </mat-card>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</ng-template>
+
+
+<ng-template #menuBlock>
+  <div class="feature__card__menu">
+    <div class="feature__card__menu__type">
+      <mat-radio-group fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start" fxLayoutGap="20px">
+        <mat-radio-button class="example-margin" value="monthly">Monthly</mat-radio-button>
+        <mat-radio-button class="example-margin" value="monthly">Annualy</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="feature__card__menu__content">
+      <div *ngFor="let menu of starter" class="feature__card__menu__content__item">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+          <div>
+            <mat-icon svgIcon="{{ menu.icon }}"></mat-icon>
+          </div>
+          <span>{{ menu.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #starterBlock>
+  <div class="feature__card__header">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" class="feature__card__header__starter">
+      <mat-icon svgIcon="starter_icon" class="feature__card__header__icon"></mat-icon>
+      <span class="feature__card__header__title">Starter</span>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
+    For solo developers
+    <mat-card class="feature__card__price__card">
+      <div class="feature__card__price__card__item">
+        £0.00 Free
+      </div>
+    </mat-card>
+  </div>
+  <div class="feature__card__content">
+
+    <div *ngFor="let item of starter" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
+
+      <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
+        <div *ngIf="chekPackValue(item.value); else stringValue">
+          <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
+          </mat-icon>
+        </div>
+      </div>
+      <ng-template #smallScreemConentBlock>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" [ngClass]="{'feature__card__content__item__no-active': !item.value}">
+          <div>
+            <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+          </div>
+          <div [ngClass]="{'feature__card__content__item__no-active': !item.value}">
+            <div *ngIf="chekPackValueForString(item.value); else stringValue" class="feature__card__content__item">
+              {{ item.name }}
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template #stringValue>
+        <div>{{ item.value }}</div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #professionalBlock>
+  <div class="feature__card__header">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" class="feature__card__header__professional">
+      <mat-icon svgIcon="professional_icon" class="feature__card__header__icon"></mat-icon>
+      <span class="feature__card__header__title">Professional</span>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
+    For small teams
+    <mat-card class="feature__card__price__card">
+      <div class="feature__card__price__card__item">
+        £10.00 / month
+      </div>
+    </mat-card>
+  </div>
+  <div class="feature__card__content">
+    <div *ngFor="let item of professional" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
+      <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
+        <div *ngIf="chekPackValue(item.value); else stringValue">
+          <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
+          </mat-icon>
+        </div>
+      </div>
+      <ng-template #smallScreemConentBlock>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+          <div>
+            <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+          </div>
+          <div [ngClass]="{'feature__card__content__item__no-active': !item.value}">
+            <div *ngIf="chekPackValueForString(item.value); else stringValue" class="feature__card__content__item">
+              {{ item.name }}</div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #stringValue>
+        <div>{{ item.value }}</div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #enterpriseBlock>
+  <div class="feature__card__header">
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" class="feature__card__header__enterprise">
+      <mat-icon svgIcon="enterprise_icon" class="feature__card__header__icon"></mat-icon>
+      <span class="feature__card__header__title">Enterprise</span>
+    </div>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
+    For large teams
+    <mat-card class="feature__card__price__card">
+      <div class="feature__card__price__card__item">
+        £60.00 / month
+      </div>
+    </mat-card>
+  </div>
+  <div class="feature__card__content">
+    <div *ngFor="let item of enterprise" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
+      <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
+        <div *ngIf="chekPackValue(item.value); else stringValue">
+          <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
+          </mat-icon>
+        </div>
+      </div>
+      <ng-template #smallScreemConentBlock>
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" [ngClass]="{'feature__card__content__item__no-active': !item.value}">
+          <div>
+            <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+          </div>
+          <div [ngClass]="{'feature__card__content__item__no-active': !item.value}">
+            <div *ngIf="chekPackValueForString(item.value); else stringValue">
+              {{ item.name }}</div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #stringValue>
+        <div>{{ item.value }}</div>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>

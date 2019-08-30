@@ -3,30 +3,33 @@
     <div class="terms__title">Terms & Conditions</div>
   </div>
 
-  <div fxLayout="column" fxLayoutAlign="center center">
-    <mat-card class="terms__card">
-      <mat-card-header>
-        <div class="terms__card__header">
-          <mat-icon svgIcon="terms_icon"></mat-icon>
-        </div>
-        <mat-card-title class="terms__card__title">Terms and Conditions</mat-card-title>
-        <mat-card-subtitle class="terms__card__title__subtitle">Legal</mat-card-subtitle>
-      </mat-card-header>
-      <mat-divider></mat-divider>
+  <div class="terms__container">
+    <div>
+      <mat-card class="terms__container__card">
+        <mat-card-header>
+          <div class="terms__container__card__header">
+            <mat-icon svgIcon="terms_icon"></mat-icon>
+          </div>
+          <mat-card-title class="terms__container__card__title">Terms and Conditions</mat-card-title>
+          <mat-card-subtitle class="terms__container__card__title__subtitle">Legal</mat-card-subtitle>
+        </mat-card-header>
+        <mat-divider></mat-divider>
 
-      <mat-card-content fxLayout="column">
-        <div class="terms__card__content__title">TBC</div>
-        <div class="terms__card__content__text">Coming soon....</div>
-      </mat-card-content>
-      <mat-card-actions>
-        <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="space-between center" class="terms__card__actions">
-          <button mat-stroked-button type="button" routerLink="../" class="terms__card__actions__disagree">Disagree</button>
-          <button mat-stroked-button type="submit" color="warn">
-            <span>Agree</span>
-          </button>
-        </div>
-      </mat-card-actions>
-    </mat-card>
+        <mat-card-content fxLayout="column">
+          <div class="terms__container__card__content__title">TBC</div>
+          <div class="terms__container__card__content__text">Coming soon....</div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="space-between center" class="terms__container__card__actions">
+            <button mat-stroked-button type="button" routerLink="../" class="terms__container__card__actions__disagree">Disagree</button>
+            <button mat-stroked-button type="submit" color="warn">
+              <span>Agree</span>
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
   </div>
 
 </div>

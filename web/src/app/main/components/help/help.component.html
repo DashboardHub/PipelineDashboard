@@ -8,7 +8,7 @@
       <div class="help__card__header">
         <form [formGroup]="searchForm" fxLayout="row" fxLayoutAlign="center center">
           <mat-form-field fxFlex="90%" class="whiteFormField">
-            <mat-icon matPrefix style="font-size: 1.2em">search</mat-icon>
+            <mat-icon matPrefix>search</mat-icon>
             <mat-placeholder class="help__card__header__search">
               Search
             </mat-placeholder>
@@ -25,8 +25,8 @@
       <mat-nav-list *ngFor="let help of filteredTopics">
         <a mat-list-item (click)="openDialog(help)">
           <mat-icon matListIcon svgIcon="{{ help.icon }}"></mat-icon>
-          <h3 matLine> {{ help.title }} </h3>
-          <p matLine> {{ help.description }} </p>
+          <h3 matLine>{{ help.title }}</h3>
+          <p matLine>{{ help.description }}</p>
           <p matLine class="mat-caption" fxHide.gt-sm>{{ help.updatedAt | timeAgo }} </p>
           <span fxFlex></span>
           <span fxHide.xs fxHide.sm fxFlex="40%" fxFlex.gt-sm="30%" fxLayoutAlign="end center">

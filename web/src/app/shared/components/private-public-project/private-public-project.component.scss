@@ -2,10 +2,10 @@
 @import "../../../../assets/scss/variable";
 
 .project {
-  padding: 0 30px;
+  @include pageContainer;
 
   &__title {
-    padding: 20px 0;
+    @include pageHeader;
 
     &__add-button {
       background-color: $blue-2-color;
@@ -22,7 +22,7 @@
 
 
   .project-card {
-
+    @include cardContainer;
     margin: 30px 0;
 
     &__header {

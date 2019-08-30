@@ -3,14 +3,14 @@
 
 
 .help {
-  padding: 30px 30px;
+  @include pageContainer;
 
   &__title {
-    font-size: 20pt;
+    @include pageHeader;
   }
 
   &__card {
-    margin-top: 30px;
+    @include cardContainer;
 
     &__header {
       @include header-icon;
@@ -40,6 +40,7 @@
     &__content {
       padding-top: 60px;
       color: $dark-grey-color;
+
       &__title {
         font-size: 22pt;
         padding: 15px 0;

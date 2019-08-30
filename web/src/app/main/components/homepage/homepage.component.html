@@ -1,27 +1,27 @@
-<div>
-  <div fxLayout="row" fxLayoutAlign="start center" class="header">
-    <div class="header__title">Homepage</div>
+<div class="home">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="home__title">Homepage</div>
   </div>
 
-  <mat-card class="users-card">
+  <mat-card class="home__users-card">
     <mat-card-header>
-      <div class="users-card__header">
+      <div class="home__users-card__header">
         <mat-icon svgIcon="home_page_icon"></mat-icon>
       </div>
-      <mat-card-title class="users-card__title">
+      <mat-card-title class="home__users-card__title">
         Active Users
       </mat-card-title>
-      <mat-card-subtitle class="users-card__title__subtitle">
+      <mat-card-subtitle class="home__users-card__title__subtitle">
         Most active users
       </mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content class="users-card__content">
-      <table mat-table [dataSource]="users" class="users-card__content__table">
+    <mat-card-content class="home__users-card__content">
+      <table mat-table [dataSource]="users" class="home__users-card__content__table">
         <ng-container matColumnDef="avatar">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <img class="users-card__content__table__avatar" matListAvatar [src]="element.avatarUrl" [alt]="element.username" />
+            <img class="home__users-card__content__table__avatar" matListAvatar [src]="element.avatarUrl" [alt]="element.username" />
           </td>
         </ng-container>
 
@@ -43,7 +43,7 @@
 
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Description </th>
-          <td mat-cell *matCellDef="let element" class="users-card__content__table__description">{{ element.github.activity.latest.type }} on {{ element.github.activity.latest.repository.fullName }} at {{ element.lastUpdated.toDate() | timeAgo }}</td>
+          <td mat-cell *matCellDef="let element" class="home__users-card__content__table__description">{{ element.github.activity.latest.type }} on {{ element.github.activity.latest.repository.fullName }} at {{ element.lastUpdated.toDate() | timeAgo }}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

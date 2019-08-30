@@ -1,16 +1,18 @@
-<div *ngIf="monitorForm" class="mat-content" fxLayout="column" fxLayoutGap="20px">
+<div *ngIf="monitorForm" class="monitor-settings" fxLayout="column" fxLayoutGap="20px">
   <form [formGroup]="monitorForm">
-    <mat-card>
+    <mat-card class="monitor-settings__card">
       <mat-card-header>
-        <mat-card-title>
+        <div class="monitor-settings__card__header">
+          <mat-icon svgIcon="monitor_white_icon"></mat-icon>
+        </div>
+        <mat-card-title class="monitor-settings__card__title">
           <span *ngIf="!isEdit">Create</span>
           <span *ngIf="isEdit">Edit</span>
           Monitor
         </mat-card-title>
       </mat-card-header>
-      <mat-divider></mat-divider>
 
-      <mat-card-content fxLayout="column" fxLayoutGap="20px">
+      <mat-card-content fxLayout="column" fxLayoutGap="20px" class="monitor-settings__card__content">
         <mat-form-field>
           <input matInput type="text" placeholder="Name" formControlName="name" required>
           <mat-error *ngIf="monitorForm.get(['name']).hasError('required')">This field is required.</mat-error>
@@ -27,7 +29,7 @@
         </mat-form-field>
         <mat-form-field>
           <mat-select formControlName="expectedCode" placeholder="Code" required>
-            <mat-option *ngFor="let statusCode of statusCodeList" [value]="statusCode">{{statusCode}}</mat-option>
+            <mat-option *ngFor="let statusCode of statusCodeList" [value]="statusCode">{{ statusCode }}</mat-option>
           </mat-select>
           <mat-error *ngIf="monitorForm.get(['expectedCode']).hasError('required')">This field is required.</mat-error>
         </mat-form-field>

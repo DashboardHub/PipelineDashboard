@@ -1,48 +1,49 @@
 @import "../../../../styles.scss";
 @import "../../../../assets/scss/variable";
 
-.header {
-  padding: 20px 30px;
+.home {
+  @include pageContainer;
 
   &__title {
-    font-size: 20pt;
-  }
-}
+    @include pageHeader;
 
-.users-card {
-  margin: 10px 30px;
-
-  &__header {
-    @include header-icon;
-    background-color: $purple-color;
-    box-shadow: 0px 3px 6px $purple-color;
   }
 
-  &__title {
-    @include title;
+  &__users-card {
+    @include cardContainer;
 
-    &__subtitle {
-      @include subtitle;
+    &__header {
+      @include header-icon;
+      background-color: $purple-color;
+      box-shadow: 0px 3px 6px $purple-color;
     }
-  }
 
-  &__content {
-    padding: 0;
-    display: block;
-    overflow: hidden;
+    &__title {
+      @include title;
 
-    &__table {
-      width: 100vw;
-
-      &__avatar {
-        height: 35px;
-        border-radius: 50%;
-        object-fit: cover;
+      &__subtitle {
+        @include subtitle;
       }
+    }
 
-      &__description {
-        text-overflow: ellipsis;
-        white-space: nowrap;
+    &__content {
+      padding: 0;
+      display: block;
+      overflow: hidden;
+
+      &__table {
+        width: 100vw;
+
+        &__avatar {
+          height: 35px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        &__description {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }

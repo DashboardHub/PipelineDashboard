@@ -1,4 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
+
+// Breakpoints components
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+
 import { delay } from 'rxjs/operators';
 
 // Dashboard hub Icon register
@@ -65,14 +69,25 @@ export class AppComponent implements AfterViewInit {
     },
   ];
   public version: string;
-
+  public isSmallScreen: boolean;
   constructor(
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
     private authService: AuthenticationService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private breakpointObserver: BreakpointObserver
 
   ) {
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.isSmallScreen = true;
+        } else {
+          this.isSmallScreen = false;
+        }
+      });
+
     this._iconRegistry.addSvgIcon(
       'contributor_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-account_circle-24px.svg')
@@ -88,6 +103,18 @@ export class AppComponent implements AfterViewInit {
     this._iconRegistry.addSvgIcon(
       'event',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-event_available-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'private_toolbar_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/toolbar-private.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'feedback_toolbar_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/toolbar-feedback.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'terms_toolbar_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/toolbar-description.svg')
     );
     this._iconRegistry.addSvgIcon(
       'tune_icon',
@@ -170,6 +197,82 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-work_outline-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'warning_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/warning.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'badges_2_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/badges.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'export_data_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/export_data.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'followers_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/folowers.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'graphs_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/graphs.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'github_login_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github_login.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'managment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/managment.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'monitor_enviroments_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/monitor_enviroments.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'feature_check_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-done-green-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'private_enviroment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/private_enviroment.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'public_unviroment_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/public_unviroment.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'sheduled_releases_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/sheduled_releases.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'unlim_notification_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/unlim_notification.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'unlim_releases_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/unlim_releases.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'webhook_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/webhook.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'enterprise_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/enterprise.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'professional_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/professional.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'starter_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/starter.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'monitor_white_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/monitor-list.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'using_badges_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-markunread_mailbox-24px.svg')
     );
@@ -232,6 +335,22 @@ export class AppComponent implements AfterViewInit {
     this._iconRegistry.addSvgIcon(
       'triangle',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/triangle.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'header_github_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github-header.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'header_login_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/login-header.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'header_person_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/non-auth-header.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'header_notificarion_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/notification-header.svg')
     );
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',

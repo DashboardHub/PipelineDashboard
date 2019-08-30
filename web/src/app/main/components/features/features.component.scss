@@ -1,0 +1,183 @@
+@import "../../../../styles.scss";
+@import "../../../../assets/scss/variable";
+
+
+.feature {
+  &__title {
+    padding: 0 30px;
+    @include pageHeader;
+    @include pageContainer;
+
+    &__toogle {
+      font-size: 15px;
+      font-weight: lighter;
+      color: $dark-grey-color;
+    }
+  }
+
+  &__card {
+    margin: 30px 30px;
+
+    &__price {
+      padding-top: 70px;
+      padding-bottom: 30px;
+
+      &__card {
+        margin: 10px 0;
+
+        text-align: center;
+
+        &__item {
+          color: $dark-grey-color;
+          font-size: 30px;
+          padding: 0 5px;
+        }
+
+        @media (max-width: $breakpoint-lg) {
+          &__item {
+            font-size: 20px;
+          }
+        }
+
+        @media (max-width: $breakpoint-md) {
+          &__item {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+
+    &__menu {
+      padding-top: 70px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      justify-content: center;
+
+      &__type {
+
+        padding: 40px 20px;
+        height: 20px;
+        text-align: center;
+      }
+
+      &__content {
+        padding-top: 25px;
+
+        &__item {
+          font-weight: lighter;
+          font-size: 20px;
+          height: 50px;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+
+        &__item:nth-child(odd) {
+          background-color: $backround-grey-light-color;
+        }
+      }
+
+    }
+
+    &__column {
+      position: relative;
+    }
+
+    &__header {
+      @include header-icon;
+      color: #fff;
+      padding: 0px;
+      background: none;
+      box-shadow: none;
+      border-radius: 0px;
+      width: 100%;
+
+      &__starter {
+        background-color: $dark-grey-color;
+        box-shadow: 0px 3px 6px $dark-grey-color;
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      &__professional {
+        background-color: $orange-color;
+        box-shadow: 0px 3px 6px $orange-color;
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      &__enterprise {
+        background-color: $orange-2-color;
+        box-shadow: 0px 3px 6px $orange-2-color;
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      &__title {
+        font-size: 25px;
+      }
+
+      @media (min-width: $breakpoint-xs) and (max-width: $breakpoint-md) {
+        &__title {
+          font-size: 15px;
+        }
+
+        &__icon {
+          display: none;
+        }
+      }
+
+      @media (max-width: $breakpoint-lg) {
+        &__title {
+          font-size: 20px;
+        }
+      }
+    }
+
+
+    @media (max-width: $breakpoint-xs) {
+      &__header {
+        width: 90%;
+      }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      justify-content: center;
+
+      &__item {
+        font-weight: lighter;
+        font-size: 20px;
+        height: 50px;
+        text-align: center;
+
+        &__no-active {
+          color: $disable_color;
+        }
+      }
+
+      &__item:nth-child(odd) {
+        background-color: $backround-grey-light-color;
+      }
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      &__content {
+        &__item {
+          display: flex;
+          align-items: center;
+          width: 40vh;
+          @include ellipsisText;
+          font-size: 18px;
+        }
+
+        &__item:nth-child(odd) {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

@@ -1,10 +1,5 @@
   <div class="project">
     <table mat-table [dataSource]="projects" class="project__list">
-
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
-      <!-- Position Column -->
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef>Type</th>
         <td mat-cell *matCellDef="let element">
@@ -14,7 +9,7 @@
 
       <ng-container matColumnDef="alert">
         <th mat-header-cell *matHeaderCellDef>Alert</th>
-        <td mat-cell *matCellDef="let element"> {{ element.repositories.length }} </td>
+        <td mat-cell *matCellDef="let element">{{ element.repositories.length }}</td>
       </ng-container>
 
       <ng-container matColumnDef="title">
@@ -23,7 +18,7 @@
           <div fxLayout.xs="column" fxLayoutAlign="start start">
             <div> <a [routerLink]="['/projects', element.uid]">{{ element.title }}</a></div>
             <div *ngIf="isSmallScreen">
-                {{ (element.access.admin[0] | user | async)?.username }}
+              {{ (element.access.admin[0] | user | async)?.username }}
             </div>
           </div>
 
@@ -32,7 +27,7 @@
 
       <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let element"> {{ element.description || 'no description' }} </td>
+        <td mat-cell *matCellDef="let element">{{ element.description || 'no description' }}</td>
       </ng-container>
 
       <ng-container matColumnDef="url">
@@ -105,7 +100,7 @@
         <td mat-cell *matCellDef="let element">
           <mat-icon [matMenuTriggerFor]="menu" class="project__list__actions">more_horiz</mat-icon>
           <mat-menu #menu="matMenu">
-            <button mat [routerLink]="['/projects', element.uid,'edit']" mat-menu-item>
+            <button [routerLink]="['/projects', element.uid,'edit']" mat-menu-item>
               <mat-icon svgIcon="edit_icon"></mat-icon>Edit
             </button>
             <button (click)="delete()" mat-menu-item>

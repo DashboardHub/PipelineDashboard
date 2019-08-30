@@ -1,8 +1,8 @@
 @import "../../../assets/scss/variable";
+@import "../../../styles.scss";
 
 .project-body {
-  margin-left: 34px;
-  margin-right: 34px;
+  @include pageContainer;
 
   .repository {
     padding-bottom: 3rem;
@@ -34,7 +34,15 @@
       }
 
       &__name {
+        @include title;
         font-size: 22px;
+        padding-left: 0;
+      }
+
+      @media (max-width: $breakpoint-xs) {
+        &__name {
+          width: 15vh;
+        }
       }
     }
 

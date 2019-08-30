@@ -1,0 +1,45 @@
+@import "../../../styles.scss";
+@import "../../../assets/scss/variable";
+
+
+.monitor-settings {
+  @include pageContainer;
+
+  &__card {
+    @include cardContainer;
+    &__header {
+      @include header-icon;
+      background-color: $blue-2-color;
+      box-shadow: 0px 3px 6px $blue-2-color;
+    }
+
+    &__title {
+      @include title;
+    
+      &__subtitle {
+        @include subtitle;
+      }
+    }
+
+    &__content {
+      padding-top: 40px;
+      display: block;
+      overflow: hidden;
+
+      &__table {
+        width: 100vw;
+
+        &__avatar {
+          height: 35px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        &__ping {
+          @include ellipsisText;
+          max-width: 15vw;
+        }
+      }
+    }
+  }
+}

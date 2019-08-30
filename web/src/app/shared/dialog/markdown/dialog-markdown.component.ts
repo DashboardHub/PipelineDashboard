@@ -11,7 +11,7 @@ export class DialogMarkdownComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogMarkdownComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { title: string, content: string }
+    @Inject(MAT_DIALOG_DATA) public data: { icon: string, title: string, content: string }
   ) { }
 
 }

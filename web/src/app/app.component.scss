@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";
+@import "../assets/scss/variable";
 
 .sidenav-container {
   height: 100%;
@@ -35,19 +36,45 @@
 }
 
 .app-toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  position: relative;
+
+  background: none;
+
+
+  &__profile-block {
+    font-size: 16px;
+
+    &__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid $orange-2-color;
+      cursor: pointer;
+
+      &__icon {
+        width: 40px;
+        height: 40px;
+        background: $orange-2-color;
+        border: 1px solid $orange-2-color;
+        border-radius: 50%;
+      }
+    }
+
+    &__icon {
+      transform: scale(0.8);
+    }
+
+    &__button {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
 }
 
 .content-container {
   min-height: calc(100% - 128px);
-  margin-top: 60px;
 
   @media ($mat-xsmall) {
     min-height: calc(100% - 112px);
-    margin-top: 56px;
   }
 }

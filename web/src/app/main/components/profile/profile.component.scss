@@ -1,70 +1,86 @@
 @import "../../../../styles.scss";
 @import "../../../../assets/scss/variable";
 
-.header {
-  padding: 20px 30px;
+.profile {
+  @include pageContainer;
 
   &__title {
-    font-size: 20pt;
+    @include pageHeader;
   }
-}
 
-.profile-card {
-  margin: 10px 30px;
+  &__card {
+    @include cardContainer;
 
-  &__header {
-    @include header-icon;
-    background: none;
-    box-shadow: none;
-    padding: 0;
+    &__header {
+      @include header-icon;
+      background: none;
+      box-shadow: none;
+      padding: 0;
 
-    &__avatar {
-      width: 65px;
-      height: 65px;
-      border-radius: 5px
+      &__avatar {
+        width: 65px;
+        height: 65px;
+        border-radius: 5px
+      }
     }
-  }
 
-  &__title {
-    @include title;
-
-    &__subtitle {
-      @include subtitle;
-    }
-  }
-
-  &__content {
     &__title {
-      font-size: 18px;
-      color: $dark-grey-color;
-      font-weight: lighter;
-      padding: 16px 0px;
+      @include title;
+
+      &__subtitle {
+        @include subtitle;
+      }
     }
 
-    &__table {
-      width: 100%;
-      font-weight: lighter;
-
+    &__content {
       &__title {
-        min-width: 10vh;
+        font-size: 18px;
+        color: $dark-grey-color;
+        font-weight: lighter;
+        padding: 16px 0px;
       }
 
-      &__icon {
-        min-width: 1vh;
-      }
+      &__table {
+        width: 100%;
+        font-weight: lighter;
 
-      @media (max-width: $breakpoint-md) {
         &__title {
-          @include ellipsisText;
-          color: $dark-grey-color;
-          max-width: 30vh;
-          min-width: 0vh;
+          min-width: 10vh;
+        }
 
-          &__main {
+        &__icon {
+          min-width: 1vh;
+        }
+
+        @media (max-width: $breakpoint-md) {
+          &__title {
             @include ellipsisText;
-            color: $dark-grey-3-color;
+            color: $dark-grey-color;
             max-width: 30vh;
             min-width: 0vh;
+
+            &__main {
+              @include ellipsisText;
+              color: $dark-grey-3-color;
+              max-width: 30vh;
+              min-width: 0vh;
+            }
+          }
+        }
+
+        @media (max-width: $breakpoint-xs) {
+          &__title {
+            @include ellipsisText;
+            color: $dark-grey-color;
+            max-width: 24vh;
+            min-width: 0vh;
+
+            &__main {
+              @include ellipsisText;
+              color: $dark-grey-3-color;
+              max-width: 24vh;
+              min-width: 0vh;
+            }
           }
         }
       }

@@ -3,29 +3,29 @@
 
 @include mat-core();
 
-$mat-blue: (
-  50 : #e9f1fb,
-  100 : #c9dcf5,
-  200 : #a5c4ee,
-  300 : #81ace7,
-  400 : #669be1,
-  500 : #4b89dc,
-  600 : #4481d8,
-  700 : #3b76d3,
-  800 : #336cce,
-  900 : #2359c5,
+$mat-orange: (
+  50 : #fdede0,
+  100 : #fad3b3,
+  200 : #f7b680,
+  300 : #f4984d,
+  400 : #f18226,
+  500 : #ef6c00,
+  600 : #ed6400,
+  700 : #eb5900,
+  800 : #e84f00,
+  900 : #e43d00,
   A100 : #ffffff,
-  A200 : #cddcff,
-  A400 : #9ab9ff,
-  A700 : #80a7ff,
+  A200 : #ffe0d8,
+  A400 : #ffb7a5,
+  A700 : #ffa38b,
   contrast: (
       50 : #000000,
       100 : #000000,
       200 : #000000,
       300 : #000000,
       400 : #000000,
-      500 : #ffffff,
-      600 : #ffffff,
+      500 : #000000,
+      600 : #000000,
       700 : #ffffff,
       800 : #ffffff,
       900 : #ffffff,
@@ -37,7 +37,7 @@ $mat-blue: (
 );
 
 /* Setup site theme */
-$dashboard-primary: mat-palette($mat-blue, 500);
+$dashboard-primary: mat-palette($mat-orange, 500);
 $dashboard-accent: mat-palette($mat-orange, 800, A100, A400);
 $dashboard-warn: mat-palette($mat-red, 600);
 $dashboard-theme: mat-light-theme(
