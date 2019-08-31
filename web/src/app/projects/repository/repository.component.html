@@ -10,7 +10,7 @@
   <mat-divider></mat-divider>
   <mat-card-content>
 
-    <div *ngIf="isWebHookAlert && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" class="alert-row">
+    <div *ngIf="isAlertEnabled && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" class="alert-row">
       <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="alert alert-danger">
         <mat-icon class="icon">warning</mat-icon>
         <span class="message">Webhook not found on this repository. This is required for realtime data.</span>

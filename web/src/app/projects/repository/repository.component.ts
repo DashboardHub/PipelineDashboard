@@ -14,7 +14,7 @@ import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, Repos
 export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
-  public isWebHookAlert: Boolean = false;
+  public isAlertEnabled: Boolean = false;
 
   @Input()
   public uid: string;
@@ -60,6 +60,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   private showWebHookAlert(): void {
-    setTimeout(() => this.isWebHookAlert = true, 10000);
+    setTimeout(() => this.isAlertEnabled = true, 10000);
   }
 }
