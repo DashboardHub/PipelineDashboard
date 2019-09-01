@@ -43,6 +43,14 @@ service cloud.firestore {
       allow update: if false;
       allow delete: if false;
     }
+
+    match /platform/stats {
+      allow create: if false;
+      allow get: if true;
+      allow list: if false;
+      allow update: if false;
+      allow delete: if false;
+    }
   }
 
 }
