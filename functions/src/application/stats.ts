@@ -7,7 +7,6 @@ import { Logger } from '../client/logger';
 export const onCreateProject: CloudFunction<DocumentSnapshot> = firestore
   .document('projects/{projectUid}')
   .onCreate(async (snapshot: DocumentSnapshot, context: EventContext) => {
-    console.log("On create project");
     try {
       await FirebaseAdmin
         .firestore()
