@@ -18,7 +18,6 @@ export const onCreateProject: CloudFunction<DocumentSnapshot> = firestore
           },
           { merge: true });
     } catch (err) {
-      console.log("Error")
       Logger.error(err);
       throw new Error(err);
     }
