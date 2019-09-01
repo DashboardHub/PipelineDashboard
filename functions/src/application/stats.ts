@@ -1,7 +1,7 @@
 // Third party modules
-import * as firebase from 'firebase-admin';
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
-import { DocumentSnapshot, FirebaseAdmin } from '../client/firebase-admin';
+
+import { DocumentSnapshot, FirebaseAdmin, IncrementFieldValue } from '../client/firebase-admin';
 import { Logger } from '../client/logger';
 
 export const onCreateProject: CloudFunction<DocumentSnapshot> = firestore
@@ -14,7 +14,7 @@ export const onCreateProject: CloudFunction<DocumentSnapshot> = firestore
         .doc('stats')
         .set(
           {
-            projects: firebase.firestore.FieldValue.increment(1),
+            projects: IncrementFieldValue,
           },
           { merge: true });
     } catch (err) {
@@ -33,7 +33,7 @@ export const onCreateUser: CloudFunction<DocumentSnapshot> = firestore
         .doc('stats')
         .set(
           {
-            users: firebase.firestore.FieldValue.increment(1),
+            users: IncrementFieldValue,
           },
           { merge: true });
     } catch (err) {
@@ -41,7 +41,6 @@ export const onCreateUser: CloudFunction<DocumentSnapshot> = firestore
       throw new Error(err);
     }
   });
-
 
 export const onCreatePings: CloudFunction<DocumentSnapshot> = firestore
   .document('projects/{projectUid}/pings/{pingUid}')
@@ -53,7 +52,7 @@ export const onCreatePings: CloudFunction<DocumentSnapshot> = firestore
         .doc('stats')
         .set(
           {
-            pings: firebase.firestore.FieldValue.increment(1),
+            pings: IncrementFieldValue,
           },
           { merge: true });
     } catch (err) {
