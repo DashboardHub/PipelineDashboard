@@ -13,14 +13,16 @@ import { onResponseGitWebhookRepository } from './repository/response-git-webhoo
 import { onUpdateRepository } from './repository/update-repository';
 
 // Dashboard users
+import { onCreateUser } from './user/create-user';
 import { getUserEvents, EventsInput } from './user/events';
 import { getUserRepos, ReposInput } from './user/repos';
 import { onUpdateUserStats } from './user/stats';
+import { onUpdateUser } from './user/update-user';
 
 // Dashboard projects
 import { deleteMonitorPings, ping, MonitorInfoInput } from './monitor/monitor';
-import { onDeleteProject, onDeleteProjectRepositories } from './project/delete-project';
-import { onUpdateProjectRepositories } from './project/update-repositories';
+import { onDeleteProject } from './project/delete-project';
+import { onUpdateProject } from './project/update-project';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
 
 import { deletePingsAfter30days, runAllMonitors60Mins } from './scheduler/schedule';
@@ -32,18 +34,19 @@ declare type Change<T> = functions.Change<T>;
 
 export const findAllUserRepositories: HttpsFunction = functions.https.onCall((input: ReposInput, context: CallableContext) => getUserRepos(input.token, context.auth.uid));
 export const findAllUserEvents: HttpsFunction = functions.https.onCall((input: EventsInput, context: CallableContext) => getUserEvents(input.token, context.auth.uid, input.username));
-export const findRepositoryInfo: HttpsFunction = functions.https.onCall((input: RepositoryInfoInput, context: CallableContext) => getRepositoryInfo(input.token, input.fullName));
+export const findRepositoryInfo: HttpsFunction = functions.https.onCall((input: RepositoryInfoInput, context: CallableContext) => getRepositoryInfo(input.token, input.uid, input.fullName));
 export const createGitWebhookRepository: HttpsFunction = functions.https.onCall((input: CreateGitWebhookRepositoryInput, context: CallableContext) => onCreateGitWebhookRepository(input.token, input.repositoryUid));
-export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall((input: DeleteGitWebhookRepositoryInput, context: CallableContext) => onDeleteGitWebhookRepository(input.token, input.repositoryUid));
+export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall((input: DeleteGitWebhookRepositoryInput, context: CallableContext) => onDeleteGitWebhookRepository(input.token, input.data));
 export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
 export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid, input.type));
 export const deletePingsByMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
 
-export const deletePingsByProject: CloudFunction<DocumentSnapshot> = onDeleteProject;
-export const deleteProjectRepositories: CloudFunction<DocumentSnapshot> = onDeleteProjectRepositories;
-export const updateProjectRepositories: CloudFunction<DocumentSnapshot> = onUpdateProjectRepositories;
+export const deleteProject: CloudFunction<DocumentSnapshot> = onDeleteProject;
+export const updateProject: CloudFunction<DocumentSnapshot> = onUpdateProject;
 export const updateRepository: CloudFunction<Change<DocumentSnapshot>> = onUpdateRepository;
 export const createRepository: CloudFunction<DocumentSnapshot> = onCreateRepository;
 export const updateUserStats: CloudFunction<DocumentSnapshot> = onUpdateUserStats;
 export const delete30DaysPings: CloudFunction<DocumentSnapshot> = deletePingsAfter30days;
 export const runPings60Mins: CloudFunction<DocumentSnapshot> = runAllMonitors60Mins;
+export const createUser: CloudFunction<DocumentSnapshot> = onCreateUser;
+export const updateUser: CloudFunction<Change<DocumentSnapshot>> = onUpdateUser;

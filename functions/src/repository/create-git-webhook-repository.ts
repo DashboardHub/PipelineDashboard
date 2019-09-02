@@ -1,6 +1,7 @@
 import { enviroment } from '../environments/environment';
 import { GitHubRepositoryWebhookMapper, GitHubRepositoryWebhookModel, GitHubRepositoryWebhookRequestCreate, GitHubRepositoryWebhookResponse } from '../mappers/github/webhook.mapper';
-import { DocumentData, DocumentReference, FirebaseAdmin } from './../client/firebase-admin';
+import { RepositoryModel } from '../models/index.model';
+import { DocumentData, DocumentReference } from './../client/firebase-admin';
 import { GitHubClientPost } from './../client/github';
 import { Logger } from './../client/logger';
 import { deleteWebhook } from './delete-git-webhook-repository';
@@ -13,7 +14,7 @@ export interface CreateGitWebhookRepositoryInput {
 
 export const onCreateGitWebhookRepository: any = async (token: string, repositoryUid: string) => {
   try {
-    const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
+    const repositorySnapshot: DocumentReference = RepositoryModel.getRepositoryReference(repositoryUid);
     const repository: DocumentData = (await repositorySnapshot.get()).data();
 
     const webhook: GitHubRepositoryWebhookModel = await getWebhook(repository.fullName, token);

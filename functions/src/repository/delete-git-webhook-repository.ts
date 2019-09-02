@@ -1,21 +1,35 @@
-import { DocumentData, DocumentReference, FirebaseAdmin } from './../client/firebase-admin';
+import { RepositoryModel } from '../models/index.model';
+import { DocumentData, DocumentReference } from './../client/firebase-admin';
 import { GitHubClientDelete } from './../client/github';
 import { Logger } from './../client/logger';
 
 export interface DeleteGitWebhookRepositoryInput {
   token: string;
-  repositoryUid: string;
+  data: { uid?: string, id?: number };
 }
 
-export const onDeleteGitWebhookRepository: any = async (token: string, repositoryUid: string) => {
-  const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
-  const repository: DocumentData = (await repositorySnapshot.get()).data();
+export const onDeleteGitWebhookRepository: any = async (token: string, data: { uid?: string, id?: number }) => {
+  let repository: DocumentData;
+  let repositoryRef: DocumentReference;
+
+  if (!(data && (data.uid || data.id))) {
+    Logger.error('Invalid input data!');
+    return null;
+  }
+
+  if (data.uid) {
+    repositoryRef = RepositoryModel.getRepositoryReference(data.uid);
+    repository = (await repositoryRef.get()).data();
+  } else if (data.id) {
+    repository = await RepositoryModel.getRepositoryById(data.id);
+    repositoryRef = RepositoryModel.getRepositoryReference(repository.uid);
+  }
 
   try {
-    if (repository.projects && repository.projects.length === 1 && repository.webhook) {
+    if (repository && repository.projects && repository.projects.length === 1 && repository.webhook) {
       await deleteWebhook(repository.fullName, repository.webhook.id, token);
       repository.webhook = null;
-      await repositorySnapshot.update(repository);
+      await repositoryRef.update(repository);
     }
 
     Logger.info(`Webhook removed for ${repository.fullName}`);

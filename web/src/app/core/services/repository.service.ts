@@ -37,9 +37,9 @@ export class RepositoryService {
   }
 
   // This function loads all the available repositories
-  public loadRepository(fullName: string): Observable<boolean> {
+  public loadRepository(repo: RepositoryModel): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
-    return callable({ fullName, token: this.authService.profile.oauth.githubToken });
+    return callable({ uid: repo.uid, fullName: repo.fullName, token: this.authService.profile.oauth.githubToken });
   }
 
   public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
@@ -47,8 +47,8 @@ export class RepositoryService {
     return callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken });
   }
 
-  public deleteGitWebhook(repositoryUid: string): Observable<RepositoryModel> {
+  public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
-    return callable({ repositoryUid, token: this.authService.profile.oauth.githubToken });
+    return callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken });
   }
 }

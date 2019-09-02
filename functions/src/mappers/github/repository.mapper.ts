@@ -12,9 +12,8 @@ import { GitHubRepositoryWebhookModel } from './webhook.mapper';
 
 export interface GitHubRepositoryInput {
   id: number;
-  uid?: string;
-  name?: string;
-  full_name?: string;
+  name: string;
+  full_name: string;
   description?: string;
   url: string;
   private: boolean;
@@ -23,8 +22,8 @@ export interface GitHubRepositoryInput {
 
 export interface GitHubRepositoryModel {
   id: number;
-  uid: string;
-  fullName?: string;
+  uid?: string;
+  fullName: string;
   description?: string;
   url: string;
   private: boolean;
@@ -40,28 +39,24 @@ export interface GitHubRepositoryModel {
 }
 
 export class GitHubRepositoryMapper {
-  static fullNameToUid(fullName: string) {
-    return fullName.replace('/', '+');
-  }
-
   static import(input: GitHubRepositoryInput, type: 'minimum' | 'all' | 'event' = 'minimum'): GitHubRepositoryModel {
     const output: any = {};
 
     if (type === 'all') {
-        output.fork = input.fork;
+      output.fork = input.fork;
     }
 
     if (type === 'event' || type === 'all') {
-        output.id = input.id;
-        output.fullName = input.name;
-        output.url = input.url;
+      output.id = input.id;
+      output.fullName = input.name;
+      output.url = input.url;
     }
 
     if (type === 'minimum' || type === 'all') {
-        output.uid = GitHubRepositoryMapper.fullNameToUid(input.full_name);
-        output.fullName = input.full_name;
-        output.description = input.description;
-        output.private = input.private;
+      output.id = input.id;
+      output.fullName = input.full_name;
+      output.description = input.description;
+      output.private = input.private;
     }
 
     return output;

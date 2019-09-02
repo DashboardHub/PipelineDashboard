@@ -1,6 +1,7 @@
 // Third party modules
 import { firestore } from 'firebase-admin';
 
+// Dashboard hub firebase functions models/mappers
 import {
   GitHubContributorInput, GitHubContributorMapper,
   GitHubEventInput, GitHubEventMapper,
@@ -19,10 +20,11 @@ import { getWebhook } from './create-git-webhook-repository';
 
 export interface RepositoryInfoInput {
   token: string;
+  uid: string;
   fullName: string;
 }
 
-export const getRepositoryInfo: any = async (token: string, fullName: string) => {
+export const getRepositoryInfo: any = async (token: string, uid: string, fullName: string) => {
   let data: [
     GitHubRepositoryInput,
     GitHubPullRequestInput[],
@@ -82,7 +84,7 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
   await FirebaseAdmin
     .firestore()
     .collection('repositories')
-    .doc(GitHubRepositoryMapper.fullNameToUid(fullName))
+    .doc(uid)
     .set(mappedData, { merge: true });
 
   return mappedData;

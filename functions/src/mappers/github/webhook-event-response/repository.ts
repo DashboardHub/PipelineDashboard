@@ -67,7 +67,7 @@ export class RepositoryEventModel implements RepositoryEventInput {
 
   private async renameAction(){
 
-    const repository: DocumentData = await RepositoryModel.getRepositoryByFullName(this.repository.full_name);
+    const repository: DocumentData = await RepositoryModel.getRepositoryById(this.repository.id);
     // const projects: QueryDocumentSnapshot[] = (await FirebaseAdmin.firestore().collection('projects').where('repositories', 'array-contains', repository.uid).get()).docs;
     
     const users: QueryDocumentSnapshot[] = (await FirebaseAdmin.firestore().collection('users').get()).docs;
