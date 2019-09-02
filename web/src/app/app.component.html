@@ -1,64 +1,108 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport="true" role="navigation" mode="over">
-    <div class="heading" fxLayout="column" fxLayoutGap="5px">
-      <img *ngIf="isAuthenticated()" src="{{ getProfile().avatarUrl }}" />
-      <mat-icon *ngIf="!isAuthenticated()">person</mat-icon>
-      <div class="mat-subheading-2">{{ isAuthenticated() ? getProfile().name : 'Guest' }}</div>
-      <div class="mat-caption">{{ isAuthenticated() ? getProfile().email : 'Not logged in' }}</div>
+  <mat-sidenav #sidenav [mode]="sideNavMode" class="sidenav" [ngClass]="{'sidenav__open': menuTriger}" fixedInViewport="false" role="navigation" [opened]="!isSmallScreen">
+    <div class="heading">
+      <mat-icon svgIcon="logo_icon" class="heading__logo" (click)="menuTriger = !menuTriger"></mat-icon>
     </div>
 
-    <mat-nav-list>
+    <mat-nav-list class="menu">
       <ng-container *ngFor="let item of publicRoutes">
-        <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
-          <mat-icon>{{ item.icon }}</mat-icon>
-          {{ item.title }}
+        <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
+          <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+            <span>
+              <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+            </span>
+            <span>
+              {{ item.title }}
+            </span>
+          </div>
         </a>
       </ng-container>
-
-      <mat-divider></mat-divider>
-
       <ng-container *ngIf="isAuthenticated()">
         <ng-container *ngFor="let item of privateRoutes">
-          <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
-            <mat-icon>{{ item.icon }}</mat-icon>
-            {{ item.title }}
+          <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
+            <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+              <span>
+                <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+              </span>
+              <span>
+                {{ item.title }}
+              </span>
+            </div>
           </a>
         </ng-container>
       </ng-container>
 
-      <mat-divider></mat-divider>
-
       <ng-container *ngFor="let item of generalRoutes">
-        <a mat-list-item [routerLink]="[item.route]" (click)="drawer.close()">
-          <mat-icon>{{ item.icon }}</mat-icon>
-          {{ item.title }}
+        <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
+          <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+            <span>
+              <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+            </span>
+            <span>
+              {{ item.title }}
+            </span>
+          </div>
         </a>
       </ng-container>
 
-      <a mat-list-item (click)="login(); drawer.close()" *ngIf="!isAuthenticated()" dashboardLogin>
-        <mat-icon>vpn_key</mat-icon> Login
+      <a mat-list-item class="menu__item" (click)="login(); closeMenu()" routerLinkActive="menu__item__active" *ngIf="!isAuthenticated()" dashboardLogin>
+
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+          <span>
+            <mat-icon svgIcon="login_page_icon" class="menu__item__icon"></mat-icon>
+          </span>
+          <span>
+            Login
+          </span>
+        </div>
       </a>
-      <a mat-list-item (click)="logout(); drawer.close()" *ngIf="isAuthenticated()">
-        <mat-icon>exit_to_app</mat-icon> Sign out
+      <a mat-list-item class="menu__item" (click)="logout(); closeMenu()" routerLinkActive="menu__item__active" *ngIf="isAuthenticated()">
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
+          <span>
+            <mat-icon svgIcon="logout_page_icon" class="menu__item__icon"></mat-icon>
+          </span>
+          <span>
+            Sign out
+          </span>
+        </div>
+
       </a>
     </mat-nav-list>
   </mat-sidenav>
 
-  <mat-sidenav-content>
+  <mat-sidenav-content [ngClass]="{'move-up': menuTriger, 'move-down': !menuTriger}">
     <mat-toolbar>
-      <div class="app-toolbar" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
-        <div>
-          <button mat-icon-button type="button" aria-label="Toggle sidenav" (click)="drawer.toggle()">
-            <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-          </button>
-        </div>
+      <div fxHide.xs class="app-toolbar" fxFlex="100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <div>
           <ng-container *ngTemplateOutlet="headerBlock"></ng-container>
         </div>
       </div>
+      <div fxHide.gt-xs fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" class="app-toolbar">
+        <div>
+          <mat-icon svgIcon="logo_icon" class="app-toolbar__logo"></mat-icon>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <div>
+            <button mat-icon-button type="button" aria-label="Toggle sidenav" (click)="sidenav.toggle()">
+              <mat-icon aria-label="Side nav toggle icon" class="app-toolbar__icon">menu</mat-icon>
+            </button>
+          </div>
+          <div class="app-toolbar__menu">
+            <div [matMenuTriggerFor]="menu" fxLayout="row" fxLayoutAlign="space-between center">
+              <mat-icon class="app-toolbar__icon">more_vert</mat-icon>
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before" class="header-menu">
+              <div mat-menu-item fxFlex="100">
+                <ng-container *ngTemplateOutlet="headerBlock"></ng-container>
+              </div>
+            </mat-menu>
+          </div>
+        </div>
+
+      </div>
     </mat-toolbar>
     <ng-template #headerBlock>
-      <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="40px" class="app-toolbar__profile-block">
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px" class="app-toolbar__profile-block">
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
           <div fxLayoutAlign="space-between center">
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated(); else notification" dashboardLogin>
@@ -79,7 +123,7 @@
         <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
           <div>{{ isAuthenticated() ? getProfile().username : 'Welcome Guest' }}</div>
           <div>
-            <a [routerLink]="['/profile']" *ngIf="isAuthenticated(); else notAuth">
+            <a [routerLink]="['/profile']" *ngIf="isAuthenticated(); else notAuth" fxLayoutAlign="center center">
               <img class="app-toolbar__profile-block__avatar" src="{{ getProfile().avatarUrl }}" />
             </a>
 

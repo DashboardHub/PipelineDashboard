@@ -1,5 +1,6 @@
 @import "~@angular/material/theming";
 @import "../assets/scss/variable";
+@import "../styles.scss";
 
 .sidenav-container {
   height: 100%;
@@ -7,27 +8,48 @@
 }
 
 .sidenav {
-  width: 300px;
+  @include ellipsisText;
+  width: 60px;
+  background: $background-black-color;
+  transition-duration: 0.5s;
+
+  &__open {
+    transition-duration: 0.5s;
+    width: 265px;
+  }
 
   .heading {
-    margin: 10px;
+    margin-top: 16px;
+    margin-left: -4px;
+    height: 60px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
 
-    img {
-      border-radius: 50%;
-      height: 4rem;
-      width: 4rem;
-    }
-
-    .mat-icon {
-      font-size: 4rem;
-      height: 4rem;
-      width: 4rem;
+    &__logo {
+      width: 240px;
+      overflow: hidden;
+      height: 32px;
     }
   }
 
-  .mat-icon {
-    padding-right: 10px;
-    opacity: 0.7;
+  .menu {
+    overflow: hidden;
+
+    &__item {
+      font-size: 16px;
+      font-weight: lighter;
+      color: $dark-grey-color;
+
+      &__active {
+        color: #fff;
+      }
+
+      &__icon {
+        width: 25px;
+        height: 25px;
+      }
+    }
   }
 }
 
@@ -40,6 +62,18 @@
 
   background: none;
 
+  &__logo {
+    width: 140px;
+    padding-left: 24px;
+  }
+
+  &__icon {
+    color: $dark-grey-color;
+  }
+
+  &__menu {
+    cursor: pointer;
+  }
 
   &__profile-block {
     font-size: 16px;
@@ -76,5 +110,27 @@
 
   @media ($mat-xsmall) {
     min-height: calc(100% - 112px);
+  }
+}
+
+.move-up {
+  margin-left: 0px !important;
+
+  @media (min-width: $breakpoint-xs) {
+
+    margin-left: 265px !important;
+    transition-duration: 0.5s;
+
+  }
+}
+
+.move-down {
+  margin-left: 0px !important;
+
+  @media (min-width: $breakpoint-xs) {
+    margin-left: 60px !important;
+    transition-duration: 0.5s;
+
+
   }
 }

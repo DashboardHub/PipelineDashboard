@@ -41,15 +41,27 @@
       padding-top: 60px;
       color: $dark-grey-color;
 
-      &__title {
-        font-size: 22pt;
-        padding: 15px 0;
+      &__icon {
+        min-width: 24px;
+        min-height: 24px;
+        padding-right: 30px;
       }
 
-      &__text {
+      &__title {
+        color: #000;
+        font-size: 20px;
+      }
+
+      &__description {
         color: $dark-grey-color;
         font-weight: lighter;
-        font-size: 18px;
+        font-size: 16px;
+      }
+
+      &__time {
+        color: $dark-grey-color;
+        font-weight: lighter;
+        font-size: 14px;
       }
     }
 

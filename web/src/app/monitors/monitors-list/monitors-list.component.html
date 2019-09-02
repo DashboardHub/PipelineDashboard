@@ -17,8 +17,13 @@
   </div>
 
   <div class="monitor-list__alert">
-    <mat-card class="monitor-list__alert__card" *ngIf="!project.url">
-      <mat-icon svgIcon="warning_icon"></mat-icon> Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run
+    <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <span>
+        <mat-icon svgIcon="warning_icon"></mat-icon>
+      </span>
+      <span>
+        Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run
+      </span>
     </mat-card>
   </div>
 

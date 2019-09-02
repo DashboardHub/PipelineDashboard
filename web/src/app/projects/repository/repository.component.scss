@@ -10,6 +10,24 @@
     }
   }
 
+  &__problem {
+    @include cardContainer;
+    margin-bottom: 40px;
+    margin-top: 0px;
+    border: none;
+
+    &__card {
+      font-size: 18px;
+      font-weight: lighter;
+      color: $dark-grey-3-color;
+    }
+
+    @media (max-width: $breakpoint-xs) {
+      margin-top: 0px;
+    }
+  }
+
+
   &__card-list {
     padding-top: 20px;
   }
@@ -129,15 +147,13 @@
 
   }
 
-  .header-icon {
-    @include header-icon;
-  }
-
   &__header {
     padding-left: 80px;
 
     &__icon {
       @include header-icon;
+      background: $green-2-color;
+      box-shadow: 0px 3px 6px $green-2-shadow;
     }
 
     &__panel__name {
@@ -187,6 +203,11 @@
           padding-left: 5px;
         }
       }
+    }
+
+    &__warning {
+      @include header-icon;
+      background: none;
     }
   }
 

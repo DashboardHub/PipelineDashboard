@@ -20,7 +20,7 @@
       &__header {
         @include header-icon;
         background-color: $orange-2-color;
-        box-shadow: 0px 3px 6px $orange-2-color;
+        box-shadow: 0px 3px 6px $orange-2-shadow;
       }
 
       &__title {

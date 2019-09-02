@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
@@ -6,7 +6,9 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 import { delay } from 'rxjs/operators';
 
 // Dashboard hub Icon register
+import { MatSidenav } from '@angular/material';
 import { MatIconRegistry } from '@angular/material/icon';
+
 import { DomSanitizer } from '@angular/platform-browser';
 
 // Dashboard hub models and services
@@ -26,50 +28,53 @@ export class AppComponent implements AfterViewInit {
     {
       title: 'Homepage',
       route: '/',
-      icon: 'home',
+      icon: 'home_page_2_icon',
     },
   ];
   public privateRoutes: Navigation[] = [
     {
       title: 'My Projects',
       route: '/projects',
-      icon: 'group_work',
+      icon: 'project_page_icon',
     },
     {
       title: 'Add Project',
       route: '/projects/create',
-      icon: 'playlist_add',
+      icon: 'add_project_page_icon',
     },
     {
       title: 'Profile',
       route: '/profile',
-      icon: 'security',
+      icon: 'profile_page_icon',
     },
   ];
   public generalRoutes: Navigation[] = [
     {
       title: 'Features',
       route: '/features',
-      icon: 'lightbulb_outline',
+      icon: 'feature_page_icon',
     },
     {
       title: 'Help',
       route: '/help',
-      icon: 'live_help',
+      icon: 'help_page_icon',
     },
     {
       title: 'Terms & Conditions',
       route: '/terms-and-conditions',
-      icon: 'copyright',
+      icon: 'terms_page_icon',
     },
     {
       title: 'Privacy',
       route: '/privacy',
-      icon: 'gavel',
+      icon: 'privacy_page_icon',
     },
   ];
   public version: string;
   public isSmallScreen: boolean;
+  public menuTriger: boolean;
+  public sideNavMode: string;
+  @ViewChild('sidenav') public menu: MatSidenav;
   constructor(
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
@@ -82,9 +87,12 @@ export class AppComponent implements AfterViewInit {
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
+          this.menuTriger = true;
           this.isSmallScreen = true;
+          this.sideNavMode = 'over';
         } else {
           this.isSmallScreen = false;
+          this.sideNavMode = 'side';
         }
       });
 
@@ -217,12 +225,56 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/graphs.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'home_page_2_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/home-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'project_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/project-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'add_project_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/create-project-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'profile_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/profile-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'feature_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/features-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'help_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/help-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'terms_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/terms_grey.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'privacy_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/privacy-page.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'login_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/login.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'logout_page_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logout.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'github_login_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/github_login.svg')
     );
     this._iconRegistry.addSvgIcon(
       'managment_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/managment.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'logo_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/Logo.svg')
     );
     this._iconRegistry.addSvgIcon(
       'monitor_enviroments_icon',
@@ -396,6 +448,11 @@ export class AppComponent implements AfterViewInit {
 
   public logout(): void {
     this.authService.logout();
+  }
+  public closeMenu(): void {
+    if (this.isSmallScreen) {
+      this.menu.opened = false;
+    }
   }
 
   public showDoorbell(): void {

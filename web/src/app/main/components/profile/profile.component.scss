@@ -20,7 +20,9 @@
       &__avatar {
         width: 65px;
         height: 65px;
-        border-radius: 5px
+        border: 1px solid $orange-2-color;
+        border-radius: 5px;
+        box-shadow: 0px 3px 6px $orange-2-shadow;
       }
     }
 

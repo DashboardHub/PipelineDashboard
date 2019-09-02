@@ -57,12 +57,12 @@
 
     .valid-monitor {
       background: $green-color 0% 0% no-repeat padding-box;
-      box-shadow: 0px 3px 6px $green-color;
+      box-shadow: 0px 3px 6px $green-shadow;
     }
 
     .invalid-monitor {
       background: $red-color 0% 0% no-repeat padding-box;
-      box-shadow: 0px 3px 6px $red-color;
+      box-shadow: 0px 3px 6px $red-shadow;
     }
 
     &__content {

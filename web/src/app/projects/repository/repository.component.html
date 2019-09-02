@@ -1,3 +1,20 @@
+<div class="repository__problem" *ngIf="isAlertEnabled && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)">
+  <mat-card class="repository__problem__card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+      <span>
+        <mat-icon svgIcon="warning_icon"></mat-icon>
+      </span>
+      <span>
+        Webhook not found on this repository. This is required for realtime data.
+      </span>
+    </div>
+    <span>
+      <button class="btn-action" mat-stroked-button (click)="createWebhook()">
+        Create webhook!
+      </button>
+    </span>
+  </mat-card>
+</div>
 <mat-accordion class="repository">
   <mat-expansion-panel hideToggle #expansion>
     <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start">
@@ -6,7 +23,6 @@
           <div class="repository__container__info">
             <div class="heading repository__header__icon">
               <mat-icon svgIcon="repository_folder"></mat-icon>
-
             </div>
             <div class="repository__header">
               <div class="repository__header__panel__name">
@@ -17,7 +33,6 @@
               </div>
             </div>
           </div>
-
           <mat-divider></mat-divider>
           <div fxFlex="50%" class="repository__header__contributors">
             <div>
@@ -43,15 +58,6 @@
       </div>
     </mat-expansion-panel-header>
     <div class="latest-body">
-      <div *ngIf="repository.webhook == null || repository.webhook.id == null" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center" class="alert-row">
-        <div fxFlex="100%" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" class="alert alert-danger">
-          <mat-icon class="icon">warning</mat-icon>
-          <span class="message">Webhook not found on this repository. This is required for realtime data.</span>
-          <button class="btn-action" mat-stroked-button (click)="createWebhook()">
-            Create webhook!
-          </button>
-        </div>
-      </div>
       <mat-divider></mat-divider>
       <ng-container *ngTemplateOutlet="latestInformation"></ng-container>
     </div>

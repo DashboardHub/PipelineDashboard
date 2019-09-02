@@ -7,15 +7,16 @@
 
   &__card {
     @include cardContainer;
+
     &__header {
       @include header-icon;
       background-color: $blue-2-color;
-      box-shadow: 0px 3px 6px $blue-2-color;
+      box-shadow: 0px 3px 6px $blue-2-shadow;
     }
 
     &__title {
       @include title;
-    
+
       &__subtitle {
         @include subtitle;
       }
