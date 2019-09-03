@@ -17,6 +17,10 @@
       box-shadow: 0px 3px 6px $green-2-shadow;
     }
 
+    &__divider{
+      margin-top: 20px;
+    }
+
     &__title {
       @include title;
 
