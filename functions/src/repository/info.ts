@@ -81,6 +81,8 @@ export const getRepositoryInfo: any = async (token: string, uid: string, fullNam
     },
   });
 
+  mappedData.uid = uid;
+
   await FirebaseAdmin
     .firestore()
     .collection('repositories')
