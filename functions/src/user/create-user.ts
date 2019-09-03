@@ -12,6 +12,7 @@ import { RepositoryModel } from '../models/index.model';
 
 async function addUidToRepositories(user: DocumentData): Promise<boolean> {
   if (user.repositories && Array.isArray(user.repositories.data) && user.repositories.data.length > 0) {
+    const uids: string[] = [];
     user.repositories.data = user.repositories.data
       .filter((item: GitHubRepositoryModel) => item && item.id !== null && item.id !== undefined);
 
@@ -22,7 +23,9 @@ async function addUidToRepositories(user: DocumentData): Promise<boolean> {
       } else {
         item.uid = uuid();
       }
+      uids.push(item.uid);
     }
+    user.repositories.data.uids = uids
     return true;
   }
 

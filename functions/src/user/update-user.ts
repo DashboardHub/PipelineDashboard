@@ -37,7 +37,8 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
     return null;
   }
 
-  const result: GitHubRepositoryModel[] = newRepos.filter((item: GitHubRepositoryModel) => item && item.id !== null && item.id !== undefined);;
+  const result: GitHubRepositoryModel[] = newRepos.filter((item: GitHubRepositoryModel) => item && item.id !== null && item.id !== undefined);
+  const uids: string[] = [];
 
   if (isArrayPreviousDataRepositories) {
     result.forEach((item1: GitHubRepositoryModel) => {
@@ -56,6 +57,7 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
       } else {
         item.uid = uuid();
       }
+      uids.push(item.uid);
     }
   }
 
@@ -63,6 +65,7 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
     repositories: {
       ...newData.repositories,
       data: result,
+      uids,
     },
   };
 }
