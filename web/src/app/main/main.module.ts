@@ -12,6 +12,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { PrivacyComponent } from './components/legal/privacy/privacy.component';
 import { TermsConditionsComponent } from './components/legal/terms-conditions/terms-conditions.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { StatsComponent } from './components/stats/stats.component';
 import { MainComponent } from './main.component';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { MainComponent } from './main.component';
     PrivacyComponent,
     ProfileComponent,
     TermsConditionsComponent,
+    StatsComponent,
   ],
 })
 export class MainModule { }
