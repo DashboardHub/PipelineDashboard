@@ -57,8 +57,8 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
       } else {
         item.uid = uuid();
       }
-      uids.push(item.uid);
     }
+    uids.push(item.uid);
   }
 
   return {
