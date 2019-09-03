@@ -20,24 +20,31 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
   const newRepos: GitHubRepositoryModel[] = newData.repositories.data;
   const isArrayPreviousDataRepositories: boolean = !!(previousData && previousData.repositories && Array.isArray(previousData.repositories.data) && previousData.repositories.data.length > 0);
   const oldRepos: GitHubRepositoryModel[] = isArrayPreviousDataRepositories ? previousData.repositories.data : [];
-  let isNotChanged: boolean = true;
+  let isExitFn: boolean = true;
 
   if (isArrayPreviousDataRepositories && newRepos.length === oldRepos.length) {
     for (const item1 of newRepos) {
-      if ((!item1.uid) || oldRepos.findIndex((item2: GitHubRepositoryModel) => item1.uid === item2.uid) === -1) {
-        isNotChanged = false;
+      if (
+        (!item1)
+        || (!item1.uid)
+        || item1.id === null
+        || item1.id === undefined
+        || oldRepos.findIndex((item2: GitHubRepositoryModel) => item1.id === item2.id) === -1
+      ) {
+        isExitFn = false;
         break;
       }
     }
   } else {
-    isNotChanged = false;
+    isExitFn = false;
   }
 
-  if (isNotChanged) {
+  if (isExitFn) {
     return null;
   }
 
-  const result: GitHubRepositoryModel[] = newRepos.filter((item: GitHubRepositoryModel) => item && item.id !== null && item.id !== undefined);;
+  const result: GitHubRepositoryModel[] = newRepos.filter((item: GitHubRepositoryModel) => item && item.id !== null && item.id !== undefined);
+  const uids: string[] = [];
 
   if (isArrayPreviousDataRepositories) {
     result.forEach((item1: GitHubRepositoryModel) => {
@@ -57,12 +64,14 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
         item.uid = uuid();
       }
     }
+    uids.push(item.uid);
   }
 
   return {
     repositories: {
       ...newData.repositories,
       data: result,
+      uids,
     },
   };
 }
