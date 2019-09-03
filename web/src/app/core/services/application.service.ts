@@ -17,8 +17,7 @@ export class ApplicationService {
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService
-
-    ) { }
+  ) { }
 
   /**
    * Function to return the application stats
