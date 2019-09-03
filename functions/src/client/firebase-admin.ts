@@ -11,6 +11,7 @@ export declare type DocumentReference = admin.firestore.DocumentReference;
 export declare type Transaction = admin.firestore.Transaction;
 export declare type WriteBatch = admin.firestore.WriteBatch;
 export declare type FieldValue = admin.firestore.FieldValue;
+export declare type CollectionReference = admin.firestore.CollectionReference;
 
 export const IncrementFieldValue: FieldValue = admin.firestore.FieldValue.increment(1);
 

@@ -1,5 +1,6 @@
-import { DocumentData, FirebaseAdmin, QueryDocumentSnapshot } from '../../../client/firebase-admin';
+import { CollectionReference, DocumentData, FirebaseAdmin, QueryDocumentSnapshot, QuerySnapshot, Transaction } from '../../../client/firebase-admin';
 import { RepositoryModel } from '../../../models/index.model';
+import { GitHubRepositoryMapper, GitHubRepositoryModel } from '../repository.mapper';
 import { isExistProperties, Repository, User } from './shared';
 
 type Action = 'created' | 'deleted' | 'archived' | 'unarchived' | 'edited' | 'renamed' | 'transferred' | 'publicized' | 'privatized';
@@ -45,19 +46,23 @@ export class RepositoryEventModel implements RepositoryEventInput {
 
     switch (this.action) {
       case 'edited': {
+        await this.edited();
         break;
       }
       case 'renamed': {
-        await this.renameAction();
+        await this.renamed();
         break;
       }
       case 'transferred': {
+        await this.transferred();
         break;
       }
       case 'publicized': {
+        await this.publicized();
         break;
       }
       case 'privatized': {
+        await this.privatized();
         break;
       }
     }
@@ -65,26 +70,52 @@ export class RepositoryEventModel implements RepositoryEventInput {
 
   }
 
-  private async renameAction(){
-
+  private async edited(): Promise<void> {
     const repository: DocumentData = await RepositoryModel.getRepositoryById(this.repository.id);
-    // const projects: QueryDocumentSnapshot[] = (await FirebaseAdmin.firestore().collection('projects').where('repositories', 'array-contains', repository.uid).get()).docs;
-    
-    const users: QueryDocumentSnapshot[] = (await FirebaseAdmin.firestore().collection('users').get()).docs;
 
-    // TODO rename in project
-    // for(const project of projects) {
-    //   project.data();
-    // };
+    // update repo in users
+    const usersRef: CollectionReference = FirebaseAdmin.firestore().collection('users');
+    const newMinDataRepo: GitHubRepositoryModel = GitHubRepositoryMapper.import(this.repository);
 
-    // TODO rename in user
-    for(const user of users) {
-      user.data();
-    };
+    await FirebaseAdmin.firestore().runTransaction((t: Transaction) => {
+      return t.get(usersRef)
+        .then((snap: QuerySnapshot) => {
+          snap.forEach((element: QueryDocumentSnapshot) => {
+            const userData: DocumentData = element.data;
 
+            if (userData.repositories && Array.isArray(userData.repositories.data) && userData.repositories.data.length > 0) {
+              const repos: GitHubRepositoryModel[] = userData.repositories.data;
+              const foundIndex: number = repos.findIndex((item: GitHubRepositoryModel) => item.uid && item.uid === repository.uid)
+
+              if (foundIndex > -1) {
+                Object.assign(repos[foundIndex], newMinDataRepo);
+                t.update(element.ref, { repositories: { ...userData.repositories, data: repos } });
+              }
+            }
+          });
+
+        });
+    });
+
+    const newDataRepo: GitHubRepositoryModel = GitHubRepositoryMapper.import(this.repository, 'all');
+    Object.assign(repository, newDataRepo);
     await RepositoryModel.saveRepository(repository);
-
   }
 
+  private async renamed(): Promise<void> {
+    await this.edited();
+  }
+
+  private async transferred(): Promise<void> {
+    await this.edited();
+  }
+
+  private async publicized(): Promise<void> {
+    await this.edited();
+  }
+
+  private async privatized(): Promise<void> {
+    await this.edited();
+  }
 
 }
