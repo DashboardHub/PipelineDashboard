@@ -10,3 +10,7 @@ export declare type QueryDocumentSnapshot = admin.firestore.QueryDocumentSnapsho
 export declare type DocumentReference = admin.firestore.DocumentReference;
 export declare type Transaction = admin.firestore.Transaction;
 export declare type WriteBatch = admin.firestore.WriteBatch;
+export declare type FieldValue = admin.firestore.FieldValue;
+
+export const IncrementFieldValue: FieldValue = admin.firestore.FieldValue.increment(1);
+

@@ -38,8 +38,8 @@ export const ping: any = async (projectUid: string, monitorUid: string, type: Pi
     response = await Ping<PingResponse>(url);
   } catch (error) {
     response = {
-      statusCode: error.statusCode,
-      body: error.message,
+      statusCode: error.statusCode || 404,
+      body: error.message || 'Invalid URL',
     }
   }
   const end: number = Date.now();

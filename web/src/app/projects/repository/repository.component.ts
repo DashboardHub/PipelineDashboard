@@ -14,6 +14,7 @@ import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, Repos
 export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
+  public isAlertEnabled: Boolean = false;
 
   @Input()
   public uid: string;
@@ -27,6 +28,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.showWebHookAlert();
     this.repositorySubscription = this.repositoryService
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
@@ -55,5 +57,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     this.repositoryService.createGitWebhook(this.repository)
       .pipe(take(1))
       .subscribe();
+  }
+
+  private showWebHookAlert(): void {
+    setTimeout(() => this.isAlertEnabled = true, 10000);
   }
 }

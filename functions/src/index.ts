@@ -25,6 +25,8 @@ import { onDeleteProject } from './project/delete-project';
 import { onUpdateProject } from './project/update-project';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
 
+import { onCreatePings as onCreatePingsStats, onCreateProject as onCreateProjectStats, onCreateUser as onCreateUserStats } from './application/stats';
+import { updateViews, ProjectInput } from './project/project';
 import { deletePingsAfter30days, runAllMonitors60Mins } from './scheduler/schedule';
 
 
@@ -40,6 +42,7 @@ export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall(
 export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
 export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid, input.type));
 export const deletePingsByMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
+export const updateProjectViews: HttpsFunction = functions.https.onCall((input: ProjectInput, context: CallableContext) => updateViews(input.projectUid));
 
 export const deleteProject: CloudFunction<DocumentSnapshot> = onDeleteProject;
 export const updateProject: CloudFunction<DocumentSnapshot> = onUpdateProject;
@@ -50,3 +53,7 @@ export const delete30DaysPings: CloudFunction<DocumentSnapshot> = deletePingsAft
 export const runPings60Mins: CloudFunction<DocumentSnapshot> = runAllMonitors60Mins;
 export const createUser: CloudFunction<DocumentSnapshot> = onCreateUser;
 export const updateUser: CloudFunction<Change<DocumentSnapshot>> = onUpdateUser;
+
+export const createProjectStat: CloudFunction<DocumentSnapshot> = onCreateProjectStats;
+export const createPingsStats: CloudFunction<DocumentSnapshot> = onCreatePingsStats;
+export const createUserStats: CloudFunction<DocumentSnapshot> = onCreateUserStats;
