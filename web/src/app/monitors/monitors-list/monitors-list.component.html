@@ -1,6 +1,6 @@
 <div class="monitor-list">
   <div class="monitor-list__header" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center"  fxLayoutGap="5px">
       <span *ngIf="!isSmallScreen" class="onitor-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
         <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
       </span>
@@ -17,7 +17,7 @@
   </div>
 
   <div class="monitor-list__alert">
-    <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <span>
         <mat-icon svgIcon="warning_icon"></mat-icon>
       </span>
@@ -45,12 +45,11 @@
         <ng-container matColumnDef="icon">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <!-- <img class="monitor-list__card__content__table__avatar" matListAvatar [src]="element.avatarUrl" [alt]="element.username" /> -->
           </td>
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
-          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+          <td mat-cell *matCellDef="let element"><a [routerLink]="[element.uid,'pings']">{{ element.name }}</a></td>
         </ng-container>
         <ng-container matColumnDef="method">
           <th mat-header-cell *matHeaderCellDef>Method</th>
@@ -82,19 +81,19 @@
             <mat-icon [matMenuTriggerFor]="menu" class="project__list__actions">more_horiz</mat-icon>
             <mat-menu #menu="matMenu">
               <button mat-menu-item [disabled]="manualPing || !project.url" (click)="pingMonitor(element.uid)">
-                <mat-icon svgIcon="ping_icon"></mat-icon> Ping
+                <mat-icon svgIcon="ping_icon"></mat-icon>Ping
               </button>
               <button mat-menu-item [routerLink]="element.uid">
-                <mat-icon svgIcon="edit_icon"></mat-icon> Edit
+                <mat-icon svgIcon="edit_icon"></mat-icon>Edit
               </button>
               <button mat-menu-item (click)="delete(element.uid)">
-                <mat-icon svgIcon="delete_icon"></mat-icon> Delete
+                <mat-icon svgIcon="delete_icon"></mat-icon>Delete
               </button>
             </mat-menu>
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </mat-card-content>

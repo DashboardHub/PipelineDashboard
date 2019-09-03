@@ -1,0 +1,40 @@
+@import "../../../../assets/scss/variable";
+@import "../../../../styles.scss";
+
+.dialog {
+
+  &__header {
+    &__title {
+      font-size: 22px;
+    }
+
+    &__icon {
+      transform: scale(1.5);
+    }
+
+    &__update {
+      font-size: 14px;
+      font-weight: lighter;
+      color: $dark-grey-color;
+    }
+  }
+
+  &__content {
+    padding: 20px 20px;
+
+    &__name {
+      font-size: 20px;
+      @include ellipsisText;
+      max-width: 60vw;
+      font-weight: 300;
+    }
+
+    &__description {
+      @include ellipsisText;
+      max-width: 60vw;
+      font-size: 14px;
+      font-weight: lighter;
+      color: $dark-grey-color;
+    }
+  }
+}

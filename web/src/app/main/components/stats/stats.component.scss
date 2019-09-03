@@ -1,3 +1,59 @@
-mat-card-content {
-  padding: 16px;
+@import "../../../../styles.scss";
+@import "../../../../assets/scss/variable";
+
+.stats {
+
+  &__title {
+    @include pageHeader;
+
+  }
+
+  &__card {
+    @include cardContainer;
+
+    &__header {
+      @include header-icon;
+      background-color: $green-2-color;
+      box-shadow: 0px 3px 6px $green-2-shadow;
+    }
+
+    &__title {
+      @include title;
+
+      &__subtitle {
+        @include subtitle;
+      }
+    }
+
+    &__content {
+      padding: 45px 0px;
+      display: block;
+      overflow: hidden;
+
+      &__item {
+        font-size: 18px;
+
+        &__blue {
+          border-bottom: 2px solid $blue-2-color;
+        }
+
+        &__red {
+          border-bottom: 2px solid $red-color;
+        }
+
+        &__purple {
+          border-bottom: 2px solid $purple-color;
+        }
+
+        &__dark-blue {
+          border-bottom: 2px solid $blue-color;
+        }
+
+        &__number {
+          padding-right: 10px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
 }

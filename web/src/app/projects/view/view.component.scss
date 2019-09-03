@@ -55,13 +55,13 @@
       }
     }
 
-    @media (max-width: $breakpoint-md) {
+    @media (max-width: $breakpoint-lg) {
       .information {
         display: none;
       }
     }
 
-    @media (min-width: $breakpoint-md) {
+    @media (min-width: $breakpoint-lg) {
       .actions-menu {
         display: none;
       }

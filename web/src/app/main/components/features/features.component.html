@@ -69,7 +69,7 @@
           <div>
             <mat-icon svgIcon="{{ menu.icon }}"></mat-icon>
           </div>
-          <span>{{ menu.name }}</span>
+          <span class="feature__card__menu__content__item__text">{{ menu.name }}</span>
         </div>
       </div>
     </div>
@@ -84,17 +84,25 @@
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
-    For solo developers
-    <mat-card class="feature__card__price__card">
+    <div class="feature__card__price__title">
+      For solo developers
+    </div>
+    <mat-card class="feature__card__price__card" fxHide.xs routerLink="/login">
       <div class="feature__card__price__card__item">
         £0.00 Free
       </div>
     </mat-card>
+    <div fxHide.gt-xs class="feature__card__price__card__price">
+      £0.00 Free
+    </div>
+    <mat-card fxHide.gt-xs class="feature__card__price__card__grey">
+      <div class="feature__card__price__card__item">
+        Choose
+      </div>
+    </mat-card>
   </div>
   <div class="feature__card__content">
-
     <div *ngFor="let item of starter" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
-
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
           <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
@@ -129,10 +137,20 @@
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
-    For small teams
-    <mat-card class="feature__card__price__card">
+    <div class="feature__card__price__title">
+      For small teams
+    </div>
+    <mat-card class="feature__card__price__card" fxHide.xs>
       <div class="feature__card__price__card__item">
         £10.00 / month
+      </div>
+    </mat-card>
+    <div fxHide.gt-xs class="feature__card__price__card__price">
+      £10.00 / month
+    </div>
+    <mat-card fxHide.gt-xs class="feature__card__price__card__yellow">
+      <div class="feature__card__price__card__item">
+        Buy
       </div>
     </mat-card>
   </div>
@@ -170,10 +188,20 @@
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
-    For large teams
-    <mat-card class="feature__card__price__card">
+    <div class="feature__card__price__title">
+      For large teams
+    </div>
+    <mat-card class="feature__card__price__card" fxHide.xs>
       <div class="feature__card__price__card__item">
         £60.00 / month
+      </div>
+    </mat-card>
+    <div fxHide.gt-xs class="feature__card__price__card__price">
+      £60.00 / month
+    </div>
+    <mat-card fxHide.gt-xs class="feature__card__price__card__orange">
+      <div class="feature__card__price__card__item">
+        Buy
       </div>
     </mat-card>
   </div>

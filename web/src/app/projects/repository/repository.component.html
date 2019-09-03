@@ -17,9 +17,9 @@
 </div>
 <mat-accordion class="repository">
   <mat-expansion-panel hideToggle #expansion>
-    <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'" fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start">
+    <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
       <div fxLayout="column" class="repository__container">
-        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-md="column" class="header-container">
+        <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-lg="column" class="header-container">
           <div class="repository__container__info">
             <div class="heading repository__header__icon">
               <mat-icon svgIcon="repository_folder"></mat-icon>
@@ -29,7 +29,9 @@
                 {{ repository.fullName }}
               </div>
               <div class="repository__header__panel__description">
-                {{ repository.description }}
+                <span *ngIf="repository.description; else emptyData">
+                  {{ repository.description }}
+                </span>
               </div>
             </div>
           </div>
@@ -64,9 +66,9 @@
 
 
     <mat-divider></mat-divider>
-    <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="20px" fxLayoutAlign="space-between start" fxLayoutAlign.lt-md="around stretch" class="repository__card-list">
+    <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="20px" fxLayoutAlign="space-between start" fxLayoutAlign.lt-lg="around stretch" class="repository__card-list">
 
-      <div fxFlex="33%" fxFlex.sm="100%" fxFlex.xs="100%">
+      <div fxFlex="33%" fxFlex.lt-lg="100%">
         <mat-card class="repository-detail-card">
           <mat-card-header class="red repository-detail-card__header">
             <mat-card-title>
@@ -96,7 +98,7 @@
           <div class="empty">No issues are available</div>
         </ng-template>
       </div>
-      <div fxFlex="33%" fxFlex.sm="100%" fxFlex.xs="100%">
+      <div fxFlex="33%" fxFlex.lt-lg="100%">
         <mat-card class="repository-detail-card">
           <mat-card-header class="orange repository-detail-card__header">
             <mat-card-title>
@@ -129,7 +131,7 @@
         </ng-template>
       </div>
 
-      <div fxFlex="33%" fxFlex.sm="100%" fxFlex.xs="100%">
+      <div fxFlex="33%" fxFlex.lt-lg="100%">
         <mat-card class="repository-detail-card">
           <mat-card-header class="blue repository-detail-card__header">
             <mat-card-subtitle>
@@ -166,7 +168,7 @@
 </mat-accordion>
 <ng-template #latestInformation>
 
-  <div fxLayout fxLayout.sm="column" fxLayoutGap="26px" fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutAlign.lt-md="around stretch" class="dasboard-info">
+  <div fxLayout fxLayout.lt-lg="column" fxLayoutGap="26px" fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutAlign.lt-lg="around stretch" class="dasboard-info">
     <div fxFlex="25%">
       <div class="info">
         <h3 fxLayout fxLayoutAlign="start center" class="info__header__blue">
@@ -278,4 +280,8 @@
       </ng-template>
     </div>
   </div>
+</ng-template>
+
+<ng-template #emptyData>
+  no data
 </ng-template>

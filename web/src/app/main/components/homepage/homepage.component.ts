@@ -21,7 +21,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public users: UserStatsModel[] = [];
   public title: string = 'Public Projects';
   public isSmallScreen: boolean;
-  public displayedColumns: string[] = ['avatar', 'title', 'description'];
+  public activeuserTable: string[] = ['avatar', 'title', 'description'];
+  public projectTable: string[] = ['icon', 'title', 'description'];
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
@@ -39,10 +40,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.displayedColumns = ['avatar', 'title'];
+          this.activeuserTable = ['avatar', 'title'];
+          this.projectTable = ['icon', 'title', 'shortDescription'];
           this.isSmallScreen = true;
         } else {
-          this.displayedColumns = ['avatar', 'title', 'description'];
+          this.activeuserTable = ['avatar', 'title', 'description'];
+          this.projectTable = ['icon', 'title', 'description'];
           this.isSmallScreen = false;
         }
       });
@@ -51,5 +54,12 @@ export class HomepageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
     this.projectSubscription.unsubscribe();
+  }
+  public checkTypeOfProject(project: ProjectModel): string {
+    if (project.type === 'private') {
+      return 'private_icon';
+    } else if (project.type === 'public') {
+      return 'public_icon';
+    }
   }
 }

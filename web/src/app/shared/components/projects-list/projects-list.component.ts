@@ -1,3 +1,5 @@
+import { AuthenticationService } from '@app/core/services/authentication.service';
+
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 // Core components
@@ -26,7 +28,8 @@ export class ProjectsListComponent implements OnChanges {
   public isSmallScreen: boolean;
 
   constructor(
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthenticationService
   ) {
     this.breakpointObserver
       .observe([Breakpoints.Medium])
@@ -55,6 +58,10 @@ export class ProjectsListComponent implements OnChanges {
           this.isSmallScreen = true;
         }
       });
+  }
+
+  isAdmin(project: ProjectModel): boolean {
+    return project.isAdmin(this.authService.profile.uid);
   }
 
   /**

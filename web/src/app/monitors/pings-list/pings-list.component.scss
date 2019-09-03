@@ -1,0 +1,45 @@
+@import "../../../styles.scss";
+@import "../../../assets/scss/variable";
+
+.monitor-ping {
+  @include pageContainer;
+
+  &__header {
+    @include pageHeader;
+  }
+
+  &__card {
+    @include cardContainer;
+
+    &__header {
+      @include header-icon;
+      background-color: $purple-color;
+      box-shadow: 0px 3px 6px $purple-shadow;
+    }
+
+    &__title {
+      @include title;
+      width: 30vh;
+
+      &__subtitle {
+        @include subtitle;
+        width: 35vh;
+      }
+    }
+
+    &__content {
+      padding: 0;
+      display: block;
+      overflow: hidden;
+
+      &__table {
+        width: 100%;
+
+        &__url{
+            @include ellipsisText;
+            width: 90%;
+        }
+      }
+    }
+  }
+}

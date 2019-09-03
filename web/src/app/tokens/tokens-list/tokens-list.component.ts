@@ -21,6 +21,7 @@ export class TokensListComponent {
   private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   public projectUid: string;
   public tokenList: TokenModel[];
+  public displayedColumns: string[] = ['name', 'action'];
 
   constructor(
     private dialog: MatDialog,

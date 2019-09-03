@@ -22,6 +22,10 @@
       padding-top: 70px;
       padding-bottom: 30px;
 
+      &__title {
+        font-size: 16px;
+      }
+
       &__card {
         margin: 10px 0;
 
@@ -35,7 +39,7 @@
 
         @media (max-width: $breakpoint-lg) {
           &__item {
-            font-size: 20px;
+            font-size: 14px;
           }
         }
 
@@ -43,13 +47,48 @@
           &__item {
             font-size: 12px;
           }
+
         }
 
         @media (max-width: $breakpoint-xs) {
           &__item {
             font-size: 22px;
           }
+
+          &__price {
+            color: $dark-grey-color;
+            padding: 20px 0px;
+            font-size: 22px;
+          }
         }
+
+        &__grey {
+          text-align: center;
+          border: 1px solid $dark-grey-color;
+          width: 30vw;
+          cursor: pointer;
+        }
+
+        &__yellow {
+          text-align: center;
+          border: 1px solid $yellow-color;
+          width: 30vw;
+          cursor: pointer;
+        }
+
+        &__orange {
+          text-align: center;
+          border: 1px solid $orange-3-color;
+          width: 30vw;
+          cursor: pointer;
+        }
+      }
+
+      @media (max-width: $breakpoint-md) {
+        &__title {
+          font-size: 12px;
+        }
+
       }
     }
 
@@ -62,7 +101,7 @@
 
       &__type {
 
-        padding: 40px 20px;
+        padding: 50px 20px;
         height: 20px;
         text-align: center;
       }
@@ -71,12 +110,20 @@
         padding-top: 25px;
 
         &__item {
+          padding-left: 5px;
           font-weight: lighter;
           font-size: 20px;
           height: 50px;
           display: flex;
           justify-content: flex-start;
           align-items: center;
+
+          @media(max-width: $breakpoint-md){
+            &__text {
+              @include ellipsisText;
+              width: 15vw;
+            }
+          }
         }
 
         &__item:nth-child(odd) {

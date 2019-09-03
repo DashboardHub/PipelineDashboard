@@ -30,10 +30,12 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     private repositoryService: RepositoryService,
     private sortingService: SortingService
   ) {
-    if (breakpointObserver.isMatched(Breakpoints.Medium)) {
-      this.headerHeight = 60;
-    } else {
+    if (breakpointObserver.isMatched(Breakpoints.Large || Breakpoints.XLarge)) {
+      this.isLargeScreen = true;
       this.headerHeight = 200;
+    } else {
+      this.isLargeScreen = false;
+      this.headerHeight = 100;
     }
   }
 
@@ -55,27 +57,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
         if (this.repository && this.repository.pullRequests.length > 0) {
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
-        if (this.headerHeight === 75) {
-          if (this.repository.fullName.length > 24) {
-            this.headerHeight += 10;
-          }
-          if (this.repository.description) {
-            this.headerHeight += 30;
-          }
-          if (this.repository.contributors && this.repository.contributors.length > 0) {
-            this.headerHeight += 40;
-          } else {
-            this.headerHeight += 20;
-          }
-          this.numberOfDisplayedUsers = 4;
-        }
-        if (this.headerHeight === 50) {
+        if (this.isLargeScreen) {
+          this.headerHeight = 200;
+        } else {
           this.headerHeight = 100;
-          if (this.isLargeScreen) {
-            this.headerHeight = 200;
-            this.isLargeScreen = false;
-          }
-          this.numberOfDisplayedUsers = 8;
         }
       });
     this.breakpointObserver
@@ -101,46 +86,24 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .observe([Breakpoints.Medium])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.headerHeight = 200;
-          this.isLargeScreen = true;
+          this.headerHeight = 100;
+          this.isLargeScreen = false;
         }
       });
     this.breakpointObserver
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.headerHeight = 70;
           this.numberOfDisplayedUsers = 4;
-          if (this.repository.description && this.repository.description.length > 50) {
-            this.headerHeight += 30;
-          }
-          if (this.repository.contributors && this.repository.contributors.length > 0) {
-            this.headerHeight += 35;
-          }
-        } else {
-          this.headerHeight = 50;
-          if (this.repository.contributors && this.repository.contributors.length > 0) {
-            this.headerHeight += 150;
-          }
+          this.headerHeight = 100;
         }
       });
     this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.headerHeight = 75;
+          this.headerHeight = 100;
           this.numberOfDisplayedUsers = 4;
-          if (this.repository.description && this.repository.description.length > 50) {
-            this.headerHeight += 30;
-          }
-          if (this.repository.contributors && this.repository.contributors.length > 0) {
-            this.headerHeight += 30;
-          }
-        } else {
-          this.headerHeight = 50;
-          if (this.repository.contributors && this.repository.contributors.length > 0) {
-            this.headerHeight += 60;
-          }
         }
       });
   }

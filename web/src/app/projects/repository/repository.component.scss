@@ -161,6 +161,7 @@
       font-size: 20px;
       font-weight: lighter;
       word-break: break-word;
+      @include ellipsisText;
     }
 
     &__panel__description {
@@ -169,12 +170,7 @@
       font-weight: lighter;
       letter-spacing: 0.18px;
       color: $dark-grey-color;
-      text-overflow: ellipsis;
-
-      /* Required for text-overflow to do anything */
-      white-space: nowrap;
-      overflow: hidden;
-      // max-height: 19px;
+      @include ellipsisText;
     }
 
     &__contributors {
@@ -211,7 +207,7 @@
     }
   }
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-lg) {
     &__header {
       padding-left: 80px;
 
@@ -297,13 +293,13 @@
     }
   }
 
-  @media (max-width: $breakpoint-md) {
+  @media (max-width: $breakpoint-lg) {
     .latest-header {
       display: none;
     }
   }
 
-  @media (min-width: $breakpoint-md) {
+  @media (min-width: $breakpoint-lg) {
     .latest-body {
       display: none;
     }

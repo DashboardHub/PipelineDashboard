@@ -31,6 +31,17 @@
       overflow: hidden;
       height: 32px;
     }
+
+    &__icon {
+      position: absolute;
+      right: -5px;
+      top: 23px;
+
+      &__item {
+        color: $dark-grey-color;
+        transform: scale(1.5)
+      }
+    }
   }
 
   .menu {
@@ -95,7 +106,14 @@
     }
 
     &__icon {
+      cursor: pointer;
       transform: scale(0.8);
+    }
+
+    &__menu-icon {
+      cursor: pointer;
+      color: $dark-grey-color;
+      transform: scale(1.2);
     }
 
     &__button {

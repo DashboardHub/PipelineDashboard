@@ -1,7 +1,11 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav [mode]="sideNavMode" class="sidenav" [ngClass]="{'sidenav__open': menuTriger}" fixedInViewport="false" role="navigation" [opened]="!isSmallScreen">
-    <div class="heading">
-      <mat-icon svgIcon="logo_icon" class="heading__logo" (click)="menuTriger = !menuTriger"></mat-icon>
+    <div class="heading" (click)="openMenu($event)">
+      <mat-icon svgIcon="logo_icon" class="heading__logo"></mat-icon>
+      <div class="heading__icon" *ngIf="!isSmallScreen" (click)="openMenu($event)">
+        <mat-icon class="heading__icon__item" *ngIf="menuTriger">keyboard_arrow_left</mat-icon>
+        <mat-icon class="heading__icon__item" *ngIf="!menuTriger">keyboard_arrow_right</mat-icon>
+      </div>
     </div>
 
     <mat-nav-list class="menu">
@@ -72,7 +76,15 @@
 
   <mat-sidenav-content [ngClass]="{'move-up': menuTriger, 'move-down': !menuTriger}">
     <mat-toolbar>
-      <div fxHide.xs class="app-toolbar" fxFlex="100" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <div fxHide.xs class="app-toolbar" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
+        <div (click)="openMenu($event)" fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon *ngIf="menuTriger" class="app-toolbar__profile-block__menu-icon">
+            more_vert
+          </mat-icon>
+          <mat-icon *ngIf="!menuTriger" class="app-toolbar__profile-block__menu-icon">
+            format_list_bulleted
+          </mat-icon>
+        </div>
         <div>
           <ng-container *ngTemplateOutlet="headerBlock"></ng-container>
         </div>
@@ -103,6 +115,7 @@
     </mat-toolbar>
     <ng-template #headerBlock>
       <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px" class="app-toolbar__profile-block">
+
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
           <div fxLayoutAlign="space-between center">
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated(); else notification" dashboardLogin>

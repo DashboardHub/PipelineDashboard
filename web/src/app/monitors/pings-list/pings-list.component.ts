@@ -1,3 +1,5 @@
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,10 +22,13 @@ export class PingsListComponent implements OnInit, OnDestroy {
   public pings: PingModel[] = [];
   public projectUid: string;
   public monitorUid: string;
+  public displayedColumns: string[];
+  public isSmallScreen: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private pingService: PingService
+    private pingService: PingService,
+    private breakpointObserver: BreakpointObserver
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +39,18 @@ export class PingsListComponent implements OnInit, OnDestroy {
     this.pingSubscription = this.pingService
       .findAllByMonitor(this.projectUid, this.monitorUid)
       .subscribe((pings: PingModel[]) => this.pings = pings);
+
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.displayedColumns = ['url', 'statusCode'];
+          this.isSmallScreen = true;
+        } else {
+          this.displayedColumns = ['url', 'statusCode', 'duration', 'type', 'time'];
+          this.isSmallScreen = false;
+        }
+      });
   }
 
   ngOnDestroy(): void {

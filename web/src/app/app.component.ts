@@ -165,8 +165,16 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-toll-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'token_white_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-toll-white-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'ping_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-swap_vertical_circle-24px.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'ping_white_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-swap_vertical_white_circle-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
       'edit_icon',
@@ -401,6 +409,22 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/non-auth-header.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'stats_header_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/stats_header.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'stats_event_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/stats_events.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'stats_project_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/stats_project.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'stats_user_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/stats_user.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'header_notificarion_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/notification-header.svg')
     );
@@ -452,6 +476,12 @@ export class AppComponent implements AfterViewInit {
   public closeMenu(): void {
     if (this.isSmallScreen) {
       this.menu.opened = false;
+    }
+  }
+  public openMenu(event: Event): void {
+    event.stopPropagation();
+    if (!this.isSmallScreen) {
+      this.menuTriger = !this.menuTriger;
     }
   }
 
