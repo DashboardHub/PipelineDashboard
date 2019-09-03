@@ -59,6 +59,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  public loadRepository(repositoryName: string): void {
+    this.repositoryService.loadRepository(repositoryName);
+  }
+
   private showWebHookAlert(): void {
     setTimeout(() => this.isAlertEnabled = true, 10000);
   }
