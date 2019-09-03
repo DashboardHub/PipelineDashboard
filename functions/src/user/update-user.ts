@@ -25,7 +25,6 @@ async function updateRepositories(newData: DocumentData, previousData: DocumentD
   if (isArrayPreviousDataRepositories && newRepos.length === oldRepos.length) {
     for (const item1 of newRepos) {
       if ((!item1.uid) || oldRepos.findIndex((item2: GitHubRepositoryModel) => item1.uid === item2.uid) === -1) {
-        Logger.info(item1);
         isNotChanged = false;
         break;
       }

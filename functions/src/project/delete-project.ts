@@ -12,7 +12,7 @@ async function deleteProjectRepositories(projectUid: string, project: ProjectMod
   try {
     if (Array.isArray(project.repositories) && project.repositories.length > 0) {
       for (const repositoryUid of project.repositories) {
-        if (repositoryUid) {
+        if (!repositoryUid) {
           continue;
         }
         const repoRef: DocumentReference = RepositoryModel.getRepositoryReference(repositoryUid);
