@@ -42,6 +42,7 @@
 
     &__content {
       padding: 0;
+      @include tableContainer;
     }
   }
 }

@@ -37,6 +37,7 @@
       padding: 0;
       display: block;
       overflow: hidden;
+      @include tableContainer;
 
       &__table {
         width: 100%;
@@ -45,8 +46,9 @@
           @include ellipsisText;
           max-width: 60vw;
         }
-        &__action{
-            cursor: pointer;
+
+        &__action {
+          cursor: pointer;
         }
       }
     }

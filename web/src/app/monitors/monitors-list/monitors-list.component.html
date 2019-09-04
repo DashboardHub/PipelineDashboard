@@ -1,6 +1,6 @@
 <div class="monitor-list">
   <div class="monitor-list__header" fxLayout="row" fxLayoutAlign="space-between center">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center"  fxLayoutGap="5px">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
       <span *ngIf="!isSmallScreen" class="onitor-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
         <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
       </span>
@@ -42,11 +42,6 @@
 
     <mat-card-content class="monitor-list__card__content">
       <table mat-table [dataSource]="monitors" class="monitor-list__card__content__table">
-        <ng-container matColumnDef="icon">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let element">
-          </td>
-        </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let element"><a [routerLink]="[element.uid,'pings']">{{ element.name }}</a></td>

@@ -57,6 +57,7 @@
       padding: 0;
       display: block;
       overflow: hidden;
+      @include tableContainer;
 
       &__table {
         width: 100%;

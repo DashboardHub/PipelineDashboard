@@ -35,11 +35,14 @@
     }
 
     &__content {
+      padding: 0;
+      @include tableContainer;
+
       &__title {
         font-size: 18px;
         color: $dark-grey-color;
         font-weight: lighter;
-        padding: 16px 0px;
+        padding: 16px 16px;
       }
 
       &__table {
@@ -58,13 +61,13 @@
           &__title {
             @include ellipsisText;
             color: $dark-grey-color;
-            max-width: 30vh;
+            max-width: 40vw;
             min-width: 0vh;
 
             &__main {
               @include ellipsisText;
               color: $dark-grey-3-color;
-              max-width: 30vh;
+              max-width: 40vw;
               min-width: 0vh;
             }
           }
@@ -74,13 +77,13 @@
           &__title {
             @include ellipsisText;
             color: $dark-grey-color;
-            max-width: 24vh;
+            max-width: 70vw;
             min-width: 0vh;
 
             &__main {
               @include ellipsisText;
               color: $dark-grey-3-color;
-              max-width: 24vh;
+              max-width: 70vw;
               min-width: 0vh;
             }
           }

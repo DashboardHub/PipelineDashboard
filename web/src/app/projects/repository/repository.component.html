@@ -7,6 +7,7 @@
       <span>
         Webhook not found on this repository. This is required for realtime data.
       </span>
+
     </div>
     <span>
       <button class="btn-action" mat-stroked-button (click)="createWebhook()">
@@ -15,6 +16,7 @@
     </span>
   </mat-card>
 </div>
+
 <mat-accordion class="repository">
   <mat-expansion-panel hideToggle #expansion>
     <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
@@ -35,19 +37,26 @@
               </div>
             </div>
           </div>
+
           <mat-divider></mat-divider>
           <div fxFlex="50%" class="repository__header__contributors">
-            <div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+              <div fxHide.gt-md>
+                <ng-container *ngTemplateOutlet="refresh"></ng-container>
+              </div>
               <mat-icon *ngIf="!expansion.expanded">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expansion.expanded">keyboard_arrow_up</mat-icon>
             </div>
 
-            <div class="repository__header__contributors__container">
+            <div class="repository__header__contributors__container" fxLayoutGap="10px">
               <div *ngFor="let contributor of repository.contributors | slice:0:numberOfDisplayedUsers" fxLayoutGap="2px">
                 <img class="repository__header__contributors__avatar" matTooltipClass="repository-tooltip" matTooltip="{{ getMoreInformation(contributor) }}" [alt]="contributor.owner.username" [src]="contributor.owner.avatarUrl" />
               </div>
               <div *ngIf="repository.contributors && repository.contributors.length > numberOfDisplayedUsers" class="repository__header__contributors__container__length">
                 +{{ repository.contributors.length - numberOfDisplayedUsers }}
+              </div>
+              <div fxHide.lt-lg>
+                <ng-container *ngTemplateOutlet="refresh"></ng-container>
               </div>
             </div>
           </div>
@@ -284,4 +293,15 @@
 
 <ng-template #emptyData>
   no data
+</ng-template>
+
+<ng-template #refresh>
+  <button mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository.fullName)" [disabled]="manualReload">
+    <span fxLayout="row" fxLayoutAlign="center center">
+      <mat-icon svgIcon="refresh_icon"></mat-icon>
+      <span fxHide.lt-lg fxFlexOffset="10px">
+        Refresh
+      </span>
+    </span>
+  </button>
 </ng-template>

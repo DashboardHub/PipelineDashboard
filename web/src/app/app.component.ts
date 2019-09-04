@@ -137,6 +137,10 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-account_white_circle-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'refresh_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/refresh.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'project_list_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-dashboard-24px.svg')
     );

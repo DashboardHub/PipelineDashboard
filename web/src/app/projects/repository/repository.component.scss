@@ -181,6 +181,19 @@
       justify-content: flex-start;
       align-items: center;
 
+      &__refresh {
+        background: $green-2-color;
+        color: #fff;
+        font-weight: 300;
+        height: 32px;
+        border-radius: 4px;
+
+        @media (max-width: $breakpoint-lg) {
+          min-width: 32px;
+          padding: 4px;
+        }
+      }
+
       // width: 100%;
       &__avatar {
         margin-top: 3px;

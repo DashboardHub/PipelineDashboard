@@ -183,3 +183,8 @@ mat-progress-bar {
 .mat-drawer-inner-container {
   overflow: hidden;
 }
+
+@mixin tableContainer {
+  margin-left: -16px;
+  margin-right: -16px;
+}
