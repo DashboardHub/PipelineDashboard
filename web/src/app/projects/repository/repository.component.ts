@@ -19,6 +19,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   @Input()
   public uid: string;
 
+  public manualReload: boolean = false;
   public repository: RepositoryModel = new RepositoryModel('');
 
   constructor(
@@ -59,8 +60,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public loadRepository(repositoryName: string): void {
-    this.repositoryService.loadRepository(repositoryName);
+  public reloadRepository(repositoryName: string): void {
+    this.manualReload = true;
+    this.repositoryService.loadRepository(repositoryName)
+      .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 
   private showWebHookAlert(): void {
