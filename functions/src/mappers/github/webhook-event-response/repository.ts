@@ -1,4 +1,4 @@
-import { CollectionReference, DocumentData, FirebaseAdmin, QueryDocumentSnapshot, QuerySnapshot, Transaction } from '../../../client/firebase-admin';
+import { DocumentData, FieldPath, FirebaseAdmin, Query, QueryDocumentSnapshot, QuerySnapshot, Transaction } from '../../../client/firebase-admin';
 import { RepositoryModel } from '../../../models/index.model';
 import { GitHubRepositoryMapper, GitHubRepositoryModel } from '../repository.mapper';
 import { isExistProperties, Repository, User } from './shared';
@@ -72,17 +72,14 @@ export class RepositoryEventModel implements RepositoryEventInput {
 
   private async edited(): Promise<void> {
     const repository: DocumentData = await RepositoryModel.getRepositoryById(this.repository.id);
-
     // update repo in users
-    const usersRef: CollectionReference = FirebaseAdmin.firestore().collection('users');
+    const usersRef: Query = FirebaseAdmin.firestore().collection('users').where(new FieldPath('repositories', 'uids'), 'array-contains', repository.uid);
     const newMinDataRepo: GitHubRepositoryModel = GitHubRepositoryMapper.import(this.repository);
-
     await FirebaseAdmin.firestore().runTransaction((t: Transaction) => {
       return t.get(usersRef)
         .then((snap: QuerySnapshot) => {
           snap.forEach((element: QueryDocumentSnapshot) => {
-            const userData: DocumentData = element.data;
-
+            const userData: DocumentData = element.data();
             if (userData.repositories && Array.isArray(userData.repositories.data) && userData.repositories.data.length > 0) {
               const repos: GitHubRepositoryModel[] = userData.repositories.data;
               const foundIndex: number = repos.findIndex((item: GitHubRepositoryModel) => item.uid && item.uid === repository.uid)

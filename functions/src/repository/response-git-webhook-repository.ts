@@ -127,11 +127,7 @@ async function issuesEvent(data: IssuesEventModel): Promise<void> {
 
 async function repositoryEvent(data: RepositoryEventModel): Promise<void> {
   Logger.info('repositoryEvent');
-  // const repository: DocumentData = await getRepository(data.repository.full_name);
-
-  // TODO add parse
-
-  // await saveRepository(repository);
+  await data.updateData();
 }
 
 async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
