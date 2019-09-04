@@ -19,7 +19,7 @@ import {
 } from '../mappers/github/webhook-event-response';
 import { addHubEventToCollection, HubEventActions } from '../mappers/github/webhook-event-response/shared';
 import { RepositoryModel } from '../models/index.model';
-import { DocumentData } from './../client/firebase-admin';
+import { DocumentData, FieldPath, FirebaseAdmin, QuerySnapshot } from './../client/firebase-admin';
 
 // tslint:disable-next-line: typedef
 const cors = CORS({
@@ -203,7 +203,30 @@ async function statusEvent(data: StatusEventModel): Promise<void> {
 }
 
 async function updateContributors(repository: DocumentData): Promise<void> {
-  // TODO return is empty obj
-  const response: GitHubContributorInput[] = await GitHubClient<GitHubContributorInput[]>(`/repos/${repository.fullName}/stats/contributors`);
-  repository.contributors = Array.isArray(response) ? response.map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)) : [];
+  const usersRef: QuerySnapshot = await (FirebaseAdmin.firestore().collection('users').where(new FieldPath('repositories', 'uids'), 'array-contains', repository.uid).get());
+
+  if (!usersRef.empty) {
+    for (const element of usersRef.docs) {
+      const userData: DocumentData = element.data();
+      const githubToken: string = userData && userData.oauth ? userData.oauth.githubToken : null;
+      if (githubToken) {
+        try {
+          // TODO return empty object
+          // const delay: any = (ms: number) => new Promise((_: any) => setTimeout(_, ms));
+          // await delay(30000);
+          const response: GitHubContributorInput[] = await GitHubClient<GitHubContributorInput[]>(`/repos/${repository.fullName}/stats/contributors`, githubToken);
+          if (Array.isArray(response) && response.length > 0) {
+            repository.contributors = response.map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor));
+            Logger.info('Repository contributors updated');
+            break;
+          } else {
+            Logger.info('Repository contributors empty');
+          }
+        } catch (err) {
+          Logger.error(err);
+        }
+      }
+    }
+  }
+
 }
