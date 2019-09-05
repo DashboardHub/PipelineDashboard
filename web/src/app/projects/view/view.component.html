@@ -2,7 +2,6 @@
   <div class="project-body">
     <div class="project-body__header" fxLayout="row" fxLayoutAlign="space-between start">
       <div class="project-body__header__content" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center">
-
         <span [matMenuTriggerFor]="menu" class="project-body__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
           <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
         </span>
@@ -23,7 +22,6 @@
       <div class="project-body__header__content information">
         <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start" *ngIf="isAdmin()">
           <ng-container *ngTemplateOutlet="infoContent"></ng-container>
-
         </span>
       </div>
       <div class="actions-menu">
@@ -53,13 +51,10 @@
           <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
         </div>
       </ng-template>
-
     </div>
-
     <dashboard-monitor-summary [monitors]="project.monitors || []"></dashboard-monitor-summary>
     <div class="repository" *ngFor="let uid of project.repositories">
       <dashboard-repository [uid]="uid"></dashboard-repository>
     </div>
-
   </div>
 </div>

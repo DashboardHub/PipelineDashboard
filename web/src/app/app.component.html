@@ -7,7 +7,6 @@
         <mat-icon class="heading__icon__item" *ngIf="!menuTriger">keyboard_arrow_right</mat-icon>
       </div>
     </div>
-
     <mat-nav-list class="menu">
       <ng-container *ngFor="let item of publicRoutes">
         <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
@@ -15,9 +14,7 @@
             <span>
               <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
             </span>
-            <span>
-              {{ item.title }}
-            </span>
+            <span>{{ item.title }}</span>
           </div>
         </a>
       </ng-container>
@@ -28,36 +25,27 @@
               <span>
                 <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
               </span>
-              <span>
-                {{ item.title }}
-              </span>
+              <span>{{ item.title }}</span>
             </div>
           </a>
         </ng-container>
       </ng-container>
-
       <ng-container *ngFor="let item of generalRoutes">
         <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
           <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
             <span>
               <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
             </span>
-            <span>
-              {{ item.title }}
-            </span>
+            <span>{{ item.title }}</span>
           </div>
         </a>
       </ng-container>
-
       <a mat-list-item class="menu__item" (click)="login(); closeMenu()" routerLinkActive="menu__item__active" *ngIf="!isAuthenticated()" dashboardLogin>
-
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
           <span>
             <mat-icon svgIcon="login_page_icon" class="menu__item__icon"></mat-icon>
           </span>
-          <span>
-            Login
-          </span>
+          <span>Login</span>
         </div>
       </a>
       <a mat-list-item class="menu__item" (click)="logout(); closeMenu()" routerLinkActive="menu__item__active" *ngIf="isAuthenticated()">
@@ -65,15 +53,11 @@
           <span>
             <mat-icon svgIcon="logout_page_icon" class="menu__item__icon"></mat-icon>
           </span>
-          <span>
-            Sign out
-          </span>
+          <span>Sign out</span>
         </div>
-
       </a>
     </mat-nav-list>
   </mat-sidenav>
-
   <mat-sidenav-content [ngClass]="{'move-up': menuTriger, 'move-down': !menuTriger}">
     <mat-toolbar>
       <div fxHide.xs class="app-toolbar" fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center">
@@ -110,12 +94,10 @@
             </mat-menu>
           </div>
         </div>
-
       </div>
     </mat-toolbar>
     <ng-template #headerBlock>
       <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px" class="app-toolbar__profile-block">
-
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
           <div fxLayoutAlign="space-between center">
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated(); else notification" dashboardLogin>
@@ -147,19 +129,16 @@
         </div>
       </div>
     </ng-template>
-
-
     <div class="content-container">
       <mat-divider></mat-divider>
       <mat-progress-bar *ngIf="progress > 0" mode="buffer" color="warn"></mat-progress-bar>
       <router-outlet></router-outlet>
     </div>
-
-    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-md="column-reverse" fxLayoutAlign.lt-md="space-between center" class="footer">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-lg="column-reverse" fxLayoutAlign.lt-lg="space-between center" class="footer">
       <div>
         <span>Copyright &copy; 2018 <a href="https://www.dashboardhub.io" target="_blank" rel="noopener">DashboardHub</a>. All rights reserved <i>({{ version }})</i></span>
       </div>
-      <div fxLayout="row" fxLayout.lt-md="column-reverse">
+      <div fxLayout="row" fxLayout.lt-lg="column-reverse">
         <div fxLayout="row">
           <div>
             <div [routerLink]="['/privacy']" class="footer__button">
@@ -179,7 +158,6 @@
               Feedback
             </div>
           </div>
-
         </div>
         <div fxLayout="row" fxLayoutAlign="center center">
           <mat-icon [style.width.px]="120" svgIcon="assets:dashboardhub"></mat-icon>

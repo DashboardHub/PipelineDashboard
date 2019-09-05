@@ -1,6 +1,5 @@
-@import "../../../../styles.scss";
 @import "../../../../assets/scss/variable";
-
+@import "../../../../assets/scss/mixin.scss";
 .profile {
   @include pageContainer;
 

@@ -1,7 +1,6 @@
 @import "~@angular/material/theming";
 @import "../assets/scss/variable";
-@import "../styles.scss";
-
+@import "../assets/scss/mixin.scss";
 .sidenav-container {
   height: 100%;
   background-color: #eaeaea;

@@ -2,7 +2,6 @@
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="create-project__title">Add Project</div>
   </div>
-
   <div>
     <form (submit)="save()" [formGroup]="projectForm">
       <mat-card class="create-project__card">
@@ -14,7 +13,6 @@
           <mat-card-subtitle class="create-project__card__title__subtitle">Group your repositories into a project view</mat-card-subtitle>
         </mat-card-header>
         <mat-divider></mat-divider>
-
         <mat-card-content fxLayout="column" fxLayoutGap="10px">
           <div class="create-project__card__content__type">
             <label class="create-project__card__content__type__title">Type*</label>
@@ -26,7 +24,6 @@
                 <mat-icon svgIcon="private_icon"></mat-icon>Private
               </mat-radio-button>
             </mat-radio-group>
-
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
             <mat-error *ngIf="projectForm.get(['type']).hasError('required')">This field is required.</mat-error>
@@ -37,7 +34,6 @@
             <mat-error *ngIf="projectForm.get(['title']).hasError('minlength')">Entered text is too short.</mat-error>
             <mat-error *ngIf="projectForm.get(['title']).hasError('maxlength')">Entered text is too long.</mat-error>
           </mat-form-field>
-
           <mat-form-field>
             <input matInput type="text" placeholder="Description" formControlName="description">
             <mat-error *ngIf="projectForm.get(['description']).hasError('minlength')">
@@ -47,14 +43,12 @@
               Entered text is too long.
             </mat-error>
           </mat-form-field>
-
           <mat-form-field>
             <input matInput type="url" placeholder="Url" formControlName="url" pattern="https?://.+">
             <mat-error *ngIf="projectForm.get(['url']).hasError('pattern')">
               Please enter correct URL
             </mat-error>
           </mat-form-field>
-
         </mat-card-content>
         <mat-card-actions>
           <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">

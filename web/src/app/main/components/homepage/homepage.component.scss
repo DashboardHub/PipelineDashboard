@@ -51,26 +51,21 @@
 
         @media(max-width: $breakpoint-xs) {
           &__avatar {
-            margin-right: 12px;
+            margin-right: 10px;
           }
 
           &__icon {
-            margin-right: 20px;
+            margin-right: 10px;
           }
         }
 
         &__description {
-          @include ellipsisText;
-          width: 60vw;
-
-          @media(max-width: $breakpoint-xs) {
-            width: 25vw;
-          }
+          margin-right: 5px;
         }
 
         &__title {
           min-width: 5vw;
-          padding-right: 5px;
+          padding-right: 10px;
         }
 
         &__time {

@@ -4,10 +4,7 @@
       <span>
         <mat-icon svgIcon="warning_icon"></mat-icon>
       </span>
-      <span>
-        Webhook not found on this repository. This is required for realtime data.
-      </span>
-
+      <span>Webhook not found on this repository. This is required for realtime data.</span>
     </div>
     <span>
       <button class="btn-action" mat-stroked-button (click)="createWebhook()">
@@ -16,7 +13,6 @@
     </span>
   </mat-card>
 </div>
-
 <mat-accordion class="repository">
   <mat-expansion-panel hideToggle #expansion>
     <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'" fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
@@ -37,7 +33,6 @@
               </div>
             </div>
           </div>
-
           <mat-divider></mat-divider>
           <div fxFlex="50%" class="repository__header__contributors">
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
@@ -47,7 +42,6 @@
               <mat-icon *ngIf="!expansion.expanded">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expansion.expanded">keyboard_arrow_up</mat-icon>
             </div>
-
             <div class="repository__header__contributors__container" fxLayoutGap="10px">
               <div *ngFor="let contributor of repository.contributors | slice:0:numberOfDisplayedUsers" fxLayoutGap="2px">
                 <img class="repository__header__contributors__avatar" matTooltipClass="repository-tooltip" matTooltip="{{ getMoreInformation(contributor) }}" [alt]="contributor.owner.username" [src]="contributor.owner.avatarUrl" />
@@ -64,7 +58,6 @@
         <div class="latest-header">
           <mat-divider></mat-divider>
           <ng-container *ngTemplateOutlet="latestInformation"></ng-container>
-
         </div>
       </div>
     </mat-expansion-panel-header>
@@ -72,11 +65,8 @@
       <mat-divider></mat-divider>
       <ng-container *ngTemplateOutlet="latestInformation"></ng-container>
     </div>
-
-
     <mat-divider></mat-divider>
     <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="20px" fxLayoutAlign="space-between start" fxLayoutAlign.lt-lg="around stretch" class="repository__card-list">
-
       <div fxFlex="33%" fxFlex.lt-lg="100%">
         <mat-card class="repository-detail-card">
           <mat-card-header class="red repository-detail-card__header">
@@ -92,13 +82,12 @@
               <mat-list-item role="listitem" *ngFor="let issue of repository.issues | slice:0:5">
                 <mat-divider class="repository-detail-card__content__divider"></mat-divider>
                 <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
-                <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues">
-                  <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
+                <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues" fxLayoutGap="5px">
+                  <a href="{{ issue.url }}">#{{ issue.number }}</a>{{ issue.title }}</h4>
                 <span class="repository-detail-card__content__time-container-top">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn | timeAgo }}</p>
                 </span>
-
               </mat-list-item>
             </mat-list>
           </mat-card-content>
@@ -113,9 +102,7 @@
             <mat-card-title>
               <h3 fxLayout fxLayoutAlign="start center">
                 <mat-icon svgIcon="request_white"></mat-icon>
-
                 <div class="repository-detail-card__header__text" fxFlexOffset="15px" fxFlexAlign="end">Pull Requests</div>
-
               </h3>
             </mat-card-title>
           </mat-card-header>
@@ -130,7 +117,6 @@
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn | timeAgo }}</p>
                 </span>
-
               </mat-list-item>
             </mat-list>
           </mat-card-content>
@@ -139,7 +125,6 @@
           <div class="empty">No pull requests are available</div>
         </ng-template>
       </div>
-
       <div fxFlex="33%" fxFlex.lt-lg="100%">
         <mat-card class="repository-detail-card">
           <mat-card-header class="blue repository-detail-card__header">
@@ -164,8 +149,6 @@
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p class="repository-detail-card__content__time" mat-line>{{ event.createdOn | timeAgo }}</p>
                 </span>
-
-
               </mat-list-item>
             </mat-list>
           </mat-card-content>
@@ -173,10 +156,8 @@
       </div>
     </div>
   </mat-expansion-panel>
-
 </mat-accordion>
 <ng-template #latestInformation>
-
   <div fxLayout fxLayout.lt-lg="column" fxLayoutGap="26px" fxLayout.xs="column" fxLayoutAlign="space-around start" fxLayoutAlign.lt-lg="around stretch" class="dasboard-info">
     <div fxFlex="25%">
       <div class="info">
@@ -199,7 +180,6 @@
             </div>
           </div>
         </div>
-
       </div>
       <ng-template #releasesOther>
         <div>No releases are available</div>
@@ -259,7 +239,6 @@
         <div>No contributors are available</div>
       </ng-template>
     </div>
-
     <div fxFlex="25%">
       <div class="info">
         <h3 fxLayout fxLayoutAlign="start center" class="info__header__orange">
@@ -290,11 +269,7 @@
     </div>
   </div>
 </ng-template>
-
-<ng-template #emptyData>
-  no data
-</ng-template>
-
+<ng-template #emptyData>no data</ng-template>
 <ng-template #refresh>
   <button mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository.fullName)" [disabled]="manualReload">
     <span fxLayout="row" fxLayoutAlign="center center">

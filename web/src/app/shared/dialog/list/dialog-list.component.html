@@ -19,7 +19,6 @@
   <mat-divider></mat-divider>
   <div mat-dialog-content class="dialog__content">
     <mat-selection-list #repos>
-
       <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.uid)">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
           <span>
@@ -31,7 +30,6 @@
             <div class="dialog__content__description">{{ repository.description }}</div>
           </span>
         </div>
-
       </mat-list-option>
     </mat-selection-list>
   </div>

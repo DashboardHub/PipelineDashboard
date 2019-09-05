@@ -2,7 +2,6 @@
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="profile__title">Profile</div>
   </div>
-
   <mat-card class="profile__card">
     <mat-card-header>
       <div class="profile__card__header">
@@ -16,16 +15,13 @@
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="profile__card__content">
-
       <mat-tab-group>
         <mat-tab>
           <ng-template mat-tab-label>
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
               <mat-icon svgIcon="overwiew_icon"></mat-icon>
               <div>Overview</div>
-
             </div>
-
           </ng-template>
           <div class="profile__card__content__title">GitHub activity</div>
           <table mat-table [dataSource]=" profile.activity" class="profile__card__content__table">
@@ -35,18 +31,14 @@
                 <div class="profile__card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center">
                   <span fxLayoutGap="15px">
                     <mat-icon *ngIf="!isSmallScreen" mat-list-icon svgIcon="check_icon"></mat-icon>
-                    <span>
-                      {{ element.type }} {{ element.payload.title }}
-                    </span>
+                    <span>{{ element.type }} {{ element.payload.title }}</span>
                   </span>
-
                 </div>
                 <div *ngIf="isSmallScreen" class="profile__card__content__table__title">
                   {{ element.repository.fullName }}
                 </div>
               </td>
             </ng-container>
-
             <ng-container matColumnDef="description">
               <th mat-header-cell *matHeaderCellDef>Description</th>
               <td mat-cell *matCellDef="let element">{{ element.repository.fullName }}</td>
@@ -55,9 +47,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-
         </mat-tab>
-
         <mat-tab>
           <ng-template mat-tab-label>
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
@@ -82,18 +72,14 @@
                 </div>
               </td>
             </ng-container>
-
             <ng-container matColumnDef="description">
               <th mat-header-cell *matHeaderCellDef>Description</th>
               <td mat-cell *matCellDef="let element">{{ element.description }}</td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-
         </mat-tab>
-
         <mat-tab>
           <ng-template mat-tab-label>
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="15px">
@@ -110,15 +96,11 @@
                   <div *ngIf="!isSmallScreen">
                     <mat-icon mat-list-icon svgIcon="security_icon"></mat-icon>
                   </div>
-                  <span *ngIf="isSmallScreen">last login: </span>
-                  <span>
-                    {{ element.date.toDate() | timeAgo }}
-                  </span>
-
+                  <span *ngIf="isSmallScreen">last login:</span>
+                  <span>{{ element.date.toDate() | timeAgo }}</span>
                 </div>
               </td>
             </ng-container>
-
             <ng-container matColumnDef="description">
               <th mat-header-cell *matHeaderCellDef>Description</th>
               <td mat-cell *matCellDef="let element">
@@ -127,13 +109,11 @@
                 </div>
               </td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
         </mat-tab>
       </mat-tab-group>
-
     </mat-card-content>
   </mat-card>
 </div>

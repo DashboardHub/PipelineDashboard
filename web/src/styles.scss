@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'assets/scss/variable.scss';
+@import 'assets/scss/variable';
+@import 'assets/scss/mixin.scss';
 
 @import 'assets/scss/custom-theme.scss';
 
@@ -70,66 +71,6 @@ mat-progress-bar {
   font-size: 0.75rem;
 }
 
-// general style of material components
-@mixin header-icon {
-  position: absolute;
-  padding: 13px;
-  margin-top: -30px !important;
-  margin-right: 15px;
-  float: left;
-  border-radius: 5px;
-  opacity: 1;
-
-  mat-icon {
-    font-size: 24px;
-    line-height: 24px;
-    width: 39px;
-    height: 39px;
-    text-align: center;
-    color: white;
-  }
-}
-
-@mixin subtitle {
-  @include title;
-  font-size: 14px;
-
-  width: 29vh;
-}
-
-@mixin title {
-  @include ellipsisText;
-  padding-left: 60px;
-  width: 30vh;
-  font-weight: lighter;
-}
-
-@mixin pageHeader {
-  font-size: 20px;
-}
-
-@mixin pageContainer {
-  padding: 20px 30px;
-
-  @media (max-width: $breakpoint-xs) {
-    padding: 15px 20px;
-  }
-}
-
-@mixin cardContainer {
-  margin-top: 55px;
-
-  @media (max-width: $breakpoint-xs) {
-    margin-top: 45px;
-  }
-}
-
-@mixin ellipsisText {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .mat-content {
   width: 100%;
 }
@@ -138,7 +79,7 @@ mat-progress-bar {
   white-space: pre-line;
 }
 
-@media (max-width: $breakpoint-xs) {
+@media (max-width: $breakpoint-md) {
   .mat-tab-labels {
     justify-content: center;
   }
@@ -182,9 +123,4 @@ mat-progress-bar {
 
 .mat-drawer-inner-container {
   overflow: hidden;
-}
-
-@mixin tableContainer {
-  margin-left: -16px;
-  margin-right: -16px;
 }

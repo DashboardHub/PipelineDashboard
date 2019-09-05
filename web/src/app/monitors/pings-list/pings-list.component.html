@@ -8,7 +8,6 @@
       <span>Pings</span>
     </div>
   </div>
-
   <mat-card class="monitor-ping__card">
     <mat-card-header>
       <div class="monitor-ping__card__header">
@@ -21,23 +20,18 @@
         You have {{ pings.length }} pings
       </mat-card-subtitle>
     </mat-card-header>
-
     <mat-card-content class="monitor-ping__card__content">
       <table mat-table [dataSource]="pings" class="monitor-ping__card__content__table">
         <ng-container matColumnDef="url">
           <th mat-header-cell *matHeaderCellDef>Url</th>
           <td mat-cell *matCellDef="let element">
             <div fxLayout.xs="column">
-              <span class="monitor-ping__card__content__table__url">
-                {{ element.url }}
-              </span>
-              <span fxHide.gt-xs fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+              <span class="monitor-ping__card__content__table__url">{{ element.url }}</span>
+              <span fxHide.gt-xs fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                 <span>
                   <mat-icon svgIcon="time_icon"></mat-icon>
                 </span>
-                <span>
-                  {{ element.createdOn.toDate() | timeAgo }}
-                </span>
+                <span>{{ element.createdOn.toDate() | timeAgo }} </span>
               </span>
             </div>
           </td>
@@ -45,9 +39,7 @@
         <ng-container matColumnDef="statusCode">
           <th mat-header-cell *matHeaderCellDef>Status Code</th>
           <td mat-cell *matCellDef="let element">
-            <span fxLayoutAlign.xs="center center">
-              {{ element.statusCode }}
-            </span>
+            <span fxLayoutAlign.xs="center center">{{ element.statusCode }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="duration">
@@ -61,13 +53,11 @@
         <ng-container matColumnDef="time">
           <th mat-header-cell *matHeaderCellDef>Last ping</th>
           <td mat-cell *matCellDef="let element">
-            <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <span>
                 <mat-icon svgIcon="time_icon"></mat-icon>
               </span>
-              <span>
-                {{ element.createdOn.toDate() | timeAgo }}
-              </span>
+              <span>{{ element.createdOn.toDate() | timeAgo }}</span>
             </span>
           </td>
         </ng-container>

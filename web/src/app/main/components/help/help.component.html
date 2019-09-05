@@ -2,7 +2,6 @@
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="help__title">Help</div>
   </div>
-
   <mat-card class="help__card">
     <mat-card-header>
       <div class="help__card__header">
@@ -17,11 +16,8 @@
         </form>
       </div>
     </mat-card-header>
-
     <mat-card-content class="help__card__content" fxLayout="column" fxLayoutGap="20px">
-
       <mat-divider></mat-divider>
-
       <mat-nav-list *ngFor="let help of filteredTopics">
         <a (click)="openDialog(help)">
           <mat-icon class="help__card__content__icon" svgIcon="{{ help.icon }}"></mat-icon>
@@ -29,7 +25,6 @@
             <div class="help__card__content__title">{{ help.title }}</div>
             <div class="help__card__content__description">{{ help.description }}</div>
           </div>
-
           <span fxFlex></span>
           <span fxHide.xs fxHide.sm fxFlex="40%" fxFlex.gt-sm="30%" fxLayoutAlign="end center">
             <div>
@@ -40,11 +35,9 @@
         </a>
         <mat-divider></mat-divider>
       </mat-nav-list>
-
       <div *ngIf="filteredTopics?.length === 0">
         <h3>No topics to display.</h3>
       </div>
     </mat-card-content>
   </mat-card>
-
 </div>

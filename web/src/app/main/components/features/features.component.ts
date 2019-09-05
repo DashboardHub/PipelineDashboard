@@ -224,7 +224,7 @@ export class FeaturesComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.breakpointObserver
-      .observe([Breakpoints.XSmall])
+      .observe([Breakpoints.XSmall, Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.isSmallScreen = true;

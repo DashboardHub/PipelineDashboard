@@ -1,5 +1,5 @@
 <div class="feature">
-  <div class="feature__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.xs="space-between center">
+  <div class="feature__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center">
     <div>Features</div>
     <div *ngIf="isSmallScreen" class="feature__title__toogle" fxLayout="row" fxLayoutGap="5px">
       <span>Monthly</span>
@@ -78,31 +78,26 @@
 
 <ng-template #starterBlock>
   <div class="feature__card__header">
-    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" class="feature__card__header__starter">
-      <mat-icon svgIcon="starter_icon" class="feature__card__header__icon"></mat-icon>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" fxLayoutGap.md="5px" class="feature__card__header__starter">
+      <span>
+        <mat-icon svgIcon="starter_icon" class="feature__card__header__icon"></mat-icon>
+      </span>
       <span class="feature__card__header__title">Starter</span>
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
-    <div class="feature__card__price__title">
-      For solo developers
+    <div class="feature__card__price__title">For solo developers
     </div>
-    <mat-card class="feature__card__price__card" fxHide.xs routerLink="/login">
-      <div class="feature__card__price__card__item">
-        £0.00 Free
-      </div>
+    <mat-card class="feature__card__price__card" fxHide.lt-md routerLink="/login">
+      <div class="feature__card__price__card__item">£0.00 Free</div>
     </mat-card>
-    <div fxHide.gt-xs class="feature__card__price__card__price">
-      £0.00 Free
-    </div>
-    <mat-card fxHide.gt-xs class="feature__card__price__card__grey">
-      <div class="feature__card__price__card__item">
-        Choose
-      </div>
+    <div fxHide.gt-sm class="feature__card__price__card__price">£0.00 Free</div>
+    <mat-card fxHide.gt-sm class="feature__card__price__card__grey">
+      <div class="feature__card__price__card__item">Choose</div>
     </mat-card>
   </div>
   <div class="feature__card__content">
-    <div *ngFor="let item of starter" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
+    <div *ngFor="let item of starter" class="feature__card__content__item" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
           <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
@@ -121,41 +116,33 @@
           </div>
         </div>
       </ng-template>
-
       <ng-template #stringValue>
         <div>{{ item.value }}</div>
       </ng-template>
     </div>
   </div>
 </ng-template>
-
 <ng-template #professionalBlock>
   <div class="feature__card__header">
-    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" class="feature__card__header__professional">
-      <mat-icon svgIcon="professional_icon" class="feature__card__header__icon"></mat-icon>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" fxLayoutGap.md="5px" class="feature__card__header__professional">
+      <span>
+        <mat-icon svgIcon="professional_icon" class="feature__card__header__icon"></mat-icon>
+      </span>
       <span class="feature__card__header__title">Professional</span>
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
-    <div class="feature__card__price__title">
-      For small teams
-    </div>
-    <mat-card class="feature__card__price__card" fxHide.xs>
-      <div class="feature__card__price__card__item">
-        £10.00 / month
-      </div>
+    <div class="feature__card__price__title">For small teams</div>
+    <mat-card class="feature__card__price__card" fxHide.lt-md>
+      <div class="feature__card__price__card__item">£10.00 / month</div>
     </mat-card>
-    <div fxHide.gt-xs class="feature__card__price__card__price">
-      £10.00 / month
-    </div>
-    <mat-card fxHide.gt-xs class="feature__card__price__card__yellow">
-      <div class="feature__card__price__card__item">
-        Buy
-      </div>
+    <div fxHide.gt-sm class="feature__card__price__card__price">£10.00 / month</div>
+    <mat-card fxHide.gt-sm class="feature__card__price__card__yellow">
+      <div class="feature__card__price__card__item">Buy</div>
     </mat-card>
   </div>
   <div class="feature__card__content">
-    <div *ngFor="let item of professional" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
+    <div *ngFor="let item of professional" class="feature__card__content__item" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
           <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
@@ -179,34 +166,27 @@
     </div>
   </div>
 </ng-template>
-
 <ng-template #enterpriseBlock>
   <div class="feature__card__header">
-    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" class="feature__card__header__enterprise">
-      <mat-icon svgIcon="enterprise_icon" class="feature__card__header__icon"></mat-icon>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" fxLayoutGap.md="5px" class="feature__card__header__enterprise">
+      <span>
+        <mat-icon svgIcon="enterprise_icon" class="feature__card__header__icon"></mat-icon>
+      </span>
       <span class="feature__card__header__title">Enterprise</span>
     </div>
   </div>
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
-    <div class="feature__card__price__title">
-      For large teams
-    </div>
-    <mat-card class="feature__card__price__card" fxHide.xs>
-      <div class="feature__card__price__card__item">
-        £60.00 / month
-      </div>
+    <div class="feature__card__price__title">For large teams</div>
+    <mat-card class="feature__card__price__card" fxHide.lt-md>
+      <div class="feature__card__price__card__item">£60.00 / month</div>
     </mat-card>
-    <div fxHide.gt-xs class="feature__card__price__card__price">
-      £60.00 / month
-    </div>
-    <mat-card fxHide.gt-xs class="feature__card__price__card__orange">
-      <div class="feature__card__price__card__item">
-        Buy
-      </div>
+    <div fxHide.gt-sm class="feature__card__price__card__price">£60.00 / month</div>
+    <mat-card fxHide.gt-sm class="feature__card__price__card__orange">
+      <div class="feature__card__price__card__item">Buy</div>
     </mat-card>
   </div>
   <div class="feature__card__content">
-    <div *ngFor="let item of enterprise" class="feature__card__content__item" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center">
+    <div *ngFor="let item of enterprise" class="feature__card__content__item" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
           <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">

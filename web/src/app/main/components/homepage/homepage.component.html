@@ -2,11 +2,8 @@
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="home__title">Homepage</div>
   </div>
-
-      <dashboard-stats></dashboard-stats>
+  <dashboard-stats></dashboard-stats>
   <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign.lt-lg="space-between scretch" fxLayoutAlign="space-between center">
- 
-
     <mat-card class="home__users-card" fxFlex="49">
       <mat-card-header>
         <div class="home__users-card__header">
@@ -36,11 +33,8 @@
                 <a href="https://github.com/{{element.username}}">{{ element.name ? element.name : element.username }}</a>
                 <div *ngIf="isSmallScreen" fxLayout="row" fxLayoutAlign="start center" class="home__users-card__content__table__time">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <span>
-                    {{ element.lastUpdated.toDate() | timeAgo }}
-                  </span>
+                  <span>{{ element.lastUpdated.toDate() | timeAgo }}</span>
                 </div>
-
               </div>
             </td>
           </ng-container>
@@ -92,9 +86,7 @@
 
                 <div *ngIf="isSmallScreen" fxLayout="row" fxLayoutAlign="start center" class="home__users-card__content__table__time">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <span>
-                    {{ element.updatedOn.toDate() | timeAgo }}
-                  </span>
+                  <span>{{ element.updatedOn.toDate() | timeAgo }}</span>
                 </div>
               </div>
             </td>

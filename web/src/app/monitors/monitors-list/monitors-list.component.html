@@ -15,18 +15,14 @@
       </button>
     </div>
   </div>
-
   <div class="monitor-list__alert">
     <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <span>
         <mat-icon svgIcon="warning_icon"></mat-icon>
       </span>
-      <span>
-        Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run
-      </span>
+      <span>Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run</span>
     </mat-card>
   </div>
-
   <mat-card class="monitor-list__card">
     <mat-card-header>
       <div class="monitor-list__card__header">
@@ -39,7 +35,6 @@
         You have {{ monitors.length }} monitors
       </mat-card-subtitle>
     </mat-card-header>
-
     <mat-card-content class="monitor-list__card__content">
       <table mat-table [dataSource]="monitors" class="monitor-list__card__content__table">
         <ng-container matColumnDef="name">
@@ -65,9 +60,7 @@
         <ng-container matColumnDef="ping">
           <th mat-header-cell *matHeaderCellDef>Ping</th>
           <td mat-cell *matCellDef="let element" class="monitor-list__card__content__table__ping">
-            <span>
-              Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings : {{ element.unsuccessgulPings || 0 }}
-            </span>
+            <span>Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings : {{ element.unsuccessgulPings || 0 }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="action">
@@ -87,7 +80,6 @@
             </mat-menu>
           </td>
         </ng-container>
-
         <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
