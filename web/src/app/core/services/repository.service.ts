@@ -39,7 +39,7 @@ export class RepositoryService {
   // This function loads all the available repositories
   public loadRepository(repo: RepositoryModel): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
-    return callable({ uid: repo.uid, fullName: repo.fullName, token: this.authService.profile.oauth.githubToken });
+    return callable({ repository: repo, token: this.authService.profile.oauth.githubToken });
   }
 
   public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
