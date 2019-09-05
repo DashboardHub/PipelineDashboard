@@ -14,6 +14,7 @@ export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = fires
       const newData: DocumentData = change.after.data();
 
       if (!newData.projects || Array.isArray(newData.projects) && newData.projects.length === 0) {
+        Logger.info(`Delete repository ${context.params.repositoryUid}`);
         return RepositoryModel.getRepositoryReference(context.params.repositoryUid).delete();
       }
 

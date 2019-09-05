@@ -22,7 +22,7 @@ export const onCreateGitWebhookRepository: any = async (token: string, repositor
     repository.webhook = webhook;
     await repositorySnapshot.update(repository);
 
-    Logger.info({ webhook });
+    Logger.info(webhook ? 'Webhook created' : 'Webhook empty');
 
     return repository;
   } catch (error) {
@@ -71,5 +71,5 @@ export async function getWebhook(repositoryFullName: string, token: string): Pro
     await deleteWebhook(repositoryFullName, exist.id, token);
   }
 
-    return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryFullName, token));
+  return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryFullName, token));
 }

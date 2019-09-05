@@ -1,5 +1,8 @@
 mat-card {
   margin-bottom: 1rem;
+  mat-card-title mat-icon{
+    cursor: pointer;
+  }
 }
 
 mat-list {

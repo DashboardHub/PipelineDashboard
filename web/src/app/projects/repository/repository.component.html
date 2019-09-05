@@ -1,6 +1,10 @@
 <mat-card *ngIf="repository">
   <mat-card-header>
-    <mat-card-title>{{ repository.fullName }}</mat-card-title>
+    <mat-card-title>{{ repository.fullName }}
+      <button mat-raised-button type="submit" color="accent" (click)="reloadRepository(repository)" [disabled]="manualReload">
+        Refresh <mat-icon>refresh</mat-icon>
+      </button>
+    </mat-card-title>
     <mat-card-subtitle>{{ repository.description }}</mat-card-subtitle>
     <span fxFlex></span>
     <span *ngIf="repository.fork">
