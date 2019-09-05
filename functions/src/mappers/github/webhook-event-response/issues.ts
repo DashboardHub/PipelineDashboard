@@ -61,81 +61,29 @@ export class IssuesEventModel implements IssuesEventInput, HubEventActions {
     switch (this.action) {
       case 'opened': {
         this.opened(repository);
-
         break;
       }
+
+      case 'pinned':
+      case 'unpinned':
+      case 'reopened':
+      case 'assigned':
+      case 'unassigned':
+      case 'labeled':
+      case 'unlabeled':
+      case 'locked':
+      case 'unlocked':
+      case 'milestoned':
+      case 'demilestoned':
+      case 'transferred':
       case 'edited': {
         this.edited(repository);
         break;
       }
 
+      case 'closed':
       case 'deleted': {
         this.deleted(repository);
-        break;
-      }
-
-      case 'transferred': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'pinned': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'unpinned': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'closed': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'reopened': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'assigned': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'unassigned': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'labeled': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'unlabeled': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'locked': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'unlocked': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'milestoned': {
-        this.edited(repository);
-        break;
-      }
-
-      case 'demilestoned': {
-        this.edited(repository);
         break;
       }
 
