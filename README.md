@@ -4,7 +4,9 @@
 
 The **heartbeat** of your project, easily see an overview of your project and display your **deployed versions** and **monitor** them.
 
-Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/7)
+Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/9)
+
+![Dashboard](https://user-images.githubusercontent.com/624760/64192563-e1b77100-ce72-11e9-9e4c-889990546b9d.png)
 
 ## WANT TO GET INVOLVED? Don't know how? ...
 

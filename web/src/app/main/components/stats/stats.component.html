@@ -1,0 +1,24 @@
+<div class="mat-content">
+  <mat-card *ngIf="stats">
+    <mat-card-header>
+      <mat-card-title>Application Statistics</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div fxLayout="row">
+        <div fxFlex="25%">
+          <h4>Users: {{ stats.users }}</h4>
+        </div>
+        <div fxFlex="25%">
+          <h4>Projects: {{ stats.projects }}</h4>
+        </div>
+        <div fxFlex="25%">
+          <h4>Pings: {{ stats.pings }}</h4>
+        </div>
+        <div fxFlex="25%">
+          <h4>Events: {{ stats.events }}</h4>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
