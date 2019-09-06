@@ -124,3 +124,10 @@ mat-progress-bar {
 .mat-drawer-inner-container {
   overflow: hidden;
 }
+.mat-card-header{
+  .mat-card-header-text {
+    margin-top: -9px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}

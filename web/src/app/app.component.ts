@@ -422,7 +422,7 @@ export class AppComponent implements AfterViewInit {
     );
     this._iconRegistry.addSvgIcon(
       'stats_project_icon',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/stats_project.svg')
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/objects_icon.svg')
     );
     this._iconRegistry.addSvgIcon(
       'stats_user_icon',
