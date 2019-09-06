@@ -124,7 +124,8 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public reloadRepository(repositoryName: string): void {
+  public reloadRepository(repositoryName: string, event: Event): void {
+    event.stopPropagation();
     this.manualReload = true;
     this.repositoryService.loadRepository(repositoryName)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;

@@ -30,7 +30,7 @@
             <th mat-header-cell *matHeaderCellDef>Title</th>
             <td mat-cell *matCellDef="let element">
               <div fxLayout.xs="column" fxLayoutAlign.xs="start start" class="home__users-card__content__table__title">
-                <a href="https://github.com/{{element.username}}">{{ element.name ? element.name : element.username }}</a>
+                <a href="https://github.com/{{ element.username }}">{{ element.name ? element.name : element.username }}</a>
                 <div *ngIf="isSmallScreen" fxLayout="row" fxLayoutAlign="start center" class="home__users-card__content__table__time">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <span>{{ element.lastUpdated.toDate() | timeAgo }}</span>
@@ -72,7 +72,7 @@
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <mat-icon svgIcon="{{checkTypeOfProject(element)}}" class="home__users-card__content__table__icon"></mat-icon>
+              <mat-icon svgIcon="{{ checkTypeOfProject(element) }}" class="home__users-card__content__table__icon"></mat-icon>
             </td>
           </ng-container>
 
@@ -96,7 +96,7 @@
             <th mat-header-cell *matHeaderCellDef>Description </th>
             <td mat-cell *matCellDef="let element">
               <div class="home__users-card__content__table__description">
-                {{ element.description  || 'no description' }} | Views: {{element.views}} | Last Updated: {{ element.updatedOn.toDate() | timeAgo }}
+                {{ element.description  || 'no description' }} | Views: {{ element.views }} | Last Updated: {{ element.updatedOn.toDate() | timeAgo }}
               </div>
             </td>
           </ng-container>
@@ -104,7 +104,7 @@
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
               <div class="home__users-card__content__table__description">
-                {{ element.description  || 'no description' }} | Views: {{element.views}}
+                {{ element.description  || 'no description' }} | Views: {{ element.views }}
               </div>
             </td>
           </ng-container>

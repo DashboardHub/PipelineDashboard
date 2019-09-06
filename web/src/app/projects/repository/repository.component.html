@@ -254,7 +254,7 @@
           </div>
           <div fxLayout="column" fxLayoutAlign="center start">
             <div class="info__body__description" *ngIf="repository.pullRequests && repository.pullRequests.length > 0; else otherLatestPR">
-              <a href="{{ repository.pullRequests[0].url}}">{{ repository.pullRequests[0].id }}</a>
+              <a href="{{ repository.pullRequests[0].url }}">{{ repository.pullRequests[0].id }}</a>
             </div>
             <div>
               <p class="info__body__line" mat-line *ngIf="repository.pullRequests && repository.pullRequests.length > 0">{{ repository.pullRequests[0].title }}</p>
@@ -271,7 +271,7 @@
 </ng-template>
 <ng-template #emptyData>no data</ng-template>
 <ng-template #refresh>
-  <button mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository.fullName)" [disabled]="manualReload">
+  <button mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository.fullName, $event)" [disabled]="manualReload">
     <span fxLayout="row" fxLayoutAlign="center center">
       <mat-icon svgIcon="refresh_icon"></mat-icon>
       <span fxHide.lt-lg fxFlexOffset="10px">

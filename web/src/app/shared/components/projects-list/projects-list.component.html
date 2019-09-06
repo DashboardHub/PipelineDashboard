@@ -3,7 +3,7 @@
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef>Type</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon svgIcon="{{checkTypeOfProject(element)}}"></mat-icon>
+        <mat-icon svgIcon="{{ checkTypeOfProject(element) }}"></mat-icon>
       </td>
     </ng-container>
     <ng-container matColumnDef="alert">

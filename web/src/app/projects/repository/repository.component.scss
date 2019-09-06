@@ -194,7 +194,13 @@
         }
       }
 
-      // width: 100%;
+      &__refresh:disabled {
+        color: #fff;
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+      }
+
       &__avatar {
         margin-top: 3px;
         width: 32px;
