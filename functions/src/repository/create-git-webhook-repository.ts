@@ -40,8 +40,9 @@ export function createWebhook(repositoryFullName: string, token: string): Promis
     events: enviroment.githubWebhook.events,
     config: {
       url: enviroment.githubWebhook.url,
-      content_type: 'json',
-      insecure_ssl: '0',
+      secret: enviroment.githubWebhook.secret,
+      content_type: enviroment.githubWebhook.content_type,
+      insecure_ssl: enviroment.githubWebhook.insecure_ssl,
     },
   }
   return GitHubClientPost<GitHubRepositoryWebhookResponse>(`/repos/${repositoryFullName}/hooks`, token, body);
