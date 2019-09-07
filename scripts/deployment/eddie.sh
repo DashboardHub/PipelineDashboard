@@ -2,6 +2,7 @@
 
 # FUNCTIONS
 (cd functions; npm install)
+(cd functions; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/'$FIREBASE_FUNCTIONS_URL_EDDIE'/g' src/environments/environment.ts)
 
 # WEB
 (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.eddie-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)

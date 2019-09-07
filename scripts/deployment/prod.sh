@@ -2,9 +2,10 @@
 
 # FUNCTIONS
 (cd functions; npm install)
+(cd functions; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/'$FIREBASE_FUNCTIONS_URL_PROD'/g' src/environments/environment.ts)
 
 # WEB
-(cd web/src/environments; sed -i 's/x\.x\.x/v0.11.prod-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
+(cd web/src/environments; sed -i 's/x\.x\.x/v0.11-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_API_KEY }}/'$FIREBASE_API_KEY_PROD'/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_AUTH_DOMAIN }}/'$FIREBASE_AUTH_DOMAIN_PROD'/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_DATABASE_URL }}/'$FIREBASE_DATABASE_URL_PROD'/g' environment.prod.ts)
