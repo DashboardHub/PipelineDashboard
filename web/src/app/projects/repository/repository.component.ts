@@ -15,6 +15,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
   public isAlertEnabled: Boolean = false;
+  public rating: number;
 
   @Input()
   public uid: string;
@@ -34,6 +35,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
+        this.getRepoRating();
         if (this.repository && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
@@ -64,6 +66,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     this.manualReload = true;
     this.repositoryService.loadRepository(repositoryName)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
+  }
+
+  getRepoRating(): void {
+    this.rating = this.repositoryService.getRepoRating(this.repository);
   }
 
   private showWebHookAlert(): void {

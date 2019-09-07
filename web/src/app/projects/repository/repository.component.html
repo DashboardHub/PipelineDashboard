@@ -2,8 +2,9 @@
   <mat-card-header>
     <mat-card-title>{{ repository.fullName }}
       <button mat-raised-button type="submit" color="accent" (click)="reloadRepository(repository.fullName)" [disabled]="manualReload">
-        Refresh <mat-icon>refresh</mat-icon>
+        Refresh <mat-icon>refresh</mat-icon> 
       </button>
+      <span class="rating" *ngIf="rating">Rating: {{ rating }}</span>
     </mat-card-title>
     <mat-card-subtitle>{{ repository.description }}</mat-card-subtitle>
     <span fxFlex></span>
