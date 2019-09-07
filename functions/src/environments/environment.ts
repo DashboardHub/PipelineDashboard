@@ -1,7 +1,7 @@
 
 export const enviroment: Config = {
   githubWebhook: {
-    url: '{{ FIREBASE_FUNCTIONS_URL }}/responseGitWebhookRepository',
+    url: 'https://{{ FIREBASE_FUNCTIONS_URL }}.cloudfunctions.net/responseGitWebhookRepository',
     events: [
       // IMPLEMENTED
       'create',
