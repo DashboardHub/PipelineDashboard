@@ -2,7 +2,7 @@
 
 # FUNCTIONS
 (cd functions; npm install)
-(cd functions; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/'$FIREBASE_FUNCTIONS_URL_PROD'/g' src/environments/environment.ts)
+(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/https://us-central1-pipelinedashboard.cloudfunctions.net/g' environment.ts)
 
 # WEB
 (cd web/src/environments; sed -i 's/x\.x\.x/v0.11-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
