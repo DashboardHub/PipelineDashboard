@@ -1,35 +1,21 @@
-import { RepositoryModel } from '../models/index.model';
-import { DocumentData, DocumentReference } from './../client/firebase-admin';
+import { DocumentData, DocumentReference, FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClientDelete } from './../client/github';
 import { Logger } from './../client/logger';
 
 export interface DeleteGitWebhookRepositoryInput {
   token: string;
-  data: { uid?: string, id?: number };
+  repositoryUid: string;
 }
 
-export const onDeleteGitWebhookRepository: any = async (token: string, data: { uid?: string, id?: number }) => {
-  let repository: DocumentData;
-  let repositoryRef: DocumentReference;
-
-  if (!(data && (data.uid || data.id))) {
-    Logger.error('Invalid input data!');
-    return null;
-  }
-
-  if (data.uid) {
-    repositoryRef = RepositoryModel.getRepositoryReference(data.uid);
-    repository = (await repositoryRef.get()).data();
-  } else if (data.id) {
-    repository = await RepositoryModel.getRepositoryById(data.id);
-    repositoryRef = RepositoryModel.getRepositoryReference(repository.uid);
-  }
+export const onDeleteGitWebhookRepository: any = async (token: string, repositoryUid: string) => {
+  const repositorySnapshot: DocumentReference = FirebaseAdmin.firestore().collection('repositories').doc(repositoryUid);
+  const repository: DocumentData = (await repositorySnapshot.get()).data();
 
   try {
-    if (repository && repository.projects && repository.projects.length === 1 && repository.webhook) {
-      await deleteWebhook(repository.fullName, repository.webhook.id, token);
+    if (repository.projects && repository.projects.length === 1 && repository.webhook) {
+      await deleteWebhook(repository, token);
       repository.webhook = null;
-      await repositoryRef.update(repository);
+      await repositorySnapshot.update(repository);
     }
 
     Logger.info(`Webhook removed for ${repository.fullName}`);
@@ -43,6 +29,6 @@ export const onDeleteGitWebhookRepository: any = async (token: string, data: { u
 };
 
 
-export function deleteWebhook(repositoryFullName: string, webhookId: number, token: string): Promise<void> {
-  return GitHubClientDelete<void>(`/repos/${repositoryFullName}/hooks/${webhookId}`, token);
+function deleteWebhook(repository: DocumentData, token: string): Promise<void> {
+  return GitHubClientDelete<void>(`/repos/${repository.fullName}/hooks/${repository.webhook.id}`, token);
 }

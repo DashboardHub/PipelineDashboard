@@ -1,7 +1,7 @@
 import { GitHubEventType } from './event.mapper';
 
 export interface GitHubPayloadInput {
-  title?: string;
+  title: string;
   action?: string;
   ref?: string;
   ref_type?: string;
@@ -15,9 +15,7 @@ export interface GitHubPayloadInput {
     body: string;
   };
   release?: {
-    tag_name: string;
-    target_commitish: string;
-    name?: string;
+    name: string;
   };
 }
 
@@ -49,7 +47,7 @@ export class GitHubPayloadMapper {
         output.title = `${input.ref_type}: ${input.ref}`;
         break;
       case 'ReleaseEvent':
-        output.title = `${input.action}: ${input.release.tag_name}@${input.release.target_commitish}` + (input.release.name ? ` - ${input.release.name}` : '');
+        output.title = `${input.action}: ${input.release.name}`;
         break;
       case 'WatchEvent':
         output.title = `${input.action} watching`;

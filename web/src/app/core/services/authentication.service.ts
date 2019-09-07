@@ -74,7 +74,7 @@ export class AuthenticationService {
   // This function used to login via github
   public login(): void {
     const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
-    provider.addScope('public_repo,admin:repo_hook');
+    provider.addScope('repo,admin:repo_hook');
     const subscription: Subscription = from(this.afAuth.auth.signInWithPopup(provider))
       .pipe(
         tap(() => this.activityService.setProgressBar(true)),
