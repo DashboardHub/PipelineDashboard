@@ -1,16 +1,12 @@
 import { delete as del, get, post } from 'request-promise-native';
 
-export async function GitHubClient<T>(uri: string, token?: string): Promise<T> {
-  const headers: any = {
-    'User-Agent': 'DashboardHub',
-  };
-  if (token) {
-    headers['Authorization'] = `token ${token}`;
-  }
-
+export async function GitHubClient<T>(uri: string, token: string): Promise<T> {
   return <T>await get({
     uri: `https://api.github.com${uri}`,
-    headers,
+    headers: {
+      'User-Agent': 'DashboardHub',
+      'Authorization': `token ${token}`,
+    },
     json: true,
   });
 };

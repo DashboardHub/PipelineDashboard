@@ -14,7 +14,7 @@ import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, Repos
 export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
-  public isAlertEnabled: boolean = false;
+  public isAlertEnabled: Boolean = false;
 
   @Input()
   public uid: string;
@@ -60,9 +60,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public reloadRepository(repository: RepositoryModel): void {
+  public reloadRepository(repositoryName: string): void {
     this.manualReload = true;
-    this.repositoryService.loadRepository(repository)
+    this.repositoryService.loadRepository(repositoryName)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 

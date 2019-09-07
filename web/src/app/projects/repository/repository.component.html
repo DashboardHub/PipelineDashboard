@@ -1,7 +1,7 @@
 <mat-card *ngIf="repository">
   <mat-card-header>
     <mat-card-title>{{ repository.fullName }}
-      <button mat-raised-button type="submit" color="accent" (click)="reloadRepository(repository)" [disabled]="manualReload">
+      <button mat-raised-button type="submit" color="accent" (click)="reloadRepository(repository.fullName)" [disabled]="manualReload">
         Refresh <mat-icon>refresh</mat-icon>
       </button>
     </mat-card-title>

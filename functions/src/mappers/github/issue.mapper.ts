@@ -1,8 +1,11 @@
+// Third party modules
+import { firestore } from 'firebase-admin';
+
 // Dashboard hub firebase functions mappers/models
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
 export interface GitHubIssueInput {
-  id: number;
+  id: string;
   html_url: string;
   state: string;
   title: string;
@@ -10,12 +13,12 @@ export interface GitHubIssueInput {
   body: string;
   user: GitHubUserInput;
   assignees: GitHubUserInput[];
-  created_at: string;
-  updated_at: string;
+  created_at: firestore.Timestamp;
+  updated_at: firestore.Timestamp;
 }
 
 export interface GitHubIssueModel {
-  uid: number;
+  uid: string;
   url: string;
   state: string;
   title: string;
@@ -23,8 +26,8 @@ export interface GitHubIssueModel {
   description: string;
   owner: GitHubUserModel;
   assignees: GitHubUserModel[];
-  createdOn: string;
-  updatedOn: string;
+  createdOn: firestore.Timestamp;
+  updatedOn: firestore.Timestamp;
 }
 
 export class GitHubIssueMapper {

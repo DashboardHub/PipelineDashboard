@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
-import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
+import { ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',
@@ -53,14 +53,13 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .pipe(
-        take(1),
-        filter((selectedRepositories: { value: RepositoryModel }[]) => !!selectedRepositories),
-        switchMap((selectedRepositories: { value: RepositoryModel }[]) => this.projectService.saveRepositories(
+        filter((selectedRepositories: { value: string }[]) => !!selectedRepositories),
+        switchMap((selectedRepositories: { value: string }[]) => this.projectService.saveRepositories(
           this.project,
-          selectedRepositories.map((item: { value: RepositoryModel }) => item.value).filter((value: RepositoryModel) => value.uid)
+          selectedRepositories.map((fullName: { value: string }) => fullName.value)
         ))
       )
-      .subscribe();
+      .subscribe(() => true);
   }
 
   // This function delete the project
