@@ -24,18 +24,13 @@ export class FeaturesComponent implements OnInit {
     },
     {
       icon: 'public_unviroment_icon',
-      name: 'Unlimited public environments',
-      value: true,
-    },
-    {
-      icon: 'unlim_releases_icon',
-      name: 'Unlimited releases',
+      name: 'Unlimited public projects',
       value: true,
     },
     {
       icon: 'monitor_enviroments_icon',
       name: 'Monitors per enviroment',
-      value: '1 monitor',
+      value: '3 monitor',
     },
     {
       icon: 'private_enviroment_icon',
@@ -45,31 +40,26 @@ export class FeaturesComponent implements OnInit {
     {
       icon: 'followers_icon',
       name: 'Unlimited followers',
-      value: true,
+      value: false,
     },
     {
       icon: 'unlim_notification_icon',
       name: 'Unlimited notifications',
-      value: true,
+      value: false,
     },
     {
       icon: 'webhook_icon',
-      name: 'Notification webhooks',
+      name: 'Realtime webhooks',
       value: true,
     },
     {
       icon: 'badges_2_icon',
       name: 'Badges',
-      value: true,
+      value: false,
     },
     {
       icon: 'graphs_icon',
       name: 'Deployments/Releases graphs',
-      value: false,
-    },
-    {
-      icon: 'sheduled_releases_icon',
-      name: 'Scheduled releases',
       value: false,
     },
     {
@@ -95,11 +85,6 @@ export class FeaturesComponent implements OnInit {
       value: true,
     },
     {
-      icon: 'unlim_releases_icon',
-      name: 'Unlimited releases',
-      value: true,
-    },
-    {
       icon: 'monitor_enviroments_icon',
       name: 'Monitors per enviroment',
       value: '5 monitors',
@@ -112,12 +97,12 @@ export class FeaturesComponent implements OnInit {
     {
       icon: 'followers_icon',
       name: 'Unlimited followers',
-      value: true,
+      value: false,
     },
     {
       icon: 'unlim_notification_icon',
       name: 'Unlimited notifications',
-      value: true,
+      value: false,
     },
     {
       icon: 'webhook_icon',
@@ -127,17 +112,12 @@ export class FeaturesComponent implements OnInit {
     {
       icon: 'badges_2_icon',
       name: 'Badges',
-      value: true,
+      value: false,
     },
     {
       icon: 'graphs_icon',
       name: 'Deployments/Releases graphs',
-      value: true,
-    },
-    {
-      icon: 'sheduled_releases_icon',
-      name: 'Scheduled releases',
-      value: true,
+      value: false,
     },
     {
       icon: 'export_data_icon',
@@ -162,14 +142,9 @@ export class FeaturesComponent implements OnInit {
       value: true,
     },
     {
-      icon: 'unlim_releases_icon',
-      name: 'Unlimited releases',
-      value: true,
-    },
-    {
       icon: 'monitor_enviroments_icon',
       name: 'Monitors per enviroment',
-      value: '20 monitors',
+      value: '10 monitors',
     },
     {
       icon: 'private_enviroment_icon',
@@ -179,12 +154,12 @@ export class FeaturesComponent implements OnInit {
     {
       icon: 'followers_icon',
       name: 'Unlimited followers',
-      value: true,
+      value: false,
     },
     {
       icon: 'unlim_notification_icon',
       name: 'Unlimited notifications',
-      value: true,
+      value: false,
     },
     {
       icon: 'webhook_icon',
@@ -194,27 +169,27 @@ export class FeaturesComponent implements OnInit {
     {
       icon: 'badges_2_icon',
       name: 'Badges',
-      value: true,
+      value: false,
     },
     {
       icon: 'graphs_icon',
       name: 'Deployments/Releases graphs',
-      value: true,
+      value: false,
     },
     {
       icon: 'sheduled_releases_icon',
       name: 'Scheduled releases',
-      value: true,
+      value: false,
     },
     {
       icon: 'export_data_icon',
       name: 'Export data',
-      value: true,
+      value: false,
     },
     {
       icon: 'managment_icon',
       name: 'User management',
-      value: true,
+      value: false,
     },
   ];
   public isSmallScreen: boolean;
