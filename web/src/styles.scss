@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'assets/scss/variable.scss';
+@import 'assets/scss/variable';
+@import 'assets/scss/mixin.scss';
 
 @import 'assets/scss/custom-theme.scss';
 
@@ -20,26 +21,6 @@ a {
   }
 }
 
-table {
-  border-collapse: collapse;
-  word-break: keep-all;
-
-  th {
-    text-align: center;
-  }
-
-  th,
-  td {
-    padding: 0.5em;
-    border: 1px #cacaca solid;
-  }
-
-  tbody {
-    tr:nth-child(even) {
-      background-color: $grey-color;
-    }
-  }
-}
 
 code {
   width: 100%;
@@ -59,15 +40,6 @@ code {
   color: mat-color($dashboard-warn, 700);
 }
 
-.mat-content {
-  padding: 20px;
-
-  form {
-    width: 100%;
-    max-width: 1200px;
-    margin: auto;
-  }
-}
 
 .mat-icon {
   &.mat-icon-2x {
@@ -95,6 +67,67 @@ mat-progress-bar {
   border: red 1px solid;
 }
 
-.mat-tooltip{
+.mat-tooltip {
   font-size: 0.75rem;
+}
+
+.mat-content {
+  width: 100%;
+}
+
+.repository-tooltip {
+  white-space: pre-line;
+}
+
+@media (max-width: $breakpoint-md) {
+  .mat-tab-labels {
+    justify-content: center;
+  }
+}
+
+.mat-toolbar {
+  background: none;
+
+  @media (max-width: $breakpoint-xs) {
+    background: $background-black-color;
+  }
+}
+
+
+.footer {
+  background: none;
+  font-size: 14px;
+
+  &__button {
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    padding: 4px 16px;
+    cursor: pointer;
+
+    @media (max-width: $breakpoint-xs) {
+      font-size: 12px;
+      padding: 4px 6px;
+    }
+  }
+
+  @media (max-width: $breakpoint-xs) {
+    font-size: 12px;
+  }
+}
+
+.cdk-overlay-pane .header-menu {
+  min-width: 100vw;
+  border-radius: 0px;
+}
+
+.mat-drawer-inner-container {
+  overflow: hidden;
+}
+.mat-card-header{
+  .mat-card-header-text {
+    margin-top: -9px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 }

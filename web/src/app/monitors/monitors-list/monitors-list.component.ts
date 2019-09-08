@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+// Breakpoints components
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+
 // Dashboard hub application model and services
 import { MonitorService, ProjectService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
@@ -25,13 +28,16 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public project: ProjectModel;
   public projectUid: string;
   public manualPing: boolean = false;
+  public displayedColumns: string[];
+  public isSmallScreen: boolean;
 
   constructor(
     private dialog: MatDialog,
     private monitorService: MonitorService,
     private projectService: ProjectService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private breakpointObserver: BreakpointObserver
   ) { }
 
   /**
@@ -46,11 +52,26 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
       .subscribe((project: ProjectModel) => {
         this.project = project;
         this.monitors = project.monitors ? project.monitors : [];
+        if (!this.project.logoUrl) {
+          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
+        }
       });
 
     this.monitorSubscription = this.projectService
       .findOneById(this.projectUid)
       .subscribe((project: ProjectModel) => this.monitors = project.monitors ? project.monitors : []);
+
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.displayedColumns = ['name', 'code', 'action'];
+          this.isSmallScreen = true;
+        } else {
+          this.displayedColumns = ['name', 'method', 'code', 'text', 'ping', 'action'];
+          this.isSmallScreen = false;
+        }
+      });
   }
 
   /**

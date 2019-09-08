@@ -1,7 +1,9 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-
+<h2 mat-dialog-title>
+  <mat-icon svgIcon="{{ data.icon }}"></mat-icon> {{ data.title }}
+</h2>
+<mat-divider></mat-divider>
 <div class="markdown-dialog" mat-dialog-content [dashboardMarkdown]="data.content"></div>
-
+<mat-divider></mat-divider>
 <div mat-dialog-actions align="end">
   <button mat-button type="button" (click)="dialogRef.close()" color="accent">CLOSE</button>
 </div>

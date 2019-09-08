@@ -1,18 +1,95 @@
-  <h3 mat-subheader>Projects</h3>
-  <div *ngFor="let project of projects" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="left left">
-    <div fxFlex="2%">
-      <img [src]="project.logoUrl" *ngIf="project.logoUrl"/>
-      <mat-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'public'">lock_open</mat-icon>
-      <mat-icon [matBadge]="project.repositories.length" matBadgeColor="accent" *ngIf="!project.logoUrl && project.type === 'private'">lock</mat-icon>
-    </div>
-    <div fxFlex="40%">
-      <h4><a [routerLink]="['/projects', project.uid]">{{ project.title }}</a></h4>
-      <p>{{ project.description || 'no description' }} <a href="{{ project.url }}" *ngIf="project.url">{{ project.url }}</a></p>
-    </div>
-    <div fxFlex="10%"> <span *ngIf="project.views"> Views {{ project.views }} </span></div>
-    <div fxFlex="10%"><span *ngIf="project.repositories">Repositories {{ project.repositories.length || 0 }}</span></div>
-    <div fxFlex="10%"> <span *ngIf="project.monitors">Monitors {{ project.monitors.length || 0}} </span></div>
-    <div fxFlex="10%"> Pings {{ project.getTotalPings() }}</div>
-    <div fxFlex="10%"> {{ (project.access.admin[0] | user | async)?.username }} </div>
-    <div fxFlex="10%"> {{ project.updatedOn.toDate() | timeAgo }}</div>
-  </div>
+<div class="project">
+  <table mat-table [dataSource]="projects" class="project__list">
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef>Type</th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon svgIcon="{{ checkTypeOfProject(element) }}"></mat-icon>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="alert">
+      <th mat-header-cell *matHeaderCellDef>Alert</th>
+      <td mat-cell *matCellDef="let element">{{ element.repositories.length }}</td>
+    </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Title</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout.xs="column" fxLayoutAlign="start start">
+          <div> <a [routerLink]="['/projects', element.uid]">{{ element.title }}</a></div>
+          <div *ngIf="isSmallScreen">
+            {{ (element.access.admin[0] | user | async)?.username }}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description || 'no description' }}</td>
+    </ng-container>
+    <ng-container matColumnDef="url">
+      <th mat-header-cell *matHeaderCellDef>Url</th>
+      <td mat-cell *matCellDef="let element"><a href="{{ element.url }}" *ngIf="element.url">{{ element.url }}</a></td>
+    </ng-container>
+    <ng-container matColumnDef="repository">
+      <th mat-header-cell *matHeaderCellDef>Repository</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon svgIcon="repository_icon"></mat-icon>
+          <span>{{ element.repositories.length }}</span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="monitors">
+      <th mat-header-cell *matHeaderCellDef>Monitors</th>
+      <td mat-cell *matCellDef="let element" class="project__list__monitors">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon class="project__list__monitors__icon" svgIcon="monitor_icon"></mat-icon>
+          <span>{{ element.monitors.length }}</span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="pings">
+      <th mat-header-cell *matHeaderCellDef>Pings</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <mat-icon svgIcon="ping_icon"></mat-icon>
+          <span>{{ element.getTotalPings() }}</span>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="user">
+      <th mat-header-cell *matHeaderCellDef>User</th>
+      <td mat-cell *matCellDef="let element">
+        <a href="https://github.com/{{ (element.access.admin[0] | user | async)?.username }}">
+          {{ (element.access.admin[0] | user | async)?.username }}
+        </a>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="lastDate">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon svgIcon="time_icon"></mat-icon>
+            <span>{{ element.updatedOn.toDate() | timeAgo }}</span>
+          </div>
+          <div *ngIf="isAdmin(element)">
+            <mat-icon [matMenuTriggerFor]="menu" class="project__list__actions">more_horiz</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button [routerLink]="['/projects', element.uid,'edit']" mat-menu-item>
+                <mat-icon svgIcon="edit_icon"></mat-icon>Edit
+              </button>
+              <button (click)="delete()" mat-menu-item>
+                <mat-icon svgIcon="delete_icon"></mat-icon>Delete
+              </button>
+              <button mat-menu-item>
+                <mat-icon svgIcon="hide_icon"></mat-icon>Hide
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
