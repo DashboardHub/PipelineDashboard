@@ -4,7 +4,7 @@
       <button mat-raised-button type="submit" color="accent" (click)="reloadRepository(repository.fullName)" [disabled]="manualReload">
         Refresh <mat-icon>refresh</mat-icon> 
       </button>
-      <span class="rating" *ngIf="rating">Rating: {{ rating }}</span>
+      <span class="rating">Rating: {{ rating | number:'1.0-2'  }}</span>
     </mat-card-title>
     <mat-card-subtitle>{{ repository.description }}</mat-card-subtitle>
     <span fxFlex></span>
