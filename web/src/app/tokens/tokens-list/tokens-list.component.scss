@@ -1,0 +1,56 @@
+@import "../../../styles.scss";
+@import "../../../assets/scss/variable";
+
+.monitor-tokens {
+  @include pageContainer;
+
+  &__header {
+    @include pageHeader;
+
+
+    &__add-button {
+      color: #fff;
+      background-color: $yellow-color
+    }
+  }
+
+  &__card {
+    @include cardContainer;
+
+    &__header {
+      @include header-icon;
+      background-color: $yellow-color;
+      box-shadow: 0px 3px 6px $orange-3-shadow;
+    }
+
+    &__title {
+      @include title;
+      width: 30vh;
+
+      &__subtitle {
+        @include subtitle;
+        width: 35vh;
+      }
+    }
+
+    &__content {
+      padding: 0;
+      display: block;
+      overflow: hidden;
+      @include tableContainer;
+
+      &__table {
+        width: 100%;
+
+        &__name {
+          @include ellipsisText;
+          max-width: 60vw;
+        }
+
+        &__action {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

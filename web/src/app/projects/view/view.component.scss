@@ -1,3 +1,70 @@
-mat-toolbar {
-  margin-bottom: 1rem;
+@import "../../../assets/scss/variable";
+@import "../../../assets/scss/mixin.scss";
+
+.project-body {
+  @include pageContainer;
+
+  .repository {
+    padding-bottom: 3rem;
+  }
+
+  &__header {
+    height: 100px;
+
+    &__content {
+      &__item {
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+        font-weight: lighter;
+      }
+
+      &__avatar {
+        cursor: pointer;
+        width: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        height: 40px;
+      }
+
+      &__name {
+        @include title;
+        font-size: 22px;
+        padding-left: 0;
+      }
+
+      @media (max-width: $breakpoint-xs) {
+        &__name {
+          width: 15vh;
+        }
+      }
+    }
+
+    .actions-menu {
+      background-color: #fff;
+      border-radius: 4px;
+
+      &__isActive {
+        color: #fff;
+        background-color: $blue-color;
+      }
+    }
+
+    @media (max-width: $breakpoint-lg) {
+      .information {
+        display: none;
+      }
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      .actions-menu {
+        display: none;
+      }
+    }
+  }
 }

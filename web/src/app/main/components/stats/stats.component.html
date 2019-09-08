@@ -1,22 +1,51 @@
-<div class="mat-content">
-  <mat-card *ngIf="stats">
+<div class="stats">
+  <mat-card class="stats__card">
     <mat-card-header>
-      <mat-card-title>Application Statistics</mat-card-title>
+      <div class="stats__card__header">
+        <mat-icon svgIcon="stats_header_icon"></mat-icon>
+      </div>
+      <mat-card-title class="stats__card__title">
+        Application statistics
+      </mat-card-title>
     </mat-card-header>
-
-    <mat-card-content>
-      <div fxLayout="row">
-        <div fxFlex="25%">
-          <h4>Users: {{ stats.users }}</h4>
+    <mat-divider class="stats__card__divider"></mat-divider>
+    <mat-card-content class="stats__card__content">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between scretch" fxLayoutGap="30px">
+        <div fxFlex="24%" class="stats__card__content__item__red" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
+            <mat-icon svgIcon="stats_user_icon"></mat-icon>
+            <span>Users</span>
+          </div>
+          <div class="stats__card__content__item__number">
+            {{ stats.users || 0 }}
+          </div>
         </div>
-        <div fxFlex="25%">
-          <h4>Projects: {{ stats.projects }}</h4>
+        <div fxFlex="24%" class="stats__card__content__item__blue" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
+            <mat-icon svgIcon="stats_project_icon"></mat-icon>
+            <span>Project</span>
+          </div>
+          <div class="stats__card__content__item__number">
+            {{ stats.projects || 0 }}
+          </div>
         </div>
-        <div fxFlex="25%">
-          <h4>Pings: {{ stats.pings }}</h4>
+        <div fxFlex="24%" class="stats__card__content__item__purple" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
+            <mat-icon svgIcon="ping_icon"></mat-icon>
+            <span>Pings</span>
+          </div>
+          <div class="stats__card__content__item__number">
+            {{ stats.pings || 0 }}
+          </div>
         </div>
-        <div fxFlex="25%">
-          <h4>Events: {{ stats.events }}</h4>
+        <div fxFlex="24%" class="stats__card__content__item__dark-blue" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
+            <mat-icon svgIcon="stats_event_icon"></mat-icon>
+            <span>Events </span>
+          </div>
+          <div class="stats__card__content__item__number">
+            {{ stats.events || 0 }}
+          </div>
         </div>
       </div>
     </mat-card-content>

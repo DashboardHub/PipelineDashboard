@@ -1,0 +1,44 @@
+@import "../../../assets/scss/variable";
+@import "../../../assets/scss/mixin.scss";
+
+.create-project {
+  @include pageContainer;
+
+  &__title {
+    @include pageHeader;
+
+  }
+
+  &__card {
+    max-width: 510px;
+    @include cardContainer;
+    margin-left: auto;
+    margin-right: auto;
+
+    &__header {
+      @include header-icon;
+      background-color: $blue-2-color;
+      box-shadow: 0px 3px 6px $blue-2-shadow;
+    }
+
+    &__title {
+      @include title;
+
+      &__subtitle {
+        @include subtitle;
+      }
+    }
+
+    &__content {
+      &__type {
+        padding-top: 20px;
+
+        @media (max-width: $breakpoint-xs) {
+          &__title {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

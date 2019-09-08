@@ -1,3 +1,110 @@
-mat-card {
-  margin-bottom: 1rem;
+@import "../../../assets/scss/variable";
+@import "../../../assets/scss/mixin.scss";
+
+.summary {
+  padding-bottom: 3rem;
+
+  &__valid {
+    margin-right: 15px;
+  }
+
+  &__invalid {
+    margin-left: 15px;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    &__valid {
+      margin-right: 0;
+      margin-bottom: 2rem;
+    }
+
+    &__invalid {
+      margin-left: 0;
+    }
+  }
+
+  &__dashboard {
+
+    .description {
+      font-size: 20px;
+    }
+
+    &__card-icon {
+      @include header-icon;
+      position: relative;
+      margin-right: 0px;
+
+      &__windows {
+        font-size: 36px;
+        line-height: 56px;
+        width: 56px;
+        height: 56px;
+        text-align: center;
+        color: white;
+      }
+    }
+
+    .heading {
+      font-size: 18px;
+      float: none;
+      color: white;
+    }
+
+    .mat-list-base .mat-list-item.mat-2-line,
+    .mat-list-base .mat-list-option.mat-2-line {
+      height: 60px;
+    }
+
+    .valid-monitor {
+      background: $green-color 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px $green-shadow;
+    }
+
+    .invalid-monitor {
+      background: $red-color 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px $red-shadow;
+    }
+
+    &__content {
+      padding: 0 10px;
+
+      &__item {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: lighter;
+        font-size: 14px;
+        color: $dark-grey-color;
+        border-bottom: 1px solid;
+        border-bottom-color: $border-color;
+
+        &__first {
+          border-bottom: none;
+        }
+
+        &__valid {
+          color: $green-color;
+          font-weight: bold;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          width: 50px;
+          padding-right: 5px;
+        }
+
+        &__invalid {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          width: 50px;
+          color: $red-color;
+          font-weight: bold;
+          padding-right: 5px;
+        }
+      }
+    }
+
+  }
+
 }
