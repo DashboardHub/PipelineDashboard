@@ -1,13 +1,16 @@
 <div class="feature">
   <div class="feature__title" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center">
     <div>Features</div>
+
+    <!--
     <div *ngIf="isSmallScreen" class="feature__title__toogle" fxLayout="row" fxLayoutGap="5px">
       <span>Monthly</span>
       <span>
         <mat-slide-toggle>Annually</mat-slide-toggle>
       </span>
-
     </div>
+    -->
+
   </div>
   <mat-card class="feature__card" *ngIf="!isSmallScreen; else smallScreenBlock">
     <div fxLayout="row" fxLayoutAlign="space-around start" fxLayoutGap="20px">
@@ -59,8 +62,10 @@
   <div class="feature__card__menu">
     <div class="feature__card__menu__type">
       <mat-radio-group fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start center" fxLayoutAlign.lt-md="start start" fxLayoutGap="20px">
+        <!--
         <mat-radio-button class="example-margin" value="monthly">Monthly</mat-radio-button>
-        <mat-radio-button class="example-margin" value="monthly">Annualy</mat-radio-button>
+        <mat-radio-button class="example-margin" value="monthly">Annually</mat-radio-button>
+        -->
       </mat-radio-group>
     </div>
     <div class="feature__card__menu__content">
@@ -88,13 +93,13 @@
   <div fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="feature__card__price">
     <div class="feature__card__price__title">For solo developers
     </div>
-    <mat-card class="feature__card__price__card" fxHide.lt-md routerLink="/login">
+    <mat-card class="feature__card__price__card" fxHide.lt-md>
       <div class="feature__card__price__card__item">£0.00 Free</div>
     </mat-card>
     <div fxHide.gt-sm class="feature__card__price__card__price">£0.00 Free</div>
-    <mat-card fxHide.gt-sm class="feature__card__price__card__grey">
+    <!-- <mat-card fxHide.gt-sm class="feature__card__price__card__grey">
       <div class="feature__card__price__card__item">Choose</div>
-    </mat-card>
+    </mat-card> -->
   </div>
   <div class="feature__card__content">
     <div *ngFor="let item of starter" class="feature__card__content__item" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
