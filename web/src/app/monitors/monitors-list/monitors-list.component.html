@@ -8,7 +8,10 @@
         {{ project.title }} >
       </a><span>Monitors</span>
     </div>
-    <div>
+    <div fxLayout="row" fxLayoutGap="5px">
+      <div class="monitor-list__header__pings" fxLayout="row" fxLayoutGap="5px" fxHide.lt-md>
+        <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
+      </div>
       <button mat-button class="monitor-list__header__add-button" [routerLink]="[ './create' ]">
         <mat-icon svgIcon="create_project_icon"></mat-icon>
         Add monitor
@@ -60,13 +63,15 @@
         <ng-container matColumnDef="ping">
           <th mat-header-cell *matHeaderCellDef>Ping</th>
           <td mat-cell *matCellDef="let element" class="monitor-list__card__content__table__ping">
-            <span>Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings : {{ element.unsuccessgulPings || 0 }}</span>
+            <span>Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings :
+              {{ element.unsuccessgulPings || 0 }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <mat-icon [matMenuTriggerFor]="menu" class="project__list__actions">more_horiz</mat-icon>
+            <mat-icon [matMenuTriggerFor]="menu" class="monitor-list__card__content__table__action">more_horiz
+            </mat-icon>
             <mat-menu #menu="matMenu">
               <button mat-menu-item [disabled]="manualPing || !project.url" (click)="pingMonitor(element.uid)">
                 <mat-icon svgIcon="ping_icon"></mat-icon>Ping

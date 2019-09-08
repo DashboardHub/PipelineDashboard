@@ -61,12 +61,14 @@ export class AppComponent implements AfterViewInit {
     },
     {
       title: 'Terms & Conditions',
-      route: '/terms-and-conditions',
+      // route: '/terms-and-conditions',
+      route: '/',
       icon: 'terms_page_icon',
     },
     {
       title: 'Privacy',
-      route: '/privacy',
+      // route: '/privacy',
+      route: '/',
       icon: 'privacy_page_icon',
     },
   ];
