@@ -1,11 +1,29 @@
-<div class="mat-content">
-  <mat-card>
-    <mat-card-title>Privacy</mat-card-title>
-    <mat-card-subtitle>Legal</mat-card-subtitle>
-
-    <mat-card-content>
-      <h3>Introduction</h3>
-      <p>This agreement is between you and DashboardHub. We are the owner and operator of DashboardHub (the Service).</p>
-    </mat-card-content>
-  </mat-card>
+<div class="privacy">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="privacy__title">Privacy</div>
+  </div>
+  <div>
+    <mat-card class="privacy__card">
+      <mat-card-header>
+        <div class="privacy__card__header">
+          <mat-icon svgIcon="privacy_icon"></mat-icon>
+        </div>
+        <mat-card-title class="privacy__card__title">Privacy</mat-card-title>
+        <mat-card-subtitle class="privacy__card__title__subtitle">Legal</mat-card-subtitle>
+      </mat-card-header>
+      <mat-divider></mat-divider>
+      <mat-card-content fxLayout="column" fxLayoutGap="20px">
+        <div class="privacy__card__content__title">Introduction</div>
+        <div class="privacy__card__content__text">This agreement is between you and DashboardHub. We are the owner and operator of DashboardHub (the Service).</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="space-between center" class="privacy__card__actions">
+          <button mat-stroked-button type="button" routerLink="../" class="privacy__card__actions__disagree">Disagree</button>
+          <button mat-stroked-button type="submit" color="warn">
+            <span>Agree</span>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

@@ -3,6 +3,7 @@ export * from './model.model';
 export * from './activity.model';
 export * from './contributor.model';
 export * from './event.model';
+export * from './issue.model';
 export * from './profile.model';
 export * from './account.model';
 export * from './loginAudit.model';

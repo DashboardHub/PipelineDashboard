@@ -1,17 +1,17 @@
 import { IModel, Model } from './model.model';
 
 export interface IStats extends IModel {
-  projects: number;
-  users: number;
-  pings: number;
-  events: number;
+  projects?: number;
+  users?: number;
+  pings?: number;
+  events?: number;
 }
 
 export class StatsModel extends Model<IStats> implements IStats {
-  projects: number;
-  users: number;
-  pings: number;
-  events: number;
+  projects?: number;
+  users?: number;
+  pings?: number;
+  events?: number;
 
   constructor(data?: IStats) {
     super();

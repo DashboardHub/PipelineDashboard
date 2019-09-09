@@ -1,9 +1,43 @@
 @import '~@angular/material/theming';
 
+
 @include mat-core();
 
+$mat-orange: (
+  50 : #fdede0,
+  100 : #fad3b3,
+  200 : #f7b680,
+  300 : #f4984d,
+  400 : #f18226,
+  500 : #ef6c00,
+  600 : #ed6400,
+  700 : #eb5900,
+  800 : #e84f00,
+  900 : #e43d00,
+  A100 : #ffffff,
+  A200 : #ffe0d8,
+  A400 : #ffb7a5,
+  A700 : #ffa38b,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
+  )
+);
+
 /* Setup site theme */
-$dashboard-primary: mat-palette($mat-blue, 700);
+$dashboard-primary: mat-palette($mat-orange, 500);
 $dashboard-accent: mat-palette($mat-orange, 800, A100, A400);
 $dashboard-warn: mat-palette($mat-red, 600);
 $dashboard-theme: mat-light-theme(
@@ -47,7 +81,7 @@ $dashboard-toolbar-typography: mat-typography-config(
 $dashboard-card-typography: mat-typography-config(
   $font-family: 'Roboto',
   $headline: mat-typography-level(1.7rem, 1.5em, 300),
-  $title: mat-typography-level(1.7rem, 1.5em, 300)
+  $title: mat-typography-level(20px, 1.5em, 300)
 );
 
 @include mat-card-typography($dashboard-card-typography);

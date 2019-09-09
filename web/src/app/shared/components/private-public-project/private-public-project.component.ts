@@ -9,11 +9,13 @@ import { IProject, ProjectModel } from '../../models/index.model';
 @Component({
   selector: 'dashboard-projects-private-public',
   templateUrl: './private-public-project.component.html',
+  styleUrls: ['./private-public-project.component.scss'],
 })
 export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
 
   private projectSubscription: Subscription;
   public projects: ProjectModel[] = [];
+  public showTitle: boolean;
   @Input() title: string = 'My Projects';
 
   constructor(
@@ -28,6 +30,7 @@ export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
         .findPublicProjects()
         .subscribe((projects: IProject[]) => this.projects = projects.map((project: IProject) => new ProjectModel(project)));
     } else {
+      this.showTitle = true;
       this.projectSubscription = this.projectService
         .findMyProjects()
         .subscribe((projects: IProject[]) => this.projects = projects.map((project: IProject) => new ProjectModel(project)));

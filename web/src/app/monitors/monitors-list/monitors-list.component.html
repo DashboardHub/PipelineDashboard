@@ -1,43 +1,88 @@
-<div class="mat-content">
-  <mat-card class="bread-crumb">
-    <a [routerLink]="['/projects', projectUid]">Project</a> > <span>Monitors</span>
-  </mat-card>
-  <mat-card class="alert" *ngIf="!project.url">
-    <mat-icon>error</mat-icon> Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run
-  </mat-card>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Monitors</mat-card-title>
-      <mat-card-subtitle>You have {{ monitors.length }} monitors</mat-card-subtitle>
-      <span fxFlex></span>
-      <span fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" matTooltip="Monitors reach of limit 3" matTooltipPosition="above" [matTooltipDisabled]="monitors.length < 3">
-        <button mat-raised-button type="submit" color="accent" routerLink="create" [disabled]="monitors.length >= 3">
-          <mat-icon>add</mat-icon> Monitor
-        </button>
+<div class="monitor-list">
+  <div class="monitor-list__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+      <span *ngIf="!isSmallScreen" class="onitor-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
+        <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
       </span>
+      <a [routerLink]="['/projects', projectUid]" *ngIf="!isSmallScreen">
+        {{ project.title }} >
+      </a><span>Monitors</span>
+    </div>
+    <div>
+      <button mat-button class="monitor-list__header__add-button" [routerLink]="[ './create' ]">
+        <mat-icon svgIcon="create_project_icon"></mat-icon>
+        Add monitor
+      </button>
+    </div>
+  </div>
+  <div class="monitor-list__alert">
+    <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+      <span>
+        <mat-icon svgIcon="warning_icon"></mat-icon>
+      </span>
+      <span>Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the project and add a URL for monitors run</span>
+    </mat-card>
+  </div>
+  <mat-card class="monitor-list__card">
+    <mat-card-header>
+      <div class="monitor-list__card__header">
+        <mat-icon svgIcon="monitor_white_icon"></mat-icon>
+      </div>
+      <mat-card-title class="monitor-list__card__title">
+        Monitors
+      </mat-card-title>
+      <mat-card-subtitle class="monitor-list__card__title__subtitle">
+        You have {{ monitors.length }} monitors
+      </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item fxLayout="column" *ngFor="let monitor of monitors">
-          <div class="monitors">
-            <h4 mat-line><a [routerLink]="[monitor.uid,'pings']">{{monitor.name}}</a></h4>
-            <p mat-line>{{monitor.method}} {{monitor.path}} {{monitor.expectedCode}} {{monitor.expectedText}}</p>
-            <p mat-line>Successful pings: {{monitor.successfulPings || 0}} | Unsuccessful pings: {{monitor.unsuccessfulPings || 0}} </p>
-            <p mat-line></p>
-          </div>
-          <div class="pings" fxLayout="column" *ngIf="monitor.latestPing">
-            <p mat-line>{{ monitor.latestPing.url }}</p>
-            <p mat-line>{{ monitor.latestPing.statusCode }} | {{ monitor.latestPing.duration }}ms | {{ monitor.latestPing.createdOn.toDate() | timeAgo }}</p>
-          </div>
-          <div class="button-right">
-            <p>
-              <button mat-raised-button color="accent" [disabled]="manualPing || !project.url" (click)="pingMonitor(monitor.uid)">Ping</button>
-              <button mat-raised-button color="accent" [routerLink]="monitor.uid">Edit</button>
-              <button mat-raised-button color="warn" (click)="delete(monitor.uid)">Delete</button>
-            </p>
-          </div>
-        </mat-list-item>
-      </mat-list>
+    <mat-card-content class="monitor-list__card__content">
+      <table mat-table [dataSource]="monitors" class="monitor-list__card__content__table">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element"><a [routerLink]="[element.uid,'pings']">{{ element.name }}</a></td>
+        </ng-container>
+        <ng-container matColumnDef="method">
+          <th mat-header-cell *matHeaderCellDef>Method</th>
+          <td mat-cell *matCellDef="let element">{{ element.method }}</td>
+        </ng-container>
+        <ng-container matColumnDef="path">
+          <th mat-header-cell *matHeaderCellDef>Path</th>
+          <td mat-cell *matCellDef="let element">{{ element.path }}</td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Code</th>
+          <td mat-cell *matCellDef="let element">{{ element.expectedCode }}</td>
+        </ng-container>
+        <ng-container matColumnDef="text">
+          <th mat-header-cell *matHeaderCellDef>Text</th>
+          <td mat-cell *matCellDef="let element">{{ element.expectedText }}</td>
+        </ng-container>
+        <ng-container matColumnDef="ping">
+          <th mat-header-cell *matHeaderCellDef>Ping</th>
+          <td mat-cell *matCellDef="let element" class="monitor-list__card__content__table__ping">
+            <span>Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings : {{ element.unsuccessgulPings || 0 }}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon [matMenuTriggerFor]="menu" class="project__list__actions">more_horiz</mat-icon>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item [disabled]="manualPing || !project.url" (click)="pingMonitor(element.uid)">
+                <mat-icon svgIcon="ping_icon"></mat-icon>Ping
+              </button>
+              <button mat-menu-item [routerLink]="element.uid">
+                <mat-icon svgIcon="edit_icon"></mat-icon>Edit
+              </button>
+              <button mat-menu-item (click)="delete(element.uid)">
+                <mat-icon svgIcon="delete_icon"></mat-icon>Delete
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
     </mat-card-content>
   </mat-card>
 </div>

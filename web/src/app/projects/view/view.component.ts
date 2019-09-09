@@ -23,9 +23,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   private deleteSubscription: Subscription;
   private projectSubscription: Subscription;
-
+  public typeIcon: string;
   public project: ProjectModel;
-
+  public isMenuOpen: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,7 +39,18 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: ProjectModel) => this.project = project);
+      .subscribe((project: ProjectModel) => {
+        this.project = project;
+        if (!this.project.logoUrl) {
+          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
+        }
+        if (this.project.type === 'private') {
+          this.typeIcon = 'private_icon';
+        } else if (this.project.type === 'public') {
+          this.typeIcon = 'public_icon';
+        }
+      }
+      );
   }
 
   // This function add  the repository

@@ -44,11 +44,36 @@ export class RepositoryService {
 
   public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('createGitWebhookRepository');
+
     return callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken });
   }
 
   public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
     return callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken });
+  }
+
+  public getRating(repo: RepositoryModel): number {
+    let rating: number = 0;
+    const issuePoints: number = repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn) : 0;
+    const releasesPoints: number = repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn) : 0;
+    rating = (issuePoints + releasesPoints) / 2;
+
+    return rating;
+  }
+
+  public getPoints(date: Date): number {
+    const boundary: number = 30; // days
+    const currentDate: Date = new Date();
+    const referenceDate: Date = new Date(date);
+    let lapse: number = Math.floor((currentDate.getTime() - referenceDate.getTime()) / 1000);
+    const hoursInDay: number = 24 * 60 * 60;
+    const duration: number = Math.ceil(lapse / hoursInDay);
+
+    if (duration > boundary) {
+      return 0;
+    }
+
+    return ((boundary - duration) / 30) * 100; // percentage
   }
 }

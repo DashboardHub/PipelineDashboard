@@ -13,6 +13,7 @@ import { ProjectModel } from '@shared/models/index.model';
 @Component({
   selector: 'dashboard-projects-create',
   templateUrl: './create-edit.component.html',
+  styleUrls: ['./create-edit.component.scss'],
 })
 export class CreateEditProjectComponent implements OnInit, OnDestroy {
 
@@ -33,11 +34,10 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('projectUid');
     this.projectForm = this.form.group({
-      type: [undefined, [Validators.required]],
+      type: ['public', [Validators.required]],
       title: [undefined, [Validators.required, Validators.minLength(3), Validators.maxLength(32)]],
       description: [undefined, [Validators.minLength(3), Validators.maxLength(1024)]],
       url: [undefined],
-      logoUrl: [undefined],
     });
     if (this.uid) {
       this.isEdit = true;

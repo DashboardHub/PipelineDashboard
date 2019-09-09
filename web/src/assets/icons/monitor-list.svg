@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+    <defs>
+        <style>.a{fill:none;}.b{fill:#fff;}</style>
+    </defs>
+    <path class="a" d="M0,0H38V38H0Z"/>
+    <path class="b" d="M32.667,2H4.167A3.176,3.176,0,0,0,1,5.167v19a3.176,3.176,0,0,0,3.167,3.167H15.25V30.5H12.083v3.167H24.75V30.5H21.583V27.333H32.667a3.176,3.176,0,0,0,3.167-3.167v-19A3.176,3.176,0,0,0,32.667,2Zm0,22.167H4.167v-19h28.5Z" transform="translate(0.583 1.167)"/>
+</svg>
