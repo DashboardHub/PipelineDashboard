@@ -4,7 +4,7 @@
 
 The **heartbeat** of your project, easily see an overview of your project and display your **deployed versions** and **monitor** them.
 
-Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/9)
+Current active [project board](https://github.com/DashboardHub/PipelineDashboard/projects/11)
 
 ![Dashboard](https://user-images.githubusercontent.com/624760/64192563-e1b77100-ce72-11e9-9e4c-889990546b9d.png)
 
@@ -14,7 +14,7 @@ All contributions are welcome, not only from code, but also blogs, content, docu
 
 Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and let us know, we are happy to chat and more than happy to pair on the technologies we use:
 
-- Angular (v7+)
+- Angular (v8+)
 - Material design
 - Firebase (with nodejs)
 
@@ -43,11 +43,12 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
 
 #### FIREBASE & GITHUB OAUTH
 
-1. Create a firebase project with the name `pipelinedashboard-dev` via their firebase console https://console.firebase.google.com (*note: this must have a credit card assigned for external http access*)
+1. Create a firebase project with the name `pipelinedashboard-dev` via their firebase console https://console.firebase.google.com (*note: this must have a credit card assigned for external http access, but no charge required*)
 2. Turn on **OAuth** authentication on the project (we use GitHub here, but you can use another or allow multiple)
    1. If using GitHub OAuth, create an OAuth App on GitHub
    2. Enter the 2 OAuth private keys from GitHub into the Firebase Authentication
 3. Click **Databases** and create an empty `firestore` database (indexes, security, collections and rules will all be automatically created later on as part of the deployment)
+4. Update `{{ FIREBASE_FUNCTIONS_URL }}` in file `functions/src/environments/environment.ts` with your function subdomain, for example `us-central1-pipelinedashboard-test`
 
 #### Angular
 
@@ -148,4 +149,3 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 1. `set GOOGLE_APPLICATION_CREDENTIALS=path\to\key.json`
 2. `firebase setup:emulators:firestore`
 3. `firebase emulators:start`
-

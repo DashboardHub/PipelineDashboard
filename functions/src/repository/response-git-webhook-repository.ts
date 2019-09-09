@@ -1,7 +1,7 @@
 // Third party modules
 import * as CORS from 'cors';
-// import { firestore } from 'firebase-admin';
 import { https, HttpsFunction, Response } from 'firebase-functions';
+
 import { Logger } from '../client/logger';
 
 // tslint:disable-next-line: typedef
