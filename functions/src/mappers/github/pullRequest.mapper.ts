@@ -1,11 +1,8 @@
-// Third party modules
-import { firestore } from 'firebase-admin';
-
 // Dashboard hub firebase functions mappers/models
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
 export interface GitHubPullRequestInput {
-  id: string;
+  id: number;
   html_url: string;
   state: string;
   title: string;
@@ -14,12 +11,12 @@ export interface GitHubPullRequestInput {
   user: GitHubUserInput
   assignees: GitHubUserInput[];
   requested_reviewers: GitHubUserInput[];
-  created_at: firestore.Timestamp;
-  updated_at: firestore.Timestamp;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface GitHubPullRequestModel {
-  uid: string;
+  uid: number;
   url: string;
   state: string;
   title: string;
@@ -28,8 +25,8 @@ export interface GitHubPullRequestModel {
   owner: GitHubUserModel;
   assignees: GitHubUserModel[];
   reviewers: GitHubUserModel[];
-  createdOn: firestore.Timestamp;
-  updatedOn: firestore.Timestamp;
+  createdOn: string;
+  updatedOn: string;
 }
 
 export class GitHubPullRequestMapper {
