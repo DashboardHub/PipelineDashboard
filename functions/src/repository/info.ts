@@ -1,6 +1,7 @@
 // Third party modules
 import { firestore } from 'firebase-admin';
 
+// Dashboard hub firebase functions models/mappers
 import {
   GitHubContributorInput, GitHubContributorMapper,
   GitHubEventInput, GitHubEventMapper,
@@ -19,10 +20,14 @@ import { getWebhook } from './create-git-webhook-repository';
 
 export interface RepositoryInfoInput {
   token: string;
-  fullName: string;
+  repository: {
+    uid: string;
+    id: number;
+    fullName: string;
+  }
 }
 
-export const getRepositoryInfo: any = async (token: string, fullName: string) => {
+export const getRepositoryInfo: any = async (token: string, repository: { uid: string; id: number; fullName: string; }) => {
   let data: [
     GitHubRepositoryInput,
     GitHubPullRequestInput[],
@@ -37,13 +42,13 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
 
   try {
     data = await Promise.all([
-      GitHubClient<GitHubRepositoryInput>(`/repos/${fullName}`, token),
-      GitHubClient<GitHubPullRequestInput[]>(`/repos/${fullName}/pulls?state=open`, token),
-      GitHubClient<GitHubEventInput[]>(`/repos/${fullName}/events`, token),
-      GitHubClient<GitHubReleaseInput[]>(`/repos/${fullName}/releases`, token),
-      GitHubClient<GitHubIssueInput[]>(`/repos/${fullName}/issues`, token),
-      GitHubClient<GitHubContributorInput[]>(`/repos/${fullName}/stats/contributors`, token),
-      GitHubClient<GitHubMilestoneInput[]>(`/repos/${fullName}/milestones`, token),
+      GitHubClient<GitHubRepositoryInput>(`/repos/${repository.fullName}`, token),
+      GitHubClient<GitHubPullRequestInput[]>(`/repos/${repository.fullName}/pulls?state=open`, token),
+      GitHubClient<GitHubEventInput[]>(`/repos/${repository.fullName}/events`, token),
+      GitHubClient<GitHubReleaseInput[]>(`/repos/${repository.fullName}/releases`, token),
+      GitHubClient<GitHubIssueInput[]>(`/repos/${repository.fullName}/issues`, token),
+      GitHubClient<GitHubContributorInput[]>(`/repos/${repository.fullName}/stats/contributors`, token),
+      GitHubClient<GitHubMilestoneInput[]>(`/repos/${repository.fullName}/milestones`, token),
     ]);
     mappedData = {
       ...GitHubRepositoryMapper.import(data[0], 'all'),
@@ -56,18 +61,18 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
       updatedAt: firestore.Timestamp.fromDate(new Date()),
     };
   } catch (error) {
-    Logger.error(error, [`Repository Path: ${fullName}`]);
+    Logger.error(error, [`Repository Path: ${repository.fullName}`]);
     throw new Error(error);
   }
 
   try {
-    mappedData.webhook = await getWebhook(fullName, token);
+    mappedData.webhook = await getWebhook(repository.fullName, token);
   } catch (error) {
-    Logger.error(error, ['Webhook failed', `Repository Path: ${fullName}`]);
+    Logger.error(error, ['Webhook failed', `Repository Path: ${repository.fullName}`]);
   }
 
   Logger.info({
-    repository: fullName,
+    repository: repository.fullName,
     imported: {
       pullRequests: mappedData && mappedData.pullRequests.length || 0,
       events: mappedData && mappedData.events.length || 0,
@@ -79,10 +84,12 @@ export const getRepositoryInfo: any = async (token: string, fullName: string) =>
     },
   });
 
+  mappedData.uid = repository.uid;
+
   await FirebaseAdmin
     .firestore()
     .collection('repositories')
-    .doc(GitHubRepositoryMapper.fullNameToUid(fullName))
+    .doc(mappedData.uid)
     .set(mappedData, { merge: true });
 
   return mappedData;
