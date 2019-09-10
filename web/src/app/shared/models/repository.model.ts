@@ -34,6 +34,7 @@ export class RepositoryModel {
   contributors: ContributorModel[];
   milestones: MilestoneModel[];
   webhook: WebhookModel;
+  url?: string;
 
   constructor(fullName: string) {
     this.fullName = fullName;

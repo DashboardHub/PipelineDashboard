@@ -59,7 +59,10 @@ export class RepositoryService {
     let rating: number = 0;
     const issuePoints: number = repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn) : 0;
     const releasesPoints: number = repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn) : 0;
-    rating = (issuePoints + releasesPoints) / 2;
+    const milestonesPoints: number = repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0;
+    const urlPoints: number = repo.url ? 100 : 0;
+    const descriptionPoints: number = repo.description ? 100 : 0;
+    rating = (issuePoints + releasesPoints + milestonesPoints + urlPoints + descriptionPoints) / 5;
 
     return rating;
   }
