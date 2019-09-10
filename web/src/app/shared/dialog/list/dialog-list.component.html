@@ -19,7 +19,8 @@
   <mat-divider></mat-divider>
   <div mat-dialog-content class="dialog__content">
     <mat-selection-list #repos>
-      <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository" [selected]="data.project.repositories.includes(repository.uid)">
+      <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository"
+        [selected]="data.project.repositories.includes(repository.uid)">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
           <span>
             <mat-icon *ngIf="repository.private" svgIcon="private_icon"></mat-icon>
@@ -36,8 +37,8 @@
   <mat-divider>
   </mat-divider>
   <div mat-dialog-actions fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="10px">
-    <button mat-stroked-button type="button">REFRESH</button>
     <button mat-stroked-button type="button" (click)="dialogRef.close()" color="accent">CANCEL</button>
-    <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)" color="warn">CONFIRM</button>
+    <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)"
+      color="warn">CONFIRM</button>
   </div>
 </div>

@@ -24,6 +24,7 @@
 
       &__title {
         font-size: 16px;
+        white-space: nowrap;
       }
 
       &__card {
@@ -33,6 +34,7 @@
 
         &__item {
           color: $dark-grey-color;
+          white-space: nowrap;
           font-size: 30px;
           padding: 0 5px;
         }
@@ -50,7 +52,7 @@
 
         }
 
-        @media (max-width: $breakpoint-sm) {
+        @media (max-width: $breakpoint-md) {
           &__item {
             font-size: 22px;
           }
@@ -86,7 +88,7 @@
 
       @media (max-width: $breakpoint-md) {
         &__title {
-          font-size: 12px;
+          font-size: 20px;
         }
 
       }
@@ -218,7 +220,7 @@
       }
     }
 
-    @media (max-width: $breakpoint-sm) {
+    @media (max-width: 960px) {
       &__content {
         &__item {
           display: flex;
