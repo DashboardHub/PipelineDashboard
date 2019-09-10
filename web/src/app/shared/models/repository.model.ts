@@ -10,7 +10,7 @@ import { WebhookModel } from './webhook.model';
  */
 export class RepositoryModel {
   uid?: string;
-  id: number;
+  id?: string;
   name?: string;
   description?: string;
   fullName: string;
@@ -35,7 +35,12 @@ export class RepositoryModel {
   milestones: MilestoneModel[];
   webhook: WebhookModel;
 
-  constructor(uid?: string) {
-    this.uid = uid;
+  constructor(fullName: string) {
+    this.fullName = fullName;
+    this.uid = RepositoryModel.getUid(fullName);
+  }
+
+  public static getUid(fullName: string): string {
+    return fullName.replace('/', '+');
   }
 }

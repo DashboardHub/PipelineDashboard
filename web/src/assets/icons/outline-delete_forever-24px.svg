@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <style>.a{fill:none;}.b{fill:#aaa;}</style>
+    </defs>
+    <path class="a" d="M0,0H24V24H0Z"/>
+    <path class="b" d="M14.12,10.47,12,12.59,9.87,10.47,8.46,11.88,10.59,14,8.47,16.12l1.41,1.41L12,15.41l2.12,2.12,1.41-1.41L13.41,14l2.12-2.12ZM15.5,4l-1-1h-5l-1,1H5V6H19V4ZM6,19a2.006,2.006,0,0,0,2,2h8a2.006,2.006,0,0,0,2-2V7H6ZM8,9h8V19H8Z"/>
+</svg>

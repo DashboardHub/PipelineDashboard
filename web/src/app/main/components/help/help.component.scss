@@ -1,0 +1,77 @@
+@import "../../../../styles.scss";
+@import "../../../../assets/scss/variable";
+
+
+.help {
+  @include pageContainer;
+
+  &__title {
+    @include pageHeader;
+  }
+
+  &__card {
+    @include cardContainer;
+
+    &__header {
+      @include header-icon;
+      left: 20px;
+      right: 20px;
+      padding: 5px;
+      margin-right: 0px;
+      background: $purple-color;
+      box-shadow: none;
+
+      &__search {
+        color: #fff;
+        padding: 0 0;
+      }
+
+      ;
+    }
+
+    &__title {
+      @include title;
+
+      &__subtitle {
+        @include subtitle;
+      }
+    }
+
+    &__content {
+      padding-top: 60px;
+      color: $dark-grey-color;
+
+      &__icon {
+        min-width: 24px;
+        min-height: 24px;
+        padding-right: 30px;
+      }
+
+      &__title {
+        color: #000;
+        font-size: 20px;
+      }
+
+      &__description {
+        color: $dark-grey-color;
+        font-weight: lighter;
+        font-size: 16px;
+      }
+
+      &__time {
+        color: $dark-grey-color;
+        font-weight: lighter;
+        font-size: 14px;
+      }
+    }
+
+    &__actions {
+      padding: 0 10px;
+
+      &__disagree {
+        background-color: #AAAAAA;
+        color: #fff;
+      }
+    }
+  }
+}

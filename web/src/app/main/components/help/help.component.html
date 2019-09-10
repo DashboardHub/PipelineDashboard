@@ -1,27 +1,43 @@
-<div class="mat-content">
-  <mat-card>
-    <form [formGroup]="searchForm" fxLayout="row">
-      <mat-form-field fxFlex>
-        <input matInput placeholder="Search" formControlName="search">
-      </mat-form-field>
-    </form>
-    <mat-divider></mat-divider>
-
-    <mat-nav-list *ngFor="let help of filteredTopics">
-      <a mat-list-item (click)="openDialog(help)">
-        <mat-icon matListIcon>{{ help.icon }}</mat-icon>
-        <h3 matLine> {{ help.title }} </h3>
-        <p matLine> {{ help.description }} </p>
-        <p matLine class="mat-caption" fxHide.gt-sm>{{ help.updatedAt | timeAgo }} </p>
-        <span fxFlex></span>
-        <span fxHide.xs fxHide.sm fxFlex="40%" fxFlex.gt-sm="30%" fxLayoutAlign="end center">
-          <div class="mat-caption"> {{ help.updatedAt | timeAgo }} </div>
-        </span>
-      </a>
-    </mat-nav-list>
-
-    <div *ngIf="filteredTopics?.length === 0">
-      <h3>No topics to display.</h3>
-    </div>
+<div class="help">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="help__title">Help</div>
+  </div>
+  <mat-card class="help__card">
+    <mat-card-header>
+      <div class="help__card__header">
+        <form [formGroup]="searchForm" fxLayout="row" fxLayoutAlign="center center">
+          <mat-form-field fxFlex="90%" class="whiteFormField">
+            <mat-icon matPrefix>search</mat-icon>
+            <mat-placeholder class="help__card__header__search">
+              Search
+            </mat-placeholder>
+            <input matInput class="help__card__header__search" formControlName="search">
+          </mat-form-field>
+        </form>
+      </div>
+    </mat-card-header>
+    <mat-card-content class="help__card__content" fxLayout="column" fxLayoutGap="20px">
+      <mat-divider></mat-divider>
+      <mat-nav-list *ngFor="let help of filteredTopics">
+        <a (click)="openDialog(help)">
+          <mat-icon class="help__card__content__icon" svgIcon="{{ help.icon }}"></mat-icon>
+          <div fxLayout="column">
+            <div class="help__card__content__title">{{ help.title }}</div>
+            <div class="help__card__content__description">{{ help.description }}</div>
+          </div>
+          <span fxFlex></span>
+          <span fxHide.xs fxHide.sm fxFlex="40%" fxFlex.gt-sm="30%" fxLayoutAlign="end center">
+            <div>
+              <mat-icon svgIcon="time_icon"></mat-icon>
+            </div>
+            <div class="help__card__content__time">{{ help.updatedAt | timeAgo }}</div>
+          </span>
+        </a>
+        <mat-divider></mat-divider>
+      </mat-nav-list>
+      <div *ngIf="filteredTopics?.length === 0">
+        <h3>No topics to display.</h3>
+      </div>
+    </mat-card-content>
   </mat-card>
 </div>

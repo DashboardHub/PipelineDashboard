@@ -1,3 +1,4 @@
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -14,18 +15,30 @@ import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, Repos
 export class RepositoryComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
-  public isAlertEnabled: boolean = false;
+  public headerHeight: number;
+  public isLargeScreen: boolean;
+  public isAlertEnabled: Boolean = false;
+  public rating: number;
 
   @Input()
   public uid: string;
 
   public manualReload: boolean = false;
   public repository: RepositoryModel = new RepositoryModel('');
+  public numberOfDisplayedUsers: number;
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
     private sortingService: SortingService
   ) {
+    if (breakpointObserver.isMatched(Breakpoints.Large || Breakpoints.XLarge)) {
+      this.isLargeScreen = true;
+      this.headerHeight = 200;
+    } else {
+      this.isLargeScreen = false;
+      this.headerHeight = 100;
+    }
   }
 
   ngOnInit(): void {
@@ -34,6 +47,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
+        this.calculateRating();
         if (this.repository && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
@@ -46,7 +60,59 @@ export class RepositoryComponent implements OnInit, OnDestroy {
         if (this.repository && this.repository.pullRequests.length > 0) {
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
+        if (this.isLargeScreen) {
+          this.headerHeight = 200;
+        } else {
+          this.headerHeight = 100;
+        }
       });
+    this.breakpointObserver
+      .observe([Breakpoints.Large])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.numberOfDisplayedUsers = 8;
+          this.headerHeight = 200;
+          this.isLargeScreen = true;
+        }
+      });
+    this.breakpointObserver
+      .observe([Breakpoints.XLarge])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.numberOfDisplayedUsers = 8;
+          this.headerHeight = 200;
+          this.isLargeScreen = true;
+        }
+      });
+
+    this.breakpointObserver
+      .observe([Breakpoints.Medium])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.headerHeight = 100;
+          this.isLargeScreen = false;
+        }
+      });
+    this.breakpointObserver
+      .observe([Breakpoints.Small])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.numberOfDisplayedUsers = 4;
+          this.headerHeight = 100;
+        }
+      });
+    this.breakpointObserver
+      .observe([Breakpoints.XSmall])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.headerHeight = 100;
+          this.numberOfDisplayedUsers = 4;
+        }
+      });
+  }
+
+  getMoreInformation(contributor: ContributorModel): string {
+    return `${contributor.owner.username}` + ' \n ' + ` Total commits : ${contributor.total}`;
   }
 
   ngOnDestroy(): void {
@@ -60,10 +126,15 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public reloadRepository(repository: RepositoryModel): void {
+  public reloadRepository(repositoryName: string, event: Event): void {
+    event.stopPropagation();
     this.manualReload = true;
-    this.repositoryService.loadRepository(repository)
+    this.repositoryService.loadRepository(repositoryName)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
+  }
+
+  calculateRating(): void {
+    this.rating = this.repositoryService.getRating(this.repository);
   }
 
   private showWebHookAlert(): void {

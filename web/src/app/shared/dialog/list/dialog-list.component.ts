@@ -8,6 +8,7 @@ import { ProjectModel, RepositoriesModel } from '../../models/index.model';
 @Component({
   selector: 'dashboard-dialog-list',
   templateUrl: './dialog-list.component.html',
+  styleUrls: ['./dialog-list.component.scss'],
 })
 export class DialogListComponent implements OnDestroy {
 

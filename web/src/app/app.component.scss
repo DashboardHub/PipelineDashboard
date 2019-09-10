@@ -1,32 +1,65 @@
 @import "~@angular/material/theming";
-
+@import "../assets/scss/variable";
+@import "../assets/scss/mixin.scss";
 .sidenav-container {
   height: 100%;
   background-color: #eaeaea;
 }
 
 .sidenav {
-  width: 300px;
+  @include ellipsisText;
+  width: 60px;
+  background: $background-black-color;
+  transition-duration: 0.5s;
+
+  &__open {
+    transition-duration: 0.5s;
+    width: 265px;
+  }
 
   .heading {
-    margin: 10px;
+    margin-top: 16px;
+    margin-left: -4px;
+    height: 60px;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
 
-    img {
-      border-radius: 50%;
-      height: 4rem;
-      width: 4rem;
+    &__logo {
+      width: 240px;
+      overflow: hidden;
+      height: 32px;
     }
 
-    .mat-icon {
-      font-size: 4rem;
-      height: 4rem;
-      width: 4rem;
+    &__icon {
+      position: absolute;
+      right: -5px;
+      top: 23px;
+
+      &__item {
+        color: $dark-grey-color;
+        transform: scale(1.5)
+      }
     }
   }
 
-  .mat-icon {
-    padding-right: 10px;
-    opacity: 0.7;
+  .menu {
+    overflow: hidden;
+
+    &__item {
+      font-size: 16px;
+      font-weight: lighter;
+      color: $dark-grey-color;
+
+      &__active {
+        color: #fff;
+      }
+
+      &__icon {
+        width: 25px;
+        height: 25px;
+      }
+    }
   }
 }
 
@@ -35,19 +68,86 @@
 }
 
 .app-toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
+  position: relative;
+
+  background: none;
+
+  &__logo {
+    width: 140px;
+    padding-left: 24px;
+  }
+
+  &__icon {
+    color: $dark-grey-color;
+  }
+
+  &__menu {
+    cursor: pointer;
+  }
+
+  &__profile-block {
+    font-size: 16px;
+
+    &__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid $orange-2-color;
+      cursor: pointer;
+
+      &__icon {
+        width: 40px;
+        height: 40px;
+        background: $orange-2-color;
+        border: 1px solid $orange-2-color;
+        border-radius: 50%;
+      }
+    }
+
+    &__icon {
+      cursor: pointer;
+      transform: scale(0.8);
+    }
+
+    &__menu-icon {
+      cursor: pointer;
+      color: $dark-grey-color;
+      transform: scale(1.2);
+    }
+
+    &__button {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
 }
 
 .content-container {
   min-height: calc(100% - 128px);
-  margin-top: 60px;
 
   @media ($mat-xsmall) {
     min-height: calc(100% - 112px);
-    margin-top: 56px;
+  }
+}
+
+.move-up {
+  margin-left: 0px !important;
+
+  @media (min-width: $breakpoint-xs) {
+
+    margin-left: 265px !important;
+    transition-duration: 0.5s;
+
+  }
+}
+
+.move-down {
+  margin-left: 0px !important;
+
+  @media (min-width: $breakpoint-xs) {
+    margin-left: 60px !important;
+    transition-duration: 0.5s;
+
+
   }
 }

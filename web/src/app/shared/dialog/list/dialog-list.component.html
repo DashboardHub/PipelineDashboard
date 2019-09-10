@@ -1,21 +1,43 @@
-<h2 mat-dialog-title>
-  <mat-icon [matBadge]="data.repositories.data.length || 0" matBadgeColor="accent">developer_board</mat-icon>
-  Your repositories
-</h2>
-
-<div mat-dialog-content>
-  <mat-selection-list #repos>
-    <h3 mat-subheader *ngIf="data.repositories.lastUpdated">Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}</h3>
-    <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository" [selected]="data.project.repositories.includes(repository.uid)">
-      <mat-icon mat-list-icon *ngIf="repository.private">lock</mat-icon>
-      <mat-icon mat-list-icon *ngIf="!repository.private">lock_open</mat-icon>
-      <h4 mat-line>{{ repository.fullName }}</h4>
-      <p mat-line> {{ repository.description }} </p>
-    </mat-list-option>
-  </mat-selection-list>
-</div>
-
-<div mat-dialog-actions align="end" fxLayout="row" fxLayoutGap="10px">
-  <button mat-stroked-button type="button" (click)="dialogRef.close()" color="accent">CANCEL</button>
-  <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)" color="warn">CONFIRM</button>
+<div class="dialog">
+  <h2 mat-dialog-title fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+    <div fxLayoutAlign="space-around center" fxLayoutGap="10px">
+      <div>
+        <mat-icon svgIcon="repository_icon" class="dialog__header__icon"></mat-icon>
+      </div>
+      <div>
+        {{ data.repositories.data.length || 0 }} | Your repositories
+      </div>
+    </div>
+    <div>
+      <div mat-subheader *ngIf="data.repositories.lastUpdated">
+        <div class="dialog__header__update">
+          Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}
+        </div>
+      </div>
+    </div>
+  </h2>
+  <mat-divider></mat-divider>
+  <div mat-dialog-content class="dialog__content">
+    <mat-selection-list #repos>
+      <mat-list-option *ngFor="let repository of data.repositories.data" [value]="repository.fullName" [selected]="data.project.repositories.includes(repository.uid)">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
+          <span>
+            <mat-icon *ngIf="repository.private" svgIcon="private_icon"></mat-icon>
+            <mat-icon *ngIf="!repository.private" svgIcon="public_icon"></mat-icon>
+          </span>
+          <span>
+            <div class="dialog__content__name">{{ repository.fullName }}</div>
+            <div class="dialog__content__description">{{ repository.description }}</div>
+          </span>
+        </div>
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+  <mat-divider>
+  </mat-divider>
+  <div mat-dialog-actions fxLayoutAlign="center center" fxLayout="row" fxLayoutGap="10px">
+    <button mat-stroked-button type="button">REFRESH</button>
+    <button mat-stroked-button type="button" (click)="dialogRef.close()" color="accent">CANCEL</button>
+    <button mat-raised-button type="button" (click)="dialogRef.close(repos.selectedOptions.selected)" color="warn">CONFIRM</button>
+  </div>
 </div>

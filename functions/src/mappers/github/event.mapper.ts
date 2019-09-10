@@ -1,3 +1,6 @@
+// Third party modules
+import { firestore } from 'firebase-admin';
+
 // Dashboard hub firebase functions mappers/modesl
 import { GitHubEventType } from './event.mapper';
 import { GitHubOrganisationtInput, GitHubOrganisationMapper, GitHubOrganisationModel } from './organisation.mapper';
@@ -10,23 +13,23 @@ export type GitHubEventType = 'PullRequestEvent' | 'IssueCommentEvent' | 'Create
 export interface GitHubEventInput {
   id: string;
   type: GitHubEventType;
-  public: boolean;
+  public: string;
   actor: GitHubUserInput;
   repo: GitHubRepositoryInput;
   org: GitHubOrganisationtInput;
   payload: GitHubPayloadInput;
-  created_at: string;
+  created_at: firestore.Timestamp;
 }
 
 export interface GitHubEventModel {
-  uid?: string;
+  uid: string;
   type: GitHubEventType;
-  public: boolean;
+  public: string;
   actor: GitHubUserModel;
   repository: GitHubRepositoryModel;
   organisation?: GitHubOrganisationModel;
   payload: GitHubPayloadModel;
-  createdOn: string;
+  createdOn: firestore.Timestamp;
 }
 
 export class GitHubEventMapper {

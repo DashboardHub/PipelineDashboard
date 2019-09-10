@@ -1,24 +1,54 @@
-<mat-card>
-  <mat-card-title>Monitors</mat-card-title>
-  <mat-card-subtitle>{{ monitors?.length }} monitors</mat-card-subtitle>
-  <mat-card-content fxLayout="row">
-    <mat-list dense fxFlex="50">
-      <h3 mat-subheader>Latest Valid Ping</h3>
-      <p *ngIf="!filterBy(true).length">No valid monitors</p>
-      <mat-list-item *ngFor="let valid of filterBy(true)">
-        <mat-icon mat-list-icon [matBadge]="valid.latestPing.duration" matBadgeColor="success" *ngIf="valid.latestPing.isValid">done</mat-icon>
-        <h4 mat-line>{{ valid.latestPing.url }}</h4>
-        <p mat-line>{{ valid.latestPing.statusCode }} | {{ valid.latestPing.duration }}ms | {{ valid.latestPing.type }} | {{ valid.latestPing.createdOn.toDate() | timeAgo }} ({{ valid.getTotalPings() }})</p>
-      </mat-list-item>
-    </mat-list>
-    <mat-list dense fxFlex="50">
-      <h3 mat-subheader>Latest Invalid Ping</h3>
-      <p *ngIf="!filterBy(false).length">No invalid monitors</p>
-      <mat-list-item *ngFor="let invalid of filterBy(false)">
-        <mat-icon mat-list-icon [matBadge]="invalid.latestPing.duration" matBadgeColor="warn" *ngIf="!invalid.latestPing.isValid">error</mat-icon>
-        <h4 mat-line>{{ invalid.latestPing.url }}</h4>
-        <p mat-line>{{ invalid.latestPing.statusCode }} | {{ invalid.latestPing.duration }}ms | {{ invalid.latestPing.type }} | {{ invalid.latestPing.createdOn.toDate() | timeAgo }} ({{ invalid.getTotalPings() }})</p>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+<div fxLayout fxLayout.lt-md="column" class="summary" fxLayoutAlign="space-between " fxLayoutAlign.sm="center" fxLayoutAlign.xs="center">
+  <div fxFlex="50" fxLayoutGap="30px" class="summary__valid">
+    <mat-card>
+      <mat-card-content class="summary__dashboard">
+        <h3 class="heading summary__dashboard__card-icon valid-monitor" fxLayout fxLayoutAlign="start center">
+          <mat-icon fxFlexOffset="5px" class="summary__dashboard__card-icon__windows" svgIcon="monitor_white_icon"></mat-icon>
+          <div fxFlexOffset="5px" fxFlexAlign="center">Latest Valid Ping</div>
+        </h3>
+        <div class="summary__dashboard__content" *ngIf="!filterBy(true).length">No valid monitors</div>
+        <div role="list" class="summary__dashboard__content">
+          <div *ngFor="let valid of filterBy(true); first as isFirst">
+            <div class="summary__dashboard__content__item" fxLayout="row" fxLayoutGap="10px" [ngClass]="{'summary__dashboard__content__item__first': isFirst}">
+              <div fxFlex="10">
+                <div class="summary__dashboard__content__item__valid">{{ valid.latestPing.duration }}</div>
+              </div>
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between start" fxFlex="90" fxLayoutGap="5px">
+                <span>{{ valid.latestPing.url }}</span>
+                <div>{{ valid.latestPing.statusCode }} | {{ valid.latestPing.duration }}ms |
+                  {{ valid.latestPing.type }} | {{ valid.latestPing.createdOn.toDate() | timeAgo }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="50" class="summary__invalid">
+    <mat-card>
+      <mat-card-content class="summary__dashboard">
+        <h3 class="heading summary__dashboard__card-icon invalid-monitor" fxLayout fxLayoutAlign="start center">
+          <mat-icon fxFlexOffset="5px" class="summary__dashboard__card-icon__windows" svgIcon="monitor_white_icon"></mat-icon>
+          <div fxFlexOffset="5px" fxFlexAlign="center">Latest Invalid Ping</div>
+        </h3>
+        <div class="summary__dashboard__content" *ngIf="!filterBy(false).length">No invalid monitors</div>
+        <div role="list" class="summary__dashboard__content">
+          <div *ngFor="let invalid of filterBy(false); first as isFirst">
+            <div class="summary__dashboard__content__item" fxLayout="row" [ngClass]="{'summary__dashboard__content__item__first': isFirst}">
+              <div fxFlex="10">
+                <div class="summary__dashboard__content__item__invalid">{{ invalid.latestPing.duration }}</div>
+              </div>
+              <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between start" fxFlex="90" fxLayoutGap="5px">
+                <span>{{ invalid.latestPing.url }}</span>
+                <div>{{ invalid.latestPing.statusCode }} | {{ invalid.latestPing.duration }}ms |
+                  {{ invalid.latestPing.type }} | {{ invalid.latestPing.createdOn.toDate() | timeAgo }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

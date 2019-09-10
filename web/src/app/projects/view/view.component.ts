@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
-import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
+import { ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',
@@ -23,9 +23,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   private deleteSubscription: Subscription;
   private projectSubscription: Subscription;
-
+  public typeIcon: string;
   public project: ProjectModel;
-
+  public isMenuOpen: boolean;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,7 +39,18 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: ProjectModel) => this.project = project);
+      .subscribe((project: ProjectModel) => {
+        this.project = project;
+        if (!this.project.logoUrl) {
+          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
+        }
+        if (this.project.type === 'private') {
+          this.typeIcon = 'private_icon';
+        } else if (this.project.type === 'public') {
+          this.typeIcon = 'public_icon';
+        }
+      }
+      );
   }
 
   // This function add  the repository
@@ -53,14 +64,13 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .pipe(
-        take(1),
-        filter((selectedRepositories: { value: RepositoryModel }[]) => !!selectedRepositories),
-        switchMap((selectedRepositories: { value: RepositoryModel }[]) => this.projectService.saveRepositories(
+        filter((selectedRepositories: { value: string }[]) => !!selectedRepositories),
+        switchMap((selectedRepositories: { value: string }[]) => this.projectService.saveRepositories(
           this.project,
-          selectedRepositories.map((item: { value: RepositoryModel }) => item.value).filter((value: RepositoryModel) => value.uid)
+          selectedRepositories.map((fullName: { value: string }) => fullName.value)
         ))
       )
-      .subscribe();
+      .subscribe(() => true);
   }
 
   // This function delete the project

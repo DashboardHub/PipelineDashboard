@@ -12,18 +12,13 @@ export const onUpdateUserStats: any = firestore
   .onWrite((change: Change<DocumentSnapshot>, context: EventContext) => {
     const user: DocumentData = change.after.data();
 
-    if (!user) {
-      // TODO delete
-      return null;
-    }
-
     const data: GitHubUserStatsModel = {
       name: user.name,
       username: user.username,
       avatarUrl: user.avatarUrl,
       github: {
         repository: {
-          total: user.repositories && user.repositories.data ? user.repositories.data.length : 0,
+          total: user.repositories.data.length || 0,
         },
         activity: {
           latest: user.activity ? user.activity[0] : {},

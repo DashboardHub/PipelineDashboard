@@ -117,14 +117,14 @@ export class ProjectService {
 
   // This function add the repository in any project
   // @TODO: move to repository service
-  public saveRepositories(project: ProjectModel, repositories: RepositoryModel[]): Observable<void> {
+  public saveRepositories(project: ProjectModel, repositories: string[]): Observable<void> {
     // remove webhook from unselected repo
     if (project.repositories && project.repositories.length > 0) {
       const remove: string[] = project.repositories
-        .filter((uid: string) => repositories.findIndex((repo: RepositoryModel) => uid === repo.uid) === -1);
+        .filter((uid: string) => repositories.findIndex((name: string) => uid === RepositoryModel.getUid(name)) === -1);
       const removeWebhooks: Observable<RepositoryModel>[] = [];
-      remove.forEach((uid: string) => {
-        const tmp: Observable<RepositoryModel> = this.repositoryService.deleteGitWebhook({ uid }).pipe(take(1));
+      remove.forEach((element: string) => {
+        const tmp: Observable<RepositoryModel> = this.repositoryService.deleteGitWebhook(element).pipe(take(1));
         removeWebhooks.push(tmp);
       });
       forkJoin(removeWebhooks).subscribe();
@@ -150,20 +150,16 @@ export class ProjectService {
     return this.activityService
       .start()
       .pipe(
-        mergeMap(() => forkJoin(
-          ...repositories.map((repository: RepositoryModel) => this.repositoryService.loadRepository(repository))
-        )),
+        mergeMap(() => forkJoin(...repositories.map((repository: string) => this.repositoryService.loadRepository(repository)))),
         switchMap(() => this.afs
           .collection<IProject>('projects')
           .doc<IProject>(project.uid)
           .set(
             {
-              repositories: repositories.map((repo: RepositoryModel) => repo.uid),
+              repositories: repositories.map((repoUid: string) => new RepositoryModel(repoUid).uid),
               updatedOn: firebase.firestore.Timestamp.fromDate(new Date()),
             },
-            { merge: true }
-          )
-        ),
+            { merge: true })),
         take(1)
       );
   }
