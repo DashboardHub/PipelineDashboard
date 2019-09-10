@@ -59,7 +59,7 @@ export class FeaturesComponent implements OnInit {
     },
     {
       icon: 'graphs_icon',
-      name: 'Deployments/Releases graphs',
+      name: 'Deployments /  Releases graphs',
       value: false,
     },
     {
@@ -116,7 +116,7 @@ export class FeaturesComponent implements OnInit {
     },
     {
       icon: 'graphs_icon',
-      name: 'Deployments/Releases graphs',
+      name: 'Deployments / Releases graphs',
       value: false,
     },
     {
@@ -173,7 +173,7 @@ export class FeaturesComponent implements OnInit {
     },
     {
       icon: 'graphs_icon',
-      name: 'Deployments/Releases graphs',
+      name: 'Deployments / Releases graphs',
       value: false,
     },
     {

@@ -1,5 +1,6 @@
 @import "../../../assets/scss/variable";
 @import "../../../assets/scss/mixin.scss";
+
 .monitor-list {
   @include pageContainer;
 
@@ -10,6 +11,19 @@
     &__add-button {
       color: #fff;
       background-color: $orange-3-color
+    }
+
+    &__pings {
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: default;
+      height: 35px;
+      display: flex;
+      font-size: 14px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      font-weight: lighter;
     }
 
     &__content {
@@ -70,6 +84,10 @@
         &__ping {
           @include ellipsisText;
           max-width: 15vw;
+        }
+
+        &__action {
+          cursor: pointer;
         }
       }
     }

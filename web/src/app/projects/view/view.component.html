@@ -47,7 +47,7 @@
         <div (click)="addRepository()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
           <mat-icon svgIcon="repository_icon"></mat-icon><span>{{ project.repositories.length }} | Repositories</span>
         </div>
-        <div class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+        <div class="project-body__header__content__item__pings" fxLayout="row" fxLayoutGap="5px">
           <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
         </div>
       </ng-template>
