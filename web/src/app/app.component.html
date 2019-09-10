@@ -2,10 +2,6 @@
   <mat-sidenav #sidenav [mode]="sideNavMode" class="sidenav" [ngClass]="{'sidenav__open': menuTriger}" fixedInViewport="false" role="navigation" [opened]="!isSmallScreen">
     <div class="heading" (click)="openMenu($event)">
       <mat-icon svgIcon="logo_icon" class="heading__logo"></mat-icon>
-      <div class="heading__icon" *ngIf="!isSmallScreen" (click)="openMenu($event)">
-        <mat-icon class="heading__icon__item" *ngIf="menuTriger">keyboard_arrow_left</mat-icon>
-        <mat-icon class="heading__icon__item" *ngIf="!menuTriger">keyboard_arrow_right</mat-icon>
-      </div>
     </div>
     <mat-nav-list class="menu">
       <ng-container *ngFor="let item of publicRoutes">
@@ -100,14 +96,10 @@
       <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px" class="app-toolbar__profile-block">
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
           <div fxLayoutAlign="space-between center">
-            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated(); else notification" dashboardLogin>
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated()" dashboardLogin>
               Login
               <mat-icon class="app-toolbar__profile-block__icon" svgIcon="header_login_icon"></mat-icon>
             </div>
-            <ng-template #notification>
-              <mat-icon class="app-toolbar__profile-block__icon" svgIcon="header_notificarion_icon"></mat-icon>
-            </ng-template>
-
           </div>
           <div>
             <a matTooltip="Github" href="http://github.com/DashboardHub/PipelineDashboard" target="_blank" fxLayout="row" fxLayoutAlign="space-between center">
@@ -140,18 +132,20 @@
       </div>
       <div fxLayout="row" fxLayout.lt-lg="column-reverse">
         <div fxLayout="row">
-          <!-- <div>
+          <!--
+          <div>
             <div [routerLink]="['/privacy']" class="footer__button">
               <mat-icon svgIcon="private_toolbar_icon"></mat-icon>
               Privacy
             </div>
           </div>
           <div>
-            <div [routerLink]="['/terms-and-conditions']" class="footer__button">
+            <div class="footer__button">
               <mat-icon svgIcon="terms_toolbar_icon"></mat-icon>
               Terms & Conditions
             </div>
-          </div> -->
+          </div>
+          -->
           <div>
             <div (click)="showDoorbell()" class="footer__button">
               <mat-icon svgIcon="feedback_toolbar_icon"></mat-icon>
