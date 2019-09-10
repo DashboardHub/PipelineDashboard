@@ -57,13 +57,13 @@ export class RepositoryService {
 
   public getRating(repo: RepositoryModel): number {
     let rating: number = 0;
-    const issuePoints: number = repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn) : 0;
-    const releasesPoints: number = repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn) : 0;
-    const milestonesPoints: number = repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0;
-    const urlPoints: number = repo.url ? 100 : 0;
-    const descriptionPoints: number = repo.description ? 100 : 0;
-    rating = (issuePoints + releasesPoints + milestonesPoints + urlPoints + descriptionPoints) / 5;
-
+    const checks: number[] = [];
+    checks.push(repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn) : 0);
+    checks.push(repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn) : 0);
+    checks.push(repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0);
+    checks.push(repo.url ? 100 : 0);
+    checks.push(repo.description ? 100 : 0);
+    rating = checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
     return rating;
   }
 
