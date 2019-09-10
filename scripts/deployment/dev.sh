@@ -2,6 +2,7 @@
 
 # FUNCTIONS
 (cd functions; npm install)
+(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-dev/g' environment.ts)
 
 # WEB
 (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.dev-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)

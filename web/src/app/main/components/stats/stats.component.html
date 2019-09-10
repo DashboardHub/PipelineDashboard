@@ -9,7 +9,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-divider class="stats__card__divider"></mat-divider>
-    <mat-card-content class="stats__card__content">
+    <mat-card-content class="stats__card__content" *ngIf="stats">
       <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between scretch" fxLayoutGap="30px">
         <div fxFlex="24%" class="stats__card__content__item__red" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">

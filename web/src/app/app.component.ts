@@ -59,18 +59,16 @@ export class AppComponent implements AfterViewInit {
       route: '/help',
       icon: 'help_page_icon',
     },
-    {
-      title: 'Terms & Conditions',
-      // route: '/terms-and-conditions',
-      route: '/',
-      icon: 'terms_page_icon',
-    },
-    {
-      title: 'Privacy',
-      // route: '/privacy',
-      route: '/',
-      icon: 'privacy_page_icon',
-    },
+    // {
+    //   title: 'Terms & Conditions',
+    //   route: '/terms-and-conditions',
+    //   icon: 'terms_page_icon',
+    // },
+    // {
+    //   title: 'Privacy',
+    //   route: '/privacy',
+    //   icon: 'privacy_page_icon',
+    // },
   ];
   public version: string;
   public isSmallScreen: boolean;

@@ -18,6 +18,9 @@
     <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'"
       fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
       <div fxLayout="column" class="repository__container">
+        <div fxLayout="row">
+            <mat-progress-bar matTooltipPosition="above" matTooltip="Rating: {{ rating | number:'1.0-2' }}%" mode="determinate" [value]="rating"></mat-progress-bar>
+        </div>
         <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-lg="column" class="header-container">
           <div class="repository__container__info">
             <div class="heading repository__header__icon">
@@ -89,7 +92,7 @@
                 <mat-divider class="repository-detail-card__content__divider"></mat-divider>
                 <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues" fxLayoutGap="5px">
-                  <a href="{{ issue.url }}">#{{ issue.number }}</a>{{ issue.title }}</h4>
+                  <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
                 <span class="repository-detail-card__content__time-container-top">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn | timeAgo }}</p>
