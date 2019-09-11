@@ -17,7 +17,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   private repositorySubscription: Subscription;
   public headerHeight: number;
   public isLargeScreen: boolean;
-  public isAlertEnabled: Boolean = false;
+  public isAlertEnabled: boolean = false;
   public rating: number;
 
   @Input()
@@ -126,10 +126,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  public reloadRepository(repositoryName: string, event: Event): void {
+  public reloadRepository(repository: RepositoryModel, event: Event): void {
     event.stopPropagation();
     this.manualReload = true;
-    this.repositoryService.loadRepository(repositoryName)
+    this.repositoryService.loadRepository(repository)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 
