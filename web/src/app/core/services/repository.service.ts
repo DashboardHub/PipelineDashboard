@@ -55,8 +55,8 @@ export class RepositoryService {
 
   public getRating(repo: RepositoryModel): number {
     let rating: number = 0;
-    const issuePoints: number = repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn) : 0;
-    const releasesPoints: number = repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn) : 0;
+    const issuePoints: number = repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0;
+    const releasesPoints: number = repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0;
     rating = (issuePoints + releasesPoints) / 2;
 
     return rating;
