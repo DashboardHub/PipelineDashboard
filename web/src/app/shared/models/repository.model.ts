@@ -35,6 +35,9 @@ export class RepositoryModel {
   milestones: MilestoneModel[];
   webhook: WebhookModel;
   url?: string;
+  forksCount: number;
+  stargazersCount: number;
+  watchersCount: number;
 
   constructor(uid?: string) {
     this.uid = uid;

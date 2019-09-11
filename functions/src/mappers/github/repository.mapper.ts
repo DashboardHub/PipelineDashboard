@@ -18,6 +18,9 @@ export interface GitHubRepositoryInput {
   url: string;
   private: boolean;
   fork: boolean;
+  forks_count: number,
+  stargazers_count: number,
+  watchers_count: number
 }
 
 export interface GitHubRepositoryModel {
@@ -36,14 +39,19 @@ export interface GitHubRepositoryModel {
   milestones?: GitHubMilestoneModel[];
   updatedAt: firestore.Timestamp;
   webhook?: GitHubRepositoryWebhookModel;
+  forksCount: 9,
+  stargazersCount: 80,
+  watchersCount: 80,
 }
 
 export class GitHubRepositoryMapper {
   static import(input: GitHubRepositoryInput, type: 'minimum' | 'all' | 'event' = 'minimum'): GitHubRepositoryModel {
     const output: any = {};
-
     if (type === 'all') {
       output.fork = input.fork;
+      output.forksCount = input.forks_count;
+      output.stargazersCount = input.stargazers_count;
+      output.watchersCount = input.watchers_count;
     }
 
     if (type === 'event' || type === 'all') {

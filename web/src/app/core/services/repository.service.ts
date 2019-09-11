@@ -61,6 +61,9 @@ export class RepositoryService {
     checks.push(repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0);
     checks.push(repo.url ? 100 : 0);
     checks.push(repo.description ? 100 : 0);
+    checks.push(repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0);
+    checks.push(repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0);
+    checks.push(repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0);
     rating = checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
     return rating;
   }
@@ -78,5 +81,20 @@ export class RepositoryService {
     }
 
     return ((boundary - duration) / 30) * 100; // percentage
+  }
+
+  public getPointsByCount(count: number, limit: number): number {
+    let points: number;
+    switch (true) {
+      case (count >= 1 && count <= limit):
+        points = 50;
+        break;
+      case (count > limit):
+        points = 100;
+        break;
+      default:
+        points = 0;
+    }
+    return points;
   }
 }
