@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubMilestoneModel } from '../milestone.mapper';
 import { GitHubUserMapper } from '../user.mapper';
@@ -72,7 +75,7 @@ export class MilestoneEventModel implements MilestoneEventInput {
       closeIssues: this.milestone.closed_issues,
       htmlUrl: this.milestone.html_url,
       description: this.milestone.description,
-      updatedAt: this.milestone.updated_at,
+      updatedAt: firestore.Timestamp.fromDate(new Date(this.milestone.updated_at)),
     };
   }
 

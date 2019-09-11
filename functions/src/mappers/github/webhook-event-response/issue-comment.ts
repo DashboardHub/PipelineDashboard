@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
@@ -11,8 +14,8 @@ interface Comment {
   id: number;
   node_id: string;
   user: User;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   author_association: string;
   body: string;
 }
@@ -56,7 +59,7 @@ export class IssueCommentEventModel implements IssueCommentEventInput, HubEventA
       actor: GitHubUserMapper.import(this.sender),
       repository: GitHubRepositoryMapper.import(this.repository, 'event'),
       payload: GitHubPayloadMapper.import(eventType, payload),
-      createdOn: new Date().toISOString(),
+      createdOn: firestore.Timestamp.now(),
     };
 
     return data;

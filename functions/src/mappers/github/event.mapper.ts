@@ -1,4 +1,6 @@
-// Dashboard hub firebase functions mappers/modesl
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { GitHubEventType } from './event.mapper';
 import { GitHubOrganisationtInput, GitHubOrganisationMapper, GitHubOrganisationModel } from './organisation.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper, GitHubPayloadModel } from './payload.mapper';
@@ -26,7 +28,7 @@ export interface GitHubEventModel {
   repository: GitHubRepositoryModel;
   organisation?: GitHubOrganisationModel;
   payload: GitHubPayloadModel;
-  createdOn: string;
+  createdOn: firestore.Timestamp;
 }
 
 export class GitHubEventMapper {
@@ -38,7 +40,7 @@ export class GitHubEventMapper {
       actor: GitHubUserMapper.import(input.actor),
       repository: GitHubRepositoryMapper.import(input.repo, 'event'),
       payload: GitHubPayloadMapper.import(input.type, input.payload),
-      createdOn: input.created_at,
+      createdOn: firestore.Timestamp.fromDate(new Date(input.created_at)),
     };
 
     if (input.org) {

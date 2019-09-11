@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
@@ -68,7 +71,7 @@ export class ReleaseEventModel implements ReleaseEventInput, HubEventActions {
       actor: GitHubUserMapper.import(this.sender),
       repository: GitHubRepositoryMapper.import(this.repository, 'event'),
       payload: GitHubPayloadMapper.import(eventType, payload),
-      createdOn: new Date().toISOString(),
+      createdOn: firestore.Timestamp.now(),
     };
 
     return data;
@@ -124,7 +127,7 @@ export class ReleaseEventModel implements ReleaseEventInput, HubEventActions {
       description: this.release.body,
       owner: GitHubUserMapper.import(this.release.author),
       htmlUrl: this.release.html_url,
-      createdOn: this.release.published_at,
+      createdOn: firestore.Timestamp.fromDate(new Date(this.release.published_at)),
       isPrerelease: this.release.prerelease,
     }
   }

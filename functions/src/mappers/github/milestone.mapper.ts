@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './index.mapper';
 
 export interface GitHubMilestoneInput {
@@ -21,7 +24,7 @@ export interface GitHubMilestoneModel {
   closeIssues: number;
   htmlUrl: string;
   description: string;
-  updatedAt: string;
+  updatedAt: firestore.Timestamp;
 }
 
 export class GitHubMilestoneMapper {
@@ -35,7 +38,7 @@ export class GitHubMilestoneMapper {
       closeIssues: input.closed_issues,
       htmlUrl: input.html_url,
       description: input.description,
-      updatedAt: input.updated_at,
+      updatedAt: firestore.Timestamp.fromDate(new Date(input.updated_at)),
     };
   }
 }

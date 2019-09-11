@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
@@ -62,7 +65,7 @@ export class PushEventModel implements PushEventInput, HubEventActions {
       actor: GitHubUserMapper.import(this.sender),
       repository: GitHubRepositoryMapper.import(this.repository, 'event'),
       payload: GitHubPayloadMapper.import(eventType, payload),
-      createdOn: new Date().toISOString(),
+      createdOn: firestore.Timestamp.now(),
     };
 
     return data;

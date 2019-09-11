@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
@@ -118,7 +121,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
       actor: GitHubUserMapper.import(this.sender),
       repository: GitHubRepositoryMapper.import(this.repository, 'event'),
       payload: GitHubPayloadMapper.import(eventType, payload),
-      createdOn: new Date().toISOString(),
+      createdOn: firestore.Timestamp.now(),
     };
 
     return data;
@@ -171,8 +174,8 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
       owner: GitHubUserMapper.import(this.pull_request.user),
       assignees: this.pull_request.assignees.map((assignee: User) => GitHubUserMapper.import(assignee)),
       reviewers: this.pull_request.requested_reviewers.map((reviewer: User) => GitHubUserMapper.import(reviewer)),
-      createdOn: this.pull_request.created_at,
-      updatedOn: this.pull_request.updated_at,
+      createdOn: firestore.Timestamp.fromDate(new Date(this.pull_request.created_at)),
+      updatedOn: firestore.Timestamp.fromDate(new Date(this.pull_request.updated_at)),
     }
   }
 

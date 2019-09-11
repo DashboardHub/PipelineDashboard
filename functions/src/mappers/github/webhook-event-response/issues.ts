@@ -1,3 +1,6 @@
+import { firestore } from 'firebase-admin';
+
+// Dashboard mappers/models
 import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubIssueModel } from '../issue.mapper';
@@ -45,7 +48,7 @@ export class IssuesEventModel implements IssuesEventInput, HubEventActions {
       actor: GitHubUserMapper.import(this.sender),
       repository: GitHubRepositoryMapper.import(this.repository, 'event'),
       payload: GitHubPayloadMapper.import(eventType, payload),
-      createdOn: new Date().toISOString(),
+      createdOn: firestore.Timestamp.now(),
     };
 
     return data;
@@ -104,8 +107,8 @@ export class IssuesEventModel implements IssuesEventInput, HubEventActions {
       description: this.issue.body,
       owner: GitHubUserMapper.import(this.issue.user),
       assignees: this.issue.assignees.map((assignee: User) => GitHubUserMapper.import(assignee)),
-      createdOn: this.issue.created_at,
-      updatedOn: this.issue.updated_at,
+      createdOn: firestore.Timestamp.fromDate(new Date(this.issue.created_at)),
+      updatedOn: firestore.Timestamp.fromDate(new Date(this.issue.updated_at)),
     }
   }
 
