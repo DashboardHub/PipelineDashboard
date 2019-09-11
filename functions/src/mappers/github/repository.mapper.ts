@@ -39,9 +39,9 @@ export interface GitHubRepositoryModel {
   milestones?: GitHubMilestoneModel[];
   updatedAt: firestore.Timestamp;
   webhook?: GitHubRepositoryWebhookModel;
-  forksCount: 9,
-  stargazersCount: 80,
-  watchersCount: 80,
+  forksCount: number,
+  stargazersCount: number,
+  watchersCount: number,
 }
 
 export class GitHubRepositoryMapper {
