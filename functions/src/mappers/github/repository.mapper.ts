@@ -18,9 +18,9 @@ export interface GitHubRepositoryInput {
   url: string;
   private: boolean;
   fork: boolean;
-  forks_count: number,
-  stargazers_count: number,
-  watchers_count: number
+  forks_count: number;
+  stargazers_count: number;
+  watchers_count: number;
 }
 
 export interface GitHubRepositoryModel {

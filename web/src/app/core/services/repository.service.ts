@@ -64,8 +64,7 @@ export class RepositoryService {
     checks.push(repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0);
     checks.push(repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0);
     checks.push(repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0);
-    rating = checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
-    return rating;
+    return checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
   }
 
   public getPoints(date: Date): number {
@@ -95,6 +94,7 @@ export class RepositoryService {
       default:
         points = 0;
     }
+
     return points;
   }
 }
