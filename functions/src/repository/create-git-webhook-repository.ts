@@ -40,8 +40,9 @@ export function createWebhook(repositoryFullName: string, token: string): Promis
     events: enviroment.githubWebhook.events,
     config: {
       url: enviroment.githubWebhook.url,
-      content_type: 'json',
-      insecure_ssl: '0',
+      secret: enviroment.githubWebhook.secret,
+      content_type: enviroment.githubWebhook.content_type,
+      insecure_ssl: enviroment.githubWebhook.insecure_ssl,
     },
   }
   return GitHubClientPost<GitHubRepositoryWebhookResponse>(`/repos/${repositoryFullName}/hooks`, token, body);
@@ -53,7 +54,10 @@ export async function getWebhook(repositoryFullName: string, token: string): Pro
   const exist: GitHubRepositoryWebhookResponse = await findWebhook(repositoryFullName, token);
 
   if (exist) {
-    let isEqual: boolean = exist.events.length === enviroment.githubWebhook.events.length;
+    let isEqual: boolean = exist.events.length === enviroment.githubWebhook.events.length
+      && exist.config.content_type === enviroment.githubWebhook.content_type
+      && exist.config.insecure_ssl === enviroment.githubWebhook.insecure_ssl
+      && ((!exist.config.secret && !enviroment.githubWebhook.secret) || (!!exist.config.secret && !!enviroment.githubWebhook.secret));
 
     if (isEqual) {
 
@@ -65,11 +69,14 @@ export async function getWebhook(repositoryFullName: string, token: string): Pro
       }
 
       if (isEqual) {
+        Logger.info('Webhook is exist');
         return GitHubRepositoryWebhookMapper.import(exist);
       }
     }
+    Logger.info('Webhook is deleting');
     await deleteWebhook(repositoryFullName, exist.id, token);
   }
 
+  Logger.info('Webhook is creating');
   return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryFullName, token));
 }

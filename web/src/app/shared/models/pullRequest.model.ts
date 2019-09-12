@@ -1,3 +1,4 @@
+import { firestore } from 'firebase';
 import { UserModel } from './user.model';
 
 export class PullRequestModel {
@@ -10,6 +11,6 @@ export class PullRequestModel {
   assigned: UserModel;
   requestedReviewers: UserModel;
   description: string = '';
-  createdOn: Date;
-  updatedOn: Date;
+  createdOn: firestore.Timestamp;
+  updatedOn: firestore.Timestamp;
 }

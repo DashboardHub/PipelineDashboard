@@ -1,3 +1,4 @@
+import { firestore } from 'firebase';
 import { UserModel } from './user.model';
 
 export class IssueModel {
@@ -9,6 +10,6 @@ export class IssueModel {
   owner: UserModel;
   assigned: UserModel;
   description: string = '';
-  createdOn: Date;
-  updatedOn: Date;
+  createdOn: firestore.Timestamp;
+  updatedOn: firestore.Timestamp;
 }
