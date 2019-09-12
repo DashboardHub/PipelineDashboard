@@ -55,6 +55,7 @@ export class RepositoryService {
 
   public getRating(repo: RepositoryModel): number {
     const checks: number[] = [];
+
     checks.push(repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0);
     checks.push(repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0);
     checks.push(repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0);
@@ -63,6 +64,7 @@ export class RepositoryService {
     checks.push(repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0);
     checks.push(repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0);
     checks.push(repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0);
+
     return checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
   }
 
