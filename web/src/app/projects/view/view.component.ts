@@ -101,6 +101,10 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     return this.project.isAdmin(this.authService.profile.uid);
   }
 
+  public isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
+  }
+
   ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
     if (this.deleteSubscription) {
