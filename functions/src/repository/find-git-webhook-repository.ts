@@ -3,13 +3,13 @@ import { GitHubRepositoryWebhookResponse } from '../mappers/github/webhook.mappe
 import { GitHubClient } from './../client/github';
 
 
-export function listWebhook(repositoryUid: string, token: string): Promise<GitHubRepositoryWebhookResponse[]> {
-  return GitHubClient<GitHubRepositoryWebhookResponse[]>(`/repos/${repositoryUid}/hooks`, token);
+export function listWebhook(repositoryFullName: string, token: string): Promise<GitHubRepositoryWebhookResponse[]> {
+  return GitHubClient<GitHubRepositoryWebhookResponse[]>(`/repos/${repositoryFullName}/hooks`, token);
 }
 
 
-export async function findWebhook(repositoryUid: string, token: string): Promise<GitHubRepositoryWebhookResponse> {
-  const list: GitHubRepositoryWebhookResponse[] = await listWebhook(repositoryUid, token);
+export async function findWebhook(repositoryFullName: string, token: string): Promise<GitHubRepositoryWebhookResponse> {
+  const list: GitHubRepositoryWebhookResponse[] = await listWebhook(repositoryFullName, token);
 
   return list.find((elem: GitHubRepositoryWebhookResponse) => elem && elem.config && elem.config.url === enviroment.githubWebhook.url)
 }
