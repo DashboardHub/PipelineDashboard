@@ -54,7 +54,7 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
       ...GitHubRepositoryMapper.import(data[0], 'all'),
       pullRequests: data[1] ? data[1].map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)) : [],
       events: data[2] ? data[2].map((event: GitHubEventInput) => GitHubEventMapper.import(event)) : [],
-      releases: data[3] ? data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release)) : [],
+      releases: data[3] ? GitHubReleaseMapper.sortReleaseList(data[3].map((release: GitHubReleaseInput) => GitHubReleaseMapper.import(release))) : [],
       issues: Array.isArray(data[4]) ? data[4].map((issue: GitHubIssueInput) => GitHubIssueMapper.import(issue)) : [],
       contributors: Array.isArray(data[5]) ? data[5].map((contributor: GitHubContributorInput) => GitHubContributorMapper.import(contributor)) : [],
       milestones: Array.isArray(data[6]) ? data[6].map((milestone: GitHubMilestoneInput) => GitHubMilestoneMapper.import(milestone)) : [],

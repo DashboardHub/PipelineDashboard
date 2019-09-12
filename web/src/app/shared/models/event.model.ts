@@ -1,3 +1,4 @@
+import { firestore } from 'firebase';
 import { RepositoryModel } from './repository.model';
 import { UserModel } from './user.model';
 
@@ -9,5 +10,5 @@ export class EventModel {
   repository: RepositoryModel;
   // organisation: input.org ? GitHubOrganisationMapper.import(input.org) : {},
   // payload: GitHubPayloadMapper.import(input.type, input.payload),
-  createdOn: Date;
+  createdOn: firestore.Timestamp;
 }

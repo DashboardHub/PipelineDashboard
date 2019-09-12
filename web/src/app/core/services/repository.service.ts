@@ -54,18 +54,17 @@ export class RepositoryService {
   }
 
   public getRating(repo: RepositoryModel): number {
-    let rating: number = 0;
     const checks: number[] = [];
-    checks.push(repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn) : 0);
-    checks.push(repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn) : 0);
+    checks.push(repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0);
+    checks.push(repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0);
     checks.push(repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0);
     checks.push(repo.url ? 100 : 0);
     checks.push(repo.description ? 100 : 0);
     checks.push(repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0);
     checks.push(repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0);
     checks.push(repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0);
-    rating = checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
-    return rating;
+
+    return checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
   }
 
   public getPoints(date: Date): number {
@@ -95,6 +94,7 @@ export class RepositoryService {
       default:
         points = 0;
     }
+
     return points;
   }
 }
