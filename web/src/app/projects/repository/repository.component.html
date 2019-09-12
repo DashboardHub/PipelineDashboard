@@ -95,7 +95,7 @@
                   <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
                 <span class="repository-detail-card__content__time-container-top">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn | timeAgo }}</p>
+                  <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -127,7 +127,7 @@
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn | timeAgo }}</p>
+                  <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -160,7 +160,7 @@
                 <p mat-line class="repository-detail-card__content__username">{{ event.actor.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <p class="repository-detail-card__content__time" mat-line>{{ event.createdOn | timeAgo }}</p>
+                  <p class="repository-detail-card__content__time" mat-line>{{ event.createdOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -192,7 +192,7 @@
                 href="{{ repository.releases[0].htmlUrl }}">{{ repository.releases[0].title }}</a></div>
             <div>
               <p class="info__body__line" *ngIf="repository.releases && repository.releases.length > 0" mat-line>
-                Published: {{ repository.releases[0].createdOn | timeAgo }}</p>
+                Published: {{ repository.releases[0].createdOn.toDate() | timeAgo }}</p>
               <p class="info__body__line" *ngIf="repository.releases && !repository.releases.length" mat-line>Published:
                 N/A</p>
             </div>
