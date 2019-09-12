@@ -6,10 +6,6 @@
         <mat-icon svgIcon="{{ checkTypeOfProject(element) }}"></mat-icon>
       </td>
     </ng-container>
-    <ng-container matColumnDef="alert">
-      <th mat-header-cell *matHeaderCellDef>Alert</th>
-      <td mat-cell *matCellDef="let element">{{ element.repositories.length }}</td>
-    </ng-container>
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Title</th>
       <td mat-cell *matCellDef="let element">
