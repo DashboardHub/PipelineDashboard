@@ -2,9 +2,11 @@
 
 # FUNCTIONS
 (cd functions; npm install)
+(cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET'/g' environment.ts)
+(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard/g' environment.ts)
 
 # WEB
-(cd web/src/environments; sed -i 's/x\.x\.x/v0.11.prod-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
+(cd web/src/environments; sed -i 's/x\.x\.x/v0.11-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_API_KEY }}/'$FIREBASE_API_KEY_PROD'/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_AUTH_DOMAIN }}/'$FIREBASE_AUTH_DOMAIN_PROD'/g' environment.prod.ts)
 (cd web/src/environments; sed -i 's/{{ FIREBASE_DATABASE_URL }}/'$FIREBASE_DATABASE_URL_PROD'/g' environment.prod.ts)

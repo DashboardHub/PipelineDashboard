@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
-import { ProjectModel } from '@shared/models/index.model';
+import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-projects-view',
@@ -64,13 +64,14 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       })
       .afterClosed()
       .pipe(
-        filter((selectedRepositories: { value: string }[]) => !!selectedRepositories),
-        switchMap((selectedRepositories: { value: string }[]) => this.projectService.saveRepositories(
+        take(1),
+        filter((selectedRepositories: { value: RepositoryModel }[]) => !!selectedRepositories),
+        switchMap((selectedRepositories: { value: RepositoryModel }[]) => this.projectService.saveRepositories(
           this.project,
-          selectedRepositories.map((fullName: { value: string }) => fullName.value)
+          selectedRepositories.map((item: { value: RepositoryModel }) => item.value).filter((value: RepositoryModel) => value.uid)
         ))
       )
-      .subscribe(() => true);
+      .subscribe();
   }
 
   // This function delete the project
@@ -96,7 +97,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   // This function check if logged in user is also owner of the project
-  isAdmin(): boolean {
+  public isAdmin(): boolean {
     return this.project.isAdmin(this.authService.profile.uid);
   }
 

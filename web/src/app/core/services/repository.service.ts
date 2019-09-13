@@ -37,18 +37,65 @@ export class RepositoryService {
   }
 
   // This function loads all the available repositories
-  public loadRepository(fullName: string): Observable<boolean> {
+  public loadRepository(repo: RepositoryModel): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
-    return callable({ fullName, token: this.authService.profile.oauth.githubToken });
+    return callable({ repository: repo, token: this.authService.profile.oauth.githubToken });
   }
 
   public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('createGitWebhookRepository');
+
     return callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken });
   }
 
-  public deleteGitWebhook(repositoryUid: string): Observable<RepositoryModel> {
+  public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
-    return callable({ repositoryUid, token: this.authService.profile.oauth.githubToken });
+    return callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken });
+  }
+
+  public getRating(repo: RepositoryModel): number {
+    const checks: number[] = [];
+
+    checks.push(repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0);
+    checks.push(repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0);
+    checks.push(repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0);
+    checks.push(repo.url ? 100 : 0);
+    checks.push(repo.description ? 100 : 0);
+    checks.push(repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0);
+    checks.push(repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0);
+    checks.push(repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0);
+
+    return checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
+  }
+
+  public getPoints(date: Date): number {
+    const boundary: number = 30; // days
+    const currentDate: Date = new Date();
+    const referenceDate: Date = new Date(date);
+    let lapse: number = Math.floor((currentDate.getTime() - referenceDate.getTime()) / 1000);
+    const hoursInDay: number = 24 * 60 * 60;
+    const duration: number = Math.ceil(lapse / hoursInDay);
+
+    if (duration > boundary) {
+      return 0;
+    }
+
+    return ((boundary - duration) / 30) * 100; // percentage
+  }
+
+  public getPointsByCount(count: number, limit: number): number {
+    let points: number;
+    switch (true) {
+      case (count >= 1 && count <= limit):
+        points = 50;
+        break;
+      case (count > limit):
+        points = 100;
+        break;
+      default:
+        points = 0;
+    }
+
+    return points;
   }
 }

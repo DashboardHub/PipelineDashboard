@@ -1,3 +1,5 @@
+import { firestore } from "firebase-admin";
+
 export interface GitHubRepositoryWebhookResponse {
   type: string;
   id: number;
@@ -10,8 +12,8 @@ export interface GitHubRepositoryWebhookResponse {
     secret?: string;
     insecure_ssl?: '0' | '1';
   };
-  updated_at: Date;
-  created_at: Date;
+  updated_at: string;
+  created_at: string;
   url: string;
   test_url: string;
   ping_url: string;
@@ -47,8 +49,8 @@ export interface GitHubRepositoryWebhookModel {
     secret?: string;
     insecureSsl?: '0' | '1';
   };
-  updatedAt: Date;
-  createdAt: Date;
+  updatedOn: firestore.Timestamp;
+  createdOn: firestore.Timestamp;
   url: string;
   testUrl: string;
   pingUrl: string;
@@ -101,8 +103,8 @@ export class GitHubRepositoryWebhookMapper {
       active: input.active,
       events: input.events,
       config: config,
-      updatedAt: input.updated_at,
-      createdAt: input.created_at,
+      updatedOn: firestore.Timestamp.fromDate(new Date(input.updated_at)),
+      createdOn: firestore.Timestamp.fromDate(new Date(input.created_at)),
       url: input.url,
       testUrl: input.test_url,
       pingUrl: input.ping_url,

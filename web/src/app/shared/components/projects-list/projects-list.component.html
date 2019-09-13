@@ -6,10 +6,6 @@
         <mat-icon svgIcon="{{ checkTypeOfProject(element) }}"></mat-icon>
       </td>
     </ng-container>
-    <ng-container matColumnDef="alert">
-      <th mat-header-cell *matHeaderCellDef>Alert</th>
-      <td mat-cell *matCellDef="let element">{{ element.repositories.length }}</td>
-    </ng-container>
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Title</th>
       <td mat-cell *matCellDef="let element">
@@ -75,14 +71,11 @@
           <div *ngIf="isAdmin(element)">
             <mat-icon [matMenuTriggerFor]="menu" class="project__list__actions">more_horiz</mat-icon>
             <mat-menu #menu="matMenu">
-              <button [routerLink]="['/projects', element.uid,'edit']" mat-menu-item>
+              <button [routerLink]="['/projects', element.uid, 'edit']" mat-menu-item>
                 <mat-icon svgIcon="edit_icon"></mat-icon>Edit
               </button>
               <button (click)="delete()" mat-menu-item>
                 <mat-icon svgIcon="delete_icon"></mat-icon>Delete
-              </button>
-              <button mat-menu-item>
-                <mat-icon svgIcon="hide_icon"></mat-icon>Hide
               </button>
             </mat-menu>
           </div>

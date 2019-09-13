@@ -63,8 +63,7 @@
         <ng-container matColumnDef="ping">
           <th mat-header-cell *matHeaderCellDef>Ping</th>
           <td mat-cell *matCellDef="let element" class="monitor-list__card__content__table__ping">
-            <span>Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings :
-              {{ element.unsuccessfulPings || 0 }}</span>
+            <span>Successful pings: {{ element.successfulPings || 0 }} | Unsuccessful pings : {{ element.unsuccessfulPings || 0 }}</span>
           </td>
         </ng-container>
         <ng-container matColumnDef="action">

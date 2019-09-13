@@ -2,7 +2,7 @@
 import * as firebase from 'firebase-admin';
 
 // Dashboard hub firebase functions mappers
-import { FirebaseAdmin } from './../client/firebase-admin';
+import { DocumentReference, FirebaseAdmin, WriteBatch } from './../client/firebase-admin';
 import { GitHubClient } from './../client/github';
 import { Logger } from './../client/logger';
 import { GitHubRepositoryInput, GitHubRepositoryMapper, GitHubRepositoryModel } from './../mappers/github/repository.mapper';
@@ -12,9 +12,11 @@ export interface ReposInput {
 }
 
 export const getUserRepos: any = async (token: string, uid: string) => {
+  const batch: WriteBatch = FirebaseAdmin.firestore().batch();
+  const userRef: DocumentReference = FirebaseAdmin.firestore().collection('users').doc(uid);
   let repositories: GitHubRepositoryInput[] = [];
   try {
-    repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos?visibility=public&affiliation=owner', token);
+    repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos?visibility=public&affiliation=owner&sort=updated&per_page=100', token);
   } catch (error) {
     Logger.error(error);
     throw new Error(error);
@@ -29,16 +31,15 @@ export const getUserRepos: any = async (token: string, uid: string) => {
     },
   });
 
-  await FirebaseAdmin
-    .firestore()
-    .collection('users')
-    .doc(uid)
-    .set({
+  await batch
+    .update(userRef, {
       repositories: {
         lastUpdated: firebase.firestore.Timestamp.fromDate(new Date()),
         data: mappedRepos,
       },
-    }, { merge: true });
+    });
+
+  await batch.commit();
 
   return mappedRepos;
 };

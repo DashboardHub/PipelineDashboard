@@ -36,17 +36,17 @@ export class ProjectsListComponent implements OnChanges {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.isSmallScreen = false;
-          this.displayedColumns = ['type', 'alert', 'title', 'url', 'repository', 'monitors', 'pings', 'user', 'lastDate'];
+          this.displayedColumns = ['type', 'title', 'url', 'repository', 'monitors', 'pings', 'user', 'lastDate'];
         } else {
           this.isSmallScreen = false;
-          this.displayedColumns = ['type', 'alert', 'title', 'description', 'url', 'repository', 'monitors', 'pings', 'user', 'lastDate'];
+          this.displayedColumns = ['type', 'title', 'description', 'url', 'repository', 'monitors', 'pings', 'user', 'lastDate'];
         }
       });
     this.breakpointObserver
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.displayedColumns = ['type', 'alert', 'title', 'url', 'repository', 'monitors', 'pings'];
+          this.displayedColumns = ['type', 'title', 'url', 'repository', 'monitors', 'pings'];
           this.isSmallScreen = false;
         }
       });

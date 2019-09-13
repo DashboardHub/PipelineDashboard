@@ -1,4 +1,4 @@
-<div class="repository__problem" *ngIf="isAlertEnabled && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)">
+<div class="repository__problem" *ngIf="isAdmin && isAlertEnabled && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)">
   <mat-card class="repository__problem__card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
       <span>
@@ -18,6 +18,9 @@
     <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'"
       fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
       <div fxLayout="column" class="repository__container">
+        <div fxLayout="row">
+            <mat-progress-bar matTooltipPosition="above" matTooltip="Rating: {{ rating | number:'1.0-2' }}%" mode="determinate" [value]="rating"></mat-progress-bar>
+        </div>
         <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-lg="column" class="header-container">
           <div class="repository__container__info">
             <div class="heading repository__header__icon">
@@ -89,10 +92,10 @@
                 <mat-divider class="repository-detail-card__content__divider"></mat-divider>
                 <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues" fxLayoutGap="5px">
-                  <a href="{{ issue.url }}">#{{ issue.number }}</a>{{ issue.title }}</h4>
+                  <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
                 <span class="repository-detail-card__content__time-container-top">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn | timeAgo }}</p>
+                  <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -124,7 +127,7 @@
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn | timeAgo }}</p>
+                  <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -157,7 +160,7 @@
                 <p mat-line class="repository-detail-card__content__username">{{ event.actor.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
-                  <p class="repository-detail-card__content__time" mat-line>{{ event.createdOn | timeAgo }}</p>
+                  <p class="repository-detail-card__content__time" mat-line>{{ event.createdOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
             </mat-list>
@@ -189,7 +192,7 @@
                 href="{{ repository.releases[0].htmlUrl }}">{{ repository.releases[0].title }}</a></div>
             <div>
               <p class="info__body__line" *ngIf="repository.releases && repository.releases.length > 0" mat-line>
-                Published: {{ repository.releases[0].createdOn | timeAgo }}</p>
+                Published: {{ repository.releases[0].createdOn.toDate() | timeAgo }}</p>
               <p class="info__body__line" *ngIf="repository.releases && !repository.releases.length" mat-line>Published:
                 N/A</p>
             </div>
@@ -301,7 +304,7 @@
 </ng-template>
 <ng-template #emptyData>no data</ng-template>
 <ng-template #refresh>
-  <button mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository.fullName, $event)" [disabled]="manualReload">
+  <button *ngIf="isAdmin" mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository, $event)" [disabled]="manualReload">
     <span fxLayout="row" fxLayoutAlign="center center">
       <mat-icon svgIcon="refresh_icon"></mat-icon>
       <span fxHide.lt-lg fxFlexOffset="10px">
