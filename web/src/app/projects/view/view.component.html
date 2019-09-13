@@ -52,9 +52,9 @@
         </div>
       </ng-template>
     </div>
-    <dashboard-monitor-summary [monitors]="project.monitors || []"></dashboard-monitor-summary>
+    <dashboard-monitor-summary *ngIf="isAdmin()" [monitors]="project.monitors || []"></dashboard-monitor-summary>
     <div class="repository" *ngFor="let uid of project.repositories">
-      <dashboard-repository [uid]="uid"></dashboard-repository>
+      <dashboard-repository [uid]="uid" [isAdmin]="isAdmin()"></dashboard-repository>
     </div>
   </div>
 </div>

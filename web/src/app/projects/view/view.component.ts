@@ -97,7 +97,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   // This function check if logged in user is also owner of the project
-  isAdmin(): boolean {
+  public isAdmin(): boolean {
     return this.project.isAdmin(this.authService.profile.uid);
   }
 
