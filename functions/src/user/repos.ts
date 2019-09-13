@@ -16,7 +16,7 @@ export const getUserRepos: any = async (token: string, uid: string) => {
   const userRef: DocumentReference = FirebaseAdmin.firestore().collection('users').doc(uid);
   let repositories: GitHubRepositoryInput[] = [];
   try {
-    repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos?visibility=public&affiliation=owner', token);
+    repositories = await GitHubClient<GitHubRepositoryInput[]>('/user/repos?visibility=public&affiliation=owner&sort=updated&per_page=100', token);
   } catch (error) {
     Logger.error(error);
     throw new Error(error);
