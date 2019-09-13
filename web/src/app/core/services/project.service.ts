@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
 import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { IProject, ProjectModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
@@ -16,11 +20,15 @@ import { RepositoryService } from './repository.service';
 })
 export class ProjectService {
 
+  private dialogRef: MatDialogRef<DialogConfirmationComponent>;
+
   constructor(
     private afs: AngularFirestore,
     private authService: AuthenticationService,
     private activityService: ActivityService,
-    private repositoryService: RepositoryService
+    private dialog: MatDialog,
+    private repositoryService: RepositoryService,
+    private router: Router
   ) {
   }
 
@@ -44,6 +52,26 @@ export class ProjectService {
         map(() => project),
         take(1)
       );
+  }
+
+  // This function delete the project
+  showDeleteDialog(projectUid: string): void {
+    let dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      width: '500px',
+      data: {
+        title: 'Delete Project',
+        content: 'Are you sure you want to delete?',
+      },
+    };
+    this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
+    this.dialogRef.afterClosed()
+      .subscribe((result: boolean) => {
+        if (result === true) {
+          this.delete(projectUid)
+            .subscribe(() => this.router.navigate(['/projects']));
+        }
+      });
   }
 
   // This function delete the project via uid
