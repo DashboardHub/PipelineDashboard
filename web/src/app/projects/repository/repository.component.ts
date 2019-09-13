@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { AuthenticationService, RepositoryService, SortingService } from '@core/services/index.service';
+import { RepositoryService, SortingService } from '@core/services/index.service';
 import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 @Component({
@@ -21,6 +21,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public rating: number;
 
   @Input()
+  public isAdmin: boolean = false;
+
+  @Input()
   public uid: string;
 
   public manualReload: boolean = false;
@@ -28,7 +31,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public numberOfDisplayedUsers: number;
 
   constructor(
-    private authService: AuthenticationService,
     private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
     private sortingService: SortingService
@@ -134,11 +136,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 
-  public isAuthenticated(): boolean {
-    return this.authService.isAuthenticated;
-  }
-
-  calculateRating(): void {
+  public calculateRating(): void {
     this.rating = this.repositoryService.getRating(this.repository);
   }
 
