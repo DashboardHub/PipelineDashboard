@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
-import { map, mergeMap, switchMap, take, tap, filter } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { v4 as uuid } from 'uuid';

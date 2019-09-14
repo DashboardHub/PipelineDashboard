@@ -4,8 +4,8 @@ import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Third party modules
-import { v4 as uuid } from 'uuid';
 import { Subscription } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 
 // Dashboard hub models and services
 import { MonitorService } from '@core/services/index.service';
