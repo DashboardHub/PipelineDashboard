@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
 import { Subscription } from 'rxjs';
@@ -26,6 +26,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   public isMenuOpen: boolean;
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private dialog: MatDialog,
     private projectService: ProjectService,
     private authService: AuthenticationService
@@ -72,7 +73,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   delete(): void {
-    this.projectService.showDeleteDialog(this.project.uid);
+    this.deleteSubscription = this.projectService
+      .showDeleteDialog(this.project.uid)
+      .subscribe(() => this.router.navigate(['/projects']));
   }
 
   // This function check if logged in user is also owner of the project
