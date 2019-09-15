@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { RepositoriesModel, RepositoryModel } from '@shared/models/index.model';
+import { RatingModel, RepositoriesModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -53,19 +53,19 @@ export class RepositoryService {
     return callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken });
   }
 
-  public getRating(repo: RepositoryModel): number {
-    const checks: number[] = [];
+  public getRating(repo: RepositoryModel): RatingModel[] {
+    const checks: RatingModel[] = [];
 
-    checks.push(repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0);
-    checks.push(repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0);
-    checks.push(repo.milestones.length > 0 ? this.getPoints(new Date(repo.milestones[0].updatedAt)) : 0);
-    checks.push(repo.url ? 100 : 0);
-    checks.push(repo.description ? 100 : 0);
-    checks.push(repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0);
-    checks.push(repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0);
-    checks.push(repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0);
+    checks.push({key: 'Issues', value: repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0});
+    checks.push({key: 'Releases', value: repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0});
+    checks.push({key: 'Milestones', value: repo.milestones.length > 0 ? this.getPoints(repo.milestones[0].updatedAt.toDate()) : 0});
+    checks.push({key: 'Url', value: repo.url ? 100 : 0});
+    checks.push({key: 'Description', value: repo.description ? 100 : 0});
+    checks.push({key: 'ForksCount', value: repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0});
+    checks.push({key: 'StargazersCount', value: repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0});
+    checks.push({key: 'WatchersCount', value: repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0});
 
-    return checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
+    return checks;
   }
 
   public getPoints(date: Date): number {
