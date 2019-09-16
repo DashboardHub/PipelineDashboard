@@ -1,0 +1,15 @@
+<div fxLayout="row" *ngIf="repository.fullName" class="rating">
+  <div fxFlex="100%">
+    <h1>{{repository.fullName}}</h1>
+    <p>Rating Statistics</p>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngFor="let rating of repoRatings">
+      <div fxFlex="20%" fxFlexAlign="center">
+        {{rating.key}}: {{rating.value | number:'1.0-2' }}%
+      </div>
+      <div fxFlex="80%" fxFlexAlign="center">
+        <mat-progress-bar mode="determinate" [value]="rating.value"></mat-progress-bar>
+      </div>
+    </div>
+  </div>
+
+</div>

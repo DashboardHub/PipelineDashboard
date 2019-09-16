@@ -2,10 +2,13 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
-import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { IProject, ProjectModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
@@ -20,6 +23,7 @@ export class ProjectService {
     private afs: AngularFirestore,
     private authService: AuthenticationService,
     private activityService: ActivityService,
+    private dialog: MatDialog,
     private repositoryService: RepositoryService
   ) {
   }
@@ -43,6 +47,26 @@ export class ProjectService {
         switchMap(() => this.afs.collection<IProject>('projects').doc(project.uid).set(project.toData())),
         map(() => project),
         take(1)
+      );
+  }
+
+  // This function delete the project
+  public showDeleteDialog(projectUid: string): Observable<void> {
+    let dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      width: '500px',
+      data: {
+        title: 'Delete Project',
+        content: 'Are you sure you want to delete?',
+      },
+    };
+
+    return this.dialog
+      .open(DialogConfirmationComponent, dialogConfig)
+      .afterClosed()
+      .pipe(
+        filter((result: boolean) => !!result),
+        switchMap(() => this.delete(projectUid))
       );
   }
 

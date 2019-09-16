@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
-import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
+import { ContributorModel, MilestoneModel, PullRequestModel, RatingModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-repository',
@@ -137,7 +137,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   public calculateRating(): void {
-    this.rating = this.repositoryService.getRating(this.repository);
+    const repoRatings: RatingModel[] = this.repositoryService.getRating(this.repository);
+    const ratingValues: number[] = repoRatings.map((rating: RatingModel) => rating.value);
+    this.rating = ratingValues.reduce((total: number, current: number) => total + current, 0) / repoRatings.length;
   }
 
   private showWebHookAlert(): void {

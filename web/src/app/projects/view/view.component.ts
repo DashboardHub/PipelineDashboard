@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
@@ -8,7 +8,6 @@ import { filter, switchMap, take } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService } from '@core/services/index.service';
-import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
 import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
@@ -20,7 +19,6 @@ import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
 export class ViewProjectComponent implements OnInit, OnDestroy {
 
-  private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   private deleteSubscription: Subscription;
   private projectSubscription: Subscription;
   public typeIcon: string;
@@ -74,26 +72,10 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  // This function delete the project
   delete(): void {
-    let dialogConfig: MatDialogConfig = new MatDialogConfig();
-    dialogConfig = {
-      width: '500px',
-      data: {
-        title: 'Delete Project',
-        content: 'Are you sure you want to delete?',
-      },
-    };
-    this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
-    this.dialogRef.afterClosed()
-      .subscribe((result: boolean) => {
-        if (result === true) {
-          this.projectSubscription.unsubscribe();
-          this.deleteSubscription = this.projectService
-            .delete(this.project.uid)
-            .subscribe(() => this.router.navigate(['/projects']));
-        }
-      });
+    this.deleteSubscription = this.projectService
+      .showDeleteDialog(this.project.uid)
+      .subscribe(() => this.router.navigate(['/projects']));
   }
 
   // This function check if logged in user is also owner of the project
