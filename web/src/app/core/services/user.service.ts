@@ -28,8 +28,9 @@ export class UserService {
         switchMap(() => this.afs
           .collection<UserStatsModel>(
             'userStats',
-            (ref: firebase.firestore.Query) => ref.orderBy('lastUpdated', 'desc')
-            .limit(4)
+            (ref: firebase.firestore.Query) => ref
+              .orderBy('lastUpdated', 'desc')
+              .limit(4)
           )
           .valueChanges())
       );
