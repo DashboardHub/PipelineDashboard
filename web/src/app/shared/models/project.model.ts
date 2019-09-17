@@ -56,20 +56,20 @@ export class ProjectModel extends Model<IProject> implements IProject {
    */
   constructor(project: IProject) {
     super();
-    this.uid = project && project.uid ? project.uid : '';
-    this.type = project && project.type ? project.type : 'public';
-    this.title = project && project.title ? project.title : undefined;
-    this.description = project && project.description ? project.description : '';
-    this.url = project && project.url ? project.url : '';
-    this.logoUrl = project && project.logoUrl ? project.logoUrl : '';
-    this.access = project && project.access ? new AccessModel(project.access) : new AccessModel();
-    this.repositories = project && project.repositories ? project.repositories : [];
-    this.monitors = project && project.monitors ? ModelFactory.toModels<IMonitor, MonitorModel>(project.monitors, MonitorModel) : [];
-    this.pings = project && project.pings ? project.pings : [];
-    this.tokens = project && project.tokens ? ModelFactory.toModels<IToken, TokenModel>(project.tokens, TokenModel) : [];
-    this.views = project && project.views ? project.views : 0;
-    this.createdOn = project && project.createdOn ? project.createdOn : undefined;
-    this.updatedOn = project && project.updatedOn ? project.updatedOn : undefined;
+    this.uid = project.uid;
+    this.type = project.type ? project.type : 'public';
+    this.title = project.title ? project.title : undefined;
+    this.description = project.description ? project.description : '';
+    this.url = project.url ? project.url : '';
+    this.logoUrl = project.logoUrl ? project.logoUrl : '';
+    this.access = project.access ? new AccessModel(project.access) : new AccessModel();
+    this.repositories = project.repositories ? project.repositories : [];
+    this.monitors = project.monitors ? ModelFactory.toModels<IMonitor, MonitorModel>(project.monitors, MonitorModel) : [];
+    this.pings = project.pings ? project.pings : [];
+    this.tokens = project.tokens ? ModelFactory.toModels<IToken, TokenModel>(project.tokens, TokenModel) : [];
+    this.views = project.views ? project.views : 0;
+    this.createdOn = project.createdOn ? project.createdOn : undefined;
+    this.updatedOn = project.updatedOn ? project.updatedOn : undefined;
   }
 
   /**
