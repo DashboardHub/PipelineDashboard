@@ -1,0 +1,1 @@
+Open source is social coding! DashboardHub is all completely open and transparent, with not only the whole codebase available but also our project board and meeting notes. Driven by the community, you influence the features you want!

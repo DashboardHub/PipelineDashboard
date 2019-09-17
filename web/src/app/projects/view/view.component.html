@@ -6,15 +6,14 @@
           <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
         </span>
         <mat-menu #menu="matMenu">
-          <button mat [routerLink]="['edit']" mat-menu-item>
-            <mat-icon svgIcon="edit_icon"></mat-icon>Edit
-          </button>
-          <button (click)="delete()" mat-menu-item>
-            <mat-icon svgIcon="delete_icon"></mat-icon>Delete
-          </button>
-          <button mat-menu-item>
-            <mat-icon svgIcon="hide_icon"></mat-icon>Hide
-          </button>
+          <span *ngIf="isAdmin()">
+            <button mat [routerLink]="['edit']" mat-menu-item>
+              <mat-icon svgIcon="edit_icon"></mat-icon>Edit
+            </button>
+            <button (click)="delete()" mat-menu-item>
+              <mat-icon svgIcon="delete_icon"></mat-icon>Delete
+            </button>
+          </span>
         </mat-menu>
         <mat-icon svgIcon="{{ typeIcon }}"></mat-icon>
         <span class="project-body__header__content__name">{{ project.title }}</span>
@@ -24,12 +23,12 @@
           <ng-container *ngTemplateOutlet="infoContent"></ng-container>
         </span>
       </div>
-      <div class="actions-menu">
+      <div class="actions-menu" *ngIf="isAdmin()">
         <button mat-button [matMenuTriggerFor]="menuAction" #trigger="matMenuTrigger" [ngClass]="{'actions-menu__isActive': trigger.menuOpen}">
           <mat-icon *ngIf="!trigger.menuOpen; else whiteIcon" svgIcon="tune_icon"></mat-icon>Actions
         </button>
         <mat-menu #menuAction="matMenu">
-          <span fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-around start" *ngIf="isAdmin()">
+          <span fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-around start">
             <ng-container *ngTemplateOutlet="infoContent"></ng-container>
           </span>
         </mat-menu>
@@ -52,9 +51,9 @@
         </div>
       </ng-template>
     </div>
-    <dashboard-monitor-summary [monitors]="project.monitors || []"></dashboard-monitor-summary>
+    <dashboard-monitor-summary *ngIf="isAdmin()" [monitors]="project.monitors || []"></dashboard-monitor-summary>
     <div class="repository" *ngFor="let uid of project.repositories">
-      <dashboard-repository [uid]="uid"></dashboard-repository>
+      <dashboard-repository [uid]="uid" [isAdmin]="isAdmin()"></dashboard-repository>
     </div>
   </div>
 </div>
