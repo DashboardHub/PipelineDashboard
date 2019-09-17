@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
-import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
@@ -20,15 +19,12 @@ import { RepositoryService } from './repository.service';
 })
 export class ProjectService {
 
-  private dialogRef: MatDialogRef<DialogConfirmationComponent>;
-
   constructor(
     private afs: AngularFirestore,
     private authService: AuthenticationService,
     private activityService: ActivityService,
     private dialog: MatDialog,
-    private repositoryService: RepositoryService,
-    private router: Router
+    private repositoryService: RepositoryService
   ) {
   }
 
@@ -55,7 +51,7 @@ export class ProjectService {
   }
 
   // This function delete the project
-  showDeleteDialog(projectUid: string): void {
+  public showDeleteDialog(projectUid: string): Observable<void> {
     let dialogConfig: MatDialogConfig = new MatDialogConfig();
     dialogConfig = {
       width: '500px',
@@ -64,14 +60,14 @@ export class ProjectService {
         content: 'Are you sure you want to delete?',
       },
     };
-    this.dialogRef = this.dialog.open(DialogConfirmationComponent, dialogConfig);
-    this.dialogRef.afterClosed()
-      .subscribe((result: boolean) => {
-        if (result === true) {
-          this.delete(projectUid)
-            .subscribe(() => this.router.navigate(['/projects']));
-        }
-      });
+
+    return this.dialog
+      .open(DialogConfirmationComponent, dialogConfig)
+      .afterClosed()
+      .pipe(
+        filter((result: boolean) => !!result),
+        switchMap(() => this.delete(projectUid))
+      );
   }
 
   // This function delete the project via uid
