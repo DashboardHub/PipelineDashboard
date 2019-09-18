@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RatingModel, RepositoryModel } from '@app/shared/models/index.model';
 import { RepositoryService } from '@core/services/index.service';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
  * Repository rating component
@@ -42,10 +43,10 @@ export class RatingComponent implements OnInit, OnDestroy {
 
     this.repositorySubscription = this.repositoryService
       .findOneById(this.repoUid)
-      .subscribe((repository: RepositoryModel) => {
-        this.repository = repository;
-        this.repoRatings = this.repositoryService.getRating(this.repository);
-      });
+      .pipe(
+        map((repository: RepositoryModel) => this.repository = repository)
+      )
+      .subscribe(() => this.repoRatings = this.repositoryService.getRating(this.repository));
   }
 
   /**

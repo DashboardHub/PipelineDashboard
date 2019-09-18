@@ -56,16 +56,48 @@ export class RepositoryService {
   public getRating(repo: RepositoryModel): RatingModel[] {
     const checks: RatingModel[] = [];
 
-    checks.push({key: 'Issues', value: repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0});
-    checks.push({key: 'Releases', value: repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0});
-    checks.push({key: 'Milestones', value: repo.milestones.length > 0 ? this.getPoints(repo.milestones[0].updatedAt.toDate()) : 0});
-    checks.push({key: 'Url', value: repo.url ? 100 : 0});
-    checks.push({key: 'Description', value: repo.description ? 100 : 0});
-    checks.push({key: 'ForksCount', value: repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0});
-    checks.push({key: 'StargazersCount', value: repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0});
-    checks.push({key: 'WatchersCount', value: repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0});
+    checks.push({
+      name: 'Issues',
+      description: 'Keep issues up to date',
+      value: repo.issues.length > 0 ? this.getPoints(repo.issues[0].createdOn.toDate()) : 0
+    });
+    checks.push({
+      name: 'Releases',
+      description: 'Mark key stages in your project with releases',
+      value: repo.releases.length > 0 ? this.getPoints(repo.releases[0].createdOn.toDate()) : 0
+    });
+    checks.push({
+      name: 'Milestones',
+      description: 'Organise issues into milestones',
+      value: repo.milestones.length > 0 ? this.getPoints(repo.milestones[0].updatedAt.toDate()) : 0
+    });
+    checks.push({
+      name: 'Url',
+      description: 'Repository url is great way for people to easily find more information',
+      value: repo.url ? 100 : 0
+    });
+    checks.push({
+      name: 'Description',
+      description: 'Repository',
+      value: repo.description ? 100 : 0
+    });
+    checks.push({
+      name: 'Forks',
+      description: 'Encourage others to contribute to your repository and build your community',
+      value: repo.forksCount ? this.getPointsByCount(repo.forksCount, 50) : 0
+    });
+    checks.push({
+      name: 'Stars',
+      description: 'Encourage others to favourite your repository to watch the activity in their timeline',
+      value: repo.stargazersCount ? this.getPointsByCount(repo.stargazersCount, 100) : 0
+    });
+    checks.push({
+      name: 'Watchers',
+      description: 'Encourage others to watch your repository to get notified of events',
+      value: repo.watchersCount ? this.getPointsByCount(repo.watchersCount, 25) : 0
+    });
 
-    return checks;
+    return checks.sort((a, b) => b.value - a.value);
   }
 
   public getPoints(date: Date): number {

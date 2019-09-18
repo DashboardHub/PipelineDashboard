@@ -1,4 +1,5 @@
 export class RatingModel {
-  key: string;
+  name: string;
+  description: string;
   value: number;
 }
