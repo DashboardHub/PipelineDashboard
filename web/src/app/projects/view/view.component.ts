@@ -73,6 +73,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   delete(): void {
+    this.projectSubscription.unsubscribe();
     this.deleteSubscription = this.projectService
       .showDeleteDialog(this.project.uid)
       .subscribe(() => this.router.navigate(['/projects']));
