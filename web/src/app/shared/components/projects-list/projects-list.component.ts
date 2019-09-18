@@ -1,11 +1,12 @@
-import { AuthenticationService } from '@app/core/services/authentication.service';
 
-// Breakpoints components
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 // Core components
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 // Dashboard hub model
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { ProjectService } from '@core/services/index.service';
 import { ProjectModel } from '../../models/index.model';
 
 /**
@@ -29,7 +30,9 @@ export class ProjectsListComponent implements OnChanges {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private projectService: ProjectService,
+    private snackBar: MatSnackBar
   ) {
     this.breakpointObserver
       .observe([Breakpoints.Medium])
@@ -80,5 +83,11 @@ export class ProjectsListComponent implements OnChanges {
     } else if (project.type === 'public') {
       return 'public_icon';
     }
+  }
+
+  public delete(projectUid: string): void {
+    this.projectService
+      .showDeleteDialog(projectUid)
+      .subscribe(() => this.snackBar.open('Project deleted successfully', undefined, { duration: 5000 }));
   }
 }

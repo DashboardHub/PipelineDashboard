@@ -1,13 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { v4 as uuid } from 'uuid';
+import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // Third party modules
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 
 // Dashboard hub models and services
-import { MatSnackBar } from '@angular/material';
 import { MonitorService } from '@core/services/index.service';
 import { MonitorModel, ProjectModel } from '@shared/models/index.model';
 
