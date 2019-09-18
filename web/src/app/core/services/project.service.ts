@@ -199,8 +199,10 @@ export class ProjectService {
         switchMap(() => this.afs
           .collection<IProject>(
             'projects',
-            (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-              .orderBy('views', 'desc').limit(3)
+            (ref: firebase.firestore.Query) => ref
+              .where('type', '==', 'public')
+              .orderBy('views', 'desc')
+              .limit(4)
           )
           .valueChanges()),
         map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
