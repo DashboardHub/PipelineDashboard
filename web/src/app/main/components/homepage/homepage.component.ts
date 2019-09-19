@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
-
 // Dashboard hub model and services
 import { ProjectService, UserService } from '@core/services/index.service';
 import { ProjectModel, UserStatsModel } from '@shared/models/index.model';

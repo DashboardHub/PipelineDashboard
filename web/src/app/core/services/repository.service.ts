@@ -21,7 +21,7 @@ export class RepositoryService {
   /**
    * Life cycle method
    * @param afs Angularfirestore instance
-   * @param fns AngularFirefunctions instance 
+   * @param fns AngularFirefunctions instance
    * @param authService AuthService instance
    * @param activityService ActivityService instance
    */

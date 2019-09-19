@@ -101,7 +101,7 @@ export class ProjectsListComponent implements OnChanges {
   }
 
   /**
-   * Method to delete project 
+   * Method to delete project
    * @param projectUid uid of project
    */
   public delete(projectUid: string): void {
