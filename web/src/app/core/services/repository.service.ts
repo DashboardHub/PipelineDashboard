@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -9,11 +10,21 @@ import { RepositoriesModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
+/**
+ * Repository service
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class RepositoryService {
 
+  /**
+   * Life cycle method
+   * @param afs Angularfirestore instance
+   * @param fns AngularFirefunctions instance 
+   * @param authService AuthService instance
+   * @param activityService ActivityService instance
+   */
   constructor(
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
@@ -21,13 +32,19 @@ export class RepositoryService {
     private activityService: ActivityService
   ) { }
 
-  // Forces refresh of users repositories
+  /**
+   * Forces refresh of users repositories
+   * @reutnrs Observable
+   */
   public refresh(): Observable<RepositoriesModel> {
     const callable: any = this.fns.httpsCallable('findAllUserRepositories');
     return callable({ token: this.authService.profile.oauth.githubToken });
   }
 
-  // This function returns the repository via uid
+  /**
+   * This function returns the repository via uid
+   * @param uid uid of repository
+   */
   public findOneById(uid: string): Observable<RepositoryModel> {
     return this.activityService
       .start()
@@ -36,23 +53,40 @@ export class RepositoryService {
       );
   }
 
-  // This function loads all the available repositories
+  /**
+   * This function loads all the available repositories
+   * @returns Observable
+   */
   public loadRepository(repo: RepositoryModel): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
     return callable({ repository: repo, token: this.authService.profile.oauth.githubToken });
   }
 
+  /**
+   * Method to call cloud function create webhook
+   * @param repo repository instance
+   * @returns Observable
+   */
   public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('createGitWebhookRepository');
 
     return callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken });
   }
 
+  /**
+   * Method to call cloud function to delete webhook
+   * @param repo repository instance
+   */
   public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
     return callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken });
   }
 
+  /**
+   * Method to return the repository rating
+   * @param repo repository instance
+   * @returns rating
+   */
   public getRating(repo: RepositoryModel): number {
     const checks: number[] = [];
 
@@ -68,6 +102,11 @@ export class RepositoryService {
     return checks.reduce((total: number, current: number) => total + current, 0) / checks.length;
   }
 
+  /**
+   * Method to return the points based upon rating type
+   * @param date updated date
+   * @returns points
+   */
   public getPoints(date: Date): number {
     const boundary: number = 30; // days
     const currentDate: Date = new Date();
@@ -83,6 +122,11 @@ export class RepositoryService {
     return ((boundary - duration) / 30) * 100; // percentage
   }
 
+  /**
+   * Method to return the points based upon the counts
+   * @param count count of the rating
+   * @param limit limit of the rating
+   */
   public getPointsByCount(count: number, limit: number): number {
     let points: number;
     switch (true) {

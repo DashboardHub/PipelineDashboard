@@ -1,3 +1,6 @@
+/**
+ * Webhook model
+ */
 export class WebhookModel {
   type: string;
   id: number;

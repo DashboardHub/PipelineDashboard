@@ -13,6 +13,9 @@ import { v4 as uuid } from 'uuid';
 import { TokenService } from '@core/services/index.service';
 import { TokenModel } from '@shared/models/index.model';
 
+/**
+ * token create/edit component
+ */
 @Component({
   selector: 'dashboard-project-tokens-create-edit',
   templateUrl: './tokens-create-edit.component.html',
@@ -28,6 +31,14 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
   public projectUid: string;
   public tokenForm: FormGroup;
 
+  /**
+   * Life cycle method
+   * @param form FormBuilder instance
+   * @param tokenService TokenService instance
+   * @param route ActivatedRoute instance
+   * @param router Router instance
+   * @param snackBar MatSnackBar instance
+   */
   constructor(
     private form: FormBuilder,
     private tokenService: TokenService,
@@ -51,7 +62,9 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  // This function will be called when component is destroyed
+  /**
+   * This function will be called when component is destroyed
+   */
   ngOnDestroy(): void {
     if (this.projectSubscription) {
       this.projectSubscription.unsubscribe();
@@ -61,7 +74,10 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  // This function will create project token and edit project token details based upon if click on edit or add
+  /**
+   * This function will create project token and edit
+   * project token details based upon if click on edit or add
+   */
   save(): void {
     this.tokenSubscription = this.tokenService
       .save(this.projectUid, new TokenModel({ ...this.tokenForm.value }))
@@ -71,7 +87,10 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
       );
   }
 
-  // This function check the project token on uniqueness
+  /**
+   * This function check the project token on uniqueness
+   * @param control AbstractControl instance
+   */
   private validateTokenNotTaken(control: AbstractControl): Observable<any> {
     return this.tokenService
       .findAll(this.projectUid)

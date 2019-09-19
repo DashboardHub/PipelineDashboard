@@ -1,3 +1,4 @@
+// Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef, MatSnackBar } from '@angular/material';
 
@@ -14,6 +15,9 @@ import { MonitorService, ProjectService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { MonitorModel, ProjectModel } from '@shared/models/index.model';
 
+/**
+ * Monitor list component
+ */
 @Component({
   selector: 'dashboard-monitors-list',
   templateUrl: './monitors-list.component.html',
@@ -31,6 +35,15 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public displayedColumns: string[];
   public isSmallScreen: boolean;
 
+  /**
+   * Life cycle method
+   * @param dialog MatDialog instance
+   * @param monitorService MonitorService instance
+   * @param projectService ProjectService instance
+   * @param route ActivatedRoute instance
+   * @param snackBar MatSnackBar instance
+   * @param breakpointObserver BreakpointObserver instance
+   */
   constructor(
     private dialog: MatDialog,
     private monitorService: MonitorService,
@@ -101,7 +114,10 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
       });
   }
 
-  // This function will ping the monitor
+  /**
+   * This function will ping the monitor
+   * @param monitorUid uid of monitor
+   */
   public pingMonitor(monitorUid: string): void {
     this.manualPing = true;
     this.monitorService

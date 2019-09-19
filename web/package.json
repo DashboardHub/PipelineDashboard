@@ -46,6 +46,7 @@
     "@angular/platform-browser-dynamic": "7.2.15",
     "@angular/platform-server": "7.2.15",
     "@angular/router": "7.2.15",
+    "@compodoc/compodoc": "^1.1.10",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.7",
     "d3": "5.7.0",

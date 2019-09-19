@@ -1,8 +1,11 @@
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
+// Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+
+// Breakpoint resolvers
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // Dashboard hub models
 import { PingService } from '@core/services/index.service';
@@ -25,12 +28,21 @@ export class PingsListComponent implements OnInit, OnDestroy {
   public displayedColumns: string[];
   public isSmallScreen: boolean;
 
+  /**
+   * Life cycle method
+   * @param route ActivatedRoute instance
+   * @param pingService PingService instance
+   * @param breakpointObserver BreakpointObserver instance
+   */
   constructor(
     private route: ActivatedRoute,
     private pingService: PingService,
     private breakpointObserver: BreakpointObserver
   ) { }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
@@ -53,6 +65,9 @@ export class PingsListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.pingSubscription.unsubscribe();
   }

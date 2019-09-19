@@ -1,8 +1,12 @@
+// Application models
 import { IModel, Model } from './model.model';
 import { PingModel } from './ping.model';
 
 export type MonitorMethod = 'GET' | 'POST';
 
+/**
+ * Monitor interface
+ */
 export interface IMonitor extends IModel {
   uid: string;
   name: string;
@@ -15,6 +19,9 @@ export interface IMonitor extends IModel {
   unsuccessfulPings?: number;
 }
 
+/**
+ * Monitor model
+ */
 export class MonitorModel extends Model<IMonitor> implements IMonitor {
   uid: string;
   name: string;
@@ -26,6 +33,10 @@ export class MonitorModel extends Model<IMonitor> implements IMonitor {
   successfulPings: number;
   unsuccessfulPings: number;
 
+  /**
+   * Life cycle method
+   * @param monitor monitor instance
+   */
   constructor(monitor: IMonitor) {
     super();
     this.uid = monitor.uid;
@@ -39,10 +50,17 @@ export class MonitorModel extends Model<IMonitor> implements IMonitor {
     this.unsuccessfulPings = monitor.unsuccessfulPings ? monitor.unsuccessfulPings : 0;
   }
 
+  /**
+   * Method to return total no of pings
+   */
   public getTotalPings(): number {
     return this.successfulPings + this.unsuccessfulPings;
   }
 
+  /**
+   * Method to convert monitor model to data
+   * @param requiredOnly to check if its required or not
+   */
   public toData(requiredOnly?: boolean): IMonitor {
     let data: IMonitor = {
       uid: this.uid,

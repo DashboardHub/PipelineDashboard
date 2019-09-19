@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -9,18 +10,28 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { UserModel, UserStatsModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
+/**
+ * User service
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
+  /**
+   * Life cycle method
+   * @param afs AngularFirestore instance
+   * @param activityService ActivityService instance
+   */
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService
   ) {
   }
 
-  // This function returns the user stats information
+  /**
+   * This function returns the user stats information
+   */
   public findAllUserStats(): Observable<UserStatsModel[]> {
     return this.activityService
       .start()
@@ -36,7 +47,10 @@ export class UserService {
       );
   }
 
-  // This function returns the user information
+  /**
+   * This function returns the user information
+   * @param userId user id of the user
+   */
   public findUserStatsById(userId: string): Observable<UserModel> {
     return this.activityService
       .start()

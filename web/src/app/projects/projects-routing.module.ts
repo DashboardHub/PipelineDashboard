@@ -1,3 +1,4 @@
+// Core modules
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -6,6 +7,7 @@ import { EditProjectResolver } from '@core/resolvers/edit-project.resolver';
 import { PrivatePublicProjectComponent } from '@shared/components/private-public-project/private-public-project.component';
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
 
+// Application resolvers
 import { ViewProjectResolver } from '@core/resolvers/view-project.resolver';
 import { ViewProjectComponent } from './view/view.component';
 

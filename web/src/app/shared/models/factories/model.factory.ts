@@ -1,3 +1,4 @@
+// Application model
 import { IModel, Model } from '../model.model';
 
 /**
@@ -8,6 +9,10 @@ export class ModelFactory {
     return data.map((item: T1): T2 => new obj(item));
   }
 
+  /**
+   * Method to convert models to interface
+   * @param models Model instance
+   */
   static fromModels<T1 extends Model<T2>, T2 extends IModel>(models: T1[]): T2[] {
     return models.map((model: T1): T2 => model.toData());
   }

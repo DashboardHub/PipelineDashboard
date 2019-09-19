@@ -1,3 +1,4 @@
+// Core modules
 import { NgModule } from '@angular/core';
 
 import {

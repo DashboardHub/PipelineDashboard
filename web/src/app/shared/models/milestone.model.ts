@@ -1,3 +1,4 @@
+// Application model
 import { UserModel } from './user.model';
 
 /**

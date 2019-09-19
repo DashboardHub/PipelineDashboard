@@ -1,3 +1,4 @@
+// Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -10,6 +11,9 @@ import { Subscription } from 'rxjs';
 import { ProjectService } from '@core/services/index.service';
 import { ProjectModel } from '@shared/models/index.model';
 
+/**
+ * Project create/edit component
+ */
 @Component({
   selector: 'dashboard-projects-create',
   templateUrl: './create-edit.component.html',
@@ -23,6 +27,14 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
   public isEdit: Boolean = false;
   public projectForm: FormGroup;
 
+  /**
+   * Life cycle method
+   * @param router Router instance
+   * @param form FormBuilder instance
+   * @param snackBar MatSnackBar instance
+   * @param projectService ProjectService instance
+   * @param route ActivatedRoute instance
+   */
   constructor(
     private router: Router,
     private form: FormBuilder,
@@ -31,6 +43,9 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) { }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('projectUid');
     this.projectForm = this.form.group({
@@ -46,7 +61,9 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
     }
   }
 
-  // This function will create project and edit project details based upon if click on edit or add
+  /**
+   * This function will create project and edit project details based upon if click on edit or add
+   */
   save(): void {
     if (this.uid) {
       this.createEditSubscription = this.projectService
@@ -65,6 +82,9 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     if (this.createEditSubscription) {
       this.createEditSubscription.unsubscribe();

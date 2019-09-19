@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
@@ -15,12 +16,22 @@ import { IProject, ProjectModel } from '@shared/models/index.model';
 })
 export class ViewProjectResolver implements Resolve<IProject> {
 
+  /**
+   * Life cycle method
+   * @param fns AngularFireFunctions instance
+   * @param projectService ProjectService instance
+   * @param router Router instance
+   */
   constructor(
     private fns: AngularFireFunctions,
     private projectService: ProjectService,
     private router: Router
   ) { }
 
+  /**
+   * Method to handle View project route
+   * @param route ActivatedRouteSnapshot instance
+   */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     const callable: any = this.fns.httpsCallable('updateProjectViews');
     return this.projectService.findOneById(route.params.projectUid)

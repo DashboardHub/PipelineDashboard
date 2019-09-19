@@ -1,3 +1,4 @@
+// Application models
 import { ContributorModel } from './contributor.model';
 import { IssueModel } from './issue.model';
 import { MilestoneModel } from './milestone.model';
@@ -39,6 +40,10 @@ export class RepositoryModel {
   stargazersCount: number;
   watchersCount: number;
 
+  /**
+   * Life cycle method
+   * @param uid uid of repository
+   */
   constructor(uid?: string) {
     this.uid = uid;
   }

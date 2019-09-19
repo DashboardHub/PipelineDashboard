@@ -1,3 +1,4 @@
+// Core modules
 import { Component, OnInit } from '@angular/core';
 
 // Application model and services

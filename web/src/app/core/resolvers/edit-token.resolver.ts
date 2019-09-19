@@ -15,11 +15,20 @@ import { TokenModel } from '@shared/models/index.model';
 })
 export class EditTokenResolver implements Resolve<TokenModel> {
 
+  /**
+   * Life cycle method
+   * @param tokenService TokenService instance
+   * @param router Router instance
+   */
   constructor(
     private tokenService: TokenService,
     private router: Router
   ) { }
 
+  /**
+   * Method to handle edit token route
+   * @param route ActivatedRouteSnapshot instance
+   */
   resolve(route: ActivatedRouteSnapshot): Observable<TokenModel> {
     return this.tokenService.findOneById(route.params.projectUid, route.params.uid)
       .pipe(

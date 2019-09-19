@@ -1,12 +1,20 @@
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+// Core modules
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+
+// RXjs operators
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+// Breakpoint resolvers
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
 import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
+/**
+ * Repository component
+ */
 @Component({
   selector: 'dashboard-repository',
   templateUrl: './repository.component.html',
@@ -30,6 +38,12 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public repository: RepositoryModel = new RepositoryModel('');
   public numberOfDisplayedUsers: number;
 
+  /**
+   * Life cycle method
+   * @param breakpointObserver BreakpointObserver instance
+   * @param repositoryService RepositoryService instance
+   * @param sortingService SortingService instance
+   */
   constructor(
     private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
@@ -44,6 +58,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.showWebHookAlert();
     this.repositorySubscription = this.repositoryService
@@ -114,21 +131,36 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Method returns contributors details
+   * @param contributor ContributorModel instance
+   */
   getMoreInformation(contributor: ContributorModel): string {
     return `${contributor.owner.username}` + ' \n ' + ` Total commits : ${contributor.total}`;
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.repositorySubscription
       .unsubscribe();
   }
 
+  /**
+   * Method to create webhook
+   */
   public createWebhook(): void {
     this.repositoryService.createGitWebhook(this.repository)
       .pipe(take(1))
       .subscribe();
   }
 
+  /**
+   * Method to reload repository
+   * @param repository RepositoryModel instance
+   * @param event Event instance
+   */
   public reloadRepository(repository: RepositoryModel, event: Event): void {
     event.stopPropagation();
     this.manualReload = true;
@@ -136,10 +168,16 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 
+  /**
+   * Method to calculate repository rating
+   */
   public calculateRating(): void {
     this.rating = this.repositoryService.getRating(this.repository);
   }
 
+  /**
+   * Method to show/hide webhook alert
+   */
   private showWebHookAlert(): void {
     setTimeout(() => this.isAlertEnabled = true, 10000);
   }

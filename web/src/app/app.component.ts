@@ -1,3 +1,4 @@
+// Core modules
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 
 // Breakpoints components
@@ -17,6 +18,9 @@ import { Navigation, ProfileModel } from './shared/models/index.model';
 
 import { environment } from './../environments/environment';
 
+/**
+ * App component
+ */
 @Component({
   selector: 'dashboard-app',
   templateUrl: './app.component.html',
@@ -75,6 +79,15 @@ export class AppComponent implements AfterViewInit {
   public menuTriger: boolean;
   public sideNavMode: string;
   @ViewChild('sidenav') public menu: MatSidenav;
+
+  /**
+   * Life cycle method
+   * @param _iconRegistry MatIconRegistry instance
+   * @param _domSanitizer DomSanitizer instance
+   * @param authService AuthenticationService instance
+   * @param activityService ActivityService instance
+   * @param breakpointObserver BreakpointObserver instance
+   */
   constructor(
     private _iconRegistry: MatIconRegistry,
     private _domSanitizer: DomSanitizer,
@@ -455,6 +468,9 @@ export class AppComponent implements AfterViewInit {
     this.version = environment.version;
   }
 
+  /**
+   * Life cycle after view init method
+   */
   ngAfterViewInit(): void {
     this.activityService
       .getProgressBar()
@@ -462,26 +478,47 @@ export class AppComponent implements AfterViewInit {
       .subscribe((progress: number) => this.progress = progress);
   }
 
+  /**
+   * Method to return the profile
+   */
   public getProfile(): ProfileModel {
     return this.authService.profile;
   }
 
+  /**
+   * Method to check if user is authenticated
+   */
   public isAuthenticated(): boolean {
     return this.authService.isAuthenticated;
   }
 
+  /**
+   * Method to login in the system
+   */
   public login(): void {
     this.authService.login();
   }
 
+  /**
+   * Method to logout from the system
+   */
   public logout(): void {
     this.authService.logout();
   }
+
+  /**
+   * Method to close the menu
+   */
   public closeMenu(): void {
     if (this.isSmallScreen) {
       this.menu.opened = false;
     }
   }
+
+  /**
+   * Method to open menu
+   * @param event Event instance
+   */
   public openMenu(event: Event): void {
     event.stopPropagation();
     if (!this.isSmallScreen) {
@@ -489,6 +526,9 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
+  /**
+   * Method to show door bell
+   */
   public showDoorbell(): void {
     (<any>window).doorbell.show();
   }

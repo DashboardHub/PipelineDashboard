@@ -1,3 +1,4 @@
+// Core modules
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -8,9 +9,18 @@ import { AuthenticationService } from '@core/services/index.service';
 @Injectable()
 export class GitHubHttpInterceptor implements HttpInterceptor {
 
+  /**
+   * Life cycle method
+   * @param authService AuthenticationService instance
+   */
   constructor(private authService: AuthenticationService) {
   }
 
+  /**
+   * Method for sending github token in all github requests
+   * @param req HttpRequest instance
+   * @param next HttpHandler instance
+   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('github.com')) {
       req = req.clone({

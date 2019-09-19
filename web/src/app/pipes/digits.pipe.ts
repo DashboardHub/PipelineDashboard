@@ -1,5 +1,9 @@
+// Core modules
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Digits pipe
+ */
 @Pipe({ name: 'digits' })
 export class DigitsPipe implements PipeTransform {
   transform(digits: number, precision: number = 1): string {

@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { of, Observable } from 'rxjs';
@@ -12,12 +13,22 @@ import { IProject, ProjectModel } from '@shared/models/index.model';
 })
 export class EditProjectResolver implements Resolve<IProject> {
 
+  /**
+   * Life cycle method
+   * @param authService AuthenticationService instance
+   * @param projectService ProjectService
+   * @param router Router instance
+   */
   constructor(
     private authService: AuthenticationService,
     private projectService: ProjectService,
     private router: Router
   ) { }
 
+  /**
+   * Method to handle Edit project route
+   * @param route ActivatedRouteSnapshot instance
+   */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     return this.projectService.findOneById(route.params.projectUid)
       .pipe(
