@@ -106,7 +106,7 @@ export class HelpComponent implements OnInit {
   }
 
   /**
-   * This function searches the topics in help page
+   * Searches the topics in help page
    * @param keyword key to search in help page
    */
   filterTopics(keyword: string = ''): void {
@@ -116,7 +116,7 @@ export class HelpComponent implements OnInit {
   }
 
   /**
-   * This function opens the dialog on help page
+   * Opens the dialog on help page
    * @param help data to send in dialog
    */
   openDialog(help: Help): void {

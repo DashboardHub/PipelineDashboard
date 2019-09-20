@@ -30,7 +30,7 @@ export class UserService {
   }
 
   /**
-   * This function returns the user stats information
+   * Find all the user stats information
    */
   public findAllUserStats(): Observable<UserStatsModel[]> {
     return this.activityService
@@ -48,7 +48,7 @@ export class UserService {
   }
 
   /**
-   * This function returns the user information
+   * Find the user information by user id
    * @param userId user id of the user
    */
   public findUserStatsById(userId: string): Observable<UserModel> {

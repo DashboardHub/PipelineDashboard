@@ -74,7 +74,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method to return the project type
+   * Returns the project type if private or public
    * @param project project instance
    */
   public checkTypeOfProject(project: ProjectModel): string {

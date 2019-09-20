@@ -18,7 +18,7 @@ export class MonitorSummaryComponent implements OnChanges {
   public monitors: MonitorModel[] = [];
 
   /**
-   * This function for filtering the monitors based upon the valid and invalid status
+   * Filter the monitors based upon the valid and invalid status
    * @param isValid isValid ping or not
    */
   public filterBy(isValid: boolean): MonitorModel[] {

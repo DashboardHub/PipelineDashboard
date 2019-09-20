@@ -47,7 +47,9 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar
   ) { }
 
-  // This function will be called when component is initialized
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.uid = this.route.snapshot.paramMap.get('uid');
@@ -63,7 +65,7 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function will be called when component is destroyed
+   * Life cycle destroy method
    */
   ngOnDestroy(): void {
     if (this.projectSubscription) {
@@ -75,7 +77,7 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function will create project token and edit
+   * Create project token and edit
    * project token details based upon if click on edit or add
    */
   save(): void {
@@ -88,7 +90,7 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function check the project token on uniqueness
+   * Check the project token on uniqueness
    * @param control AbstractControl instance
    */
   private validateTokenNotTaken(control: AbstractControl): Observable<any> {

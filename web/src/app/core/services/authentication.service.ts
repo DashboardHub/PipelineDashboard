@@ -53,7 +53,7 @@ export class AuthenticationService {
   }
 
   /**
-   * This function checks authentication state of user
+   * Checks authentication state of user
    */
   public checkAuth(): void {
     const subscription: Subscription = this.afAuth.authState
@@ -72,7 +72,7 @@ export class AuthenticationService {
   }
 
   /**
-   * This function returns all the logged in users list
+   * Get all the logged in users list
    */
   public getLogins(): Observable<LoginAuditModel[]> {
     return this.afs.collection<ProfileModel>('users')
@@ -82,7 +82,7 @@ export class AuthenticationService {
   }
 
   /**
-   * This function returns the profile information of user
+   * Returns the profile information of user
    * @param uid uid of user
    */
   public getProfile(uid: string): Observable<ProfileModel> {
@@ -92,7 +92,7 @@ export class AuthenticationService {
   }
 
   /**
-   * This function used to login via github
+   * Login via github authentication
    */
   public login(): void {
     const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
@@ -167,7 +167,7 @@ export class AuthenticationService {
   }
 
   /**
-   * This function is used for logout from dashboard hub
+   * Logout from dashboard hub
    */
   public logout(): void {
     from(this.afAuth.auth.signOut())

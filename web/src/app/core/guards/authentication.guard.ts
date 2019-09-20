@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
   }
 
   /**
-   * Method to protect routes
+   * Protect routes for authenticated user
    * @param next ActivatedRouteSnapshot instance
    * @param state RouterStateSnapshot instance
    */

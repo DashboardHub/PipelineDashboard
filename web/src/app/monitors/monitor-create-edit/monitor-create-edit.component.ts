@@ -81,7 +81,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function is used to save monitor and navigate to monitors list screen
+   * Save monitor and navigate to monitors list screen
    *
    * @param uid uid of monitor which needs to be added into monitors list
    * @param monitors monitors list to be updated

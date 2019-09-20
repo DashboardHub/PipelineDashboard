@@ -24,7 +24,7 @@ export class TokensResolver implements Resolve<TokenModel[]> {
   ) { }
 
   /**
-   * Method to handle token route
+   * Find all token data before displaying tokens page
    * @param route ActivatedRouteSnapshot instance
    */
   resolve(route: ActivatedRouteSnapshot): Observable<TokenModel[]> {

@@ -26,7 +26,7 @@ export class EditTokenResolver implements Resolve<TokenModel> {
   ) { }
 
   /**
-   * Method to handle edit token route
+   * Find the token data before displaying on the page
    * @param route ActivatedRouteSnapshot instance
    */
   resolve(route: ActivatedRouteSnapshot): Observable<TokenModel> {

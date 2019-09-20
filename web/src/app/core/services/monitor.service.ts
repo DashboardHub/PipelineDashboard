@@ -36,7 +36,7 @@ export class MonitorService {
   }
 
   /**
-   * This function is used to save monitors in the database
+   * Save monitors in the database and send automatic ping
    *
    * @param projectUid uid of project
    * @param monitor monitor to save
@@ -74,7 +74,7 @@ export class MonitorService {
   }
 
   /**
-   * Method to delete the monitor from project
+   * Delete the monitor from project
    * @param projectUid uid of project
    * @param monitorUid uid of monitor to be deleted
    */
@@ -96,7 +96,7 @@ export class MonitorService {
   }
 
   /**
-   * Method to call cloud function for deleting pings by monitor
+   * Call cloud function for deleting pings by monitor
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
    * @returns Observable
@@ -107,7 +107,7 @@ export class MonitorService {
   }
 
   /**
-   * Method to ping monitor
+   * Send monitor ping manually using cloud function
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
    * @param type project type

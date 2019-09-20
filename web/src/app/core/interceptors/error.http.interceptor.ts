@@ -22,7 +22,7 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
   ) { }
 
   /**
-   * Method for showing error in request
+   * Showing error in request
    * @param req HttpRequest instance
    * @param next HttpHandler instance
    */

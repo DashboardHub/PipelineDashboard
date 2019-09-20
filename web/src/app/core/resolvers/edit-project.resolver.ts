@@ -26,7 +26,7 @@ export class EditProjectResolver implements Resolve<IProject> {
   ) { }
 
   /**
-   * Method to handle Edit project route
+   * Allow owner to edit project routes only
    * @param route ActivatedRouteSnapshot instance
    */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {

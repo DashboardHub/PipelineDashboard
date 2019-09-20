@@ -208,6 +208,10 @@ export class FeaturesComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver
   ) { }
+
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
@@ -222,7 +226,7 @@ export class FeaturesComponent implements OnInit {
   }
 
   /**
-   * Method the check the pack value
+   * Check the pack value
    * @param value
    */
   public chekPackValue(value: any): boolean {
@@ -233,7 +237,7 @@ export class FeaturesComponent implements OnInit {
   }
 
   /**
-   * Method to check the pack value for string
+   * Check the pack value for string
    * @param value
    */
   public chekPackValueForString(value: any): boolean {

@@ -28,7 +28,7 @@ export class PingService {
   }
 
   /**
-   * This function returns the pings details via monitorUid
+   * Find all the pings by monitor using monitorUid
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
    * @returns Observable

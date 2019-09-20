@@ -479,35 +479,35 @@ export class AppComponent implements AfterViewInit {
   }
 
   /**
-   * Method to return the profile
+   * Return the profile
    */
   public getProfile(): ProfileModel {
     return this.authService.profile;
   }
 
   /**
-   * Method to check if user is authenticated
+   * Check if user is authenticated
    */
   public isAuthenticated(): boolean {
     return this.authService.isAuthenticated;
   }
 
   /**
-   * Method to login in the system
+   * Login in the system
    */
   public login(): void {
     this.authService.login();
   }
 
   /**
-   * Method to logout from the system
+   * Logout from the system
    */
   public logout(): void {
     this.authService.logout();
   }
 
   /**
-   * Method to close the menu
+   * Close the menu
    */
   public closeMenu(): void {
     if (this.isSmallScreen) {
@@ -516,7 +516,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   /**
-   * Method to open menu
+   * Open menu
    * @param event Event instance
    */
   public openMenu(event: Event): void {
@@ -527,7 +527,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   /**
-   * Method to show door bell
+   * Show door bell
    */
   public showDoorbell(): void {
     (<any>window).doorbell.show();

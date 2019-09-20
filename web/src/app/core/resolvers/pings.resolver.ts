@@ -26,7 +26,7 @@ export class PingsResolver implements Resolve<PingModel[]> {
   ) { }
 
   /**
-   * Method to handle ping route
+   * Find all monitors before displaying data on pings page and navigate to monitors page in case of error
    * @param route ActivatedRouteSnapshot instance
    */
   resolve(route: ActivatedRouteSnapshot): Observable<PingModel[]> {

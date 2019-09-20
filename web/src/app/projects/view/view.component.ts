@@ -68,7 +68,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function add  the repository
+   * Add the repository when click on add from repository dialog
    */
   addRepository(): void {
     this.dialog
@@ -91,7 +91,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method to delete the  repository
+   * Show the delete confirmation dialog and delete the project
    */
   delete(): void {
     this.projectSubscription.unsubscribe();
@@ -101,7 +101,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function check if logged in user is also owner of the project
+   * Check if logged in user is also owner of the project
    */
   public isAdmin(): boolean {
     return this.project.isAdmin(this.authService.profile.uid);

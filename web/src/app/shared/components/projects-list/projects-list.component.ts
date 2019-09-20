@@ -71,7 +71,7 @@ export class ProjectsListComponent implements OnChanges {
   }
 
   /**
-   * Method to check if project belongs to owner or not
+   * Check if project belongs to owner or not
    * @param project ProjectModel instance
    */
   isAdmin(project: ProjectModel): boolean {
@@ -89,7 +89,7 @@ export class ProjectsListComponent implements OnChanges {
   }
 
   /**
-   * Method to check project type
+   * Check project type
    * @param project ProjectModel instance
    */
   public checkTypeOfProject(project: ProjectModel): string {
@@ -101,7 +101,7 @@ export class ProjectsListComponent implements OnChanges {
   }
 
   /**
-   * Method to delete project
+   * Delete project by project uid
    * @param projectUid uid of project
    */
   public delete(projectUid: string): void {

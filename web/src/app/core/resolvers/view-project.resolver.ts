@@ -29,7 +29,7 @@ export class ViewProjectResolver implements Resolve<IProject> {
   ) { }
 
   /**
-   * Method to handle View project route
+   * Find all project data before showing projects page
    * @param route ActivatedRouteSnapshot instance
    */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {

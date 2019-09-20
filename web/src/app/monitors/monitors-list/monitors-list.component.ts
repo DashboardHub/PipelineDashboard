@@ -88,7 +88,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This method is used to delete the monitor from list
+   * Delete the monitor from list
    *
    * @param uid the uid of monitor which needs to be deleted
    */
@@ -115,7 +115,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function will ping the monitor
+   * Send ping to the monitor manually from UI
    * @param monitorUid uid of monitor
    */
   public pingMonitor(monitorUid: string): void {

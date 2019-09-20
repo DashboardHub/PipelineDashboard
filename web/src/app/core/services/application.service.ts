@@ -29,7 +29,7 @@ export class ApplicationService {
   ) { }
 
   /**
-   * Function to return the application stats
+   * Find the application stats
    */
   public getApplicationStats(): Observable<StatsModel> {
     return this.activityService

@@ -42,7 +42,7 @@ export class RepositoryService {
   }
 
   /**
-   * This function returns the repository via uid
+   * Find the repository via uid
    * @param uid uid of repository
    */
   public findOneById(uid: string): Observable<RepositoryModel> {
@@ -54,7 +54,7 @@ export class RepositoryService {
   }
 
   /**
-   * This function loads all the available repositories
+   * Loads all the available repositories
    * @returns Observable
    */
   public loadRepository(repo: RepositoryModel): Observable<boolean> {
@@ -63,7 +63,7 @@ export class RepositoryService {
   }
 
   /**
-   * Method to call cloud function create webhook
+   * Call cloud function create webhook manually
    * @param repo repository instance
    * @returns Observable
    */
@@ -74,7 +74,7 @@ export class RepositoryService {
   }
 
   /**
-   * Method to call cloud function to delete webhook
+   * Call cloud function to delete webhook manually
    * @param repo repository instance
    */
   public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
@@ -83,7 +83,8 @@ export class RepositoryService {
   }
 
   /**
-   * Method to return the repository rating
+   * Calculate the repository rating based upon the issues, milestones, releases, url, description and
+   * forksCount, stargazersCount and watchersCount
    * @param repo repository instance
    * @returns rating
    */
@@ -103,7 +104,7 @@ export class RepositoryService {
   }
 
   /**
-   * Method to return the points based upon rating type
+   * Returns the points based upon rating type
    * @param date updated date
    * @returns points
    */
@@ -123,7 +124,7 @@ export class RepositoryService {
   }
 
   /**
-   * Method to return the points based upon the counts
+   * Return the points based upon the counts
    * @param count count of the rating
    * @param limit limit of the rating
    */

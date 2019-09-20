@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 })
 export class SortingService {
   /**
-   * This function is used for sorting the list by date field
+   * Sort the list by date field
    */
   sortListByDate<T>(list: T[], field: string): void {
     list.sort((obj1: any, obj2: any) => {
@@ -20,7 +20,7 @@ export class SortingService {
   }
 
   /**
-   * This function is used for sorting the list by date field
+   * Sort the list by any key
    */
   sortListByNumber<T>(list: T[], field: string): void {
     list.sort((obj1: any, obj2: any) => {

@@ -132,7 +132,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method returns contributors details
+   * Find contributors details
    * @param contributor ContributorModel instance
    */
   getMoreInformation(contributor: ContributorModel): string {
@@ -148,7 +148,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method to create webhook
+   * Create webhook
    */
   public createWebhook(): void {
     this.repositoryService.createGitWebhook(this.repository)
@@ -157,7 +157,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method to reload repository
+   * Reload repository when click on refresh button
    * @param repository RepositoryModel instance
    * @param event Event instance
    */
@@ -169,14 +169,14 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Method to calculate repository rating
+   * Calculate repository rating
    */
   public calculateRating(): void {
     this.rating = this.repositoryService.getRating(this.repository);
   }
 
   /**
-   * Method to show/hide webhook alert
+   * Show/hide webhook alert
    */
   private showWebHookAlert(): void {
     setTimeout(() => this.isAlertEnabled = true, 10000);

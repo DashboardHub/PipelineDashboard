@@ -17,7 +17,7 @@ export class GitHubHttpInterceptor implements HttpInterceptor {
   }
 
   /**
-   * Method for sending github token in all github requests
+   * Send github token in all github requests
    * @param req HttpRequest instance
    * @param next HttpHandler instance
    */

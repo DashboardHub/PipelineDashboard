@@ -44,7 +44,7 @@ export class MarkdownDirective implements OnChanges {
   }
 
   /**
-   * Method to render the HTML
+   * Render the HTML
    */
   materialRender(): any {
 

@@ -47,7 +47,7 @@ export class TokensListComponent {
   }
 
   /**
-   * This function delete the project token
+   * Delete the project token
    * @param tokenUid uid of token to be deleted
    */
   delete(tokenUid: string): void {

@@ -62,7 +62,7 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function will create project and edit project details based upon if click on edit or add
+   * Save project details based upon if click on edit or add
    */
   save(): void {
     if (this.uid) {

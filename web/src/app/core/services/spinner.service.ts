@@ -13,7 +13,7 @@ export class SpinnerService {
   private spinnerSubject: Subject<Boolean> = new Subject();
 
   /**
-   * This function will set the progress bar status
+   * Set the progress bar status
    * @param status status of the progress bar
    */
   public setProgressBar(status: boolean): void {
@@ -21,7 +21,7 @@ export class SpinnerService {
   }
 
   /**
-   * This function will return the status of progress bar to main component
+   * Returns the status of progress bar to main component
    */
   public getProgressBar(): Observable<Boolean> {
     return this.spinnerSubject.asObservable();
