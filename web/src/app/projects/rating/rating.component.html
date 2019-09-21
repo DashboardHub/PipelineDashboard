@@ -1,8 +1,8 @@
-<div fxLayout="row" *ngIf="repository.fullName" class="rating">
+<div fxLayout="row">
   <div fxFlex="100%">
     <h1>{{ repository.fullName }}</h1>
     <p>Rating Statistics</p>
-    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngFor="let rating of repoRatings">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngFor="let rating of repository.getRatings()">
       <mat-card fxFlex="100%">
         <mat-card-header>
           <div mat-card-avatar><mat-icon svgIcon="release_icon"></mat-icon></div>

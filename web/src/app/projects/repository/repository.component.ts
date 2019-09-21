@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
-import { ContributorModel, MilestoneModel, PullRequestModel, RatingModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
+import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-repository',
@@ -18,7 +18,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public headerHeight: number;
   public isLargeScreen: boolean;
   public isAlertEnabled: boolean = false;
-  public rating: number;
 
   @Input()
   public isAdmin: boolean = false;
@@ -27,7 +26,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public uid: string;
 
   public manualReload: boolean = false;
-  public repository: RepositoryModel = new RepositoryModel('');
+  public repository: IRepository;
   public numberOfDisplayedUsers: number;
 
   constructor(
@@ -50,7 +49,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        this.calculateRating();
         if (this.repository && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
@@ -134,12 +132,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     this.manualReload = true;
     this.repositoryService.loadRepository(repository)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
-  }
-
-  public calculateRating(): void {
-    const repoRatings: RatingModel[] = this.repositoryService.getRating(this.repository);
-    const ratingValues: number[] = repoRatings.map((rating: RatingModel) => rating.value);
-    this.rating = ratingValues.reduce((total: number, current: number) => total + current, 0) / repoRatings.length;
   }
 
   private showWebHookAlert(): void {

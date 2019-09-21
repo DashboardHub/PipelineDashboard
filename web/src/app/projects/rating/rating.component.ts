@@ -3,10 +3,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // Application services/model
 import { ActivatedRoute } from '@angular/router';
-import { RatingModel, RepositoryModel } from '@app/shared/models/index.model';
+import { RepositoryModel } from '@app/shared/models/index.model';
 import { RepositoryService } from '@core/services/index.service';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 /**
  * Repository rating component
@@ -18,35 +17,31 @@ import { map } from 'rxjs/operators';
 })
 export class RatingComponent implements OnInit, OnDestroy {
 
-  private repoUid: string;
   private repositorySubscription: Subscription;
 
-  public projectUid: string;
-  public repository: RepositoryModel = new RepositoryModel('');
-  public repoRatings: RatingModel[];
+  public repository: RepositoryModel;
 
   /**
    * Life cycle method
-   * @param repositoryService instance of Repository service
+   * @param repositoryService Repository service
+   * @param route ActivatedRoute
    */
   constructor(
     private repositoryService: RepositoryService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.route.data.subscribe((data: { repository: RepositoryModel }) => this.repository = data.repository);
+  }
 
   /**
    * Life cycle init method
    */
   ngOnInit(): void {
-    this.repoUid = this.route.snapshot.paramMap.get('repoUid');
-    this.projectUid = this.route.snapshot.paramMap.get('projectUid');
+    const repoUid: string = this.route.snapshot.paramMap.get('repoUid');
 
     this.repositorySubscription = this.repositoryService
-      .findOneById(this.repoUid)
-      .pipe(
-        map((repository: RepositoryModel) => this.repository = repository)
-      )
-      .subscribe(() => this.repoRatings = this.repositoryService.getRating(this.repository));
+      .findOneById(repoUid)
+      .subscribe((repository: RepositoryModel) => this.repository = repository);
   }
 
   /**
