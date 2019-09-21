@@ -12,6 +12,7 @@ import { MainComponent } from './main.component';
 
 // Dashboard hub authentication guards
 import { AuthGuard } from '@core/guards/authentication.guard';
+import { MarkdownComponent } from '@shared/dialog/markdown/markdown.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,11 @@ const routes: Routes = [
         path: 'help',
         pathMatch: 'full',
         component: HelpComponent,
+      },
+      {
+        path: 'help/:path',
+        pathMatch: 'full',
+        component: MarkdownComponent,
       },
       {
         path: 'terms-and-conditions',
