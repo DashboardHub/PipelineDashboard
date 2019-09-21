@@ -17,7 +17,7 @@ import { HelpModel } from '@shared/models/index.model';
 })
 export class MarkdownComponent implements OnInit {
 
-  private data: HelpModel = new HelpModel();
+  public data: HelpModel = new HelpModel();
 
   /**
    * Life cycle method
