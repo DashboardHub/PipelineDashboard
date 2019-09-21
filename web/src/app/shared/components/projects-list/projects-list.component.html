@@ -82,7 +82,7 @@
               <button [routerLink]="['/projects', element.uid, 'edit']" mat-menu-item>
                 <mat-icon svgIcon="edit_icon"></mat-icon>Edit
               </button>
-              <button (click)="delete()" mat-menu-item>
+              <button (click)="delete(element.uid)" mat-menu-item>
                 <mat-icon svgIcon="delete_icon"></mat-icon>Delete
               </button>
             </mat-menu>

@@ -19,7 +19,7 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
 
   private createEditSubscription: Subscription;
   private projectSubscription: Subscription;
-  private uid: string;
+  public uid: string;
   public isEdit: Boolean = false;
   public projectForm: FormGroup;
 
