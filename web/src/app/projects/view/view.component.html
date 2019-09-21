@@ -52,25 +52,26 @@
       </ng-template>
     </div>
 
-    <div class="margin-bottom-40" *ngIf="project.monitors.length === 0">
+    <div class="helper" *ngIf="project.monitors.length === 0">
       <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
         <span>
           <mat-icon svgIcon="warning_icon"></mat-icon>
         </span>
-        <span>You do not have any monitor. Please <a routerLink="monitors/create">create</a> monitor</span>
+        <span>You do not have any monitors. Please <a [routerLink]="['/projects', project.uid, 'monitors', 'create']">create</a> monitor</span>
       </mat-card>
     </div>
 
-    <div class="margin-bottom-40" *ngIf="project.repositories.length === 0">
+    <div class="helper" *ngIf="project.repositories.length === 0">
       <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
         <span>
           <mat-icon svgIcon="warning_icon"></mat-icon>
         </span>
-        <span>You do not have any repository. Please <a (click)="addRepository()">connect</a> repository</span>
+        <span>You do not have any repositories. Please <a (click)="addRepository()">connect</a> repository</span>
       </mat-card>
     </div>
 
     <dashboard-monitor-summary *ngIf="isAdmin()" [monitors]="project.monitors || []"></dashboard-monitor-summary>
+
     <div class="repository" *ngFor="let uid of project.repositories">
       <dashboard-repository [uid]="uid" [isAdmin]="isAdmin()"></dashboard-repository>
     </div>

@@ -8,6 +8,10 @@
     padding-bottom: 3rem;
   }
 
+  .helper {
+    margin-bottom: 1rem;
+  }
+
   &__header {
     height: 100px;
 
@@ -79,8 +83,4 @@
       }
     }
   }
-}
-
-.margin-bottom-40{
-  margin-bottom: 40px;
 }
