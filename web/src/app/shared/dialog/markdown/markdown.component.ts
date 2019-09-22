@@ -35,7 +35,7 @@ export class MarkdownComponent implements OnInit {
    */
   ngOnInit(): void {
     const path: string = this.route.snapshot.paramMap.get('path');
-    const topics: Help[] = this.data.getTopicsList();
+    const topics: Help[] = this.data.topics;
     this.http.get(`/assets/help/${path}.md`, { responseType: 'text' }).subscribe((content: string) => {
       this.data.content = content;
     });

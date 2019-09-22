@@ -26,7 +26,7 @@ export class HelpComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.topics = this.help.getTopicsList();
+    this.topics = this.help.topics;
     this.topics.forEach((help: { title: string, path: string }, index: number) => {
       this.http.get(`/assets/help/${help.path}.md`, { responseType: 'text' }).subscribe((content: string) => {
         this.topics[index].content = content;

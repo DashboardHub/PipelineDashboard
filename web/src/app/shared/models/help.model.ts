@@ -64,11 +64,4 @@ export class HelpModel {
     this.icon = '';
     this.content = '';
   }
-
-  /**
-   * Returns the help topics list
-   */
-  getTopicsList(): Help[] {
-    return this.topics;
-  }
 }
