@@ -24,9 +24,9 @@ export class MonitorService {
 
   /**
    * Life cycle method
-   * @param afs AngularFirestore instance
-   * @param fns AngularFireFunctions instance
-   * @param projectService ProjectService instance
+   * @param afs AngularFirestore
+   * @param fns AngularFireFunctions
+   * @param projectService ProjectService
    */
   constructor(
     private afs: AngularFirestore,
@@ -77,6 +77,7 @@ export class MonitorService {
    * Delete the monitor from project
    * @param projectUid uid of project
    * @param monitorUid uid of monitor to be deleted
+   * @returns the observable
    */
   public delete(projectUid: string, monitorUid: string): Observable<void> {
     return this.projectService.findOneById(projectUid)
@@ -111,6 +112,7 @@ export class MonitorService {
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
    * @param type project type
+   * @returns the observable
    */
   public pingMonitor(projectUid: string, monitorUid: string, type: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');

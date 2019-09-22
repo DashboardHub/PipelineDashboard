@@ -20,8 +20,8 @@ export class ApplicationService {
 
   /**
    * Life cycle method
-   * @param afs AngularFireStore instance
-   * @param activityService ActivityService instance
+   * @param afs AngularFireStore
+   * @param activityService ActivityService
    */
   constructor(
     private afs: AngularFirestore,

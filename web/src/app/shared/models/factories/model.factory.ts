@@ -11,7 +11,7 @@ export class ModelFactory {
 
   /**
    * Method to convert models to interface
-   * @param models Model instance
+   * @param models Model
    */
   static fromModels<T1 extends Model<T2>, T2 extends IModel>(models: T1[]): T2[] {
     return models.map((model: T1): T2 => model.toData());

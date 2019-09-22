@@ -31,11 +31,11 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param route ActivatedRoute instance
-   * @param router Router instance
-   * @param dialog MatDialog instance
-   * @param projectService ProjectService instance
-   * @param authService AuthenticationService instance
+   * @param route ActivatedRoute
+   * @param router Router
+   * @param dialog MatDialog
+   * @param projectService ProjectService
+   * @param authService AuthenticationService
    */
   constructor(
     private route: ActivatedRoute,

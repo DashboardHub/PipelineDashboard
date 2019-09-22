@@ -77,9 +77,9 @@ export class HelpComponent implements OnInit {
 
   /**
    * Life cycle method
-   * @param http HttpClient instance
-   * @param form FormBuilder instance
-   * @param dialog MatDialog instance
+   * @param http HttpClient
+   * @param form FormBuilder
+   * @param dialog MatDialog
    */
   constructor(
     private http: HttpClient,

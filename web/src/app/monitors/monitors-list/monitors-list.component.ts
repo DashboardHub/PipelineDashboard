@@ -37,12 +37,12 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param dialog MatDialog instance
-   * @param monitorService MonitorService instance
-   * @param projectService ProjectService instance
-   * @param route ActivatedRoute instance
-   * @param snackBar MatSnackBar instance
-   * @param breakpointObserver BreakpointObserver instance
+   * @param dialog MatDialog
+   * @param monitorService MonitorService
+   * @param projectService ProjectService
+   * @param route ActivatedRoute
+   * @param snackBar MatSnackBar
+   * @param breakpointObserver BreakpointObserver
    */
   constructor(
     private dialog: MatDialog,

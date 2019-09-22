@@ -22,11 +22,11 @@ export class ProjectService {
 
   /**
    * Life cycle method
-   * @param afs AngularFirestore instance
-   * @param authService AuthenticationService instance
-   * @param activityService ActivityService instance
-   * @param dialog MatDialog instance
-   * @param repositoryService RepositoryService instance
+   * @param afs AngularFirestore
+   * @param authService AuthenticationService
+   * @param activityService ActivityService
+   * @param dialog MatDialog
+   * @param repositoryService RepositoryService
    */
   constructor(
     private afs: AngularFirestore,

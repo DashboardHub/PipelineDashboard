@@ -40,9 +40,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param breakpointObserver BreakpointObserver instance
-   * @param repositoryService RepositoryService instance
-   * @param sortingService SortingService instance
+   * @param breakpointObserver BreakpointObserver
+   * @param repositoryService RepositoryService
+   * @param sortingService SortingService
    */
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -133,7 +133,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   /**
    * Find contributors details
-   * @param contributor ContributorModel instance
+   * @param contributor ContributorModel
    */
   getMoreInformation(contributor: ContributorModel): string {
     return `${contributor.owner.username}` + ' \n ' + ` Total commits : ${contributor.total}`;
@@ -158,8 +158,8 @@ export class RepositoryComponent implements OnInit, OnDestroy {
 
   /**
    * Reload repository when click on refresh button
-   * @param repository RepositoryModel instance
-   * @param event Event instance
+   * @param repository RepositoryModel
+   * @param event Event
    */
   public reloadRepository(repository: RepositoryModel, event: Event): void {
     event.stopPropagation();

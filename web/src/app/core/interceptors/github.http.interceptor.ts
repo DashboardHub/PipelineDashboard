@@ -11,15 +11,15 @@ export class GitHubHttpInterceptor implements HttpInterceptor {
 
   /**
    * Life cycle method
-   * @param authService AuthenticationService instance
+   * @param authService AuthenticationService
    */
   constructor(private authService: AuthenticationService) {
   }
 
   /**
    * Send github token in all github requests
-   * @param req HttpRequest instance
-   * @param next HttpHandler instance
+   * @param req HttpRequest
+   * @param next HttpHandler
    */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('github.com')) {

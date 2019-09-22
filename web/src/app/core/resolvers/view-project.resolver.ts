@@ -18,9 +18,9 @@ export class ViewProjectResolver implements Resolve<IProject> {
 
   /**
    * Life cycle method
-   * @param fns AngularFireFunctions instance
-   * @param projectService ProjectService instance
-   * @param router Router instance
+   * @param fns AngularFireFunctions
+   * @param projectService ProjectService
+   * @param router Router
    */
   constructor(
     private fns: AngularFireFunctions,
@@ -30,7 +30,7 @@ export class ViewProjectResolver implements Resolve<IProject> {
 
   /**
    * Find all project data before showing projects page
-   * @param route ActivatedRouteSnapshot instance
+   * @param route ActivatedRouteSnapshot
    */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     const callable: any = this.fns.httpsCallable('updateProjectViews');

@@ -31,7 +31,7 @@ export class MonitorSummaryComponent implements OnChanges {
 
   /**
    * Life cycle changes method
-   * @param changes SimpleChanges instance
+   * @param changes SimpleChanges
    */
   ngOnChanges(changes: SimpleChanges): void {
     this.monitors = changes.monitors.currentValue;

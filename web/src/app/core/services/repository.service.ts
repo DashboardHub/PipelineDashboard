@@ -20,10 +20,10 @@ export class RepositoryService {
 
   /**
    * Life cycle method
-   * @param afs Angularfirestore instance
-   * @param fns AngularFirefunctions instance
-   * @param authService AuthService instance
-   * @param activityService ActivityService instance
+   * @param afs Angularfirestore
+   * @param fns AngularFirefunctions
+   * @param authService AuthService
+   * @param activityService ActivityService
    */
   constructor(
     private afs: AngularFirestore,
@@ -34,7 +34,7 @@ export class RepositoryService {
 
   /**
    * Forces refresh of users repositories
-   * @reutnrs Observable
+   * @returns Observable
    */
   public refresh(): Observable<RepositoriesModel> {
     const callable: any = this.fns.httpsCallable('findAllUserRepositories');
@@ -64,7 +64,7 @@ export class RepositoryService {
 
   /**
    * Call cloud function create webhook manually
-   * @param repo repository instance
+   * @param repo repository
    * @returns Observable
    */
   public createGitWebhook(repo: RepositoryModel): Observable<RepositoryModel> {
@@ -75,7 +75,7 @@ export class RepositoryService {
 
   /**
    * Call cloud function to delete webhook manually
-   * @param repo repository instance
+   * @param repo repository
    */
   public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
@@ -85,7 +85,7 @@ export class RepositoryService {
   /**
    * Calculate the repository rating based upon the issues, milestones, releases, url, description and
    * forksCount, stargazersCount and watchersCount
-   * @param repo repository instance
+   * @param repo repository
    * @returns rating
    */
   public getRating(repo: RepositoryModel): number {

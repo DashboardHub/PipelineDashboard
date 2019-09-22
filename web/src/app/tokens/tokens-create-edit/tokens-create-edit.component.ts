@@ -33,11 +33,11 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param form FormBuilder instance
-   * @param tokenService TokenService instance
-   * @param route ActivatedRoute instance
-   * @param router Router instance
-   * @param snackBar MatSnackBar instance
+   * @param form FormBuilder
+   * @param tokenService TokenService
+   * @param route ActivatedRoute
+   * @param router Router
+   * @param snackBar MatSnackBar
    */
   constructor(
     private form: FormBuilder,
@@ -91,7 +91,7 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
 
   /**
    * Check the project token on uniqueness
-   * @param control AbstractControl instance
+   * @param control AbstractControl
    */
   private validateTokenNotTaken(control: AbstractControl): Observable<any> {
     return this.tokenService

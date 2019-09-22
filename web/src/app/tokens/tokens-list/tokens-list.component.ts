@@ -28,9 +28,9 @@ export class TokensListComponent {
 
   /**
    * Life cycle method
-   * @param dialog MatDialog instance
-   * @param tokenService TokenService instance
-   * @param route ActivatedRoute instance
+   * @param dialog MatDialog
+   * @param tokenService TokenService
+   * @param route ActivatedRoute
    */
   constructor(
     private dialog: MatDialog,

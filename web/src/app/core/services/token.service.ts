@@ -21,8 +21,8 @@ export class TokenService {
 
   /**
    * Life cycle method
-   * @param afs AngularFirestore instance
-   * @param projectService ProjectService instance
+   * @param afs AngularFirestore
+   * @param projectService ProjectService
    */
   constructor(
     private afs: AngularFirestore,
@@ -55,7 +55,7 @@ export class TokenService {
   /**
    * Create the project token and save it into db
    * @param projectUid uid of project
-   * @param token token instance
+   * @param token token
    */
   public save(projectUid: string, token: TokenModel): Observable<void> {
     return this.projectService.findOneById(projectUid)

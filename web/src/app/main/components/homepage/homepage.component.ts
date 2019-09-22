@@ -30,9 +30,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param projectService ProjectService instance
-   * @param userService UserService instance
-   * @param breakpointObserver BreakpointObserver instance
+   * @param projectService ProjectService
+   * @param userService UserService
+   * @param breakpointObserver BreakpointObserver
    */
   constructor(
     private projectService: ProjectService,
@@ -75,7 +75,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   /**
    * Returns the project type if private or public
-   * @param project project instance
+   * @param project project
    */
   public checkTypeOfProject(project: ProjectModel): string {
     if (project.type === 'private') {

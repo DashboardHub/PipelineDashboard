@@ -82,11 +82,11 @@ export class AppComponent implements AfterViewInit {
 
   /**
    * Life cycle method
-   * @param _iconRegistry MatIconRegistry instance
-   * @param _domSanitizer DomSanitizer instance
-   * @param authService AuthenticationService instance
-   * @param activityService ActivityService instance
-   * @param breakpointObserver BreakpointObserver instance
+   * @param _iconRegistry MatIconRegistry
+   * @param _domSanitizer DomSanitizer
+   * @param authService AuthenticationService
+   * @param activityService ActivityService
+   * @param breakpointObserver BreakpointObserver
    */
   constructor(
     private _iconRegistry: MatIconRegistry,
@@ -517,7 +517,7 @@ export class AppComponent implements AfterViewInit {
 
   /**
    * Open menu
-   * @param event Event instance
+   * @param event Event
    */
   public openMenu(event: Event): void {
     event.stopPropagation();

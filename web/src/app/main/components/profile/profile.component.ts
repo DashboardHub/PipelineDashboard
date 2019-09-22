@@ -29,8 +29,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param authService AuthenticationService instance
-   * @param breakpointObserver BreakpointObserver instance
+   * @param authService AuthenticationService
+   * @param breakpointObserver BreakpointObserver
    */
   constructor(
     public authService: AuthenticationService,

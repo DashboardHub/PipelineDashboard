@@ -19,7 +19,7 @@ export class StatsComponent implements OnInit {
 
   /**
    * Life cycle method
-   * @param applicationService application service instance
+   * @param applicationService application service
    */
   constructor(private applicationService: ApplicationService) { }
 

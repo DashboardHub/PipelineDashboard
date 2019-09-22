@@ -17,8 +17,8 @@ export class EditTokenResolver implements Resolve<TokenModel> {
 
   /**
    * Life cycle method
-   * @param tokenService TokenService instance
-   * @param router Router instance
+   * @param tokenService TokenService
+   * @param router Router
    */
   constructor(
     private tokenService: TokenService,
@@ -27,7 +27,7 @@ export class EditTokenResolver implements Resolve<TokenModel> {
 
   /**
    * Find the token data before displaying on the page
-   * @param route ActivatedRouteSnapshot instance
+   * @param route ActivatedRouteSnapshot
    */
   resolve(route: ActivatedRouteSnapshot): Observable<TokenModel> {
     return this.tokenService.findOneById(route.params.projectUid, route.params.uid)

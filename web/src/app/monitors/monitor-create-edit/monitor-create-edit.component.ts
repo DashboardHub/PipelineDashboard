@@ -33,10 +33,10 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param form FormBuilder instance
-   * @param monitorService MonitorService instance
+   * @param form FormBuilder
+   * @param monitorService MonitorService
    * @param route ActivatedRoute instace
-   * @param snackBar MatSnackBar instance
+   * @param snackBar MatSnackBar
    * @param router Router instace
    */
   constructor(

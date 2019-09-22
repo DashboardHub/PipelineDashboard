@@ -30,9 +30,9 @@ export class PingsListComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param route ActivatedRoute instance
-   * @param pingService PingService instance
-   * @param breakpointObserver BreakpointObserver instance
+   * @param route ActivatedRoute
+   * @param pingService PingService
+   * @param breakpointObserver BreakpointObserver
    */
   constructor(
     private route: ActivatedRoute,

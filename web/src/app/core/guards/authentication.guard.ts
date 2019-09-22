@@ -15,16 +15,16 @@ export class AuthGuard implements CanActivate {
 
   /**
    * Life cycle method
-   * @param router instance of router
-   * @param authService instance of authentication service
+   * @param router Router
+   * @param authService AuthService
    */
   constructor(private router: Router, private authService: AuthenticationService) {
   }
 
   /**
    * Protect routes for authenticated user
-   * @param next ActivatedRouteSnapshot instance
-   * @param state RouterStateSnapshot instance
+   * @param next ActivatedRouteSnapshot
+   * @param state RouterStateSnapshot
    */
   public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.authService.isAuthenticated) {

@@ -13,8 +13,8 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
 
   /**
    * Life cycle method
-   * @param router Router instance
-   * @param snackBar Snackbar instance
+   * @param router Router
+   * @param snackBar Snackbar
    */
   constructor(
     private router: Router,
@@ -23,8 +23,8 @@ export class ErrorHttpInterceptor implements HttpInterceptor {
 
   /**
    * Showing error in request
-   * @param req HttpRequest instance
-   * @param next HttpHandler instance
+   * @param req HttpRequest
+   * @param next HttpHandler
    */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap(undefined, (error: HttpErrorResponse) => {

@@ -15,9 +15,9 @@ export class EditProjectResolver implements Resolve<IProject> {
 
   /**
    * Life cycle method
-   * @param authService AuthenticationService instance
+   * @param authService AuthenticationService
    * @param projectService ProjectService
-   * @param router Router instance
+   * @param router Router
    */
   constructor(
     private authService: AuthenticationService,
@@ -27,7 +27,7 @@ export class EditProjectResolver implements Resolve<IProject> {
 
   /**
    * Allow owner to edit project routes only
-   * @param route ActivatedRouteSnapshot instance
+   * @param route ActivatedRouteSnapshot
    */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     return this.projectService.findOneById(route.params.projectUid)

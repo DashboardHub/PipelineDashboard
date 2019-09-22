@@ -18,7 +18,7 @@ export class AccessModel extends Model<IAccess> implements IAccess {
 
   /**
    * Life cycle method
-   * @param access IAccess instance
+   * @param access IAccess
    */
   constructor(access?: IAccess) {
     super();

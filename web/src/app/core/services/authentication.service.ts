@@ -34,12 +34,12 @@ export class AuthenticationService {
 
   /**
    * Life cycle method
-   * @param activityService ActivityService instance
-   * @param afs AngularFireStore instance
-   * @param deviceService DeviceDetectorService instance
-   * @param fns AngularFireFunctions instance
-   * @param router Router instance
-   * @param afAuth AngularFireAuth instance
+   * @param activityService ActivityService
+   * @param afs AngularFireStore
+   * @param deviceService DeviceDetectorService
+   * @param fns AngularFireFunctions
+   * @param router Router
+   * @param afAuth AngularFireAuth
    */
   constructor(
     private activityService: ActivityService,

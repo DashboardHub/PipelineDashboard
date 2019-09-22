@@ -20,7 +20,7 @@ export class DialogListComponent implements OnDestroy {
 
   /**
    * Life cycle method
-   * @param dialogRef MatDialogRef instance
+   * @param dialogRef MatDialogRef
    * @param data data to be send in dialog
    */
   constructor(

@@ -14,7 +14,7 @@ export class UserPipe implements PipeTransform {
 
   /**
    * Life cycle method
-   * @param userService UserService instance
+   * @param userService UserService
    */
   constructor(private userService: UserService) { }
 

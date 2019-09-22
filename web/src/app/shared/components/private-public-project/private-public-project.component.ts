@@ -24,8 +24,8 @@ export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param projectService ProjectService instance
-   * @param router Router instance
+   * @param projectService ProjectService
+   * @param router Router
    */
   constructor(
     private projectService: ProjectService,

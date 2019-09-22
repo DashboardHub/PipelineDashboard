@@ -35,7 +35,7 @@ export class MonitorModel extends Model<IMonitor> implements IMonitor {
 
   /**
    * Life cycle method
-   * @param monitor monitor instance
+   * @param monitor monitor
    */
   constructor(monitor: IMonitor) {
     super();

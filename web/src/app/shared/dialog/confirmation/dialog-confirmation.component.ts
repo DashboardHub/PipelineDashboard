@@ -13,7 +13,7 @@ export class DialogConfirmationComponent {
 
   /**
    * Life cycle method
-   * @param dialogRef MatDialogRef instance
+   * @param dialogRef MatDialogRef
    * @param data data to be send in dialog
    */
   constructor(

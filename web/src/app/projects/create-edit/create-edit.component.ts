@@ -29,11 +29,11 @@ export class CreateEditProjectComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param router Router instance
-   * @param form FormBuilder instance
-   * @param snackBar MatSnackBar instance
-   * @param projectService ProjectService instance
-   * @param route ActivatedRoute instance
+   * @param router Router
+   * @param form FormBuilder
+   * @param snackBar MatSnackBar
+   * @param projectService ProjectService
+   * @param route ActivatedRoute
    */
   constructor(
     private router: Router,

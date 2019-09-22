@@ -152,5 +152,6 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 3. `firebase emulators:start`
 
 ## Generate documentation
-1. cd web
-2. npm run docs
+
+1. `cd web`
+2. `npm run docs`
