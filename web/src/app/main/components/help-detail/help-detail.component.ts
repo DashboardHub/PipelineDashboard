@@ -10,12 +10,12 @@ import { Help } from '@app/main/components/help/help';
 import { HelpModel } from '@shared/models/index.model';
 
 @Component({
-  selector: 'dashboard-markdown',
-  templateUrl: './markdown.component.html',
-  styleUrls: ['./markdown.component.scss'],
+  selector: 'dashboard-help-detail',
+  templateUrl: './help-detail.component.html',
+  styleUrls: ['./help-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MarkdownComponent implements OnInit {
+export class HelpDetailComponent implements OnInit {
 
   public data: HelpModel = new HelpModel();
 
@@ -31,7 +31,7 @@ export class MarkdownComponent implements OnInit {
 
   /**
    * Life cycle init method
-   * Find the topics based upon the help path and display it in markdown component
+   * Find the topics based upon the help path and display it in help detail component
    */
   ngOnInit(): void {
     const path: string = this.route.snapshot.paramMap.get('path');
