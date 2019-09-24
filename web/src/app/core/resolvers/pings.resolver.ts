@@ -28,6 +28,7 @@ export class PingsResolver implements Resolve<PingModel[]> {
         take(1),
         catchError(() => {
           this.router.navigate(['/projects', route.params.projectUid, 'monitors']);
+
           return of([]);
         })
       );

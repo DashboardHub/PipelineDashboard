@@ -214,12 +214,14 @@ export class FeaturesComponent implements OnInit {
     if (typeof value === 'boolean') {
       return true;
     }
+
     return false;
   }
   public chekPackValueForString(value: any): boolean {
     if (typeof value !== 'string') {
       return true;
     }
+
     return false;
   }
 

@@ -23,12 +23,14 @@ export class ViewProjectResolver implements Resolve<IProject> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     const callable: any = this.fns.httpsCallable('updateProjectViews');
+
     return this.projectService.findOneById(route.params.projectUid)
       .pipe(
         take(1),
         tap(() => callable({ projectUid: route.params.projectUid })),
         catchError(() => {
           this.router.navigate(['/']);
+
           return of(new ProjectModel({ uid: 'error' }));
         })
       );
