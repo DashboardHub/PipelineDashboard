@@ -1,3 +1,11 @@
+<div *ngIf="projects.length === 0">
+  <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <span>
+      <mat-icon svgIcon="warning_icon"></mat-icon>
+    </span>
+    <span>You do not have any project. Please <a [routerLink]="['/projects', 'create']">create</a> project</span>
+  </mat-card>
+</div>
 <div class="project">
   <table mat-table [dataSource]="projects" class="project__list">
     <ng-container matColumnDef="type">

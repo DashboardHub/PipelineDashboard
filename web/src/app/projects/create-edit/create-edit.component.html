@@ -52,7 +52,8 @@
         </mat-card-content>
         <mat-card-actions>
           <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-            <button mat-stroked-button type="button" routerLink="/projects" color="warn">Cancel</button>
+            <button mat-stroked-button type="button" [routerLink]="['/projects']" color="warn" *ngIf="!isEdit">Cancel</button>
+            <button mat-stroked-button type="button" [routerLink]="['/projects', uid]" color="warn" *ngIf="isEdit">Cancel</button>
             <button mat-raised-button type="submit" color="accent" [disabled]="projectForm.invalid">
               <span *ngIf="!isEdit">Create</span>
               <span *ngIf="isEdit">Save</span>

@@ -15,7 +15,6 @@ import { PrivatePublicProjectComponent } from './components/private-public-proje
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
-import { DialogMarkdownComponent } from './dialog/markdown/dialog-markdown.component';
 import { MarkdownDirective } from './directives/markdown.directive';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { MarkdownDirective } from './directives/markdown.directive';
     MarkdownDirective,
     DialogConfirmationComponent,
     DialogListComponent,
-    DialogMarkdownComponent,
     ProjectsListComponent,
     PrivatePublicProjectComponent],
   imports: [
@@ -45,7 +43,6 @@ import { MarkdownDirective } from './directives/markdown.directive';
   entryComponents: [
     DialogConfirmationComponent,
     DialogListComponent,
-    DialogMarkdownComponent,
   ],
 })
 export class SharedModule { }

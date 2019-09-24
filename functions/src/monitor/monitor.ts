@@ -76,7 +76,6 @@ export const ping: any = async (projectUid: string, monitorUid: string, type: Pi
     .set(
       {
         monitors: project.monitors,
-        updatedOn: new Date(),
       },
       { merge: true });
 
