@@ -34,7 +34,11 @@ export class RepositoryService {
     return this.activityService
       .start()
       .pipe(
-        switchMap(() => this.afs.collection<IRepository>('repositories').doc<IRepository>(uid).valueChanges()),
+        switchMap(() => this.afs.collection<IRepository>(
+          'repositories',
+          (ref: firebase.firestore.Query) => ref
+            .orderBy('updatedOn', 'desc')
+        ).doc<IRepository>(uid).valueChanges()),
         map((repository: IRepository) => new RepositoryModel(repository))
       );
   }
