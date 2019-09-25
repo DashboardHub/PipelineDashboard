@@ -46,6 +46,7 @@ export class MonitorService {
               if (monitorModel.uid === monitor.uid) {
                 return new MonitorModel({ ...monitorModel.toData(), ...monitor.toData(true) });
               }
+
               return monitorModel;
             });
           }
@@ -83,11 +84,13 @@ export class MonitorService {
 
   public deletePingsByMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('deletePingsByMonitor');
+
     return callable({ projectUid, monitorUid });
   }
 
   public pingMonitor(projectUid: string, monitorUid: string, type: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');
+
     return callable({ projectUid, monitorUid, type });
   }
 }

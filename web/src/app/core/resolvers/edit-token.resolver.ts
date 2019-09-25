@@ -26,6 +26,7 @@ export class EditTokenResolver implements Resolve<TokenModel> {
         take(1),
         catchError(() => {
           this.router.navigate(['/']);
+
           return of(new TokenModel());
         })
       );

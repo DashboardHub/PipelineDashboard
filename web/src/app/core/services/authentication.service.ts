@@ -132,6 +132,7 @@ export class AuthenticationService {
         }),
         switchMap((profile: ProfileModel) => {
           const callable: any = this.fns.httpsCallable('findAllUserRepositories');
+
           return callable({ token: profile.oauth.githubToken });
         })
       )
