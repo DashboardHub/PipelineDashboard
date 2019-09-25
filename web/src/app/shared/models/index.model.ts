@@ -4,6 +4,7 @@ export * from './activity.model';
 export * from './contributor.model';
 export * from './event.model';
 export * from './help.model';
+export * from './help-topic.model';
 export * from './issue.model';
 export * from './profile.model';
 export * from './account.model';

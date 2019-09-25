@@ -1,10 +1,10 @@
-import { Help } from '@app/main/components/help/help';
+import { HelpTopic } from '@shared/models/index.model';
 
 export class HelpModel {
   icon: string;
   title: string;
   content: string;
-  topics: Help[] = [
+  topics: HelpTopic[] = [
     {
       title: 'Quickstart',
       description: 'Overview information on getting started',
