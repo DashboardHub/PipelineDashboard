@@ -109,6 +109,7 @@ export class RepositoryModel extends Model<IRepository> implements IRepository {
   public calculateRating(): number {
     const repoRatings: RatingModel[] = this.getRatings();
     const ratingValues: number[] = repoRatings.map((rating: RatingModel) => rating.value);
+
     return ratingValues.reduce((total: number, current: number) => total + current, 0) / repoRatings.length;
   }
 
