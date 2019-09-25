@@ -25,6 +25,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
   private deleteSubscription: Subscription;
   private projectSubscription: Subscription;
+
   public typeIcon: string;
   public project: ProjectModel;
   public isMenuOpen: boolean;

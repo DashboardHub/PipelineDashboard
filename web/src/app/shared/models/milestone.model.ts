@@ -1,4 +1,7 @@
-// Application model
+// Firestore model
+import { firestore } from 'firebase';
+
+// DashboardHub model
 import { UserModel } from './user.model';
 
 /**
@@ -12,5 +15,5 @@ export class MilestoneModel {
   closeIssues: number;
   htmlUrl: string;
   description: string;
-  updatedAt: string;
+  updatedAt: firestore.Timestamp;
 }

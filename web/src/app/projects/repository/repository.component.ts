@@ -10,7 +10,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
-import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
+import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 /**
  * Repository component
@@ -26,7 +26,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public headerHeight: number;
   public isLargeScreen: boolean;
   public isAlertEnabled: boolean = false;
-  public rating: number;
 
   @Input()
   public isAdmin: boolean = false;
@@ -35,7 +34,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public uid: string;
 
   public manualReload: boolean = false;
-  public repository: RepositoryModel = new RepositoryModel('');
+  public repository: IRepository;
   public numberOfDisplayedUsers: number;
 
   /**
@@ -67,7 +66,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        this.calculateRating();
         if (this.repository && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
@@ -168,16 +166,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 
-  /**
-   * Calculate repository rating
-   */
-  public calculateRating(): void {
-    this.rating = this.repositoryService.getRating(this.repository);
-  }
-
-  /**
-   * Show/hide webhook alert
-   */
   private showWebHookAlert(): void {
     setTimeout(() => this.isAlertEnabled = true, 10000);
   }

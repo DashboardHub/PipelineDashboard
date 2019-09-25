@@ -68,6 +68,7 @@
     "no-conditional-assignment": true,
     "no-consecutive-blank-lines": [true],
     "no-unused-declaration": true,
+    "newline-before-return": true,
     "no-console": [
       true,
       "assert",

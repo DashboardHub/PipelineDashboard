@@ -1,5 +1,4 @@
-// Application model
-import { RepositoryModel } from './repository.model';
+import { IRepository } from './repository.model';
 
 /**
  * Activity model
@@ -7,6 +6,6 @@ import { RepositoryModel } from './repository.model';
 export class ActivityModel {
   type: string;
   payload: { title: string, action?: string };
-  repository: RepositoryModel;
+  repository: IRepository;
   createdOn: Date;
 }

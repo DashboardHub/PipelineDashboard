@@ -233,6 +233,7 @@ export class FeaturesComponent implements OnInit {
     if (typeof value === 'boolean') {
       return true;
     }
+
     return false;
   }
 
@@ -244,6 +245,7 @@ export class FeaturesComponent implements OnInit {
     if (typeof value !== 'string') {
       return true;
     }
+
     return false;
   }
 
