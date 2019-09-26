@@ -1,10 +1,10 @@
 <div class="repository__problem" *ngIf="isAdmin && isAlertEnabled && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)">
   <mat-card class="repository__problem__card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-      <span>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
+      <div>
         <mat-icon svgIcon="warning_icon"></mat-icon>
-      </span>
-      <span>Webhook not found on this repository. This is required for realtime data.</span>
+      </div>
+      <div>Webhook not found on this repository. This is required for realtime data.</div>
     </div>
     <span>
       <button class="btn-action" mat-stroked-button (click)="createWebhook()">
@@ -30,10 +30,8 @@
               <div class="repository__header__panel__name">
                 {{ repository.fullName }}
               </div>
-              <div class="repository__header__panel__description">
-                <span *ngIf="repository.description; else emptyData">
-                  {{ repository.description }}
-                </span>
+              <div>
+                <div *ngIf="repository.description; else emptyData" class="repository__header__panel__description">{{ repository.description }}</div>
               </div>
             </div>
           </div>

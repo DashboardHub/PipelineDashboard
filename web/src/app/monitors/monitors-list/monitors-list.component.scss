@@ -34,6 +34,11 @@
         object-fit: cover;
         height: 40px;
       }
+
+      &__project-title {
+        @include ellipsisText;
+        width: 20vw;
+      }
     }
   }
 
@@ -58,11 +63,11 @@
 
     &__title {
       @include title;
-      width: 30vh;
+      width: 55vw;
 
       &__subtitle {
         @include subtitle;
-        width: 35vh;
+        width: 55vw;
       }
     }
 
@@ -74,6 +79,11 @@
 
       &__table {
         width: 100%;
+
+        &__name {
+          word-break: break-all;
+          max-width: 30vw;
+        }
 
         &__avatar {
           height: 35px;

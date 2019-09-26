@@ -25,11 +25,11 @@
 
     &__title {
       @include title;
-      width: 30vh;
+      width: 30vw;
 
       &__subtitle {
         @include subtitle;
-        width: 35vh;
+        width: 35vw;
       }
     }
 
@@ -43,7 +43,7 @@
         width: 100%;
 
         &__name {
-          @include ellipsisText;
+          word-break: break-all;
           max-width: 60vw;
         }
 

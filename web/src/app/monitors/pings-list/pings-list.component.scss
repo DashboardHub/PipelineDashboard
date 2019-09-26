@@ -1,5 +1,6 @@
 @import "../../../assets/scss/variable";
 @import "../../../assets/scss/mixin.scss";
+
 .monitor-ping {
   @include pageContainer;
 
@@ -18,26 +19,28 @@
 
     &__title {
       @include title;
-      width: 30vh;
 
       &__subtitle {
         @include subtitle;
-        width: 35vh;
       }
     }
 
     &__content {
       padding: 0;
       display: block;
-      overflow: hidden;
+      overflow: auto;
+      max-height: 60vh;
+
       @include tableContainer;
 
       &__table {
         width: 100%;
+        padding: 0 2px;
 
         &__url {
-          @include ellipsisText;
-          width: 90%;
+          width: 30vw;
+          word-break: break-all;
+          padding-right: 5px;
         }
       }
     }

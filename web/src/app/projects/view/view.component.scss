@@ -9,7 +9,7 @@
   }
 
   .helper {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
   &__header {
@@ -51,12 +51,27 @@
       &__name {
         @include title;
         font-size: 22px;
+        width: 30vw;
         padding-left: 0;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        &__name {
+          width: 25vw;
+
+          &__long {
+            width: 55vw;
+          }
+        }
       }
 
       @media (max-width: $breakpoint-xs) {
         &__name {
-          width: 15vh;
+          width: 30vw;
+
+          &__long {
+            width: 70vw;
+          }
         }
       }
     }

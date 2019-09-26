@@ -16,7 +16,7 @@
           </span>
         </mat-menu>
         <mat-icon svgIcon="{{ typeIcon }}"></mat-icon>
-        <span class="project-body__header__content__name">{{ project.title }}</span>
+        <span class="project-body__header__content__name" [ngClass]="{'project-body__header__content__name__long': !isAdmin()}">{{ project.title }}</span>
       </div>
       <div class="project-body__header__content information">
         <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start" *ngIf="isAdmin()">

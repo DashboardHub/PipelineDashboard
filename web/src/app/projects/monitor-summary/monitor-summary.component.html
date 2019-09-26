@@ -14,7 +14,7 @@
                 <div class="summary__dashboard__content__item__valid">{{ valid.latestPing.duration }}</div>
               </div>
               <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between start" fxFlex="90" fxLayoutGap="5px">
-                <span>{{ valid.latestPing.url }}</span>
+                <span class="summary__dashboard__content__item__url">{{ valid.latestPing.url }}</span>
                 <div>{{ valid.latestPing.statusCode }} | {{ valid.latestPing.duration }}ms |
                   {{ valid.latestPing.type }} | {{ valid.latestPing.createdOn.toDate() | timeAgo }}
                 </div>
@@ -40,7 +40,7 @@
                 <div class="summary__dashboard__content__item__invalid">{{ invalid.latestPing.duration }}</div>
               </div>
               <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-between start" fxFlex="90" fxLayoutGap="5px">
-                <span>{{ invalid.latestPing.url }}</span>
+                <span  class="summary__dashboard__content__item__url">{{ invalid.latestPing.url }}</span>
                 <div>{{ invalid.latestPing.statusCode }} | {{ invalid.latestPing.duration }}ms |
                   {{ invalid.latestPing.type }} | {{ invalid.latestPing.createdOn.toDate() | timeAgo }}
                 </div>
