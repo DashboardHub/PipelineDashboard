@@ -26,6 +26,7 @@ export class RepositoryResolver implements Resolve<RepositoryModel> {
         take(1),
         catchError(() => {
           this.router.navigate(['/projects', route.params.projectUid]);
+
           return of(new RepositoryModel({ uid: '-' }));
         })
       );

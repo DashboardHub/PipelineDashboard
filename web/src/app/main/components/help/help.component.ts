@@ -5,8 +5,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 // Rxjs operators
 import { debounceTime } from 'rxjs/operators';
 
-import { HelpModel } from '@shared/models/help.model';
-import { Help } from './help';
+import { HelpModel, HelpTopic } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-help',
@@ -16,9 +15,9 @@ import { Help } from './help';
 export class HelpComponent implements OnInit {
 
   public searchForm: FormGroup;
-  public filteredTopics: Help[] = [];
+  public filteredTopics: HelpTopic[] = [];
   public help: HelpModel = new HelpModel();
-  public topics: Help[];
+  public topics: HelpTopic[];
 
   constructor(
     private http: HttpClient,
@@ -43,7 +42,7 @@ export class HelpComponent implements OnInit {
 
   // This function searches the topics in help page
   filterTopics(keyword: string = ''): void {
-    this.filteredTopics = this.topics.filter((help: Help) => {
+    this.filteredTopics = this.topics.filter((help: HelpTopic) => {
       return help.title.toLowerCase().includes(keyword.toLowerCase()) || help.description.toLowerCase().includes(keyword.toLowerCase());
     });
   }

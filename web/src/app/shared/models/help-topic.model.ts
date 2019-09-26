@@ -1,4 +1,4 @@
-export class Help {
+export class HelpTopic {
   title: string;
   description: string;
   path: string;

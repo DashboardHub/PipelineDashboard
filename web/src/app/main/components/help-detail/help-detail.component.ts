@@ -6,8 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 // Application models
-import { Help } from '@app/main/components/help/help';
-import { HelpModel } from '@shared/models/index.model';
+import { HelpModel, HelpTopic } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-help-detail',
@@ -35,12 +34,12 @@ export class HelpDetailComponent implements OnInit {
    */
   ngOnInit(): void {
     const path: string = this.route.snapshot.paramMap.get('path');
-    const topics: Help[] = this.data.topics;
+    const topics: HelpTopic[] = this.data.topics;
     this.http.get(`/assets/help/${path}.md`, { responseType: 'text' }).subscribe((content: string) => {
       this.data.content = content;
     });
 
-    const filteredTopic: Help =  topics.find((topic: Help) => topic.path === path);
+    const filteredTopic: HelpTopic =  topics.find((topic: HelpTopic) => topic.path === path);
     this.data.icon  = filteredTopic.icon;
     this.data.title = filteredTopic.title;
   }
