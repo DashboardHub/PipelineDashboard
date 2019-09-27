@@ -11,6 +11,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MainComponent } from './main.component';
 
 // Dashboard hub authentication guards
+import { HelpResolver } from '@app/core/resolvers/help.resolver';
 import { AuthGuard } from '@core/guards/authentication.guard';
 import { HelpDetailComponent } from './components/help-detail/help-detail.component';
 
@@ -43,6 +44,7 @@ const routes: Routes = [
         path: 'help/:path',
         pathMatch: 'full',
         component: HelpDetailComponent,
+        resolve: [HelpResolver],
       },
       {
         path: 'terms-and-conditions',
