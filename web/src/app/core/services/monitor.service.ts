@@ -40,7 +40,6 @@ export class MonitorService {
    *
    * @param projectUid uid of project
    * @param monitor monitor to save
-   * @returns the observable
    */
   public save(projectUid: string, monitor: MonitorModel): Observable<void> {
     return this.projectService.findOneById(projectUid)
@@ -78,7 +77,6 @@ export class MonitorService {
    * Delete the monitor from project
    * @param projectUid uid of project
    * @param monitorUid uid of monitor to be deleted
-   * @returns the observable
    */
   public delete(projectUid: string, monitorUid: string): Observable<void> {
     return this.projectService.findOneById(projectUid)
@@ -101,7 +99,6 @@ export class MonitorService {
    * Call cloud function for deleting pings by monitor
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
-   * @returns Observable
    */
   public deletePingsByMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('deletePingsByMonitor');
@@ -114,7 +111,6 @@ export class MonitorService {
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
    * @param type project type
-   * @returns the observable
    */
   public pingMonitor(projectUid: string, monitorUid: string, type: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');

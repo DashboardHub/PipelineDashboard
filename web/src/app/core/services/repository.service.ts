@@ -35,7 +35,6 @@ export class RepositoryService {
 
   /**
    * Forces refresh of users repositories
-   * @returns Observable
    */
   public refresh(): Observable<IRepository> {
     const callable: any = this.fns.httpsCallable('findAllUserRepositories');
@@ -58,7 +57,6 @@ export class RepositoryService {
 
   /**
    * Loads all the available repositories
-   * @returns Observable
    */
   public loadRepository(repo: IRepository): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
@@ -69,7 +67,6 @@ export class RepositoryService {
   /**
    * Call cloud function create webhook manually
    * @param repo repository
-   * @returns Observable
    */
   public createGitWebhook(repo: IRepository): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('createGitWebhookRepository');

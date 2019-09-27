@@ -31,7 +31,6 @@ export class PingService {
    * Find all the pings by monitor using monitorUid
    * @param projectUid uid of project
    * @param monitorUid uid of monitor
-   * @returns Observable
    */
   public findAllByMonitor(projectUid: string, monitorUid: string): Observable<PingModel[]> {
     return this.activityService
