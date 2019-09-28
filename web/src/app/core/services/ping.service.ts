@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -7,18 +8,30 @@ import { switchMap } from 'rxjs/operators';
 import { IProject, PingModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
+/**
+ * Ping service
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class PingService {
 
+  /**
+   * Lifecycle method
+   * @param afs AngularFirestore
+   * @param activityService ActivityService
+   */
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService
   ) {
   }
 
-  // This function returns the pings details via monitorUid
+  /**
+   * Find all the pings by monitor using monitorUid
+   * @param projectUid uid of project
+   * @param monitorUid uid of monitor
+   */
   public findAllByMonitor(projectUid: string, monitorUid: string): Observable<PingModel[]> {
     return this.activityService
       .start()

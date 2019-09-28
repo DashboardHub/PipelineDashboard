@@ -6,22 +6,29 @@ import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { of, Observable } from 'rxjs';
 import { catchError, take } from 'rxjs/operators';
 
-// Third party modules
+// DashboardHub model and services
 import { PingService } from '@core/services/index.service';
 import { PingModel } from '@shared/models/index.model';
-
-// Dashboard hub model and services
 
 @Injectable({
   providedIn: 'root',
 })
 export class PingsResolver implements Resolve<PingModel[]> {
 
+  /**
+   * Life cycle method
+   * @param pingService PingService
+   * @param router Router
+   */
   constructor(
     private pingService: PingService,
     private router: Router
   ) { }
 
+  /**
+   * Find all monitors before displaying data on pings page and navigate to monitors page in case of error
+   * @param route ActivatedRouteSnapshot
+   */
   resolve(route: ActivatedRouteSnapshot): Observable<PingModel[]> {
     return this.pingService.findAllByMonitor(route.params.projectUid, route.params.monitorUid)
       .pipe(

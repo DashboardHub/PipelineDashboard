@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -10,11 +11,21 @@ import { IRepository, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
+/**
+ * Repository service
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class RepositoryService {
 
+  /**
+   * Life cycle method
+   * @param afs Angularfirestore
+   * @param fns AngularFirefunctions
+   * @param authService AuthService
+   * @param activityService ActivityService
+   */
   constructor(
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
@@ -22,14 +33,19 @@ export class RepositoryService {
     private activityService: ActivityService
   ) { }
 
-  // Forces refresh of users repositories
+  /**
+   * Forces refresh of users repositories
+   */
   public refresh(): Observable<IRepository> {
     const callable: any = this.fns.httpsCallable('findAllUserRepositories');
 
     return callable({ token: this.authService.profile.oauth.githubToken });
   }
 
-  // This function returns the repository via uid
+  /**
+   * Find the repository via uid
+   * @param uid uid of repository
+   */
   public findOneById(uid: string): Observable<RepositoryModel> {
     return this.activityService
       .start()
@@ -39,19 +55,29 @@ export class RepositoryService {
       );
   }
 
-  // This function loads all the available repositories
+  /**
+   * Loads all the available repositories
+   */
   public loadRepository(repo: IRepository): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('findRepositoryInfo');
 
     return callable({ repository: repo, token: this.authService.profile.oauth.githubToken });
   }
 
+  /**
+   * Call cloud function create webhook manually
+   * @param repo repository
+   */
   public createGitWebhook(repo: IRepository): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('createGitWebhookRepository');
 
     return of(new RepositoryModel(callable({ repositoryUid: repo.uid, token: this.authService.profile.oauth.githubToken })));
   }
 
+  /**
+   * Call cloud function to delete webhook manually
+   * @param repo repository
+   */
   public deleteGitWebhook(repo: { uid?: string, id?: number }): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
 

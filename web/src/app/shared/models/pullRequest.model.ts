@@ -1,6 +1,12 @@
+// Firestore module
 import { firestore } from 'firebase';
+
+// Application model
 import { UserModel } from './user.model';
 
+/**
+ * PullRequest model
+ */
 export class PullRequestModel {
   uid: string = '';
   url: string = '';

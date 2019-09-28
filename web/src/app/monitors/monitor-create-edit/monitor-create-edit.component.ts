@@ -1,3 +1,4 @@
+// Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -11,6 +12,9 @@ import { v4 as uuid } from 'uuid';
 import { MonitorService } from '@core/services/index.service';
 import { MonitorModel, ProjectModel } from '@shared/models/index.model';
 
+/**
+ * Monitor create edit component
+ */
 @Component({
   selector: 'dashboard-monitor-create-edit',
   templateUrl: './monitor-create-edit.component.html',
@@ -27,6 +31,14 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   public projectUid: string;
   public statusCodeList: Number[] = [200, 201, 204, 400, 401, 404, 500];
 
+  /**
+   * Life cycle method
+   * @param form FormBuilder
+   * @param monitorService MonitorService
+   * @param route ActivatedRoute instace
+   * @param snackBar MatSnackBar
+   * @param router Router instace
+   */
   constructor(
     private form: FormBuilder,
     private monitorService: MonitorService,
@@ -69,7 +81,7 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * This function is used to save monitor and navigate to monitors list screen
+   * Save monitor and navigate to monitors list screen
    *
    * @param uid uid of monitor which needs to be added into monitors list
    * @param monitors monitors list to be updated

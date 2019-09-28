@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { of, timer, Observable, Subject } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 
+/**
+ * Activity service
+ */
 @Injectable({
   providedIn: 'root',
 })

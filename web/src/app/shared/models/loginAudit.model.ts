@@ -1,5 +1,9 @@
+// Firestore module
 import { firestore } from 'firebase';
 
+/**
+ * LoginAudit model
+ */
 export class LoginAuditModel {
   date: firestore.Timestamp;
   userAgent: string;

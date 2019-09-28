@@ -1,3 +1,4 @@
+// Core modules
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -6,6 +7,9 @@ import { Router } from '@angular/router';
 import { ProjectService } from '@core/services/index.service';
 import { IProject, ProjectModel } from '../../models/index.model';
 
+/**
+ * Private public project component
+ */
 @Component({
   selector: 'dashboard-projects-private-public',
   templateUrl: './private-public-project.component.html',
@@ -18,12 +22,20 @@ export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
   public showTitle: boolean;
   @Input() title: string = 'My Projects';
 
+  /**
+   * Life cycle method
+   * @param projectService ProjectService
+   * @param router Router
+   */
   constructor(
     private projectService: ProjectService,
     private router: Router
   ) {
   }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     if (this.router.url === '/') {
       this.projectSubscription = this.projectService
@@ -37,6 +49,9 @@ export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.projectSubscription
       .unsubscribe();
