@@ -55,13 +55,4 @@ export class HelpModel {
       updatedAt: '09/13/2019 09:05 AM',
     },
   ];
-
-  /**
-   * Life cycle method
-   */
-  constructor() {
-    this.content = '';
-    this.icon = '';
-    this.content = '';
-  }
 }

@@ -32,13 +32,14 @@ export class HelpResolver implements Resolve<String> {
   resolve(route: ActivatedRouteSnapshot): Observable<String> {
     const path: string = route.params.path;
 
-    return this.http.get(`/assets/help/${path}.md`, { responseType: 'text' }).pipe(
-      take(1),
-      catchError(() => {
-        this.router.navigate(['/help']);
+    return this.http.get(`/assets/help/${path}.md`, { responseType: 'text' })
+      .pipe(
+        take(1),
+        catchError(() => {
+          this.router.navigate(['/help']);
 
-        return of('');
-      })
-    );
+          return of('');
+        })
+      );
   }
 }

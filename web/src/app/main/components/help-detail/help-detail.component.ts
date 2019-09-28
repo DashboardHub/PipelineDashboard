@@ -2,9 +2,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-// Third party modules
-import { HttpClient } from '@angular/common/http';
-
 // Application models
 import { HelpModel, HelpTopic } from '@shared/models/index.model';
 
@@ -20,11 +17,9 @@ export class HelpDetailComponent implements OnInit {
 
   /**
    * Life cycle method
-   * @param http HttpClient instance
    * @param route ActivatedRoute instance
    */
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute
   ) { }
 
