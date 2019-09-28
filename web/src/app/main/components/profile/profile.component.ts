@@ -1,13 +1,19 @@
+// Core modules
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
-import { Component, OnDestroy, OnInit } from '@angular/core';
+// Rxjs operators
 import { Subscription } from 'rxjs';
 
 // Dashboard hub model and services
 import { AuthenticationService } from '@core/services/index.service';
 import { LoginAuditModel, ProfileModel } from '@shared/models/index.model';
 
+/**
+ * Profile component
+ */
 @Component({
   selector: 'dashboard-profile',
   templateUrl: './profile.component.html',
@@ -21,12 +27,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public isSmallScreen: boolean;
   displayedColumns: string[] = ['title', 'description'];
 
+  /**
+   * Life cycle method
+   * @param authService AuthenticationService
+   * @param breakpointObserver BreakpointObserver
+   */
   constructor(
     public authService: AuthenticationService,
     private breakpointObserver: BreakpointObserver
   ) {
   }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.profile = this.authService.profile;
     this.loginsSubscription = this.authService
@@ -45,6 +59,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.loginsSubscription
       .unsubscribe();

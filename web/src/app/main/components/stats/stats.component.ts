@@ -1,3 +1,4 @@
+// Core modules
 import { Component, OnInit } from '@angular/core';
 
 // Application model and services
@@ -18,7 +19,7 @@ export class StatsComponent implements OnInit {
 
   /**
    * Life cycle method
-   * @param applicationService application service instance
+   * @param applicationService application service
    */
   constructor(private applicationService: ApplicationService) { }
 

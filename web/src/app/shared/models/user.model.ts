@@ -1,3 +1,6 @@
+/**
+ * User model
+ */
 export class UserModel {
   uid: string = '';
   name: string;

@@ -11,6 +11,9 @@ import { TokenService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { TokenModel } from '@shared/models/index.model';
 
+/**
+ * Token list component
+ */
 @Component({
   selector: 'dashboard-project-tokens-list',
   templateUrl: './tokens-list.component.html',
@@ -23,6 +26,12 @@ export class TokensListComponent {
   public tokenList: TokenModel[];
   public displayedColumns: string[] = ['name', 'action'];
 
+  /**
+   * Life cycle method
+   * @param dialog MatDialog
+   * @param tokenService TokenService
+   * @param route ActivatedRoute
+   */
   constructor(
     private dialog: MatDialog,
     private tokenService: TokenService,
@@ -37,7 +46,10 @@ export class TokensListComponent {
       .subscribe((data: TokenModel[]) => this.tokenList = data);
   }
 
-  // This function delete the project token
+  /**
+   * Delete the project token
+   * @param tokenUid uid of token to be deleted
+   */
   delete(tokenUid: string): void {
     let dialogConfig: MatDialogConfig = new MatDialogConfig();
     dialogConfig = {

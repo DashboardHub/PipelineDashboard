@@ -1,8 +1,12 @@
+// Application model
 import { Account } from './account.model';
 import { ActivityModel } from './activity.model';
 import { LoginAuditModel } from './loginAudit.model';
 import { RepositoriesModel } from './repositories.model';
 
+/**
+ * Profile model
+ */
 export class ProfileModel {
   uid: string = '';
   username: string;

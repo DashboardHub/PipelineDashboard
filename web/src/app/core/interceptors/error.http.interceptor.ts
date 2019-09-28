@@ -1,3 +1,4 @@
+// Core modules
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
@@ -10,11 +11,21 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class ErrorHttpInterceptor implements HttpInterceptor {
 
+  /**
+   * Life cycle method
+   * @param router Router
+   * @param snackBar Snackbar
+   */
   constructor(
     private router: Router,
     private snackBar: MatSnackBar
   ) { }
 
+  /**
+   * Showing error in request
+   * @param req HttpRequest
+   * @param next HttpHandler
+   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(tap(undefined, (error: HttpErrorResponse) => {
       if (error instanceof HttpErrorResponse) {

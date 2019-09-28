@@ -1,3 +1,4 @@
+// Core modules
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -10,6 +11,9 @@ import { debounceTime } from 'rxjs/operators';
 import { DialogMarkdownComponent } from '@shared/dialog/markdown/dialog-markdown.component';
 import { Help } from './help';
 
+/**
+ * Help component
+ */
 @Component({
   selector: 'dashboard-help',
   templateUrl: './help.component.html',
@@ -71,12 +75,21 @@ export class HelpComponent implements OnInit {
     },
   ];
 
+  /**
+   * Life cycle method
+   * @param http HttpClient
+   * @param form FormBuilder
+   * @param dialog MatDialog
+   */
   constructor(
     private http: HttpClient,
     private form: FormBuilder,
     private dialog: MatDialog
   ) { }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.topics.forEach((help: { title: string, path: string }, index: number) => {
       this.http.get(`/assets/help/${help.path}.md`, { responseType: 'text' }).subscribe((content: string) => {
@@ -92,14 +105,20 @@ export class HelpComponent implements OnInit {
     this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe((search: string) => this.filterTopics(search));
   }
 
-  // This function searches the topics in help page
+  /**
+   * Searches the topics in help page
+   * @param keyword key to search in help page
+   */
   filterTopics(keyword: string = ''): void {
     this.filteredTopics = this.topics.filter((help: Help) => {
       return help.title.toLowerCase().includes(keyword.toLowerCase()) || help.description.toLowerCase().includes(keyword.toLowerCase());
     });
   }
 
-  // This function opens the dialog on help page
+  /**
+   * Opens the dialog on help page
+   * @param help data to send in dialog
+   */
   openDialog(help: Help): void {
     this.dialog.open(DialogMarkdownComponent, {
       width: '800px',

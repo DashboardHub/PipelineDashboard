@@ -150,3 +150,8 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 1. `set GOOGLE_APPLICATION_CREDENTIALS=path\to\key.json`
 2. `firebase setup:emulators:firestore`
 3. `firebase emulators:start`
+
+## Generate documentation
+
+1. `cd web`
+2. `npm run docs`
