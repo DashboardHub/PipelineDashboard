@@ -56,6 +56,11 @@ const routes: Routes = [
         pathMatch: 'full',
         component: PrivacyComponent,
       },
+      {
+        path: 'admin',
+        pathMatch: 'full',
+        component: PrivacyComponent,
+      },
     ],
   },
 ];

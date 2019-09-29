@@ -48,6 +48,23 @@ export class UserService {
   }
 
   /**
+   * Find all the user information
+   */
+  public findAllUserList(): Observable<UserModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<UserModel>(
+            'users',
+            (ref: firebase.firestore.Query) => ref
+              .orderBy('lastSignInTime', 'desc')
+          )
+          .valueChanges())
+      );
+  }
+
+  /**
    * Find the user information by user id
    * @param userId user id of the user
    */

@@ -8,7 +8,8 @@ service cloud.firestore {
 
     match /users/{user} {
       allow create: if isSignedIn();
-      allow get, list, update, delete: if isSignedIn() && request.auth.uid == resource.data.uid;
+      allow get,list: if true;
+      allow update, delete: if isSignedIn() && request.auth.uid == resource.data.uid;
 
       match /logins/{login} {
         allow read, write: if isSignedIn() && get(/databases/$(database)/documents/users/$(user)).data.uid == request.auth.uid;

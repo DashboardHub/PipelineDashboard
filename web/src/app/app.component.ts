@@ -74,6 +74,13 @@ export class AppComponent implements AfterViewInit {
     //   icon: 'privacy_page_icon',
     // },
   ];
+  public adminRoutes: Navigation[] = [
+    {
+      title: 'List users',
+      route: '/admin/users',
+      icon: 'stats_user_icon',
+    },
+  ];
   public version: string;
   public isSmallScreen: boolean;
   public menuTriger: boolean;
@@ -490,6 +497,13 @@ export class AppComponent implements AfterViewInit {
    */
   public isAuthenticated(): boolean {
     return this.authService.isAuthenticated;
+  }
+
+  /**
+   * Check if user is admin
+   */
+  public isAdmin(): boolean {
+    return this.authService.isAdmin;
   }
 
   /**
