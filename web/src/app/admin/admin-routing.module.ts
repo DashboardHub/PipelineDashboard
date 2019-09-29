@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-//DashboardHub components
+// DashboardHub components
 import { AdminGuard } from '@app/core/guards/admin.guard';
 import { AdminComponent } from './admin.component';
 

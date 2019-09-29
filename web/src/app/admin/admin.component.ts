@@ -11,7 +11,7 @@ import { UserModel } from '@shared/models/user.model';
 @Component({
   selector: 'dashboard-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
 
