@@ -2,9 +2,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-// Third party modules
-import { HttpClient } from '@angular/common/http';
-
 // Application models
 import { HelpModel, HelpTopic } from '@shared/models/index.model';
 
@@ -20,11 +17,9 @@ export class HelpDetailComponent implements OnInit {
 
   /**
    * Life cycle method
-   * @param http HttpClient instance
    * @param route ActivatedRoute instance
    */
   constructor(
-    private http: HttpClient,
     private route: ActivatedRoute
   ) { }
 
@@ -33,14 +28,11 @@ export class HelpDetailComponent implements OnInit {
    * Find the topics based upon the help path and display it in help detail component
    */
   ngOnInit(): void {
+    this.route.data.subscribe((data: string[]) => this.data.content = data[0]);
     const path: string = this.route.snapshot.paramMap.get('path');
     const topics: HelpTopic[] = this.data.topics;
-    this.http.get(`/assets/help/${path}.md`, { responseType: 'text' }).subscribe((content: string) => {
-      this.data.content = content;
-    });
-
-    const filteredTopic: HelpTopic =  topics.find((topic: HelpTopic) => topic.path === path);
-    this.data.icon  = filteredTopic.icon;
+    const filteredTopic: HelpTopic = topics.find((topic: HelpTopic) => topic.path === path);
+    this.data.icon = filteredTopic.icon;
     this.data.title = filteredTopic.title;
   }
 }

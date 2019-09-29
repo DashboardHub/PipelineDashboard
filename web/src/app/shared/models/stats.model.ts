@@ -1,5 +1,9 @@
+// Application models
 import { IModel, Model } from './model.model';
 
+/**
+ * Stats interface
+ */
 export interface IStats extends IModel {
   projects?: number;
   users?: number;
@@ -7,12 +11,19 @@ export interface IStats extends IModel {
   events?: number;
 }
 
+/**
+ * Stats model
+ */
 export class StatsModel extends Model<IStats> implements IStats {
   projects?: number;
   users?: number;
   pings?: number;
   events?: number;
 
+  /**
+   * Life cycle method
+   * @param data data to be initialized
+   */
   constructor(data?: IStats) {
     super();
     this.projects = data.projects ? data.projects : 0;
@@ -21,6 +32,9 @@ export class StatsModel extends Model<IStats> implements IStats {
     this.events = data.events ? data.events : 0;
   }
 
+  /**
+   * Method to convert model to data
+   */
   toData(): IStats {
     return  {
       projects: this.projects,

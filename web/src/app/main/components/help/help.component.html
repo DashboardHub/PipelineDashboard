@@ -19,7 +19,7 @@
     <mat-card-content class="help__card__content" fxLayout="column" fxLayoutGap="20px">
       <mat-divider></mat-divider>
       <mat-nav-list *ngFor="let help of filteredTopics">
-        <a [routerLink]="[help.path]">
+        <a [routerLink]="['/help', help.path]">
           <mat-icon class="help__card__content__icon" svgIcon="{{ help.icon }}"></mat-icon>
           <div fxLayout="column">
             <div class="help__card__content__title">{{ help.title }}</div>

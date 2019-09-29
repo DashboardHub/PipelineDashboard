@@ -28,6 +28,13 @@ export class ProjectsListComponent implements OnChanges {
 
   public isSmallScreen: boolean;
 
+  /**
+   * Life cycle method
+   * @param breakpointObserver BreakpointObserver
+   * @param authService AuthenticationService
+   * @param projectService ProjectService
+   * @param snackBar MatSnackBar
+   */
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthenticationService,
@@ -63,6 +70,10 @@ export class ProjectsListComponent implements OnChanges {
       });
   }
 
+  /**
+   * Check if project belongs to owner or not
+   * @param project ProjectModel
+   */
   isAdmin(project: ProjectModel): boolean {
     return project.isAdmin(this.authService.profile.uid);
   }
@@ -77,6 +88,10 @@ export class ProjectsListComponent implements OnChanges {
     }
   }
 
+  /**
+   * Check project type
+   * @param project ProjectModel
+   */
   public checkTypeOfProject(project: ProjectModel): string {
     if (project.type === 'private') {
       return 'private_icon';
@@ -85,6 +100,10 @@ export class ProjectsListComponent implements OnChanges {
     }
   }
 
+  /**
+   * Delete project by project uid
+   * @param projectUid uid of project
+   */
   public delete(projectUid: string): void {
     this.projectService
       .showDeleteDialog(projectUid)

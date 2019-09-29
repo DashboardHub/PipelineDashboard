@@ -46,3 +46,6 @@ Thumbs.db
 #cypress files
 test/videos
 test/screenshots
+
+#documentation
+documentation

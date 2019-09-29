@@ -19,12 +19,21 @@ import { ProjectService } from './project.service';
 })
 export class TokenService {
 
+  /**
+   * Life cycle method
+   * @param afs AngularFirestore
+   * @param projectService ProjectService
+   */
   constructor(
     private afs: AngularFirestore,
     private projectService: ProjectService
   ) { }
 
-  // This function returns the token details via id
+  /**
+   * Returns the token details via id
+   * @param projectUid uid of project
+   * @param tokenUid uid of token
+   */
   public findOneById(projectUid: string, tokenUid: string): Observable<TokenModel> {
     return this.projectService.findOneById(projectUid)
       .pipe(
@@ -32,7 +41,10 @@ export class TokenService {
       );
   }
 
-  // This function returns the tokens list
+  /**
+   * Find all the tokens list
+   * @param projectUid uid of project
+   */
   public findAll(projectUid: string): Observable<TokenModel[]> {
     return this.projectService.findOneById(projectUid)
       .pipe(
@@ -40,7 +52,11 @@ export class TokenService {
       );
   }
 
-  // This function create the project token
+  /**
+   * Create the project token and save it into db
+   * @param projectUid uid of project
+   * @param token token
+   */
   public save(projectUid: string, token: TokenModel): Observable<void> {
     return this.projectService.findOneById(projectUid)
       .pipe(
@@ -76,7 +92,11 @@ export class TokenService {
       );
   }
 
-  // This function delete the token via uid
+  /**
+   * Delete the token via project uid and token uid
+   * @param projectUid uid or project
+   * @param tokenUid uid of token
+   */
   public delete(projectUid: string, tokenUid: string): Observable<TokenModel[]> {
     return this.projectService.findOneById(projectUid)
       .pipe(

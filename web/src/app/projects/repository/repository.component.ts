@@ -1,12 +1,20 @@
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+// Core modules
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+
+// RXjs operators
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+
+// Breakpoint resolvers
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
 import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
+/**
+ * Repository component
+ */
 @Component({
   selector: 'dashboard-repository',
   templateUrl: './repository.component.html',
@@ -29,6 +37,12 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public repository: IRepository;
   public numberOfDisplayedUsers: number;
 
+  /**
+   * Life cycle method
+   * @param breakpointObserver BreakpointObserver
+   * @param repositoryService RepositoryService
+   * @param sortingService SortingService
+   */
   constructor(
     private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
@@ -43,6 +57,9 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.showWebHookAlert();
     this.repositorySubscription = this.repositoryService
@@ -113,21 +130,36 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Find contributors details
+   * @param contributor ContributorModel
+   */
   getMoreInformation(contributor: ContributorModel): string {
     return `${contributor.owner.username}` + ' \n ' + ` Total commits : ${contributor.total}`;
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.repositorySubscription
       .unsubscribe();
   }
 
+  /**
+   * Create webhook
+   */
   public createWebhook(): void {
     this.repositoryService.createGitWebhook(this.repository)
       .pipe(take(1))
       .subscribe();
   }
 
+  /**
+   * Reload repository when click on refresh button
+   * @param repository RepositoryModel
+   * @param event Event
+   */
   public reloadRepository(repository: RepositoryModel, event: Event): void {
     event.stopPropagation();
     this.manualReload = true;

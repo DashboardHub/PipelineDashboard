@@ -1,5 +1,9 @@
+// Core modules
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
+/**
+ * Markdown directive
+ */
 @Directive({
   selector: '[dashboardMarkdown]',
   exportAs: 'markdown',
@@ -12,10 +16,16 @@ export class MarkdownDirective implements OnChanges {
 
   @Input() dashboardMarkdown: string;
 
+  /**
+   * Life cycle method
+   */
   constructor(
     protected element: ElementRef
   ) { }
 
+  /**
+   * Life cycle on changes method
+   */
   ngOnChanges(): void {
     this.marked.setOptions({
       gfm: true,
@@ -33,6 +43,9 @@ export class MarkdownDirective implements OnChanges {
     }
   }
 
+  /**
+   * Render the HTML
+   */
   materialRender(): any {
 
     return {

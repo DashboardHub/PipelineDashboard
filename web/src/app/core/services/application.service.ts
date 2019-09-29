@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -9,18 +10,26 @@ import { map, switchMap } from 'rxjs/operators';
 import { IStats, StatsModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
+/**
+ * Application service
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class ApplicationService {
 
+  /**
+   * Life cycle method
+   * @param afs AngularFireStore
+   * @param activityService ActivityService
+   */
   constructor(
     private afs: AngularFirestore,
     private activityService: ActivityService
   ) { }
 
   /**
-   * Function to return the application stats
+   * Find the application stats
    */
   public getApplicationStats(): Observable<StatsModel> {
     return this.activityService

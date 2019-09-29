@@ -1,14 +1,21 @@
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
+// Core modules
 import { Component, OnInit } from '@angular/core';
 
+/**
+ * Ifeature interface
+ */
 export interface IFeature {
   icon: string;
   name: string;
   value: boolean | string;
 }
 
+/**
+ * Feature component
+ */
 @Component({
   selector: 'dashboard-features',
   templateUrl: './features.component.html',
@@ -194,9 +201,17 @@ export class FeaturesComponent implements OnInit {
   ];
   public isSmallScreen: boolean;
 
+  /**
+   * Life cycle method
+   * @param breakpointObserver
+   */
   constructor(
     private breakpointObserver: BreakpointObserver
   ) { }
+
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.breakpointObserver
       .observe([Breakpoints.XSmall, Breakpoints.Small])
@@ -210,6 +225,10 @@ export class FeaturesComponent implements OnInit {
 
   }
 
+  /**
+   * Check the pack value
+   * @param value
+   */
   public chekPackValue(value: any): boolean {
     if (typeof value === 'boolean') {
       return true;
@@ -217,6 +236,11 @@ export class FeaturesComponent implements OnInit {
 
     return false;
   }
+
+  /**
+   * Check the pack value for string
+   * @param value
+   */
   public chekPackValueForString(value: any): boolean {
     if (typeof value !== 'string') {
       return true;

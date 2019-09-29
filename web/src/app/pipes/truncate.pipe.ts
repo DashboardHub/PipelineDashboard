@@ -1,5 +1,9 @@
+// Core modules
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Truncate pipe
+ */
 @Pipe({ name: 'truncate' })
 export class TruncatePipe implements PipeTransform {
   transform(text: any, length: number): string {

@@ -1,4 +1,7 @@
+// Firestore model
 import { firestore } from 'firebase';
+
+// DashboardHub model
 import { UserModel } from './user.model';
 
 /**

@@ -1,3 +1,4 @@
+// Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,6 +12,9 @@ import { AuthenticationService, ProjectService } from '@core/services/index.serv
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
 import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
+/**
+ * Project View component
+ */
 @Component({
   selector: 'dashboard-projects-view',
   templateUrl: './view.component.html',
@@ -26,6 +30,14 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   public project: ProjectModel;
   public isMenuOpen: boolean;
 
+  /**
+   * Life cycle method
+   * @param route ActivatedRoute
+   * @param router Router
+   * @param dialog MatDialog
+   * @param projectService ProjectService
+   * @param authService AuthenticationService
+   */
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -36,6 +48,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((data: { project: ProjectModel }) => this.project = data.project);
   }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
@@ -53,7 +68,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       );
   }
 
-  // This function add  the repository
+  /**
+   * Add the repository when click on add from repository dialog
+   */
   addRepository(): void {
     this.dialog
       .open(DialogListComponent, {
@@ -74,6 +91,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /**
+   * Show the delete confirmation dialog and delete the project
+   */
   delete(): void {
     this.projectSubscription.unsubscribe();
     this.deleteSubscription = this.projectService
@@ -81,11 +101,16 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .subscribe(() => this.router.navigate(['/projects']));
   }
 
-  // This function check if logged in user is also owner of the project
+  /**
+   * Check if logged in user is also owner of the project
+   */
   public isAdmin(): boolean {
     return this.project.isAdmin(this.authService.profile.uid);
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
     if (this.deleteSubscription) {
