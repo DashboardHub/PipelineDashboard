@@ -1,5 +1,6 @@
 @import "../../../../assets/scss/variable";
 @import "../../../../assets/scss/mixin.scss";
+
 .profile {
   @include pageContainer;
 
@@ -44,46 +45,83 @@
         padding: 16px 16px;
       }
 
+      &__container {
+        max-height: 65vh;
+        overflow-y: auto;
+        margin: 2px;
+      }
+
       &__table {
         width: 100%;
         font-weight: lighter;
 
         &__title {
-          min-width: 15vh;
+          min-width: 15vw;
+
+          &__main {
+            padding-right: 5px;
+
+            &__event {
+              overflow-wrap: break-word;
+              margin-right: 10px;
+            }
+          }
         }
 
         &__icon {
-          min-width: 1vh;
+          min-width: 1vw;
         }
 
         @media (max-width: $breakpoint-md) {
           &__title {
-            @include ellipsisText;
             color: $dark-grey-color;
-            max-width: 40vw;
-            min-width: 0vh;
 
             &__main {
-              @include ellipsisText;
-              color: $dark-grey-3-color;
-              max-width: 40vw;
-              min-width: 0vh;
+
+              &__event {
+                overflow-wrap: break-word;
+                width: 40vw;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+
+        @media (max-width: 767px) {
+          &__title {
+            @include ellipsisText;
+            color: $dark-grey-color;
+            margin-right: 10px;
+
+            &__main {
+
+              &__title {
+                @include ellipsisText;
+                color: $dark-grey-3-color;
+                width: 40vw;
+              }
+
+              &__event {
+                @include ellipsisText;
+                width: 30vw;
+              }
             }
           }
         }
 
         @media (max-width: $breakpoint-xs) {
           &__title {
-            @include ellipsisText;
-            color: $dark-grey-color;
-            max-width: 70vw;
-            min-width: 0vh;
+            width: 80vw;
 
             &__main {
-              @include ellipsisText;
-              color: $dark-grey-3-color;
-              max-width: 70vw;
-              min-width: 0vh;
+
+              &__title {
+                width: 80vw;
+              }
+
+              &__event {
+                width: 80vw;
+              }
             }
           }
         }

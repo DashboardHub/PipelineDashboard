@@ -102,6 +102,15 @@
           font-weight: bold;
           padding-right: 5px;
         }
+
+        &__url {
+          @include ellipsisText;
+          width: 20vw;
+
+          @media (max-width: $breakpoint-md) {
+            width: 50vw;
+          }
+        }
       }
     }
 

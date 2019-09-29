@@ -108,6 +108,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.headerHeight = 100;
+          this.numberOfDisplayedUsers = 8;
           this.isLargeScreen = false;
         }
       });
@@ -115,7 +116,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.numberOfDisplayedUsers = 4;
+          this.numberOfDisplayedUsers = 3;
           this.headerHeight = 100;
         }
       });
@@ -124,7 +125,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.headerHeight = 100;
-          this.numberOfDisplayedUsers = 4;
+          this.numberOfDisplayedUsers = 2;
         }
       });
   }

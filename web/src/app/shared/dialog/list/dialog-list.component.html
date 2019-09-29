@@ -9,9 +9,10 @@
       </div>
     </div>
     <div>
-      <div mat-subheader *ngIf="data.repositories.lastUpdated">
+      <div *ngIf="data.repositories.lastUpdated">
         <div class="dialog__header__update">
-          Last updated {{ data.repositories.lastUpdated.toDate() | timeAgo }}
+          <span fxHide.xs>Last updated</span>
+          {{ data.repositories.lastUpdated.toDate() | timeAgo }}
         </div>
       </div>
     </div>

@@ -56,7 +56,7 @@ export class ProjectsListComponent implements OnChanges {
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.displayedColumns = ['type', 'title', 'url', 'repository', 'monitors', 'pings'];
+          this.displayedColumns = ['type', 'title', 'url', 'repository'];
           this.isSmallScreen = false;
         }
       });
