@@ -17,6 +17,7 @@ export class PullRequestModel {
   assigned: UserModel;
   requestedReviewers: UserModel;
   description: string = '';
+  statusesUrl: string = '';
   createdOn: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
 }

@@ -174,6 +174,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
       owner: GitHubUserMapper.import(this.pull_request.user),
       assignees: this.pull_request.assignees.map((assignee: User) => GitHubUserMapper.import(assignee)),
       reviewers: this.pull_request.requested_reviewers.map((reviewer: User) => GitHubUserMapper.import(reviewer)),
+      statusesUrl: this.pull_request.statuses_url,
       createdOn: firestore.Timestamp.fromDate(new Date(this.pull_request.created_at)),
       updatedOn: firestore.Timestamp.fromDate(new Date(this.pull_request.updated_at)),
     }

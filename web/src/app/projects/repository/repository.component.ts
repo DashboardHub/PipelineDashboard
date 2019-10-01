@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // Dashboard hub model and services
-import { RepositoryService, SortingService } from '@core/services/index.service';
+import { HttpService, RepositoryService, SortingService } from '@core/services/index.service';
 import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 /**
@@ -46,7 +46,8 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
-    private sortingService: SortingService
+    private sortingService: SortingService,
+    private httpService: HttpService
   ) {
     if (breakpointObserver.isMatched(Breakpoints.Large || Breakpoints.XLarge)) {
       this.isLargeScreen = true;
@@ -76,6 +77,14 @@ export class RepositoryComponent implements OnInit, OnDestroy {
           this.sortingService.sortListByNumber<ContributorModel>(this.repository.contributors, 'total');
         }
         if (this.repository && this.repository.pullRequests.length > 0) {
+          const pullRequests: PullRequestModel = new PullRequestModel();
+          this.httpService.get(pullRequests.statusesUrl)
+            .subscribe((content: string) => {
+              if (!content.includes('<')) {
+                this.repository.pullRequests.
+                  map((element: PullRequestModel) => element.state = JSON.parse(content)[0].state);
+              }
+            });
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
         if (this.isLargeScreen) {
