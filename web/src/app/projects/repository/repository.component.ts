@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // Dashboard hub model and services
-import { HttpService, RepositoryService, SortingService } from '@core/services/index.service';
+import { RepositoryService, SortingService } from '@core/services/index.service';
 import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
 /**
@@ -46,8 +46,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
-    private sortingService: SortingService,
-    private httpService: HttpService
+    private sortingService: SortingService
   ) {
     if (breakpointObserver.isMatched(Breakpoints.Large || Breakpoints.XLarge)) {
       this.isLargeScreen = true;
@@ -78,7 +77,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
         }
         if (this.repository && this.repository.pullRequests.length > 0) {
           const pullRequests: PullRequestModel = new PullRequestModel();
-          this.httpService.get(pullRequests.statusesUrl)
+          this.repositoryService.getStatusesUrlResponse(pullRequests.statusesUrl)
             .subscribe((content: string) => {
               if (!content.includes('<')) {
                 this.repository.pullRequests.

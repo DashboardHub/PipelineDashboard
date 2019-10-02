@@ -1,4 +1,5 @@
 // Core modules
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -30,7 +31,8 @@ export class RepositoryService {
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
     private authService: AuthenticationService,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private httpClient: HttpClient
   ) { }
 
   /**
@@ -82,5 +84,13 @@ export class RepositoryService {
     const callable: any = this.fns.httpsCallable('deleteGitWebhookRepository');
 
     return of(new RepositoryModel(callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken })));
+  }
+
+  /**
+   * Finds the response of pull request if its success | failure | pending
+   * @param uri string
+   */
+  public getStatusesUrlResponse(uri: string): any {
+    return this.httpClient.get(uri, { responseType: 'text' });
   }
 }
