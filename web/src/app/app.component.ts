@@ -445,6 +445,14 @@ export class AppComponent implements AfterViewInit {
       'header_notificarion_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/notification-header.svg')
     );
+    this._iconRegistry.addSvgIcon(
+      'follow_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-follow.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'unfollow_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-unfollow.svg')
+    );
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',
         this._domSanitizer

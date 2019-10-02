@@ -49,6 +49,12 @@
         <div class="project-body__header__content__item__pings" fxLayout="row" fxLayoutGap="5px">
           <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
         </div>
+        <div *ngIf= "!isFollower" (click)="incrementFollowers()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="follow_icon"></mat-icon><span>{{ project.followers }} | Follow </span>
+        </div>
+        <div *ngIf= "isFollower" (click)="decrementFollowers()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="unfollow_icon"></mat-icon><span>{{ project.followers }} | Unfollow </span>
+        </div>
       </ng-template>
     </div>
 

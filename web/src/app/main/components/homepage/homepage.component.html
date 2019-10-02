@@ -46,7 +46,7 @@
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef>Description </th>
             <td mat-cell *matCellDef="let element" class="home__users-card__content__table__description">
-              <div class="home__users-card__content__table__description" *ngIf="element.github.activity.latest">
+              <div class="home__users-card__content__table__description" *ngIf="element.github.activity.latest && element.github.activity.latest.repository">
                 {{ element.github.activity.latest.type }} on {{ element.github.activity.latest.repository.fullName }} at {{ element.lastUpdated.toDate() | timeAgo }}
               </div>
             </td>

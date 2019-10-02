@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 
 // DashboardHub
-import { AuthenticationService, ProjectService } from '@core/services/index.service';
+import { AuthenticationService, ProjectService, UserService } from '@core/services/index.service';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
 import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
@@ -29,6 +29,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   public typeIcon: string;
   public project: ProjectModel;
   public isMenuOpen: boolean;
+  public isFollower: boolean = false;
 
   /**
    * Life cycle method
@@ -43,7 +44,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private projectService: ProjectService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {
     this.route.data.subscribe((data: { project: ProjectModel }) => this.project = data.project);
   }
@@ -56,6 +58,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .findOneById(this.route.snapshot.params.projectUid)
       .subscribe((project: ProjectModel) => {
         this.project = project;
+        this.setFollower();
         if (!this.project.logoUrl) {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }
@@ -92,6 +95,31 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Increase the followers count by 1 and update the followings in the users collection
+   */
+  incrementFollowers(): void {
+    this.projectService.updateFollowers(this.project.uid, 1).subscribe();
+    this.userService.updateFollowings(this.authService.profile.uid, this.project.uid, true).
+      pipe(
+        tap(() => this.setFollower())
+    )
+    .subscribe();
+    this.setFollower();
+  }
+
+  /**
+   * Decrease the followers count by 1 and update the followings in the users collection
+   */
+  decrementFollowers(): void {
+    this.projectService.updateFollowers(this.project.uid, -1).subscribe();
+    this.userService.updateFollowings(this.authService.profile.uid, this.project.uid, false).
+      pipe(
+        tap(() => this.setFollower())
+    )
+    .subscribe();
+  }
+
+  /**
    * Show the delete confirmation dialog and delete the project
    */
   delete(): void {
@@ -106,6 +134,17 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
    */
   public isAdmin(): boolean {
     return this.project.isAdmin(this.authService.profile.uid);
+  }
+
+  /**
+   * Set the followers flag true if user uid is present in the database else set false
+   */
+  public setFollower(): void {
+    if (this.authService.profile.following.includes(this.project.uid)) {
+      this.isFollower = true;
+    } else {
+      this.isFollower = false;
+    }
   }
 
   /**

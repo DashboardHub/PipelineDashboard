@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
+import { firestore } from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
 import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 
@@ -241,6 +242,27 @@ export class ProjectService {
           )
           .valueChanges()),
         map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
+      );
+  }
+
+  /**
+   * Update the followers count in project collection
+   * @param projectUid string
+   * @param counter string
+   */
+  public updateFollowers(projectUid: string, counter: number): Observable<void> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<IProject>('projects')
+          .doc<IProject>(projectUid)
+          .set(
+            {
+              followers: firestore.FieldValue.increment(counter),
+            },
+            { merge: true })),
+        take(1)
       );
   }
 }

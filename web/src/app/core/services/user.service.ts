@@ -1,10 +1,11 @@
 // Core modules
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 // Firestore modules
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 // Dashboard hub model and services
 import { UserModel, UserStatsModel } from '@shared/models/index.model';
@@ -56,6 +57,28 @@ export class UserService {
       .start()
       .pipe(
         switchMap(() => this.afs.doc<UserModel>(`userStats/${userId}`).valueChanges())
+      );
+  }
+
+  /**
+   * Update the following array inside users collection based upon the update flag
+   * @param userUid string
+   * @param projectUid string
+   * @param isUpdate flag if user uid has to remove or array in following array
+   */
+  public updateFollowings(userUid: string, projectUid: string, isUpdate: boolean): Observable<void> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<UserModel>('users')
+          .doc<any>(userUid)
+          .set(
+            {
+              following: isUpdate ? firebase.firestore.FieldValue.arrayUnion(projectUid) : firebase.firestore.FieldValue.arrayRemove(projectUid),
+            },
+            { merge: true })),
+        take(1)
       );
   }
 }

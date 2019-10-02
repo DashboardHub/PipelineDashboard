@@ -32,4 +32,5 @@ export class ProfileModel {
   logins?: LoginAuditModel[] = [];
   repositories?: RepositoriesModel = new RepositoriesModel();
   activity?: ActivityModel[] = [];
+  following?: string[];
 }
