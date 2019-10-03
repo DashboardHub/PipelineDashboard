@@ -1,4 +1,9 @@
+// Application model
 import { ActivityModel } from './activity.model';
+
+/**
+ * User stats model
+ */
 export class UserStatsModel {
   name: string;
   username: string;

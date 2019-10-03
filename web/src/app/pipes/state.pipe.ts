@@ -1,3 +1,4 @@
+// Core modules
 import { Pipe, PipeTransform } from '@angular/core';
 
 export enum StateData {
@@ -9,6 +10,9 @@ export enum StateData {
   failDeploy = 'Deployed Failed',
 }
 
+/**
+ * State Pipe
+ */
 @Pipe({ name: 'releaseState' })
 export class ReleaseStatePipe implements PipeTransform {
   transform(state: string): string {

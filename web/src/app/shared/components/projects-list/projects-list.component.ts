@@ -1,11 +1,12 @@
-import { AuthenticationService } from '@app/core/services/authentication.service';
 
-// Breakpoints components
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 // Core components
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 
 // Dashboard hub model
+import { AuthenticationService } from '@app/core/services/authentication.service';
+import { ProjectService } from '@core/services/index.service';
 import { ProjectModel } from '../../models/index.model';
 
 /**
@@ -27,9 +28,18 @@ export class ProjectsListComponent implements OnChanges {
 
   public isSmallScreen: boolean;
 
+  /**
+   * Life cycle method
+   * @param breakpointObserver BreakpointObserver
+   * @param authService AuthenticationService
+   * @param projectService ProjectService
+   * @param snackBar MatSnackBar
+   */
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private projectService: ProjectService,
+    private snackBar: MatSnackBar
   ) {
     this.breakpointObserver
       .observe([Breakpoints.Medium])
@@ -46,7 +56,7 @@ export class ProjectsListComponent implements OnChanges {
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.displayedColumns = ['type', 'title', 'url', 'repository', 'monitors', 'pings'];
+          this.displayedColumns = ['type', 'title', 'url', 'repository'];
           this.isSmallScreen = false;
         }
       });
@@ -60,6 +70,10 @@ export class ProjectsListComponent implements OnChanges {
       });
   }
 
+  /**
+   * Check if project belongs to owner or not
+   * @param project ProjectModel
+   */
   isAdmin(project: ProjectModel): boolean {
     return project.isAdmin(this.authService.profile.uid);
   }
@@ -74,11 +88,25 @@ export class ProjectsListComponent implements OnChanges {
     }
   }
 
+  /**
+   * Check project type
+   * @param project ProjectModel
+   */
   public checkTypeOfProject(project: ProjectModel): string {
     if (project.type === 'private') {
       return 'private_icon';
     } else if (project.type === 'public') {
       return 'public_icon';
     }
+  }
+
+  /**
+   * Delete project by project uid
+   * @param projectUid uid of project
+   */
+  public delete(projectUid: string): void {
+    this.projectService
+      .showDeleteDialog(projectUid)
+      .subscribe(() => this.snackBar.open('Project deleted successfully', undefined, { duration: 5000 }));
   }
 }

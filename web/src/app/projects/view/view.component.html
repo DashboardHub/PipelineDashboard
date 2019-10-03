@@ -16,7 +16,7 @@
           </span>
         </mat-menu>
         <mat-icon svgIcon="{{ typeIcon }}"></mat-icon>
-        <span class="project-body__header__content__name">{{ project.title }}</span>
+        <span class="project-body__header__content__name" [ngClass]="{'project-body__header__content__name__long': !isAdmin()}">{{ project.title }}</span>
       </div>
       <div class="project-body__header__content information">
         <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start" *ngIf="isAdmin()">
@@ -51,7 +51,27 @@
         </div>
       </ng-template>
     </div>
+
+    <div class="helper" *ngIf="project.monitors.length === 0">
+      <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <span>
+          <mat-icon svgIcon="warning_icon"></mat-icon>
+        </span>
+        <span>You do not have any monitors. Please <a [routerLink]="['/projects', project.uid, 'monitors', 'create']">create</a> monitor</span>
+      </mat-card>
+    </div>
+
+    <div class="helper" *ngIf="project.repositories.length === 0">
+      <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <span>
+          <mat-icon svgIcon="warning_icon"></mat-icon>
+        </span>
+        <span>You do not have any repositories. Please <a (click)="addRepository()">connect</a> repository</span>
+      </mat-card>
+    </div>
+
     <dashboard-monitor-summary *ngIf="isAdmin()" [monitors]="project.monitors || []"></dashboard-monitor-summary>
+
     <div class="repository" *ngFor="let uid of project.repositories">
       <dashboard-repository [uid]="uid" [isAdmin]="isAdmin()"></dashboard-repository>
     </div>

@@ -1,10 +1,10 @@
 <div class="repository__problem" *ngIf="isAdmin && isAlertEnabled && repository.fullName !== '' && (repository.webhook == null || repository.webhook.id == null)">
   <mat-card class="repository__problem__card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
-    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-      <span>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
+      <div>
         <mat-icon svgIcon="warning_icon"></mat-icon>
-      </span>
-      <span>Webhook not found on this repository. This is required for realtime data.</span>
+      </div>
+      <div>Webhook not found on this repository. This is required for realtime data.</div>
     </div>
     <span>
       <button class="btn-action" mat-stroked-button (click)="createWebhook()">
@@ -13,13 +13,13 @@
     </span>
   </mat-card>
 </div>
-<mat-accordion class="repository">
+<mat-accordion class="repository" *ngIf="repository">
   <mat-expansion-panel hideToggle #expansion [expanded]="true">
     <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'"
       fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
       <div fxLayout="column" class="repository__container">
         <div fxLayout="row">
-            <mat-progress-bar matTooltipPosition="above" matTooltip="Rating: {{ rating | number:'1.0-2' }}%" mode="determinate" [value]="rating"></mat-progress-bar>
+            <mat-progress-bar [routerLink]="['rating', repository.uid]" matTooltipPosition="above" matTooltip="Rating: {{ repository.calculateRating() | number:'1.0-2' }}%" mode="determinate" [value]="repository.calculateRating()"></mat-progress-bar>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-lg="column" class="header-container">
           <div class="repository__container__info">
@@ -30,10 +30,8 @@
               <div class="repository__header__panel__name">
                 {{ repository.fullName }}
               </div>
-              <div class="repository__header__panel__description">
-                <span *ngIf="repository.description; else emptyData">
-                  {{ repository.description }}
-                </span>
+              <div>
+                <div *ngIf="repository.description; else emptyData" class="repository__header__panel__description">{{ repository.description }}</div>
               </div>
             </div>
           </div>

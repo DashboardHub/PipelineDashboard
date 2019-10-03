@@ -1,0 +1,12 @@
+<mat-card class="help-detail">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon svgIcon="{{ data.icon }}"></mat-icon> {{ data.title }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div [dashboardMarkdown]="data.content"></div>
+  </mat-card-content>
+  <mat-divider></mat-divider>
+</mat-card>

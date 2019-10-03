@@ -1,7 +1,13 @@
+// Firestore module
 import { firestore } from 'firebase';
+
+// Application model
 import { RepositoryModel } from './repository.model';
 import { UserModel } from './user.model';
 
+/**
+ * Event model
+ */
 export class EventModel {
   uid: string;
   type: string;

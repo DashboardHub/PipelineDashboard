@@ -1,6 +1,7 @@
 @import "~@angular/material/theming";
 @import "../assets/scss/variable";
 @import "../assets/scss/mixin.scss";
+
 .sidenav-container {
   height: 100%;
   background-color: #eaeaea;
@@ -14,7 +15,7 @@
 
   &__open {
     transition-duration: 0.5s;
-    width: 265px;
+    width: 235px;
   }
 
   .heading {
@@ -94,6 +95,7 @@
       border-radius: 50%;
       border: 1px solid $orange-2-color;
       cursor: pointer;
+      margin-right: 5px !important;
 
       &__icon {
         width: 40px;
@@ -101,18 +103,21 @@
         background: $orange-2-color;
         border: 1px solid $orange-2-color;
         border-radius: 50%;
+        margin-right: 5px !important;
       }
     }
 
     &__icon {
       cursor: pointer;
       transform: scale(0.8);
+      margin-right: 5px !important;
     }
 
     &__menu-icon {
       cursor: pointer;
       color: $dark-grey-color;
       transform: scale(1.2);
+      margin-right: 5px !important;
     }
 
     &__button {
@@ -124,6 +129,7 @@
 
 .content-container {
   min-height: calc(100% - 128px);
+  overflow-x: hidden;
 
   @media ($mat-xsmall) {
     min-height: calc(100% - 112px);
@@ -135,7 +141,7 @@
 
   @media (min-width: $breakpoint-xs) {
 
-    margin-left: 265px !important;
+    margin-left: 235px !important;
     transition-duration: 0.5s;
 
   }
@@ -149,5 +155,16 @@
     transition-duration: 0.5s;
 
 
+  }
+}
+
+.footer {
+  &__copyright {
+    text-align: center;
+    white-space: pre-wrap;
+    
+    @media (max-width: $breakpoint-sm) {
+      padding: 10px 0;
+    }
   }
 }

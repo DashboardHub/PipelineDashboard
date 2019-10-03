@@ -1,3 +1,11 @@
+<div *ngIf="projects.length === 0">
+  <mat-card fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <span>
+      <mat-icon svgIcon="warning_icon"></mat-icon>
+    </span>
+    <span>You do not have any project. Please <a [routerLink]="['/projects', 'create']">create</a> project</span>
+  </mat-card>
+</div>
 <div class="project">
   <table mat-table [dataSource]="projects" class="project__list">
     <ng-container matColumnDef="type">
@@ -9,8 +17,8 @@
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>Title</th>
       <td mat-cell *matCellDef="let element">
-        <div fxLayout.xs="column" fxLayoutAlign="start start">
-          <div> <a [routerLink]="['/projects', element.uid]">{{ element.title }}</a></div>
+        <div fxLayout.xs="column" fxLayoutAlign="start start" class="project__list__title">
+          <div><a [routerLink]="['/projects', element.uid]" class="project__list__title">{{ element.title }}</a></div>
           <div *ngIf="isSmallScreen">
             {{ (element.access.admin[0] | user | async)?.username }}
           </div>
@@ -23,7 +31,11 @@
     </ng-container>
     <ng-container matColumnDef="url">
       <th mat-header-cell *matHeaderCellDef>Url</th>
-      <td mat-cell *matCellDef="let element"><a href="{{ element.url }}" *ngIf="element.url">{{ element.url }}</a></td>
+      <td mat-cell *matCellDef="let element" class="project__list__url">
+        <div class="project__list__url__content">
+          <a href="{{ element.url }}" *ngIf="element.url">{{ element.url }}</a>
+        </div>
+      </td>
     </ng-container>
     <ng-container matColumnDef="repository">
       <th mat-header-cell *matHeaderCellDef>Repository</th>
@@ -74,7 +86,7 @@
               <button [routerLink]="['/projects', element.uid, 'edit']" mat-menu-item>
                 <mat-icon svgIcon="edit_icon"></mat-icon>Edit
               </button>
-              <button (click)="delete()" mat-menu-item>
+              <button (click)="delete(element.uid)" mat-menu-item>
                 <mat-icon svgIcon="delete_icon"></mat-icon>Delete
               </button>
             </mat-menu>

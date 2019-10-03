@@ -14,11 +14,20 @@ import { map, switchMap, take, tap } from 'rxjs/operators';
 import { IMonitor, IProject, ModelFactory, MonitorModel, ProjectModel } from '@shared/models/index.model';
 import { ProjectService } from './project.service';
 
+/**
+ * Monitor service
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class MonitorService {
 
+  /**
+   * Life cycle method
+   * @param afs AngularFirestore
+   * @param fns AngularFireFunctions
+   * @param projectService ProjectService
+   */
   constructor(
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
@@ -27,11 +36,10 @@ export class MonitorService {
   }
 
   /**
-   * This function is used to save monitors in the database
+   * Save monitors in the database and send automatic ping
    *
    * @param projectUid uid of project
    * @param monitor monitor to save
-   * @returns the observable
    */
   public save(projectUid: string, monitor: MonitorModel): Observable<void> {
     return this.projectService.findOneById(projectUid)
@@ -46,6 +54,7 @@ export class MonitorService {
               if (monitorModel.uid === monitor.uid) {
                 return new MonitorModel({ ...monitorModel.toData(), ...monitor.toData(true) });
               }
+
               return monitorModel;
             });
           }
@@ -64,6 +73,11 @@ export class MonitorService {
       );
   }
 
+  /**
+   * Delete the monitor from project
+   * @param projectUid uid of project
+   * @param monitorUid uid of monitor to be deleted
+   */
   public delete(projectUid: string, monitorUid: string): Observable<void> {
     return this.projectService.findOneById(projectUid)
       .pipe(
@@ -81,13 +95,26 @@ export class MonitorService {
       );
   }
 
+  /**
+   * Call cloud function for deleting pings by monitor
+   * @param projectUid uid of project
+   * @param monitorUid uid of monitor
+   */
   public deletePingsByMonitor(projectUid: string, monitorUid: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('deletePingsByMonitor');
+
     return callable({ projectUid, monitorUid });
   }
 
+  /**
+   * Send monitor ping manually using cloud function
+   * @param projectUid uid of project
+   * @param monitorUid uid of monitor
+   * @param type project type
+   */
   public pingMonitor(projectUid: string, monitorUid: string, type: string): Observable<boolean> {
     const callable: any = this.fns.httpsCallable('pingMonitor');
+
     return callable({ projectUid, monitorUid, type });
   }
 }

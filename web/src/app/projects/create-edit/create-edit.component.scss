@@ -33,6 +33,10 @@
       &__type {
         padding-top: 20px;
 
+        &__title {
+          color: $dark-grey-2-color;
+        }
+
         @media (max-width: $breakpoint-xs) {
           &__title {
             display: none;

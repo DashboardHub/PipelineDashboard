@@ -18,7 +18,7 @@ export class MonitorSummaryComponent implements OnChanges {
   public monitors: MonitorModel[] = [];
 
   /**
-   * This function for filtering the monitors based upon the valid and invalid status
+   * Filter the monitors based upon the valid and invalid status
    * @param isValid isValid ping or not
    */
   public filterBy(isValid: boolean): MonitorModel[] {
@@ -29,6 +29,10 @@ export class MonitorSummaryComponent implements OnChanges {
     });
   }
 
+  /**
+   * Life cycle changes method
+   * @param changes SimpleChanges
+   */
   ngOnChanges(changes: SimpleChanges): void {
     this.monitors = changes.monitors.currentValue;
   }

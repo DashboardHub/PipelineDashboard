@@ -20,6 +20,10 @@
       font-size: 18px;
       font-weight: lighter;
       color: $dark-grey-3-color;
+
+      @media (max-width: $breakpoint-xs) {
+        text-align: center;
+      }
     }
 
     @media (max-width: $breakpoint-xs) {
@@ -172,9 +176,13 @@
       text-align: left;
       font-size: 0.9rem;
       font-weight: lighter;
-      letter-spacing: 0.18px;
       color: $dark-grey-color;
-      @include ellipsisText;
+      max-width: 90%;
+
+      @media (max-width: $breakpoint-lg) {
+        @include ellipsisText;
+
+      }
     }
 
     &__contributors {
@@ -196,6 +204,7 @@
         @media (max-width: $breakpoint-lg) {
           min-width: 32px;
           padding: 4px;
+          margin-bottom: 10px;
         }
       }
 
@@ -215,6 +224,10 @@
         width: 32px;
         height: 32px;
         border-radius: 50%;
+
+        @media (max-width: $breakpoint-lg) {
+          margin-bottom: 5px;
+        }
       }
 
       &__container {
@@ -225,6 +238,10 @@
           color: $dark-grey-color;
           font-size: 16pt;
           padding-left: 5px;
+
+          @media (max-width: $breakpoint-lg) {
+            margin-bottom: 5px;
+          }
         }
       }
     }

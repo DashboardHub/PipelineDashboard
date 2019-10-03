@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 
@@ -15,20 +16,32 @@ import { IProject, ProjectModel } from '@shared/models/index.model';
 })
 export class ViewProjectResolver implements Resolve<IProject> {
 
+  /**
+   * Life cycle method
+   * @param fns AngularFireFunctions
+   * @param projectService ProjectService
+   * @param router Router
+   */
   constructor(
     private fns: AngularFireFunctions,
     private projectService: ProjectService,
     private router: Router
   ) { }
 
+  /**
+   * Find all project data before showing projects page
+   * @param route ActivatedRouteSnapshot
+   */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     const callable: any = this.fns.httpsCallable('updateProjectViews');
+
     return this.projectService.findOneById(route.params.projectUid)
       .pipe(
         take(1),
         tap(() => callable({ projectUid: route.params.projectUid })),
         catchError(() => {
           this.router.navigate(['/']);
+
           return of(new ProjectModel({ uid: 'error' }));
         })
       );

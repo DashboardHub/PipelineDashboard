@@ -1,0 +1,23 @@
+<div class="rating-container">
+  <div fxLayout="row">
+    <div fxFlex="100%">
+      <h1>{{ repository.fullName }}</h1>
+      <p>Rating Statistics</p>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between" *ngFor="let rating of repository.getRatings()">
+        <mat-card fxFlex="100%" class="rating-container__card">
+          <mat-card-header>
+            <div mat-card-avatar>
+              <mat-icon svgIcon="release_icon"></mat-icon>
+            </div>
+            <mat-card-title>{{ rating.name }} ({{ rating.value | number:'1.0-2' }}%)</mat-card-title>
+            <mat-card-subtitle>{{ rating.description }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-progress-bar mode="determinate" [value]="rating.value"></mat-progress-bar>
+
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

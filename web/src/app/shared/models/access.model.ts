@@ -1,14 +1,25 @@
+// Applicatoin model
 import { IModel, Model } from './model.model';
 
+/**
+ * Access interface
+ */
 export interface IAccess extends IModel {
   admin: string[];
   readonly?: string[];
 }
 
+/**
+ * Access model
+ */
 export class AccessModel extends Model<IAccess> implements IAccess {
   admin: string[];
   readonly?: string[];
 
+  /**
+   * Life cycle method
+   * @param access IAccess
+   */
   constructor(access?: IAccess) {
     super();
     this.admin = access && access.admin ? access.admin : [];

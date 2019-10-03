@@ -1,12 +1,20 @@
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+// Core modules
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+
+// RXjs operators
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
+// Breakpoint resolvers
+import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
-import { ContributorModel, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
+import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
 
+/**
+ * Repository component
+ */
 @Component({
   selector: 'dashboard-repository',
   templateUrl: './repository.component.html',
@@ -18,7 +26,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public headerHeight: number;
   public isLargeScreen: boolean;
   public isAlertEnabled: boolean = false;
-  public rating: number;
 
   @Input()
   public isAdmin: boolean = false;
@@ -27,9 +34,15 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   public uid: string;
 
   public manualReload: boolean = false;
-  public repository: RepositoryModel = new RepositoryModel('');
+  public repository: IRepository;
   public numberOfDisplayedUsers: number;
 
+  /**
+   * Life cycle method
+   * @param breakpointObserver BreakpointObserver
+   * @param repositoryService RepositoryService
+   * @param sortingService SortingService
+   */
   constructor(
     private breakpointObserver: BreakpointObserver,
     private repositoryService: RepositoryService,
@@ -44,13 +57,15 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Life cycle init method
+   */
   ngOnInit(): void {
     this.showWebHookAlert();
     this.repositorySubscription = this.repositoryService
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        this.calculateRating();
         if (this.repository && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
@@ -93,6 +108,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.headerHeight = 100;
+          this.numberOfDisplayedUsers = 8;
           this.isLargeScreen = false;
         }
       });
@@ -100,7 +116,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .observe([Breakpoints.Small])
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
-          this.numberOfDisplayedUsers = 4;
+          this.numberOfDisplayedUsers = 3;
           this.headerHeight = 100;
         }
       });
@@ -109,35 +125,46 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.headerHeight = 100;
-          this.numberOfDisplayedUsers = 4;
+          this.numberOfDisplayedUsers = 2;
         }
       });
   }
 
+  /**
+   * Find contributors details
+   * @param contributor ContributorModel
+   */
   getMoreInformation(contributor: ContributorModel): string {
     return `${contributor.owner.username}` + ' \n ' + ` Total commits : ${contributor.total}`;
   }
 
+  /**
+   * Life cycle destroy method
+   */
   ngOnDestroy(): void {
     this.repositorySubscription
       .unsubscribe();
   }
 
+  /**
+   * Create webhook
+   */
   public createWebhook(): void {
     this.repositoryService.createGitWebhook(this.repository)
       .pipe(take(1))
       .subscribe();
   }
 
+  /**
+   * Reload repository when click on refresh button
+   * @param repository RepositoryModel
+   * @param event Event
+   */
   public reloadRepository(repository: RepositoryModel, event: Event): void {
     event.stopPropagation();
     this.manualReload = true;
     this.repositoryService.loadRepository(repository)
       .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
-  }
-
-  public calculateRating(): void {
-    this.rating = this.repositoryService.getRating(this.repository);
   }
 
   private showWebHookAlert(): void {

@@ -1,11 +1,15 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
-import { map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
+
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
+import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
 import { IProject, ProjectModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
@@ -16,15 +20,27 @@ import { RepositoryService } from './repository.service';
 })
 export class ProjectService {
 
+  /**
+   * Life cycle method
+   * @param afs AngularFirestore
+   * @param authService AuthenticationService
+   * @param activityService ActivityService
+   * @param dialog MatDialog
+   * @param repositoryService RepositoryService
+   */
   constructor(
     private afs: AngularFirestore,
     private authService: AuthenticationService,
     private activityService: ActivityService,
+    private dialog: MatDialog,
     private repositoryService: RepositoryService
   ) {
   }
 
-  // This function is for creating the project for logged in user
+  /**
+   * Save the new project for logged in user
+   * @param data project data to be saved in db
+   */
   public create(data: IProject): Observable<ProjectModel> {
     const project: ProjectModel = new ProjectModel(
       {
@@ -46,7 +62,33 @@ export class ProjectService {
       );
   }
 
-  // This function delete the project via uid
+  /**
+   * Show the delete confirmation dialog when click on the delete project
+   * @param projectUid uid of project to be deleted
+   */
+  public showDeleteDialog(projectUid: string): Observable<void> {
+    let dialogConfig: MatDialogConfig = new MatDialogConfig();
+    dialogConfig = {
+      width: '500px',
+      data: {
+        title: 'Delete Project',
+        content: 'Are you sure you want to delete?',
+      },
+    };
+
+    return this.dialog
+      .open(DialogConfirmationComponent, dialogConfig)
+      .afterClosed()
+      .pipe(
+        filter((result: boolean) => !!result),
+        switchMap(() => this.delete(projectUid))
+      );
+  }
+
+  /**
+   * Delete the project using project uid
+   * @param uid uid of project to be deleted
+   */
   public delete(uid: string): Observable<void> {
     return this.activityService
       .start()
@@ -56,7 +98,9 @@ export class ProjectService {
       );
   }
 
-  // This function returns the public projects list
+  /**
+   * Find top 10 public projects list
+   */
   public findPublicProjects(): Observable<ProjectModel[]> {
     return this.activityService
       .start()
@@ -72,7 +116,9 @@ export class ProjectService {
       );
   }
 
-  // This function returns the private projects list
+  /**
+   * Find all private projects list
+   */
   public findMyProjects(): Observable<ProjectModel[]> {
     return this.activityService
       .start()
@@ -88,7 +134,10 @@ export class ProjectService {
       );
   }
 
-  // This function returns the project details via id
+  /**
+   * Find the project details via id
+   * @param uid uid of project
+   */
   public findOneById(uid: string): Observable<ProjectModel> {
     return this.activityService
       .start()
@@ -98,7 +147,10 @@ export class ProjectService {
       );
   }
 
-  // This function update the project details
+  /**
+   * Update the project details
+   * @param data project data to be updated
+   */
   public save(data: IProject): Observable<void> {
     return this.findOneById(data.uid)
       .pipe(
@@ -115,8 +167,12 @@ export class ProjectService {
       );
   }
 
-  // This function add the repository in any project
-  // @TODO: move to repository service
+  /**
+   * Add the repository in any project
+   * @TODO: move to repository service
+   * @param project project in which repository is added
+   * @param repositories repositories to be added
+   */
   public saveRepositories(project: ProjectModel, repositories: RepositoryModel[]): Observable<void> {
     // remove webhook from unselected repo
     if (project.repositories && project.repositories.length > 0) {
@@ -168,6 +224,9 @@ export class ProjectService {
       );
   }
 
+  /**
+   * Find top 4 popular projects by views
+   */
   public getPopularProjects(): Observable<ProjectModel[]> {
     return this.activityService
       .start()
@@ -175,8 +234,10 @@ export class ProjectService {
         switchMap(() => this.afs
           .collection<IProject>(
             'projects',
-            (ref: firebase.firestore.Query) => ref.where('type', '==', 'public')
-              .orderBy('views', 'desc').limit(3)
+            (ref: firebase.firestore.Query) => ref
+              .where('type', '==', 'public')
+              .orderBy('views', 'desc')
+              .limit(4)
           )
           .valueChanges()),
         map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))

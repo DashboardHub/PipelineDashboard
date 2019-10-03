@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -19,6 +20,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { LoginAuditModel, ProfileModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
+/**
+ * Authentication service
+ */
 @Injectable({
   providedIn: 'root',
 })
@@ -28,6 +32,15 @@ export class AuthenticationService {
   public isAuthenticated: boolean = false;
   public profile: ProfileModel = new ProfileModel();
 
+  /**
+   * Life cycle method
+   * @param activityService ActivityService
+   * @param afs AngularFireStore
+   * @param deviceService DeviceDetectorService
+   * @param fns AngularFireFunctions
+   * @param router Router
+   * @param afAuth AngularFireAuth
+   */
   constructor(
     private activityService: ActivityService,
     private afs: AngularFirestore,
@@ -39,7 +52,9 @@ export class AuthenticationService {
     this.checkAuth();
   }
 
-  // This function checks authentication state of user
+  /**
+   * Checks authentication state of user
+   */
   public checkAuth(): void {
     const subscription: Subscription = this.afAuth.authState
       .pipe(
@@ -56,7 +71,9 @@ export class AuthenticationService {
     this.subscriptions.push(subscription);
   }
 
-  // This function returns all the logged in users list
+  /**
+   * Get all the logged in users list
+   */
   public getLogins(): Observable<LoginAuditModel[]> {
     return this.afs.collection<ProfileModel>('users')
       .doc<ProfileModel>(this.profile.uid)
@@ -64,14 +81,19 @@ export class AuthenticationService {
       .valueChanges();
   }
 
-  // This function returns the profile information of user
+  /**
+   * Returns the profile information of user
+   * @param uid uid of user
+   */
   public getProfile(uid: string): Observable<ProfileModel> {
     return this.afs.collection<ProfileModel>('users')
       .doc<ProfileModel>(uid)
       .valueChanges();
   }
 
-  // This function used to login via github
+  /**
+   * Login via github authentication
+   */
   public login(): void {
     const provider: auth.GithubAuthProvider = new auth.GithubAuthProvider();
     provider.addScope('public_repo,admin:repo_hook');
@@ -132,6 +154,7 @@ export class AuthenticationService {
         }),
         switchMap((profile: ProfileModel) => {
           const callable: any = this.fns.httpsCallable('findAllUserRepositories');
+
           return callable({ token: profile.oauth.githubToken });
         })
       )
@@ -144,7 +167,9 @@ export class AuthenticationService {
     this.subscriptions.push(subscription);
   }
 
-  // This function is used for logout from dashboard hub
+  /**
+   * Logout from dashboard hub
+   */
   public logout(): void {
     from(this.afAuth.auth.signOut())
       .pipe(first())

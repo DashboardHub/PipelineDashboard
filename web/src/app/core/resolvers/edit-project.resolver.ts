@@ -1,3 +1,4 @@
+// Core modules
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router } from '@angular/router';
 import { of, Observable } from 'rxjs';
@@ -12,12 +13,22 @@ import { IProject, ProjectModel } from '@shared/models/index.model';
 })
 export class EditProjectResolver implements Resolve<IProject> {
 
+  /**
+   * Life cycle method
+   * @param authService AuthenticationService
+   * @param projectService ProjectService
+   * @param router Router
+   */
   constructor(
     private authService: AuthenticationService,
     private projectService: ProjectService,
     private router: Router
   ) { }
 
+  /**
+   * Allow owner to edit project routes only
+   * @param route ActivatedRouteSnapshot
+   */
   resolve(route: ActivatedRouteSnapshot): Observable<IProject> {
     return this.projectService.findOneById(route.params.projectUid)
       .pipe(
@@ -26,6 +37,7 @@ export class EditProjectResolver implements Resolve<IProject> {
           // for private project must have access
           if (!project || (project.type === 'private' && !project.isAdmin(this.authService.profile.uid))) {
             this.router.navigate(['/projects']);
+
             return of(new ProjectModel({ uid: 'error'}));
           }
 
@@ -33,6 +45,7 @@ export class EditProjectResolver implements Resolve<IProject> {
         }),
         catchError(() => {
           this.router.navigate(['/projects']);
+
           return of(new ProjectModel({ uid: 'error'}));
         })
       );
