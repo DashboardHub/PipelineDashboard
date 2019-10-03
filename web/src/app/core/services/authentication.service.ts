@@ -17,7 +17,7 @@ import { concatMap, filter, first, switchMap, tap } from 'rxjs/operators';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // Dashboard hub models
-import { LoginAuditModel, ProfileModel } from '@shared/models/index.model';
+import { LoginAuditModel, ProfileModel, ProjectModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 
 /**
@@ -69,6 +69,16 @@ export class AuthenticationService {
       });
 
     this.subscriptions.push(subscription);
+  }
+
+  public getCurrentUser(): Observable<ProfileModel> {
+    return this.afAuth.authState
+      .pipe(
+        filter((user: User) => !!user),
+        switchMap((user: User) => this.afs
+          .doc<ProfileModel>(`users/${user.uid}`)
+          .valueChanges())
+      );
   }
 
   /**
