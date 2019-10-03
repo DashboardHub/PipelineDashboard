@@ -1,11 +1,13 @@
 // Core modules
 import { Component, OnInit } from '@angular/core';
 
-// DashboardHub Service and models
-import { ProfileModel, ProjectModel } from '@app/shared/models/index.model';
-import { AuthenticationService, ProjectService } from '@core/services/index.service';
+// Rxjs modules
 import { combineLatest, of } from 'rxjs';
 import { filter, mergeMap } from 'rxjs/operators';
+
+// DashboardHub Service and models
+import { AuthenticationService, ProjectService } from '@core/services/index.service';
+import { ProfileModel, ProjectModel } from '@shared/models/index.model';
 
 @Component({
   selector: 'dashboard-following',
@@ -17,11 +19,19 @@ export class FollowingComponent implements OnInit {
   public projects: ProjectModel[] = [];
   public title: string = 'Following projects list';
 
+  /**
+   * Life cycle method
+   * @param authenticationService AuthenticationService
+   * @param projectService ProjectService
+   */
   constructor(
     private authenticationService: AuthenticationService,
     private projectService: ProjectService
   ) { }
 
+  /**
+   * Finds the all projects details followed by logged in user
+   */
   ngOnInit(): void {
     of(this.authenticationService.profile)
       .pipe(
@@ -30,5 +40,4 @@ export class FollowingComponent implements OnInit {
       )
       .subscribe((projects: ProjectModel[]) => this.projects = projects);
   }
-
 }

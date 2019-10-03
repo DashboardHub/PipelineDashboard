@@ -71,6 +71,9 @@ export class AuthenticationService {
     this.subscriptions.push(subscription);
   }
 
+  /**
+   * Find the logged in user details
+   */
   public getCurrentUser(): Observable<ProfileModel> {
     return this.afAuth.authState
       .pipe(

@@ -26,7 +26,7 @@ export class ProfileResolver implements Resolve<ProfileModel> {
   ) { }
 
   /**
-   * Find all project data before showing projects page
+   * Find all profile data before showing profile page
    */
   resolve(): Observable<ProfileModel> {
 
