@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // Rxjs modules
-import { combineLatest, of } from 'rxjs';
+import { combineLatest } from 'rxjs';
 import { filter, mergeMap } from 'rxjs/operators';
 
 // DashboardHub Service and models
@@ -33,7 +33,7 @@ export class FollowingComponent implements OnInit {
    * Finds the all projects details followed by logged in user
    */
   ngOnInit(): void {
-    of(this.authenticationService.profile)
+    this.authenticationService.getCurrentUser()
       .pipe(
         filter((profile: ProfileModel) => !!(profile.following && profile.following.length)),
         mergeMap((profile: ProfileModel) => combineLatest(...profile.following.map((uid: string) => this.projectService.findOneById(uid))))
