@@ -56,13 +56,7 @@ export class AuthenticationService {
    * Checks authentication state of user
    */
   public checkAuth(): void {
-    const subscription: Subscription = this.afAuth.authState
-      .pipe(
-        filter((user: User) => !!user),
-        switchMap((user: User) => this.afs
-          .doc<ProfileModel>(`users/${user.uid}`)
-          .valueChanges())
-      )
+    const subscription: Subscription = this.getCurrentUser()
       .subscribe((profile: ProfileModel) => {
         this.isAuthenticated = true;
         this.profile = profile;
@@ -75,9 +69,7 @@ export class AuthenticationService {
     return this.afAuth.authState
       .pipe(
         filter((user: User) => !!user),
-        switchMap((user: User) => this.afs
-          .doc<ProfileModel>(`users/${user.uid}`)
-          .valueChanges())
+        switchMap((user: User) => this.getProfile(user.uid))
       );
   }
 
