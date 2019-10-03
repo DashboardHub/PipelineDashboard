@@ -13,7 +13,6 @@ import { MainComponent } from './main.component';
 // Dashboard hub authentication guards
 import { HelpResolver } from '@app/core/resolvers/help.resolver';
 import { AuthGuard } from '@core/guards/authentication.guard';
-import { ProfileResolver } from '@core/resolvers/profile.resolver';
 import { FollowingComponent } from './components/following/following.component';
 import { HelpDetailComponent } from './components/help-detail/help-detail.component';
 
