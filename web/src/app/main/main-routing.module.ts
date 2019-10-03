@@ -41,7 +41,7 @@ const routes: Routes = [
         path: 'following',
         pathMatch: 'full',
         component: FollowingComponent,
-        resolve: [ProfileResolver],
+        resolve: { profile: ProfileResolver },
       },
       {
         path: 'help',
