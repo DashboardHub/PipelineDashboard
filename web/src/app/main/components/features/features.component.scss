@@ -126,6 +126,10 @@
               width: 15vw;
             }
           }
+
+          @media (max-width: $breakpoint-lg) {
+            font-size: 15px;
+          }
         }
 
         &__item:nth-child(odd) {
@@ -153,6 +157,10 @@
         box-shadow: 0px 3px 6px $dark-grey-shadow;
         padding: 20px;
         border-radius: 5px;
+
+        @media(max-width: $breakpoint-md) {
+          margin-right: 32px;
+        }
       }
 
       &__professional {
@@ -160,6 +168,10 @@
         box-shadow: 0px 3px 6px $orange-shadow;
         padding: 20px;
         border-radius: 5px;
+
+        @media(max-width: $breakpoint-md) {
+          margin-right: 32px;
+        }
       }
 
       &__enterprise {
@@ -167,6 +179,10 @@
         box-shadow: 0px 3px 6px $orange-2-shadow;
         padding: 20px;
         border-radius: 5px;
+
+        @media(max-width: $breakpoint-md) {
+          margin-right: 32px;
+        }
       }
 
       &__title {
@@ -186,18 +202,6 @@
       }
     }
 
-    @media (max-width: $breakpoint-md) {
-      &__header {
-        width: 95%;
-      }
-    }
-
-    @media (max-width: $breakpoint-xs) {
-      &__header {
-        width: 90%;
-      }
-    }
-
     &__content {
       display: flex;
       flex-direction: column;
@@ -210,10 +214,15 @@
         height: 50px;
         text-align: center;
 
+        @media(min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+          font-size: 15px;
+        }
+
         &__no-active {
           color: $disable_color;
         }
       }
+
 
       &__item:nth-child(odd) {
         background-color: $backround-grey-light-color;
@@ -225,9 +234,25 @@
         &__item {
           display: flex;
           align-items: center;
-          width: 40vh;
+          width: 70vw;
           @include ellipsisText;
           font-size: 18px;
+        }
+
+        &__small-item {
+          width: 60vw;
+          padding: 0;
+          overflow: hidden;
+          position: relative;
+          display: inline-block;
+          text-align: left;
+          text-decoration: none;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          &__no-active {
+            color: $disable_color;
+          }
         }
 
         &__item:nth-child(odd) {

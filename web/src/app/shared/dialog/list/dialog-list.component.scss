@@ -21,6 +21,7 @@
 
   &__content {
     padding: 20px 20px;
+    height: 40vh;
 
     &__name {
       font-size: 20px;
@@ -35,6 +36,17 @@
       font-size: 14px;
       font-weight: lighter;
       color: $dark-grey-color;
+    }
+
+    @media (max-width: $breakpoint-xs) {
+
+      &__name {
+        width: 35vw;
+      }
+
+      &__description {
+        width: 35vw;
+      }
     }
   }
 }

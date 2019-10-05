@@ -105,7 +105,7 @@
       </div>
     </mat-toolbar>
     <ng-template #headerBlock>
-      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="40px" class="app-toolbar__profile-block">
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px" class="app-toolbar__profile-block">
         <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
           <div fxLayoutAlign="space-between center">
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated()" dashboardLogin>
@@ -138,11 +138,14 @@
       <mat-progress-bar *ngIf="progress > 0" mode="buffer" color="warn"></mat-progress-bar>
       <router-outlet></router-outlet>
     </div>
-    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-lg="column-reverse" fxLayoutAlign.lt-lg="space-between center" class="footer">
-      <div>
-        <span>Copyright &copy; 2019 <a href="https://www.dashboardhub.io" target="_blank" rel="noopener">DashboardHub</a>. All rights reserved <i>({{ version }})</i></span>
-      </div>
-      <div fxLayout="row" fxLayout.lt-lg="column-reverse">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" fxLayout.lt-lg="column-reverse"
+      fxLayoutAlign.lt-lg="space-between center" class="footer">
+      <mat-toolbar-row fxLayout="row" fxLayout.lt-lg="column-reverse" fxLayoutAlign="start center" fxLayoutAlign.lt-lg="center center">
+        <div class="footer__copyright">
+          <span>Copyright &copy; 2019 <a href="https://www.dashboardhub.io" target="_blank" rel="noopener">DashboardHub</a>. All rights reserved <i>({{ version }})</i></span>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row fxLayout="row" fxLayout.lt-lg="column-reverse" fxLayoutAlign="end center" fxLayoutAlign.lt-lg="center center">
         <div fxLayout="row">
           <!--
           <div>
@@ -168,7 +171,7 @@
         <div fxLayout="row" fxLayoutAlign="center center">
           <mat-icon [style.width.px]="120" svgIcon="assets:dashboardhub"></mat-icon>
         </div>
-      </div>
+      </mat-toolbar-row>
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>

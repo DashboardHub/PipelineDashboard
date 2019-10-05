@@ -1,0 +1,9 @@
+@import "../../../assets/scss/mixin.scss";
+
+.rating-container {
+  @include pageContainer;
+
+  &__card {
+    margin-top: 20px;
+  }
+}

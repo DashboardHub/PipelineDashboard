@@ -1,13 +1,36 @@
+@import "../../../../assets/scss/mixin.scss";
 
-.project{
+.project {
 
-  &__list{
+  &__list {
     width: 100%;
-    &__actions{
+
+    &__title {
+      word-break: break-all;
+
+      @media(max-width: $breakpoint-xs) {
+
+        width: 30vw;
+      }
+
+
+    }
+
+    &__actions {
       cursor: pointer;
     }
-    &__monitors{
-      &__icon{
+
+    &__url {
+      max-width: 20vw;
+
+      &__content {
+        @include ellipsisText;
+        width: 90%;
+      }
+    }
+
+    &__monitors {
+      &__icon {
         padding-top: 6px;
       }
     }

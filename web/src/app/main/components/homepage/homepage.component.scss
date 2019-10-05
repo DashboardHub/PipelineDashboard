@@ -60,12 +60,25 @@
         }
 
         &__description {
+          word-break: break-word;
           margin-right: 5px;
+        }
+
+        &__description-popular {
+          &__text {
+            @include ellipsisText;
+            width: 35vw;
+          }
         }
 
         &__title {
           min-width: 5vw;
+          word-break: break-word;
           padding-right: 10px;
+
+          @media (max-width: $breakpoint-sm) {
+            min-width: 10vw;
+          }
         }
 
         &__time {
