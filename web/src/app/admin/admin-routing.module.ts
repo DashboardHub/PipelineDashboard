@@ -4,12 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 // DashboardHub components
 import { AdminGuard } from '@app/core/guards/admin.guard';
-import { AdminComponent } from './admin.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 const routes: Routes = [
   {
     path: 'users',
-    component: AdminComponent,
+    component: UsersListComponent,
     canActivate: [AdminGuard],
   },
 ];

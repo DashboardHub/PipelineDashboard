@@ -7,14 +7,14 @@ import { UserService } from '@core/services/user.service';
 import { UserModel } from '@shared/models/user.model';
 
 /**
- * Admin component
+ * Users list component
  */
 @Component({
-  selector: 'dashboard-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss'],
+  selector: 'dashboard-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss'],
 })
-export class AdminComponent implements OnInit, OnDestroy {
+export class UsersListComponent implements OnInit, OnDestroy {
 
   public activeuserTable: string[] = ['avatar', 'name', 'creationTime', 'lastSignInTime'];
   public userSubscription: Subscription;

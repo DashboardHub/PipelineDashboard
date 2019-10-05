@@ -5,10 +5,10 @@ import { NgModule } from '@angular/core';
 // DashboardHub modules and components
 import { SharedModule } from '@shared/shared.module';
 import { AdminRoutingModule } from './admin-routing.module';
-import { AdminComponent } from './admin.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
-  declarations: [AdminComponent],
+  declarations: [UsersListComponent],
   imports: [
     CommonModule,
     SharedModule,

@@ -1,11 +1,8 @@
-@import '../../styles.scss';
-@import '../../assets/scss/variable';
+@import '../../../styles.scss';
+@import '../../../assets/scss/variable';
 
 .users {
   padding: 20px 30px;
-}
-
-.home {
   @include pageContainer;
 
   &__title {
