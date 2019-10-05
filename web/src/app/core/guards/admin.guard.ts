@@ -27,7 +27,7 @@ export class AdminGuard implements CanActivate {
    * @param state RouterStateSnapshot
    */
   public canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.authService.isAdmin) {
+    if (this.authService.profile.isAdmin) {
       return true;
     }
 

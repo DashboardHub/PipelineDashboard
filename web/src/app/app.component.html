@@ -52,7 +52,7 @@
           <span>Sign out</span>
         </div>
       </a>
-      <ng-container *ngIf="isAdmin()">
+      <ng-container *ngIf="getProfile().isAdmin">
         <ng-container *ngFor="let item of adminRoutes">
           <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
             <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">

@@ -32,5 +32,5 @@ export class ProfileModel {
   logins?: LoginAuditModel[] = [];
   repositories?: RepositoriesModel = new RepositoriesModel();
   activity?: ActivityModel[] = [];
-  admin?: Boolean = false;
+  isAdmin?: Boolean = false;
 }

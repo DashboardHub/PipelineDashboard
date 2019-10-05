@@ -30,7 +30,6 @@ export class AuthenticationService {
 
   private subscriptions: Subscription[] = [];
   public isAuthenticated: boolean = false;
-  public isAdmin: boolean = false;
   public profile: ProfileModel = new ProfileModel();
 
   /**
@@ -67,9 +66,6 @@ export class AuthenticationService {
       .subscribe((profile: ProfileModel) => {
         this.isAuthenticated = true;
         this.profile = profile;
-        if (profile.admin) {
-          this.isAdmin = true;
-        }
       });
 
     this.subscriptions.push(subscription);

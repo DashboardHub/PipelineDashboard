@@ -500,13 +500,6 @@ export class AppComponent implements AfterViewInit {
   }
 
   /**
-   * Check if user is admin
-   */
-  public isAdmin(): boolean {
-    return this.authService.isAdmin;
-  }
-
-  /**
    * Login in the system
    */
   public login(): void {
