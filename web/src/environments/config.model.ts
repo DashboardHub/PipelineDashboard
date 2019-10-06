@@ -11,4 +11,6 @@ export class Config {
     messagingSenderId: string,
     appId?: string,
   };
+
+  tracking: string;
 }
