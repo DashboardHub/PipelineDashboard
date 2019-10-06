@@ -77,6 +77,13 @@ export class AppComponent implements AfterViewInit, OnInit {
     //   icon: 'privacy_page_icon',
     // },
   ];
+  public adminRoutes: Navigation[] = [
+    {
+      title: 'List users',
+      route: '/admin/users',
+      icon: 'stats_user_icon',
+    },
+  ];
   public version: string;
   public isSmallScreen: boolean;
   public menuTriger: boolean;
