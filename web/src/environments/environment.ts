@@ -13,5 +13,5 @@ export const environment: Config = {
     messagingSenderId: '',
   },
 
-  tracking: 'UA-60804146-5',
+  tracking: '',
 };
