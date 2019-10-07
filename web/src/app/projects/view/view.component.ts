@@ -1,6 +1,7 @@
 // Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // Thid party modules
@@ -43,7 +44,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private projectService: ProjectService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private meta: Meta
   ) {
     this.route.data.subscribe((data: { project: ProjectModel }) => this.project = data.project);
   }
@@ -66,6 +68,16 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
         }
       }
       );
+
+    this.updateMetaTags();
+  }
+
+  /**
+   * Update meta tags for title and image for SEO
+   */
+  updateMetaTags(): void {
+    this.meta.updateTag({ 'og:title': this.project.title });
+    this.meta.updateTag({ 'og:image': this.project.logoUrl ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/favicon.ico' });
   }
 
   /**
