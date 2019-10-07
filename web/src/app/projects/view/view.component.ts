@@ -76,8 +76,11 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
    * Update meta tags for title and image for SEO
    */
   updateMetaTags(): void {
-    this.meta.updateTag({name: 'og:title', content: this.project.title});
-    this.meta.updateTag({ name: 'og:image', content: this.project.logoUrl ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/favicon.ico' });
+    this.meta.updateTag({ property: 'og:title', content: this.project.title });
+    this.meta.updateTag({
+      property: 'og:image', content: this.project.logoUrl
+        ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/favicon.ico',
+    });
   }
 
   /**
