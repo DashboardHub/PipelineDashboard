@@ -79,7 +79,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     this.meta.updateTag({ property: 'og:title', content: this.project.title });
     this.meta.updateTag({
       property: 'og:image', content: this.project.logoUrl
-        ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/icon-only-orange-1216x1160.png',
+        ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/logo-horizontal-std-2567x580.png',
     });
   }
 
