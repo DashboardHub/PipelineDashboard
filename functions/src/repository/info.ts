@@ -13,6 +13,7 @@ import {
   GitHubRepositoryModel,
   GitHubRepositoryWebhookModel,
 } from '../mappers/github/index.mapper';
+import { GitHubPullRequestStatusInput, GitHubPullRequestStatusMapper, GitHubPullRequestStatusModel } from '../mappers/github/status.mapper';
 import { FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClient } from './../client/github';
 import { Logger } from './../client/logger';
@@ -25,6 +26,14 @@ export interface RepositoryInfoInput {
     id: number;
     fullName: string;
   }
+}
+
+export interface PullRequestStatusInput {
+  token: string;
+  repository: {
+    fullName: string;
+    ref: string;
+  };
 }
 
 export const getRepositoryInfo: any = async (token: string, repository: { uid: string; id: number; fullName: string; }) => {
@@ -92,5 +101,19 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
     .doc(mappedData.uid)
     .set(mappedData, { merge: true });
 
+  return mappedData;
+};
+
+export const getPullRequestStatus: any = async (token: string, repository: { ref: string; fullName: string; }) => {
+  let data: GitHubPullRequestStatusInput[];
+  let mappedData: GitHubPullRequestStatusModel[];
+
+  try {
+    data = await GitHubClient<GitHubPullRequestStatusInput[]>(`/repos/${repository.fullName}/statuses/${repository.ref}`, token);
+    mappedData = data.map((pullrequest: GitHubPullRequestStatusInput) => GitHubPullRequestStatusMapper.import(pullrequest))
+  } catch (error) {
+    Logger.error(error, [`Pull request status path: ${repository.fullName}/statuses/${repository.ref}`]);
+    throw new Error(error);
+  }
   return mappedData;
 };

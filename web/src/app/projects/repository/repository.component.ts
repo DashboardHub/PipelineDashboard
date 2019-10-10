@@ -10,7 +10,10 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
-import { ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel, RepositoryModel } from '@shared/models/index.model';
+import {
+  ContributorModel, IRepository, MilestoneModel, PullRequestModel, PullRequestStatusModel, ReleaseModel,
+  RepositoryModel
+} from '@shared/models/index.model';
 
 /**
  * Repository component
@@ -76,14 +79,13 @@ export class RepositoryComponent implements OnInit, OnDestroy {
           this.sortingService.sortListByNumber<ContributorModel>(this.repository.contributors, 'total');
         }
         if (this.repository && this.repository.pullRequests.length > 0) {
-          const pullRequests: PullRequestModel = new PullRequestModel();
-          this.repositoryService.getStatusesUrlResponse(pullRequests.statusesUrl)
-            .subscribe((content: string) => {
-              if (!content.includes('<')) {
-                this.repository.pullRequests.
-                  map((element: PullRequestModel) => element.state = JSON.parse(content)[0].state);
-              }
-            });
+          this.repository.pullRequests.map((pullRequest: PullRequestModel) => {
+            const status: string[] = pullRequest.statusesUrl.split('/');
+            const ref: string = status[status.length - 1];
+            this.repositoryService.getStatusesUrlResponse(this.repository.fullName, ref)
+              .subscribe((content: PullRequestStatusModel) =>
+                this.repository.pullRequests.map((element: PullRequestModel) => element.state = content.state));
+          });
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
         if (this.isLargeScreen) {

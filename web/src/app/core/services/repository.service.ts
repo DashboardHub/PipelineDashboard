@@ -90,7 +90,9 @@ export class RepositoryService {
    * Finds the response of pull request if its success | failure | pending
    * @param uri string
    */
-  public getStatusesUrlResponse(uri: string): any {
-    return this.httpClient.get(uri, { responseType: 'text' });
+  public getStatusesUrlResponse(fullName: string , ref: string): any {
+    const callable: any = this.fns.httpsCallable('findPullRequestStatus');
+
+    return callable({ token: this.authService.profile.oauth.githubToken, repository: { ref: ref, fullName: fullName} });
   }
 }
