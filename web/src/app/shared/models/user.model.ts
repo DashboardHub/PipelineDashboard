@@ -8,4 +8,6 @@ export class UserModel {
   avatarUrl: string = '';
   url: string = '';
   following?: string[] = [];
+  lastSignedIn: Date;
+  creationTime: Date;
 }

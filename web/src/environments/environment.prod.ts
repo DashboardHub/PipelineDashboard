@@ -12,4 +12,6 @@ export const environment: Config = {
     storageBucket: '{{ FIREBASE_STORAGE_BUCKET }}',
     messagingSenderId: '{{ FIREBASE_MESSAGING_SEND_ID }}',
   },
+
+  tracking: 'UA-60804146-5',
 };
