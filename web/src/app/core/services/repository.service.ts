@@ -1,5 +1,4 @@
 // Core modules
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireFunctions } from '@angular/fire/functions';
@@ -31,8 +30,7 @@ export class RepositoryService {
     private afs: AngularFirestore,
     private fns: AngularFireFunctions,
     private authService: AuthenticationService,
-    private activityService: ActivityService,
-    private httpClient: HttpClient
+    private activityService: ActivityService
   ) { }
 
   /**

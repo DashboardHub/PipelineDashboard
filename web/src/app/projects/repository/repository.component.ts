@@ -83,8 +83,7 @@ export class RepositoryComponent implements OnInit, OnDestroy {
             const status: string[] = pullRequest.statusesUrl.split('/');
             const ref: string = status[status.length - 1];
             this.repositoryService.getStatusesUrlResponse(this.repository.fullName, ref)
-              .subscribe((content: PullRequestStatusModel) =>
-                this.repository.pullRequests.map((element: PullRequestModel) => element.state = content.state));
+              .subscribe((content: PullRequestStatusModel) => pullRequest.state = content[0].state);
           });
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }

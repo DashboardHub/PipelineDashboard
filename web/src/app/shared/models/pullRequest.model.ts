@@ -10,7 +10,7 @@ import { UserModel } from './user.model';
 export class PullRequestModel {
   uid: string = '';
   url: string = '';
-  state: string;
+  state: 'open' | 'closed' | 'failure' | 'success' | 'pending';
   title: string = '';
   owner: UserModel;
   id: number;

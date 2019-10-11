@@ -6,7 +6,7 @@ import { firestore } from 'firebase';
  */
 export class PullRequestStatusModel {
   id: number;
-  state: string;
+  state: 'open' | 'closed' | 'failure' | 'success' | 'pending';
   context: string;
   createdAt: firestore.Timestamp;
   updatedAt: firestore.Timestamp;
