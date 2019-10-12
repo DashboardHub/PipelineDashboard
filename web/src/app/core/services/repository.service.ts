@@ -7,7 +7,7 @@ import { of, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { IRepository, RepositoryModel } from '@shared/models/index.model';
+import { IRepository, PullRequestStatusModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -88,9 +88,29 @@ export class RepositoryService {
    * Finds the response of pull request if its success | failure | pending
    * @param uri string
    */
-  public getStatusesUrlResponse(fullName: string , ref: string): any {
+  public getStatusesUrlResponse(fullName: string, ref: string): any {
     const callable: any = this.fns.httpsCallable('findPullRequestStatus');
 
-    return callable({ token: this.authService.profile.oauth.githubToken, repository: { fullName: fullName , ref: ref} });
+    return callable({ token: this.authService.profile.oauth.githubToken, repository: { fullName: fullName, ref: ref } });
+  }
+
+  /**
+   * Return the build times for all type of context for any PR
+   * @param statuses PullRequestStatusModel[]
+   */
+  public getPRBuildTime(statuses: PullRequestStatusModel[]): { context: string; time: number }[] {
+    const contexts: string[] = statuses.map((status: PullRequestStatusModel) => status.context);
+    const uniqueContexts: string[] = Array.from(new Set(contexts).values());
+    let buildTimes: {context: string; time: number}[] = [];
+    uniqueContexts.map((context: string) => {
+      const filteredStatus: PullRequestStatusModel[] = statuses.filter((status: PullRequestStatusModel) => status.context === context);
+      if (filteredStatus.length > 0) {
+        const buildTime: number = Math.floor(new Date(filteredStatus[0].updatedAt).getTime()
+          - new Date(filteredStatus[filteredStatus.length - 1].updatedAt).getTime()) / 1000;
+        buildTimes.push({context: context, time: buildTime});
+      }
+    });
+
+    return buildTimes;
   }
 }
