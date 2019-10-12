@@ -104,13 +104,13 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
   return mappedData;
 };
 
-export const getPullRequestStatus: any = async (token: string, repository: { ref: string; fullName: string; }) => {
+export const getPullRequestStatus: any = async (token: string, repository: { fullName: string; ref: string;  }) => {
   let data: GitHubPullRequestStatusInput[];
   let mappedData: GitHubPullRequestStatusModel[];
 
   try {
     data = await GitHubClient<GitHubPullRequestStatusInput[]>(`/repos/${repository.fullName}/statuses/${repository.ref}`, token);
-    mappedData = data.map((pullrequest: GitHubPullRequestStatusInput) => GitHubPullRequestStatusMapper.import(pullrequest))
+    mappedData = data.map((pullrequest: GitHubPullRequestStatusInput) => GitHubPullRequestStatusMapper.import(pullrequest));
   } catch (error) {
     Logger.error(error, [`Pull request status path: ${repository.fullName}/statuses/${repository.ref}`]);
     throw new Error(error);

@@ -91,6 +91,6 @@ export class RepositoryService {
   public getStatusesUrlResponse(fullName: string , ref: string): any {
     const callable: any = this.fns.httpsCallable('findPullRequestStatus');
 
-    return callable({ token: this.authService.profile.oauth.githubToken, repository: { ref: ref, fullName: fullName} });
+    return callable({ token: this.authService.profile.oauth.githubToken, repository: { fullName: fullName , ref: ref} });
   }
 }

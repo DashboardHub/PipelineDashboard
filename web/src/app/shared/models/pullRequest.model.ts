@@ -2,6 +2,7 @@
 import { firestore } from 'firebase';
 
 // Application model
+import { state } from './status.model';
 import { UserModel } from './user.model';
 
 /**
@@ -10,7 +11,7 @@ import { UserModel } from './user.model';
 export class PullRequestModel {
   uid: string = '';
   url: string = '';
-  state: 'open' | 'closed' | 'failure' | 'success' | 'pending';
+  state: state;
   title: string = '';
   owner: UserModel;
   id: number;
