@@ -3,7 +3,8 @@
     <span>
       <mat-icon svgIcon="warning_icon"></mat-icon>
     </span>
-    <span>You do not have any project. Please <a [routerLink]="['/projects', 'create']">create</a> project</span>
+    <span *ngIf="authService.isAuthenticated">You do not have any project. Please <a [routerLink]="['/projects', 'create']">create</a> project</span>
+    <span *ngIf="!authService.isAuthenticated">No projects are added yet.</span>
   </mat-card>
 </div>
 <div class="project">
