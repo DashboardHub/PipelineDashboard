@@ -1,5 +1,5 @@
-@import "../../../assets/scss/variable";
-@import "../../../assets/scss/mixin.scss";
+@import '../../../assets/scss/variable';
+@import '../../../assets/scss/mixin.scss';
 
 .repository {
   &__container {
@@ -31,11 +31,9 @@
     }
   }
 
-
   &__card-list {
     padding-top: 20px;
   }
-
 
   .red {
     background-color: $red-color;
@@ -60,7 +58,6 @@
   .repository-detail-card {
     padding: 0px;
 
-
     &__header {
       padding: 5px;
 
@@ -78,7 +75,6 @@
     &__content {
       &__description {
         font-size: 20px;
-
       }
 
       &__divider {
@@ -91,7 +87,7 @@
         font-weight: lighter;
         font-size: 14px;
         max-width: 100px;
-        color: $dark-grey-2-color
+        color: $dark-grey-2-color;
       }
 
       &__username {
@@ -106,7 +102,6 @@
 
       &__title {
         max-width: 40vh;
-
       }
 
       @media (max-width: $breakpoint-md) {
@@ -152,7 +147,6 @@
         }
       }
     }
-
   }
 
   &__header {
@@ -181,7 +175,6 @@
 
       @media (max-width: $breakpoint-lg) {
         @include ellipsisText;
-
       }
     }
 
@@ -282,12 +275,9 @@
     }
   }
 
-
   .dasboard-info {
     .info {
-
       &__header {
-
         &__blue {
           border-bottom: 2px solid $blue-color;
         }
@@ -309,7 +299,6 @@
           font-size: 16px;
           letter-spacing: 0.21px;
         }
-
       }
 
       &__body {
@@ -354,5 +343,7 @@
     margin: auto;
     padding: 10px;
   }
-
+}
+.remove-icon {
+  padding-left: 10px;
 }

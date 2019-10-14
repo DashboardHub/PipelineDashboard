@@ -161,6 +161,14 @@ export class AppComponent implements AfterViewInit, OnInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-account_white_circle-24px.svg')
     );
     this._iconRegistry.addSvgIcon(
+      'add_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-add.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'remove_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/outline-remove.svg')
+    );
+    this._iconRegistry.addSvgIcon(
       'refresh_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/refresh.svg')
     );

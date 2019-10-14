@@ -123,6 +123,14 @@
                 <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title">{{ pullRequest.title }}</h4>
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
+                <p mat-line class="repository-detail-card__content__request">Commits: {{ pullRequest.commits }}</p>
+                <p mat-line class="repository-detail-card__content__request">Comments: {{ pullRequest.comments }}</p>
+                <p mat-line class="repository-detail-card__content__request">Review Comments: {{ pullRequest.reviewComments }}</p>
+                <p mat-line class="repository-detail-card__content__request">
+                  <mat-icon svgIcon="add_icon"></mat-icon> <span>{{ pullRequest.additions }}</span>
+                  <mat-icon class="remove-icon" svgIcon="remove_icon"></mat-icon> <span>{{ pullRequest.deletions }}</span></p>
+                <p mat-line class="repository-detail-card__content__request">Changed Files: {{ pullRequest.changedFiles }}</p>
+
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
