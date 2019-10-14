@@ -176,6 +176,13 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
       reviewers: this.pull_request.requested_reviewers.map((reviewer: User) => GitHubUserMapper.import(reviewer)),
       createdOn: firestore.Timestamp.fromDate(new Date(this.pull_request.created_at)),
       updatedOn: firestore.Timestamp.fromDate(new Date(this.pull_request.updated_at)),
+      comments: this.pull_request.comments,
+      reviewComments: this.pull_request.review_comments,
+      maintainerCanModify: this.pull_request.maintainer_can_modify,
+      commits: this.pull_request.commits,
+      additions: this.pull_request.additions,
+      deletions: this.pull_request.deletions,
+      changedFiles: this.pull_request.changed_files,
     }
   }
 

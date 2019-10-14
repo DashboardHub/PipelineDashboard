@@ -19,4 +19,11 @@ export class PullRequestModel {
   description: string = '';
   createdOn: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
+  comments: number;
+  reviewComments: number;
+  maintainerCanModify: boolean;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changedFiles: number;
 }
