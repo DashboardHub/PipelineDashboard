@@ -1,9 +1,10 @@
 // Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// Thid party modules
+// Third party modules
 import { Subscription } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 
@@ -45,7 +46,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private projectService: ProjectService,
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private meta: Meta
   ) {
     this.route.data.subscribe((data: { project: ProjectModel }) => this.project = data.project);
   }
@@ -69,6 +71,19 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
         }
       }
       );
+
+    this.updateMetaTags();
+  }
+
+  /**
+   * Update meta tags for title and image for SEO
+   */
+  updateMetaTags(): void {
+    this.meta.updateTag({ property: 'og:title', content: this.project.title });
+    this.meta.updateTag({
+      property: 'og:image', content: this.project.logoUrl
+        ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/icon-only-orange-1216x1160.png',
+    });
   }
 
   /**

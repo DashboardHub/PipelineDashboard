@@ -63,7 +63,8 @@
         <span>
           <mat-icon svgIcon="warning_icon"></mat-icon>
         </span>
-        <span>You do not have any monitors. Please <a [routerLink]="['/projects', project.uid, 'monitors', 'create']">create</a> monitor</span>
+        <span *ngIf="isAdmin()">You do not have any monitors. Please <a [routerLink]="['/projects', project.uid, 'monitors', 'create']">create</a> monitor</span>
+        <span *ngIf="!isAdmin()">No monitors added to this project yet.</span>
       </mat-card>
     </div>
 
@@ -72,7 +73,8 @@
         <span>
           <mat-icon svgIcon="warning_icon"></mat-icon>
         </span>
-        <span>You do not have any repositories. Please <a (click)="addRepository()">connect</a> repository</span>
+        <span *ngIf="isAdmin()">You do not have any repositories. Please <a (click)="addRepository()">connect</a> repository</span>
+        <span *ngIf="!isAdmin()">No repositories added to this project yet.</span>              
       </mat-card>
     </div>
 
