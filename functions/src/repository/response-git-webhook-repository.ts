@@ -6,6 +6,7 @@ import { https, HttpsFunction, Response } from 'firebase-functions';
 import { enviroment } from '../environments/environment';
 
 // Dashboard hub firebase functions models/mappers
+import { onCreateEvent } from '../application/stats';
 import { GitHubClient } from '../client/github';
 import { Logger } from '../client/logger';
 import { GitHubContributorInput, GitHubContributorMapper } from '../mappers/github/index.mapper';
@@ -47,7 +48,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
 
     const inputData: any = req.body;
     let result: Promise<any>;
-
+    
     Logger.info(Object.keys(inputData));
     Logger.info(inputData);
 
@@ -104,6 +105,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
         .then(() => {
           Logger.info('Parsing done!');
           res.status(200).send();
+          onCreateEvent();
         })
         .catch((err: any) => {
           Logger.error('Parser error!');
