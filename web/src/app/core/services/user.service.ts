@@ -10,6 +10,7 @@ import * as firebase from 'firebase';
 // Dashboard hub model and services
 import { UserModel, UserStatsModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
+import { AuthenticationService } from './authentication.service';
 
 /**
  * User service
@@ -26,7 +27,8 @@ export class UserService {
    */
   constructor(
     private afs: AngularFirestore,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private authService: AuthenticationService
   ) {
   }
 
@@ -79,17 +81,16 @@ export class UserService {
 
   /**
    * Update the following array inside users collection based upon the update flag
-   * @param userUid string
    * @param projectUid string
    * @param isUpdate flag if user uid has to remove or array in following array
    */
-  public updateFollowings(userUid: string, projectUid: string, isUpdate: boolean): Observable<void> {
+  public updateFollowing(projectUid: string, isUpdate: boolean): Observable<void> {
     return this.activityService
       .start()
       .pipe(
         switchMap(() => this.afs
           .collection<UserModel>('users')
-          .doc<any>(userUid)
+          .doc<any>(this.authService.profile.uid)
           .set(
             {
               following: isUpdate ? firebase.firestore.FieldValue.arrayUnion(projectUid) : firebase.firestore.FieldValue.arrayRemove(projectUid),

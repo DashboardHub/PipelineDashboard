@@ -7,7 +7,6 @@ export class UserModel {
   username: string;
   avatarUrl: string = '';
   url: string = '';
-  following?: string[] = [];
   lastSignedIn: Date;
   creationTime: Date;
 }
