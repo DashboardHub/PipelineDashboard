@@ -116,7 +116,7 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 
 ## SUB PROJECTS
 
-* `functions`, read the [API](api/README.md) docs
+* `functions`, read the [API](functions/README.md) docs
 * Web UI, read the [UI](web/README.md) docs
 
 ## Social media

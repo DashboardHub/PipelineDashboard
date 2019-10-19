@@ -1,11 +1,12 @@
 // Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// Thid party modules
+// Third party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService, UserService } from '@core/services/index.service';
@@ -29,7 +30,6 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   public typeIcon: string;
   public project: ProjectModel;
   public isMenuOpen: boolean;
-  public isFollower: boolean = false;
 
   /**
    * Life cycle method
@@ -45,7 +45,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private projectService: ProjectService,
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private meta: Meta
   ) {
     this.route.data.subscribe((data: { project: ProjectModel }) => this.project = data.project);
   }
@@ -58,7 +59,6 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .findOneById(this.route.snapshot.params.projectUid)
       .subscribe((project: ProjectModel) => {
         this.project = project;
-        this.setFollower();
         if (!this.project.logoUrl) {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }
@@ -69,12 +69,25 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
         }
       }
       );
+
+    this.updateMetaTags();
+  }
+
+  /**
+   * Update meta tags for title and image for SEO
+   */
+  public updateMetaTags(): void {
+    this.meta.updateTag({ property: 'og:title', content: this.project.title });
+    this.meta.updateTag({
+      property: 'og:image', content: this.project.logoUrl
+        ? this.project.logoUrl : 'https://cdn.dashboardhub.io/logo/icon-only-orange-1216x1160.png',
+    });
   }
 
   /**
    * Add the repository when click on add from repository dialog
    */
-  addRepository(): void {
+  public addRepository(): void {
     this.dialog
       .open(DialogListComponent, {
         data: {
@@ -97,26 +110,19 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   /**
    * Increase the followers count by 1 and update the followings in the users collection
    */
-  incrementFollowers(): void {
-    this.projectService.updateFollowers(this.project.uid, 1).subscribe();
-    this.userService.updateFollowings(this.authService.profile.uid, this.project.uid, true).
-      pipe(
-        tap(() => this.setFollower())
-    )
-    .subscribe();
-    this.setFollower();
+  public follow(): void {
+    this.userService
+      .updateFollowing(this.project.uid, true)
+      .subscribe(() => this.projectService.updateFollowers(this.project.uid, true));
   }
 
   /**
    * Decrease the followers count by 1 and update the followings in the users collection
    */
-  decrementFollowers(): void {
-    this.projectService.updateFollowers(this.project.uid, -1).subscribe();
-    this.userService.updateFollowings(this.authService.profile.uid, this.project.uid, false).
-      pipe(
-        tap(() => this.setFollower())
-    )
-    .subscribe();
+  public unfollow(): void {
+    this.userService
+      .updateFollowing(this.project.uid, false)
+      .subscribe(() => this.projectService.updateFollowers(this.project.uid, false));
   }
 
   /**
@@ -137,20 +143,23 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Check if user is logged in
+   */
+  public isLoggedIn(): boolean {
+    return this.authService.isAuthenticated;
+  }
+
+  /**
    * Set the followers flag true if user uid is present in the database else set false
    */
-  public setFollower(): void {
-    if (this.authService.profile.following.includes(this.project.uid)) {
-      this.isFollower = true;
-    } else {
-      this.isFollower = false;
-    }
+  public isFollowing(): boolean {
+    return this.authService.profile.following.includes(this.project.uid);
   }
 
   /**
    * Life cycle destroy method
    */
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.projectSubscription.unsubscribe();
     if (this.deleteSubscription) {
       this.deleteSubscription.unsubscribe();

@@ -1,5 +1,6 @@
 // Core modules
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd, Router, RouterEvent } from '@angular/router';
 
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
@@ -26,7 +27,9 @@ import { environment } from './../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
+
+  private ga: Function = (<any>window).ga;
   public progress: number = 0;
   public publicRoutes: Navigation[] = [
     {
@@ -79,6 +82,13 @@ export class AppComponent implements AfterViewInit {
     //   icon: 'privacy_page_icon',
     // },
   ];
+  public adminRoutes: Navigation[] = [
+    {
+      title: 'List users',
+      route: '/admin/users',
+      icon: 'stats_user_icon',
+    },
+  ];
   public version: string;
   public isSmallScreen: boolean;
   public menuTriger: boolean;
@@ -98,7 +108,8 @@ export class AppComponent implements AfterViewInit {
     private _domSanitizer: DomSanitizer,
     private authService: AuthenticationService,
     private activityService: ActivityService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
 
   ) {
     this.breakpointObserver
@@ -447,7 +458,7 @@ export class AppComponent implements AfterViewInit {
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/stats_user.svg')
     );
     this._iconRegistry.addSvgIcon(
-      'header_notificarion_icon',
+      'header_notification_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/notification-header.svg')
     );
     this._iconRegistry.addSvgIcon(
@@ -457,6 +468,14 @@ export class AppComponent implements AfterViewInit {
     this._iconRegistry.addSvgIcon(
       'unfollow_icon',
       this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-unfollow.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'success_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-success.svg')
+    );
+    this._iconRegistry.addSvgIcon(
+      'error_icon',
+      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/baseline-error.svg')
     );
     this._iconRegistry
       .addSvgIconInNamespace('assets', 'dashboardhub',
@@ -479,6 +498,23 @@ export class AppComponent implements AfterViewInit {
           .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/github.svg')
       );
     this.version = environment.version;
+  }
+
+  /**
+   * Initializing the google analytics router events
+   */
+  public ngOnInit(): void {
+    this.ga('create', environment.tracking , 'auto');
+    this.ga('send', 'pageview');
+
+    this.router.events.subscribe((event: RouterEvent) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+
+        this.ga('set', 'page', event.urlAfterRedirects);
+        this.ga('send', 'pageview');
+      }
+    });
   }
 
   /**

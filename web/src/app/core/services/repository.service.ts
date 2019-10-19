@@ -83,4 +83,14 @@ export class RepositoryService {
 
     return of(new RepositoryModel(callable({ data: { uid: repo.uid, id: repo.id }, token: this.authService.profile.oauth.githubToken })));
   }
+
+  /**
+   * Finds the response of pull request if its success | failure | pending
+   * @param uri string
+   */
+  public getStatusesUrlResponse(fullName: string , ref: string): any {
+    const callable: any = this.fns.httpsCallable('findPullRequestStatus');
+
+    return callable({ token: this.authService.profile.oauth.githubToken, repository: { fullName: fullName , ref: ref} });
+  }
 }

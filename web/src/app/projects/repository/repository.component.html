@@ -121,7 +121,13 @@
               <mat-list-item role="listitem" *ngFor="let pullRequest of repository.pullRequests | slice:0:5">
                 <mat-divider class="repository-detail-card__content__divider"></mat-divider>
                 <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
-                <h4 mat-line class="repository-detail-card__content__title">{{ pullRequest.title }}</h4>
+                <h4 mat-line class="repository-detail-card__content__title">{{ pullRequest.title }}
+                  <ng-container *ngIf="pullRequest.state">
+                    <mat-icon *ngIf="pullRequest.state === 'success' || pullRequest.state === 'open'" svgIcon="success_icon"></mat-icon>
+                    <mat-spinner [diameter]="20" class="spinner" *ngIf="pullRequest.state === 'pending'"></mat-spinner>
+                    <mat-icon *ngIf="pullRequest.state === 'failure'" svgIcon="failure_icon"></mat-icon>
+                  </ng-container>
+                </h4>
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>

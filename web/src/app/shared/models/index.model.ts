@@ -21,6 +21,7 @@ export * from './token.model';
 export * from './pullRequest.model';
 export * from './release.model';
 export * from './stats.model';
+export * from './status.model';
 export * from './user.model';
 export * from './userStats.model';
 export * from './navigation.model';
