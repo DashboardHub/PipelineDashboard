@@ -1,9 +1,9 @@
-import { filter, tap } from 'rxjs/operators';
 // Core modules
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 // RXjs operators
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 
 // Breakpoint resolvers
