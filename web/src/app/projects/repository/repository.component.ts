@@ -3,6 +3,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 // RXjs operators
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 
 // Breakpoint resolvers
@@ -80,10 +81,14 @@ export class RepositoryComponent implements OnInit, OnDestroy {
         }
         if (this.repository && this.repository.pullRequests.length > 0) {
           this.repository.pullRequests.map((pullRequest: PullRequestModel) => {
-            const status: string[] = pullRequest.statusesUrl.split('/');
-            const ref: string = status[status.length - 1];
-            this.repositoryService.getStatusesUrlResponse(this.repository.fullName, ref)
-              .subscribe((content: PullRequestStatusModel) => pullRequest.state = content[0].state);
+            if (pullRequest.statusesUrl) { // @TODO: refactor, subscribe should be out of the map
+              const ref: string = pullRequest.statusesUrl.split('/').pop();
+              this.repositoryService.getStatusesUrlResponse(this.repository.fullName, ref)
+                .pipe(
+                  filter((content: PullRequestStatusModel[]) => !!content.length)
+                )
+                .subscribe((content: PullRequestStatusModel[]) => pullRequest.state = content[0].state);
+            }
           });
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
