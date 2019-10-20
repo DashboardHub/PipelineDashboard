@@ -1,10 +1,16 @@
 <div class="project">
   <div fxLayout="row" fxLayoutAlign="space-between center" class="project__title" *ngIf="showTitle">
     <div class="project__title__header">My Projects</div>
-    <button mat-button class="project__title__add-button" [routerLink]="[ './create' ]">
-      <mat-icon svgIcon="create_project_icon"></mat-icon>
-      Add project
-    </button>
+    <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start">
+      <button mat-button class="project__title__button" [routerLink]="[ '/projects', 'create' ]">
+        <mat-icon svgIcon="create_project_icon"></mat-icon>
+        Add project
+      </button>
+      <button mat-button class="project__title__button" [routerLink]="[ '/following' ]">
+        <mat-icon svgIcon="project_page_icon"></mat-icon>
+        Following
+      </button>
+    </span>
   </div>
   <mat-card class="project-card">
     <mat-card-header>

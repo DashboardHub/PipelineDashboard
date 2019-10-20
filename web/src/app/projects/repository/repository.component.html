@@ -15,7 +15,7 @@
 </div>
 <mat-accordion class="repository" *ngIf="repository">
   <mat-expansion-panel hideToggle #expansion [expanded]="true">
-    <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'" 
+    <mat-expansion-panel-header [collapsedHeight]="headerHeight+'px'" [expandedHeight]="headerHeight+'px'"
     fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="space-between start">
       <div fxLayout="column" class="repository__container">
         <div fxLayout="row">
@@ -45,13 +45,13 @@
               <mat-icon *ngIf="expansion.expanded">keyboard_arrow_up</mat-icon>
             </div>
             <div class="repository__header__contributors__container" fxLayoutGap="15px">
-              <div *ngFor="let contributor of repository.contributors | slice:0:numberOfDisplayedUsers" 
+              <div *ngFor="let contributor of repository.contributors | slice:0:numberOfDisplayedUsers"
               fxLayoutGap="2px">
-                <img class="repository__header__contributors__avatar" matTooltipClass="repository-tooltip" 
-                matTooltip="{{ getMoreInformation(contributor) }}" [alt]="contributor.owner.username" 
+                <img class="repository__header__contributors__avatar" matTooltipClass="repository-tooltip"
+                matTooltip="{{ getMoreInformation(contributor) }}" [alt]="contributor.owner.username"
                 [src]="contributor.owner.avatarUrl" />
               </div>
-              <div *ngIf="repository.contributors && repository.contributors.length > numberOfDisplayedUsers" 
+              <div *ngIf="repository.contributors && repository.contributors.length > numberOfDisplayedUsers"
                 class="repository__header__contributors__container__length">
                 +{{ repository.contributors.length - numberOfDisplayedUsers }}
               </div>
@@ -72,7 +72,7 @@
       <ng-container *ngTemplateOutlet="latestInformation"></ng-container>
     </div>
     <mat-divider></mat-divider>
-    <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="20px" fxLayoutAlign="space-between start" 
+    <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutGap="20px" fxLayoutAlign="space-between start"
     fxLayoutAlign.lt-lg="around stretch" class="repository__card-list">
       <div fxFlex="33%" fxFlex.lt-lg="100%">
         <mat-card class="repository-detail-card">
@@ -122,17 +122,19 @@
                 <mat-divider class="repository-detail-card__content__divider"></mat-divider>
                 <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title">
-                  <mat-icon *ngIf="pullRequest.state === 'success' || pullRequest.state === 'open'" svgIcon="success_icon"></mat-icon>
-                  <mat-spinner [diameter]="20" class="spinner" *ngIf="pullRequest.state === 'pending'"></mat-spinner>
-                  <mat-icon *ngIf="pullRequest.state === 'failure'" svgIcon="error_icon"></mat-icon>
-                  {{ pullRequest.title }}
+                  <ng-container *ngIf="pullRequest.state">
+                    <mat-icon *ngIf="pullRequest.state === 'success' || pullRequest.state === 'open'" svgIcon="success_icon"></mat-icon>
+                    <mat-spinner [diameter]="20" class="spinner" *ngIf="pullRequest.state === 'pending'"></mat-spinner>
+                    <mat-icon *ngIf="pullRequest.state === 'failure'" svgIcon="error_icon"></mat-icon>
+                    {{ pullRequest.title }}
+                  </ng-container>
                 </h4>
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
                 </span>
-                <p *ngFor="let buildTime of pullRequest.buildTimes" mat-line class="repository-detail-card__content__request">{{ buildTime.context }} 
+                <p *ngFor="let buildTime of pullRequest.buildTimes" mat-line class="repository-detail-card__content__request">{{ buildTime.context }}
                 <span class="repository-detail-card__content__time-container-bottom">
                   <p mat-line class="repository-detail-card__content__time">{{ buildTime.time }} seconds </p>
                 </span>
@@ -179,7 +181,7 @@
   </mat-expansion-panel>
 </mat-accordion>
 <ng-template #latestInformation>
-  <div fxLayout fxLayout.lt-lg="column" fxLayoutGap="26px" fxLayout.xs="column" fxLayoutAlign="space-around start" 
+  <div fxLayout fxLayout.lt-lg="column" fxLayoutGap="26px" fxLayout.xs="column" fxLayoutAlign="space-around start"
   fxLayoutAlign.lt-lg="around stretch" class="dasboard-info">
     <div fxFlex="25%">
       <div class="info">
@@ -189,14 +191,14 @@
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">
           <div fxFlex="50px" *ngIf="repository.releases && repository.releases.length > 0">
-            <img class="info__body__avatar" [alt]="repository.releases[0].owner.username" 
+            <img class="info__body__avatar" [alt]="repository.releases[0].owner.username"
             [src]="repository.releases[0].owner.avatarUrl" />
           </div>
           <div fxFlex="50px" *ngIf="repository.releases && !repository.releases.length">
             <mat-icon class="info__body__icon">person</mat-icon>
           </div>
           <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="info__body__description" *ngIf="repository.releases && repository.releases.length > 0; else releasesOther"><a 
+            <div class="info__body__description" *ngIf="repository.releases && repository.releases.length > 0; else releasesOther"><a
               href="{{ repository.releases[0].htmlUrl }}">{{ repository.releases[0].title }}</a></div>
             <div>
               <p class="info__body__line" *ngIf="repository.releases && repository.releases.length > 0" mat-line>
@@ -219,15 +221,15 @@
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">
           <div fxFlex="50px" *ngIf="repository.milestones && repository.milestones.length > 0">
-            <img class="info__body__avatar" [alt]="repository.milestones[0].creator.username" 
+            <img class="info__body__avatar" [alt]="repository.milestones[0].creator.username"
             [src]="repository.milestones[0].creator.avatarUrl" />
           </div>
           <div fxFlex="50px" *ngIf="repository.milestones && !repository.milestones.length">
             <mat-icon class="info__body__icon">person</mat-icon>
           </div>
           <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="info__body__description" 
-            *ngIf="repository.milestones && repository.milestones.length > 0; else milestonesOther"><a 
+            <div class="info__body__description"
+            *ngIf="repository.milestones && repository.milestones.length > 0; else milestonesOther"><a
             href="{{ repository.milestones[0].htmlUrl }}">{{ repository.milestones[0].title }}</a></div>
             <div>
               <p class="info__body__line" *ngIf="repository.milestones && repository.milestones.length > 0" mat-line>
@@ -251,7 +253,7 @@
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">
           <div fxFlex="50px" *ngIf="repository.contributors && repository.contributors.length > 0">
-            <img class="info__body__avatar" [alt]="repository.contributors[0].owner.username" 
+            <img class="info__body__avatar" [alt]="repository.contributors[0].owner.username"
             [src]="repository.contributors[0].owner.avatarUrl" />
           </div>
           <div fxFlex="50px" *ngIf="repository.contributors && !repository.contributors.length">
@@ -260,7 +262,7 @@
           <div fxLayout="column" fxLayoutAlign="center start">
             <div class="info__body__description"
              *ngIf="repository.contributors && repository.contributors.length > 0; else topContributorsOther">
-              <a 
+              <a
               href="https://github.com/{{ repository.contributors[0].owner.username }}">{{ repository.contributors[0].owner.username }}</a>
             </div>
             <div>
@@ -291,7 +293,7 @@
             <mat-icon class="info__body__icon">person</mat-icon>
           </div>
           <div fxLayout="column" fxLayoutAlign="center start">
-            <div class="info__body__description" 
+            <div class="info__body__description"
             *ngIf="repository.pullRequests && repository.pullRequests.length > 0; else otherLatestPR">
               <a href="{{ repository.pullRequests[0].url }}">{{ repository.pullRequests[0].id }}</a>
             </div>

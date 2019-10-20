@@ -1,21 +1,8 @@
-@import "../../../../assets/scss/variable";
-@import "../../../../assets/scss/mixin.scss";
+@import '../../../../assets/scss/variable';
+@import '../../../../assets/scss/mixin.scss';
 
 .project {
-  @include pageContainer;
-
-  &__title {
-    @include pageHeader;
-
-    &__button {
-      background-color: $blue-2-color;
-      color: #fff;
-    }
-
-    &__header {
-      font-size: 16pt
-    }
-  }
+  padding: 20px 30px;
 
   .project-card {
     @include cardContainer;
