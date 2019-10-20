@@ -45,11 +45,6 @@ export class AppComponent implements AfterViewInit, OnInit {
       icon: 'project_page_icon',
     },
     {
-      title: 'Following',
-      route: '/following',
-      icon: 'stats_user_icon',
-    },
-    {
       title: 'Add Project',
       route: '/projects/create',
       icon: 'add_project_page_icon',

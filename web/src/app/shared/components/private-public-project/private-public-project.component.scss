@@ -7,9 +7,8 @@
   &__title {
     @include pageHeader;
 
-    &__add-button {
+    &__button {
       background-color: $blue-2-color;
-
       color: #fff;
     }
 
@@ -17,9 +16,6 @@
       font-size: 16pt
     }
   }
-
-
-
 
   .project-card {
     @include cardContainer;
@@ -38,7 +34,6 @@
         @include subtitle;
       }
     }
-
 
     &__content {
       padding: 0;
