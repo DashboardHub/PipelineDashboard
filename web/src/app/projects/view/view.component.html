@@ -19,8 +19,9 @@
         <span class="project-body__header__content__name" [ngClass]="{'project-body__header__content__name__long': !isAdmin()}">{{ project.title }}</span>
       </div>
       <div class="project-body__header__content information">
-        <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start" *ngIf="isAdmin()">
-          <ng-container *ngTemplateOutlet="infoContent"></ng-container>
+        <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start">
+          <ng-container *ngIf="isAdmin()"><ng-container *ngTemplateOutlet="infoContentAdmin"></ng-container></ng-container>
+          <ng-container *ngIf="isLoggedIn()"><ng-container *ngTemplateOutlet="infoContentGuest"></ng-container></ng-container>
         </span>
       </div>
       <div class="actions-menu" *ngIf="isAdmin()">
@@ -29,14 +30,15 @@
         </button>
         <mat-menu #menuAction="matMenu">
           <span fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="space-around start">
-            <ng-container *ngTemplateOutlet="infoContent"></ng-container>
+            <ng-container *ngIf="isAdmin()"><ng-container *ngTemplateOutlet="infoContentAdmin"></ng-container></ng-container>
+            <ng-container *ngIf="isLoggedIn()"><ng-container *ngTemplateOutlet="infoContentGuest"></ng-container></ng-container>
           </span>
         </mat-menu>
         <ng-template #whiteIcon>
           <mat-icon svgIcon="tune_white_icon"></mat-icon>
         </ng-template>
       </div>
-      <ng-template #infoContent>
+      <ng-template #infoContentAdmin>
         <div routerLink="monitors" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
           <mat-icon svgIcon="monitor_icon"></mat-icon><span>{{ project.monitors.length }} | Monitors</span>
         </div>
@@ -48,6 +50,14 @@
         </div>
         <div class="project-body__header__content__item__pings" fxLayout="row" fxLayoutGap="5px">
           <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
+        </div>
+      </ng-template>
+      <ng-template #infoContentGuest>
+        <div *ngIf= "!isFollowing()" (click)="follow()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="follow_icon"></mat-icon><span>{{ project.followers }} | Follow </span>
+        </div>
+        <div *ngIf= "isFollowing()" (click)="unfollow()" class="project-body__header__content__item" fxLayout="row" fxLayoutGap="5px">
+          <mat-icon svgIcon="unfollow_icon"></mat-icon><span>{{ project.followers }} | Unfollow </span>
         </div>
       </ng-template>
     </div>
@@ -68,7 +78,7 @@
           <mat-icon svgIcon="warning_icon"></mat-icon>
         </span>
         <span *ngIf="isAdmin()">You do not have any repositories. Please <a (click)="addRepository()">connect</a> repository</span>
-        <span *ngIf="!isAdmin()">No repositories added to this project yet.</span>              
+        <span *ngIf="!isAdmin()">No repositories added to this project yet.</span>
       </mat-card>
     </div>
 

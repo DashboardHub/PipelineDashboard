@@ -13,6 +13,7 @@ export interface GitHubPullRequestInput {
   user: GitHubUserInput
   assignees: GitHubUserInput[];
   requested_reviewers: GitHubUserInput[];
+  statuses_url: string;
   created_at: string;
   updated_at: string;
 }
@@ -27,6 +28,7 @@ export interface GitHubPullRequestModel {
   owner: GitHubUserModel;
   assignees: GitHubUserModel[];
   reviewers: GitHubUserModel[];
+  statusesUrl: string;
   createdOn: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
 }
@@ -43,6 +45,7 @@ export class GitHubPullRequestMapper {
       owner: GitHubUserMapper.import(input.user),
       assignees: input.assignees.map((assignee: GitHubUserInput) => GitHubUserMapper.import(assignee)),
       reviewers: input.requested_reviewers.map((reviewer: GitHubUserInput) => GitHubUserMapper.import(reviewer)),
+      statusesUrl: input.statuses_url,
       createdOn: firestore.Timestamp.fromDate(new Date(input.created_at)),
       updatedOn: firestore.Timestamp.fromDate(new Date(input.updated_at)),
     };
