@@ -104,8 +104,8 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
       result
         .then(() => {
           Logger.info('Parsing done!');
-          res.status(200).send();
           onCreateEvent();
+          res.status(200).send();
         })
         .catch((err: any) => {
           Logger.error('Parser error!');
