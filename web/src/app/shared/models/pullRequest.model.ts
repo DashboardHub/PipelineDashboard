@@ -2,6 +2,7 @@
 import { firestore } from 'firebase';
 
 // Application model
+import { BuildTimes } from './build-times.model';
 import { state } from './status.model';
 import { UserModel } from './user.model';
 
@@ -19,7 +20,7 @@ export class PullRequestModel {
   requestedReviewers: UserModel;
   description: string = '';
   statusesUrl: string = '';
-  buildTimes?: { context: string; time: number }[];
+  buildTimes?: BuildTimes[];
   createdOn: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
 }

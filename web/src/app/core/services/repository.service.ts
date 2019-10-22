@@ -7,7 +7,7 @@ import { of, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { IRepository, PullRequestStatusModel, RepositoryModel } from '@shared/models/index.model';
+import { BuildTimes, IRepository, PullRequestStatusModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -98,10 +98,10 @@ export class RepositoryService {
    * Return the build times for all type of context for any PR
    * @param statuses PullRequestStatusModel[]
    */
-  public getPRBuildTime(statuses: PullRequestStatusModel[]): { context: string; time: number }[] {
+  public getPRBuildTime(statuses: PullRequestStatusModel[]): BuildTimes[] {
     const contexts: string[] = statuses.map((status: PullRequestStatusModel) => status.context);
     const uniqueContexts: string[] = Array.from(new Set(contexts).values());
-    let buildTimes: {context: string; time: number}[] = [];
+    let buildTimes: BuildTimes[] = [];
     uniqueContexts.map((context: string) => {
       const filteredStatus: PullRequestStatusModel[] = statuses.filter((status: PullRequestStatusModel) => status.context === context);
       if (filteredStatus.length > 0) {
