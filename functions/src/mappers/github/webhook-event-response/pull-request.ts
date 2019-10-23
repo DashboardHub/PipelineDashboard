@@ -83,7 +83,7 @@ interface PullRequest {
   changed_files: number;
 }
 
-type Action = 'assigned' | 'unassigned' | 'review_requested' | 'review_request_removed' | 'labeled' | 'unlabeled' | 'opened' | 'edited' | 'closed' | 'ready_for_review' | 'locked' | 'unlocked' | 'reopened';
+type Action = 'assigned' | 'unassigned' | 'review_requested' | 'review_request_removed' | 'labeled' | 'unlabeled' | 'opened' | 'edited' | 'closed' | 'ready_for_review' | 'locked' | 'unlocked' | 'reopened' | 'synchronize';
 
 export interface PullRequestEventInput {
   action: Action;
@@ -143,6 +143,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
         this.closed(repository);
         break;
       }
+      case 'synchronize':
       case 'assigned':
       case 'unassigned':
       case 'review_requested':
