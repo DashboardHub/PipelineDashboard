@@ -1,12 +1,13 @@
 import { firestore } from 'firebase-admin';
+import { DocumentData } from '../../../client/firebase-admin';
 
 // Dashboard mappers/models
-import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubPullRequestModel } from '../pullRequest.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
 import { GitHubUserMapper } from '../user.mapper';
+import { Logger } from './../../../client/logger';
 import { isExistProperties, HubEventActions, Repository, User } from './shared';
 
 
@@ -157,6 +158,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
         break;
       }
       default: {
+        Logger.info('ACTION: ', this.action);
         throw new Error('Not found action');
       }
     }
