@@ -87,7 +87,10 @@ export class RepositoryComponent implements OnInit, OnDestroy {
                 .pipe(
                   filter((content: PullRequestStatusModel[]) => !!content.length)
                 )
-                .subscribe((content: PullRequestStatusModel[]) => pullRequest.state = content[0].state);
+                .subscribe((content: PullRequestStatusModel[]) => {
+                  pullRequest.buildTimes = this.repositoryService.getPRBuildTime(content);
+                  pullRequest.state = content[0].state;
+                });
             }
           });
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');

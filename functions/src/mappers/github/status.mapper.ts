@@ -12,8 +12,8 @@ export interface GitHubPullRequestStatusModel {
   id: number;
   state: string;
   context: string;
-  createdAt: firestore.Timestamp;
-  updatedAt: firestore.Timestamp;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export class GitHubPullRequestStatusMapper {
@@ -22,8 +22,8 @@ export class GitHubPullRequestStatusMapper {
       id: input.id,
       state: input.state,
       context: input.context,
-      createdAt: firestore.Timestamp.fromDate(new Date(input.created_at)),
-      updatedAt: firestore.Timestamp.fromDate(new Date(input.updated_at)),
+      createdAt: input.created_at,
+      updatedAt: input.updated_at,
     };
   }
 }
