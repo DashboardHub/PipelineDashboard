@@ -3,7 +3,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 // RXjs operators
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 
 // Breakpoint resolvers
@@ -12,7 +11,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
 import {
-  ContributorModel, IRepository, MilestoneModel, PullRequestModel, PullRequestStatusModel, ReleaseModel,
+  ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel,
   RepositoryModel
 } from '@shared/models/index.model';
 

@@ -7,7 +7,7 @@ import { of, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { BuildTimes, IRepository, PullRequestStatusModel, RepositoryModel } from '@shared/models/index.model';
+import { IRepository, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
