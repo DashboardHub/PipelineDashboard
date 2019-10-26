@@ -14,11 +14,11 @@ import {
   GitHubRepositoryModel,
   GitHubRepositoryWebhookModel,
 } from '../mappers/github/index.mapper';
-import { GitHubPullRequestStatusInput, GitHubPullRequestStatusMapper, GitHubPullRequestStatusModel } from '../mappers/github/status.mapper';
 import { FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClient } from './../client/github';
 import { Logger } from './../client/logger';
 import { getWebhook } from './create-git-webhook-repository';
+import { getPullRequestStatus } from './pull-request';
 
 export interface RepositoryInfoInput {
   token: string;
@@ -111,19 +111,14 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
     .doc(mappedData.uid)
     .set(mappedData, { merge: true });
 
-  return mappedData;
-};
+  // Saving the Pull Request status and build time data
+  const promises: Promise<any>[] = [];
+  mappedData.pullRequests.map((pullRequest: GitHubPullRequestModel) => {
+    const ref: string = pullRequest.statusesUrl.split('/').pop();
+    promises.push(getPullRequestStatus(token, repository.fullName, ref, mappedData.uid, pullRequest.uid))
+  });
 
-export const getPullRequestStatus: any = async (token: string, repository: { fullName: string; ref: string;  }) => {
-  let data: GitHubPullRequestStatusInput[];
-  let mappedData: GitHubPullRequestStatusModel[];
+  await Promise.all(promises);
 
-  try {
-    data = await GitHubClient<GitHubPullRequestStatusInput[]>(`/repos/${repository.fullName}/statuses/${repository.ref}`, token);
-    mappedData = data.map((pullrequest: GitHubPullRequestStatusInput) => GitHubPullRequestStatusMapper.import(pullrequest));
-  } catch (error) {
-    Logger.error(error, [`Pull request status path: ${repository.fullName}/statuses/${repository.ref}`]);
-    throw new Error(error);
-  }
   return mappedData;
 };
