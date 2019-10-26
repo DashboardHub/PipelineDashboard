@@ -9,7 +9,7 @@ import { BuildTimes, GitHubPullRequestStatusInput, GitHubPullRequestStatusMapper
  * Return the build times for all type of context for any PR
  * @param statuses GitHubPullRequestStatusModel[]
  */
-export const getPRBuildTime: any = (statuses: GitHubPullRequestStatusModel[]): BuildTimes[] => {
+export const getPullRequestBuildTime: any = (statuses: GitHubPullRequestStatusModel[]): BuildTimes[] => {
   const contexts: string[] = statuses.map((status: GitHubPullRequestStatusModel) => status.context);
   const uniqueContexts: string[] = Array.from(new Set(contexts).values());
 
@@ -35,7 +35,7 @@ export const getPullRequestStatus: any = async (token: string, fullName: string,
   try {
     data = await GitHubClient<GitHubPullRequestStatusInput[]>(`/repos/${fullName}/statuses/${ref}`, token);
     mappedData = data.map((pullrequest: GitHubPullRequestStatusInput) => GitHubPullRequestStatusMapper.import(pullrequest));
-    const buildTimes: BuildTimes = getPRBuildTime(mappedData);
+    const buildTimes: BuildTimes = getPullRequestBuildTime(mappedData);
 
     await FirebaseAdmin
       .firestore()
