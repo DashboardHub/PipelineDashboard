@@ -42,7 +42,7 @@ export const getPullRequestStatus: any = async (token: string, fullName: string,
       .collection(`repositories/${repositoryUid}/statuses`)
       .doc(pullRequestUid.toString())
       .set({
-        latest: { statuses: mappedData, buildTimes: buildTimes },
+        latest: { commitId: ref, statuses: mappedData, buildTimes: buildTimes },
         historic: firebase.firestore.FieldValue.arrayUnion({ commitId: ref, statuses: mappedData, buildTimes: buildTimes }), // append to exist historic array
       }, { merge: true });
 
