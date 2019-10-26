@@ -93,24 +93,4 @@ export class RepositoryService {
 
     return callable({ token: this.authService.profile.oauth.githubToken, repository: { fullName: fullName, ref: ref } });
   }
-
-  /**
-   * Return the build times for all type of context for any PR
-   * @param statuses PullRequestStatusModel[]
-   */
-  public getPRBuildTime(statuses: PullRequestStatusModel[]): BuildTimes[] {
-    const contexts: string[] = statuses.map((status: PullRequestStatusModel) => status.context);
-    const uniqueContexts: string[] = Array.from(new Set(contexts).values());
-    let buildTimes: BuildTimes[] = [];
-    uniqueContexts.map((context: string) => {
-      const filteredStatus: PullRequestStatusModel[] = statuses.filter((status: PullRequestStatusModel) => status.context === context);
-      if (filteredStatus.length > 0) {
-        const buildTime: number = Math.floor(new Date(filteredStatus[0].updatedAt).getTime()
-          - new Date(filteredStatus[filteredStatus.length - 1].updatedAt).getTime()) / 1000;
-        buildTimes.push({context: context, time: buildTime});
-      }
-    });
-
-    return buildTimes;
-  }
 }
