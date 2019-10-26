@@ -7,7 +7,6 @@ import { enviroment } from '../environments/environment';
 
 // Dashboard hub firebase functions models/mappers
 import { onCreateEvent } from '../application/stats';
-import { DocumentSnapshot } from '../client/firebase-admin';
 import { GitHubClient } from '../client/github';
 import { Logger } from '../client/logger';
 import { GitHubContributorInput, GitHubContributorMapper } from '../mappers/github/index.mapper';
@@ -149,17 +148,25 @@ async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
   const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
   console.log("--Pull request Data---",data);
   data.updateData(repository);
-  const usersRef: DocumentSnapshot = await (FirebaseAdmin.firestore().collection('users').doc(data.sender.id.toString()).get());
+  console.log("----Sender login", data.sender.login);
+  const usersRef: QuerySnapshot = await (FirebaseAdmin.firestore().collection('users').where('username', '==', data.sender.login).get());
 
-  const userData: DocumentData = usersRef.data();
-  console.log("--Pull request user data---",userData);
-  console.log("Repository name", repository.fullName);
-  
-  console.log("Repository uid", repository.uid);
-  const githubToken: string = userData && userData.oauth ? userData.oauth.githubToken : null;
-  const ref: string = data.pull_request.statuses_url.split('/').pop();
-  console.log("Repository ref", ref);
-  getPullRequestStatus(githubToken, repository.fullName, ref, repository.uid, data.pull_request.id);
+  if (!usersRef.empty) {
+    for (const element of usersRef.docs) {
+      const userData: DocumentData = element.data();
+      const githubToken: string = userData && userData.oauth ? userData.oauth.githubToken : null;
+      console.log("--Pull request user data---",userData);
+      console.log("Repository name", repository.fullName);
+      
+      console.log("Repository uid", repository.uid);
+      const ref: string = data.pull_request.statuses_url.split('/').pop();
+      console.log("Repository ref", ref);
+    
+      console.log("Github Token", ref);
+      getPullRequestStatus(githubToken, repository.fullName, ref, repository.uid, data.pull_request.id);
+    }
+  }
+
 
   addHubEventToCollection(repository, data);
   await RepositoryModel.saveRepository(repository);
