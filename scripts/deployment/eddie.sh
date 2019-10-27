@@ -2,7 +2,7 @@
 
 # FUNCTIONS
 (cd functions; npm install)
-(cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET'/g' environment.ts)
+(cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET_EDDIE'/g' environment.ts)
 (cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-eddie/g' environment.ts)
 
 # WEB
