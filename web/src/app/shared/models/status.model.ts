@@ -1,5 +1,4 @@
 // Firestore module
-import { firestore } from 'firebase';
 
 export type state = 'open' | 'closed' | 'failure' | 'success' | 'pending';
 
@@ -10,6 +9,6 @@ export class PullRequestStatusModel {
   id: number;
   state: state;
   context: string;
-  createdAt: firestore.Timestamp;
-  updatedAt: firestore.Timestamp;
+  createdAt: string;
+  updatedAt: string;
 }
