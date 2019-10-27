@@ -123,8 +123,10 @@
 
       &__time-container-bottom {
         width: 250px;
-        display: flex;
         justify-content: flex-start;
+        div {
+          display: flex;
+        }
       }
 
       &__time-container-top {
@@ -145,7 +147,7 @@
 
         &__time-container-bottom {
           width: 120px;
-          display: flex;
+          display: block;
           position: absolute;
           font-size: 9pt;
           right: -5px;
