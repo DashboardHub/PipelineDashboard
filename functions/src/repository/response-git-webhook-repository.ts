@@ -48,7 +48,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
 
     const inputData: any = req.body;
     let result: Promise<any>;
-    
+
     Logger.info(Object.keys(inputData));
     Logger.info(inputData);
 
