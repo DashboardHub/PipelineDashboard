@@ -48,8 +48,9 @@ Please get in touch via [@DashboardHub](https://twitter.com/DashboardHub) and le
    1. If using GitHub OAuth, create an OAuth App on GitHub
    2. Enter the 2 OAuth private keys from GitHub into the Firebase Authentication
 3. Click **Databases** and create an empty `firestore` database (indexes, security, collections and rules will all be automatically created later on as part of the deployment)
-4. Update `{{ FIREBASE_FUNCTIONS_URL }}` in file `functions/src/environments/environment.ts` with your function subdomain, for example `us-central1-pipelinedashboard-test`
-4. Update `{{ GITHUB_WEBHOOK_SECRET }}` in file `functions/src/environments/environment.ts` with your private secret key (random string), this is used to protect your webhook function, for example `pipelinedashboard-test-123`
+4. Deploying
+  i. Update `{{ FIREBASE_FUNCTIONS_URL }}` in file `functions/src/environments/environment.ts` with your function subdomain, for example `us-central1-pipelinedashboard-test`
+  ii. Update `{{ GITHUB_WEBHOOK_SECRET }}` in file `functions/src/environments/environment.ts` with your private secret key (random string), this is used to protect your webhook function, for example `pipelinedashboard-test-123`
 
 #### Angular
 
