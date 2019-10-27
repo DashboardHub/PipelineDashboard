@@ -1,6 +1,7 @@
 // Core modules
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireFunctions } from '@angular/fire/functions';
 import * as firebase from 'firebase';
 import { forkJoin, Observable } from 'rxjs';
 import { filter, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
@@ -33,6 +34,7 @@ export class ProjectService {
     private authService: AuthenticationService,
     private activityService: ActivityService,
     private dialog: MatDialog,
+    private fns: AngularFireFunctions,
     private repositoryService: RepositoryService
   ) {
   }
@@ -242,5 +244,16 @@ export class ProjectService {
           .valueChanges()),
         map((projects: IProject[]) => projects.map((project: IProject) => new ProjectModel(project)))
       );
+  }
+
+  /**
+   * Update the followers count in project collection
+   * @param projectUid string
+   * @param counter string
+   */
+  public updateFollowers(projectUid: string, increase: boolean): Observable<void> {
+    const callable: any = this.fns.httpsCallable('updateProjectFollowers');
+
+    return callable({ projectUid, increase });
   }
 }

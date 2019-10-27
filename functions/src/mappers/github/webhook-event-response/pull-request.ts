@@ -1,12 +1,13 @@
 import { firestore } from 'firebase-admin';
+import { DocumentData } from '../../../client/firebase-admin';
 
 // Dashboard mappers/models
-import { DocumentData } from '../../../client/firebase-admin';
 import { GitHubEventModel, GitHubEventType } from '../event.mapper';
 import { GitHubPayloadInput, GitHubPayloadMapper } from '../payload.mapper';
 import { GitHubPullRequestModel } from '../pullRequest.mapper';
 import { GitHubRepositoryMapper } from '../repository.mapper';
 import { GitHubUserMapper } from '../user.mapper';
+import { Logger } from './../../../client/logger';
 import { isExistProperties, HubEventActions, Repository, User } from './shared';
 
 
@@ -82,7 +83,7 @@ interface PullRequest {
   changed_files: number;
 }
 
-type Action = 'assigned' | 'unassigned' | 'review_requested' | 'review_request_removed' | 'labeled' | 'unlabeled' | 'opened' | 'edited' | 'closed' | 'ready_for_review' | 'locked' | 'unlocked' | 'reopened';
+type Action = 'assigned' | 'unassigned' | 'review_requested' | 'review_request_removed' | 'labeled' | 'unlabeled' | 'opened' | 'edited' | 'closed' | 'ready_for_review' | 'locked' | 'unlocked' | 'reopened' | 'synchronize';
 
 export interface PullRequestEventInput {
   action: Action;
@@ -142,6 +143,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
         this.closed(repository);
         break;
       }
+      case 'synchronize':
       case 'assigned':
       case 'unassigned':
       case 'review_requested':
@@ -157,6 +159,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
         break;
       }
       default: {
+        Logger.info('ACTION: ', this.action);
         throw new Error('Not found action');
       }
     }
@@ -174,6 +177,7 @@ export class PullRequestEventModel implements PullRequestEventInput, HubEventAct
       owner: GitHubUserMapper.import(this.pull_request.user),
       assignees: this.pull_request.assignees.map((assignee: User) => GitHubUserMapper.import(assignee)),
       reviewers: this.pull_request.requested_reviewers.map((reviewer: User) => GitHubUserMapper.import(reviewer)),
+      statusesUrl: this.pull_request.statuses_url,
       createdOn: firestore.Timestamp.fromDate(new Date(this.pull_request.created_at)),
       updatedOn: firestore.Timestamp.fromDate(new Date(this.pull_request.updated_at)),
       comments: this.pull_request.comments,

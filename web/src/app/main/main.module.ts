@@ -7,6 +7,7 @@ import { MainRoutingModule } from './main-routing.module';
 
 // Dashboard hub components
 import { FeaturesComponent } from './components/features/features.component';
+import { FollowingComponent } from './components/following/following.component';
 import { HelpDetailComponent } from './components/help-detail/help-detail.component';
 import { HelpComponent } from './components/help/help.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -31,6 +32,7 @@ import { MainComponent } from './main.component';
     ProfileComponent,
     TermsConditionsComponent,
     StatsComponent,
+    FollowingComponent,
   ],
 })
 export class MainModule { }
