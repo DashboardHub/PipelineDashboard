@@ -124,6 +124,15 @@
                   </ng-container>
                 </h4>
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
+                <p mat-line class="repository-detail-card__content__request">Commits: {{ pullRequest.commits }}</p>
+                <p mat-line class="repository-detail-card__content__request">Comments: {{ pullRequest.comments }}</p>
+                <p mat-line class="repository-detail-card__content__request">Review Comments: {{ pullRequest.reviewComments }}</p>
+                <p mat-line class="repository-detail-card__content__request" *ngIf="pullRequest.changedFiles">
+                  <mat-icon svgIcon="add_icon" ></mat-icon> <span>{{ pullRequest.additions }}</span>
+                  <mat-icon svgIcon="remove_icon"></mat-icon> <span>{{ pullRequest.deletions }}</span>
+                  Changed Files: {{ pullRequest.changedFiles }}
+                </p>
+
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
