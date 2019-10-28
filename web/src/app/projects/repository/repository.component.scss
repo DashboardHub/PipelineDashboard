@@ -79,6 +79,11 @@
     }
 
     &__content {
+
+      &__time-container{
+        margin: 0;
+      }
+
       &__description {
         font-size: 20px;
       }
@@ -131,15 +136,16 @@
 
       &__time-container-top {
         width: 250px;
-        display: flex;
         justify-content: flex-start;
+        div {
+          display:flex;
+        }
       }
 
       @media (max-width: $breakpoint-md) {
         &__time-container-top {
           width: 120px;
           display: flex;
-          position: absolute;
           font-size: 9pt;
           right: 0;
           top: 0;

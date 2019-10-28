@@ -85,10 +85,20 @@
                 <img matListAvatar [src]="issue.owner.avatarUrl" [alt]="issue.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues" fxLayoutGap="5px">
                   <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
+                <p class="repository-detail-card__content__time-container">                
+                  <span class="repository-detail-card__content__time-container-top">
+                 <div>
+                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <p mat-line class="repository-detail-card__content__time">{{ issue.createdOn.toDate() | timeAgo }}</p>
+                 </div>
+                </span>
                 <span class="repository-detail-card__content__time-container-top">
+                 <div>
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn.toDate() | timeAgo }}</p>
+                </div>
                 </span>
+                </p>
               </mat-list-item>
             </mat-list>
           </mat-card-content>
