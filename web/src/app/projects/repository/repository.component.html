@@ -135,9 +135,9 @@
                   </div>
                 </span>
                 <p *ngFor="let buildTime of pullRequest.buildTimes" mat-line class="repository-detail-card__content__request">{{ buildTime.context }}
-                  <span class="repository-detail-card__content">
-                    <p mat-line class="repository-detail-card__content__time">{{ buildTime.time }} seconds </p>
-                  </span>
+                 <span class="repository-detail-card__content">
+                   <p mat-line class="repository-detail-card__content__time">{{ buildTime.time }} seconds </p>
+                 </span>
                 </p>
               </mat-list-item>
             </mat-list>
