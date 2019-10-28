@@ -2,6 +2,7 @@
 import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 
 import { DocumentSnapshot, FirebaseAdmin, IncrementFieldValue } from '../client/firebase-admin';
+
 import { Logger } from '../client/logger';
 
 export const onCreateProject: CloudFunction<DocumentSnapshot> = firestore
@@ -60,3 +61,20 @@ export const onCreatePings: CloudFunction<DocumentSnapshot> = firestore
       throw new Error(err);
     }
   });
+
+export const onCreateEvent: any = async (): Promise<any> => {
+  try {
+    await FirebaseAdmin
+      .firestore()
+      .collection('platform')
+      .doc('stats')
+      .set(
+        {
+          events: IncrementFieldValue,
+        },
+        { merge: true });
+  } catch (err) {
+    Logger.error(err);
+    throw new Error(err);
+  }
+}
