@@ -263,13 +263,13 @@
           </div>
           <div fxLayout="column" fxLayoutAlign="center start">
             <div class="info__body__description"
-            *ngIf="repository.contributors && repository.contributors.length > 0; else topContributorsOther">
+             *ngIf="repository.contributors && repository.contributors.length > 0; else topContributorsOther">
               <a
               href="https://github.com/{{ repository.contributors[0].owner.username }}">{{ repository.contributors[0].owner.username }}</a>
             </div>
             <div>
               <p class="info__body__line" *ngIf="repository.contributors && repository.contributors.length > 0"
-                mat-line>Total Commits: {{ repository.contributors[0].total }}</p>
+                 mat-line>Total Commits: {{ repository.contributors[0].total }}</p>
               <p class="info__body__line" *ngIf="repository.contributors && !repository.contributors.length" mat-line>
                 Total Commits: N/A</p>
             </div>
@@ -289,7 +289,7 @@
         <div class="info__body" fxLayout fxLayoutAlign="start start">
           <div fxFlex="50px" *ngIf="repository.pullRequests && repository.pullRequests.length > 0">
             <img class="info__body__avatar" [alt]="repository.pullRequests[0].owner.username"
-            [src]="repository.pullRequests[0].owner.avatarUrl" />
+             [src]="repository.pullRequests[0].owner.avatarUrl" />
           </div>
           <div fxFlex="50px" *ngIf="repository.pullRequests && !repository.pullRequests.length">
             <mat-icon class="info__body__icon">person</mat-icon>
