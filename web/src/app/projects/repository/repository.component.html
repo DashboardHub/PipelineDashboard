@@ -38,9 +38,6 @@
           <mat-divider></mat-divider>
           <div fxFlex="50%" class="repository__header__contributors">
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-              <div fxHide.gt-md>
-                <ng-container *ngTemplateOutlet="refresh"></ng-container>
-              </div>
               <mat-icon *ngIf="!expansion.expanded">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expansion.expanded">keyboard_arrow_up</mat-icon>
             </div>
@@ -54,9 +51,6 @@
               <div *ngIf="repository.contributors && repository.contributors.length > numberOfDisplayedUsers"
                 class="repository__header__contributors__container__length">
                 +{{ repository.contributors.length - numberOfDisplayedUsers }}
-              </div>
-              <div fxHide.lt-lg>
-                <ng-container *ngTemplateOutlet="refresh"></ng-container>
               </div>
             </div>
           </div>
@@ -130,6 +124,15 @@
                   </ng-container>
                 </h4>
                 <p mat-line class="repository-detail-card__content__request-user">{{ pullRequest.owner.username }}</p>
+                <p mat-line class="repository-detail-card__content__request">Commits: {{ pullRequest.commits }}</p>
+                <p mat-line class="repository-detail-card__content__request">Comments: {{ pullRequest.comments }}</p>
+                <p mat-line class="repository-detail-card__content__request">Review Comments: {{ pullRequest.reviewComments }}</p>
+                <p mat-line class="repository-detail-card__content__request" *ngIf="pullRequest.changedFiles">
+                  <mat-icon svgIcon="add_icon" ></mat-icon> <span>{{ pullRequest.additions }}</span>
+                  <mat-icon svgIcon="remove_icon"></mat-icon> <span>{{ pullRequest.deletions }}</span>
+                  Changed Files: {{ pullRequest.changedFiles }}
+                </p>
+
                 <span class="repository-detail-card__content__time-container-bottom">
                   <mat-icon svgIcon="time_icon"></mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
@@ -313,13 +316,3 @@
   </div>
 </ng-template>
 <ng-template #emptyData>no data</ng-template>
-<ng-template #refresh>
-  <button *ngIf="isAdmin" mat-button type="submit" class="repository__header__contributors__refresh" (click)="reloadRepository(repository, $event)" [disabled]="manualReload">
-    <span fxLayout="row" fxLayoutAlign="center center">
-      <mat-icon svgIcon="refresh_icon"></mat-icon>
-      <span fxHide.lt-lg fxFlexOffset="10px">
-        Refresh
-      </span>
-    </span>
-  </button>
-</ng-template>

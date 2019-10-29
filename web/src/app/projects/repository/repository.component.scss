@@ -7,7 +7,7 @@
     position: absolute;
     padding-left: 5px;
   }
-  
+
   &__container {
     width: 100%;
 
@@ -193,29 +193,8 @@
       justify-content: flex-start;
       align-items: center;
 
-      &__refresh {
-        background: $green-2-color;
-        color: #fff;
-        font-weight: 300;
-        height: 32px;
-        border-radius: 4px;
-
-        @media (max-width: $breakpoint-lg) {
-          min-width: 32px;
-          padding: 4px;
-          margin-bottom: 10px;
-        }
-      }
-
       @media (max-width: $breakpoint-lg) {
         padding-top: 0px;
-      }
-
-      &__refresh:disabled {
-        color: #fff;
-        opacity: 0.5;
-        cursor: default;
-        pointer-events: none;
       }
 
       &__avatar {

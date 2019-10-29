@@ -36,7 +36,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
   @Input()
   public uid: string;
 
-  public manualReload: boolean = false;
   public repository: IRepository;
   public numberOfDisplayedUsers: number;
 
@@ -156,18 +155,6 @@ export class RepositoryComponent implements OnInit, OnDestroy {
     this.repositoryService.createGitWebhook(this.repository)
       .pipe(take(1))
       .subscribe();
-  }
-
-  /**
-   * Reload repository when click on refresh button
-   * @param repository RepositoryModel
-   * @param event Event
-   */
-  public reloadRepository(repository: RepositoryModel, event: Event): void {
-    event.stopPropagation();
-    this.manualReload = true;
-    this.repositoryService.loadRepository(repository)
-      .subscribe(() => setTimeout(() => this.manualReload = false, 60000)); // disable the ping button for 60 seconds;
   }
 
   private showWebHookAlert(): void {

@@ -6,6 +6,7 @@ import { https, HttpsFunction, Response } from 'firebase-functions';
 import { enviroment } from '../environments/environment';
 
 // Dashboard hub firebase functions models/mappers
+import { onCreateEvent } from '../application/stats';
 import { GitHubClient } from '../client/github';
 import { Logger } from '../client/logger';
 import { GitHubContributorInput, GitHubContributorMapper } from '../mappers/github/index.mapper';
@@ -104,6 +105,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
       result
         .then(() => {
           Logger.info('Parsing done!');
+          onCreateEvent();
           res.status(200).send();
         })
         .catch((err: any) => {

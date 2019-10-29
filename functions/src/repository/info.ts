@@ -96,6 +96,15 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
 
   mappedData.uid = repository.uid;
 
+  // Find more information for each PR
+  const promises: Promise<any>[] = [];
+  mappedData.pullRequests.forEach((pullrequest: GitHubPullRequestModel) => {
+      promises.push(GitHubClient<GitHubPullRequestInput[]>(`/repos/${repository.fullName}/pulls/${pullrequest.id}`, token));
+  });
+
+  const pullRequestData: GitHubPullRequestInput[] = await Promise.all(promises);
+  mappedData.pullRequests = pullRequestData ? pullRequestData.map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)) : [];
+
   await FirebaseAdmin
     .firestore()
     .collection('repositories')
