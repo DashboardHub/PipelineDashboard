@@ -34,7 +34,7 @@ interface Links {
   statuses: LinkObj;
 }
 
-interface PullRequest {
+export interface PullRequest {
   url: string;
   id: number;
   node_id: string;
