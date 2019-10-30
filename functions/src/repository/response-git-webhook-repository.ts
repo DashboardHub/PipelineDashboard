@@ -156,7 +156,7 @@ async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
       const userData: DocumentData = element.data();
       const githubToken: string = userData && userData.oauth ? userData.oauth.githubToken : null;
       const ref: string = data.pull_request.statuses_url.split('/').pop();
-      getPullRequestStatus(githubToken, repository.fullName, ref, repository.uid, data.pull_request.id);
+      await getPullRequestStatus(githubToken, repository.fullName, ref, repository.uid, data.pull_request.id);
     }
   }
 
