@@ -30,10 +30,10 @@ async function deleteProjectRepositories(projectUid: string, project: ProjectMod
               }
 
               t.update(repoRef, { projects: repoData.projects });
+            
+              deleteRepoBuilds(repositoryUid);
             });
         });
-
-        await deleteRepoBuilds(repositoryUid);
       }
     }
 
@@ -70,4 +70,3 @@ export const onDeleteProject: CloudFunction<DocumentSnapshot> = firestore
     deleteProjectPings(project);
     await deleteProjectRepositories(context.params.projectUid, project);
   });
-  

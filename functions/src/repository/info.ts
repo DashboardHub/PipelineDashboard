@@ -112,13 +112,13 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
     .set(mappedData, { merge: true });
 
   // Saving the Pull Request status and build time data
-  const promises: Promise<any>[] = [];
+  const buildTimePromises: Promise<any>[] = [];
   mappedData.pullRequests.map((pullRequest: GitHubPullRequestModel) => {
     const ref: string = pullRequest.statusesUrl.split('/').pop();
-    promises.push(getPullRequestStatus(token, repository.fullName, ref, mappedData.uid, pullRequest.uid))
+    buildTimePromises.push(getPullRequestStatus(token, repository.fullName, ref, mappedData.uid, pullRequest.uid))
   });
 
-  await Promise.all(promises);
+  await Promise.all(buildTimePromises);
 
   return mappedData;
 };
