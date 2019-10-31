@@ -127,7 +127,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
 
 async function simpleHubEvent(data: HubEventActions): Promise<void> {
   const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
-
+  
   addHubEventToCollection(repository, data);
   await RepositoryModel.saveRepository(repository);
 }
@@ -202,6 +202,10 @@ async function pushEvent(data: PushEventModel): Promise<void> {
 async function issueCommentEvent(data: IssueCommentEventModel): Promise<void> {
   Logger.info('issueCommentEvent');
   await simpleHubEvent(data);
+  const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
+
+  data.updateData(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function createEvent(data: CreateEventModel): Promise<void> {
