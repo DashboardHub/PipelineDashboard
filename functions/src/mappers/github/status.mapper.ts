@@ -1,4 +1,7 @@
-import { firestore } from 'firebase-admin';
+export interface BuildTimes {
+  context: string;
+  time: number;
+}
 
 export interface GitHubPullRequestStatusInput {
   id: number;

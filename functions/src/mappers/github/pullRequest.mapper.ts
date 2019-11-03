@@ -4,7 +4,7 @@ import { firestore } from 'firebase-admin';
 import { GitHubUserInput, GitHubUserMapper, GitHubUserModel } from './user.mapper';
 
 export interface GitHubPullRequestInput {
-  id: number;
+  id: string;
   html_url: string;
   state: string;
   title: string;
@@ -26,7 +26,7 @@ export interface GitHubPullRequestInput {
 }
 
 export interface GitHubPullRequestModel {
-  uid: number;
+  uid: string;
   url: string;
   state: string;
   title: string;
