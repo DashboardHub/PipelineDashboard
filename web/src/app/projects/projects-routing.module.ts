@@ -14,6 +14,7 @@ import { ViewProjectComponent } from './view/view.component';
 // Dashboard hub authentication guards
 import { AuthGuard } from '@core/guards/authentication.guard';
 import { RepositoryResolver } from '@core/resolvers/repository.resolver';
+import { PullRequestsComponent } from './pull-requests/pull-requests.component';
 import { RatingComponent } from './rating/rating.component';
 
 const routes: Routes = [
@@ -49,6 +50,11 @@ const routes: Routes = [
   {
     path: ':projectUid/rating/:repoUid',
     component: RatingComponent,
+    resolve: { repository: RepositoryResolver },
+  },
+  {
+    path: ':projectUid/:repoUid',
+    component: PullRequestsComponent,
     resolve: { repository: RepositoryResolver },
   },
 ];

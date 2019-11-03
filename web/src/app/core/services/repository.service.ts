@@ -107,10 +107,27 @@ export class RepositoryService {
       if (filteredStatus.length > 0) {
         const buildTime: number = Math.floor(new Date(filteredStatus[0].updatedAt).getTime()
           - new Date(filteredStatus[filteredStatus.length - 1].updatedAt).getTime()) / 1000;
-        buildTimes.push({context: context, time: buildTime});
+        buildTimes.push({ context: context, time: buildTime });
       }
     });
 
     return buildTimes;
+  }
+
+  public getPullRequestStatuses(uid: string): Observable<PullRequestStatusModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs.collection<IRepository>('repositories')
+          .doc<IRepository>(uid)
+          .collection<PullRequestStatusModel>('statuses')
+          .snapshotChanges().pipe(
+            map((actions: any) => actions.map((a: any) => {
+              const data: PullRequestStatusModel = a.payload.doc.data();
+              const id: string = a.payload.doc.id;
+
+              return { id, ...data };
+            }))
+          )));
   }
 }

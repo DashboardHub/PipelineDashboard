@@ -1,0 +1,65 @@
+<div class="pull-request" *ngIf="statuses">
+  <div class="pull-request__header" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+      <a [routerLink]="['/projects', projectUid]" *ngIf="!isSmallScreen"> Project ></a>
+      <span>Pull Requests</span>
+    </div>
+  </div>
+  <mat-card class="pull-request__card">
+    <mat-card-header>
+      <div class="pull-request__card__header">
+        <mat-icon svgIcon="request_white"></mat-icon>
+      </div>
+      <mat-card-title class="pull-request__card__title">
+        Pull Requests
+      </mat-card-title>
+      <mat-card-subtitle class="pull-request__card__title__subtitle">
+        You have {{ statuses.length }} pull requests
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="pull-request__card__content">
+      <table mat-table [dataSource]="repository.pullRequests" class="pull-request__card__content__table">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Id</th>
+          <td mat-cell *matCellDef="let element">
+            <span fxLayoutAlign.xs="center center">{{ element.id }}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>Title</th>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+        <ng-container matColumnDef="buildCount">
+          <th mat-header-cell *matHeaderCellDef>Build Count</th>
+          <td mat-cell *matCellDef="let element">{{ element.statuses.historic.length || 0 }}</td>
+        </ng-container>
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>Build Time </th>
+          <td mat-cell *matCellDef="let element">{{ element.statuses.latest.buildTimes[0].time || N/A }} seconds</td>
+        </ng-container>
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>State</th>
+          <td mat-cell *matCellDef="let element">{{ element.state }}</td>
+        </ng-container>
+        <ng-container matColumnDef="commits">
+          <th mat-header-cell *matHeaderCellDef>Commits</th>
+          <td mat-cell *matCellDef="let element">{{ element.commits }}</td>
+        </ng-container>
+        <ng-container matColumnDef="comments">
+          <th mat-header-cell *matHeaderCellDef>Comments</th>
+          <td mat-cell *matCellDef="let element">{{ element.comments }}</td>
+        </ng-container>
+        <ng-container matColumnDef="reviewComments">
+          <th mat-header-cell *matHeaderCellDef>Review Comments</th>
+          <td mat-cell *matCellDef="let element">{{ element.reviewComments }}</td>
+        </ng-container>
+        <ng-container matColumnDef="changedFiles">
+          <th mat-header-cell *matHeaderCellDef>Files Changed</th>
+          <td mat-cell *matCellDef="let element" class ="icons-column" fxLayout="row" fxLayoutAlign="start center"> <mat-icon svgIcon="add_icon" ></mat-icon> <span>{{ element.additions }}</span> <mat-icon svgIcon="remove_icon" ></mat-icon><span>{{element.deletions}}</span></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

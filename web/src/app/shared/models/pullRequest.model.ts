@@ -3,7 +3,7 @@ import { firestore } from 'firebase';
 
 // Application model
 import { BuildTimes } from './build-times.model';
-import { state } from './status.model';
+import { state, PullRequestStatusModel } from './status.model';
 import { UserModel } from './user.model';
 
 /**
@@ -30,4 +30,5 @@ export class PullRequestModel {
   additions: number;
   deletions: number;
   changedFiles: number;
+  statuses: PullRequestStatusModel;
 }

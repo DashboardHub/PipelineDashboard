@@ -44,6 +44,12 @@ service cloud.firestore {
       allow list: if false;
       allow update: if false;
       allow delete: if false;
+
+      match /statuses/{status} {
+        allow create: if isSignedIn();
+        allow get, list: if true;
+        allow update, delete: if isSignedIn() && request.auth.uid in projectDoc().access.admin;
+      }
     }
 
     match /platform/stats {
