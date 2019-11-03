@@ -18,9 +18,9 @@ export const getPullRequestBuildTime: any = (statuses: GitHubPullRequestStatusMo
   uniqueContexts.map((context: string) => {
     const filteredStatus: GitHubPullRequestStatusModel[] = statuses.filter((status: GitHubPullRequestStatusModel) => status.context === context);
     if (filteredStatus.length > 0) {
-      const buildTime: number = Math.floor(new Date(filteredStatus[0].updatedAt).getTime()
-        - new Date(filteredStatus[filteredStatus.length - 1].updatedAt).getTime()) / 1000;
-      buildTimes.push({ context: context, time: buildTime });
+      const buildTime: number = Math.floor((filteredStatus[0].updatedAt.toDate().getTime()
+        - filteredStatus[filteredStatus.length - 1].updatedAt.toDate().getTime())) / 1000;
+      buildTimes.push({ context: context, time: buildTime, createdAt: filteredStatus[0].createdAt });
     }
   });
   return buildTimes;

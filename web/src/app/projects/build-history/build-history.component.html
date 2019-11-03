@@ -26,8 +26,13 @@
         </ng-container>
 
         <ng-container matColumnDef="time">
-          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <th mat-header-cell *matHeaderCellDef>Duration</th>
           <td mat-cell *matCellDef="let element"> {{ element.buildTimes[0].time }} seconds </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Created</th>
+          <td mat-cell *matCellDef="let element"> {{ element.buildTimes[0].createdAt.toDate() | timeAgo}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

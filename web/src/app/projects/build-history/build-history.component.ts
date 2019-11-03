@@ -16,7 +16,7 @@ export class BuildHistoryComponent implements OnInit {
   public repoUid: string;
   public pullRequestUid: string;
   public historic: [];
-  public displayedColumns: string[] = ['commitId', 'time'];
+  public displayedColumns: string[] = ['commitId', 'time', 'createdAt'];
   public status: PullRequestStatusModel;
 
   /**
