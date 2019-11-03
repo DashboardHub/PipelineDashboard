@@ -1,0 +1,38 @@
+<div class="build-history" *ngIf="status">
+  <div class="build-history__header" fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+      <a [routerLink]="['/projects', projectUid]" *ngIf="!isSmallScreen"> Project ></a>
+      <a [routerLink]="['/projects', projectUid, repoUid]" *ngIf="!isSmallScreen"> Pull Request ></a>
+      <span>Build History</span>
+    </div>
+  </div>
+  <mat-card class="build-history__card">
+    <mat-card-header>
+      <div class="build-history__card__header">
+        <mat-icon svgIcon="request_white"></mat-icon>
+      </div>
+      <mat-card-title class="build-history__card__title">
+        Build History
+      </mat-card-title>
+      <mat-card-subtitle class="build-history__card__title__subtitle">
+        You have {{ status.historic.length }} total builds
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="build-history__card__content">
+      <table mat-table [dataSource]="status.historic" class="build-history__card__content__table">
+        <ng-container matColumnDef="commitId">
+          <th mat-header-cell *matHeaderCellDef>Commit Id</th>
+          <td mat-cell *matCellDef="let element"> {{ element.commitId }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <td mat-cell *matCellDef="let element"> {{ element.buildTimes[0].time }} seconds </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

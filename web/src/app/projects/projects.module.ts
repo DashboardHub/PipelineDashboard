@@ -7,6 +7,7 @@ import { SharedModule } from '@shared/shared.module';
 import { ProjectsRoutingModule } from './projects-routing.module';
 
 // Dashboard hub components
+import { BuildHistoryComponent } from './build-history/build-history.component';
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
 import { MonitorSummaryComponent } from './monitor-summary/monitor-summary.component';
 import { PullRequestsComponent } from './pull-requests/pull-requests.component';
@@ -27,6 +28,7 @@ import { ViewProjectComponent } from './view/view.component';
     ViewProjectComponent,
     RatingComponent,
     PullRequestsComponent,
+    BuildHistoryComponent,
   ],
 })
 export class ProjectsModule { }

@@ -94,12 +94,16 @@ export class RepositoryService {
     return callable({ token: this.authService.profile.oauth.githubToken, repository: { fullName: fullName, ref: ref } });
   }
 
-  public getPullRequestStatuses(uid: string): Observable<PullRequestStatusModel[]> {
+  /**
+   * Find all pull reqeust status and map the latest bulid time for each pull reqeust
+   * @param repoUid string
+   */
+  public getPullRequestStatuses(repoUid: string): Observable<PullRequestStatusModel[]> {
     return this.activityService
       .start()
       .pipe(
         switchMap(() => this.afs.collection<IRepository>('repositories')
-          .doc<IRepository>(uid)
+          .doc<IRepository>(repoUid)
           .collection<PullRequestStatusModel>('statuses')
           .snapshotChanges().pipe(
             map((actions: any) => actions.map((a: any) => {
@@ -109,5 +113,21 @@ export class RepositoryService {
               return { id, ...data };
             }))
           )));
+  }
+
+  /**
+   * Find the Status details for pull requst of a given repository
+   * @param repoUid string
+   * @param uid string
+   */
+  public getPullRequestStatusByUid(repoUid: string, uid: string): Observable<PullRequestStatusModel> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs.collection<IRepository>('repositories')
+          .doc<IRepository>(repoUid)
+          .collection<PullRequestStatusModel>('statuses')
+          .doc<PullRequestStatusModel>(uid)
+          .valueChanges()));
   }
 }
