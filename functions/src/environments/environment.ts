@@ -1,8 +1,8 @@
 
 export const enviroment: Config = {
   githubWebhook: {
-    url: 'https://{{ FIREBASE_FUNCTIONS_URL }}.cloudfunctions.net/responseGitWebhookRepository',
-    secret: '{{ GITHUB_WEBHOOK_SECRET }}',
+    url: 'https://us-central1-pipelinedashboard-khush.cloudfunctions.net/responseGitWebhookRepository',
+    secret: '123454321',
     content_type: 'json',
     insecure_ssl: '0',
     events: [
