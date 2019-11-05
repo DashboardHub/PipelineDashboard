@@ -13,8 +13,16 @@ export interface GitHubPullRequestInput {
   user: GitHubUserInput
   assignees: GitHubUserInput[];
   requested_reviewers: GitHubUserInput[];
+  statuses_url: string;
   created_at: string;
   updated_at: string;
+  comments: number;
+  review_comments: number;
+  maintainer_can_modify: boolean;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changed_files: number;
 }
 
 export interface GitHubPullRequestModel {
@@ -27,8 +35,16 @@ export interface GitHubPullRequestModel {
   owner: GitHubUserModel;
   assignees: GitHubUserModel[];
   reviewers: GitHubUserModel[];
+  statusesUrl: string;
   createdOn: firestore.Timestamp;
   updatedOn: firestore.Timestamp;
+  comments: number;
+  reviewComments: number;
+  maintainerCanModify: boolean;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changedFiles: number;
 }
 
 export class GitHubPullRequestMapper {
@@ -43,8 +59,16 @@ export class GitHubPullRequestMapper {
       owner: GitHubUserMapper.import(input.user),
       assignees: input.assignees.map((assignee: GitHubUserInput) => GitHubUserMapper.import(assignee)),
       reviewers: input.requested_reviewers.map((reviewer: GitHubUserInput) => GitHubUserMapper.import(reviewer)),
+      statusesUrl: input.statuses_url,
       createdOn: firestore.Timestamp.fromDate(new Date(input.created_at)),
       updatedOn: firestore.Timestamp.fromDate(new Date(input.updated_at)),
+      comments: input.comments,
+      reviewComments: input.review_comments,
+      maintainerCanModify: input.maintainer_can_modify,
+      commits: input.commits,
+      additions: input.additions,
+      deletions: input.deletions,
+      changedFiles: input.changed_files,
     };
   }
 }

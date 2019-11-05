@@ -13,6 +13,7 @@ import { MainComponent } from './main.component';
 // Dashboard hub authentication guards
 import { HelpResolver } from '@app/core/resolvers/help.resolver';
 import { AuthGuard } from '@core/guards/authentication.guard';
+import { FollowingComponent } from './components/following/following.component';
 import { HelpDetailComponent } from './components/help-detail/help-detail.component';
 
 const routes: Routes = [
@@ -34,6 +35,11 @@ const routes: Routes = [
         path: 'features',
         pathMatch: 'full',
         component: FeaturesComponent,
+      },
+      {
+        path: 'following',
+        pathMatch: 'full',
+        component: FollowingComponent,
       },
       {
         path: 'help',

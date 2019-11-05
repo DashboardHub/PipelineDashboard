@@ -1,14 +1,16 @@
 // Core modules
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 // Firestore modules
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
 
 // Dashboard hub model and services
 import { UserModel, UserStatsModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
+import { AuthenticationService } from './authentication.service';
 
 /**
  * User service
@@ -25,7 +27,8 @@ export class UserService {
    */
   constructor(
     private afs: AngularFirestore,
-    private activityService: ActivityService
+    private activityService: ActivityService,
+    private authService: AuthenticationService
   ) {
   }
 
@@ -48,6 +51,23 @@ export class UserService {
   }
 
   /**
+   * Find all the user information
+   */
+  public findAllUserList(): Observable<UserModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<UserModel>(
+            'users',
+            (ref: firebase.firestore.Query) => ref
+              .orderBy('lastSignInTime', 'desc')
+          )
+          .valueChanges())
+      );
+  }
+
+  /**
    * Find the user information by user id
    * @param userId user id of the user
    */
@@ -56,6 +76,27 @@ export class UserService {
       .start()
       .pipe(
         switchMap(() => this.afs.doc<UserModel>(`userStats/${userId}`).valueChanges())
+      );
+  }
+
+  /**
+   * Update the following array inside users collection based upon the update flag
+   * @param projectUid string
+   * @param isUpdate flag if user uid has to remove or array in following array
+   */
+  public updateFollowing(projectUid: string, isUpdate: boolean): Observable<void> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs
+          .collection<UserModel>('users')
+          .doc<any>(this.authService.profile.uid)
+          .set(
+            {
+              following: isUpdate ? firebase.firestore.FieldValue.arrayUnion(projectUid) : firebase.firestore.FieldValue.arrayRemove(projectUid),
+            },
+            { merge: true })),
+        take(1)
       );
   }
 }

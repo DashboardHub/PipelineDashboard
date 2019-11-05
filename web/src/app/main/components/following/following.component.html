@@ -1,0 +1,16 @@
+<div class="project">
+  <mat-card class="project-card" *ngIf="projects.length > 0">
+    <mat-card-header>
+      <div class="project-card__header">
+        <mat-icon svgIcon="project_list_icon"></mat-icon>
+      </div>
+      <mat-card-title class="project-card__title">
+        {{ title }}
+      </mat-card-title>
+      <mat-card-subtitle class="project-card__title__subtitle">You are following {{ projects.length }} projects</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="project-card__content">
+      <dashboard-projects-list [projects]="projects"></dashboard-projects-list>
+    </mat-card-content>
+  </mat-card>
+</div>

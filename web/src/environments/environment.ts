@@ -12,4 +12,6 @@ export const environment: Config = {
     storageBucket: '',
     messagingSenderId: '',
   },
+
+  tracking: '',
 };

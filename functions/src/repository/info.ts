@@ -8,11 +8,13 @@ import {
   GitHubIssueInput, GitHubIssueMapper,
   GitHubMilestoneInput, GitHubMilestoneMapper,
   GitHubPullRequestInput, GitHubPullRequestMapper,
-  GitHubReleaseInput, GitHubReleaseMapper,
-  GitHubRepositoryInput, GitHubRepositoryMapper,
+  GitHubPullRequestModel, GitHubReleaseInput,
+  GitHubReleaseMapper, GitHubRepositoryInput,
+  GitHubRepositoryMapper,
   GitHubRepositoryModel,
   GitHubRepositoryWebhookModel,
 } from '../mappers/github/index.mapper';
+import { GitHubPullRequestStatusInput, GitHubPullRequestStatusMapper, GitHubPullRequestStatusModel } from '../mappers/github/status.mapper';
 import { FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClient } from './../client/github';
 import { Logger } from './../client/logger';
@@ -25,6 +27,14 @@ export interface RepositoryInfoInput {
     id: number;
     fullName: string;
   }
+}
+
+export interface PullRequestStatusInput {
+  token: string;
+  repository: {
+    fullName: string;
+    ref: string;
+  };
 }
 
 export const getRepositoryInfo: any = async (token: string, repository: { uid: string; id: number; fullName: string; }) => {
@@ -86,11 +96,34 @@ export const getRepositoryInfo: any = async (token: string, repository: { uid: s
 
   mappedData.uid = repository.uid;
 
+  // Find more information for each PR
+  const promises: Promise<any>[] = [];
+  mappedData.pullRequests.forEach((pullrequest: GitHubPullRequestModel) => {
+      promises.push(GitHubClient<GitHubPullRequestInput[]>(`/repos/${repository.fullName}/pulls/${pullrequest.id}`, token));
+  });
+
+  const pullRequestData: GitHubPullRequestInput[] = await Promise.all(promises);
+  mappedData.pullRequests = pullRequestData ? pullRequestData.map((pullrequest: GitHubPullRequestInput) => GitHubPullRequestMapper.import(pullrequest)) : [];
+
   await FirebaseAdmin
     .firestore()
     .collection('repositories')
     .doc(mappedData.uid)
     .set(mappedData, { merge: true });
 
+  return mappedData;
+};
+
+export const getPullRequestStatus: any = async (token: string, repository: { fullName: string; ref: string;  }) => {
+  let data: GitHubPullRequestStatusInput[];
+  let mappedData: GitHubPullRequestStatusModel[];
+
+  try {
+    data = await GitHubClient<GitHubPullRequestStatusInput[]>(`/repos/${repository.fullName}/statuses/${repository.ref}`, token);
+    mappedData = data.map((pullrequest: GitHubPullRequestStatusInput) => GitHubPullRequestStatusMapper.import(pullrequest));
+  } catch (error) {
+    Logger.error(error, [`Pull request status path: ${repository.fullName}/statuses/${repository.ref}`]);
+    throw new Error(error);
+  }
   return mappedData;
 };

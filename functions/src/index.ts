@@ -8,7 +8,7 @@ import { DocumentSnapshot } from './client/firebase-admin';
 // Dashboard repositories
 import { onCreateGitWebhookRepository, CreateGitWebhookRepositoryInput } from './repository/create-git-webhook-repository';
 import { onCreateRepository } from './repository/create-repository';
-import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
+import { getPullRequestStatus, getRepositoryInfo, PullRequestStatusInput, RepositoryInfoInput } from './repository/info';
 import { onResponseGitWebhookRepository } from './repository/response-git-webhook-repository';
 import { onUpdateRepository } from './repository/update-repository';
 
@@ -27,7 +27,7 @@ import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from '.
 import { onDeleteRepository } from './repository/delete-repository';
 
 import { onCreatePings as onCreatePingsStats, onCreateProject as onCreateProjectStats, onCreateUser as onCreateUserStats } from './application/stats';
-import { updateViews, ProjectInput } from './project/project';
+import { updateFollowers, updateViews, ProjectInput } from './project/project';
 import { deletePingsAfter30days, runAllMonitors60Mins } from './scheduler/schedule';
 
 
@@ -44,6 +44,8 @@ export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookR
 export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid, input.type));
 export const deletePingsByMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => deleteMonitorPings(input.projectUid, input.monitorUid));
 export const updateProjectViews: HttpsFunction = functions.https.onCall((input: ProjectInput, context: CallableContext) => updateViews(input.projectUid));
+export const updateProjectFollowers: HttpsFunction = functions.https.onCall((input: ProjectInput, context: CallableContext) => updateFollowers(input.projectUid, input.increase));
+export const findPullRequestStatus: HttpsFunction = functions.https.onCall((input: PullRequestStatusInput, context: CallableContext) => getPullRequestStatus(input.token, input.repository));
 
 export const deleteProject: CloudFunction<DocumentSnapshot> = onDeleteProject;
 export const updateProject: CloudFunction<DocumentSnapshot> = onUpdateProject;
