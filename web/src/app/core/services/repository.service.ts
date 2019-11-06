@@ -7,7 +7,7 @@ import { of, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 // Dashboard hub model and services
-import { BuildTimes, IRepository, PullRequestStatusModel, RepositoryModel } from '@shared/models/index.model';
+import { IRepository, PullRequestStatusModel, RepositoryModel } from '@shared/models/index.model';
 import { ActivityService } from './activity.service';
 import { AuthenticationService } from './authentication.service';
 
@@ -95,22 +95,39 @@ export class RepositoryService {
   }
 
   /**
-   * Return the build times for all type of context for any PR
-   * @param statuses PullRequestStatusModel[]
+   * Find all pull reqeust status and map the latest bulid time for each pull reqeust
+   * @param repoUid string
    */
-  public getPRBuildTime(statuses: PullRequestStatusModel[]): BuildTimes[] {
-    const contexts: string[] = statuses.map((status: PullRequestStatusModel) => status.context);
-    const uniqueContexts: string[] = Array.from(new Set(contexts).values());
-    let buildTimes: BuildTimes[] = [];
-    uniqueContexts.map((context: string) => {
-      const filteredStatus: PullRequestStatusModel[] = statuses.filter((status: PullRequestStatusModel) => status.context === context);
-      if (filteredStatus.length > 0) {
-        const buildTime: number = Math.floor(new Date(filteredStatus[0].updatedAt).getTime()
-          - new Date(filteredStatus[filteredStatus.length - 1].updatedAt).getTime()) / 1000;
-        buildTimes.push({context: context, time: buildTime});
-      }
-    });
+  public getPullRequestStatuses(repoUid: string): Observable<PullRequestStatusModel[]> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs.collection<IRepository>('repositories')
+          .doc<IRepository>(repoUid)
+          .collection<PullRequestStatusModel>('statuses')
+          .snapshotChanges().pipe(
+            map((actions: any) => actions.map((a: any) => {
+              const data: PullRequestStatusModel = a.payload.doc.data();
+              const id: string = a.payload.doc.id;
 
-    return buildTimes;
+              return { id, ...data };
+            }))
+          )));
+  }
+
+  /**
+   * Find the Status details for pull requst of a given repository
+   * @param repoUid string
+   * @param uid string
+   */
+  public getPullRequestStatusByUid(repoUid: string, uid: string): Observable<PullRequestStatusModel> {
+    return this.activityService
+      .start()
+      .pipe(
+        switchMap(() => this.afs.collection<IRepository>('repositories')
+          .doc<IRepository>(repoUid)
+          .collection<PullRequestStatusModel>('statuses')
+          .doc<PullRequestStatusModel>(uid)
+          .valueChanges()));
   }
 }

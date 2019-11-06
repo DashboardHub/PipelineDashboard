@@ -1,0 +1,52 @@
+@import "../../../assets/scss/variable";
+@import "../../../assets/scss/mixin.scss";
+
+.pull-request {
+  @include pageContainer;
+
+  &__header {
+    @include pageHeader;
+  }
+
+  &__card {
+    @include cardContainer;
+
+    &__header {
+      @include header-icon;
+      background-color: $purple-color;
+      box-shadow: 0px 3px 6px $purple-shadow;
+    }
+
+    &__title {
+      @include title;
+
+      &__subtitle {
+        @include subtitle;
+      }
+    }
+
+    &__content {
+      padding: 0;
+      display: block;
+      overflow: auto;
+      max-height: 60vh;
+
+      @include tableContainer;
+
+      &__table {
+        width: 100%;
+        padding: 0 2px;
+
+        &__url {
+          width: 30vw;
+          word-break: break-all;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+
+  .icons-column{
+    height: 50px;
+  }
+}

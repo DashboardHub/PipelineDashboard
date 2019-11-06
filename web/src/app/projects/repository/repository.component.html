@@ -38,6 +38,9 @@
           <mat-divider></mat-divider>
           <div fxFlex="50%" class="repository__header__contributors">
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+               <div fxHide.gt-md>
+                    <ng-container *ngTemplateOutlet="pullRequestDetails"></ng-container>
+                </div>
               <mat-icon *ngIf="!expansion.expanded">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="expansion.expanded">keyboard_arrow_up</mat-icon>
             </div>
@@ -51,6 +54,9 @@
               <div *ngIf="repository.contributors && repository.contributors.length > numberOfDisplayedUsers"
                 class="repository__header__contributors__container__length">
                 +{{ repository.contributors.length - numberOfDisplayedUsers }}
+              </div>
+              <div fxHide.lt-lg>
+                  <ng-container *ngTemplateOutlet="pullRequestDetails"></ng-container>
               </div>
             </div>
           </div>
@@ -316,3 +322,12 @@
   </div>
 </ng-template>
 <ng-template #emptyData>no data</ng-template>
+<ng-template #pullRequestDetails>
+    <button *ngIf="isAdmin" mat-button type="submit" class="repository__header__contributors__details" [routerLink]="[repository.uid]" (click)="$event.stopPropagation()">
+      <span fxLayout="row" fxLayoutAlign="center center">
+        <span fxHide.lt-lg fxFlexOffset="10px">
+          Pull Requests Details
+        </span>
+      </span>
+    </button>
+  </ng-template>

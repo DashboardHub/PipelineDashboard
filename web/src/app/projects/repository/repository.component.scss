@@ -192,7 +192,21 @@
       padding-top: 5px;
       justify-content: flex-start;
       align-items: center;
+    
+    &__details {
+        background: $green-2-color;
+        color: #fff;
+        font-weight: 300;
+        height: 32px;
+        border-radius: 4px;
 
+        @media (max-width: $breakpoint-lg) {
+          min-width: 32px;
+          padding: 4px;
+          margin-bottom: 10px;
+        }
+      }  
+      
       @media (max-width: $breakpoint-lg) {
         padding-top: 0px;
       }

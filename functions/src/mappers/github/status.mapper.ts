@@ -1,5 +1,11 @@
 import { firestore } from 'firebase-admin';
 
+export interface BuildTimes {
+  context: string;
+  time: number;
+  createdAt: firestore.Timestamp;
+}
+
 export interface GitHubPullRequestStatusInput {
   id: number;
   state: string;
@@ -12,8 +18,8 @@ export interface GitHubPullRequestStatusModel {
   id: number;
   state: string;
   context: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: firestore.Timestamp;
+  updatedAt: firestore.Timestamp;
 }
 
 export class GitHubPullRequestStatusMapper {
@@ -22,8 +28,8 @@ export class GitHubPullRequestStatusMapper {
       id: input.id,
       state: input.state,
       context: input.context,
-      createdAt: input.created_at,
-      updatedAt: input.updated_at,
+      createdAt: firestore.Timestamp.fromDate(new Date(input.created_at)),
+      updatedAt: firestore.Timestamp.fromDate(new Date(input.updated_at)),
     };
   }
 }
