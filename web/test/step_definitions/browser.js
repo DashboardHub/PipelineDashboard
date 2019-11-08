@@ -10,7 +10,7 @@ Then(/^the title on the page says "([^"]*)"$/, (check) => {
   cy.title().should('include', check);
 });
 
-And(/^the text "([^"]*)" is in the element "([^"]*)"$/, (text, element) => {
+Then(/^the text "([^"]*)" is in the element "([^"]*)"$/, (text, element) => {
   cy.get(element).contains(text);
 });
 
