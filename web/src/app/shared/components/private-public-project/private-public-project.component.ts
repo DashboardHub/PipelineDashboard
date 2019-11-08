@@ -40,7 +40,8 @@ export class PrivatePublicProjectComponent implements OnInit, OnDestroy {
     if (this.router.url === '/') {
       this.projectSubscription = this.projectService
         .findPublicProjects()
-        .subscribe((projects: IProject[]) => this.projects = projects.map((project: IProject) => new ProjectModel(project)));
+        .subscribe((projects: IProject[]) => this.projects = projects.map((project: IProject) => new ProjectModel(project))
+          .filter((project: ProjectModel) => project.repositories.length > 0));
     } else {
       this.showTitle = true;
       this.projectSubscription = this.projectService
