@@ -8,9 +8,9 @@ firebase.initializeApp()
 
 const attachCustomCommands = (
   Cypress,
-  { auth, firestore }: typeof firebase,
+  { auth, firestore }
 ) => {
-  let currentUser: null | firebase.User = null
+  let currentUser = null
   auth().onAuthStateChanged(user => {
     currentUser = user
   })
