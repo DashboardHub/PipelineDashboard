@@ -8,5 +8,8 @@
   "supportFile": "test/support",
   "videosFolder": "test/videos",
   "viewportWidth": 1920,
-  "viewportHeight": 1080
+  "viewportHeight": 1080,
+  "firebase": {
+    
+  }
 }

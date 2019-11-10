@@ -9,3 +9,9 @@ Feature:  Open the website landing page
     And the text "Active Users" is in the element ".home__users-card__title"
     And the text "Popular projects" is in the element ".home__users-card__title"
     And the text "Public Projects" is in the element ".project-card__title"
+
+  
+# Scenario: Ensure the application statistics
+#     Given there is the field "users" with "45" in collection "platform/stats"
+#     And the "/" page is open
+#     Then the count "45" is in the element ".stats__card__content__item__red"
