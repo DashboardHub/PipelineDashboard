@@ -68,6 +68,7 @@
     "@angular/cli": "7.3.9",
     "@angular/compiler-cli": "7.2.15",
     "@compodoc/compodoc": "^1.1.10",
+    "@cypress/webpack-preprocessor": "^4.1.0",
     "@types/hammerjs": "2.0.36",
     "@types/jasmine": "2.8.9",
     "@types/node": "10.12.0",

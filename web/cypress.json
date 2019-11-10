@@ -5,11 +5,9 @@
   "integrationFolder": "test/integration",
   "pluginsFile": "test/plugins",
   "screenshotsFolder": "test/screenshots",
-  "supportFile": "test/support",
+  "supportFile": "test/support/index.ts",
   "videosFolder": "test/videos",
   "viewportWidth": 1920,
   "viewportHeight": 1080,
-  "firebase": {
-    
-  }
+  "firebase": {}
 }

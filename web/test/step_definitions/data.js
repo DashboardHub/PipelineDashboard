@@ -1,11 +1,12 @@
 Then(/^there is the field "([^"]*)" with "([^"]*)" in collection "([^"]*)"$/, (field, count, collection) => {
-  FirebaseAdmin
-  .firestore()
-  .collection(`${collection}`)
-  .doc(uid)
-  .set({
-    field: count
-  });
+  // FirebaseAdmin
+  // .firestore()
+  // .collection(`${collection}`)
+  // .doc(uid)
+  // .set({
+  //   field: count
+  // });
+  console.log('FIREBASE ---------');
 });
 
 Then(/^the count "([^"]*)" is in the element "([^"]*)"$/, (field, count) => {
