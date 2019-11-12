@@ -145,7 +145,6 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
    * Set the followers flag true if user uid is present in the database else set false
    */
   public isFollowing(): boolean {
-    // return this.authService.profile.following.includes(this.project.uid);
     return Array.isArray(this.authService.profile.following) ? this.authService.profile.following.includes(this.project.uid) : false;
   }
 

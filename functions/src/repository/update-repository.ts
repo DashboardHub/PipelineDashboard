@@ -15,11 +15,6 @@ export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = fires
 
       if (!newData.projects || Array.isArray(newData.projects) && newData.projects.length === 0) {
         Logger.info(`Delete repository ${context.params.repositoryUid}`);
-        // tslint:disable-next-line: no-floating-promises
-        // deleteRepoBuilds(context.params.repositoryUid)
-        //   .then(() => {
-        //     Logger.info('resolve deleteRepoBuilds');
-        //   });
         return RepositoryModel.getRepositoryReference(context.params.repositoryUid).delete();
       }
 
