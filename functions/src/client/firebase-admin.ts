@@ -1,3 +1,4 @@
+// Third party modules
 import * as admin from 'firebase-admin';
 
 export const FirebaseAdmin: admin.app.App = admin.initializeApp();
@@ -13,6 +14,7 @@ export declare type WriteBatch = admin.firestore.WriteBatch;
 export declare type FieldValue = admin.firestore.FieldValue;
 export declare type CollectionReference = admin.firestore.CollectionReference;
 export declare type Query = admin.firestore.Query;
+export declare type Firestore = admin.firestore.Firestore;
 
 // tslint:disable-next-line: typedef
 export const FieldPath = admin.firestore.FieldPath;

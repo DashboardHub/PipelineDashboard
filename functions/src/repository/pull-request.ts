@@ -1,10 +1,11 @@
 import * as firebase from 'firebase-admin';
 
-import { FirebaseAdmin, QueryDocumentSnapshot, QuerySnapshot, WriteResult } from '../client/firebase-admin';
+// Dashboard hub firebase functions models/mappers
+import { FirebaseAdmin } from '../client/firebase-admin';
 import { GitHubClient } from '../client/github';
 import { Logger } from '../client/logger';
-
 import { BuildTimes, GitHubPullRequestStatusInput, GitHubPullRequestStatusMapper, GitHubPullRequestStatusModel } from '../mappers/github/status.mapper';
+import { deleteCollection } from '../shared/delete-collection';
 
 /**
  * Return the build times for all type of context for any PR
@@ -55,14 +56,17 @@ export const getPullRequestStatus: any = async (token: string, fullName: string,
   return mappedData;
 };
 
-export const deleteRepoBuilds: any = async (repoUid: string): Promise<WriteResult[]> => {
+export function deleteRepoBuilds(repoUid: string): Promise<any> {
+  // export const deleteRepoBuilds: any = async (repoUid: string): Promise<WriteResult[]> => {
   Logger.info('deleteRepoBuilds');
-  const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
-    .collection(`repositories/${repoUid}/statuses`)
-    .get();
+  // const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
+  //   .collection(`repositories/${repoUid}/statuses`)
+  //   .get();
 
-  const promises: Promise<WriteResult>[] = [];
-  snapshots.docs.forEach((doc: QueryDocumentSnapshot) => promises.push(doc.ref.delete()));
+  // const promises: Promise<WriteResult>[] = [];
+  // snapshots.docs.forEach((doc: QueryDocumentSnapshot) => promises.push(doc.ref.delete()));
 
-  return Promise.all(promises);
+  // return Promise.all(promises);
+
+  return deleteCollection(FirebaseAdmin.firestore(), `repositories/${repoUid}/statuses`, 1000);
 };

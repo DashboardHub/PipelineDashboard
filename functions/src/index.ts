@@ -8,6 +8,7 @@ import { DocumentSnapshot } from './client/firebase-admin';
 // Dashboard repositories
 import { onCreateGitWebhookRepository, CreateGitWebhookRepositoryInput } from './repository/create-git-webhook-repository';
 import { onCreateRepository } from './repository/create-repository';
+import { onDeleteRepository } from './repository/delete-repository';
 import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
 import { onResponseGitWebhookRepository } from './repository/response-git-webhook-repository';
 import { onUpdateRepository } from './repository/update-repository';
