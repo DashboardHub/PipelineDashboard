@@ -11,7 +11,23 @@ Feature:  Open the website landing page
     And the text "Public Projects" is in the element ".project-card__title"
 
 
-Scenario: Ensure the application statistics
-    Given there is a document "stats" with the field "users" set to "123" in collection "platform"
+Scenario: Ensure the application statistics for users
+    Given there is a document "stats" with the field "users" set to 100 in collection "platform"
     And the "/" page is open
-    Then the count "123" is in the element ".stats__card__content .stats__card__content__item__number"
+    Then the count 100 is in the element ".stats__card__content__item__red"
+
+Scenario: Ensure the application statistics for project
+    Given there is a document "stats" with the field "projects" set to 200 in collection "platform"
+    And the "/" page is open
+    Then the count 200 is in the element ".stats__card__content__item__blue"
+
+Scenario: Ensure the application statistics for pings
+    Given there is a document "stats" with the field "pings" set to 300 in collection "platform"
+    And the "/" page is open
+    Then the count 300 is in the element ".stats__card__content__item__purple"
+
+Scenario: Ensure the application statistics for events
+    Given there is a document "stats" with the field "events" set to 400 in collection "platform"
+    And the "/" page is open
+    Then the count 400 is in the element ".stats__card__content__item__dark-blue"
+    
