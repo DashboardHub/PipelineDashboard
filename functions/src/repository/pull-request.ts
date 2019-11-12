@@ -57,16 +57,6 @@ export const getPullRequestStatus: any = async (token: string, fullName: string,
 };
 
 export function deleteRepoBuilds(repoUid: string): Promise<any> {
-  // export const deleteRepoBuilds: any = async (repoUid: string): Promise<WriteResult[]> => {
   Logger.info('deleteRepoBuilds');
-  // const snapshots: QuerySnapshot = await FirebaseAdmin.firestore()
-  //   .collection(`repositories/${repoUid}/statuses`)
-  //   .get();
-
-  // const promises: Promise<WriteResult>[] = [];
-  // snapshots.docs.forEach((doc: QueryDocumentSnapshot) => promises.push(doc.ref.delete()));
-
-  // return Promise.all(promises);
-
   return deleteCollection(FirebaseAdmin.firestore(), `repositories/${repoUid}/statuses`, 1000);
 };

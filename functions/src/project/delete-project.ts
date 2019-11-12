@@ -29,10 +29,7 @@ async function deleteProjectRepositories(projectUid: string, project: ProjectMod
               }
 
               t.update(repoRef, { projects: repoData.projects });
-
-              // deleteRepoBuilds(repositoryUid);
             });
-            // .then(() => deleteRepoBuilds(repositoryUid));
         });
       }
     }
