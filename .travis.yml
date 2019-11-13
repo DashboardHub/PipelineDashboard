@@ -10,7 +10,6 @@ branches:
   - khush
 env:
 - NODE_ENV=development
-- TEST_ENV=dev
 addons:
   apt:
     packages:
@@ -29,7 +28,7 @@ script:
   - "(cd functions; npm run build)"
   - "(cd web; npm install)"
   - "(cd web; npm run docs)"
-  - "(cd web; npm test)"
+  - "(cd web; TEST_ENV=dev npm test)"
 deploy:
 - provider: script
   skip_cleanup: true
