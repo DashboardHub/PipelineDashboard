@@ -19,7 +19,7 @@ cache:
   directories:
   - "~/.cache"
 before_install:
-  - openssl aes-256-cbc -K $encrypted_52b5fcab8d5f_key -iv $encrypted_52b5fcab8d5f_iv -in firebase.dev.json.enc -out firebase.dev.json -d
+  - openssl aes-256-cbc -K $encrypted_52b5fcab8d5f_key -iv $encrypted_52b5fcab8d5f_iv -in firebase.dev.json.enc -out firebase.enc.json -d
   - npm cache --force clean
   - npm install -g firebase-tools
 script:
