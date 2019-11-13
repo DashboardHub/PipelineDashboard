@@ -10,6 +10,7 @@ branches:
   - khush
 env:
 - NODE_ENV=development
+- TEST_ENV=dev
 addons:
   apt:
     packages:
