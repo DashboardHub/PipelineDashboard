@@ -1,10 +1,9 @@
 const cucumber = require('cypress-cucumber-preprocessor').default;
 const admin = require('firebase-admin');
-const serviceAccount = require('../../firebase.enc.json');
+const serviceAccount = require('../../../firebase.enc.json');
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://pipelinedashboard-eddie.firebaseio.com"
+  credential: admin.credential.cert(serviceAccount)
 });
 const db = admin.firestore();
 

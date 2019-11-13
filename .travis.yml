@@ -1,59 +1,56 @@
 language: node_js
 node_js:
-  - "10"
+- '10'
 branches:
   only:
   - master
   - v0.11.9
-  - /issue-*/
+  - "/issue-*/"
   - eddie
   - khush
 env:
-  - NODE_ENV=development
-
+- NODE_ENV=development
 addons:
   apt:
     packages:
-      - libgconf-2-4
+    - libgconf-2-4
 cache:
   npm: true
   directories:
-    - ~/.cache
-
+  - "~/.cache"
 before_install:
+  - openssl aes-256-cbc -K $encrypted_52b5fcab8d5f_key -iv $encrypted_52b5fcab8d5f_iv -in firebase.dev.json.enc -out firebase.dev.json -d
   - npm cache --force clean
   - npm install -g firebase-tools
-
 script:
-  - (cd functions; npm install)
-  - (cd functions; npm run lint)
-  - (cd functions; npm run build)
-  - (cd web; npm install)
-  - (cd web; npm run docs)
-  - (cd web; npm test)
-
+  - "(cd functions; npm install)"
+  - "(cd functions; npm run lint)"
+  - "(cd functions; npm run build)"
+  - "(cd web; npm install)"
+  - "(cd web; npm run docs)"
+  - "(cd web; npm test)"
 deploy:
-  - provider: script
-    skip_cleanup: true
-    script: sh ./scripts/deployment/eddie.sh
-    message: "Deploying v0.11.eddie-$TRAVIS_BUILD_NUMBER-ALPHA"
-    on:
-      branch: eddie
-  - provider: script
-    skip_cleanup: true
-    script: sh ./scripts/deployment/khush.sh
-    message: "Deploying v0.11.khush-$TRAVIS_BUILD_NUMBER-ALPHA"
-    on:
-      branch: khush
-  - provider: script
-    skip_cleanup: true
-    script: sh ./scripts/deployment/dev.sh
-    message: "Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA"
-    on:
-      branch: v0.11.9
-  - provider: script
-    skip_cleanup: true
-    script: sh ./scripts/deployment/prod.sh
-    message: "Deploying v0.11-$TRAVIS_BUILD_NUMBER-ALPHA"
-    on:
-      branch: master
+- provider: script
+  skip_cleanup: true
+  script: sh ./scripts/deployment/eddie.sh
+  message: Deploying v0.11.eddie-$TRAVIS_BUILD_NUMBER-ALPHA
+  on:
+    branch: eddie
+- provider: script
+  skip_cleanup: true
+  script: sh ./scripts/deployment/khush.sh
+  message: Deploying v0.11.khush-$TRAVIS_BUILD_NUMBER-ALPHA
+  on:
+    branch: khush
+- provider: script
+  skip_cleanup: true
+  script: sh ./scripts/deployment/dev.sh
+  message: Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA
+  on:
+    branch: v0.11.9
+- provider: script
+  skip_cleanup: true
+  script: sh ./scripts/deployment/prod.sh
+  message: Deploying v0.11-$TRAVIS_BUILD_NUMBER-ALPHA
+  on:
+    branch: master
