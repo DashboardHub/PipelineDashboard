@@ -28,7 +28,7 @@ script:
   - "(cd functions; npm run build)"
   - "(cd web; npm install)"
   - "(cd web; npm run docs)"
-  - "(cd web; TEST_ENV=dev npm test)"
+  - "(cd web; CYPRESS_FIREBASE=dev npm test)"
 deploy:
 - provider: script
   skip_cleanup: true

@@ -3,9 +3,10 @@ const admin = require('firebase-admin');
 const serviceAccount = require('../../../firebase.enc.json');
 
 module.exports = (on, config) => {
+
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: `https://pipelinedashboard-${config.TEST_ENV}.firebaseio.com`
+    databaseURL: `https://pipelinedashboard-${config.env.FIREBASE}.firebaseio.com`
   });
   const db = admin.firestore();
 
@@ -17,5 +18,6 @@ module.exports = (on, config) => {
         .doc(params.id)
         .update({ [params.field]: params.value });
     }
-  })
+  });
+
 }
