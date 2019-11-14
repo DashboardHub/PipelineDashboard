@@ -20,4 +20,12 @@ module.exports = (on, config) => {
     }
   });
 
+  on('task', {
+    'db:update:project': (params) => {
+      return db.collection(params.collection)
+        .doc(params.doc)
+        .set(params.data);
+    }
+  });
+
 }
