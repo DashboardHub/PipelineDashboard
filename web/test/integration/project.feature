@@ -1,6 +1,6 @@
-Feature:  Save the project json in db 
+Feature:  Display projects on the homepage 
 
-Scenario: Ensure the create public project
+Scenario: List public project on the homepage
     Given there is a document "test-public-project" with the json "test/data/public-project.json" in collection "projects"
     And the "/" page is open
     And the text "Demo public project" is in the element ".project__list__title"

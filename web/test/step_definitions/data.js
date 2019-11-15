@@ -7,5 +7,5 @@ Then(/^the count (\d+) is in the element "([^"]*)"$/, (count, field) => {
 });
 
 Then(/^there is a document "([^"]*)" with the json "([^"]*)" in collection "([^"]*)"$/, (doc, json, collection) => {
-  cy.readFile(json).then((data) => cy.task('db:update:project', { collection, doc, data }));
+  cy.readFile(json).then((data) => cy.task('db:project:save', { collection, doc, data }));
 });
