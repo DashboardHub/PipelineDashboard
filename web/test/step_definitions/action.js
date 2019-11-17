@@ -1,10 +1,10 @@
-import { Then } from 'cypress-cucumber-preprocessor/steps';
+import { Then, When } from 'cypress-cucumber-preprocessor/steps';
 
-Then(/^the "([^"]*)" link at position (\d+) is clicked$/, (link, position) => {
+When(/^the "([^"]*)" link at position (\d+) is clicked$/, (link, position) => {
   cy.get(link).eq(position).click();
 });
 
-Then(/^enter text "([^"]*)" in the element "([^"]*)"$/, (text, element) => {
+When(/^enter text "([^"]*)" in the element "([^"]*)"$/, (text, element) => {
   cy.get(element).type(text);
 });
 
