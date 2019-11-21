@@ -1,0 +1,14 @@
+{
+  "uid": "public-project-no-data",
+  "type": "public",
+  "title": "Demo public project with no data",
+  "description": "Demo public project with no data description added",
+  "url": "https://www.pipelinedashboard.io",
+  "logoUrl": "",
+  "repositories": ["c7f3ad5b-3d48-42e5-8b6f-558e9ce52dc1"],
+  "monitors": [],
+  "pings": [],
+  "tokens": [],
+  "views": 1,
+  "followers": 0
+}

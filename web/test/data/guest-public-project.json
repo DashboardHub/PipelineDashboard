@@ -1,0 +1,14 @@
+{
+  "uid": "guest-test-public-project",
+  "type": "public",
+  "title": "Demo guest public project",
+  "description": "Demo guest public project description added",
+  "url": "https://www.pipelinedashboard.io",
+  "logoUrl": "",
+  "repositories": [],
+  "monitors": [],
+  "pings": [],
+  "tokens": [],
+  "views": 1,
+  "followers": 0
+}
