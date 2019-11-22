@@ -28,6 +28,7 @@ script:
   - "(cd functions; npm run build)"
   - "(cd web; npm install)"
   - "(cd web; npm run docs)"
+  - "sh ./scripts/build/dev.sh"
   - "(cd web; CYPRESS_FIREBASE=dev npm test)"
 deploy:
 - provider: script
