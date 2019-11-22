@@ -1,16 +1,19 @@
 Feature:  Help section
 
-  Scenario: List quickstart on help page
+  Scenario: Quickstart is listed on the help page
     Given the "/help" page is open
-    And the text "Quickstart" is in the element ".help__card__content__title"
-    When enter text "Glossary" in the element ".help__card__header__search.mat-input-element"
+    Then the text "Quickstart" is in the element ".help__card__content__title"
+
+  Scenario: Search for quickstart on help page
+    Given the "/help" page is open
+    When enter text "Quick" in the element ".help__card__header__search.mat-input-element"
+    Then the text "Quickstart" is in the element ".help__card__content__title"
     And the ".help__card__content__title" link at position 0 is clicked
     Then the text "Get up and running in minutes" is in the element "#get-up-and-running-in-minutes-in-3-simple-steps-and-without-installing-anything"
 
-  Scenario: Ensure search in quickstart on helppage
+  Scenario: Reset search on help page
     Given the "/help" page is open
-    And enter text "Glossary" in the element ".help__card__header__search.mat-input-element"
-    And the text "Glossary" is in the element ".help__card__content__title"
-    And clear text in the element ".help__card__header__search.mat-input-element"
-    And enter text "Project Not visible" in the element ".help__card__header__search.mat-input-element"
-    Then the text "Project Not visible" is not in the element ".help__card__content__title"
+    When enter text "Quickstart" in the element ".help__card__header__search.mat-input-element"
+    Then the text "Glossary" is not in the element ".help__card__content__title"
+    When clear text in the element ".help__card__header__search.mat-input-element"
+    Then the text "Glossary" is in the element ".help__card__content__title"
