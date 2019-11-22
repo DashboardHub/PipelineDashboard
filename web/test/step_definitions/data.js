@@ -5,3 +5,7 @@ Given(/^there is a document "([^"]*)" with the field "([^"]*)" set to (\d+) in c
 Then(/^the count (\d+) is in the element "([^"]*)"$/, (count, field) => {
   cy.get(field).contains(count);
 });
+
+Then(/^there is a document "([^"]*)" with the json "([^"]*)" in collection "([^"]*)"$/, (doc, json, collection) => {
+  cy.readFile(json).then((data) => cy.task('db:project:save', { collection, doc, data }));
+});
