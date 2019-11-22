@@ -24,7 +24,11 @@ module.exports = (on, config) => {
     'db:project:save': (params) => {
       return db.collection(params.collection)
         .doc(params.doc)
-        .set(params.data);
+        .set({
+          ...params.data,
+          createdOn: admin.firestore.Timestamp.fromDate(new Date("2050-01-01")),
+          updatedOn: admin.firestore.Timestamp.fromDate(new Date("2050-01-01"))
+        });
     }
   });
 
