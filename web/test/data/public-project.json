@@ -3,7 +3,7 @@
   "type": "public",
   "title": "Demo public project",
   "description": "Demo public project description added",
-  "_url": "https://www.pipelinedashboard.io",
+  "url": "https://www.pipelinedashboard.io",
   "logoUrl": "",
   "repositories": ["19deb070-1603-4fea-a774-6da2f93253ce", "97b2389a-4163-48b3-9fa8-ad8eb7937647"],
   "monitors": [{
@@ -19,5 +19,8 @@
   "pings": [],
   "tokens": [],
   "views": 1,
-  "followers": 0
+  "followers": 0,
+  "access": {
+    "admin": [ "00000000-0000-0000-0000-000000000001" ]
+  }
 }

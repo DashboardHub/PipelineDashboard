@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://pipelinedashboard-khush.firebaseapp.com",
+  "baseUrl": "http://localhost:4200",
   "ignoreTestFiles": "*.js",
   "fixturesFolder": "test/fixtures",
   "integrationFolder": "test/integration",
