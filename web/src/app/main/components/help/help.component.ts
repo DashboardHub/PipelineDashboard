@@ -50,7 +50,7 @@ export class HelpComponent implements OnInit {
       search: [undefined, []],
     });
 
-    this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe((search: string) => this.filterTopics(search));
+    this.searchForm.get('search').valueChanges.subscribe((search: string) => this.filterTopics(search));
   }
 
   /**
