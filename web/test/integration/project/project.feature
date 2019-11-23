@@ -2,7 +2,8 @@ Feature:  Display public projects on the homepage
 
 Scenario: List public project on the homepage
     Given there is a document "test-public-project" with the json "test/data/public-project.json" in collection "projects"
-    And there is a document "test-user" with the json "test/data/user-test.json" in collection "users"
+    And there is a document "00000000-0000-0000-0000-000000000001" with the json "test/data/user-test.json" in collection "users"
+    And there is a document "00000000-0000-0000-0000-000000000001" with the json "test/data/user-test.json" in collection "userStats"
     When the "/" page is open
     Then the text "Demo public project" is in the element ".project__list__title"
     And the text "Demo public project description added" is in the element ".mat-column-description"
@@ -10,7 +11,7 @@ Scenario: List public project on the homepage
     And the text "2" is in the element ".mat-column-repository"
     And the text "1" is in the element ".mat-column-monitors"
     And the text "0" is in the element ".mat-column-pings"
-    # And the text "testuser" is in the element ".mat-column-user"
+    And the text "testuser" is in the element ".mat-column-user"
     And the text "1 second ago" is in the element ".mat-column-lastDate"
 
 Scenario: Check private projects are not displayed on the homepage
