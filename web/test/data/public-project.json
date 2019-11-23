@@ -19,5 +19,8 @@
   "pings": [],
   "tokens": [],
   "views": 1,
-  "followers": 0
+  "followers": 0,
+  "access": {
+    "admin": [ "00000000-0000-0000-0000-000000000001" ]
+  }
 }

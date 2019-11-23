@@ -1,21 +1,22 @@
-Feature:  Display projects on the homepage 
+Feature:  Display public projects on the homepage
 
 Scenario: List public project on the homepage
     Given there is a document "test-public-project" with the json "test/data/public-project.json" in collection "projects"
-    And the "/" page is open
-    And the text "Demo public project" is in the element ".project__list__title"
+    And there is a document "test-user" with the json "test/data/user-test.json" in collection "users"
+    When the "/" page is open
+    Then the text "Demo public project" is in the element ".project__list__title"
     And the text "Demo public project description added" is in the element ".mat-column-description"
-    And the text "https://www.pipelinedashboard.io" is in the element ".project__list__url__content"
+    And the text "https://www.pipelinedashboard.io" is in the element ".project__list__url"
     And the text "2" is in the element ".mat-column-repository"
     And the text "1" is in the element ".mat-column-monitors"
     And the text "0" is in the element ".mat-column-pings"
-    And the text "webkhushboo" is in the element ".mat-column-user"
+    # And the text "testuser" is in the element ".mat-column-user"
     And the text "1 second ago" is in the element ".mat-column-lastDate"
 
-Scenario: Ensure the create private project
+Scenario: Check private projects are not displayed on the homepage
     Given there is a document "test-private-project" with the json "test/data/private-project.json" in collection "projects"
-    And the "/" page is open
-    And the text "Demo private project" is not in the element ".project__list__title"
+    When the "/" page is open
+    Then the text "Demo private project" is not in the element ".project__list__title"
 
 Scenario: Ensure the public project with minium requirements
     Given there is a document "guest-test-public-project" with the json "test/data/guest-public-project.json" in collection "projects"
