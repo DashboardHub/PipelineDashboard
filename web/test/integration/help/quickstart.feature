@@ -16,5 +16,4 @@ Feature:  Help section
     When enter text "Quickstart" in the element ".help__card__header__search.mat-input-element"
     Then the text "Glossary" is not in the element ".help__card__content__title"
     When clear text in the element ".help__card__header__search.mat-input-element"
-    And wait for 500 milliseconds
     Then the text "Glossary" is in the element ".help__card__content__title"

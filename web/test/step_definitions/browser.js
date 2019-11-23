@@ -17,9 +17,3 @@ Then(/^the text "([^"]*)" is in the element "([^"]*)"$/, (text, element) => {
 Then(/^the text "([^"]*)" is not in the element "([^"]*)"$/, (text, element) => {
   cy.get(element).contains(text).should('not.exist')
 });
-
-Then(/^wait for (\d+) milliseconds$/, (time) => {
-  cy.wait(time)
-});
-
-
