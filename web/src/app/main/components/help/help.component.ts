@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-// Rxjs operators
-import { debounceTime } from 'rxjs/operators';
-
+// DashboardHub Models
 import { HelpModel, HelpTopic } from '@shared/models/index.model';
 
 /**
