@@ -3,9 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-// Rxjs operators
-import { debounceTime } from 'rxjs/operators';
-
+// DashboardHub Models
 import { HelpModel, HelpTopic } from '@shared/models/index.model';
 
 /**
@@ -50,7 +48,7 @@ export class HelpComponent implements OnInit {
       search: [undefined, []],
     });
 
-    this.searchForm.get('search').valueChanges.pipe(debounceTime(500)).subscribe((search: string) => this.filterTopics(search));
+    this.searchForm.get('search').valueChanges.subscribe((search: string) => this.filterTopics(search));
   }
 
   /**

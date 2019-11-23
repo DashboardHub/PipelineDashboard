@@ -1,6 +1,6 @@
 Feature:  Display public projects on the homepage
 
-  Scenario: List public project on the homepage
+Scenario: List public project on the homepage
     Given there is a document "test-public-project" with the json "test/data/public-project.json" in collection "projects"
     And there is a document "test-user" with the json "test/data/user-test.json" in collection "users"
     When the "/" page is open
@@ -13,7 +13,7 @@ Feature:  Display public projects on the homepage
     # And the text "testuser" is in the element ".mat-column-user"
     And the text "1 second ago" is in the element ".mat-column-lastDate"
 
-  Scenario: Check private projects are not displayed on the homepage
+Scenario: Check private projects are not displayed on the homepage
     Given there is a document "test-private-project" with the json "test/data/private-project.json" in collection "projects"
     When the "/" page is open
     Then the text "Demo private project" is not in the element ".project__list__title"
