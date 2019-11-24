@@ -16,7 +16,7 @@ Feature:  Project dashboard page
     And the text "No monitors added to this project yet." is in the element ".helper"
     And the text "No releases are available" is in the element ".info__body"
     And the text "No milestones are available" is in the element ".info__body"
-    And the text "eddiejaoude" is in the element ".info__body"
+    And the text "No contributors are available" is in the element ".info__body"
     And the text "No PR are available" is in the element ".info__body"
     And the text "No pull requests are available" is in the element ".repository-detail-card__content.mat-card-content"
     And the text "No issues are available" is in the element ".repository-detail-card__content.mat-card-content"
