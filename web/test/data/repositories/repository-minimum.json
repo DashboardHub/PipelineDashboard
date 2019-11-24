@@ -1,4 +1,12 @@
 {
   "uid": "test-repository-minimum",
-  "projects": [ "project-public-minimum" ]
+  "projects": ["test-project-public-repository"],
+  "url": "https://api.github.com/repos/webkhushboo/HelloWorld",
+  "fullName": "webkhushboo/HelloWorld",
+  "private": false,
+  "issues": [],
+  "releases": [],
+  "milestones": [],
+  "contributors": [],
+  "pullRequests": []
 }
