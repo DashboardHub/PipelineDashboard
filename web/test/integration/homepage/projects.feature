@@ -28,6 +28,6 @@ Feature:  Display public projects on the homepage
     And the text "1 second ago" is in the element ".mat-column-lastDate"
 
   Scenario: Check private projects are not displayed on the homepage
-    Given there is a document "test-project-private-minimum" with the json "test/data/projects/project-private-minimum.json" in collection "projects"
+    Given there is a document "test-project-private-minimum" with the js "projects/project-private-minimum" in collection "projects"
     When the "/" page is open
     Then the text "Test private project" is not in the element ".project__list__title"
