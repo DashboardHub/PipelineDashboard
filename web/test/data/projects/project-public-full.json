@@ -1,5 +1,5 @@
 {
-  "uid": "test-project-project-monitors",
+  "uid": "test-project-public-full",
   "type": "public",
   "title": "Test public project with full data title",
   "description": "Test public project with full data description",
@@ -19,6 +19,6 @@
   "tokens": [],
   "views": 1,
   "access": {
-    "admin": [ "00000000-0000-0000-0000-000000000001" ]
+    "admin": [ "test-user-minimum" ]
   }
 }
