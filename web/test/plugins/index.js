@@ -10,6 +10,21 @@ module.exports = (on, config) => {
   });
   const db = admin.firestore();
 
+  let manipulate = (data) => {
+    const newData = {}
+    Object.entries(data).forEach((item) => {
+      switch (item[1]) {
+        case 'DATETIME[NOW]':
+          newData[item[0]] = admin.firestore.Timestamp.fromDate(new Date())
+          break;
+        default:
+          newData[item[0]] = item[1];
+      }
+    });
+    console.log(newData);
+    return newData;
+  };
+
   on('file:preprocessor', cucumber());
 
   on('task', {
@@ -25,9 +40,9 @@ module.exports = (on, config) => {
       return db.collection(params.collection)
         .doc(params.doc)
         .set({
-          ...params.data,
-          createdOn: admin.firestore.Timestamp.fromDate(new Date("2050-01-01")),
-          updatedOn: admin.firestore.Timestamp.fromDate(new Date("2050-01-01"))
+          ...manipulate(params.data),
+          createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
+          updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
         });
     }
   });
