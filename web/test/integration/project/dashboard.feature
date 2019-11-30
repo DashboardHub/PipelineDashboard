@@ -21,3 +21,10 @@ Feature:  Project dashboard page
     And the text "No pull requests are available" is in the element ".repository-detail-card__content.mat-card-content"
     And the text "No issues are available" is in the element ".repository-detail-card__content.mat-card-content"
     And the text "No events are available" is in the element ".repository-detail-card__content.mat-card-content"
+
+Scenario: Project dashboard with detailed information to display
+    Given there is a document "test-public-project-repostory-full" with the json "test/data/projects/project-public-repository-full.json" in collection "projects"
+    And there is a document "test-repository-full" with the js "repositories/repository-full" in collection "repositories"
+    When the "/projects/test-public-project-repostory-full" page is open
+    Then the text "Test public project with repository data" is in the element ".project-body__header__content__name project-body__header__content__name__long"
+    
