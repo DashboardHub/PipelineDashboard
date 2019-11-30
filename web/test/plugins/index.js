@@ -30,7 +30,6 @@ module.exports = (on, config) => {
       }
     });
 
-    console.log('RESULT: ', data);
     return data;
   };
 

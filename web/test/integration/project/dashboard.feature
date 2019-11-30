@@ -1,7 +1,7 @@
 Feature:  Project dashboard page
 
   Scenario: Project dashboard does not display admin/owner information
-    Given there is a document "test-public-project-minimum" with the json "test/data/projects/project-public-minimum.json" in collection "projects"
+    Given there is a document "test-public-project-minimum" with the js "projects/project-public-minimum" in collection "projects"
     When the "/projects/test-public-project-minimum" page is open
     Then the text "You do not have any monitors. Please create monitor" is not in the element ".helper"
     And the text "You do not have any repositories. Please connect repository" is not in the element ".helper"
@@ -9,8 +9,8 @@ Feature:  Project dashboard page
     And the text "No repositories added to this project yet" is in the element ".helper"
 
   Scenario: Project dashboard with no detailed information to display
-    Given there is a document "test-public-project-repostory" with the json "test/data/projects/project-public-repository.json" in collection "projects"
-    And there is a document "test-repository-minimum" with the json "test/data/repositories/repository-minimum.json" in collection "repositories"
+    Given there is a document "test-public-project-repostory" with the js "projects/project-public-repository" in collection "projects"
+    And there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
     When the "/projects/test-public-project-repostory" page is open
     Then the text "You do not have any monitors. Please create monitor" is not in the element ".helper"
     And the text "No monitors added to this project yet." is in the element ".helper"
@@ -23,7 +23,7 @@ Feature:  Project dashboard page
     And the text "No events are available" is in the element ".repository-detail-card__content.mat-card-content"
 
 Scenario: Project dashboard with detailed information to display
-    Given there is a document "test-public-project-repostory-full" with the json "test/data/projects/project-public-repository-full.json" in collection "projects"
+    Given there is a document "test-public-project-repostory-full" with the js "projects/project-public-repository-full" in collection "projects"
     And there is a document "test-repository-full" with the js "repositories/repository-full" in collection "repositories"
     When the "/projects/test-public-project-repostory-full" page is open
     Then the text "Test public project with repository data" is in the element ".project-body__header__content__name.project-body__header__content__name__long"
