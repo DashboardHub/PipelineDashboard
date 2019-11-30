@@ -26,5 +26,5 @@ Scenario: Project dashboard with detailed information to display
     Given there is a document "test-public-project-repostory-full" with the json "test/data/projects/project-public-repository-full.json" in collection "projects"
     And there is a document "test-repository-full" with the js "repositories/repository-full" in collection "repositories"
     When the "/projects/test-public-project-repostory-full" page is open
-    Then the text "Test public project with repository data" is in the element ".project-body__header__content__name project-body__header__content__name__long"
+    Then the text "Test public project with repository data" is in the element ".project-body__header__content__name.project-body__header__content__name__long"
     
