@@ -2,6 +2,16 @@ const cucumber = require('cypress-cucumber-preprocessor').default;
 const admin = require('firebase-admin');
 const serviceAccount = require('../../../firebase.enc.json');
 
+const traverse = (o, fn) => {
+  Object.entries(o).forEach((i) => {
+    if (i[1] !== null && (typeof(i[1]) === 'object' || typeof(i[1]) === 'array')) {
+      traverse(i[1], fn);
+    } else {
+      o[i[0]] = fn(i);
+    }
+  });
+};
+
 module.exports = (on, config) => {
 
   admin.initializeApp({
@@ -11,18 +21,17 @@ module.exports = (on, config) => {
   const db = admin.firestore();
 
   let manipulate = (data) => {
-    const newData = {}
-    Object.entries(data).forEach((item) => {
+    traverse(data, (item) => {
       switch (item[1]) {
         case 'DATETIME[NOW]':
-          newData[item[0]] = admin.firestore.Timestamp.fromDate(new Date())
-          break;
+          return admin.firestore.Timestamp.fromDate(new Date())
         default:
-          newData[item[0]] = item[1];
+          return item[1];
       }
     });
-    console.log(newData);
-    return newData;
+
+    console.log('RESULT: ', data);
+    return data;
   };
 
   on('file:preprocessor', cucumber());
