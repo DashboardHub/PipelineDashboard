@@ -4,18 +4,60 @@ exports.data = {
   url: 'https://api.github.com/repos/DashboardHub/PipelineDashboard',
   fullName: 'DashboardHub/PipelineDashboard',
   private: false,
-  issues: [],
+  issues: [{
+    title: 'test-issue',
+    createdOn: 'DATETIME[NOW]',
+    updatedOn: 'DATETIME[NOW]',
+    owner: {
+      avatarUrl: 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',
+      username: 'test-user-minimum'
+    },
+  }],
   releases: [{
     title: 'test-release',
     isPrerelease: false,
     owner: {
-      avatarUrl: 'https://avatars2.githubusercontent.com/u/10898595?v=4',
-      username: 'webkhushboo'
+      avatarUrl: 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',
+      username: 'test-user-minimum'
     },
-    createdOn:'DATETIME[NOW]',
+    createdOn: 'DATETIME[NOW]',
   }],
-  milestones: [],
-  contributors: [],
-  pullRequests: [],
-  createdOn:'DATETIME[NOW]',
+  milestones: [{
+    title: 'test-milestone',
+    state: 'open',
+    creator: {
+      avatarUrl: 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',
+      username: 'test-user-minimum'
+    },
+    updatedAt: 'DATETIME[NOW]'
+  }],
+  contributors: [{
+    owner: {
+      avatarUrl: 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',
+      username: 'test-user-minimum'
+    },
+    total: 2
+  }],
+  pullRequests: [{
+    title: 'test-PR',
+    owner: {
+      avatarUrl: 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',
+      username: 'test-user-minimum'
+    },
+    createdOn: 'DATETIME[NOW]',
+  }],
+  events: [{
+    payload: {
+      title: 'test-event',
+      action: 'created'
+    },
+    createdOn: 'DATETIME[NOW]',
+    public: true,
+    type: 'IssueCommentEvent',
+    actor: {
+      avatarUrl: 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',
+      username: 'test-user-minimum'
+    },
+  }],
+  createdOn: 'DATETIME[NOW]',
 }

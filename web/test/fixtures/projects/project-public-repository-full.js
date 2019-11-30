@@ -5,5 +5,6 @@ exports.data = {
   access: {
     admin: ['test-user-minimum']
   },
-  repositories: ['test-repository-minimum', 'test-repository-full']
+  repositories: ['test-repository-minimum', 'test-repository-full'],
+  url: 'https://www.pipelinedashboard.io'
 }
