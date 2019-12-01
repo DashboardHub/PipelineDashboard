@@ -8,6 +8,7 @@ import { ProjectsRoutingModule } from './projects-routing.module';
 
 // Dashboard hub components
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
+import { ListMyProjectsComponent } from './list/list-my-projects.component';
 import { MonitorSummaryComponent } from './monitor-summary/monitor-summary.component';
 import { RatingComponent } from './rating/rating.component';
 import { RepositoryComponent } from './repository/repository.component';
@@ -22,6 +23,7 @@ import { ViewProjectComponent } from './view/view.component';
   declarations: [
     CreateEditProjectComponent,
     MonitorSummaryComponent,
+    ListMyProjectsComponent,
     RepositoryComponent,
     ViewProjectComponent,
     RatingComponent,
