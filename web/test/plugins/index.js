@@ -36,23 +36,26 @@ module.exports = (on, config) => {
   on('file:preprocessor', cucumber());
 
   on('task', {
-    'db:update': (params) => {
-      return db.collection(params.collection)
+    'db:update': (params) => db.collection(params.collection)
         .doc(params.id)
-        .update({ [params.field]: params.value });
-    }
+        .update({ [params.field]: params.value })
+        .then(() => console.log(`Updated to ${params.collection}`))
+        .then(() => params.collection)
   });
 
   on('task', {
-    'db:project:save': (params) => {
-      return db.collection(params.collection)
+    'db:project:save': (params) => db.collection(params.collection)
         .doc(params.doc)
         .set({
           ...manipulate(params.data),
           createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
           updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
-        });
-    }
+        })
+        .then(() => db.collection(params.collection)
+          .doc(params.doc)
+          .get())
+        .then(() => console.log(`Written to ${params.collection}`))
+        .then(() => params.collection)
   });
 
 }
