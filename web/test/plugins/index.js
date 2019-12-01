@@ -4,7 +4,7 @@ const serviceAccount = require('../../../firebase.enc.json');
 
 const traverse = (o, fn) => {
   Object.entries(o).forEach((i) => {
-    if (i[1] !== null && (typeof(i[1]) === 'object' || typeof(i[1]) === 'array')) {
+    if (i[1] !== null && (typeof (i[1]) === 'object' || typeof (i[1]) === 'array')) {
       traverse(i[1], fn);
     } else {
       o[i[0]] = fn(i);
@@ -39,7 +39,9 @@ module.exports = (on, config) => {
     'db:update': (params) => {
       return db.collection(params.collection)
         .doc(params.id)
-        .update({ [params.field]: params.value });
+        .update({
+          [params.field]: params.value
+        });
     }
   });
 
@@ -57,18 +59,10 @@ module.exports = (on, config) => {
 
   on('task', {
     'db:delete': (params) => {
-      db.collection(params.collection).get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
+      db.collection(params.collection).get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
           if ((doc.id).startsWith("test-")) {
             db.collection(params.collection).doc(doc.id).delete();
-            if (params.subCollection) {
-              db.collection(`${params.collection} / ${doc.id} / ${params.subCollection}`).get().then(
-                function (subCollectionSnapshot) {
-                  subCollectionSnapshot.forEach(function (document) {
-                    db.collection(`${params.collection} / ${doc.id} / ${params.subCollection}`).doc(document).delete();
-                  });
-                })
-            }
           }
         });
       });
