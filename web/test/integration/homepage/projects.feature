@@ -14,7 +14,7 @@ Feature:  Display public projects on the homepage
 
   Scenario: List public project on the homepage with repository and monitor
     Given there is a document "test-public-project" with the js "projects/project-public-full" in collection "projects"
-    Given there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
+    And there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
     And there is a document "test-user-minimum" with the js "users/user-minimum" in collection "users"
     And there is a document "test-user-minimum" with the js "user-stats/user-minimum" in collection "userStats"
     When the "/" page is open
