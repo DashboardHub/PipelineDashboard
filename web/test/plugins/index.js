@@ -55,4 +55,16 @@ module.exports = (on, config) => {
     }
   });
 
+  on('task', {
+    'db:delete': (params) => {
+      db.collection(params.collection).get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          if ((doc.id).startsWith("test-")) {
+            db.collection(params.collection).doc(doc.id).delete();
+          }
+        });
+      });
+      return null;
+    }
+  });
 }
