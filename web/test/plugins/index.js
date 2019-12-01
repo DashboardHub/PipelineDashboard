@@ -61,6 +61,14 @@ module.exports = (on, config) => {
         querySnapshot.forEach(function (doc) {
           if ((doc.id).startsWith("test-")) {
             db.collection(params.collection).doc(doc.id).delete();
+            if (params.subCollection) {
+              db.collection(`${params.collection} / ${doc.id} / ${params.subCollection}`).get().then(
+                function (subCollectionSnapshot) {
+                  subCollectionSnapshot.forEach(function (document) {
+                    db.collection(`${params.collection} / ${doc.id} / ${params.subCollection}`).doc(document).delete();
+                  });
+                })
+            }
           }
         });
       });
