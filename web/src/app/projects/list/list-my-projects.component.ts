@@ -18,6 +18,7 @@ export class ListMyProjectsComponent implements OnInit, OnDestroy {
   private projectSubscription: Subscription;
 
   public projects: IProject[] = [];
+  public title: string = 'My Projects';
 
   /**
    * Life cycle method
