@@ -11,9 +11,9 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { MainComponent } from './main.component';
 
 // Dashboard hub authentication guards
-import { HelpResolver } from '@app/core/resolvers/help.resolver';
-import { PublicProjectResolver } from '@app/core/resolvers/public-projects.resolver';
 import { AuthGuard } from '@core/guards/authentication.guard';
+import { HelpResolver } from '@core/resolvers/help.resolver';
+import { PublicProjectResolver } from '@core/resolvers/public-projects.resolver';
 import { FollowingComponent } from './components/following/following.component';
 import { HelpDetailComponent } from './components/help-detail/help-detail.component';
 
@@ -27,7 +27,7 @@ const routes: Routes = [
         component: HomepageComponent,
         resolve: {
           projects: PublicProjectResolver,
-        }
+        },
       },
       {
         path: 'profile',

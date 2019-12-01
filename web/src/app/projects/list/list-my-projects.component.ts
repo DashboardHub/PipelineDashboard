@@ -3,11 +3,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 // Application services/model
-import { ProjectService } from '@app/core/services/index.service';
+import { ProjectService } from '@core/services/index.service';
 import { IProject } from '@shared/models/index.model';
 
 /**
- * Repository rating component
+ * List my project component
  */
 @Component({
   selector: 'dashboard-list-my-projects',
@@ -21,8 +21,7 @@ export class ListMyProjectsComponent implements OnInit, OnDestroy {
 
   /**
    * Life cycle method
-   * @param repositoryService Repository service
-   * @param route ActivatedRoute
+   * @param projectService Project service
    */
   constructor(
     private projectService: ProjectService
