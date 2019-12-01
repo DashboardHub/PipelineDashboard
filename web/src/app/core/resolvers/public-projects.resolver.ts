@@ -17,9 +17,7 @@ export class PublicProjectResolver implements Resolve<IProject[]> {
 
   /**
    * Life cycle method
-   * @param fns AngularFireFunctions
    * @param projectService ProjectService
-   * @param router Router
    */
   constructor(
     private projectService: ProjectService
