@@ -17,7 +17,7 @@
       <div class="project-card__header">
         <mat-icon svgIcon="project_list_icon"></mat-icon>
       </div>
-      <mat-card-title class="project-card__title">
+      <mat-card-title class="project-card__title" *ngIf="title">
         {{ title }}
       </mat-card-title>
       <mat-card-subtitle class="project-card__title__subtitle">You have {{ projects.length }} projects</mat-card-subtitle>

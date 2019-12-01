@@ -72,7 +72,7 @@
       </mat-card-header>
 
       <mat-card-content class="home__users-card__content">
-        <table mat-table [dataSource]="projects" class="home__users-card__content__table">
+        <table mat-table [dataSource]="popularProjects" class="home__users-card__content__table">
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
@@ -121,4 +121,4 @@
   </div>
 </div>
 
-<dashboard-projects-private-public [title]="title"></dashboard-projects-private-public>
+<dashboard-projects-private-public [title]="title" [projects]="projects"></dashboard-projects-private-public>
