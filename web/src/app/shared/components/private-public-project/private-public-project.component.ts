@@ -14,7 +14,7 @@ import { IProject } from '../../models/index.model';
 })
 export class PrivatePublicProjectComponent {
 
-  @Input() public projects: IProject[] = [];
+  @Input() projects: IProject[] = [];
   @Input() title: string;
   @Input() showTitle: boolean = false;
 
