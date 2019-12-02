@@ -27,11 +27,11 @@ Scenario: Project dashboard with detailed information to display
     And there is a document "test-repository-full" with the js "repositories/repository-full" in collection "repositories"
     When the "/projects/test-public-project-repostory-full" page is open
     Then the text "Test public project with repository data" is in the element ".project-body__header__content__name.project-body__header__content__name__long"
-    And total count of element ".repository__container" is 2 
+    And total count of element ".repository__container" is 2
     And the text "test-release" is in the element ".info__body__description"
     And the text "test-milestone" is in the element ".info__body__description"
     And the text "test-user-minimum" is in the element ".info__body__description"
-    And the text "test-PR" is in the element ".info__body__line"   
+    And the text "test-PR" is in the element ".info__body__line"
     And the text "test-issue" is in the element ".repository-detail-card__content__title"
     And the text "test-user-minimum" is in the element ".repository-detail-card__content__request-user"
     And the text "test-event" is in the element ".repository-detail-card__content__title"
