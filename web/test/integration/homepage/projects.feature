@@ -13,10 +13,10 @@ Feature:  Display public projects on the homepage
     And the text "1 second ago" is in the element ".mat-column-lastDate"
 
   Scenario: List public project on the homepage with repository and monitor
-    Given there is a document "test-project-public-full" with the js "projects/project-public-full" in collection "projects"
-    And there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
-    And there is a document "test-user-minimum" with the js "users/user-minimum" in collection "users"
+    Given there is a document "test-user-minimum" with the js "users/user-minimum" in collection "users"
     And there is a document "test-user-minimum" with the js "user-stats/user-minimum" in collection "userStats"
+    And there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
+    And there is a document "test-project-public-full" with the js "projects/project-public-full" in collection "projects"
     When the "/" page is open
     Then the text "Test public project with full data title" is in the element ".project__list__title"
     And the text "Test public project with full data description" is in the element ".mat-column-description"

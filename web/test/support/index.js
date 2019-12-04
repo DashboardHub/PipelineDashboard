@@ -1,6 +1,6 @@
 import './commands';
 
-beforeEach(() => {
+before(() => {
   cy.task('db:delete:collection', { collection: 'repositories' });
   cy.task('db:delete:collection', { collection: 'projects' });
   cy.task('db:delete:collection', { collection: 'users' });

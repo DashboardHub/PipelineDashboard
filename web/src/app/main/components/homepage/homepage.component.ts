@@ -54,6 +54,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.projectSubscription = this.projectService
       .getPopularProjects()
       .subscribe((popularProjects: IProject[]) => this.popularProjects = popularProjects);
+    this.projectService
+      .findPublicProjects()
+      .subscribe((projects: IProject[]) => this.projects = projects);
     this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
