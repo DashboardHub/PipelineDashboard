@@ -3,7 +3,7 @@ exports.data = {
   type: 'public',
   title: 'Test public project with no repository data',
   access: {
-    admin: ['test-user-minimum']
+    admin: ['test-project-public-repository-user-minimum']
   },
   repositories: ['test-repository-minimum']
 }

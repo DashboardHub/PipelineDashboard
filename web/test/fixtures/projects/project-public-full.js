@@ -19,6 +19,6 @@ exports.data = {
   tokens: [],
   views: 1,
   access: {
-    admin: [ 'test-user-minimum' ]
+    admin: [ 'test-project-full-user-minimum' ]
   }
 }

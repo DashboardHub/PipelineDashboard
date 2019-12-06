@@ -1,8 +1,10 @@
 Feature:  Project dashboard page
 
   Scenario: Project dashboard does not display admin/owner information
-    Given there is a document "test-public-project-minimum" with the js "projects/project-public-minimum" in collection "projects"
-    When the "/projects/test-public-project-minimum" page is open
+    Given there is a document "test-dashboard-public-minimum" with the js "projects/dashboard-public-minimum" in collection "projects"
+    And there is a document "test-dashboard-public-user-minimum" with the js "users/dashboard-public-user-minimum" in collection "users"
+    And there is a document "test-dashboard-public-user-minimum" with the js "user-stats/dashboard-public-user-minimum" in collection "userStats"
+    When the "/projects/test-dashboard-public-minimum" page is open
     Then the text "You do not have any monitors. Please create monitor" is not in the element ".helper"
     And the text "You do not have any repositories. Please connect repository" is not in the element ".helper"
     And the text "No monitors added to this project yet" is in the element ".helper"
@@ -11,7 +13,9 @@ Feature:  Project dashboard page
   Scenario: Project dashboard with no detailed information to display
     Given there is a document "test-public-project-repostory" with the js "projects/project-public-repository" in collection "projects"
     And there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
-    When the "/projects/test-public-project-repostory" page is open
+    And there is a document "test-project-public-repository-user-minimum" with the js "users/project-public-repository-user-minimum" in collection "users"
+    And there is a document "test-project-public-repository-user-minimum" with the js "user-stats/project-public-repository-user-minimum" in collection "userStats"
+     When the "/projects/test-public-project-repostory" page is open
     Then the text "You do not have any monitors. Please create monitor" is not in the element ".helper"
     And the text "No monitors added to this project yet." is in the element ".helper"
     And the text "No releases are available" is in the element ".info__body"
@@ -25,6 +29,8 @@ Feature:  Project dashboard page
 Scenario: Project dashboard with detailed information to display
     Given there is a document "test-public-project-repostory-full" with the js "projects/project-public-repository-full" in collection "projects"
     And there is a document "test-repository-full" with the js "repositories/repository-full" in collection "repositories"
+    And there is a document "test-user-minimum" with the js "users/user-minimum" in collection "users"
+    And there is a document "test-user-minimum" with the js "user-stats/user-minimum" in collection "userStats"
     When the "/projects/test-public-project-repostory-full" page is open
     Then the text "Test public project with repository data" is in the element ".project-body__header__content__name.project-body__header__content__name__long"
     And total count of element ".repository__container" is 2
