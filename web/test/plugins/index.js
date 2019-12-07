@@ -48,7 +48,7 @@ module.exports = (on, config) => {
         ...manipulate(params.data),
         createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
         updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
-      }),
+      }).catch((e) => console.log('DB:SAVE:ERROR: ', e)),
 
     'db:delete:collection': (params) => db.collection(params.collection).get()
       .then((querySnapshot) => {
@@ -60,7 +60,7 @@ module.exports = (on, config) => {
             }
           });
 
-        return Promise.all(deletes);
+        return Promise.all(deletes).catch((e) => console.log('DB:SAVE:ERROR: ', e));
       }),
 
   });

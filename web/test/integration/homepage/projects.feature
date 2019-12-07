@@ -1,6 +1,6 @@
 Feature:  Display public projects on the homepage
 
-  Scenario: Generate data
+  Scenario: List public project on the homepage with minimum information
     Given there is the following document in the collection "users":
       | field    | value                              |
       | uid      | "test-project-public-user-minimum" |
@@ -15,6 +15,15 @@ Feature:  Display public projects on the homepage
       | type   | "public"                                            |
       | title  | "Test public project with minimum data title"       |
       | access | { "admin": [ "test-project-public-user-minimum" ] } |
+    When the "/" page is open
+    Then the text "Test public project with minimum data title" is in the element "a.project__list__title"
+    And the text "0" is in the element ".mat-column-repository"
+    And the text "0" is in the element ".mat-column-monitors"
+    And the text "0" is in the element ".mat-column-pings"
+    #And the text "test-project-public-user-minimum" is in the element "td.mat-column-user"
+    And the text "1 second ago" is in the element ".mat-column-lastDate"
+
+  Scenario: List public project on the homepage with repository and monitor
     Given there is the following document in the collection "users":
       | field    | value                            |
       | uid      | "test-project-full-user-minimum" |
@@ -48,6 +57,17 @@ Feature:  Display public projects on the homepage
       | pings        | []                                                                                                                                                                    |
       | tokens       | []                                                                                                                                                                    |
       | views        | 1                                                                                                                                                                     |
+    When the "/" page is open
+    Then the text "Test public project with full data title" is in the element "a.project__list__title"
+    And the text "Test public project with full data description" is in the element ".mat-column-description"
+    And the text "https://www.pipelinedashboard.io" is in the element ".project__list__url"
+    And the text "1" is in the element ".mat-column-repository"
+    And the text "1" is in the element ".mat-column-monitors"
+    And the text "0" is in the element ".mat-column-pings"
+    #And the text "test-project-full-user-minimum" is in the element "td.mat-column-user"
+    And the text "1 second ago" is in the element ".mat-column-lastDate"
+
+  Scenario: Check private projects are not displayed on the homepage
     Given there is the following document in the collection "users":
       | field    | value                               |
       | uid      | "test-project-private-user-minimum" |
@@ -62,28 +82,5 @@ Feature:  Display public projects on the homepage
       | type   | "private"                                            |
       | title  | "Test private project with minimum data title"       |
       | access | { "admin": [ "test-project-private-user-minimum" ] } |
-    And wait for data
-
-  Scenario: List public project on the homepage with minimum information
-    When the "/" page is open
-    Then the text "Test public project with minimum data title" is in the element "a.project__list__title"
-    And the text "0" is in the element ".mat-column-repository"
-    And the text "0" is in the element ".mat-column-monitors"
-    And the text "0" is in the element ".mat-column-pings"
-    #And the text "test-project-public-user-minimum" is in the element "td.mat-column-user"
-    And the text "1 second ago" is in the element ".mat-column-lastDate"
-
-  Scenario: List public project on the homepage with repository and monitor
-    When the "/" page is open
-    Then the text "Test public project with full data title" is in the element "a.project__list__title"
-    And the text "Test public project with full data description" is in the element ".mat-column-description"
-    And the text "https://www.pipelinedashboard.io" is in the element ".project__list__url"
-    And the text "1" is in the element ".mat-column-repository"
-    And the text "1" is in the element ".mat-column-monitors"
-    And the text "0" is in the element ".mat-column-pings"
-    #And the text "test-project-full-user-minimum" is in the element "td.mat-column-user"
-    And the text "1 second ago" is in the element ".mat-column-lastDate"
-
-  Scenario: Check private projects are not displayed on the homepage
     When the "/" page is open
     Then the text "Test private project" is not in the element ".project__list__title"

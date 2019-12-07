@@ -15,7 +15,7 @@ Feature:  Project dashboard page
     And there is a document "test-repository-minimum" with the js "repositories/repository-minimum" in collection "repositories"
     And there is a document "test-project-public-repository-user-minimum" with the js "users/project-public-repository-user-minimum" in collection "users"
     And there is a document "test-project-public-repository-user-minimum" with the js "user-stats/project-public-repository-user-minimum" in collection "userStats"
-     When the "/projects/test-public-project-repostory" page is open
+    When the "/projects/test-public-project-repostory" page is open
     Then the text "You do not have any monitors. Please create monitor" is not in the element ".helper"
     And the text "No monitors added to this project yet." is in the element ".helper"
     And the text "No releases are available" is in the element ".info__body"

@@ -23,5 +23,3 @@ Given(/^there is the following document in the collection "([^"]*)":$/, (collect
   });
   cy.task('db:save', { collection, uid: data.uid, data });
 });
-
-Given(/^wait for data$/, () => cy.wait(10000));
