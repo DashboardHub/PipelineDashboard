@@ -33,5 +33,5 @@ export class ProfileModel {
   repositories?: RepositoriesModel = new RepositoriesModel();
   activity?: ActivityModel[] = [];
   following?: string[] = [];
-  isAdmin: boolean = false;
+  isAdmin?: boolean = false;
 }
