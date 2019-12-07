@@ -48,11 +48,8 @@ module.exports = (on, config) => {
         ...manipulate(params.data),
         createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
         updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
-      })
-      .then(() => db.collection(params.collection)
-        .doc(params.uid)
-        .get()),
-        
+      }),
+
     'db:delete:collection': (params) => db.collection(params.collection).get()
       .then((querySnapshot) => {
         const deletes = [];

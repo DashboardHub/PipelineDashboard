@@ -7,7 +7,7 @@ Then(/^the count (\d+) is in the element "([^"]*)"$/, (count, field) => {
 });
 
 Then(/^there is a document "([^"]*)" with the js "([^"]*)" in collection "([^"]*)"$/, (doc, js, collection) => {
-  cy.fixture(js).then((data) => cy.task('db:project:save', { collection, doc, data }));
+  cy.fixture(js).then((data) => cy.task('db:save', { collection, doc, data }));
 });
 
 Then(/^total count of element "([^"]*)" is (\d+)$/, (field, count) => {
@@ -23,3 +23,5 @@ Given(/^there is the following document in the collection "([^"]*)":$/, (collect
   });
   cy.task('db:save', { collection, uid: data.uid, data });
 });
+
+Given(/^wait for data$/, () => cy.wait(10000));
