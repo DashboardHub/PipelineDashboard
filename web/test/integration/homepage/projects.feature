@@ -26,7 +26,7 @@ Feature:  Display public projects on the homepage
     And there is the following document in the collection "repositories":
       | field        | value                                                                     |
       | uid          | "test-repository-minimum"                                                 |
-      | projects     | ["test-project-public-repository", "test-project-public-repository-full"] |
+      | projects     | ["test-project-public-full"] |
       | url          | "https://api.github.com/repos/webkhushboo/HelloWorld"                     |
       | fullName     | "webkhushboo/HelloWorld"                                                  |
       | private      | false                                                                     |
