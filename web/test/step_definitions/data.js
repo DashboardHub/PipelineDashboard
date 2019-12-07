@@ -13,3 +13,13 @@ Then(/^there is a document "([^"]*)" with the js "([^"]*)" in collection "([^"]*
 Then(/^total count of element "([^"]*)" is (\d+)$/, (field, count) => {
   cy.get(field).should('have.length', count);
 });
+
+Given(/^there is the following document in the collection "([^"]*)":$/, (collection, table) => {
+  const data = {};
+  table.hashes().forEach((item) => {
+    try {
+      data[item.field] = JSON.parse(item.value);
+    } catch(e) { console.log(e) }
+  });
+  cy.task('db:save', { collection, uid: data.uid, data });
+});

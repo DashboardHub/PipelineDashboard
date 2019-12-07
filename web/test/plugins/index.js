@@ -37,20 +37,22 @@ module.exports = (on, config) => {
 
   on('task', {
     'db:update': (params) => db.collection(params.collection)
-        .doc(params.id)
-        .update({ [params.field]: params.value }),
+      .doc(params.id)
+      .update({
+        [params.field]: params.value
+      }),
 
-    'db:project:save': (params) => db.collection(params.collection)
-        .doc(params.doc)
-        .set({
-          ...manipulate(params.data),
-          createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
-          updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
-        })
-        .then(() => db.collection(params.collection)
-          .doc(params.doc)
-          .get()),
-
+    'db:save': (params) => db.collection(params.collection)
+      .doc(params.uid)
+      .set({
+        ...manipulate(params.data),
+        createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
+        updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
+      })
+      .then(() => db.collection(params.collection)
+        .doc(params.uid)
+        .get()),
+        
     'db:delete:collection': (params) => db.collection(params.collection).get()
       .then((querySnapshot) => {
         const deletes = [];
@@ -61,8 +63,8 @@ module.exports = (on, config) => {
             }
           });
 
-          return Promise.all(deletes);
-        }),
+        return Promise.all(deletes);
+      }),
 
   });
 }
