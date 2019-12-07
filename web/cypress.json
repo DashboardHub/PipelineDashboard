@@ -8,5 +8,6 @@
   "supportFile": "test/support/index.js",
   "videosFolder": "test/videos",
   "viewportWidth": 1920,
-  "viewportHeight": 1080
+  "viewportHeight": 1080,
+  "pageLoadTimeout": 10000
 }
