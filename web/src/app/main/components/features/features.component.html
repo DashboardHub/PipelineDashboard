@@ -73,7 +73,7 @@
       <div *ngFor="let menu of starter" class="feature__card__menu__content__item">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
           <div>
-            <mat-icon svgIcon="{{ menu.icon }}"></mat-icon>
+            <mat-icon class="material-icons-outlined grey-color">{{ menu.icon }}</mat-icon>
           </div>
           <span class="feature__card__menu__content__item__text">{{ menu.name }}</span>
         </div>
@@ -87,7 +87,7 @@
     <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" fxLayoutGap.md="5px"
       class="feature__card__header__starter">
       <span>
-        <mat-icon svgIcon="starter_icon" class="feature__card__header__icon"></mat-icon>
+        <mat-icon class="material-icons-outlined feature__card__header__icon">directions_bike</mat-icon>
       </span>
       <span class="feature__card__header__title">Starter</span>
     </div>
@@ -108,7 +108,7 @@
       fxLayoutAlign.gt-sm="center center">
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
-          <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
+          <mat-icon *ngIf="item.value" class="material-icons-outlined green-color">check
           </mat-icon>
         </div>
       </div>
@@ -116,7 +116,7 @@
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px"
           [ngClass]="{'feature__card__content__item__no-active': !item.value}">
           <div>
-            <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+            <mat-icon class="material-icons-outlined grey-color">{{ item.icon }}</mat-icon>
           </div>
           <div [ngClass]="{'feature__card__content__small-item__no-active': !item.value}">
             <div *ngIf="chekPackValueForString(item.value); else stringValue"
@@ -136,7 +136,7 @@
   <div class="feature__card__header">
     <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" fxLayoutGap.md="5px" class="feature__card__header__professional">
       <span>
-        <mat-icon svgIcon="professional_icon" class="feature__card__header__icon"></mat-icon>
+        <mat-icon class="feature__card__header__icon material-icons-outlined">directions_car</mat-icon>
       </span>
       <span class="feature__card__header__title">Professional</span>
     </div>
@@ -155,14 +155,14 @@
     <div *ngFor="let item of professional" class="feature__card__content__item" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
-          <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
+          <mat-icon *ngIf="item.value" class="material-icons-outlined green-color">check
           </mat-icon>
         </div>
       </div>
       <ng-template #smallScreemConentBlock>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
           <div>
-            <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+            <mat-icon class="material-icons-outlined grey-color">{{ item.icon }}</mat-icon>
           </div>
           <div [ngClass]="{'feature__card__content__small-item__no-active': !item.value}">
             <div *ngIf="chekPackValueForString(item.value); else stringValue" class="feature__card__content__small-item">
@@ -181,7 +181,7 @@
   <div class="feature__card__header">
     <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="20px" fxLayoutGap.md="5px" class="feature__card__header__enterprise">
       <span>
-        <mat-icon svgIcon="enterprise_icon" class="feature__card__header__icon"></mat-icon>
+        <mat-icon class="feature__card__header__icon material-icons-outlined">airplanemode_active</mat-icon>
       </span>
       <span class="feature__card__header__title">Enterprise</span>
     </div>
@@ -200,14 +200,14 @@
     <div *ngFor="let item of enterprise" class="feature__card__content__item" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="center center">
       <div *ngIf="!isSmallScreen; else smallScreemConentBlock">
         <div *ngIf="chekPackValue(item.value); else stringValue">
-          <mat-icon *ngIf="item.value" svgIcon="feature_check_icon">
+          <mat-icon *ngIf="item.value" class="material-icons-outlined green-color">check
           </mat-icon>
         </div>
       </div>
       <ng-template #smallScreemConentBlock>
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" [ngClass]="{'feature__card__content__item__no-active': !item.value}">
           <div>
-            <mat-icon svgIcon="{{ item.icon }}"></mat-icon>
+            <mat-icon class="material-icons-outlined grey-color">{{ item.icon }}</mat-icon>
           </div>
           <div [ngClass]="{'feature__card__content__small-item__no-active': !item.value}">
             <div *ngIf="chekPackValueForString(item.value); else stringValue" class="feature__card__content__small-item">

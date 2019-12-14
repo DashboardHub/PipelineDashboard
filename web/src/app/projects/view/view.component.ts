@@ -63,9 +63,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }
         if (this.project.type === 'private') {
-          this.typeIcon = 'private_icon';
+          this.typeIcon = 'lock';
         } else if (this.project.type === 'public') {
-          this.typeIcon = 'public_icon';
+          this.typeIcon = 'lock_open';
         }
       }
       );

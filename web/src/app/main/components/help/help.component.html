@@ -20,7 +20,7 @@
       <mat-divider></mat-divider>
       <mat-nav-list *ngFor="let help of filteredTopics">
         <a [routerLink]="['/help', help.path]">
-          <mat-icon class="help__card__content__icon" svgIcon="{{ help.icon }}"></mat-icon>
+          <mat-icon class="help__card__content__icon material-icons-outlined grey-color">{{help.icon}}</mat-icon>
           <div fxLayout="column">
             <div class="help__card__content__title">{{ help.title }}</div>
             <div class="help__card__content__description">{{ help.description }}</div>
@@ -28,7 +28,7 @@
           <span fxFlex></span>
           <span fxHide.xs fxHide.sm fxFlex="40%" fxFlex.gt-sm="30%" fxLayoutAlign="end center">
             <div>
-              <mat-icon svgIcon="time_icon"></mat-icon>
+              <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
             </div>
             <div class="help__card__content__time">{{ help.updatedAt | timeAgo }}</div>
           </span>
