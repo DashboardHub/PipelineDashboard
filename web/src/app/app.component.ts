@@ -9,9 +9,6 @@ import { delay } from 'rxjs/operators';
 
 // Dashboard hub Icon register
 import { MatSidenav } from '@angular/material';
-import { MatIconRegistry } from '@angular/material/icon';
-
-import { DomSanitizer } from '@angular/platform-browser';
 
 // Dashboard hub models and services
 import { ActivityService, AuthenticationService } from './core/services/index.service';
@@ -99,8 +96,6 @@ export class AppComponent implements AfterViewInit, OnInit {
    * @param breakpointObserver BreakpointObserver
    */
   constructor(
-    private _iconRegistry: MatIconRegistry,
-    private _domSanitizer: DomSanitizer,
     private authService: AuthenticationService,
     private activityService: ActivityService,
     private breakpointObserver: BreakpointObserver,
@@ -120,30 +115,6 @@ export class AppComponent implements AfterViewInit, OnInit {
         }
       });
 
-    this._iconRegistry.addSvgIcon(
-      'logo_icon',
-      this._domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/Logo.svg')
-    );
-    this._iconRegistry
-      .addSvgIconInNamespace('assets', 'dashboardhub',
-        this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/logo-horizontal-std.svg')
-      );
-    this._iconRegistry
-      .addSvgIconInNamespace('assets', 'dashboardhub_white',
-        this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/logo-horizontal-white.svg')
-      );
-    this._iconRegistry
-      .addSvgIconInNamespace('assets', 'dashboardhub_icon',
-        this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/icon-only-orange.svg')
-      );
-    this._iconRegistry
-      .addSvgIconInNamespace('assets', 'github',
-        this._domSanitizer
-          .bypassSecurityTrustResourceUrl('https://raw.githubusercontent.com/DashboardHub/Assets/master/logo/github.svg')
-      );
     this.version = environment.version;
   }
 

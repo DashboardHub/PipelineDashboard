@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav [mode]="sideNavMode" class="sidenav" [ngClass]="{'sidenav__open': menuTriger}" fixedInViewport="false" role="navigation" [opened]="!isSmallScreen">
     <div class="heading" (click)="openMenu($event)">
-      <mat-icon svgIcon="logo_icon" class="heading__logo"></mat-icon>
+      <img src="assets/icons/Logo.svg" class="heading__logo"/>
     </div>
     <mat-nav-list class="menu">
       <ng-container *ngFor="let item of publicRoutes">
@@ -83,7 +83,7 @@
       </div>
       <div fxHide.gt-xs fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" class="app-toolbar">
         <div>
-          <mat-icon svgIcon="logo_icon" class="app-toolbar__logo"></mat-icon>
+          <img src="assets/icons/Logo.svg" class="app-toolbar__logo"/>
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
           <div>
@@ -169,7 +169,7 @@
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center">
-          <mat-icon [style.width.px]="120" svgIcon="assets:dashboardhub"></mat-icon>
+          <img src="assets/icons/logo-horizontal-std.svg" [style.width.px]="120"/>
         </div>
       </mat-toolbar-row>
     </mat-toolbar>
