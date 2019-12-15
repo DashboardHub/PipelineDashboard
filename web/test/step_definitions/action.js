@@ -11,3 +11,7 @@ When(/^enter text "([^"]*)" in the element "([^"]*)"$/, (text, element) => {
 Then(/^clear text in the element "([^"]*)"$/, (element) => {
   cy.get(element).clear();
 });
+
+When(/^click on list item "([^"]*)" at position (\d+)$/, (item, position) => {
+  cy.get(item).eq(position).click();
+});
