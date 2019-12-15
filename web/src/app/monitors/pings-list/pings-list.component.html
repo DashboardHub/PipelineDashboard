@@ -11,7 +11,7 @@
   <mat-card class="monitor-ping__card">
     <mat-card-header>
       <div class="monitor-ping__card__header">
-        <mat-icon svgIcon="ping_white_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">swap_vertical_circle</mat-icon>
       </div>
       <mat-card-title class="monitor-ping__card__title">
         Pings
@@ -29,7 +29,7 @@
               <div class="monitor-ping__card__content__table__url">{{ element.url }}</div>
               <span fxHide.gt-xs fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                 <span>
-                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
                 </span>
                 <span>{{ element.createdOn.toDate() | timeAgo }} </span>
               </span>
@@ -55,7 +55,7 @@
           <td mat-cell *matCellDef="let element">
             <span fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
               <span>
-                <mat-icon svgIcon="time_icon"></mat-icon>
+                <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
               </span>
               <span>{{ element.createdOn.toDate() | timeAgo }}</span>
             </span>

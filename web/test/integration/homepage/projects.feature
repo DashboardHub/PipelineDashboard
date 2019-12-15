@@ -58,14 +58,14 @@ Feature:  Display public projects on the homepage
       | tokens       | []                                                                                                                                                                    |
       | views        | 1                                                                                                                                                                     |
     Given the "/" page is open
-    Then the text "Test public project with full data title" is in the element "a.project__list__title"
-    And the text "Test public project with full data description" is in the element ".mat-column-description"
-    And the text "https://www.pipelinedashboard.io" is in the element ".project__list__url"
-    And the text "1" is in the element ".mat-column-repository"
-    And the text "1" is in the element ".mat-column-monitors"
-    And the text "0" is in the element ".mat-column-pings"
-    #And the text "test-project-full-user-minimum" is in the element "td.mat-column-user"
-    And the text "1 second ago" is in the element ".mat-column-lastDate"
+    Then find the row of text "Test public project with full data title"
+    And the text "Test public project with full data description" is in the row and column ".mat-column-description"
+    And the text "https://www.pipelinedashboard.io" is in the row and column ".mat-column-url"
+    And the text "1" is in the row and column ".mat-column-repository"
+    And the text "1" is in the row and column ".mat-column-monitors"
+    And the text "0" is in the row and column ".mat-column-pings"
+    #And the text "test-user-minimum" is in the row
+    And the text "1 second ago" is in the row and column ".mat-column-lastDate"
 
   Scenario: Check private projects are not displayed on the homepage
     Given there is the following document in the collection "users":
