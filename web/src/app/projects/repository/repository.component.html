@@ -2,7 +2,7 @@
   <mat-card class="repository__problem__card" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayout.xs="column">
       <div>
-        <mat-icon svgIcon="warning_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">warning</mat-icon>
       </div>
       <div>Webhook not found on this repository. This is required for realtime data.</div>
     </div>
@@ -24,7 +24,7 @@
         <div fxLayout="row" fxLayoutAlign="space-between start" fxLayout.lt-lg="column" class="header-container">
           <div class="repository__container__info">
             <div class="heading repository__header__icon">
-              <mat-icon svgIcon="repository_folder"></mat-icon>
+              <mat-icon class="material-icons-outlined">folder_open</mat-icon>
             </div>
             <div class="repository__header">
               <div class="repository__header__panel__name">
@@ -73,7 +73,7 @@
           <mat-card-header class="red repository-detail-card__header" fxLayoutAlign="start center">
             <mat-card-title>
               <div fxLayout fxLayoutAlign="start center" class="repository-detail-card__header__title">
-                <mat-icon svgIcon="triangle"></mat-icon>
+                <mat-icon class="material-icons-outlined white-color">warning</mat-icon>
                 <div class="repository-detail-card__header__text" fxFlexOffset="15px" fxFlexAlign="end">Issues</div>
               </div>
             </mat-card-title>
@@ -86,7 +86,7 @@
                 <h4 mat-line class="repository-detail-card__content__title repository-detail-card__content__title__issues" fxLayoutGap="5px">
                   <a href="{{ issue.url }}">#{{ issue.number }}</a> {{ issue.title }}</h4>
                 <span class="repository-detail-card__content__time-container-top">
-                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ issue.updatedOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
@@ -103,7 +103,7 @@
             <mat-card-title>
               <div fxLayout fxLayoutAlign="start center" class="repository-detail-card__header__title">
                 <div>
-                  <mat-icon svgIcon="request_white"></mat-icon>
+                  <mat-icon class="material-icons-outlined white-color">subdirectory_arrow_left</mat-icon>
                 </div>
                 <div class="repository-detail-card__header__text" fxFlexOffset="15px" fxFlexAlign="end">Pull Requests
                 </div>
@@ -117,9 +117,9 @@
                 <img matListAvatar [src]="pullRequest.owner.avatarUrl" [alt]="pullRequest.owner.username" />
                 <h4 mat-line class="repository-detail-card__content__title">
                   <ng-container *ngIf="pullRequest.state">
-                    <mat-icon *ngIf="pullRequest.state === 'success' || pullRequest.state === 'open'" svgIcon="success_icon"></mat-icon>
+                    <mat-icon *ngIf="pullRequest.state === 'success' || pullRequest.state === 'open'" class="material-icons-outlined green-color">check_circle</mat-icon>
                     <mat-spinner [diameter]="20" class="spinner" *ngIf="pullRequest.state === 'pending'"></mat-spinner>
-                    <mat-icon *ngIf="pullRequest.state === 'failure'" svgIcon="error_icon"></mat-icon>
+                    <mat-icon *ngIf="pullRequest.state === 'failure'" class="material-icons-outlined red-color">error_outline</mat-icon>
                     {{ pullRequest.title }}
                   </ng-container>
                 </h4>
@@ -128,13 +128,13 @@
                 <p mat-line class="repository-detail-card__content__request">Comments: {{ pullRequest.comments }}</p>
                 <p mat-line class="repository-detail-card__content__request">Review Comments: {{ pullRequest.reviewComments }}</p>
                 <p mat-line class="repository-detail-card__content__request" *ngIf="pullRequest.changedFiles">
-                  <mat-icon svgIcon="add_icon" ></mat-icon> <span>{{ pullRequest.additions }}</span>
-                  <mat-icon svgIcon="remove_icon"></mat-icon> <span>{{ pullRequest.deletions }}</span>
+                  <mat-icon class="material-icons-outlined green-color" >add_circle_outline</mat-icon> <span>{{ pullRequest.additions }}</span>
+                  <mat-icon class="material-icons-outlined red-color">remove_circle_outline</mat-icon> <span>{{ pullRequest.deletions }}</span>
                   Changed Files: {{ pullRequest.changedFiles }}
                 </p>
 
                 <span class="repository-detail-card__content__time-container-bottom">
-                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
                   <p mat-line class="repository-detail-card__content__time">{{ pullRequest.createdOn.toDate() | timeAgo }}</p>
                 </span>
                 <p *ngFor="let buildTime of pullRequest.buildTimes" mat-line class="repository-detail-card__content__request">{{ buildTime.context }}
@@ -155,7 +155,7 @@
           <mat-card-header class="blue repository-detail-card__header">
             <mat-card-title>
               <div fxLayout fxLayoutAlign="start center" class="repository-detail-card__header__title">
-                <mat-icon svgIcon="event"></mat-icon>
+                <mat-icon class="material-icons-outlined white-color">event_available</mat-icon>
                 <div class="repository-detail-card__header__text" fxFlexOffset="15px" fxFlexAlign="end">Events</div>
               </div>
               <ng-template #eventsOther>
@@ -172,7 +172,7 @@
                   {{ event.payload.title }}</h4>
                 <p mat-line class="repository-detail-card__content__username">{{ event.actor.username }}</p>
                 <span class="repository-detail-card__content__time-container-bottom">
-                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
                   <p class="repository-detail-card__content__time" mat-line>{{ event.createdOn.toDate() | timeAgo }}</p>
                 </span>
               </mat-list-item>
@@ -189,7 +189,7 @@
     <div fxFlex="25%">
       <div class="info">
         <h3 fxLayout fxLayoutAlign="start center" class="info__header__blue">
-          <mat-icon svgIcon="release_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined blue-color">extension</mat-icon>
           <div class="info__header__title" fxFlexOffset="15px" fxFlexAlign="end">Latest Release</div>
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">
@@ -219,7 +219,7 @@
     <div fxFlex="25%">
       <div class="info">
         <h3 fxLayout fxLayoutAlign="start center" class="info__header__red">
-          <mat-icon svgIcon="milestone_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined red-color">filter_none</mat-icon>
           <div class="info__header__title" fxFlexOffset="15px" fxFlexAlign="end">Milestone last updated</div>
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">
@@ -251,7 +251,7 @@
     <div fxFlex="25%">
       <div class="info">
         <h3 fxLayout fxLayoutAlign="start center" class="info__header__green">
-          <mat-icon svgIcon="contributor_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined green-color">account_circle_outline</mat-icon>
           <div class="info__header__title" fxFlexOffset="15px" fxFlexAlign="end">Top Contributor</div>
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">
@@ -284,7 +284,7 @@
     <div fxFlex="25%">
       <div class="info">
         <h3 fxLayout fxLayoutAlign="start center" class="info__header__orange">
-          <mat-icon svgIcon="latest_pr_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined orange-color">subdirectory_arrow_left</mat-icon>
           <div class="info__header__title" fxFlexOffset="15px" fxFlexAlign="end">Latest PR</div>
         </h3>
         <div class="info__body" fxLayout fxLayoutAlign="start start">

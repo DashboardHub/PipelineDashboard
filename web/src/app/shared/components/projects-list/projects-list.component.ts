@@ -94,9 +94,9 @@ export class ProjectsListComponent implements OnChanges {
    */
   public checkTypeOfProject(project: ProjectModel): string {
     if (project.type === 'private') {
-      return 'private_icon';
+      return 'lock';
     } else if (project.type === 'public') {
-      return 'public_icon';
+      return 'lock_open';
     }
   }
 
