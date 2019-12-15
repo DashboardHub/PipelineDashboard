@@ -82,7 +82,7 @@ Scenario: Project dashboard with detailed information to display
       | milestones | [{"title": 'test-milestone',"state": 'open',"creator": {"avatarUrl": 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',"username": 'test-user-minimum'},"updatedAt": 'DATETIME[NOW]'}] |
       | contributors | [{"owner": {"avatarUrl": 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',"username": 'test-user-minimum'},"total": 2}] |
       | pullRequests | [{"title": 'test-PR',"owner": {"avatarUrl": 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',"username": 'test-user-minimum' },"createdOn": 'DATETIME[NOW]'}] |
-      | pullRequests |[{"payload": {"title": 'test-event',"action": 'created' },"createdOn": 'DATETIME[NOW]', "public": true,"type": 'IssueCommentEvent', "actor": {"avatarUrl": 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',"username": 'test-user-minimum'}}] |
+      | events |[{"payload": {"title": 'test-event',"action": 'created' },"createdOn": 'DATETIME[NOW]', "public": true,"type": 'IssueCommentEvent', "actor": {"avatarUrl": 'https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png',"username": 'test-user-minimum'}}] |
       | createdOn | "DATETIME[NOW]" |
     And there is the following document in the collection "users":
       | field    | value                              |
