@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    <defs>
-        <style>.a{fill:none;}.b{fill:#aaa;}</style>
-    </defs>
-    <path class="a" d="M0,0H24V24H0Z"/>
-    <path class="b" d="M12.36,6l.4,2H18v6H14.64l-.4-2H7V6h5.36M14,4H5V21H7V14h5.6l.4,2h7V6H14.4Z"/>
-</svg>

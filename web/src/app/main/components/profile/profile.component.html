@@ -19,7 +19,7 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
-              <mat-icon svgIcon="overwiew_icon"></mat-icon>
+              <mat-icon class="material-icons-outlined">notifications_active</mat-icon>
               <div>Overview</div>
             </div>
           </ng-template>
@@ -32,7 +32,7 @@
                   <div class="profile__card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center">
                     <span fxLayoutGap.gt-xs="15px" fxLayout="row">
                       <div>
-                        <mat-icon *ngIf="!isSmallScreen" mat-list-icon svgIcon="check_icon"></mat-icon>
+                        <mat-icon *ngIf="!isSmallScreen" mat-list-icon class="material-icons-outlined grey-color">check_circle</mat-icon>
                       </div>
                       <div class="profile__card__content__table__title__main__event">{{ element.type }}
                         {{ element.payload.title }}
@@ -57,7 +57,7 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
-              <mat-icon svgIcon="repository_icon"></mat-icon>
+              <mat-icon class="material-icons-outlined light-green-color">folder_open</mat-icon>
               <div>{{ profile.repositories.data.length }} | Repositories</div>
             </div>
           </ng-template>
@@ -72,8 +72,8 @@
                   <div class="profile__card__content__table__title__main" fxLayout="row" fxLayoutAlign="start center"
                     fxLayoutGap="15px">
                     <div *ngIf="!isSmallScreen">
-                      <mat-icon mat-list-icon *ngIf="element.private" svgIcon="private_icon"></mat-icon>
-                      <mat-icon mat-list-icon *ngIf="!element.private" svgIcon="public_icon"></mat-icon>
+                      <mat-icon mat-list-icon *ngIf="element.private" class="material-icons-outlined green-color">lock</mat-icon>
+                      <mat-icon mat-list-icon *ngIf="!element.private" class="material-icons-outlined green-color">lock_open</mat-icon>
                     </div>
                     <div class="profile__card__content__table__title__main__title">{{ element.fullName }}</div>
                   </div>
@@ -94,7 +94,7 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="15px">
-              <mat-icon svgIcon="security_icon"></mat-icon>
+              <mat-icon class="material-icons-outlined">security</mat-icon>
               <div>{{ logins.length }}| Security</div>
             </div>
           </ng-template>
@@ -107,7 +107,7 @@
                   <div class="profile__card__content__table__title" fxLayout="row" fxLayoutAlign="start center"
                     fxLayoutGap="15px">
                     <div *ngIf="!isSmallScreen">
-                      <mat-icon mat-list-icon svgIcon="security_icon"></mat-icon>
+                      <mat-icon mat-list-icon class="material-icons-outlined">security</mat-icon>
                     </div>
                     <span *ngIf="isSmallScreen">last login:</span>
                     <span>{{ element.date.toDate() | timeAgo }}</span>

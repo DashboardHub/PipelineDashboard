@@ -7,7 +7,7 @@
     <mat-card class="home__users-card" fxFlex="49">
       <mat-card-header>
         <div class="home__users-card__header">
-          <mat-icon svgIcon="home_page_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined">account_circle</mat-icon>
         </div>
         <mat-card-title class="home__users-card__title">
           Active Users
@@ -36,7 +36,7 @@
                   href="https://github.com/{{ element.username }}">{{ element.name ? element.name : element.username }}</a>
                 <div *ngIf="isSmallScreen" fxLayout="row" fxLayoutAlign="start center"
                   class="home__users-card__content__table__time">
-                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
                   <span>{{ element.lastUpdated.toDate() | timeAgo }}</span>
                 </div>
               </div>
@@ -61,7 +61,7 @@
     <mat-card class="home__users-card" fxFlex="49">
       <mat-card-header>
         <div class="home__users-card__header">
-          <mat-icon svgIcon="project_list_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined">dashboard</mat-icon>
         </div>
         <mat-card-title class="home__users-card__title">
           Popular projects
@@ -76,7 +76,7 @@
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <mat-icon svgIcon="{{ checkTypeOfProject(element) }}" class="home__users-card__content__table__icon"></mat-icon>
+              <mat-icon class="home__users-card__content__table__icon material-icons-outlined green-color">{{ checkTypeOfProject(element) }}</mat-icon>
             </td>
           </ng-container>
 
@@ -89,7 +89,7 @@
                 </div>
 
                 <div *ngIf="isSmallScreen" fxLayout="row" fxLayoutAlign="start center" class="home__users-card__content__table__time">
-                  <mat-icon svgIcon="time_icon"></mat-icon>
+                  <mat-icon class="material-icons-outlined grey-color">update</mat-icon>
                   <span>{{ element.updatedOn.toDate() | timeAgo }}</span>
                 </div>
               </div>
