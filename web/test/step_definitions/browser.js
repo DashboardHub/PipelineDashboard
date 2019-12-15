@@ -4,7 +4,6 @@ import {
 } from 'cypress-cucumber-preprocessor/steps';
 
 const url = Cypress.config('baseUrl');
-let row;
 
 Given(/^the "([^"]*)" page is open$/, (path) => {
   cy.visit(`${url}/${path}`);
@@ -19,13 +18,11 @@ Then(/^the text "([^"]*)" is in the element "([^"]*)"$/, (text, element) => {
 });
 
 When(/^find the row of text "([^"]*)"$/, (text) => {
-  cy.contains('tr', text).then((elem) => {
-   row = elem;
-  })
+  cy.contains('tr', text).as('row');
 });
 
-Then(/^the text "([^"]*)" is in the row$/, (text) => {
-  cy.get(row).contains(text);
+Then(/^the text "([^"]*)" is in the row and column "([^"]*)"$/, (text, column) => {
+  cy.get('@row').get(column).contains(text);
 });
 
 Then(/^the text "([^"]*)" is not in the element "([^"]*)"$/, (text, element) => {
