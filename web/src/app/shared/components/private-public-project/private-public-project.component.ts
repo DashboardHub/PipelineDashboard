@@ -1,5 +1,5 @@
 // Core modules
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 // Dashboard hub model and services
 import { IProject } from '../../models/index.model';
@@ -12,10 +12,15 @@ import { IProject } from '../../models/index.model';
   templateUrl: './private-public-project.component.html',
   styleUrls: ['./private-public-project.component.scss'],
 })
-export class PrivatePublicProjectComponent {
+export class PrivatePublicProjectComponent implements OnChanges {
 
   @Input() projects: IProject[] = [];
   @Input() title: string;
   @Input() showTitle: boolean = false;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.projects) {
+      this.projects = changes.projects.currentValue;
+    }
+  }
 }

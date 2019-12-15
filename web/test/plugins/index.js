@@ -4,7 +4,7 @@ const serviceAccount = require('../../../firebase.enc.json');
 
 const traverse = (o, fn) => {
   Object.entries(o).forEach((i) => {
-    if (i[1] !== null && (typeof(i[1]) === 'object' || typeof(i[1]) === 'array')) {
+    if (i[1] !== null && (typeof (i[1]) === 'object' || typeof (i[1]) === 'array')) {
       traverse(i[1], fn);
     } else {
       o[i[0]] = fn(i);
@@ -37,25 +37,31 @@ module.exports = (on, config) => {
 
   on('task', {
     'db:update': (params) => db.collection(params.collection)
-        .doc(params.id)
-        .update({ [params.field]: params.value })
-        .then(() => console.log(`Updated to ${params.collection}`))
-        .then(() => params.collection)
-  });
+      .doc(params.id)
+      .update({
+        [params.field]: params.value
+      }),
 
-  on('task', {
-    'db:project:save': (params) => db.collection(params.collection)
-        .doc(params.doc)
-        .set({
-          ...manipulate(params.data),
-          createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
-          updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
-        })
-        .then(() => db.collection(params.collection)
-          .doc(params.doc)
-          .get())
-        .then(() => console.log(`Written to ${params.collection}`))
-        .then(() => params.collection)
-  });
+    'db:save': (params) => db.collection(params.collection)
+      .doc(params.uid)
+      .set({
+        ...manipulate(params.data),
+        createdOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01')),
+        updatedOn: admin.firestore.Timestamp.fromDate(new Date('2050-01-01'))
+      }).catch((e) => console.log('DB:SAVE:ERROR: ', e)),
 
+    'db:delete:collection': (params) => db.collection(params.collection).get()
+      .then((querySnapshot) => {
+        const deletes = [];
+        querySnapshot
+          .forEach((doc) => {
+            if ((doc.id).startsWith('test-')) {
+              deletes.push(db.collection(params.collection).doc(doc.id).delete());
+            }
+          });
+
+        return Promise.all(deletes).catch((e) => console.log('DB:SAVE:ERROR: ', e));
+      }),
+
+  });
 }
