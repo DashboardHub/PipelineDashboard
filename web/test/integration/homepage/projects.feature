@@ -15,7 +15,7 @@ Feature:  Display public projects on the homepage
       | type   | "public"                                            |
       | title  | "Test public project with minimum data title"       |
       | access | { "admin": [ "test-project-public-user-minimum" ] } |
-    When the "/" page is open
+    Given the "/" page is open
     Then the text "Test public project with minimum data title" is in the element "a.project__list__title"
     And the text "0" is in the element ".mat-column-repository"
     And the text "0" is in the element ".mat-column-monitors"
@@ -57,7 +57,7 @@ Feature:  Display public projects on the homepage
       | pings        | []                                                                                                                                                                    |
       | tokens       | []                                                                                                                                                                    |
       | views        | 1                                                                                                                                                                     |
-    When the "/" page is open
+    Given the "/" page is open
     Then the text "Test public project with full data title" is in the element "a.project__list__title"
     And the text "Test public project with full data description" is in the element ".mat-column-description"
     And the text "https://www.pipelinedashboard.io" is in the element ".project__list__url"
@@ -82,5 +82,5 @@ Feature:  Display public projects on the homepage
       | type   | "private"                                            |
       | title  | "Test private project with minimum data title"       |
       | access | { "admin": [ "test-project-private-user-minimum" ] } |
-    When the "/" page is open
+    Given the "/" page is open
     Then the text "Test private project" is not in the element ".project__list__title"

@@ -6,10 +6,6 @@ Then(/^the count (\d+) is in the element "([^"]*)"$/, (count, field) => {
   cy.get(field).contains(count);
 });
 
-Then(/^there is a document "([^"]*)" with the js "([^"]*)" in collection "([^"]*)"$/, (uid, js, collection) => {
-  cy.fixture(js).then((data) => cy.task('db:save', { collection, uid, data }));
-});
-
 Then(/^total count of element "([^"]*)" is (\d+)$/, (field, count) => {
   cy.get(field).should('have.length', count);
 });
