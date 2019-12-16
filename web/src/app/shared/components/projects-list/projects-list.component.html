@@ -12,7 +12,10 @@
     <ng-container matColumnDef="type">
       <th mat-header-cell *matHeaderCellDef>Type</th>
       <td mat-cell *matCellDef="let element">
-        <mat-icon class="material-icons-outlined green-color">{{ checkTypeOfProject(element) }}</mat-icon>
+        <img *ngIf = "element.logoUrl; else imagePlaceholder" src="{{element.logoUrl}}" />
+        <ng-template #imagePlaceholder>
+          <mat-icon class="material-icons-outlined green-color">{{ checkTypeOfProject(element) }}</mat-icon >
+        </ng-template>
       </td>
     </ng-container>
     <ng-container matColumnDef="title">

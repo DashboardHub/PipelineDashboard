@@ -49,6 +49,10 @@
           height: 35px;
         }
 
+        img {
+          width: 24px;
+        }
+
         @media(max-width: $breakpoint-xs) {
           &__avatar {
             margin-right: 10px;
