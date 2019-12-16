@@ -9,7 +9,7 @@ import { map, take } from 'rxjs/operators';
 // Dashboard model and services
 import { TokenService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
-import { TokenModel } from '@shared/models/index.model';
+import { ProjectModel, TokenModel } from '@shared/models/index.model';
 
 /**
  * Token list component
@@ -23,7 +23,9 @@ export class TokensListComponent {
 
   private dialogRef: MatDialogRef<DialogConfirmationComponent>;
   public projectUid: string;
+  public project: ProjectModel;
   public tokenList: TokenModel[];
+  public typeIcon: string;
   public displayedColumns: string[] = ['name', 'action'];
 
   /**
@@ -40,10 +42,18 @@ export class TokensListComponent {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.route.data
       .pipe(
-        map((data: { tokens: TokenModel[] }) => data.tokens),
+        map((data: { tokens: TokenModel[], project: ProjectModel }) => data),
         take(1)
       )
-      .subscribe((data: TokenModel[]) => this.tokenList = data);
+      .subscribe((data: { tokens: TokenModel[], project: ProjectModel }) => {
+        this.tokenList = data.tokens;
+        this.project = data.project;
+        if (this.project.type === 'private') {
+          this.typeIcon = 'lock';
+        } else if (this.project.type === 'public') {
+          this.typeIcon = 'lock_open';
+        }
+      });
   }
 
   /**
