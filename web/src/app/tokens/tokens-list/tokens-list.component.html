@@ -1,7 +1,7 @@
 <div class="monitor-tokens">
   <div class="monitor-tokens__header" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-      <span *ngIf="!isSmallScreen" class="token-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
+      <span class="token-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
         <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl; else imagePlaceHolder" />
         <ng-template #imagePlaceHolder>
           <mat-icon class="material-icons-outlined purple-color">dashboard</mat-icon>
