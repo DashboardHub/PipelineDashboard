@@ -49,7 +49,7 @@
           <mat-icon class="material-icons-outlined light-green-color">folder_open</mat-icon><span>{{ project.repositories.length }} | Repositories</span>
         </div>
         <div class="project-body__header__content__item__pings" fxLayout="row" fxLayoutGap="5px">
-          <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
+          <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon><span>{{ project.getTotalPings() | numbers }} | Total Pings</span>
         </div>
       </ng-template>
       <ng-template #infoContentGuest>
