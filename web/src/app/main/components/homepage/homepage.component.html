@@ -74,7 +74,7 @@
           <ng-container matColumnDef="icon">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <img *ngIf="element.logoUrl; else imagePlaceholder" src="{{element.logoUrl}}" />
+              <img *ngIf="element.logoUrl; else imagePlaceholder" [src]="element.logoUrl" class="home__users-card__content__table__icon" />
               <ng-template #imagePlaceholder>
                 <mat-icon class="home__users-card__content__table__icon material-icons-outlined green-color">{{ checkTypeOfProject(element) }}</mat-icon>
               </ng-template>
