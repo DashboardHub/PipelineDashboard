@@ -9,7 +9,7 @@
     </div>
     <div fxLayout="row" fxLayoutGap="5px">
       <div class="monitor-list__header__pings" fxLayout="row" fxLayoutGap="5px" fxHide.lt-md>
-        <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
+        <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon><span>{{ project.getTotalPings() | numbers }} | Total Pings</span>
       </div>
       <button mat-button class="monitor-list__header__add-button" [routerLink]="[ './create' ]">
         <mat-icon class="material-icons-outlined white-color">add_to_photos</mat-icon>
