@@ -2,7 +2,7 @@ Given(/^there is a document "([^"]*)" with the field "([^"]*)" set to (\d+) in c
   cy.task('db:update', { collection, id, field, value })
 });
 
-Then(/^the count (\d+) is in the element "([^"]*)"$/, (count, field) => {
+Then(/^the count "([^"]*)" is in the element "([^"]*)"$/, (count, field) => {
   cy.get(field).contains(count);
 });
 
