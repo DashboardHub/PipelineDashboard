@@ -5,7 +5,6 @@ import { FirebaseAdmin } from '../client/firebase-admin';
 import { GitHubClient } from '../client/github';
 import { Logger } from '../client/logger';
 import { BuildTimes, GitHubPullRequestStatusInput, GitHubPullRequestStatusMapper, GitHubPullRequestStatusModel } from '../mappers/github/status.mapper';
-import { deleteCollection } from '../shared/delete-collection';
 
 /**
  * Return the build times for all type of context for any PR

@@ -25,7 +25,6 @@ import { deleteMonitorPings, ping, MonitorInfoInput } from './monitor/monitor';
 import { onDeleteProject } from './project/delete-project';
 import { onUpdateProject } from './project/update-project';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
-import { onDeleteRepository } from './repository/delete-repository';
 
 import { onCreatePings as onCreatePingsStats, onCreateProject as onCreateProjectStats, onCreateUser as onCreateUserStats } from './application/stats';
 import { updateFollowers, updateViews, ProjectInput } from './project/project';
