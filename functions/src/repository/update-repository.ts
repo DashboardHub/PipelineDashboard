@@ -5,7 +5,6 @@ import { firestore, Change, CloudFunction, EventContext } from 'firebase-functio
 import { Logger } from '../client/logger';
 import { RepositoryModel } from '../models/index.model';
 import { DocumentData, DocumentSnapshot } from './../client/firebase-admin';
-import { deleteRepoBuilds } from './pull-request';
 
 export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = firestore
   .document('repositories/{repositoryUid}')
@@ -16,7 +15,6 @@ export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = fires
 
       if (!newData.projects || Array.isArray(newData.projects) && newData.projects.length === 0) {
         Logger.info(`Delete repository ${context.params.repositoryUid}`);
-        deleteRepoBuilds(context.params.repositoryUid);
         return RepositoryModel.getRepositoryReference(context.params.repositoryUid).delete();
       }
 

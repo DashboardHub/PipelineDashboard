@@ -5,7 +5,6 @@ import { firestore, CloudFunction, EventContext } from 'firebase-functions';
 import { Logger } from '../client/logger';
 import { ProjectModel, RepositoryModel } from '../models/index.model';
 import { deleteMonitorPings } from '../monitor/monitor';
-import { deleteRepoBuilds } from '../repository/pull-request';
 import { DocumentData, DocumentReference, DocumentSnapshot, FirebaseAdmin, Transaction, WriteResult } from './../client/firebase-admin';
 
 async function deleteProjectRepositories(projectUid: string, project: ProjectModel): Promise<void> {
@@ -30,8 +29,6 @@ async function deleteProjectRepositories(projectUid: string, project: ProjectMod
               }
 
               t.update(repoRef, { projects: repoData.projects });
-            
-              deleteRepoBuilds(repositoryUid);
             });
         });
       }
