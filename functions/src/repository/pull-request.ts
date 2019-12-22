@@ -55,8 +55,3 @@ export const getPullRequestStatus: any = async (token: string, fullName: string,
 
   return mappedData;
 };
-
-export function deleteRepoBuilds(repoUid: string): Promise<any> {
-  Logger.info('deleteRepoBuilds');
-  return deleteCollection(FirebaseAdmin.firestore(), `repositories/${repoUid}/statuses`, 1000);
-};
