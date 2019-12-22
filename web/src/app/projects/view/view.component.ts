@@ -59,13 +59,10 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       .findOneById(this.route.snapshot.params.projectUid)
       .subscribe((project: ProjectModel) => {
         this.project = project;
-        if (!this.project.logoUrl) {
-          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
-        }
         if (this.project.type === 'private') {
-          this.typeIcon = 'private_icon';
+          this.typeIcon = 'lock';
         } else if (this.project.type === 'public') {
-          this.typeIcon = 'public_icon';
+          this.typeIcon = 'lock_open';
         }
       }
       );

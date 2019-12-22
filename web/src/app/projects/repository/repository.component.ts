@@ -68,13 +68,13 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        if (this.repository && this.repository.milestones.length > 0) {
+        if (this.repository && this.repository.milestones && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
-        if (this.repository && this.repository.releases.length > 0) {
+        if (this.repository && this.repository.releases && this.repository.releases.length > 0) {
           this.sortingService.sortListByDate<ReleaseModel>(this.repository.releases, 'createdAt');
         }
-        if (this.repository && this.repository.contributors.length > 0) {
+        if (this.repository && this.repository.contributors && this.repository.contributors.length > 0) {
           this.sortingService.sortListByNumber<ContributorModel>(this.repository.contributors, 'total');
         }
         if (this.repository && this.repository.pullRequests.length > 0) {

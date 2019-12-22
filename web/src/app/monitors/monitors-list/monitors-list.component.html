@@ -1,8 +1,7 @@
 <div class="monitor-list">
   <div class="monitor-list__header" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-      <span *ngIf="!isSmallScreen" class="monitor-list__header__content__avatar" matBadgeColor="accent"
-        [matBadge]="project.repositories.length">
+      <span *ngIf="!isSmallScreen" class="monitor-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
         <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl" />
       </span>
       <a [routerLink]="['/projects', projectUid]" fxHide.lt-md>{{ project.title }} ></a>
@@ -10,19 +9,18 @@
     </div>
     <div fxLayout="row" fxLayoutGap="5px">
       <div class="monitor-list__header__pings" fxLayout="row" fxLayoutGap="5px" fxHide.lt-md>
-        <mat-icon svgIcon="ping_icon"></mat-icon><span>{{ project.getTotalPings() }} | Total Pings</span>
+        <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon><span>{{ project.getTotalPings() | numbers }} | Total Pings</span>
       </div>
       <button mat-button class="monitor-list__header__add-button" [routerLink]="[ './create' ]">
-        <mat-icon svgIcon="create_project_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">add_to_photos</mat-icon>
         Add monitor
       </button>
     </div>
   </div>
   <div class="monitor-list__alert">
-    <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center"
-      fxLayoutGap="20px">
+    <mat-card class="monitor-list__alert__card" *ngIf="!project.url" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
       <span>
-        <mat-icon svgIcon="warning_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined orange-color">warning</mat-icon>
       </span>
       <span>Project does not have a url. Please <a [routerLink]="['/projects', project.uid, 'edit']">edit</a> the
         project and add a URL for monitors run</span>
@@ -31,7 +29,7 @@
   <mat-card class="monitor-list__card">
     <mat-card-header>
       <div class="monitor-list__card__header">
-        <mat-icon svgIcon="monitor_white_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">desktop_windows</mat-icon>
       </div>
       <mat-card-title class="monitor-list__card__title">
         Monitors
@@ -82,13 +80,13 @@
             </mat-icon>
             <mat-menu #menu="matMenu">
               <button mat-menu-item [disabled]="manualPing || !project.url" (click)="pingMonitor(element.uid)">
-                <mat-icon svgIcon="ping_icon"></mat-icon>Ping
+                <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon>Ping
               </button>
               <button mat-menu-item [routerLink]="element.uid">
-                <mat-icon svgIcon="edit_icon"></mat-icon>Edit
+                <mat-icon class="material-icons-outlined blue-color">edit</mat-icon>Edit
               </button>
               <button mat-menu-item (click)="delete(element.uid)">
-                <mat-icon svgIcon="delete_icon"></mat-icon>Delete
+                <mat-icon class="material-icons-outlined dark-orange-color">delete_outline</mat-icon>Delete
               </button>
             </mat-menu>
           </td>

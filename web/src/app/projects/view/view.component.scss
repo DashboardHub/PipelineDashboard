@@ -46,6 +46,14 @@
         border-radius: 50%;
         object-fit: cover;
         height: 40px;
+
+        img {
+          width: 32px;
+        }
+
+        .mat-icon {
+          font-size: 35px;
+        }
       }
 
       &__name {

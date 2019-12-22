@@ -119,17 +119,17 @@ export class RepositoryModel extends Model<IRepository> implements IRepository {
     checks.push({
       name: 'Issues',
       description: 'Keep issues up to date',
-      value: this.issues.length > 0 ? this.getPoints(this.issues[0].createdOn.toDate()) : 0,
+      value: this.issues && this.issues.length > 0 ? this.getPoints(this.issues[0].createdOn.toDate()) : 0,
     });
     checks.push({
       name: 'Releases',
       description: 'Mark key stages in your project with releases',
-      value: this.releases.length > 0 ? this.getPoints(this.releases[0].createdOn.toDate()) : 0,
+      value: this.releases && this.releases.length > 0 ? this.getPoints(this.releases[0].createdOn.toDate()) : 0,
     });
     checks.push({
       name: 'Milestones',
       description: 'Organise issues into milestones',
-      value: this.milestones.length > 0 ? this.getPoints(this.milestones[0].updatedAt.toDate()) : 0,
+      value: this.milestones && this.milestones.length > 0 ? this.getPoints(this.milestones[0].updatedAt.toDate()) : 0,
     });
     checks.push({
       name: 'Url',

@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Dashboard hub components
 import { EditProjectResolver } from '@core/resolvers/edit-project.resolver';
-import { PrivatePublicProjectComponent } from '@shared/components/private-public-project/private-public-project.component';
 import { CreateEditProjectComponent } from './create-edit/create-edit.component';
+import { ListMyProjectsComponent } from './list/list-my-projects.component';
 
 // Application resolvers
 import { ViewProjectResolver } from '@core/resolvers/view-project.resolver';
@@ -19,7 +19,7 @@ import { RatingComponent } from './rating/rating.component';
 const routes: Routes = [
   {
     path: '',
-    component: PrivatePublicProjectComponent,
+    component: ListMyProjectsComponent,
     canActivate: [AuthGuard],
   },
   {
