@@ -26,10 +26,10 @@ export class StatsModel extends Model<IStats> implements IStats {
    */
   constructor(data?: IStats) {
     super();
-    this.projects = data.projects ? data.projects : 0;
-    this.users = data.users ? data.users : 0;
-    this.pings = data.pings ? data.pings : 0;
-    this.events = data.events ? data.events : 0;
+    this.projects = data && data.projects ? data.projects : 0;
+    this.users = data && data.users ? data.users : 0;
+    this.pings = data && data.pings ? data.pings : 0;
+    this.events = data && data.events ? data.events : 0;
   }
 
   /**
