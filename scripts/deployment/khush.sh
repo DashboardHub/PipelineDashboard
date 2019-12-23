@@ -3,7 +3,7 @@
 # FUNCTIONS
 (cd functions; npm install)
 (cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET_KHUSH'/g' environment.ts)
-(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-khush/g' environment.ts)
+(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-khush2/g' environment.ts)
 
 # WEB
 (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.khush-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
