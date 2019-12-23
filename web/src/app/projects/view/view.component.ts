@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Third party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, switchMap, take, map } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService, UserService } from '@core/services/index.service';
@@ -57,14 +57,10 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: ProjectModel) => {
-        this.project = project;
-        if (!this.project.logoUrl) {
-          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
-        }
-        this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
-      }
-      );
+      .pipe(
+        map((project: ProjectModel) => this.project = project)
+      )
+      .subscribe((project: ProjectModel) => this.typeIcon = project.isPrivate() ? 'lock' : 'lock_open');
 
     this.updateMetaTags();
   }

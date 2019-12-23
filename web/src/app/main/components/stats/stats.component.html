@@ -17,7 +17,7 @@
             <span>Users</span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.users || 0 }}
+            {{ stats.users || 0  | numbers }}
           </div>
         </div>
         <div fxFlex="24%" class="stats__card__content__item__blue" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
@@ -26,7 +26,7 @@
             <span>Project</span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.projects || 0 }}
+            {{ stats.projects || 0 | numbers }}
           </div>
         </div>
         <div fxFlex="24%" class="stats__card__content__item__purple" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
@@ -35,7 +35,7 @@
             <span>Pings</span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.pings || 0 }}
+            {{ stats.pings || 0  | numbers }}
           </div>
         </div>
         <div fxFlex="24%" class="stats__card__content__item__dark-blue" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
@@ -44,7 +44,7 @@
             <span>Events </span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.events || 0 }}
+            {{ stats.events || 0 | numbers }}
           </div>
         </div>
       </div>
