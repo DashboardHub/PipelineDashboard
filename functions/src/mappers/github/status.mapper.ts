@@ -1,5 +1,3 @@
-import { firestore } from 'firebase-admin';
-
 export interface GitHubPullRequestStatusInput {
   id: number;
   state: string;
