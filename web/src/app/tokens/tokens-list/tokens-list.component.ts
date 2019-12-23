@@ -48,11 +48,7 @@ export class TokensListComponent {
       .subscribe((data: { tokens: TokenModel[], project: ProjectModel }) => {
         this.tokenList = data.tokens;
         this.project = data.project;
-        if (this.project.type === 'private') {
-          this.typeIcon = 'lock';
-        } else if (this.project.type === 'public') {
-          this.typeIcon = 'lock_open';
-        }
+        this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
       });
   }
 
