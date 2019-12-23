@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Third party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take, map } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService, UserService } from '@core/services/index.service';
