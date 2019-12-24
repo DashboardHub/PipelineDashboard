@@ -85,10 +85,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
    * @param project project
    */
   public checkTypeOfProject(project: ProjectModel): string {
-    if (project.type === 'private') {
-      return 'lock';
-    } else if (project.type === 'public') {
-      return 'lock_open';
-    }
+    return project.isPrivate() ? 'lock' : 'lock_open';
   }
 }
