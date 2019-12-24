@@ -34,6 +34,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public manualPing: boolean = false;
   public displayedColumns: string[];
   public isSmallScreen: boolean;
+  public typeIcon: string;
 
   /**
    * Life cycle method
@@ -68,6 +69,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
         if (!this.project.logoUrl) {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }
+        this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
       });
 
     this.monitorSubscription = this.projectService
