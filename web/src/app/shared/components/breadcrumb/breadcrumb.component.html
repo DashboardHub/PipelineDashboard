@@ -6,6 +6,6 @@
     </ng-template>
   </span>
   <mat-icon class="material-icons-outlined green-color">{{ typeIcon }}</mat-icon>
-  <a [routerLink]="['/projects',project.uid]" fxHide.lt-md>{{ project.title }} ></a>
+  <a *ngFor="let item of breadCrumb" [routerLink]=[item.link] fxHide.lt-md>{{ item.title }} ></a>
   <div>{{subTitle}}</div>
 </div>

@@ -6,7 +6,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 
 // Application services/model
 import { ActivatedRoute } from '@angular/router';
-import { ProjectModel, RepositoryModel } from '@app/shared/models/index.model';
+import { BreadCrumbModel, ProjectModel, RepositoryModel } from '@app/shared/models/index.model';
 import { RepositoryService } from '@core/services/index.service';
 import { Subscription } from 'rxjs';
 
@@ -25,6 +25,7 @@ export class RatingComponent implements OnInit, OnDestroy {
   public isSmallScreen: Boolean;
   public project: ProjectModel;
   public repository: RepositoryModel;
+  public breadCrumb: BreadCrumbModel[];
 
   /**
    * Life cycle method
@@ -39,6 +40,7 @@ export class RatingComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((data: { repository: RepositoryModel, project: ProjectModel }) => {
       this.repository = data.repository;
       this.project = data.project;
+      this.breadCrumb = [{link: `/projects/${this.project.uid}`, title: this.project.title}];
     });
   }
 

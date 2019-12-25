@@ -13,7 +13,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 // Dashboard hub application model and services
 import { MonitorService, ProjectService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
-import { MonitorModel, ProjectModel } from '@shared/models/index.model';
+import { BreadCrumbModel, MonitorModel, ProjectModel } from '@shared/models/index.model';
 
 /**
  * Monitor list component
@@ -35,6 +35,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public displayedColumns: string[];
   public isSmallScreen: boolean;
   public typeIcon: string;
+  public breadCrumb: BreadCrumbModel[];
 
   /**
    * Life cycle method
@@ -66,6 +67,7 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
       .subscribe((project: ProjectModel) => {
         this.project = project;
         this.monitors = project.monitors ? project.monitors : [];
+        this.breadCrumb = [{link: `/projects/${this.project.uid}`, title: this.project.title}];
         if (!this.project.logoUrl) {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }

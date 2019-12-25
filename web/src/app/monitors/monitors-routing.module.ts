@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: ':monitorUid/pings',
     component: PingsListComponent,
-    resolve: { pings: PingsResolver },
+    resolve: { pings: PingsResolver, project: ViewProjectResolver },
   },
 ];
 
