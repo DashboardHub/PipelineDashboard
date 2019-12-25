@@ -1,4 +1,7 @@
 <div class="rating-container">
+  <div class="rating-list__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <dashboard-breadcrumb [project]="project" [isSmallScreen]="isSmallScreen" subTitle="Ratings"></dashboard-breadcrumb>
+  </div>
   <div fxLayout="row">
     <div fxFlex="100%">
       <h1>{{ repository.fullName }}</h1>

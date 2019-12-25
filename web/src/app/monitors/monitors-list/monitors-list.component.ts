@@ -69,7 +69,6 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
         if (!this.project.logoUrl) {
           this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
         }
-        this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
       });
 
     this.monitorSubscription = this.projectService

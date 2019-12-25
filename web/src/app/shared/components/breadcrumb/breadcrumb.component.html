@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
+  <span *ngIf="!isSmallScreen" class="avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
+    <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl; else imagePlaceHolder" />
+    <ng-template #imagePlaceHolder>
+      <mat-icon class="material-icons-outlined purple-color">dashboard</mat-icon>
+    </ng-template>
+  </span>
+  <mat-icon class="material-icons-outlined green-color">{{ typeIcon }}</mat-icon>
+  <a [routerLink]="['/projects',project.uid]" fxHide.lt-md>{{ project.title }} ></a>
+  <div>{{subTitle}}</div>
+</div>
