@@ -7,5 +7,5 @@
   </span>
   <mat-icon class="material-icons-outlined green-color">{{ typeIcon }}</mat-icon>
   <a *ngFor="let item of breadCrumb" [routerLink]=[item.link] fxHide.lt-md>{{ item.title }} ></a>
-  <div>{{subTitle}}</div>
+  <div>{{ subTitle }}</div>
 </div>
