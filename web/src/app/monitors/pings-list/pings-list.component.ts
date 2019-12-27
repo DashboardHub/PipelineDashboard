@@ -26,7 +26,6 @@ export class PingsListComponent implements OnInit, OnDestroy {
   public projectUid: string;
   public monitorUid: string;
   public displayedColumns: string[];
-  public isSmallScreen: boolean;
   public breadCrumb: BreadCrumbModel[];
   public project: ProjectModel;
 
@@ -66,10 +65,8 @@ export class PingsListComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.displayedColumns = ['url', 'statusCode'];
-          this.isSmallScreen = true;
         } else {
           this.displayedColumns = ['url', 'statusCode', 'duration', 'type', 'time'];
-          this.isSmallScreen = false;
         }
       });
   }

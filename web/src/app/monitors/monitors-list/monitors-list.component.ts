@@ -33,7 +33,6 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
   public projectUid: string;
   public manualPing: boolean = false;
   public displayedColumns: string[];
-  public isSmallScreen: boolean;
   public typeIcon: string;
   public breadCrumb: BreadCrumbModel[];
 
@@ -82,10 +81,8 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.displayedColumns = ['name', 'code', 'action'];
-          this.isSmallScreen = true;
         } else {
           this.displayedColumns = ['name', 'method', 'code', 'text', 'ping', 'action'];
-          this.isSmallScreen = false;
         }
       });
   }

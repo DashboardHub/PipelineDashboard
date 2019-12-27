@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 
 // Dashboard hub models and services
 import { MonitorService } from '@core/services/index.service';
-import { MonitorModel, ProjectModel } from '@shared/models/index.model';
+import { BreadCrumbModel, MonitorModel, ProjectModel } from '@shared/models/index.model';
 
 /**
  * Monitor create edit component
@@ -30,6 +30,8 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
   public monitorForm: FormGroup;
   public projectUid: string;
   public statusCodeList: Number[] = [200, 201, 204, 400, 401, 404, 500];
+  public project: ProjectModel;
+  public breadCrumb: BreadCrumbModel[];
 
   /**
    * Life cycle method
@@ -55,8 +57,9 @@ export class MonitorCreateEditComponent implements OnInit, OnDestroy {
     this.initializeMonitorForm();
     this.projectSubscription = this.route.data
       .subscribe((data: { project: ProjectModel }) => {
-        const project: ProjectModel = data.project;
-        this.monitorsList = project && project.monitors ? project.monitors : [];
+        this.project  = data.project;
+        this.breadCrumb = [{ link: `/projects/${this.project.uid}`, title: this.project.title }];
+        this.monitorsList = this.project && this.project.monitors ? this.project.monitors : [];
         this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
         if (this.monitorUid) {
           this.isEdit = true;

@@ -1,10 +1,20 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-  <span *ngIf="!isSmallScreen" class="avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
+  <span [matMenuTriggerFor]="menu" *ngIf="!isSmallScreen" class="avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
     <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl; else imagePlaceHolder" />
     <ng-template #imagePlaceHolder>
       <mat-icon class="material-icons-outlined purple-color">dashboard</mat-icon>
     </ng-template>
   </span>
+  <mat-menu #menu="matMenu">
+    <span *ngIf="isAdmin()">
+      <button mat [routerLink]="['edit']" mat-menu-item>
+        <mat-icon class="material-icons-outlined blue-color">edit</mat-icon>Edit
+      </button>
+      <button (click)="delete()" mat-menu-item>
+        <mat-icon class="material-icons-outlined dark-orange-color">delete_outline</mat-icon>Delete
+      </button>
+    </span>
+  </mat-menu>
   <mat-icon class="material-icons-outlined green-color">{{ typeIcon }}</mat-icon>
   <a *ngFor="let item of breadCrumb" [routerLink]=[item.link] fxHide.lt-md>{{ item.title }} ></a>
   <div>{{ subTitle }}</div>
