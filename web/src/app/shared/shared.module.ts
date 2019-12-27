@@ -25,14 +25,16 @@ import { MarkdownDirective } from './directives/markdown.directive';
     DialogListComponent,
     ProjectsListComponent,
     PrivatePublicProjectComponent,
-    BreadcrumbComponent],
+    BreadcrumbComponent,
+  ],
   imports: [
     CommonModule,
     FlexLayoutModule,
     AppMaterialModule,
     RouterModule.forChild([]),
     ReactiveFormsModule,
-    PipesModule],
+    PipesModule,
+  ],
   exports: [
     FlexLayoutModule,
     AppMaterialModule,
@@ -42,7 +44,8 @@ import { MarkdownDirective } from './directives/markdown.directive';
     RouterModule,
     BreadcrumbComponent,
     ProjectsListComponent,
-    PrivatePublicProjectComponent],
+    PrivatePublicProjectComponent,
+  ],
   entryComponents: [
     DialogConfirmationComponent,
     DialogListComponent,

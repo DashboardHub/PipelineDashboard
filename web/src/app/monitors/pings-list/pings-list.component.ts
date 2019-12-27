@@ -51,8 +51,10 @@ export class PingsListComponent implements OnInit, OnDestroy {
     this.route.data.subscribe((data: { pings: PingModel[], project: ProjectModel }) => {
       this.pings = data.pings;
       this.project = data.project;
-      this.breadCrumb = [{ link: `/projects/${this.project.uid}`, title: this.project.title },
-      { link: `/projects/${this.project.uid}/monitors`, title: 'Monitors' }];
+      this.breadCrumb = [
+        { link: `/projects/${this.project.uid}`, title: this.project.title },
+        { link: `/projects/${this.project.uid}/monitors`, title: 'Monitors' },
+      ];
     });
 
     this.pingSubscription = this.pingService

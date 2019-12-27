@@ -1,6 +1,12 @@
+// Core modules
 import { Component, Input, OnInit } from '@angular/core';
-import { BreadCrumbModel, ProjectModel } from '@app/shared/models/index.model';
 
+// DashboardHub Models
+import { BreadCrumbModel, ProjectModel } from '@shared/models/index.model';
+
+/**
+ * Breadcrumb component
+ */
 @Component({
   selector: 'dashboard-breadcrumb',
   templateUrl: './breadcrumb.component.html',
@@ -15,8 +21,11 @@ export class BreadcrumbComponent implements OnInit {
   @Input() subTitle: string;
   @Input() breadCrumb: BreadCrumbModel[];
 
-ngOnInit(): void {
-  this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
-}
+  /**
+   * Life cycle init method
+   */
+  ngOnInit(): void {
+    this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
+  }
 
 }
