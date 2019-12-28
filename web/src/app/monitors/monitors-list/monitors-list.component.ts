@@ -67,9 +67,6 @@ export class MonitorsListComponent implements OnInit, OnDestroy {
         this.project = project;
         this.monitors = project.monitors ? project.monitors : [];
         this.breadCrumb = [{ link: `/projects/${this.project.uid}`, title: this.project.title }];
-        if (!this.project.logoUrl) {
-          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
-        }
       });
 
     this.monitorSubscription = this.projectService
