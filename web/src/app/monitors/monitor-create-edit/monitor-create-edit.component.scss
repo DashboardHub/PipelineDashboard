@@ -4,6 +4,10 @@
 .monitor-settings {
   @include pageContainer;
 
+  &__header {
+    @include pageHeader;
+  }
+
   &__card {
     @include cardContainer;
 

@@ -9,7 +9,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 
 // Dashboard hub models
 import { PingService } from '@core/services/index.service';
-import { PingModel } from '@shared/models/index.model';
+import { BreadCrumbModel, PingModel, ProjectModel } from '@shared/models/index.model';
 
 /**
  * Ping list components
@@ -26,7 +26,8 @@ export class PingsListComponent implements OnInit, OnDestroy {
   public projectUid: string;
   public monitorUid: string;
   public displayedColumns: string[];
-  public isSmallScreen: boolean;
+  public breadCrumb: BreadCrumbModel[];
+  public project: ProjectModel;
 
   /**
    * Life cycle method
@@ -46,7 +47,14 @@ export class PingsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.monitorUid = this.route.snapshot.paramMap.get('monitorUid');
-    this.route.data.subscribe((data: { pings: PingModel[] }) => this.pings = data.pings);
+    this.route.data.subscribe((data: { pings: PingModel[], project: ProjectModel }) => {
+      this.pings = data.pings;
+      this.project = data.project;
+      this.breadCrumb = [
+        { link: `/projects/${this.project.uid}`, title: this.project.title },
+        { link: `/projects/${this.project.uid}/monitors`, title: 'Monitors' },
+      ];
+    });
 
     this.pingSubscription = this.pingService
       .findAllByMonitor(this.projectUid, this.monitorUid)
@@ -57,10 +65,8 @@ export class PingsListComponent implements OnInit, OnDestroy {
       .subscribe((state: BreakpointState) => {
         if (state.matches) {
           this.displayedColumns = ['url', 'statusCode'];
-          this.isSmallScreen = true;
         } else {
           this.displayedColumns = ['url', 'statusCode', 'duration', 'type', 'time'];
-          this.isSmallScreen = false;
         }
       });
   }

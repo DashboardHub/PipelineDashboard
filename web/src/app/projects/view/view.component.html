@@ -1,24 +1,7 @@
 <div *ngIf="project">
   <div class="project-body">
     <div class="project-body__header" fxLayout="row" fxLayoutAlign="space-between start">
-      <div class="project-body__header__content" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="space-between center">
-        <span [matMenuTriggerFor]="menu" class="project-body__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
-          <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl; else imagePlaceholder" />
-          <ng-template #imagePlaceholder><mat-icon class="material-icons-outlined purple-color">dashboard</mat-icon></ng-template>
-        </span>
-        <mat-menu #menu="matMenu">
-          <span *ngIf="isAdmin()">
-            <button mat [routerLink]="['edit']" mat-menu-item>
-              <mat-icon class="material-icons-outlined blue-color">edit</mat-icon>Edit
-            </button>
-            <button (click)="delete()" mat-menu-item>
-              <mat-icon class="material-icons-outlined dark-orange-color">delete_outline</mat-icon>Delete
-            </button>
-          </span>
-        </mat-menu>
-        <mat-icon class="material-icons-outlined green-color">{{ typeIcon }}</mat-icon>
-        <span class="project-body__header__content__name" [ngClass]="{'project-body__header__content__name__long': !isAdmin()}">{{ project.title }}</span>
-      </div>
+      <dashboard-breadcrumb [breadCrumb]="breadCrumb" [project]="project" [subTitle]="project.title"></dashboard-breadcrumb>
       <div class="project-body__header__content information">
         <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start">
           <ng-container *ngIf="isAdmin()"><ng-container *ngTemplateOutlet="infoContentAdmin"></ng-container></ng-container>

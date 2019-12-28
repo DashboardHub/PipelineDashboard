@@ -49,7 +49,7 @@ const routes: Routes = [
   {
     path: ':projectUid/rating/:repoUid',
     component: RatingComponent,
-    resolve: { repository: RepositoryResolver },
+    resolve: { project: ViewProjectResolver, repository: RepositoryResolver },
   },
 ];
 

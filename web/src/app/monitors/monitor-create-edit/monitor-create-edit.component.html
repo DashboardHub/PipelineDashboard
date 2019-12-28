@@ -1,4 +1,7 @@
 <div *ngIf="monitorForm" class="monitor-settings" fxLayout="column" fxLayoutGap="20px">
+  <div class="monitor-settings__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <dashboard-breadcrumb [breadCrumb]="breadCrumb" [project]="project" subTitle="Monitors"></dashboard-breadcrumb>
+  </div>
   <form [formGroup]="monitorForm">
     <mat-card class="monitor-settings__card">
       <mat-card-header>
