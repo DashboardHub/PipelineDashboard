@@ -176,6 +176,7 @@ export class ProjectService {
    * @param repositories repositories to be added
    */
   public saveRepositories(project: ProjectModel, repositories: RepositoryModel[]): Observable<void> {
+    /*
     // remove webhook from unselected repo
     if (project.repositories && project.repositories.length > 0) {
       const remove: string[] = project.repositories
@@ -187,6 +188,7 @@ export class ProjectService {
       });
       forkJoin(removeWebhooks).subscribe();
     }
+    */
 
     if (!repositories.length) {
       return this.activityService

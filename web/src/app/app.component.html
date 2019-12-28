@@ -1,14 +1,14 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav [mode]="sideNavMode" class="sidenav" [ngClass]="{'sidenav__open': menuTriger}" fixedInViewport="false" role="navigation" [opened]="!isSmallScreen">
     <div class="heading" (click)="openMenu($event)">
-      <mat-icon svgIcon="logo_icon" class="heading__logo"></mat-icon>
+      <img src="assets/icons/logo.svg" class="heading__logo" />
     </div>
     <mat-nav-list class="menu">
       <ng-container *ngFor="let item of publicRoutes">
         <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
           <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
             <span>
-              <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+              <mat-icon class="menu__item__icon material-icons-outlined grey-color">{{ item.icon }}</mat-icon>
             </span>
             <span>{{ item.title }}</span>
           </div>
@@ -19,7 +19,7 @@
           <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
             <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
               <span>
-                <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+                <mat-icon class="menu__item__icon material-icons-outlined">{{ item.icon }}</mat-icon>
               </span>
               <span>{{ item.title }}</span>
             </div>
@@ -30,7 +30,7 @@
         <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
           <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
             <span>
-              <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+              <mat-icon class="menu__item__icon material-icons-outlined">{{ item.icon }}</mat-icon>
             </span>
             <span>{{ item.title }}</span>
           </div>
@@ -39,7 +39,7 @@
       <a mat-list-item class="menu__item" (click)="login(); closeMenu()" routerLinkActive="menu__item__active" *ngIf="!isAuthenticated()" dashboardLogin>
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
           <span>
-            <mat-icon svgIcon="login_page_icon" class="menu__item__icon"></mat-icon>
+            <mat-icon class="menu__item__icon material-icons-outlined">vpn_key</mat-icon>
           </span>
           <span>Login</span>
         </div>
@@ -47,7 +47,7 @@
       <a mat-list-item class="menu__item" (click)="logout(); closeMenu()" routerLinkActive="menu__item__active" *ngIf="isAuthenticated()">
         <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
           <span>
-            <mat-icon svgIcon="logout_page_icon" class="menu__item__icon"></mat-icon>
+            <mat-icon class="menu__item__icon material-icons-outlined">exit_to_app</mat-icon>
           </span>
           <span>Sign out</span>
         </div>
@@ -57,7 +57,7 @@
           <a mat-list-item class="menu__item" [routerLink]="[item.route]" routerLinkActive="menu__item__active" (click)="closeMenu()">
             <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="20px">
               <span>
-                <mat-icon svgIcon="{{ item.icon }}" class="menu__item__icon"></mat-icon>
+                <mat-icon class="menu__item__icon material-icons-outlined">{{ item.icon }}</mat-icon>
               </span>
               <span>{{ item.title }}</span>
             </div>
@@ -83,7 +83,7 @@
       </div>
       <div fxHide.gt-xs fxFlex="100" fxLayout="row" fxLayoutAlign="space-between center" class="app-toolbar">
         <div>
-          <mat-icon svgIcon="logo_icon" class="app-toolbar__logo"></mat-icon>
+          <img src="assets/icons/logo.svg" class="app-toolbar__logo" />
         </div>
         <div fxLayout="row" fxLayoutAlign="end center">
           <div>
@@ -110,12 +110,12 @@
           <div fxLayoutAlign="space-between center">
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center" matTooltip="Login" class="app-toolbar__profile-block__button" (click)="login()" *ngIf="!isAuthenticated()" dashboardLogin>
               Login
-              <mat-icon class="app-toolbar__profile-block__icon" svgIcon="header_login_icon"></mat-icon>
+              <mat-icon class="app-toolbar__profile-block__icon material-icons-outlined grey-color">vpn_key</mat-icon>
             </div>
           </div>
           <div>
             <a matTooltip="Github" href="http://github.com/DashboardHub/PipelineDashboard" target="_blank" fxLayout="row" fxLayoutAlign="space-between center">
-              <mat-icon class="app-toolbar__profile-block__icon" svgIcon="header_github_icon"></mat-icon>
+              <mat-icon class="app-toolbar__profile-block__icon" class="material-icons-outlined grey-color">security</mat-icon>
             </a>
           </div>
         </div>
@@ -127,7 +127,7 @@
             </a>
 
             <ng-template #notAuth>
-              <mat-icon svgIcon="header_person_icon" class="app-toolbar__profile-block__avatar__icon"></mat-icon>
+              <mat-icon class="app-toolbar__profile-block__avatar__icon material-icons-outlined white-color">person</mat-icon>
             </ng-template>
           </div>
         </div>
@@ -163,13 +163,13 @@
           -->
           <div>
             <div (click)="showDoorbell()" class="footer__button">
-              <mat-icon svgIcon="feedback_toolbar_icon"></mat-icon>
+              <mat-icon class="material-icons-outlined orange-color">feedback</mat-icon>
               Feedback
             </div>
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center">
-          <mat-icon [style.width.px]="120" svgIcon="assets:dashboardhub"></mat-icon>
+          <img src="assets/icons/logo-horizontal-std.svg" [style.width.px]="120" />
         </div>
       </mat-toolbar-row>
     </mat-toolbar>

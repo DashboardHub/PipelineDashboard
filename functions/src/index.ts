@@ -8,7 +8,6 @@ import { DocumentSnapshot } from './client/firebase-admin';
 // Dashboard repositories
 import { onCreateGitWebhookRepository, CreateGitWebhookRepositoryInput } from './repository/create-git-webhook-repository';
 import { onCreateRepository } from './repository/create-repository';
-import { onDeleteRepository } from './repository/delete-repository';
 import { getRepositoryInfo, RepositoryInfoInput } from './repository/info';
 import { onResponseGitWebhookRepository } from './repository/response-git-webhook-repository';
 import { onUpdateRepository } from './repository/update-repository';
@@ -25,6 +24,7 @@ import { deleteMonitorPings, ping, MonitorInfoInput } from './monitor/monitor';
 import { onDeleteProject } from './project/delete-project';
 import { onUpdateProject } from './project/update-project';
 import { onDeleteGitWebhookRepository, DeleteGitWebhookRepositoryInput } from './repository/delete-git-webhook-repository';
+import { onDeleteRepository } from './repository/delete-repository';
 
 import { onCreatePings as onCreatePingsStats, onCreateProject as onCreateProjectStats, onCreateUser as onCreateUserStats } from './application/stats';
 import { updateFollowers, updateViews, ProjectInput } from './project/project';

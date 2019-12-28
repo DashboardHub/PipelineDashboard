@@ -7,10 +7,19 @@
   &__header {
     @include pageHeader;
 
+    span {
+      img {
+        width: 32px;
+      }
+
+      mat-icon {
+        font-size: 35px;
+      }
+    }
 
     &__add-button {
       color: #fff;
-      background-color: $yellow-color
+      background-color: $yellow-color;
     }
   }
 

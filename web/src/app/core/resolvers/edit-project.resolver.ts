@@ -35,7 +35,7 @@ export class EditProjectResolver implements Resolve<IProject> {
         take(1),
         switchMap((project: ProjectModel) => {
           // for private project must have access
-          if (!project || (project.type === 'private' && !project.isAdmin(this.authService.profile.uid))) {
+          if (!project || (project.isPrivate() && !project.isAdmin(this.authService.profile.uid))) {
             this.router.navigate(['/projects']);
 
             return of(new ProjectModel({ uid: 'error'}));

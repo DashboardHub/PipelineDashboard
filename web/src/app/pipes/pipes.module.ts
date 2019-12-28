@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {
   DigitsPipe,
   EnvironmentTypePipe,
+  NumbersPipe,
   ReleaseStatePipe,
   TimeAgoPipe,
   TruncatePipe,
@@ -14,6 +15,7 @@ import {
   declarations: [
     DigitsPipe,
     EnvironmentTypePipe,
+    NumbersPipe,
     ReleaseStatePipe,
     TimeAgoPipe,
     TruncatePipe,
@@ -23,6 +25,7 @@ import {
   exports: [
     DigitsPipe,
     EnvironmentTypePipe,
+    NumbersPipe,
     ReleaseStatePipe,
     TimeAgoPipe,
     TruncatePipe,

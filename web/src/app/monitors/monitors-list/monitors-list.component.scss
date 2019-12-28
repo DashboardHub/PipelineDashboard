@@ -7,10 +7,19 @@
   &__header {
     @include pageHeader;
 
+    span {
+      img {
+        width: 32px;
+      }
+
+      .mat-icon {
+        font-size: 35px;
+      }
+    }
 
     &__add-button {
       color: #fff;
-      background-color: $orange-3-color
+      background-color: $orange-3-color;
     }
 
     &__pings {
@@ -28,7 +37,6 @@
 
     &__content {
       &__avatar {
-        cursor: pointer;
         width: 40px;
         border-radius: 50%;
         object-fit: cover;

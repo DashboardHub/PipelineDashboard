@@ -1,13 +1,19 @@
 <div class="monitor-tokens">
-  <div class="monitor-tokens__header" fxLayout="row" fxLayoutAlign="space-between center"  >
+  <div class="monitor-tokens__header" fxLayout="row" fxLayoutAlign="space-between center">
     <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" fxLayoutGap="5px">
-      <a [routerLink]="['/projects', projectUid]" fxHide.xs>
-        Project
-      </a><span fxHide.xs>></span><span>Tokens</span>
+      <span class="token-list__header__content__avatar" matBadgeColor="accent" [matBadge]="project.repositories.length">
+        <img [src]="project.logoUrl" matBadgeSize="small" *ngIf="project.logoUrl; else imagePlaceHolder" />
+        <ng-template #imagePlaceHolder>
+          <mat-icon class="material-icons-outlined purple-color">dashboard</mat-icon>
+        </ng-template>
+      </span>
+      <mat-icon class="material-icons-outlined green-color">{{typeIcon}}</mat-icon>
+      <a [routerLink]="['/projects', projectUid]" fxHide.lt-md>{{ project.title }} ></a>
+      <div>Tokens</div>
     </div>
     <div>
       <button mat-button class="monitor-tokens__header__add-button" [routerLink]="['create']">
-        <mat-icon svgIcon="create_project_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">add_to_photos</mat-icon>
         Add token
       </button>
     </div>
@@ -16,7 +22,7 @@
   <mat-card class="monitor-tokens__card">
     <mat-card-header>
       <div class="monitor-tokens__card__header">
-        <mat-icon svgIcon="token_white_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">toll</mat-icon>
       </div>
       <mat-card-title class="monitor-tokens__card__title">
         Project tokens
@@ -47,10 +53,10 @@
             <mat-icon [matMenuTriggerFor]="menu" class="monitor-tokens__card__content__table__action">more_horiz</mat-icon>
             <mat-menu #menu="matMenu">
               <button mat-menu-item [routerLink]="[element.uid, 'edit']">
-                <mat-icon svgIcon="edit_icon"></mat-icon> Edit
+                <mat-icon class="material-icons-outlined blue-color">edit</mat-icon> Edit
               </button>
               <button mat-menu-item (click)="delete(element.uid)">
-                <mat-icon svgIcon="delete_icon"></mat-icon> Delete
+                <mat-icon class="material-icons-outlined dark-orange-color">delete_outline</mat-icon> Delete
               </button>
             </mat-menu>
           </td>
