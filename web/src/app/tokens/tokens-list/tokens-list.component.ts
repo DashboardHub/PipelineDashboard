@@ -4,7 +4,6 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
 // Third party modules
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { map, take } from 'rxjs/operators';
 
 // Dashboard model and services
@@ -27,7 +26,6 @@ export class TokensListComponent {
   public project: ProjectModel;
   public tokenList: TokenModel[];
   public typeIcon: string;
-  public isSmallScreen: Boolean;
   public displayedColumns: string[] = ['name', 'action'];
   public breadCrumb: BreadCrumbModel[];
 
@@ -40,8 +38,7 @@ export class TokensListComponent {
   constructor(
     private dialog: MatDialog,
     private tokenService: TokenService,
-    private route: ActivatedRoute,
-    private breakpointObserver: BreakpointObserver
+    private route: ActivatedRoute
   ) {
     this.projectUid = this.route.snapshot.paramMap.get('projectUid');
     this.route.data
@@ -53,16 +50,6 @@ export class TokensListComponent {
         this.tokenList = data.tokens;
         this.project = data.project;
         this.breadCrumb = [{link: `/projects/${this.project.uid}`, title: this.project.title}];
-      });
-
-    this.breakpointObserver
-      .observe([Breakpoints.XSmall])
-      .subscribe((state: BreakpointState) => {
-        if (state.matches) {
-          this.isSmallScreen = true;
-        } else {
-          this.isSmallScreen = false;
-        }
       });
   }
 

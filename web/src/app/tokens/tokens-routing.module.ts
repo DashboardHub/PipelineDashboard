@@ -23,12 +23,13 @@ const routes: Routes = [
     path: 'create',
     component: TokensCreateEditComponent,
     canActivate: [AuthGuard],
+    resolve: { project: ViewProjectResolver },
   },
   {
     path: ':uid/edit',
     component: TokensCreateEditComponent,
     canActivate: [AuthGuard],
-    resolve: { token: EditTokenResolver },
+    resolve: { token: EditTokenResolver, project: ViewProjectResolver },
   },
 ];
 

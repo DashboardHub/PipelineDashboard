@@ -1,14 +1,18 @@
-.avatar {
-  width: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  height: 40px;
+div {
+  font-size: 20px;
+  .avatar {
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 40px;
+    cursor: pointer;
 
-  img {
-    width: 32px;
-  }
+    img {
+      width: 32px;
+    }
 
-  .mat-icon {
-    font-size: 35px;
+    .mat-icon {
+      font-size: 35px;
+    }
   }
 }

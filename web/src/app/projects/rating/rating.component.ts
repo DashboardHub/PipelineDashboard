@@ -1,9 +1,6 @@
 // Core components
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-// Breakpoints components
-import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-
 // Application services/model
 import { ActivatedRoute } from '@angular/router';
 import { BreadCrumbModel, ProjectModel, RepositoryModel } from '@app/shared/models/index.model';
@@ -22,7 +19,6 @@ export class RatingComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
 
-  public isSmallScreen: Boolean;
   public project: ProjectModel;
   public repository: RepositoryModel;
   public breadCrumb: BreadCrumbModel[];
@@ -34,13 +30,12 @@ export class RatingComponent implements OnInit, OnDestroy {
    */
   constructor(
     private repositoryService: RepositoryService,
-    private route: ActivatedRoute,
-    private breakpointObserver: BreakpointObserver
+    private route: ActivatedRoute
   ) {
     this.route.data.subscribe((data: { repository: RepositoryModel, project: ProjectModel }) => {
       this.repository = data.repository;
       this.project = data.project;
-      this.breadCrumb = [{link: `/projects/${this.project.uid}`, title: this.project.title}];
+      this.breadCrumb = [{ link: `/projects/${this.project.uid}`, title: this.project.title }];
     });
   }
 
@@ -53,16 +48,6 @@ export class RatingComponent implements OnInit, OnDestroy {
     this.repositorySubscription = this.repositoryService
       .findOneById(repoUid)
       .subscribe((repository: RepositoryModel) => this.repository = repository);
-
-    this.breakpointObserver
-      .observe([Breakpoints.XSmall])
-      .subscribe((state: BreakpointState) => {
-        if (state.matches) {
-          this.isSmallScreen = true;
-        } else {
-          this.isSmallScreen = false;
-        }
-      });
   }
 
   /**
