@@ -23,6 +23,7 @@ import {
   StatusEventModel,
   WatchEventModel,
 } from '../mappers/github/webhook-event-response';
+import { PullRequestReviewCommentEventModel } from '../mappers/github/webhook-event-response/pull-request-review-comment';
 import { addHubEventToCollection, HubEventActions } from '../mappers/github/webhook-event-response/shared';
 import { RepositoryModel } from '../models/index.model';
 import { DocumentData, FieldPath, FirebaseAdmin, QuerySnapshot } from './../client/firebase-admin';
@@ -72,6 +73,10 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
 
       result = pullRequestEvent(new PullRequestEventModel(inputData));
 
+    } else if (PullRequestReviewCommentEventModel.isCurrentModel(inputData)) {
+
+      result = pullRequestReviewCommentEvent(new PullRequestReviewCommentEventModel(inputData));
+      
     } else if (ReleaseEventModel.isCurrentModel(inputData)) {
 
       result = releaseEvent(new ReleaseEventModel(inputData));
@@ -122,7 +127,7 @@ export const onResponseGitWebhookRepository: HttpsFunction = https.onRequest((re
 
 async function simpleHubEvent(data: HubEventActions): Promise<void> {
   const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
-
+  
   addHubEventToCollection(repository, data);
   await RepositoryModel.saveRepository(repository);
 }
@@ -149,6 +154,14 @@ async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
   data.updateData(repository);
 
   addHubEventToCollection(repository, data);
+  await RepositoryModel.saveRepository(repository);
+}
+
+async function pullRequestReviewCommentEvent(data: PullRequestReviewCommentEventModel): Promise<void> {
+  Logger.info('pullRequestReviewCommentEvent');
+  const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
+
+  data.updateData(repository);
   await RepositoryModel.saveRepository(repository);
 }
 
@@ -189,6 +202,10 @@ async function pushEvent(data: PushEventModel): Promise<void> {
 async function issueCommentEvent(data: IssueCommentEventModel): Promise<void> {
   Logger.info('issueCommentEvent');
   await simpleHubEvent(data);
+  const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
+
+  data.updateData(repository);
+  await RepositoryModel.saveRepository(repository);
 }
 
 async function createEvent(data: CreateEventModel): Promise<void> {
