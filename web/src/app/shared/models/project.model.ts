@@ -136,6 +136,13 @@ export class ProjectModel extends Model<IProject> implements IProject {
   }
 
   /**
+   * Check if project is private
+   */
+  public isPrivate(): boolean {
+    return this.type === 'private';
+  }
+
+  /**
    * The models to data only
    */
   public toData(): IProject {
