@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 // Application services/model
 import { ActivatedRoute } from '@angular/router';
-import { RepositoryModel } from '@app/shared/models/index.model';
+import { BreadCrumbModel, ProjectModel, RepositoryModel } from '@app/shared/models/index.model';
 import { RepositoryService } from '@core/services/index.service';
 import { Subscription } from 'rxjs';
 
@@ -19,7 +19,9 @@ export class RatingComponent implements OnInit, OnDestroy {
 
   private repositorySubscription: Subscription;
 
+  public project: ProjectModel;
   public repository: RepositoryModel;
+  public breadCrumb: BreadCrumbModel[];
 
   /**
    * Life cycle method
@@ -30,7 +32,11 @@ export class RatingComponent implements OnInit, OnDestroy {
     private repositoryService: RepositoryService,
     private route: ActivatedRoute
   ) {
-    this.route.data.subscribe((data: { repository: RepositoryModel }) => this.repository = data.repository);
+    this.route.data.subscribe((data: { repository: RepositoryModel, project: ProjectModel }) => {
+      this.repository = data.repository;
+      this.project = data.project;
+      this.breadCrumb = [{ link: `/projects/${this.project.uid}`, title: this.project.title }];
+    });
   }
 
   /**

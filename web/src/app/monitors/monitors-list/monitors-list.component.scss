@@ -7,16 +7,6 @@
   &__header {
     @include pageHeader;
 
-    span {
-      img {
-        width: 32px;
-      }
-
-      .mat-icon {
-        font-size: 35px;
-      }
-    }
-
     &__add-button {
       color: #fff;
       background-color: $orange-3-color;
@@ -36,13 +26,7 @@
     }
 
     &__content {
-      &__avatar {
-        width: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        height: 40px;
-      }
-
+      
       &__project-title {
         @include ellipsisText;
         width: 20vw;

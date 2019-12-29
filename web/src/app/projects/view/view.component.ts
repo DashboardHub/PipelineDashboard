@@ -11,7 +11,7 @@ import { filter, map, switchMap, take } from 'rxjs/operators';
 // DashboardHub
 import { AuthenticationService, ProjectService, UserService } from '@core/services/index.service';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
-import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
+import { BreadCrumbModel, ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
 /**
  * Project View component
@@ -30,6 +30,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   public typeIcon: string;
   public project: ProjectModel;
   public isMenuOpen: boolean;
+  public breadCrumb: BreadCrumbModel[] = [];
 
   /**
    * Life cycle method
