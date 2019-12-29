@@ -13,6 +13,7 @@ import { ViewProjectComponent } from './view/view.component';
 
 // Dashboard hub authentication guards
 import { AuthGuard } from '@core/guards/authentication.guard';
+import { MyProjectsResolver } from '@core/resolvers/my-projects.resolver';
 import { RepositoryResolver } from '@core/resolvers/repository.resolver';
 import { RatingComponent } from './rating/rating.component';
 
@@ -21,6 +22,7 @@ const routes: Routes = [
     path: '',
     component: ListMyProjectsComponent,
     canActivate: [AuthGuard],
+    resolve: { projects: MyProjectsResolver },
   },
   {
     path: 'create',
@@ -49,7 +51,7 @@ const routes: Routes = [
   {
     path: ':projectUid/rating/:repoUid',
     component: RatingComponent,
-    resolve: { repository: RepositoryResolver },
+    resolve: { project: ViewProjectResolver, repository: RepositoryResolver },
   },
 ];
 

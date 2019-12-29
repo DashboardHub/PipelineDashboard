@@ -9,7 +9,7 @@ import { map, take } from 'rxjs/operators';
 // Dashboard model and services
 import { TokenService } from '@core/services/index.service';
 import { DialogConfirmationComponent } from '@shared/dialog/confirmation/dialog-confirmation.component';
-import { ProjectModel, TokenModel } from '@shared/models/index.model';
+import { BreadCrumbModel, ProjectModel, TokenModel } from '@shared/models/index.model';
 
 /**
  * Token list component
@@ -27,6 +27,7 @@ export class TokensListComponent {
   public tokenList: TokenModel[];
   public typeIcon: string;
   public displayedColumns: string[] = ['name', 'action'];
+  public breadCrumb: BreadCrumbModel[];
 
   /**
    * Life cycle method
@@ -48,7 +49,7 @@ export class TokensListComponent {
       .subscribe((data: { tokens: TokenModel[], project: ProjectModel }) => {
         this.tokenList = data.tokens;
         this.project = data.project;
-        this.typeIcon = this.project.isPrivate() ? 'lock' : 'lock_open';
+        this.breadCrumb = [{link: `/projects/${this.project.uid}`, title: this.project.title}];
       });
   }
 
