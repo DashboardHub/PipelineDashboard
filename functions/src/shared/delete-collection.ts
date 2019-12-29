@@ -17,19 +17,16 @@ function deleteQueryBatch(db: Firestore, query: Query, batchSize: number, resolv
     .then((snapshot: QuerySnapshot) => {
       // When there are no documents left, we are done
       if (snapshot.size === 0) {
-        return 0;
+        return snapshot.size;
       }
 
       // Delete documents in a batch
       const batch: WriteBatch = db.batch();
-      snapshot.docs.forEach((doc: QueryDocumentSnapshot) => {
-        batch.delete(doc.ref);
-      });
+      snapshot.docs.forEach((doc: QueryDocumentSnapshot) => batch.delete(doc.ref));
 
-      return batch.commit().then(() => {
-        return snapshot.size;
-      });
-    }).then((numDeleted: number) => {
+      return batch.commit().then(() => snapshot.size);
+    })
+    .then((numDeleted: number) => {
       if (numDeleted === 0) {
         resolve();
         return;
@@ -37,8 +34,7 @@ function deleteQueryBatch(db: Firestore, query: Query, batchSize: number, resolv
 
       // Recurse on the next process tick, to avoid
       // exploding the stack.
-      process.nextTick(() => {
-        deleteQueryBatch(db, query, batchSize, resolve, reject);
-      });
-    }).catch(reject);
+      process.nextTick(() => deleteQueryBatch(db, query, batchSize, resolve, reject));
+    })
+    .catch(reject);
 }
