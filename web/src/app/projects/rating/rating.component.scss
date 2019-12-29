@@ -3,6 +3,10 @@
 .rating-container {
   @include pageContainer;
 
+  &__header {
+    @include pageHeader;
+  }
+
   &__card {
     margin-top: 20px;
   }

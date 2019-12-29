@@ -1,10 +1,9 @@
 // Core components
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 // Application services/model
-import { ProjectService } from '@core/services/index.service';
-import { IProject } from '@shared/models/index.model';
+import { ActivatedRoute } from '@angular/router';
+import { IProject, ProjectModel } from '@shared/models/index.model';
 
 /**
  * List my project component
@@ -13,9 +12,7 @@ import { IProject } from '@shared/models/index.model';
   selector: 'dashboard-list-my-projects',
   templateUrl: './list-my-projects.component.html',
 })
-export class ListMyProjectsComponent implements OnInit, OnDestroy {
-
-  private projectSubscription: Subscription;
+export class ListMyProjectsComponent implements OnInit {
 
   public projects: IProject[] = [];
   public title: string = 'My Projects';
@@ -25,22 +22,13 @@ export class ListMyProjectsComponent implements OnInit, OnDestroy {
    * @param projectService Project service
    */
   constructor(
-    private projectService: ProjectService
+    private route: ActivatedRoute
   ) { }
 
   /**
    * Life cycle init method
    */
   ngOnInit(): void {
-    this.projectSubscription = this.projectService
-      .findMyProjects()
-      .subscribe((projects: IProject[]) => this.projects = projects);
-  }
-
-  /**
-   * Life cycle destroy method
-   */
-  ngOnDestroy(): void {
-    this.projectSubscription.unsubscribe();
+    this.route.data.subscribe((data: { projects: ProjectModel[] }) => this.projects = data.projects);
   }
 }

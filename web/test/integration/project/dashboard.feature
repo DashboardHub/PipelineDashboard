@@ -93,7 +93,7 @@ Feature:  Project dashboard page
       | uid      | "test-user-minimum" |
       | username | "test-user-minimum" |  
     Given the "/projects/test-public-project-repostory-full" page is open
-    Then the text "Test public project with repository data" is in the element ".project-body__header__content__name.project-body__header__content__name__long"
+    Then the text "Test public project with repository data" is in the element ".project-body__header"
     And total count of element ".repository__container" is 2
     And the text "test-release" is in the element ".info__body__description"
     And the text "test-milestone" is in the element ".info__body__description"
