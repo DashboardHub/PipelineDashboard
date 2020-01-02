@@ -2,7 +2,7 @@
   <h2 mat-dialog-title fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
     <div fxLayoutAlign="space-around center" fxLayoutGap="10px">
       <div>
-        <mat-icon svgIcon="repository_icon" class="dialog__header__icon"></mat-icon>
+        <mat-icon class="material-icons-outlined light-green-color dialog__header__icon">folder_open</mat-icon>
       </div>
       <div>
         {{ data.repositories.data.length || 0 }} | Your repositories
@@ -24,8 +24,8 @@
         [selected]="data.project.repositories.includes(repository.uid)">
         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="30px">
           <span>
-            <mat-icon *ngIf="repository.private" svgIcon="private_icon"></mat-icon>
-            <mat-icon *ngIf="!repository.private" svgIcon="public_icon"></mat-icon>
+            <mat-icon *ngIf="repository.private" class="material-icons-outlined blue-color">lock</mat-icon>
+            <mat-icon *ngIf="!repository.private" class="material-icons-outlined green-color">lock_open</mat-icon>
           </span>
           <span>
             <div class="dialog__content__name">{{ repository.fullName }}</div>

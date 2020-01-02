@@ -3,7 +3,6 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 
 // RXjs operators
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 
 // Breakpoint resolvers
@@ -12,7 +11,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 // Dashboard hub model and services
 import { RepositoryService, SortingService } from '@core/services/index.service';
 import {
-  ContributorModel, IRepository, MilestoneModel, PullRequestModel, PullRequestStatusModel, ReleaseModel,
+  ContributorModel, IRepository, MilestoneModel, PullRequestModel, ReleaseModel,
   RepositoryModel
 } from '@shared/models/index.model';
 
@@ -69,29 +68,16 @@ export class RepositoryComponent implements OnInit, OnDestroy {
       .findOneById(this.uid)
       .subscribe((repository: RepositoryModel) => {
         this.repository = repository;
-        if (this.repository && this.repository.milestones.length > 0) {
+        if (this.repository && this.repository.milestones && this.repository.milestones.length > 0) {
           this.sortingService.sortListByDate<MilestoneModel>(this.repository.milestones, 'updatedAt');
         }
-        if (this.repository && this.repository.releases.length > 0) {
+        if (this.repository && this.repository.releases && this.repository.releases.length > 0) {
           this.sortingService.sortListByDate<ReleaseModel>(this.repository.releases, 'createdAt');
         }
-        if (this.repository && this.repository.contributors.length > 0) {
+        if (this.repository && this.repository.contributors && this.repository.contributors.length > 0) {
           this.sortingService.sortListByNumber<ContributorModel>(this.repository.contributors, 'total');
         }
         if (this.repository && this.repository.pullRequests.length > 0) {
-          this.repository.pullRequests.map((pullRequest: PullRequestModel) => {
-            if (pullRequest.statusesUrl) { // @TODO: refactor, subscribe should be out of the map
-              const ref: string = pullRequest.statusesUrl.split('/').pop();
-              this.repositoryService.getStatusesUrlResponse(this.repository.fullName, ref)
-                .pipe(
-                  filter((content: PullRequestStatusModel[]) => !!content.length)
-                )
-                .subscribe((content: PullRequestStatusModel[]) => {
-                  pullRequest.buildTimes = this.repositoryService.getPRBuildTime(content);
-                  pullRequest.state = content[0].state;
-                });
-            }
-          });
           this.sortingService.sortListByDate<PullRequestModel>(this.repository.pullRequests, 'createdOn');
         }
         if (this.isLargeScreen) {

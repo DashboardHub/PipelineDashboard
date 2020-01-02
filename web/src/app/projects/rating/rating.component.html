@@ -1,4 +1,7 @@
 <div class="rating-container">
+  <div class="rating-container__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <dashboard-breadcrumb [breadCrumb]="breadCrumb" [project]="project" subTitle="Ratings"></dashboard-breadcrumb>
+  </div>
   <div fxLayout="row">
     <div fxFlex="100%">
       <h1>{{ repository.fullName }}</h1>
@@ -7,7 +10,7 @@
         <mat-card fxFlex="100%" class="rating-container__card">
           <mat-card-header>
             <div mat-card-avatar>
-              <mat-icon svgIcon="release_icon"></mat-icon>
+              <mat-icon class="material-icons-outlined blue-color"></mat-icon>
             </div>
             <mat-card-title>{{ rating.name }} ({{ rating.value | number:'1.0-2' }}%)</mat-card-title>
             <mat-card-subtitle>{{ rating.description }}</mat-card-subtitle>

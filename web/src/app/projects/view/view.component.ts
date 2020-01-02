@@ -6,12 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 // Third party modules
 import { Subscription } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 
 // DashboardHub
 import { AuthenticationService, ProjectService, UserService } from '@core/services/index.service';
 import { DialogListComponent } from '@shared/dialog/list/dialog-list.component';
-import { ProjectModel, RepositoryModel } from '@shared/models/index.model';
+import { BreadCrumbModel, ProjectModel, RepositoryModel } from '@shared/models/index.model';
 
 /**
  * Project View component
@@ -30,6 +30,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   public typeIcon: string;
   public project: ProjectModel;
   public isMenuOpen: boolean;
+  public breadCrumb: BreadCrumbModel[] = [];
 
   /**
    * Life cycle method
@@ -57,18 +58,10 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.projectSubscription = this.projectService
       .findOneById(this.route.snapshot.params.projectUid)
-      .subscribe((project: ProjectModel) => {
-        this.project = project;
-        if (!this.project.logoUrl) {
-          this.project.logoUrl = 'https://cdn.dashboardhub.io/logo/favicon.ico';
-        }
-        if (this.project.type === 'private') {
-          this.typeIcon = 'private_icon';
-        } else if (this.project.type === 'public') {
-          this.typeIcon = 'public_icon';
-        }
-      }
-      );
+      .pipe(
+        map((project: ProjectModel) => this.project = project)
+      )
+      .subscribe((project: ProjectModel) => this.typeIcon = project.isPrivate() ? 'lock' : 'lock_open');
 
     this.updateMetaTags();
   }
@@ -153,7 +146,7 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
    * Set the followers flag true if user uid is present in the database else set false
    */
   public isFollowing(): boolean {
-    return this.authService.profile.following.includes(this.project.uid);
+    return Array.isArray(this.authService.profile.following) ? this.authService.profile.following.includes(this.project.uid) : false;
   }
 
   /**

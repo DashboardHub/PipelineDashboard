@@ -1,5 +1,6 @@
 // Core modules
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 // Breakpoints components
@@ -7,7 +8,7 @@ import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/l
 
 // Dashboard hub model and services
 import { ProjectService, UserService } from '@core/services/index.service';
-import { ProjectModel, UserStatsModel } from '@shared/models/index.model';
+import { IProject, ProjectModel, UserStatsModel } from '@shared/models/index.model';
 
 /**
  * Homepage component
@@ -21,7 +22,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   private userSubscription: Subscription;
   private projectSubscription: Subscription;
-  public projects: ProjectModel[] = [];
+  public projects: IProject[] = [];
+  public popularProjects: IProject[] = [];
   public users: UserStatsModel[] = [];
   public title: string = 'Public Projects';
   public isSmallScreen: boolean;
@@ -35,6 +37,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
    * @param breakpointObserver BreakpointObserver
    */
   constructor(
+    private route: ActivatedRoute,
     private projectService: ProjectService,
     private userService: UserService,
     private breakpointObserver: BreakpointObserver
@@ -44,12 +47,16 @@ export class HomepageComponent implements OnInit, OnDestroy {
    * Life cycle init method. Initialization of all parameteres
    */
   ngOnInit(): void {
+    this.projects = this.route.snapshot.data.projects;
     this.userSubscription = this.userService
       .findAllUserStats()
       .subscribe((users: UserStatsModel[]) => this.users = users);
     this.projectSubscription = this.projectService
       .getPopularProjects()
-      .subscribe((projects: ProjectModel[]) => this.projects = projects);
+      .subscribe((popularProjects: IProject[]) => this.popularProjects = popularProjects);
+    this.projectService
+      .findPublicProjects()
+      .subscribe((projects: IProject[]) => this.projects = projects);
     this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
@@ -78,10 +85,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
    * @param project project
    */
   public checkTypeOfProject(project: ProjectModel): string {
-    if (project.type === 'private') {
-      return 'private_icon';
-    } else if (project.type === 'public') {
-      return 'public_icon';
-    }
+    return project.isPrivate() ? 'lock' : 'lock_open';
   }
 }

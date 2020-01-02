@@ -26,6 +26,7 @@ import {
 import { addHubEventToCollection, HubEventActions } from '../mappers/github/webhook-event-response/shared';
 import { RepositoryModel } from '../models/index.model';
 import { DocumentData, FieldPath, FirebaseAdmin, QuerySnapshot } from './../client/firebase-admin';
+import { getPullRequestStatus } from './pull-request';
 
 // tslint:disable-next-line: typedef
 const cors = CORS({
@@ -145,8 +146,17 @@ async function repositoryEvent(data: RepositoryEventModel): Promise<void> {
 async function pullRequestEvent(data: PullRequestEventModel): Promise<void> {
   Logger.info('pullRequestEvent');
   const repository: DocumentData = await RepositoryModel.getRepositoryById(data.repository.id);
-
   data.updateData(repository);
+
+  // Find logged in user to get the github token
+  const usersRef: QuerySnapshot = await (FirebaseAdmin.firestore().collection('users').where('username', '==', data.sender.login).get());
+
+  for (const element of usersRef.docs) {
+    const userData: DocumentData = element.data();
+    const githubToken: string = userData && userData.oauth ? userData.oauth.githubToken : null;
+    const ref: string = data.pull_request.statuses_url.split('/').pop();
+    await getPullRequestStatus(githubToken, repository.fullName, ref, repository.uid, data.pull_request.id);
+  }
 
   addHubEventToCollection(repository, data);
   await RepositoryModel.saveRepository(repository);

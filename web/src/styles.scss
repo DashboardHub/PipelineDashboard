@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'assets/scss/variable';
-@import 'assets/scss/mixin.scss';
+@import "assets/scss/variable";
+@import "assets/scss/mixin.scss";
 
-@import 'assets/scss/custom-theme.scss';
+@import "assets/scss/custom-theme.scss";
 
 html,
 body {
@@ -21,7 +21,6 @@ a {
   }
 }
 
-
 code {
   width: 100%;
   padding: 0.2em 0.5em;
@@ -39,7 +38,6 @@ code {
 .text-warn {
   color: mat-color($dashboard-warn, 700);
 }
-
 
 .mat-icon {
   &.mat-icon-2x {
@@ -93,7 +91,6 @@ mat-progress-bar {
   }
 }
 
-
 .footer {
   background: none;
   font-size: 14px;
@@ -138,4 +135,98 @@ mat-progress-bar {
     margin-top: -12px;
     height: auto !important;
   }
+}
+
+/* fallback */
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
+}
+/* Angular Material Icon CSS. */
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialicons/v48/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2)
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Material Icons Outlined";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/materialiconsoutlined/v14/gok-H7zzDkdnRel8-DQ6KAXJ69wP1tGnf4ZGhUce.woff2)
+    format("woff2");
+}
+
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-icons-outlined {
+  font-family: "Material Icons Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.blue-color {
+  color: $blue-color !important;
+}
+
+.green-color {
+  color: $green-color;
+}
+
+.white-color {
+  color: white;
+}
+
+.orange-color {
+  color: $orange-color;
+}
+
+.red-color {
+  color: $red-color;
+}
+
+.purple-color {
+  color: $purple-color;
+}
+
+.dark-orange-color {
+  color: $orange-3-color !important;
+}
+
+.light-green-color {
+  color: $green-2-color;
+}
+
+.grey-color {
+  color: darkgrey;
 }

@@ -2,7 +2,7 @@
   <mat-card class="stats__card">
     <mat-card-header>
       <div class="stats__card__header">
-        <mat-icon svgIcon="stats_header_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined">insert_chart</mat-icon>
       </div>
       <mat-card-title class="stats__card__title">
         Application statistics
@@ -13,38 +13,38 @@
       <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between scretch" fxLayoutGap="30px">
         <div fxFlex="24%" class="stats__card__content__item__red" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
-            <mat-icon svgIcon="stats_user_icon"></mat-icon>
+            <mat-icon class="material-icons-outlined orange-color">person</mat-icon>
             <span>Users</span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.users || 0 }}
+            {{ stats.users || 0  | numbers }}
           </div>
         </div>
         <div fxFlex="24%" class="stats__card__content__item__blue" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
-            <mat-icon svgIcon="stats_project_icon"></mat-icon>
+            <mat-icon class="material-icons-outlined blue-color">dashboard</mat-icon>
             <span>Project</span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.projects || 0 }}
+            {{ stats.projects || 0 | numbers }}
           </div>
         </div>
         <div fxFlex="24%" class="stats__card__content__item__purple" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
-            <mat-icon svgIcon="ping_icon"></mat-icon>
+            <mat-icon class="material-icons-outlined purple-color">swap_vertical_circle</mat-icon>
             <span>Pings</span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.pings || 0 }}
+            {{ stats.pings || 0  | numbers }}
           </div>
         </div>
         <div fxFlex="24%" class="stats__card__content__item__dark-blue" fxLayout="row" fxLayoutAlign="start center" fxLayoutAlign.lt-md="space-between center" fxLayoutGap="23px">
           <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="23px">
-            <mat-icon svgIcon="stats_event_icon"></mat-icon>
+            <mat-icon class="material-icons-outlined blue-color">event_available</mat-icon>
             <span>Events </span>
           </div>
           <div class="stats__card__content__item__number">
-            {{ stats.events || 0 }}
+            {{ stats.events || 0 | numbers }}
           </div>
         </div>
       </div>

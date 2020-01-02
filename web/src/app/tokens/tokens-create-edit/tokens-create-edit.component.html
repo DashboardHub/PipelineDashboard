@@ -1,10 +1,13 @@
 
 <div class="token-settings" fxLayout="column">
+  <div class="token-settings__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <dashboard-breadcrumb [breadCrumb]="breadCrumb" [project]="project" subTitle="Tokens"></dashboard-breadcrumb>
+  </div>
     <form (submit)="save()" [formGroup]="tokenForm">
       <mat-card class="token-settings__card">
         <mat-card-header>
           <div class="token-settings__card__header">
-            <mat-icon svgIcon="token_white_icon"></mat-icon>
+            <mat-icon class="material-icons-outlined white-color">toll</mat-icon>
           </div>
           <mat-card-title class="token-settings__card__title">
             <span *ngIf="!isEdit">Create</span>

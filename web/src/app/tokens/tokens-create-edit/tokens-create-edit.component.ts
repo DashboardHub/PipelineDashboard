@@ -11,7 +11,7 @@ import { v4 as uuid } from 'uuid';
 
 // Dashboard model and services
 import { TokenService } from '@core/services/index.service';
-import { TokenModel } from '@shared/models/index.model';
+import { BreadCrumbModel, ProjectModel, TokenModel } from '@shared/models/index.model';
 
 /**
  * token create/edit component
@@ -25,11 +25,14 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
 
   private projectSubscription: Subscription;
   private tokenSubscription: Subscription;
+  private viewProjectSubscription: Subscription;
   private uid: string;
 
   public isEdit: Boolean = false;
   public projectUid: string;
   public tokenForm: FormGroup;
+  public project: ProjectModel;
+  public breadCrumb: BreadCrumbModel[];
 
   /**
    * Life cycle method
@@ -62,6 +65,11 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
       this.projectSubscription = this.route.data
         .subscribe((data: { token: TokenModel }) => this.tokenForm.reset(data.token));
     }
+    this.viewProjectSubscription = this.route.data
+      .subscribe((data: { project: ProjectModel }) => {
+        this.project = data.project;
+        this.breadCrumb = [{ link: `/projects/${this.project.uid}`, title: this.project.title }];
+      });
   }
 
   /**
@@ -70,6 +78,7 @@ export class TokensCreateEditComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.projectSubscription) {
       this.projectSubscription.unsubscribe();
+      this.viewProjectSubscription.unsubscribe();
     }
     if (this.tokenSubscription) {
       this.tokenSubscription.unsubscribe();

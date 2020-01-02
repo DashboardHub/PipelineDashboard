@@ -8,7 +8,7 @@ import { DocumentData, DocumentSnapshot } from './../client/firebase-admin';
 
 export const onUpdateRepository: CloudFunction<Change<DocumentSnapshot>> = firestore
   .document('repositories/{repositoryUid}')
-  .onUpdate((change: Change<DocumentSnapshot>, context: EventContext) => {
+  .onUpdate( async (change: Change<DocumentSnapshot>, context: EventContext) => {
 
     try {
       const newData: DocumentData = change.after.data();
