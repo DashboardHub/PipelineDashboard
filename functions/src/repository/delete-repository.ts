@@ -6,6 +6,7 @@ import { Logger } from '../client/logger';
 import { RepositoryModel } from '../models/index.model';
 import { DocumentData, DocumentSnapshot, FieldPath, FirebaseAdmin, QuerySnapshot } from './../client/firebase-admin';
 import { deleteWebhook } from './delete-git-webhook-repository';
+import { deleteRepoBuilds } from './pull-request';
 
 async function deleteWebhookRepository(repositoryUid: string, repository: RepositoryModel): Promise<void> {
   Logger.info('deleteWebhookRepository');
@@ -50,4 +51,5 @@ export const onDeleteRepository: CloudFunction<DocumentSnapshot> = firestore
   .onDelete(async (projectSnapshot: DocumentSnapshot, context: EventContext) => {
     const repository: RepositoryModel = <RepositoryModel>projectSnapshot.data();
     await deleteWebhookRepository(context.params.repositoryUid, repository);
+    await deleteRepoBuilds(context.params.repositoryUid);
   });
