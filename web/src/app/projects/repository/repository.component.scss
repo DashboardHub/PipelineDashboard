@@ -79,6 +79,11 @@
     }
 
     &__content {
+
+      &__time-container{
+        margin: 0;
+      }
+
       &__description {
         font-size: 20px;
       }
@@ -123,21 +128,24 @@
 
       &__time-container-bottom {
         width: 250px;
-        display: flex;
         justify-content: flex-start;
+        div {
+          display: flex;
+        }
       }
 
       &__time-container-top {
         width: 250px;
-        display: flex;
         justify-content: flex-start;
+        div {
+          display:flex;
+        }
       }
 
       @media (max-width: $breakpoint-md) {
         &__time-container-top {
           width: 120px;
           display: flex;
-          position: absolute;
           font-size: 9pt;
           right: 0;
           top: 0;
@@ -145,11 +153,10 @@
 
         &__time-container-bottom {
           width: 120px;
-          display: flex;
+          display: block;
           position: absolute;
           font-size: 9pt;
           right: -5px;
-          bottom: -5px;
         }
       }
     }

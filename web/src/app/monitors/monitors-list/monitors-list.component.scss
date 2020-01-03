@@ -7,10 +7,9 @@
   &__header {
     @include pageHeader;
 
-
     &__add-button {
       color: #fff;
-      background-color: $orange-3-color
+      background-color: $orange-3-color;
     }
 
     &__pings {
@@ -27,14 +26,7 @@
     }
 
     &__content {
-      &__avatar {
-        cursor: pointer;
-        width: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        height: 40px;
-      }
-
+      
       &__project-title {
         @include ellipsisText;
         width: 20vw;

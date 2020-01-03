@@ -1,5 +1,6 @@
+// Dashboard hub firebase functions models/mappers
 import { RepositoryModel } from '../models/index.model';
-import { DocumentData, DocumentReference } from './../client/firebase-admin';
+import { DocumentData, DocumentReference, DocumentSnapshot, FirebaseAdmin, Query, QuerySnapshot, Transaction } from './../client/firebase-admin';
 import { GitHubClientDelete } from './../client/github';
 import { Logger } from './../client/logger';
 
@@ -9,8 +10,6 @@ export interface DeleteGitWebhookRepositoryInput {
 }
 
 export const onDeleteGitWebhookRepository: any = async (token: string, data: { uid?: string, id?: number }) => {
-  let repository: DocumentData;
-  let repositoryRef: DocumentReference;
 
   if (!(data && (data.uid || data.id))) {
     Logger.error('Invalid input data!');
@@ -18,28 +17,65 @@ export const onDeleteGitWebhookRepository: any = async (token: string, data: { u
   }
 
   if (data.uid) {
-    repositoryRef = RepositoryModel.getRepositoryReference(data.uid);
-    repository = (await repositoryRef.get()).data();
+    const repositoryRef: DocumentReference = RepositoryModel.getRepositoryReference(data.uid);
+
+    await FirebaseAdmin.firestore().runTransaction((t: Transaction) => {
+
+      return t.get(repositoryRef)
+        .then((snap: DocumentSnapshot) => {
+          const repository: DocumentData = snap.data();
+
+          if (repository && repository.webhook) {
+            return deleteWebhook(repository.fullName, repository.webhook.id, token)
+              .then(() => {
+                repository.webhook = null;
+                Logger.info(`Webhook removed for ${repository.fullName}`);
+
+                return repositoryRef.update(repository);
+              })
+              .catch((error: any) => {
+                Logger.info(`No Webhook for ${repository.fullName}`);
+                Logger.error(error);
+                return repository;
+              });
+          }
+          Logger.info(`No found repository (uid = ${data.uid}) or webhook`);
+          return null;
+        });
+
+    });
+
   } else if (data.id) {
-    repository = await RepositoryModel.getRepositoryById(data.id);
-    repositoryRef = RepositoryModel.getRepositoryReference(repository.uid);
+    const query: Query = RepositoryModel.getRepositoryReferenceById(data.id);
+
+    await FirebaseAdmin.firestore().runTransaction((t: Transaction) => {
+
+      return t.get(query)
+        .then((snap: QuerySnapshot) => {
+          const repositoryRef: DocumentReference = snap.docs.shift().ref;
+          const repository: DocumentData = snap.docs.shift().data();
+
+          if (repository && repository.webhook) {
+            return deleteWebhook(repository.fullName, repository.webhook.id, token)
+              .then(() => {
+                repository.webhook = null;
+                Logger.info(`Webhook removed for ${repository.fullName}`);
+
+                return repositoryRef.update(repository);
+              })
+              .catch((error: any) => {
+                Logger.info(`No Webhook for ${repository.fullName}`);
+                Logger.error(error);
+                return repositoryRef;
+              });
+          }
+          Logger.info(`No found repository (id = ${data.id}) or webhook`);
+          return null;
+        });
+
+    });
   }
 
-  try {
-    if (repository && repository.projects && repository.projects.length === 1 && repository.webhook) {
-      await deleteWebhook(repository.fullName, repository.webhook.id, token);
-      repository.webhook = null;
-      await repositoryRef.update(repository);
-    }
-
-    Logger.info(`Webhook removed for ${repository.fullName}`);
-
-    return repository;
-  } catch (error) {
-    Logger.info(`No Webhook for ${repository.fullName}`);
-    Logger.error(error);
-    return repository;
-  }
 };
 
 

@@ -3,11 +3,11 @@
     <div class="project__title__header">My Projects</div>
     <span fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="space-between start">
       <button mat-button class="project__title__button" [routerLink]="[ '/projects', 'create' ]">
-        <mat-icon svgIcon="create_project_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">add_to_photos</mat-icon>
         Add project
       </button>
       <button mat-button class="project__title__button" [routerLink]="[ '/following' ]">
-        <mat-icon svgIcon="project_page_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined white-color">dashboard</mat-icon>
         Following
       </button>
     </span>
@@ -15,9 +15,9 @@
   <mat-card class="project-card">
     <mat-card-header>
       <div class="project-card__header">
-        <mat-icon svgIcon="project_list_icon"></mat-icon>
+        <mat-icon class="material-icons-outlined">dashboard</mat-icon>
       </div>
-      <mat-card-title class="project-card__title">
+      <mat-card-title class="project-card__title" *ngIf="title">
         {{ title }}
       </mat-card-title>
       <mat-card-subtitle class="project-card__title__subtitle">You have {{ projects.length }} projects</mat-card-subtitle>

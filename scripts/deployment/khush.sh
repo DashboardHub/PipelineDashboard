@@ -3,7 +3,7 @@
 # FUNCTIONS
 (cd functions; npm install)
 (cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET_KHUSH'/g' environment.ts)
-(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-khush/g' environment.ts)
+(cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-khush2/g' environment.ts)
 
 # WEB
 (cd web/src/environments; sed -i 's/x\.x\.x/v0.11.khush-'$TRAVIS_BUILD_NUMBER'-ALPHA/g' environment.prod.ts)
@@ -16,4 +16,4 @@
 
 # DEPLOY
 npm --prefix web run build:prod
-firebase deploy --project pipelinedashboard-khush --token $FIREBASE_TOKEN_KHUSH --force
+firebase deploy --project pipelinedashboard-khush2 --token $FIREBASE_TOKEN_KHUSH --force

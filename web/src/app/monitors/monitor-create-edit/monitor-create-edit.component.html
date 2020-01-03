@@ -1,9 +1,12 @@
 <div *ngIf="monitorForm" class="monitor-settings" fxLayout="column" fxLayoutGap="20px">
+  <div class="monitor-settings__header" fxLayout="row" fxLayoutAlign="space-between center">
+    <dashboard-breadcrumb [breadCrumb]="breadCrumb" [project]="project" subTitle="Monitors"></dashboard-breadcrumb>
+  </div>
   <form [formGroup]="monitorForm">
     <mat-card class="monitor-settings__card">
       <mat-card-header>
         <div class="monitor-settings__card__header">
-          <mat-icon svgIcon="monitor_white_icon"></mat-icon>
+          <mat-icon class="material-icons-outlined white-color">desktop_windows</mat-icon>
         </div>
         <mat-card-title class="monitor-settings__card__title">
           <span *ngIf="!isEdit">Create</span>

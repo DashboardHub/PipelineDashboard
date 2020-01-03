@@ -36,7 +36,7 @@ interface Links {
 
 export interface PullRequest {
   url: string;
-  id: number;
+  id: string;
   node_id: string;
   html_url: string;
   diff_url: string;

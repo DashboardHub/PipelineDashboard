@@ -16,6 +16,7 @@
   "dependencies": {
     "@google-cloud/logging-winston": "^1.0.0",
     "cors": "^2.8.5",
+    "firebase": "^7.3.0",
     "firebase-admin": "^8.2.0",
     "firebase-functions": "^3.1.0",
     "request": "^2.88.0",
