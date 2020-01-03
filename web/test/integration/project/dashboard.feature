@@ -81,7 +81,7 @@ Feature:  Project dashboard page
       | releases | [{"title": "test-release","isPrerelease": false,"owner": {"avatarUrl": "https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png","username": "test-user-minimum"},"createdOn": "DATETIME[NOW]"}] |
       | milestones | [{"title": "test-milestone","state": "open","creator": {"avatarUrl": "https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png","username": "test-user-minimum"},"updatedAt": "DATETIME[NOW]"}] |
       | contributors | [{"owner": {"avatarUrl": "https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png","username": "test-user-minimum"},"total": 2}] |
-      | pullRequests | [{"title": "test-PR","owner": {"avatarUrl": "https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png","username": "test-user-minimum" },"createdOn": "DATETIME[NOW]"}] |
+      | pullRequests | [{"title": "test-PR","owner": {"avatarUrl": "https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png","username": "test-user-minimum" },"createdOn": "DATETIME[NOW]", "updatedOn": "DATETIME[NOW]"}] |
       | events |[{"payload": {"title": "test-event","action": "created" },"createdOn": "DATETIME[NOW]", "public": true,"type": "IssueCommentEvent", "actor": {"avatarUrl": "https://cdn.dashboardhub.io/logo/icon-only-orange-120x120.png","username": "test-user-minimum"}}] |
       | createdOn | "DATETIME[NOW]" |
     And there is the following document in the collection "users":
