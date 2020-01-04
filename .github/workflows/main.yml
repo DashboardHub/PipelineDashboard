@@ -1,6 +1,11 @@
 name: CI
 
-on: [push]
+on:
+  push:
+    branches: 
+      - eddie
+      - khush
+      - issue-*
 
 jobs:
   build:
@@ -9,9 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
-    - name: Run a multi-line script
+    - name: Build functions
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        (cd functions; npm install)
+        (cd functions; npm run lint)
+        (cd functions; npm run build)
+    - name: Build UI
+      run: (cd web; npm install)
+    - name: Build docs
+      run: (cd web; npm run docs)
