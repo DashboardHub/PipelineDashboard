@@ -1,12 +1,14 @@
 // Core modules
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 // Breakpoints components
 import { Breakpoints, BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 // Dashboard hub model and services
+import { ApplicationService, ProjectService, UserService } from '@core/services/index.service';
 import { IProject, ProjectModel, StatsModel, UserStatsModel } from '@shared/models/index.model';
+import { Subscription } from 'rxjs';
 
 /**
  * Homepage component
@@ -16,7 +18,12 @@ import { IProject, ProjectModel, StatsModel, UserStatsModel } from '@shared/mode
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss'],
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit, OnDestroy {
+
+  private userSubscription: Subscription;
+  private projectSubscription: Subscription;
+  private popularProjectSubscription: Subscription;
+  private applicationStatsSubscription: Subscription;
 
   public projects: IProject[] = [];
   public popularProjects: IProject[] = [];
@@ -34,7 +41,10 @@ export class HomepageComponent implements OnInit {
    */
   constructor(
     private route: ActivatedRoute,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private userService: UserService,
+    private projectService: ProjectService,
+    private applicationService: ApplicationService
   ) { }
 
   /**
@@ -52,6 +62,20 @@ export class HomepageComponent implements OnInit {
       this.users = data.userStats;
       this.applicationStats = data.applicationStats;
     });
+
+    this.userSubscription = this.userService
+      .findAllUserStats()
+      .subscribe((users: UserStatsModel[]) => this.users = users);
+    this.popularProjectSubscription = this.projectService
+      .getPopularProjects()
+      .subscribe((popularProjects: IProject[]) => this.popularProjects = popularProjects);
+    this.projectSubscription = this.projectService
+      .findPublicProjects()
+      .subscribe((projects: IProject[]) => this.projects = projects);
+    this.applicationStatsSubscription = this.applicationService
+    .getApplicationStats()
+    .subscribe((stats: StatsModel) => this.applicationStats = stats);
+
     this.breakpointObserver
       .observe([Breakpoints.XSmall])
       .subscribe((state: BreakpointState) => {
@@ -65,6 +89,16 @@ export class HomepageComponent implements OnInit {
           this.isSmallScreen = false;
         }
       });
+  }
+
+  /**
+   * Life cycle destroy method
+   */
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+    this.projectSubscription.unsubscribe();
+    this.popularProjectSubscription.unsubscribe();
+    this.applicationStatsSubscription.unsubscribe();
   }
 
   /**
