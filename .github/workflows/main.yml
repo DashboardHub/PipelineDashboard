@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Decrypt
-      run: gpg --quiet --batch --yes --decrypt --passphrase="{{ secrets.FIREBASE_GPG_DEV }}" --output firebase.enc.json firebase.dev.json.gpg
+      run: gpg --quiet --batch --yes --decrypt --passphrase="${{ secrets.FIREBASE_GPG_DEV }}" --output firebase.enc.json firebase.dev.json.gpg
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
