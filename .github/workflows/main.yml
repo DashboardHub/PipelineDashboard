@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: 
+    branches:
       - eddie
       - khush
       - issue-*
@@ -34,5 +34,9 @@ jobs:
         (cd web/src/environments; sed -i 's~{{ FIREBASE_PROJECT_ID }}~${{ secrets.FIREBASE_PROJECT_ID_DEV }}~g' environment.prod.ts)
         (cd web/src/environments; sed -i 's~{{ FIREBASE_STORAGE_BUCKET }}~${{ secrets.FIREBASE_STORAGE_BUCKET_DEV }}~g' environment.prod.ts)
         (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_DEV }}~g' environment.prod.ts)
+    - name: Decrypt
+      run: gpg --quiet --batch --yes --decrypt --passphrase="$FIREBASE_GPG_DEV" --output firebase.enc.json firebase.dev.json.gpg
+      env:
+        FIREBASE_GPG_DEV: $
     - name: Cypress tests
       run: (cd web; CYPRESS_FIREBASE=dev npm test)
