@@ -36,15 +36,17 @@ jobs:
         (cd web/src/environments; sed -i 's~{{ FIREBASE_PROJECT_ID }}~${{ secrets.FIREBASE_PROJECT_ID_DEV }}~g' environment.prod.ts)
         (cd web/src/environments; sed -i 's~{{ FIREBASE_STORAGE_BUCKET }}~${{ secrets.FIREBASE_STORAGE_BUCKET_DEV }}~g' environment.prod.ts)
         (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_DEV }}~g' environment.prod.ts)
-    - name: Cypress dependencies
-      uses: cypress-io/github-action@v1
-      with:
-        install: false
-        runTests: false
-    - uses: actions/upload-artifact@v1
+    - name: Cypress config
+      uses: actions/upload-artifact@v1
       if: failure()
       with:
         name: cypress-screenshots
         path: cypress/screenshots
-    - name: Run tests
-      run: (cd web; CYPRESS_FIREBASE=dev npm test)
+    - name: Cypress run
+      uses: cypress-io/github-action@v1
+      env:
+        CYPRESS_FIREBASE: dev
+      with:
+        install: false
+        wait-on: http://localhost:4200
+        working-directory: web
