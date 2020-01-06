@@ -39,7 +39,7 @@ jobs:
     - name: Start server in the background
       run: | 
          cd web;
-         npm start
+         ng serve
     - name: Cypress run
       uses: cypress-io/github-action@v1
       with:
