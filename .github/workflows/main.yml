@@ -42,10 +42,5 @@ jobs:
         CYPRESS_FIREBASE: dev
       with:
         install: false
+        start: npm start
         working-directory: web
-    - name: Cypress config
-      uses: actions/upload-artifact@v1
-      if: failure()
-      with:
-        name: cypress-screenshots
-        path: web/test/screenshots
