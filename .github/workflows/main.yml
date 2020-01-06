@@ -39,9 +39,9 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v1
       with:
+        working-directory: ./web
         start: npm start
         wait-on: 'http://localhost:4200'
         install: false
-        working-directory: web
       env:
         CYPRESS_FIREBASE: dev
