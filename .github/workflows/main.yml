@@ -42,7 +42,6 @@ jobs:
         CYPRESS_FIREBASE: dev
       with:
         install: false
-        wait-on: http://localhost:4200
         working-directory: web
     - name: Cypress config
       uses: actions/upload-artifact@v1
