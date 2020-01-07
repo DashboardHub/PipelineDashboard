@@ -40,7 +40,7 @@ jobs:
     - name: Deploy
       run: |
         (cd web; npm --prefix web run build:prod)
-        firebase deploy --project pipelinedashboard-dev --token ${{ FIREBASE_TOKEN }} --force
+        firebase deploy --project pipelinedashboard-dev --token ${{ secrets.FIREBASE_TOKEN }} --force
     - name: Cypress plugin
       uses: cypress-io/github-action@v1
       with: 
