@@ -42,7 +42,7 @@ jobs:
       uses: cypress-io/github-action@v1
       with:
         install: false
-        working-directory: ./web
+        working-directory: web
         start: npm run start:test
         wait-on: 'http://localhost:4200'
       env:
