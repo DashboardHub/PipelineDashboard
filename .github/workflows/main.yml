@@ -39,6 +39,7 @@ jobs:
         (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_DEV }}~g' environment.prod.ts)
     - name: Deploy
       run: |
+        npm install -g firebase-tools
         npm --prefix web run build:prod
         firebase deploy --project pipelinedashboard-dev --token ${{ secrets.FIREBASE_TOKEN }} --force
     - name: Cypress plugin
