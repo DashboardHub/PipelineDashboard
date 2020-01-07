@@ -44,5 +44,6 @@ jobs:
         install: false
         working-directory: ./web
         start: npm run start:test
+        wait-on: 'http://localhost:4200'
       env:
         CYPRESS_FIREBASE: dev
