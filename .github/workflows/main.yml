@@ -26,8 +26,8 @@ jobs:
         (cd functions; npm run build)
     - name: Build UI
       run: (cd web; npm install)
-    - name: Build docs
-      run: (cd web; npm run docs)
+#     - name: Build docs
+#       run: (cd web; npm run docs)
     - name: UI config
       run: |
         (cd web/src/environments; sed -i 's~x\.x\.x~v0.11.dev-${{ github.sha }}-ALPHA~g' environment.prod.ts)
@@ -39,7 +39,7 @@ jobs:
         (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_DEV }}~g' environment.prod.ts)
     - name: Deploy
       run: |
-        (cd web; npm --prefix web run build:prod)
+        npm --prefix web run build:prod
         firebase deploy --project pipelinedashboard-dev --token ${{ secrets.FIREBASE_TOKEN }} --force
     - name: Cypress plugin
       uses: cypress-io/github-action@v1
