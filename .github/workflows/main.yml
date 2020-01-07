@@ -36,12 +36,13 @@ jobs:
         (cd web/src/environments; sed -i 's~{{ FIREBASE_PROJECT_ID }}~${{ secrets.FIREBASE_PROJECT_ID_DEV }}~g' environment.prod.ts)
         (cd web/src/environments; sed -i 's~{{ FIREBASE_STORAGE_BUCKET }}~${{ secrets.FIREBASE_STORAGE_BUCKET_DEV }}~g' environment.prod.ts)
         (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_DEV }}~g' environment.prod.ts)
-    - name: Start server in the background
-      run: (cd web; npm run build:prod && npm run start:test)
+    - name: Build UI app
+      run: (cd web; npm run build:prod)
     - name: Cypress run
       uses: cypress-io/github-action@v1
       with:
         install: false
         working-directory: ./web
+        start: npm run start:test
       env:
         CYPRESS_FIREBASE: dev
