@@ -38,12 +38,12 @@ jobs:
         (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_DEV }}~g' environment.prod.ts)
     - name: Build UI app
       run: (cd web; npm run build:prod)
-    - name: Cypress run
+    - name: Cypress plugin
       uses: cypress-io/github-action@v1
-      with:
+      with: 
+        runTests: false
         install: false
-        working-directory: web
-        start: npm run start:test
-        wait-on: 'http://localhost:4200'
+    - name: Test UI app
+      run: (cd web; npm run test)
       env:
         CYPRESS_FIREBASE: dev
