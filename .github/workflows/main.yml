@@ -41,6 +41,8 @@ jobs:
       with: 
         runTests: false
         install: false
+    - name: Run server
+      run: (cd web; npm start)
     - name: Test UI app
       run: (cd web; npm run test)
       env:
