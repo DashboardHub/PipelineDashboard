@@ -1,0 +1,38 @@
+name: Build, deploy to Eddie environment
+
+on:
+  push:
+    branches:
+      - eddie
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Build functions
+      run: |
+        (cd functions; npm install)
+        (cd functions; npm run lint)
+        (cd functions; npm run build)
+    - name: Build UI
+      run: (cd web; npm install)
+    - name: UI config
+      run: |
+        (cd web/src/environments; sed -i 's~x\.x\.x~v0.11.eddie-${{ github.sha }}-ALPHA~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_API_KEY }}~${{ secrets.FIREBASE_API_KEY_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_AUTH_DOMAIN }}~${{ secrets.FIREBASE_AUTH_DOMAIN_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_DATABASE_URL }}~${{ secrets.FIREBASE_DATABASE_URL_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_PROJECT_ID }}~${{ secrets.FIREBASE_PROJECT_ID_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_STORAGE_BUCKET }}~${{ secrets.FIREBASE_STORAGE_BUCKET_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_EDDIE }}~g' environment.prod.ts)
+    - name: Deploy
+      run: |
+        npm install -g firebase-tools
+        npm --prefix web run build:prod
+        firebase deploy --project pipelinedashboard-eddie --token ${{ secrets.FIREBASE_TOKEN }} --force

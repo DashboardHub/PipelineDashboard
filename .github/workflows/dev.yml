@@ -3,8 +3,6 @@ name: Build, deploy and test
 on:
   push:
     branches:
-      - eddie
-      - khush
       - issue-*
 
 jobs:
@@ -44,7 +42,7 @@ jobs:
         firebase deploy --project pipelinedashboard-dev --token ${{ secrets.FIREBASE_TOKEN }} --force
     - name: Cypress plugin
       uses: cypress-io/github-action@v1
-      with: 
+      with:
         install: false
         working-directory: web
         config: baseUrl=http://pipelinedashboard-dev.firebaseapp.com
