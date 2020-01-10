@@ -28,27 +28,15 @@ script:
   - "sh ./scripts/build/dev.sh"
   - "(cd web; CYPRESS_FIREBASE=dev npm test)"
 deploy:
-- provider: script
-  skip_cleanup: true
-  script: sh ./scripts/deployment/eddie.sh
-  message: Deploying v0.11.eddie-$TRAVIS_BUILD_NUMBER-ALPHA
-  on:
-    branch: eddie
-- provider: script
-  skip_cleanup: true
-  script: sh ./scripts/deployment/khush.sh
-  message: Deploying v0.11.khush-$TRAVIS_BUILD_NUMBER-ALPHA
-  on:
-    branch: khush
-- provider: script
-  skip_cleanup: true
-  script: sh ./scripts/deployment/dev.sh
-  message: Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA
-  on:
-    branch: v0.11.9
-- provider: script
-  skip_cleanup: true
-  script: sh ./scripts/deployment/prod.sh
-  message: Deploying v0.11-$TRAVIS_BUILD_NUMBER-ALPHA
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/dev.sh
+    message: Deploying v0.11.dev-$TRAVIS_BUILD_NUMBER-ALPHA
+    on:
+      branch: v0.11.9
+  - provider: script
+    skip_cleanup: true
+    script: sh ./scripts/deployment/prod.sh
+    message: Deploying v0.11-$TRAVIS_BUILD_NUMBER-ALPHA
+    on:
+      branch: master
