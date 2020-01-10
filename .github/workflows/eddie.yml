@@ -21,6 +21,10 @@ jobs:
       run: (cd functions; npm install)
     - name: Lint firebase functions
       run: (cd functions; npm run lint)
+    - name: Set function config
+      run: |
+        (cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET_EDDIE'/g' environment.ts)
+        (cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-eddie/g' environment.ts)
     - name: Build firebase functions
       run: (cd functions; npm run build)
     - name: Install angular dependencies
