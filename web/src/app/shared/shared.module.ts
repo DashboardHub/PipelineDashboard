@@ -14,6 +14,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PrivatePublicProjectComponent } from './components/private-public-project/private-public-project.component';
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DialogConfirmationComponent } from './dialog/confirmation/dialog-confirmation.component';
 import { DialogListComponent } from './dialog/list/dialog-list.component';
 import { MarkdownDirective } from './directives/markdown.directive';
@@ -26,6 +27,7 @@ import { MarkdownDirective } from './directives/markdown.directive';
     ProjectsListComponent,
     PrivatePublicProjectComponent,
     BreadcrumbComponent,
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import { MarkdownDirective } from './directives/markdown.directive';
     BreadcrumbComponent,
     ProjectsListComponent,
     PrivatePublicProjectComponent,
+    SidebarComponent,
   ],
   entryComponents: [
     DialogConfirmationComponent,
