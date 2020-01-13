@@ -156,3 +156,4 @@ The format is `<type>(<scope>): #<issue-no> <subject>`, examples...
 
 1. `cd web`
 2. `npm run docs`
+This will generate the documentation for Project
