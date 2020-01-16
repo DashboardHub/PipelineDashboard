@@ -1,10 +1,23 @@
-@import '../../../styles.scss';
-@import '../../../assets/scss/variable';
+@import "../../../styles.scss";
+@import "../../../assets/scss/variable";
 
 .webhooks {
   padding: 20px 30px;
   @include pageContainer;
 
+  &__header {
+    &__content__item {
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      font-weight: lighter;
+    }
+  }
   &__title {
     @include pageHeader;
   }
