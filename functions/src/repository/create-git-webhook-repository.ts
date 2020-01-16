@@ -12,6 +12,11 @@ export interface CreateGitWebhookRepositoryInput {
   repositoryUid: string;
 }
 
+export interface CreateGitWebhooksInput {
+  token: string;
+  repositoryUids: string[];
+}
+
 export const onCreateGitWebhookRepository: any = async (token: string, repositoryUid: string) => {
   try {
     const repositorySnapshot: DocumentReference = RepositoryModel.getRepositoryReference(repositoryUid);
@@ -80,3 +85,11 @@ export async function getWebhook(repositoryFullName: string, token: string): Pro
   Logger.info('Webhook is creating');
   return GitHubRepositoryWebhookMapper.import(await createWebhook(repositoryFullName, token));
 }
+
+export const onCreateGitWebhooks: any = async (token: string, repositoryUids: string[]) => {
+  const promises: Promise<any>[] = [];
+  repositoryUids.forEach((repoUid: string) =>
+    promises.push(onCreateGitWebhookRepository(token, repoUid))
+  );
+  await Promise.all(promises);
+};
