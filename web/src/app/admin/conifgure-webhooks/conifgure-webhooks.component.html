@@ -50,8 +50,8 @@
           <ng-container matColumnDef="updatedAt">
             <th mat-header-cell *matHeaderCellDef>Last updated </th>
             <td mat-cell *matCellDef="let element" class="webhooks__webhooks-card__content__table__description">
-              <div *ngIf="element.updatedOn" class="webhooks__webhooks-card__content__table__description">
-                {{ element.updatedOn.toDate() | timeAgo }}
+              <div *ngIf="element.updatedAt" class="webhooks__webhooks-card__content__table__description">
+                {{ element.updatedAt.toDate() | timeAgo }}
               </div>
             </td>
           </ng-container>

@@ -6,9 +6,8 @@ import { Subscription } from 'rxjs';
 
 // DashboardHub Model and services
 import { RepositoryService } from '@core/services/index.service';
-import { RepositoryModel, IRepository } from '@shared/models/index.model';
+import { IRepository, RepositoryModel } from '@shared/models/index.model';
 import { take } from 'rxjs/operators';
-
 /**
  * Configure webhooks component
  */
@@ -35,7 +34,8 @@ export class ConifgureWebhooksComponent implements OnInit {
    * Life cycle init method
    */
   ngOnInit(): void {
-    this.repositoryService.findAllRepositories().subscribe((repositories: RepositoryModel[]) => this.repositories = repositories);
+    this.repositoryService.findAllRepositories()
+      .subscribe((repositories: RepositoryModel[]) => this.repositories = repositories);
   }
 
   /**
@@ -43,8 +43,8 @@ export class ConifgureWebhooksComponent implements OnInit {
    */
   createWebhooks(repos: IRepository[]): void {
     this.repositoryService.createGitWebhooks(repos)
-    .pipe(take(1))
-    .subscribe();
+      .pipe(take(1))
+      .subscribe();
   }
 
 }

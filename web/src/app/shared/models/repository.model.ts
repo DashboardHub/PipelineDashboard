@@ -44,7 +44,7 @@ export interface IRepository extends IModel {
   stargazersCount?: number;
   watchersCount?: number;
   lastUpdated?: firestore.Timestamp;
-  updatedOn?: firestore.Timestamp;
+  updatedAt?: firestore.Timestamp;
 }
 
 /**
@@ -81,7 +81,7 @@ export class RepositoryModel extends Model<IRepository> implements IRepository {
   stargazersCount: number;
   watchersCount: number;
   lastUpdated: firestore.Timestamp;
-  updatedOn: firestore.Timestamp;
+  updatedAt: firestore.Timestamp;
 
   constructor(repository: IRepository) {
     super();
@@ -110,7 +110,7 @@ export class RepositoryModel extends Model<IRepository> implements IRepository {
     this.forksCount = repository.forksCount ? repository.forksCount : undefined;
     this.stargazersCount = repository.stargazersCount ? repository.stargazersCount : undefined;
     this.lastUpdated = repository.lastUpdated ? repository.lastUpdated : undefined;
-    this.updatedOn = repository.updatedOn ? repository.updatedOn : undefined;
+    this.updatedAt = repository.updatedAt ? repository.updatedAt : undefined;
   }
 
   public calculateRating(): number {
