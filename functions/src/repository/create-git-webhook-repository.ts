@@ -25,6 +25,7 @@ export const onCreateGitWebhookRepository: any = async (token: string, repositor
     const webhook: GitHubRepositoryWebhookModel = await getWebhook(repository.fullName, token);
 
     repository.webhook = webhook;
+    repository.resetWebhook = false;
     await repositorySnapshot.update(repository);
 
     Logger.info(webhook ? 'Webhook created' : 'Webhook empty');
