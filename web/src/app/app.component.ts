@@ -82,7 +82,7 @@ export class AppComponent implements AfterViewInit, OnInit {
     },
     {
       title: 'Configure webhooks',
-      route: '/admin/configure-webhooks',
+      route: '/admin/webhooks',
       icon: 'dashboard',
     },
   ];

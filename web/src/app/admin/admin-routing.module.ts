@@ -14,7 +14,7 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: 'configure-webhooks',
+    path: 'webhooks',
     component: ConifgureWebhooksComponent,
     canActivate: [AdminGuard],
   },
