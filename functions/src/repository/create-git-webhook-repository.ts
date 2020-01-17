@@ -1,7 +1,7 @@
 import { enviroment } from '../environments/environment';
 import { GitHubRepositoryWebhookMapper, GitHubRepositoryWebhookModel, GitHubRepositoryWebhookRequestCreate, GitHubRepositoryWebhookResponse } from '../mappers/github/webhook.mapper';
 import { RepositoryModel } from '../models/index.model';
-import { DocumentData, DocumentReference } from './../client/firebase-admin';
+import { DocumentData, DocumentReference, FirebaseAdmin } from './../client/firebase-admin';
 import { GitHubClientPost } from './../client/github';
 import { Logger } from './../client/logger';
 import { deleteWebhook } from './delete-git-webhook-repository';
@@ -89,7 +89,15 @@ export async function getWebhook(repositoryFullName: string, token: string): Pro
 export const onCreateGitWebhooks: any = async (token: string, repositoryUids: string[]) => {
   const promises: Promise<any>[] = [];
   repositoryUids.forEach((repoUid: string) =>
-    promises.push(onCreateGitWebhookRepository(token, repoUid))
+    FirebaseAdmin
+      .firestore()
+      .collection('repositories')
+      .doc(repoUid)
+      .set(
+        {
+          resetWebhook: true,
+        }
+        , { merge: true })
   );
   await Promise.all(promises);
 };
