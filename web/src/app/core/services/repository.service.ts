@@ -81,10 +81,7 @@ export class RepositoryService {
   public createGitWebhooks(repos: IRepository[]): Observable<RepositoryModel> {
     const callable: any = this.fns.httpsCallable('createGitWebhooks');
 
-    return of(new RepositoryModel(callable({
-      repositoryUids: repos.map((repo: IRepository) => repo.uid),
-      token: this.authService.profile.oauth.githubToken,
-    })));
+    return of(new RepositoryModel(callable({ repositoryUids: repos.map((repo: IRepository) => repo.uid) })));
   }
 
   /**

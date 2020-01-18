@@ -39,7 +39,7 @@ export const findAllUserRepositories: HttpsFunction = functions.https.onCall((in
 export const findAllUserEvents: HttpsFunction = functions.https.onCall((input: EventsInput, context: CallableContext) => getUserEvents(input.token, context.auth.uid, input.username));
 export const findRepositoryInfo: HttpsFunction = functions.https.onCall((input: RepositoryInfoInput, context: CallableContext) => getRepositoryInfo(input.token, input.repository));
 export const createGitWebhookRepository: HttpsFunction = functions.https.onCall((input: CreateGitWebhookRepositoryInput, context: CallableContext) => onCreateGitWebhookRepository(input.token, input.repositoryUid));
-export const createGitWebhooks: HttpsFunction = functions.https.onCall((input: CreateGitWebhooksInput, context: CallableContext) => onCreateGitWebhooks(input.token, input.repositoryUids));
+export const createGitWebhooks: HttpsFunction = functions.https.onCall((input: CreateGitWebhooksInput, context: CallableContext) => onCreateGitWebhooks(input.repositoryUids));
 export const deleteGitWebhookRepository: HttpsFunction = functions.https.onCall((input: DeleteGitWebhookRepositoryInput, context: CallableContext) => onDeleteGitWebhookRepository(input.token, input.data));
 export const responseGitWebhookRepository: HttpsFunction = onResponseGitWebhookRepository;
 export const pingMonitor: HttpsFunction = functions.https.onCall((input: MonitorInfoInput, context: CallableContext) => ping(input.projectUid, input.monitorUid, input.type));
