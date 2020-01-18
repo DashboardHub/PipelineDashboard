@@ -1,0 +1,44 @@
+name: Eddie environment
+
+on:
+  push:
+    branches:
+      - eddie
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    - name: Install firebase tools
+      run: npm install -g firebase-tools
+    - name: Install firebase functions dependencies
+      run: (cd functions; npm install)
+    - name: Lint firebase functions
+      run: (cd functions; npm run lint)
+    - name: Set function config
+      run: |
+        (cd functions/src/environments; sed -i 's/{{ GITHUB_WEBHOOK_SECRET }}/'$GITHUB_WEBHOOK_SECRET_EDDIE'/g' environment.ts)
+        (cd functions/src/environments; sed -i 's/{{ FIREBASE_FUNCTIONS_URL }}/us-central1-pipelinedashboard-eddie/g' environment.ts)
+    - name: Build firebase functions
+      run: (cd functions; npm run build)
+    - name: Install angular dependencies
+      run: (cd web; npm install)
+    - name: Set angular config
+      run: |
+        (cd web/src/environments; sed -i 's~x\.x\.x~v0.11.eddie-${{ github.sha }}-ALPHA~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_API_KEY }}~${{ secrets.FIREBASE_API_KEY_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_AUTH_DOMAIN }}~${{ secrets.FIREBASE_AUTH_DOMAIN_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_DATABASE_URL }}~${{ secrets.FIREBASE_DATABASE_URL_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_PROJECT_ID }}~${{ secrets.FIREBASE_PROJECT_ID_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_STORAGE_BUCKET }}~${{ secrets.FIREBASE_STORAGE_BUCKET_EDDIE }}~g' environment.prod.ts)
+        (cd web/src/environments; sed -i 's~{{ FIREBASE_MESSAGING_SEND_ID }}~${{ secrets.FIREBASE_MESSAGING_SEND_ID_EDDIE }}~g' environment.prod.ts)
+    - name: Build angular
+      run: npm --prefix web run build:prod
+    - name: Deploy to firebase
+      run: firebase deploy --project pipelinedashboard-eddie --token ${{ secrets.FIREBASE_TOKEN }} --force
