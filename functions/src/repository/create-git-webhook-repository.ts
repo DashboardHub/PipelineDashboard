@@ -1,12 +1,12 @@
 import { enviroment } from '../environments/environment';
 import { GitHubRepositoryWebhookMapper, GitHubRepositoryWebhookModel, GitHubRepositoryWebhookRequestCreate, GitHubRepositoryWebhookResponse } from '../mappers/github/webhook.mapper';
 import { RepositoryModel } from '../models/index.model';
-import { getUserRepos } from '../user/repos';
 import { DocumentData, DocumentReference, FirebaseAdmin, WriteResult } from './../client/firebase-admin';
 import { GitHubClientPost } from './../client/github';
 import { Logger } from './../client/logger';
 import { deleteWebhook } from './delete-git-webhook-repository';
 import { findWebhook } from './find-git-webhook-repository';
+import { getRepositoryInfo } from './info';
 
 export interface CreateGitWebhookRepositoryInput {
   token: string;
@@ -29,6 +29,8 @@ export const onCreateGitWebhookRepository: any = async (token: string, repositor
     await repositorySnapshot.update(repository);
 
     Logger.info(webhook ? 'Webhook created' : 'Webhook empty');
+
+    await getRepositoryInfo(token, repository);
 
     return repository;
   } catch (error) {
@@ -97,5 +99,4 @@ export const onCreateGitWebhooks: any = async (repositoryUids: string[]) => {
       .set({ resetWebhook: true }, { merge: true }))
   );
   await Promise.all(promises);
-  await getUserRepos();
 };
