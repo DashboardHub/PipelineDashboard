@@ -23,12 +23,13 @@
     border: none;
 
     &__card {
-      font-size: 18px;
-      font-weight: lighter;
-      color: $dark-grey-3-color;
 
       @media (max-width: $breakpoint-xs) {
         text-align: center;
+      }
+
+      &__alert {
+        margin-left: 20px;
       }
     }
 
